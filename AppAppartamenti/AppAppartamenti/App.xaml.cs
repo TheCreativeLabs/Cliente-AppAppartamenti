@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AppAppartamenti.Services;
 using AppAppartamenti.Views;
+using AppRegali.Views.Login;
 
 namespace AppAppartamenti
 {
@@ -14,7 +15,7 @@ namespace AppAppartamenti
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new Login());
         }
 
         protected override void OnStart()

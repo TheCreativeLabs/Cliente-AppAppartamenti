@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             mc:Ignorable="d"
+             x:Class="AppAppartamenti.Views.Ricerca">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Button x:Name="btnCancel" Text="Cancel" TextColor="Gray" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" Clicked="btnCancel_Clicked"></Button>
+
+            <Frame HasShadow="True" Padding="10,5,10,5" Visual="Material">
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="Large" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
+
+                    <appappartamenti:MyEntry x:Name="entRicerca" Unfocused="entRicerca_Unfocused" Focused="entRicerca_Focused" TextColor="Gray" Text="Ricerca città o provincia" HorizontalOptions="FillAndExpand"></appappartamenti:MyEntry>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
