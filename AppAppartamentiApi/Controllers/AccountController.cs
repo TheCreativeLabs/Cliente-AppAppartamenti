@@ -17,6 +17,8 @@ using AppAppartamentiApi.Models;
 using AppAppartamentiApi.Providers;
 using AppAppartamentiApi.Results;
 using System.Linq;
+using System.Web.Http.Description;
+using System.Data.Entity;
 
 namespace AppAppartamentiApi.Controllers
 {
@@ -275,7 +277,8 @@ namespace AppAppartamentiApi.Controllers
             else
             {
                 // IEnumerable<Claim> claims = externalLogin.Claims;
-                IEnumerable<Claim> claims = externalLogin.GetClaims();
+                IEnumerable<Claim> claims = externalLogin.Claims;// externalLogin.GetClaims();
+                //IEnumerable<Claim> claims = externalLogin.GetClaims();
                 ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
                 Authentication.SignIn(identity);
             }
@@ -327,7 +330,7 @@ namespace AppAppartamentiApi.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterUserBindingModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -342,6 +345,22 @@ namespace AppAppartamentiApi.Controllers
             {
                 return GetErrorResult(result);
             }
+
+            ////registro l'utente nella tabella UserInfo del db DATA
+            DbDataContext dbDataContext = new DbDataContext();
+
+            UserInfo userInfo = new UserInfo()
+            {
+                Cognome = model.Surname,
+                Nome = model.Name,
+                IdAspNetUser = new Guid(user.Id),
+                Id = new Guid(),
+                FotoProfilo = model.ImmagineProfilo,
+                DataDiNascita = model.DataNascita
+            };
+
+            dbDataContext.UserInfo.Add(userInfo);
+            dbDataContext.SaveChanges();
 
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 
@@ -401,7 +420,7 @@ namespace AppAppartamentiApi.Controllers
                 {
                     return GetErrorResult(result);
                 }
-
+                //FIXME TESTO
                 await EmailService.SendAsync(user.Email,
                  "Password reset",
                  "La tua nuova password è:" + newPassword);
@@ -409,6 +428,7 @@ namespace AppAppartamentiApi.Controllers
 
             return Ok();
         }
+
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
@@ -442,10 +462,18 @@ namespace AppAppartamentiApi.Controllers
             {
                 return GetErrorResult(result);
             }
+
+            //TODO:
+            // 1) Aggiungere alla tabella UserInfo la colonna PhotoUrl
+            // 2) Registrare l'utente dentro la tabella UserInfo prendendo i valori dai Claims (User.Identity.Claims)
+            // 3) Dentro il metodo che restituisce le user info restituire anche l'url della foto
+
+
+
             return Ok();
         }
 
-        //// GET api/Account/UserInfo
+        // GET api/Account/UserInfo
         //[HttpGet]
         //[Route("UserDetail")]
         //public UserInfoDto GetUserDetail()
@@ -453,10 +481,14 @@ namespace AppAppartamentiApi.Controllers
         //    DbDataContext dbDataContext = new DbDataContext();
         //    UserInfoMapper userInfoMapper = new UserInfoMapper();
         //    UserInfo userInfo = dbDataContext.UserInfo.Where(user => user.IdAspNetUser.ToString() == User.Identity.GetUserId()).FirstOrDefault();
-        //    UserInfoDto userInfoDto = userInfoMapper.UserInfoToUserInfoDto(userInfo, UserManager.GetEmail(User.Identity.GetUserId()));
+        //    UserInfoDto userInfoDto = UserInfoMapper.UserInfoToUserInfoDto(userInfo, UserManager.GetEmail(User.Identity.GetUserId()));
 
         //    return userInfoDto;
         //}
+
+
+
+
 
         private async Task<ExternalLoginInfo> AuthenticationManager_GetExternalLoginInfoAsync_WithExternalBearer()
         {
@@ -573,7 +605,8 @@ namespace AppAppartamentiApi.Controllers
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
                     UserName = identity.FindFirstValue(ClaimTypes.Email),
-                    Email = identity.FindFirstValue(ClaimTypes.Email)
+                    Email = identity.FindFirstValue(ClaimTypes.Email),
+                    Claims = identity.Claims.ToList()
                 };
             }
         }
@@ -599,6 +632,66 @@ namespace AppAppartamentiApi.Controllers
             }
         }
 
+        #endregion
+
+
+        #region MetodiCustom
+
+
+        [HttpPut]
+        [Route("UpdateUser")]
+        public async Task<IHttpActionResult> UpdateUser(UpdateUserBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string idUser = User.Identity.GetUserId();
+            ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+            List<ApplicationUser> applicationUsers = applicationDbContext.Users.Where(x => x.Id == idUser).ToList();
+
+            if (!applicationUsers.Any())
+            {
+                return NotFound();
+            }
+
+            DbDataContext dbDataContext = new DbDataContext();
+            List<UserInfo> userInfos = dbDataContext.UserInfo.Where(x => x.IdAspNetUser == new Guid(idUser)).ToList();
+
+            //Controllo se c'è il record dentro dbData
+            if (!userInfos.Any())
+            {
+                return NotFound();
+            }
+
+            userInfos[0].Nome = model.Name;
+            userInfos[0].Cognome = model.Surname;
+            userInfos[0].DataDiNascita = (model.DataNascita ?? null);
+            userInfos[0].FotoProfilo = (model.ImmagineProfilo ?? null);
+            dbDataContext.SaveChanges();
+
+            //TODO: devo modificare anche la Email?
+
+            return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("CurrentUserInfo")]
+        [ResponseType(typeof(UserInfoDto))]
+        public async Task<IHttpActionResult> GetCurrentUserInfoAsync()
+        {
+            DbDataContext dbDataContext = new DbDataContext();
+            ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+            UserInfo userInfo = await dbDataContext.UserInfo.SingleOrDefaultAsync(x => x.IdAspNetUser == new Guid(User.Identity.GetUserId()));
+            string email = await applicationDbContext.Users.Where(x => x.Id == User.Identity.GetUserId()).Select(x => x.Email).FirstOrDefaultAsync();
+
+            //FIXME inserire anche immagine da Facebook 
+            //ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            UserInfoDto dto = UserInfoMapper.UserInfoToUserInfoDto(userInfo, email);
+            return Ok(dto);
+        }
         #endregion
     }
 }

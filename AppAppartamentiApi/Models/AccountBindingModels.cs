@@ -48,6 +48,18 @@ namespace AppAppartamentiApi.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name;
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname;
+
+        [Required]
+        [Display(Name = "BirthName")]
+        public string BirthName;
     }
 
     public class RegisterExternalBindingModel
@@ -80,5 +92,47 @@ namespace AppAppartamentiApi.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    /// <summary>
+    /// Model Custom per aggiunta foto e info utente
+    /// </summary>
+    public class RegisterUserBindingModel : RegisterBindingModel
+    {
+        [Display(Name = "ImmagineProfilo")]
+        public byte[] ImmagineProfilo { get; set; }
+
+        [Required]
+        [Display(Name = "DataNascita")]
+        public DateTime? DataNascita { get; set; }
+    }
+
+    /// <summary>
+    /// Model Custom per modifica dell'account
+    /// </summary>
+    public class UpdateUserBindingModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name;
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname;
+
+        [Required]
+        [Display(Name = "BirthName")]
+        public string BirthName;
+
+        [Display(Name = "ImmagineProfilo")]
+        public byte[] ImmagineProfilo { get; set; }
+
+        [Required]
+        [Display(Name = "DataNascita")]
+        public DateTime? DataNascita { get; set; }
     }
 }

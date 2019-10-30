@@ -32,7 +32,7 @@ namespace AppAppartamentiApi
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
-            app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Configure the application for OAuth based flow
@@ -61,8 +61,8 @@ namespace AppAppartamentiApi
 
             var options = new FacebookAuthenticationOptions
             {
-                AppId = "971997736480952",
-                AppSecret = "483348891fbc0f94cf3a6e40cdbbaf1d",
+                AppId = "2512554998794203",
+                AppSecret = "630053704de44a45a8793021b0fbea4f",
 
                 Provider = new FacebookProvider
                 {
@@ -84,12 +84,17 @@ namespace AppAppartamentiApi
                         await Task.FromResult(context);
                     }
 
-                }
+                },
+                UserInformationEndpoint = "https://graph.facebook.com/v2.5/me?fields=id,name,email,first_name,last_name,location,birthday,picture",
             };
+
             options.Scope.Add("public_profile");
             options.Scope.Add("email");
             options.Scope.Add("user_birthday");
             options.Scope.Add("user_location");
+            options.Fields.Add("birthday");
+            options.Fields.Add("picture");
+
             app.UseFacebookAuthentication(options);
 
             //app.UseFacebookAuthentication(
