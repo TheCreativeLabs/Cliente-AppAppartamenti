@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="AppRegali.Views.Account.Account"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             Title="Account">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame HasShadow="True" >
+                <StackLayout Orientation="Horizontal">
+                        <Frame CornerRadius="100"
+                   HeightRequest="100"
+                   WidthRequest="100"
+                   HorizontalOptions="Center"
+                   Padding="0"
+                   IsClippedToBounds="True"
+                           HasShadow="True">
+                            <Image x:Name="imgFotoUtente"  HorizontalOptions="Center"
+                   VerticalOptions="Center"></Image>
+                        </Frame>
+
+                    <Grid VerticalOptions="Center" HeightRequest="50">
+                        <Label Grid.Row="0" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" Text="Simone Bitti"></Label>
+                        <Label Grid.Row="1" FontSize="Medium" FontAttributes="Bold" TextColor="Gray" VerticalTextAlignment="Center" Text="simone.bitti1996@gmail.com"></Label>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <!--<Button x:Name="btnInfoPersonali" Text="Informazioni personali" Visual="Material" Clicked="btnCambiaPassword_Clicked"></Button>
+
+            <Button x:Name="btnCambiaPassword" Text="{translator:Translate Account.CambiaPassword}" Visual="Material" Clicked="btnCambiaPassword_Clicked"></Button>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

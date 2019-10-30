@@ -61,8 +61,8 @@ namespace AppAppartamentiApi
 
             var options = new FacebookAuthenticationOptions
             {
-                AppId = "971997736480952",
-                AppSecret = "483348891fbc0f94cf3a6e40cdbbaf1d",
+                AppId = "2512554998794203",
+                AppSecret = "630053704de44a45a8793021b0fbea4f",
 
                 Provider = new FacebookProvider
                 {
