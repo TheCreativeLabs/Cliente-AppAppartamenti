@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -102,7 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppAppartamenti\AppAppartamenti.csproj">
-      <Project>{4B6A51AE-E5CD-4FEF-A5D1-4D20F14459C1}</Project>
+      <Project>{59AF77F8-40F6-4216-AA6D-1157FB564538}</Project>
       <Name>AppAppartamenti</Name>
     </ProjectReference>
   </ItemGroup>

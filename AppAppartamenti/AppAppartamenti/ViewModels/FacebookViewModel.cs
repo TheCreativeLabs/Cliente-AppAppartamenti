@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using FacebookLogin.Models;
 using FacebookLogin.Services;
 
-namespace AppRegali.ViewModels
+namespace AppAppartamenti.ViewModels
 {
     public class FacebookViewModel : INotifyPropertyChanged
     {

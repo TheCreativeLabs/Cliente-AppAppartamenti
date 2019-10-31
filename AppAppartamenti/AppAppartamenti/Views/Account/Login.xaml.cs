@@ -1,6 +1,6 @@
 ﻿using AppAppartamenti.Views;
-using AppRegali.Api;
-using AppRegali.Views.Account;
+using AppAppartamenti.Api;
+using AppAppartamenti.Views.Account;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppRegali.Views.Login
+namespace AppAppartamenti.Views.Login
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Login : ContentPage

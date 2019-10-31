@@ -1,4 +1,4 @@
-﻿using AppRegali.ViewModels;
+﻿using AppAppartamenti.ViewModels;
 using DependencyServiceDemos;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppRegali.Views.Account
+namespace AppAppartamenti.Views.Account
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Account : ContentPage

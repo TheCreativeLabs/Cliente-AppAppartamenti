@@ -8,6 +8,7 @@
              x:Class="AppAppartamenti.Views.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:views1="clr-namespace:AppRegali.Views.Account"
+            xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
             android:TabbedPage.ToolbarPlacement="Bottom" BackgroundColor="#E8E8E8" BarBackgroundColor="White">
 
     <TabbedPage.Children>
@@ -56,8 +57,8 @@
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views1:Account>
-                </views1:Account>
+                <views11:Account>
+                </views11:Account>
             </x:Arguments>
         </NavigationPage>
 

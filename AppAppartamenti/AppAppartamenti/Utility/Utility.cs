@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AppRegali.Utility
+namespace AppAppartamenti.Utility
 {
     public static class Utility
     {

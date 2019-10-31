@@ -1,4 +1,6 @@
-﻿using AppAppartamentiApiClient;
+﻿using AppAppartamenti.Api;
+using AppAppartamenti.Utility;
+using AppAppartamentiApiClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppRegali.Views.Login
+namespace AppAppartamenti.Views.Login
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Registrazione : ContentPage
@@ -67,7 +69,7 @@ namespace AppRegali.Views.Login
                 //Se la form è valida proseguo con la registrazione.
                 if (formIsValid)
                 {
-                    await AppRegali.Api.ApiHelper.RegisterAsync(entEmail.Text, entPassword.Text, entConfermaPassword.Text);
+                    await ApiHelper.RegisterAsync(entEmail.Text, entPassword.Text, entConfermaPassword.Text);
                     stkFormRegistrazione.IsVisible = false;
                     stkRegistrazioneAvvenuta.IsVisible = true;
                 }

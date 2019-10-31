@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace AppRegali.Api
+namespace AppAppartamenti.Api
 {
     public static class ApiHelper
     {

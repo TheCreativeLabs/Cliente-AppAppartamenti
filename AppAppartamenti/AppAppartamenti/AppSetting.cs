@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AppRegali
+namespace AppAppartamenti
 {
     public static class AppSetting
     {

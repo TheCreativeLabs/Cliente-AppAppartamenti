@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AppAppartamenti.Services;
 using AppAppartamenti.Views;
-using AppRegali.Views.Login;
+using AppAppartamenti.Views.Login;
 
 namespace AppAppartamenti
 {

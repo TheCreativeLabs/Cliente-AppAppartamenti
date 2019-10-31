@@ -1,6 +1,7 @@
-﻿using AppAppartamenti.Views;
+﻿using AppAppartamenti.Api;
+using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
-using AppRegali.ViewModels;
+using AppAppartamenti.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppRegali.Views.Account
+namespace AppAppartamenti.Views.Account
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FacebookLogin : ContentPage
@@ -46,10 +47,10 @@ namespace AppRegali.Views.Account
             if (accessToken != "")
             {
                 //Salva il token nelle properties
-                Application.Current.Properties[Api.ApiHelper.AccessTokenKey] = accessToken;
+                Application.Current.Properties[ApiHelper.AccessTokenKey] = accessToken;
 
                 //Salvo il nelle properties che l'utente ha fatto accesso con Facebook
-                Api.ApiHelper.SetFacebookLogin(true);
+                ApiHelper.SetFacebookLogin(true);
 
                 //creo il client e setto il Baerer Token
                 HttpClient httpClient = new HttpClient();

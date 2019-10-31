@@ -1,5 +1,6 @@
-﻿using AppAppartamentiApiClient;
-using AppRegali.Api;
+﻿using AppAppartamenti.Utility;
+using AppAppartamentiApiClient;
+using AppAppartamenti.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AppAppartamenti.Views;
 
-namespace AppRegali.Views.Login
+namespace AppAppartamenti.Views.Login
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CambiaPassword : ContentPage
