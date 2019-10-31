@@ -1,8 +1,10 @@
 ﻿using AppAppartamenti.Api;
 using AppAppartamenti.Utility;
 using AppAppartamentiApiClient;
+using DependencyServiceDemos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +19,8 @@ namespace AppAppartamenti.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Registrazione : ContentPage
     {
+        byte[] img;
+
         public Registrazione()
         {
             InitializeComponent();
@@ -69,7 +73,26 @@ namespace AppAppartamenti.Views.Login
                 //Se la form è valida proseguo con la registrazione.
                 if (formIsValid)
                 {
-                    await ApiHelper.RegisterAsync(entEmail.Text, entPassword.Text, entConfermaPassword.Text);
+                    HttpClient httpClient = new HttpClient();
+                    AccountClient accountClient = new AccountClient(httpClient);
+
+                    //Creo il modello dei dati per la registrazione
+                    RegisterUserBindingModel registerBindingModel = new RegisterUserBindingModel()
+                    {
+                        Name = entNome.Text,
+                        Surname = entCognome.Text,
+                        BirthName = entNome.Text,
+                        ImmagineProfilo = img,
+                        DataNascita = null,
+                        Email = entEmail.Text,
+                        Password = entPassword.Text,
+                        ConfirmPassword = entConfermaPassword.Text
+                    };
+
+                    //TODO: gestire la data di nascita
+
+                    await accountClient.RegisterAsync(registerBindingModel);
+
                     stkFormRegistrazione.IsVisible = false;
                     stkRegistrazioneAvvenuta.IsVisible = true;
                 }
@@ -108,6 +131,25 @@ namespace AppAppartamenti.Views.Login
             {
                 throw;
             }
+        }
+
+        async void OnPickPhotoButtonClicked(object sender, EventArgs e)
+        {
+            (sender as Button).IsEnabled = false;
+
+            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (stream != null)
+            {
+                imgFotoUtente.Source = ImageSource.FromStream(() => stream);
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+                    img = memoryStream.ToArray();
+                }
+            }
+
+            (sender as Button).IsEnabled = true;
         }
     }
 }

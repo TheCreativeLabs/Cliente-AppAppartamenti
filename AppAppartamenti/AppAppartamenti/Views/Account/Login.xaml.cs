@@ -26,7 +26,7 @@ namespace AppAppartamenti.Views.Login
         {
             base.OnAppearing();
 
-            Application.Current.MainPage = new MainPage();
+            //Application.Current.MainPage = new MainPage();
 
             //Se ho il token allora vado direttamente alla home
             if (ApiHelper.GetToken() != null)
