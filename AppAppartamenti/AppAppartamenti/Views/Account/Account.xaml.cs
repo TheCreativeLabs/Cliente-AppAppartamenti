@@ -1,4 +1,6 @@
-﻿using AppAppartamenti.ViewModels;
+﻿using AppAppartamenti.Api;
+using AppAppartamenti.ViewModels;
+using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace AppAppartamenti.Views.Account
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Account : ContentPage
     {
-        //UserInfo viewModel;
+        UserInfoDto viewModel;
 
         public Account()
         {
@@ -24,37 +26,72 @@ namespace AppAppartamenti.Views.Account
 
         }
 
-        //private void btnCambiaPassword_Clicked(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        Navigation.PushAsync(new Login.CambiaPassword());
-        //    }
-        //    catch (Exception)
-        //    {
+        private void BtnCambiaPassword_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Navigation.PushAsync(new Login.CambiaPassword());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-        //        throw;
-        //    }
-        //}
-        
+        private void BtnInfoPersonali_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Navigation.PushAsync(new InformazioniPersonali());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            //if (viewModel == null)
-            //{
-            //    HttpClient httpClient = new HttpClient();
-            //    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.ApiHelper.GetToken());
-            //    AmiciClient amiciClient = new AmiciClient(httpClient);
-            //    UserInfo userInfo = await amiciClient.GetCurrentUserInfoAsync();
+            if (viewModel == null)
+            {
+                AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
+                UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
 
-            //    viewModel = userInfo;
-            //    BindingContext = viewModel;
-            //}
+                viewModel = userInfo;
+                BindingContext = viewModel;
 
-            //Image image = new Image();
-            //Stream stream = new MemoryStream(viewModel.FotoProfilo);
-            //imgFotoUtente.Source = ImageSource.FromStream(() => { return stream; });
+                imgFotoUtente.Source = ImageSource.FromStream(() => new MemoryStream(viewModel.FotoProfilo));
+            }
+        }
+
+
+        private async void BtnLogOut_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Api.ApiHelper.GetFacebookLogin())
+                {
+                    //Vado alla pagina di logout di facebook
+                    Application.Current.MainPage = new NavigationPage(new FacebookLogout());
+                }
+                else
+                {
+                    //Eseguo il logout
+                    AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+                    await accountClient.LogoutAsync();
+
+                    //Rimuovo il token e navigo alla home
+                    Api.ApiHelper.DeleteToken();
+                    Application.Current.MainPage = new Login.Login();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
 
         //async void OnPickPhotoButtonClicked(object sender, EventArgs e)

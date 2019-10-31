@@ -9,30 +9,44 @@
              NavigationPage.HasNavigationBar="False"
              Title="Account">
     <ContentPage.Content>
-        <StackLayout>
-            <Frame HasShadow="True" >
-                <StackLayout Orientation="Horizontal">
+        <StackLayout Padding="20">
+                <StackLayout Orientation="Horizontal" Margin="-20,-20,-20,20" Padding="20" BackgroundColor="White">
                         <Frame CornerRadius="100"
                    HeightRequest="100"
                    WidthRequest="100"
-                   HorizontalOptions="Center"
                    Padding="0"
                    IsClippedToBounds="True"
                            HasShadow="True">
-                            <Image x:Name="imgFotoUtente"  HorizontalOptions="Center"
+                            <Image x:Name="imgFotoUtente"  HorizontalOptions="Center" Aspect="Fill"
                    VerticalOptions="Center"></Image>
                         </Frame>
 
                     <Grid VerticalOptions="Center" HeightRequest="50">
-                        <Label Grid.Row="0" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" Text="Simone Bitti"></Label>
-                        <Label Grid.Row="1" FontSize="Medium" FontAttributes="Bold" TextColor="Gray" VerticalTextAlignment="Center" Text="simone.bitti1996@gmail.com"></Label>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0">
+                        <Label  FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" Text="{Binding Nome}"></Label>
+                        <Label FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" Text="{Binding Cognome}"></Label>
+                        </StackLayout>
+
+                        <Label Grid.Row="1" FontSize="Medium" FontAttributes="Bold" TextColor="Gray" VerticalTextAlignment="Center" Text="{Binding Email}"></Label>
                     </Grid>
                 </StackLayout>
-            </Frame>
 
-            <!--<Button x:Name="btnInfoPersonali" Text="Informazioni personali" Visual="Material" Clicked="btnCambiaPassword_Clicked"></Button>
+            <Button x:Name="btnInfoPersonali" Text="{translator:Translate Account.InformazioniPersonali}" Visual="Material" Clicked="BtnInfoPersonali_Clicked"> </Button>
 
-            <Button x:Name="btnCambiaPassword" Text="{translator:Translate Account.CambiaPassword}" Visual="Material" Clicked="btnCambiaPassword_Clicked"></Button>-->
+            <Button x:Name="btnCambiaPassword" Text="{translator:Translate Account.CambiaPassword}" Visual="Material" Clicked="BtnCambiaPassword_Clicked"></Button>
+
+            <Button x:Name="btnNotificheSuggerimenti" Text="{translator:Translate Account.NotificheSuggerimenti}" Visual="Material" Clicked="BtnCambiaPassword_Clicked"></Button>
+
+            <Button x:Name="btnInformativaPrivacy" Text="{translator:Translate Account.InformativaPrivacy}" Visual="Material" Clicked="BtnCambiaPassword_Clicked"></Button>
+
+            <!--<Button x:Name="btnLogOut" VerticalOptions="EndAndExpand" Clicked="BtnLogOut_Clicked" Text="{translator:Translate Menu.Logout}" Visual="Material" TextColor="Gray" BackgroundColor="Transparent"></Button>-->
+
+            <Label x:Name="lblLogOut" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="Medium" Text="{translator:Translate Menu.Logout}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnLogOut_Clicked"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

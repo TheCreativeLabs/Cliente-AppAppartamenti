@@ -231,4 +231,13 @@
   <data name="Restore.Titolo" xml:space="preserve">
     <value>Hai dimenticato la password? Inserisci la tua mail, ti invieremo una nuova password.</value>
   </data>
+     <data name="Account.InformazioniPersonali" xml:space="preserve">
+    <value>Informazioni personali</value>
+  </data>
+    <data name="Account.NotificheSuggerimenti" xml:space="preserve">
+    <value>Notifiche e suggerimenti</value>
+  </data>
+       <data name="Account.InformativaPrivacy" xml:space="preserve">
+    <value>Informazioni e privacy</value>
+  </data>
 </root>

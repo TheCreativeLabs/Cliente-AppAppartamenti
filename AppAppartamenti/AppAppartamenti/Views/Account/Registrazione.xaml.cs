@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using RestSharp.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -141,12 +141,7 @@ namespace AppAppartamenti.Views.Login
             if (stream != null)
             {
                 imgFotoUtente.Source = ImageSource.FromStream(() => stream);
-
-                using (var memoryStream = new MemoryStream())
-                {
-                    stream.CopyTo(memoryStream);
-                    img = memoryStream.ToArray();
-                }
+                img = stream.ReadAsBytes();
             }
 
             (sender as Button).IsEnabled = true;
