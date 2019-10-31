@@ -8,7 +8,7 @@ namespace AppAppartamentiApi.Models
     public partial class DbDataContext : DbContext
     {
         public DbDataContext()
-            : base("name=DbDataContext")
+            : base("name=DbConnectionData")
         {
         }
 
