@@ -682,11 +682,12 @@ namespace AppAppartamentiApi.Controllers
         [ResponseType(typeof(UserInfoDto))]
         public async Task<IHttpActionResult> GetCurrentUserInfoAsync()
         {
+            var idUser = User.Identity.GetUserId();
             DbDataContext dbDataContext = new DbDataContext();
             ApplicationDbContext applicationDbContext = new ApplicationDbContext();
-            UserInfo userInfo = await dbDataContext.UserInfo.SingleOrDefaultAsync(x => x.IdAspNetUser == new Guid(User.Identity.GetUserId()));
-            string email = await applicationDbContext.Users.Where(x => x.Id == User.Identity.GetUserId()).Select(x => x.Email).FirstOrDefaultAsync();
-
+            UserInfo userInfo = await dbDataContext.UserInfo.SingleOrDefaultAsync(x => x.IdAspNetUser == new Guid(idUser));
+            string email = await applicationDbContext.Users.Where(x => x.Id == idUser).Select(x => x.Email).FirstOrDefaultAsync();
+        
             //FIXME inserire anche immagine da Facebook 
             //ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             UserInfoDto dto = UserInfoMapper.UserInfoToUserInfoDto(userInfo, email);
