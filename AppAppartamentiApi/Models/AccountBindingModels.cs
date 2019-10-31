@@ -51,15 +51,15 @@ namespace AppAppartamentiApi.Models
 
         [Required]
         [Display(Name = "Name")]
-        public string Name;
+        public string Name { get; set; }
 
         [Required]
         [Display(Name = "Surname")]
-        public string Surname;
+        public string Surname { get; set; }
 
         [Required]
         [Display(Name = "BirthName")]
-        public string BirthName;
+        public string BirthName { get; set; }
     }
 
     public class RegisterExternalBindingModel
@@ -97,12 +97,38 @@ namespace AppAppartamentiApi.Models
     /// <summary>
     /// Model Custom per aggiunta foto e info utente
     /// </summary>
-    public class RegisterUserBindingModel : RegisterBindingModel
+    public class RegisterUserBindingModel
     {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
+        [Display(Name = "BirthName")]
+        public string BirthName { get; set; }
+
         [Display(Name = "ImmagineProfilo")]
         public byte[] ImmagineProfilo { get; set; }
 
-        [Required]
         [Display(Name = "DataNascita")]
         public DateTime? DataNascita { get; set; }
     }
@@ -118,20 +144,19 @@ namespace AppAppartamentiApi.Models
 
         [Required]
         [Display(Name = "Name")]
-        public string Name;
+        public string Name { get; set; }
 
         [Required]
         [Display(Name = "Surname")]
-        public string Surname;
+        public string Surname { get; set; }
 
         [Required]
         [Display(Name = "BirthName")]
-        public string BirthName;
+        public string BirthName { get; set; }
 
         [Display(Name = "ImmagineProfilo")]
         public byte[] ImmagineProfilo { get; set; }
 
-        [Required]
         [Display(Name = "DataNascita")]
         public DateTime? DataNascita { get; set; }
     }
