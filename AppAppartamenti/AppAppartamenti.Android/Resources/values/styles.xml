@@ -14,17 +14,34 @@
     <item name="colorPrimary">#ff6b6b</item>
     <!-- colorPrimaryDark is used for the status bar -->
     <item name="colorPrimaryDark">#c73840</item>
-    <!-- colorAccent is used as the default value for colorControlActivated
-         which is used to tint widgets -->
-    <item name="colorAccent">#0000</item>
+   <item name="colorControlActivated">#c73840</item>
+    <item name="colorAccent">#c73840</item>
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
 
-    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:colorPressedHighlight">@color/ListViewSelected</item>
+    <item name="android:colorLongPressedHighlight">@color/ListViewHighlighted</item>
+    <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
+    <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
+    <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
+
+    <item name="android:editTextStyle">@style/EditTextStyle</item>
   </style>
+
+  <style name="EditTextStyle" parent="@android:style/Widget.EditText">
+    <item name="android:layout_margin">0dp</item>
+    <item name="android:padding">0dp</item>
+  </style>
+  
+    <style name="MyTextInputLayout" parent="@android:style/TextAppearance">
+      <item name="android:textColor">#c73840</item>
+      <item name="android:textSize">8sp</item>
+    </style>
+
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
   </style>
+
 </resources>
