@@ -273,6 +273,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AnnunciController.cs" />
+    <Compile Include="Dto\AnnunciDtoOutput.cs" />
+    <Compile Include="Dto\AnnuncioDtoInput.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="FacebookBackChannelHandler.cs" />
@@ -294,8 +297,16 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Annuncio.cs" />
+    <Compile Include="Models\AnnunciPreferiti.cs" />
+    <Compile Include="Models\ClasseEnergetica.cs" />
     <Compile Include="Models\DbDataContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImmagineAnnuncio.cs" />
+    <Compile Include="Models\StatoProprieta.cs" />
+    <Compile Include="Models\TipologiaAnnuncio.cs" />
+    <Compile Include="Models\TipologiaProprieta.cs" />
+    <Compile Include="Models\TipologiaRiscaldamento.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
