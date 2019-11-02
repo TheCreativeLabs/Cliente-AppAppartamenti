@@ -243,4 +243,11 @@
        <data name="Account.InformativaPrivacy" xml:space="preserve">
     <value>Informazioni e privacy</value>
   </data>
+        <data name="MieiAnnunci.Title" xml:space="preserve">
+    <value>I miei annunci</value>
+  </data>
+    
+           <data name="MieiAnnunci.Nuovo" xml:space="preserve">
+    <value>Nuovo annuncio</value>
+  </data>
 </root>

@@ -27,8 +27,8 @@
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf08d;"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views:ItemsPage>
-                </views:ItemsPage>
+                <views:MieiAnnunci>
+                </views:MieiAnnunci>
             </x:Arguments>
         </NavigationPage>
 
