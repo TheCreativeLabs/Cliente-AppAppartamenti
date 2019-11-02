@@ -85,7 +85,7 @@ namespace AppAppartamentiApi
                     }
 
                 },
-                UserInformationEndpoint = "https://graph.facebook.com/v2.5/me?fields=id,name,email,first_name,last_name,location,birthday,picture",
+                UserInformationEndpoint = "https://graph.facebook.com/v2.5/me?fields=id,name,email,first_name,last_name,location,birthday,picture.width(500).height(500)",
             };
 
             options.Scope.Add("public_profile");
@@ -93,7 +93,7 @@ namespace AppAppartamentiApi
             options.Scope.Add("user_birthday");
             options.Scope.Add("user_location");
             options.Fields.Add("birthday");
-            options.Fields.Add("picture");
+            options.Fields.Add("picture.width(500).height(500)");
 
             app.UseFacebookAuthentication(options);
 
