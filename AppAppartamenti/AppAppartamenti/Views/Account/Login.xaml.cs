@@ -101,7 +101,10 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
-                await Navigation.PushAsync(new Account.FacebookLogin());
+                await Navigation.PushAsync(new NavigationPage(new Account.FacebookLogin()));
+
+                //Application.Current.MainPage = new Account.FacebookLogin();
+
             }
             catch (Exception ex)
             {

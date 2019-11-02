@@ -62,6 +62,17 @@ namespace AppAppartamenti.Views.Account
                 viewModel = userInfo;
                 BindingContext = viewModel;
 
+
+                if (viewModel.FotoProfilo != null)
+                {
+                    Stream stream = new MemoryStream(userInfo.FotoProfilo);
+                    imgFotoUtente.Source = ImageSource.FromStream(() => { return stream; });
+                }
+                else if (viewModel.PhotoUrl != null)
+                {
+                    imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
+                }
+
                 imgFotoUtente.Source = ImageSource.FromStream(() => new MemoryStream(viewModel.FotoProfilo));
             }
         }

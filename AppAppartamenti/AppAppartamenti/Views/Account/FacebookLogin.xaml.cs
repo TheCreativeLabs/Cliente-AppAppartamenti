@@ -17,6 +17,8 @@ namespace AppAppartamenti.Views.Account
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FacebookLogin : ContentPage
     {
+        String ApiRequest;
+
         public FacebookLogin()
         {
             InitializeComponent();
@@ -24,9 +26,9 @@ namespace AppAppartamenti.Views.Account
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
             ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/", true).Result.First();
-            string apiRequest = "https://appregaliapitest.com" + externalLoginViewModel.Url;
-            apiRequest= apiRequest.Replace("www.", "");
-
+            string apiRequest = $"{AppSetting.ApiEndpoint}{externalLoginViewModel.Url}";
+            apiRequest = apiRequest.Replace("www.", "");
+            ApiRequest = apiRequest;
             //mostro l'url nella pagina
             var webView = new WebView
             {
@@ -47,10 +49,10 @@ namespace AppAppartamenti.Views.Account
             if (accessToken != "")
             {
                 //Salva il token nelle properties
-                Application.Current.Properties[ApiHelper.AccessTokenKey] = accessToken;
+                Application.Current.Properties[Api.ApiHelper.AccessTokenKey] = accessToken;
 
                 //Salvo il nelle properties che l'utente ha fatto accesso con Facebook
-                ApiHelper.SetFacebookLogin(true);
+                Api.ApiHelper.SetFacebookLogin(true);
 
                 //creo il client e setto il Baerer Token
                 HttpClient httpClient = new HttpClient();
@@ -73,9 +75,22 @@ namespace AppAppartamenti.Views.Account
 
                     //registro l'utente
                     await accountClient.RegisterExternalAsync(registerExternalBindingModel);
+
+                    var webView = new WebView
+                    {
+                        Source = ApiRequest,
+                        HeightRequest = 1
+                    };
+
+                    webView.Navigated += WebViewOnNavigated;
+
+                    Content = webView;
                 }
-               
-                Application.Current.MainPage = new MainPage();
+                else
+                {
+                    //Application.Current.MainPage = new NavigationPage( new MainPage());
+                    Application.Current.MainPage = new MainPage();
+                }
             }
         }
 
@@ -88,11 +103,11 @@ namespace AppAppartamenti.Views.Account
         {
             if (url.Contains("access_token") && url.Contains("&expires_in="))
             {
-                var at = url.Replace("https://appregaliapitest.com/#access_token=", "");
+                var at = url.Replace($"{AppSetting.ApiEndpoint}#access_token=", "");
 
                 if (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows)
                 {
-                    at = url.Replace("https://appregaliapitest.com/#access_token=", "");
+                    at = url.Replace($"{AppSetting.ApiEndpoint}#access_token=", "");
                 }
 
                 var accessToken = at.Remove(at.IndexOf("&token_type=bearer&expires_in="));
