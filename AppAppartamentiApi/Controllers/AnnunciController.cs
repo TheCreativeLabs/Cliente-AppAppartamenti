@@ -174,5 +174,27 @@ namespace AppAppartamentiApi.Controllers
             return Ok(Annuncio);
         }
 
+
+        // GET api/values
+        [HttpGet]
+        [Route("ListaTipologiaAnnunci")]
+        [ResponseType(typeof(List<TipologiaAnnuncio>))]
+        public List<TipologiaAnnuncio> GetListaTipologiaAnnunci()
+        {
+            List<TipologiaAnnuncio> listaTipologiaAnnunci = dbDataContext.TipologiaAnnuncio.Where(x => x.Abilitato == true).ToList();
+
+            return listaTipologiaAnnunci;
+        }
+
+        // GET api/values
+        [HttpGet]
+        [Route("ListaTipologiaProprieta")]
+        [ResponseType(typeof(List<TipologiaProprieta>))]
+        public List<TipologiaProprieta> GetListaTipologiaProprieta()
+        {
+            List<TipologiaProprieta> listaTipologiaProprieta = dbDataContext.TipologiaProprieta.Where(x => x.Abilitato == true).ToList();
+
+            return listaTipologiaProprieta;
+        }
     }
 }

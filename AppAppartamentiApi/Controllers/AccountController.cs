@@ -500,6 +500,10 @@ namespace AppAppartamentiApi.Controllers
                 userInfo.PhotoUrl = url;
             }
 
+
+            dbDataContext.UserInfo.Add(userInfo);
+            dbDataContext.SaveChanges();
+
             return Ok();
         }
 
