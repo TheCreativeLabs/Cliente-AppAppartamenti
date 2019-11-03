@@ -52,12 +52,12 @@ namespace AppAppartamentiApi.Models
                 .HasForeignKey(e => e.IdStatoProprieta);
 
             modelBuilder.Entity<TipologiaAnnuncio>()
-                .HasMany(e => e.Annuncios)
+                .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.TipologiaAnnuncio)
                 .HasForeignKey(e => e.IdTipologiaAnnuncio);
 
             modelBuilder.Entity<TipologiaProprieta>()
-                .HasMany(e => e.Annuncios)
+                .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.TipologiaProprieta)
                 .HasForeignKey(e => e.IdTipologiaProprieta);
 
