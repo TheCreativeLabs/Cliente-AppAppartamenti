@@ -10,6 +10,7 @@ namespace AppAppartamentiApi.Models
         public DbDataContext()
             : base("name=DbConnectionData")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<Annuncio> Annuncio { get; set; }
