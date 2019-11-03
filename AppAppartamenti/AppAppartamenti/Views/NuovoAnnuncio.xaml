@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
+             x:Class="AppAppartamenti.Views.NuovoAnnuncio"
+             NavigationPage.HasNavigationBar="False">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+            <StackLayout Orientation="Vertical" Padding="20">
+                    <Button HorizontalOptions="End" TextColor="Gray" WidthRequest="40"
+                    BackgroundColor="Transparent" Text="&#xf00d;" FontSize="Title" Visual="Default"
+                    FontFamily="{x:StaticResource FA-Solid}"></Button>
+
+
+                <Label FontSize="Subtitle" TextColor="Gray" Text="PASSAGGIO 1"></Label>
+               <ProgressBar Progress="0.2" />
+
+
+            <Label FontSize="Title" FontAttributes="Bold" Margin="0,10,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"
+                   Text="Che tipo di alloggio hai?" TextColor="Black"></Label>
+
+               <ListView>
+                    <ListView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                        <x:String>mono</x:String>
+                        <x:String>monodroid</x:String>
+                        <x:String>monotouch</x:String>
+                        <x:String>monorail</x:String>
+                        <x:String>monodevelop</x:String>
+                        <x:String>monotone</x:String>
+                        <x:String>monopoly</x:String>
+                        <x:String>monomodal</x:String>
+                        <x:String>mononucleosis</x:String>
+                        </x:Array>
+                    </ListView.ItemsSource>
+                </ListView>
+                  
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
