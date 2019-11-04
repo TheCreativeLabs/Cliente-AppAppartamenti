@@ -3,6 +3,7 @@ using AppAppartamentiApi.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
@@ -27,22 +28,24 @@ namespace AppAppartamentiApi.Controllers
         public List<AnnunciDtoOutput> GetAnnunci()
         {
             List<AnnunciDtoOutput> annunci = dbDataContext.Annuncio
-                                        .Select(annuncio => new AnnunciDtoOutput()
-                                        {
-                                            Id = annuncio.Id,
-                                            IdUtente = annuncio.IdUtente,
-                                            DataCreazione = annuncio.DataCreazione,
-                                            DataModifica = annuncio.DataModifica,
-                                            Comune = annuncio.Comune,
-                                            Indirizzo = annuncio.Indirizzo,
-                                            Prezzo = annuncio.Prezzo,
-                                            Superficie = annuncio.Superficie,
-                                            Descrizione = annuncio.Descrizione,
-                                            TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
-                                            TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
-                                            Completato = annuncio.Completato,
-                                            Cancellato = annuncio.Cancellato
-                                        }).ToList();
+                                                .Include(x => x.Comuni)
+                                             .Select(annuncio => new AnnunciDtoOutput()
+                                             {
+                                                 Id = annuncio.Id,
+                                                 IdUtente = annuncio.IdUtente,
+                                                 DataCreazione = annuncio.DataCreazione,
+                                                 DataModifica = annuncio.DataModifica,
+                                                 CodiceComune = annuncio.ComuneCodice,
+                                                 NomeComune = annuncio.Comuni.NomeComune,
+                                                 Indirizzo = annuncio.Indirizzo,
+                                                 Prezzo = annuncio.Prezzo,
+                                                 Superficie = annuncio.Superficie,
+                                                 Descrizione = annuncio.Descrizione,
+                                                 TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
+                                                 TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
+                                                 Completato = annuncio.Completato,
+                                                 Cancellato = annuncio.Cancellato
+                                             }).ToList();
 
             annunci.ForEach(x =>
             {
@@ -60,6 +63,7 @@ namespace AppAppartamentiApi.Controllers
         {
             var id = new Guid(User.Identity.GetUserId());
             List<AnnunciDtoOutput> annunci = dbDataContext.Annuncio
+                                        .Include(x => x.Comuni)
                                         .Where(x => x.IdUtente == id)
                                         .Select(annuncio => new AnnunciDtoOutput()
                                         {
@@ -67,7 +71,8 @@ namespace AppAppartamentiApi.Controllers
                                             IdUtente = annuncio.IdUtente,
                                             DataCreazione = annuncio.DataCreazione,
                                             DataModifica = annuncio.DataModifica,
-                                            Comune = annuncio.Comune,
+                                            CodiceComune = annuncio.ComuneCodice,
+                                            NomeComune = annuncio.Comuni.NomeComune,
                                             Indirizzo = annuncio.Indirizzo,
                                             Prezzo = annuncio.Prezzo,
                                             Superficie = annuncio.Superficie,
@@ -107,7 +112,7 @@ namespace AppAppartamentiApi.Controllers
                 IdUtente = new Guid(User.Identity.GetUserId()),
                 DataCreazione = DateTime.Now,
                 DataModifica = DateTime.Now,
-                Comune = Annuncio.Comune,
+                ComuneCodice = Annuncio.CodiceComune,
                 Indirizzo = Annuncio.Indirizzo,
                 Prezzo = Annuncio.Prezzo,
                 Superficie = Annuncio.Superficie,
@@ -195,6 +200,20 @@ namespace AppAppartamentiApi.Controllers
             List<TipologiaProprieta> listaTipologiaProprieta = dbDataContext.TipologiaProprieta.Where(x => x.Abilitato == true).ToList();
 
             return listaTipologiaProprieta;
+        }
+
+        // GET api/values
+        [HttpGet]
+        [Route("ListaComuni")]
+        [ResponseType(typeof(List<Comuni>))]
+        public List<Comuni> GetListaComuni(string NomeComune)
+        {
+            List<Comuni> listaComuni = dbDataContext.Comuni
+                                                .Where(x => x.NomeComune.Any(nome => nome.ToString().StartsWith(NomeComune, StringComparison.OrdinalIgnoreCase)))
+                                                .Take(30)
+                                                .ToList();
+
+            return listaComuni;
         }
     }
 }

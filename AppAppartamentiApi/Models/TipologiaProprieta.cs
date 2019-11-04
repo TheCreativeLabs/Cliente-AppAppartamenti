@@ -23,7 +23,7 @@ namespace AppAppartamentiApi.Models
 
         public bool Abilitato { get; set; }
 
-      [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Annuncio> Annuncio { get; set; }
     }
 }

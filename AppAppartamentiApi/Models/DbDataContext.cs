@@ -22,6 +22,7 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<TipologiaProprieta> TipologiaProprieta { get; set; }
         public virtual DbSet<TipologiaRiscaldamento> TipologiaRiscaldamentoe { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<Comuni> Comuni { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -65,6 +66,11 @@ namespace AppAppartamentiApi.Models
                 .HasMany(e => e.Annuncios)
                 .WithOptional(e => e.TipologiaRiscaldamento)
                 .HasForeignKey(e => e.IdTipologiaRiscaldamento);
+
+            modelBuilder.Entity<Comuni>()
+               .HasMany(e => e.Annuncio)
+               .WithOptional(e => e.Comuni)
+               .HasForeignKey(e => e.ComuneCodice);
         }
     }
 }

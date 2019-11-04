@@ -300,6 +300,7 @@
     <Compile Include="Models\Annuncio.cs" />
     <Compile Include="Models\AnnunciPreferiti.cs" />
     <Compile Include="Models\ClasseEnergetica.cs" />
+    <Compile Include="Models\Comuni.cs" />
     <Compile Include="Models\DbDataContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImmagineAnnuncio.cs" />

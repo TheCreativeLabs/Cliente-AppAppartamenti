@@ -21,7 +21,8 @@ namespace AppAppartamentiApi.Dto
                 IdUtente = annuncio.IdUtente,
                 DataCreazione = annuncio.DataCreazione,
                 DataModifica = annuncio.DataModifica,
-                Comune = annuncio.Comune,
+                CodiceComune = annuncio.ComuneCodice,
+                NomeComune  =annuncio.Comuni.NomeComune,
                 Indirizzo = annuncio.Indirizzo,
                 Prezzo = annuncio.Prezzo,
                 Superficie = annuncio.Superficie,
@@ -41,8 +42,9 @@ namespace AppAppartamentiApi.Dto
 
         public DateTime? DataModifica { get; set; }
 
-        [StringLength(128)]
-        public string Comune { get; set; }
+        public int CodiceComune { get; set; }
+
+        public string NomeComune { get; set; }
 
         [StringLength(512)]
         public string Indirizzo { get; set; }

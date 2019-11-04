@@ -25,10 +25,6 @@ namespace AppAppartamentiApi.Models
         public DateTime? DataModifica { get; set; }
 
         [Required]
-        [StringLength(128)]
-        public string Comune { get; set; }
-
-        [Required]
         [StringLength(512)]
         public string Indirizzo { get; set; }
 
@@ -85,6 +81,8 @@ namespace AppAppartamentiApi.Models
 
         public bool Cancellato { get; set; }
 
+        public int ComuneCodice { get; set; }
+
         public virtual ClasseEnergetica ClasseEnergetica { get; set; }
 
         public virtual StatoProprieta StatoProprieta { get; set; }
@@ -92,6 +90,8 @@ namespace AppAppartamentiApi.Models
         public virtual TipologiaAnnuncio TipologiaAnnuncio { get; set; }
 
         public virtual TipologiaProprieta TipologiaProprieta { get; set; }
+
+        public virtual Comuni Comuni { get; set; }
 
         public virtual TipologiaRiscaldamento TipologiaRiscaldamento { get; set; }
 

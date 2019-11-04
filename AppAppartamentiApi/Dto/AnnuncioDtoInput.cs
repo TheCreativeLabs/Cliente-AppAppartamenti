@@ -8,10 +8,8 @@ namespace AppAppartamentiApi.Dto
 {
     public class AnnuncioDtoInput
     {
-
         [Required]
-        [StringLength(128)]
-        public string Comune { get; set; }
+        public int CodiceComune { get; set; }
 
         [Required]
         [StringLength(512)]
