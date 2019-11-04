@@ -7,18 +7,35 @@
              x:Class="AppAppartamenti.Views.Account.Account"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
-             Title="Account">
+             Title="Account"
+             BackgroundColor="#F0F0F0">
     <ContentPage.Content>
         <StackLayout Padding="20">
-                <StackLayout Orientation="Horizontal" Margin="-20,-20,-20,20" Padding="20" BackgroundColor="White">
-                        <Frame CornerRadius="100"
+
+                <StackLayout Orientation="Horizontal" Margin="-20,-20,-20,20" BackgroundColor="White">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="20,50,20,20"></On>
+                            <On Platform="Android" Value="20"></On>
+                        </OnPlatform>
+                    </StackLayout.Padding>
+
+                    <Frame
                    HeightRequest="100"
                    WidthRequest="100"
                    Padding="0"
                    IsClippedToBounds="True"
-                           HasShadow="True">
+                           HasShadow="True" Visual="Material">
+                            <Frame.CornerRadius>
+                               <OnPlatform x:TypeArguments="x:Single">
+                                    <On Platform="iOS" Value="50"/>
+                                    <On Platform="Android" Value="100"/>
+                                </OnPlatform>
+                            </Frame.CornerRadius>
+
                             <Image x:Name="imgFotoUtente"  HorizontalOptions="Center" Aspect="Fill"
                    VerticalOptions="Center"></Image>
+
                         </Frame>
 
                     <Grid VerticalOptions="Center" HeightRequest="50">

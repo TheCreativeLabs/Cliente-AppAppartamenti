@@ -38,10 +38,24 @@
             </StackLayout>-->
 
 
-            <Button BorderColor="#1e73be"  Visual="Material" FontFamily="{x:StaticResource FA-Brands}" CornerRadius="30" HorizontalOptions="CenterAndExpand" TextColor="#1e73be" Text="&#xf09a; Accedi con Facebook" Clicked="btnAccediFacebook_Clicked" BackgroundColor="White"></Button>
-
-            <Button BorderColor="Red"  Visual="Material" FontFamily="{x:StaticResource FA-Brands}" CornerRadius="30" HorizontalOptions="CenterAndExpand"  TextColor="Red" BackgroundColor="White" Text="&#xf1a0; Accedi con Google"></Button>
-
+            <Button BorderColor="#1e73be"  Visual="Material" FontFamily="{x:StaticResource FA-Brands}" HorizontalOptions="CenterAndExpand" TextColor="#1e73be"
+                    Text="&#xf09a; Accedi con Facebook" Clicked="btnAccediFacebook_Clicked" BackgroundColor="White">
+                <Button.Style>
+                                       <OnPlatform x:TypeArguments="Style">
+                                            <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
+                                            <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
+                                        </OnPlatform>
+                                    </Button.Style>
+            </Button>
+ 
+            <Button BorderColor="Red" Visual="Material" FontFamily="{x:StaticResource FA-Brands}"  HorizontalOptions="CenterAndExpand"  TextColor="Red" BackgroundColor="White" Text="&#xf1a0; Accedi con Google">
+                <Button.Style>
+                               <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
+                                    <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
+                                </OnPlatform>
+                            </Button.Style>
+            </Button>
 
             <Label x:Name="lblRegistrati" FontAttributes="Bold" Text="{translator:Translate Login.RegisterIfNoAccount}" HorizontalTextAlignment="Center" Margin="0,10,0,0" TextColor="black">
                 <Label.GestureRecognizers>

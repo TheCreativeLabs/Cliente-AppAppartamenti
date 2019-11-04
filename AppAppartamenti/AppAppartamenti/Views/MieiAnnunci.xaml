@@ -7,7 +7,7 @@
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.MieiAnnunci"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
 
 
      <ContentPage.Resources>
@@ -16,7 +16,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
+    <!--<NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
             <Label FontSize="Title" FontAttributes="Bold" VerticalTextAlignment="Center"
                    Text="{translator:Translate MieiAnnunci.Title}" TextColor="White"></Label>
@@ -25,12 +25,33 @@
                     BackgroundColor="Transparent" Text="&#xf067;" FontSize="Medium" Visual="Default"
                     FontFamily="{x:StaticResource FA-Solid}" Clicked="BtnAdd_Clicked"></Button>
         </StackLayout>
-    </NavigationPage.TitleView>
+    </NavigationPage.TitleView>-->
 
     <ContentPage.Content>
             <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label FontSize="Title" FontAttributes="Bold" VerticalTextAlignment="Center"
+                           Text="{translator:Translate MieiAnnunci.Title}" TextColor="Black"></Label>
 
-                <ListView x:Name="AnnunciiListView"
+                    <Button HorizontalOptions="EndAndExpand" TextColor="White" WidthRequest="45"
+                            HeightRequest="45"
+                             Text="&#xf067;" FontSize="Medium" Visual="Default" BackgroundColor="#ff6b6b"
+                            FontFamily="{x:StaticResource FA-Solid}" Clicked="BtnAdd_Clicked">
+                        <Button.Style>
+                               <OnPlatform x:TypeArguments="Style">
+                                    <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
+                                    <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
+                                </OnPlatform>
+                            </Button.Style>
+                    </Button>
+                </StackLayout>
+
+                <BoxView VerticalOptions="Center"
+           HorizontalOptions="FillAndExpand"
+           HeightRequest="1"
+           Color="LightGray"></BoxView>
+
+            <ListView x:Name="AnnunciiListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"

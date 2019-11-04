@@ -11,10 +11,12 @@
             <!--    Font Awesome     -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
                 <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
+     <On Platform="iOS" Value="Font Awesome 5 Brands" />
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Solid">
                 <On Platform="Android" Value="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" />
+          <On Platform="iOS" Value="Font Awesome 5 Free" />
             </OnPlatform>
 
             <Style TargetType="Button" x:Key="primaryButton">
@@ -60,6 +62,14 @@
                 <Setter Property="IsVisible" Value="False"></Setter>
                 <Setter Property="Margin" Value="0,-8,0,5"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
+
+              <Style TargetType="Button" x:Key="IosButtonRadius">
+                <Setter Property="CornerRadius" Value="30"></Setter>
+            </Style>
+
+            <Style TargetType="Button" x:Key="AndroidButtonRadius">
+                <Setter Property="CornerRadius" Value="100"></Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

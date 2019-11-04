@@ -119,6 +119,13 @@
     <BundleResource Include="Resources\xamarin_logo%402x.png" />
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\fa-brands-400.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\Font Awesome 5 Free-Solid-900.otf" />
+    <BundleResource Include="Resources\MyriadPro-Regular.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -141,7 +148,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\AppAppartamenti\AppAppartamenti.csproj">
-      <Project>{4B6A51AE-E5CD-4FEF-A5D1-4D20F14459C1}</Project>
+      <Project>{59AF77F8-40F6-4216-AA6D-1157FB564538}</Project>
       <Name>AppAppartamenti</Name>
     </ProjectReference>
   </ItemGroup>

@@ -5,13 +5,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              mc:Ignorable="d"
-             x:Class="AppAppartamenti.Views.Home" NavigationPage.HasNavigationBar="False">
+             x:Class="AppAppartamenti.Views.Home" NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F0F0">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical" Padding="20">
+                <StackLayout.Margin>
+                      <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="0,20,0,0"/>
+                      </OnPlatform>
+                </StackLayout.Margin>
+
                 <Label FontSize="60" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="#ff6b6b" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf7ae;"></Label>
 
-                <Frame HasShadow="True" Padding="10,0,0,0" HeightRequest="55" CornerRadius="5">
+                <Frame HasShadow="True" Padding="10,0,0,0" HeightRequest="55" CornerRadius="5" Visual="Material">
                     <StackLayout Orientation="Horizontal">
                         <Label FontSize="Large" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
@@ -81,7 +88,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="130" />
                                         </Grid.ColumnDefinitions>
-                                        <Frame HeightRequest="120" WidthRequest="120" HasShadow="True" Visual="Material" CornerRadius="20"  BackgroundColor="White">
+                                        <Frame HeightRequest="120" WidthRequest="120" HasShadow="True" Visual="Default" CornerRadius="20"  BackgroundColor="White">
                                             <Label Text="Prova"></Label>
                                         </Frame>
                                     </Grid>
