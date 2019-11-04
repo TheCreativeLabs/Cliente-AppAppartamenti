@@ -12,8 +12,8 @@ namespace AppAppartamentiApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Annuncio()
         {
-            AnnunciPreferitis = new HashSet<AnnunciPreferiti>();
-            ImmagineAnnuncios = new HashSet<ImmagineAnnuncio>();
+            AnnunciPreferiti = new HashSet<AnnunciPreferiti>();
+            ImmagineAnnuncio = new HashSet<ImmagineAnnuncio>();
         }
 
         public Guid Id { get; set; }
@@ -81,9 +81,11 @@ namespace AppAppartamentiApi.Models
 
         public bool Cancellato { get; set; }
 
-        public int ComuneCodice { get; set; }
+        public int? ComuneCodice { get; set; }
 
         public virtual ClasseEnergetica ClasseEnergetica { get; set; }
+
+        public virtual Comuni Comuni { get; set; }
 
         public virtual StatoProprieta StatoProprieta { get; set; }
 
@@ -91,14 +93,12 @@ namespace AppAppartamentiApi.Models
 
         public virtual TipologiaProprieta TipologiaProprieta { get; set; }
 
-        public virtual Comuni Comuni { get; set; }
-
         public virtual TipologiaRiscaldamento TipologiaRiscaldamento { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnnunciPreferiti> AnnunciPreferitis { get; set; }
+        public virtual ICollection<AnnunciPreferiti> AnnunciPreferiti { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImmagineAnnuncio> ImmagineAnnuncios { get; set; }
+        public virtual ICollection<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
     }
 }

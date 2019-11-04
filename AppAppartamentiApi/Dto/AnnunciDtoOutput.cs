@@ -42,7 +42,7 @@ namespace AppAppartamentiApi.Dto
 
         public DateTime? DataModifica { get; set; }
 
-        public int CodiceComune { get; set; }
+        public int? CodiceComune { get; set; }
 
         public string NomeComune { get; set; }
 

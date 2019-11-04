@@ -16,13 +16,13 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<Annuncio> Annuncio { get; set; }
         public virtual DbSet<AnnunciPreferiti> AnnunciPreferiti { get; set; }
         public virtual DbSet<ClasseEnergetica> ClasseEnergetica { get; set; }
+        public virtual DbSet<Comuni> Comuni { get; set; }
         public virtual DbSet<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
         public virtual DbSet<StatoProprieta> StatoProprieta { get; set; }
         public virtual DbSet<TipologiaAnnuncio> TipologiaAnnuncio { get; set; }
         public virtual DbSet<TipologiaProprieta> TipologiaProprieta { get; set; }
-        public virtual DbSet<TipologiaRiscaldamento> TipologiaRiscaldamentoe { get; set; }
+        public virtual DbSet<TipologiaRiscaldamento> TipologiaRiscaldamento { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
-        public virtual DbSet<Comuni> Comuni { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,24 +31,29 @@ namespace AppAppartamentiApi.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Annuncio>()
-                .HasMany(e => e.AnnunciPreferitis)
+                .HasMany(e => e.AnnunciPreferiti)
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Annuncio>()
-                .HasMany(e => e.ImmagineAnnuncios)
+                .HasMany(e => e.ImmagineAnnuncio)
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ClasseEnergetica>()
-                .HasMany(e => e.Annuncios)
+                .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.ClasseEnergetica)
                 .HasForeignKey(e => e.IdClasseEnergetica);
 
+            modelBuilder.Entity<Comuni>()
+                .HasMany(e => e.Annuncio)
+                .WithOptional(e => e.Comuni)
+                .HasForeignKey(e => e.ComuneCodice);
+
             modelBuilder.Entity<StatoProprieta>()
-                .HasMany(e => e.Annuncios)
+                .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.StatoProprieta)
                 .HasForeignKey(e => e.IdStatoProprieta);
 
@@ -63,14 +68,9 @@ namespace AppAppartamentiApi.Models
                 .HasForeignKey(e => e.IdTipologiaProprieta);
 
             modelBuilder.Entity<TipologiaRiscaldamento>()
-                .HasMany(e => e.Annuncios)
+                .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.TipologiaRiscaldamento)
                 .HasForeignKey(e => e.IdTipologiaRiscaldamento);
-
-            modelBuilder.Entity<Comuni>()
-               .HasMany(e => e.Annuncio)
-               .WithOptional(e => e.Comuni)
-               .HasForeignKey(e => e.ComuneCodice);
         }
     }
 }
