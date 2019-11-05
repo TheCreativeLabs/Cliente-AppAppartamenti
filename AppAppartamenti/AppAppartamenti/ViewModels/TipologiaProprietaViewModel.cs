@@ -16,13 +16,11 @@ namespace AppAppartamenti.ViewModels
     {
         public ObservableCollection<TipologiaProprieta> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        private bool SoloPersonali { get; set; }
 
         public TipologiaProprietaViewModel()
         {
             Items = new ObservableCollection<TipologiaProprieta>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-          
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -38,11 +36,7 @@ namespace AppAppartamenti.ViewModels
 
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
-                ICollection<TipologiaProprieta> tipologiaProprietas;
-
-
-                tipologiaProprietas = await annunciClient.GetListaTipologiaProprietaAsync();
-              
+                ICollection<TipologiaProprieta> tipologiaProprietas = await annunciClient.GetListaTipologiaProprietaAsync();
 
                 foreach (var evento in tipologiaProprietas)
                 {

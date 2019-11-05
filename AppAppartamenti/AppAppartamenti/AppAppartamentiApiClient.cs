@@ -1576,6 +1576,78 @@ namespace AppAppartamentiApiClient
             }
         }
 
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Comuni>> GetListaComuniAsync(string nomeComune)
+        {
+            return GetListaComuniAsync(nomeComune, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Comuni>> GetListaComuniAsync(string nomeComune, System.Threading.CancellationToken cancellationToken)
+        {
+            if (nomeComune == null)
+                throw new System.ArgumentNullException("nomeComune");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/ListaComuni?");
+            urlBuilder_.Append(System.Uri.EscapeDataString("NomeComune") + "=").Append(System.Uri.EscapeDataString(ConvertToString(nomeComune, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Comuni>>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+
+                        return default(System.Collections.Generic.ICollection<Comuni>);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -2097,9 +2169,11 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("DataModifica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? DataModifica { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Comune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.StringLength(128)]
-        public string Comune { get; set; }
+        [Newtonsoft.Json.JsonProperty("CodiceComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CodiceComune { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NomeComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NomeComune { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Indirizzo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(512)]
@@ -2136,10 +2210,8 @@ namespace AppAppartamentiApiClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.24.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class AnnuncioDtoInput
     {
-        [Newtonsoft.Json.JsonProperty("Comune", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [System.ComponentModel.DataAnnotations.StringLength(128)]
-        public string Comune { get; set; }
+        [Newtonsoft.Json.JsonProperty("CodiceComune", Required = Newtonsoft.Json.Required.Always)]
+        public int CodiceComune { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Indirizzo", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2267,11 +2339,6 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("DataModifica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? DataModifica { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Comune", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [System.ComponentModel.DataAnnotations.StringLength(128)]
-        public string Comune { get; set; }
-
         [Newtonsoft.Json.JsonProperty("Indirizzo", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(512)]
@@ -2356,8 +2423,14 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Cancellato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Cancellato { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("ComuneCodice", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? ComuneCodice { get; set; }
+
         [Newtonsoft.Json.JsonProperty("ClasseEnergetica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ClasseEnergetica ClasseEnergetica { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Comuni", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Comuni Comuni { get; set; }
 
         [Newtonsoft.Json.JsonProperty("StatoProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StatoProprieta StatoProprieta { get; set; }
@@ -2371,11 +2444,11 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("TipologiaRiscaldamento", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public TipologiaRiscaldamento TipologiaRiscaldamento { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("AnnunciPreferitis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<AnnunciPreferiti> AnnunciPreferitis { get; set; }
+        [Newtonsoft.Json.JsonProperty("AnnunciPreferiti", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<AnnunciPreferiti> AnnunciPreferiti { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("ImmagineAnnuncios", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ImmagineAnnuncio> ImmagineAnnuncios { get; set; }
+        [Newtonsoft.Json.JsonProperty("ImmagineAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
 
 
     }
@@ -2394,8 +2467,62 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Annuncios", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Annuncio> Annuncios { get; set; }
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Annuncio> Annuncio { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.24.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class Comuni
+    {
+        [Newtonsoft.Json.JsonProperty("CodiceComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CodiceComune { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NomeComune", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string NomeComune { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceRegione", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string CodiceRegione { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NomeRegione", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string NomeRegione { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceUnitaTerritoriale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string CodiceUnitaTerritoriale { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceProvincia", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string CodiceProvincia { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ProgressivoComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string ProgressivoComune { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceComuneAlfanumerico", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string CodiceComuneAlfanumerico { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceRipartizioneGeografica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CodiceRipartizioneGeografica { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("DenominazioneUnitaTerritorialeSovracomunale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string DenominazioneUnitaTerritorialeSovracomunale { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceCatastaleComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string CodiceCatastaleComune { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Annuncio> Annuncio { get; set; }
 
 
     }
@@ -2414,8 +2541,8 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Annuncios", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Annuncio> Annuncios { get; set; }
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Annuncio> Annuncio { get; set; }
 
 
     }
@@ -2454,8 +2581,8 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Annuncios", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Annuncio> Annuncios { get; set; }
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Annuncio> Annuncio { get; set; }
 
 
     }

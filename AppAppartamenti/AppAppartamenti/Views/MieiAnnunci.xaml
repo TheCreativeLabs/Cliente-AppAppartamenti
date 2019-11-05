@@ -29,7 +29,7 @@
 
     <ContentPage.Content>
             <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Horizontal" Padding="20">
+                <StackLayout Orientation="Horizontal" Padding="20,10,20,10">
                     <Label FontSize="Title" FontAttributes="Bold" VerticalTextAlignment="Center"
                            Text="{translator:Translate MieiAnnunci.Title}" TextColor="Black"></Label>
 

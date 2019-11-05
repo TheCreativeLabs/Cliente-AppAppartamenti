@@ -12,18 +12,18 @@ using System.Collections.Generic;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class TipologiaAnnunciViewModel : BaseViewModel
+    public class ListaComuniViewModel : BaseViewModel
     {
-        public ObservableCollection<TipologiaAnnuncio> Items { get; set; }
+        public ObservableCollection<Comuni> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public TipologiaAnnunciViewModel()
+        public ListaComuniViewModel(string NomeComune)
         {
-            Items = new ObservableCollection<TipologiaAnnuncio>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Items = new ObservableCollection<Comuni>();
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(NomeComune));
         }
 
-        async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadItemsCommand(string NomeComune)
         {
             if (IsBusy)
                 return;
@@ -35,9 +35,9 @@ namespace AppAppartamenti.ViewModels
                 Items.Clear();
 
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                ICollection<TipologiaAnnuncio> tipologiaAnnuncios = await annunciClient.GetListaTipologiaAnnunciAsync();
+                ICollection<Comuni> listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
 
-                foreach (var evento in tipologiaAnnuncios)
+                foreach (var evento in listaComuni)
                 {
                     Items.Add(evento);
                 }

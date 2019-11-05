@@ -71,6 +71,65 @@
             <Style TargetType="Button" x:Key="AndroidButtonRadius">
                 <Setter Property="CornerRadius" Value="100"></Setter>
             </Style>
+
+             <Style TargetType="Frame" x:Key="NuovoAnnuncioImageFrame">
+                 <Setter Property="Padding" Value="0"></Setter>
+                 <Setter Property="HeightRequest" Value="200"></Setter>
+                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                 <Setter Property="IsClippedToBounds" Value="True"></Setter>
+                 <Setter Property="IsVisible" Value="False"></Setter>
+             </Style>
+
+            <Style TargetType="Image" x:Key="NuovoAnnuncioImage">
+                 <Setter Property="Aspect" Value="AspectFill"></Setter>
+                 <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="IsVisible" Value="False"></Setter>
+             </Style>
+
+            <Style TargetType="Button" x:Key="NuovoAnnuncioAddImage">
+                 <Setter Property="Text" Value="&#xf030;"></Setter>
+                 <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
+             </Style>
+
+            <Style TargetType="Label" x:Key="BackButton">
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}" />
+                <Setter Property="Text" Value="&#xf053;"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="CancelButton">
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}" />
+                <Setter Property="Text" Value="&#xf00d;"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="FrameBackButton">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="BorderColor" Value="Transparent"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="LabelNuovoAnnuncioTitle">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="LabelNuovoAnnuncioIcon">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="{StaticResource FA-Solid}" />
+                <Setter Property="FontFamily" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
     

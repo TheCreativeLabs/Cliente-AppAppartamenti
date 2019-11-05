@@ -41,11 +41,11 @@
             <Button BorderColor="#1e73be"  Visual="Material" FontFamily="{x:StaticResource FA-Brands}" HorizontalOptions="CenterAndExpand" TextColor="#1e73be"
                     Text="&#xf09a; Accedi con Facebook" Clicked="btnAccediFacebook_Clicked" BackgroundColor="White">
                 <Button.Style>
-                                       <OnPlatform x:TypeArguments="Style">
-                                            <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
-                                            <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
-                                        </OnPlatform>
-                                    </Button.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
+                            <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
+                        </OnPlatform>
+                    </Button.Style>
             </Button>
  
             <Button BorderColor="Red" Visual="Material" FontFamily="{x:StaticResource FA-Brands}"  HorizontalOptions="CenterAndExpand"  TextColor="Red" BackgroundColor="White" Text="&#xf1a0; Accedi con Google">

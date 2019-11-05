@@ -26,15 +26,17 @@ namespace AppAppartamenti.Views.Account
 
         }
 
-        private void BtnCambiaPassword_Clicked(object sender, EventArgs e)
+
+        private async void BtnCambiaPassword_Clicked(object sender, EventArgs e)
         {
             try
             {
-                Navigation.PushAsync(new Login.CambiaPassword());
+                await Navigation.PushAsync(new Login.CambiaPassword());
             }
-            catch (Exception)
+            catch (Exception Ex)
             {
-                throw;
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
             }
         }
 

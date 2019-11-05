@@ -24,6 +24,9 @@ namespace AppAppartamenti.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
+            Plugin.InputKit.Platforms.iOS.Config.Init();
+
+            Xamarin.FormsMaps.Init();
 
             LoadApplication(new App());
 
