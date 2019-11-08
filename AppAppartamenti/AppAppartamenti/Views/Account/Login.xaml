@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Login.Login"
              NavigationPage.HasNavigationBar="False"
@@ -13,10 +14,28 @@
             <Label FontSize="90" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="#ff6b6b" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf7ae;"></Label>
 
             <Label Text="{translator:Translate Login.ErroreLogin}" FontSize="Medium"  FontAttributes="Bold" TextColor="Red" IsVisible="False" x:Name="lblValidazioneLogin"></Label>
-            
-            <Entry x:Name="entUsername" Visual="Material" Placeholder="{translator:Translate Login.Username}" TextChanged="ent_TextChanged"></Entry>
 
-            <Entry Visual="Material" x:Name="entPassword" Placeholder="{translator:Translate Login.Password}" IsPassword="True" TextChanged="ent_TextChanged"></Entry>
+            <appappartamenti:CustomEntry
+                    IsRequired="True"
+                    Placeholder="Email"
+                    Visual="Material"
+                    x:Name="entUsername"
+                    Keyboard="Email"
+                    TextChanged="ent_TextChanged"
+                    />
+
+            <appappartamenti:CustomEntry
+                    IsRequired="True"
+                    Placeholder="Password"
+                    Visual="Material"
+                    x:Name="entPassword"
+                    IsPassword="True"
+                    TextChanged="ent_TextChanged"
+                    />
+
+            <!--<Entry x:Name="entUsername" Keyboard="Email" Visual="Material" Placeholder="{translator:Translate Login.Username}" TextChanged="ent_TextChanged"></Entry>-->
+
+            <!--<Entry Visual="Material" x:Name="entPassword" Placeholder="{translator:Translate Login.Password}" IsPassword="True" TextChanged="ent_TextChanged"></Entry>-->
 
             <Button Style="{x:StaticResource primaryButton}"  Visual="Material" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" IsEnabled="False" Clicked="btnAccedi_ClickedAsync"></Button>
 

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneInfoGenerali"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20">
+                <!-- Bottoni -->
+                <StackLayout Orientation="Horizontal">
+                    <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                        <Label Style="{x:StaticResource BackButton}"></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Informazioni generali"></Label>
+
+
+                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                        <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+
+
+                    <ProgressBar Progress="0.6" Margin="0,0,0,20" />
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="m²" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label Text="Inserisci la superficie" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <appappartamenti:CustomEntry TextFontSize="Medium" x:Name="entSuperficie" Keyboard="Numeric" Placeholder="Esempio: 120.000" Visual="Material"></appappartamenti:CustomEntry>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Camere da letto:" FontSize="Medium"></Label>
+                        <Label x:Name="lblCamereLettoCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpCamereLetto" ValueChanged="StpCamereLetto_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf26c;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Stanze: " FontSize="Medium"></Label>
+                        <Label x:Name="lblStanzeCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged"></Stepper>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Bagni: " FontSize="Medium"></Label>
+                        <Label x:Name="lblBagniCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Cucine: " FontSize="Medium"></Label>
+                        <Label x:Name="lblCucineCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpCucine" ValueChanged="StpCucine_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label VerticalTextAlignment="Center" Text="Garage/Posto auto: " FontSize="Medium"></Label>
+                        <Label x:Name="lblGarageCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+                    <Label Text="Altro" FontSize="Medium"></Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="9*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox x:Name="chkGiardino" Grid.Column="0" Grid.Row="0" IsChecked="False"></CheckBox>
+                        <Label  Grid.Column="1" VerticalTextAlignment="Center" Text="Giardino" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkTerrazzo" Grid.Column="0" Grid.Row="1" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="Terrazzo" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkCantina" Grid.Column="0" Grid.Row="2" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="Cantina" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkPiscina" Grid.Column="0" Grid.Row="3" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" Text="Piscina" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkAscensore" Grid.Column="0" Grid.Row="4" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="Ascensore" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkCondizionatori" Grid.Column="0" Grid.Row="5" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="Condizionatori" FontSize="Medium"></Label>
+                    </Grid>
+
+                    <Button Text="Procedi" x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

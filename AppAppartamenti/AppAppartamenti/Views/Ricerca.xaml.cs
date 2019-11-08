@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using AppAppartamenti.ViewModels;
+using AppAppartamentiApiClient;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,9 +18,11 @@ namespace AppAppartamenti.Views
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
 
+            //entRicerca.Focus();
         }
 
         private async void btnCancel_Clicked(object sender, EventArgs e)
@@ -27,20 +30,25 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-        private void entRicerca_Focused(object sender, FocusEventArgs e)
+        private void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (entRicerca.Text == "Ricerca")
-            {
-                entRicerca.Text = "";
-            }
+            //refresh della lista dei comuni
+            var listaComuni = new ListaComuniViewModel(entRicerca.Text);
+            listaComuni.LoadItemsCommand.Execute(null);
+            lvComuni.ItemsSource = listaComuni.Items;
         }
 
-        private void entRicerca_Unfocused(object sender, FocusEventArgs e)
+        async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
         {
-            if (entRicerca.Text == "")
-            {
-                entRicerca.Text = "Ricerca";
-            }
+            Comuni comune = args.SelectedItem as Comuni;
+
+            if (comune == null || comune.CodiceComune == null)
+                return;
+
+            //modifico la textbox del comune inserendo il nome completo del comune
+            entRicerca.Text = comune.NomeComune;
+
+            lvComuni.SelectedItem = null;
         }
     }
 }

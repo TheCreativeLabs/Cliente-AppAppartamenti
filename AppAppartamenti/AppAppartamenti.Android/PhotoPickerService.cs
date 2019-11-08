@@ -15,12 +15,17 @@ namespace DependencyServiceDemos.Droid
             // Define the Intent for getting images
             Intent intent = new Intent();
             intent.SetType("image/*");
+            intent.PutExtra(Intent.ExtraAllowMultiple, true);
             intent.SetAction(Intent.ActionGetContent);
 
-            // Start the picture-picker activity (resumes in MainActivity.cs)
+            //Start the picture - picker activity(resumes in MainActivity.cs)
             MainActivity.Instance.StartActivityForResult(
                 Intent.CreateChooser(intent, "Select Photo"),
                 MainActivity.PickImageId);
+
+            //intent.SetAction(Intent.ActionGetContent);
+            //((MainActivity)Forms.Context).StartActivityForResult(
+            //    Intent.CreateChooser(intent, "Select photo"), 0);
 
             // Save the TaskCompletionSource object as a MainActivity property
             MainActivity.Instance.PickImageTaskCompletionSource = new TaskCompletionSource<Stream>();

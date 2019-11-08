@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneImmagini"
+             NavigationPage.HasNavigationBar="False">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:MediaFileImageSourceConverter x:Key="MediaFileToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20">
+                <!-- Bottoni -->
+                <StackLayout Orientation="Horizontal">
+                    <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                        <Label Style="{x:StaticResource BackButton}"></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+              <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Immagini"></Label>
+
+
+                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                        <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+
+             
+
+                    <ProgressBar Progress="0.8" Margin="0,0,0,20" />
+
+                    <Button Clicked="ActionImmagini" Text="Aggiungi Immagini"></Button>
+
+                    <CollectionView x:Name="cvImmagini">
+                        <CollectionView.ItemsLayout>
+                           <GridItemsLayout Orientation="Vertical"
+                                            Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image HeightRequest="200" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"></Image>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button x:Name="btnImmaginiProcedi" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

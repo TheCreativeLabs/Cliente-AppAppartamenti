@@ -98,7 +98,6 @@ namespace AppAppartamenti.Views
         private async void BtnIndirizzoProcedi_Clicked(object sender, EventArgs e)
         {
             annuncio.Indirizzo = entIndirizzo.Text;
-
             stkPassaggio4.IsVisible = true;
             stkPassaggio3.IsVisible = false;
         }
@@ -132,6 +131,7 @@ namespace AppAppartamenti.Views
             annuncio.Ascensore = chkAscensore.IsChecked;
             annuncio.Balcone = chkTerrazzo.IsChecked;
             annuncio.Giardino = chkGiardino.IsChecked;
+            annuncio.Condizionatori = chkCondizionatori.IsChecked;
 
             stkPassaggio4.IsVisible = false;
             stkPassaggio5.IsVisible = true;
@@ -143,7 +143,15 @@ namespace AppAppartamenti.Views
         private async void EntIndirizzo_Unfocused(object sender, EventArgs e)
         {
             //ottengo la posizione dell'indirizzo.
-            List<Position> postionList = new List<Position>(await (new Geocoder()).GetPositionsForAddressAsync($"{entIndirizzo.Text} , {entCercaComune.Text}"));
+            List<Position> postionList = new List<Position>();
+
+            try
+            {
+                postionList = (await (new Geocoder()).GetPositionsForAddressAsync($"{entIndirizzo.Text} , {entCercaComune.Text}")).ToList();
+            }
+            catch (Exception ex)
+            {
+            }
 
             if (postionList.Count != 0)
             {
@@ -236,30 +244,30 @@ namespace AppAppartamenti.Views
 
         #region Stepper
 
-        void StpCamereLetto_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            lblCamereLettoCount.Text = stpCamereLetto.Value.ToString();
-        }
+            void StpCamereLetto_ValueChanged(object sender, ValueChangedEventArgs e)
+            {
+                lblCamereLettoCount.Text = stpCamereLetto.Value.ToString();
+            }
 
-        void StpStanze_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            lblStanzeCount.Text = stpStanze.Value.ToString();
-        }
+            void StpStanze_ValueChanged(object sender, ValueChangedEventArgs e)
+            {
+                lblStanzeCount.Text = stpStanze.Value.ToString();
+            }
 
-        void StpBagni_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            lblBagniCount.Text = stpBagni.Value.ToString();
-        }
+            void StpBagni_ValueChanged(object sender, ValueChangedEventArgs e)
+            {
+                lblBagniCount.Text = stpBagni.Value.ToString();
+            }
 
-        void StpCucine_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            lblCucineCount.Text = stpCucine.Value.ToString();
-        }
+            void StpCucine_ValueChanged(object sender, ValueChangedEventArgs e)
+            {
+                lblCucineCount.Text = stpCucine.Value.ToString();
+            }
 
-        void StpGarage_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            lblGarageCount.Text = stpGarage.Value.ToString();
-        }
+            void StpGarage_ValueChanged(object sender, ValueChangedEventArgs e)
+            {
+                lblGarageCount.Text = stpGarage.Value.ToString();
+            }
 
         #endregion
 

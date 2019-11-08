@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="AppAppartamenti.Views.Login.Registrazione" xmlns:translator="clr-namespace:AppAppartamenti.Helpers" NavigationPage.HasNavigationBar="False">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+             x:Class="AppAppartamenti.Views.Login.Registrazione" xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti" NavigationPage.HasNavigationBar="False">
 
     <!--<NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
@@ -26,11 +30,16 @@
                 <Button HeightRequest="50" CornerRadius="10" FontSize="Medium" Visual="Material" WidthRequest="50" TextColor="Black" BackgroundColor="#efefef" Text="&#xf030;" Margin="0,-30,0,10" FontFamily="{StaticResource FA-Solid}" HorizontalOptions="Center" Clicked="OnPickPhotoButtonClicked">
                 </Button>
 
-                <Entry x:Name="entNome" Visual="Material" Placeholder="{translator:Translate Registrazione.Nome}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
+                <appappartamenti:CustomEntry x:Name="entNome" Visual="Material"
+                       Placeholder="{translator:Translate Registrazione.Nome}"
+                       TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntNome"></Label>
 
-                <Entry x:Name="entCognome" Visual="Material" Placeholder="{translator:Translate Registrazione.Cognome}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
-                <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntCognome"></Label>
+                <appappartamenti:CustomEntry  x:Name="entCognome" Visual="Material"
+                       Placeholder="{translator:Translate Registrazione.Cognome}" VerticalOptions="Center"
+                    TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
+                <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}"
+                       Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntCognome"></Label>
 
                 <!--<DatePicker x:Name="entDataNascita" Visual="Material" VerticalOptions="Center"></DatePicker>
                 -->
@@ -38,30 +47,34 @@
                 <!--
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" FontSize="Small" TextColor="Red" IsVisible="False" x:Name="lblValidatorEntCognome"></Label>-->
 
-                <Entry   x:Name="entEmail" Visual="Material" Placeholder="{translator:Translate Login.Email}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
+                <appappartamenti:CustomEntry   x:Name="entEmail" Visual="Material" Placeholder="{translator:Translate Login.Email}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneEmail}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntEmail"></Label>
 
-                <Entry x:Name="entPassword" Visual="Material" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
+                <appappartamenti:CustomEntry x:Name="entPassword" Visual="Material" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
                 <Label Text="{translator:Translate Login.MessaggioValidazionePassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntPassword"></Label>
 
-                <Entry  x:Name="entConfermaPassword" Visual="Material" IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
+                <appappartamenti:CustomEntry  x:Name="entConfermaPassword" Visual="Material" IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneConfermaPassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntConfermaPassword"></Label>
 
                 <StackLayout Orientation="Horizontal">
-                    <CheckBox IsChecked="true" Color="#efefef" VerticalOptions="Center"></CheckBox>
+                    <CheckBox IsChecked="true" VerticalOptions="Center"></CheckBox>
                     <Label Text="Accetto le condizioni d'uso" VerticalTextAlignment="Center"></Label>
                 </StackLayout>
 
-                <!--<Button Style="{x:StaticResource primaryButton}" IsEnabled="False"  x:Name="btnRegistrati" Text="{translator:Translate Registrazione.Bottone}" Visual="Material" Clicked="btnRegistrati_Clicked"></Button>-->
-
-                <Button Style="{x:StaticResource primaryButton}" Visual="Material" Text="{translator:Translate Registrazione.Bottone}" x:Name="btnRegistrati" Clicked="btnRegistrati_Clicked" IsEnabled="False"></Button>
+                <Button Style="{x:StaticResource primaryButton}"
+                        Visual="Material"
+                        Text="{translator:Translate Registrazione.Bottone}"
+                        x:Name="btnRegistrati" Clicked="btnRegistrati_Clicked"
+                        IsEnabled="False"></Button>
             </StackLayout>
 
             <StackLayout x:Name="stkRegistrazioneAvvenuta" IsVisible="False">
                 <Label FontSize="40" FontAttributes="Bold" TextColor="Black" Margin="0,0,0,10" Text="{translator:Translate Registrazione.TitoloSuccesso}"></Label>
                 <Label FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="0,0,0,10" Text="{translator:Translate Registrazione.SottotitoloSuccesso}"></Label>
 
-                <Button x:Name="btnLogin" Text="{translator:Translate Registrazione.TornaAlLogin}" Visual="Material" VerticalOptions="Center" Clicked="btnLogin_Clicked"></Button>
+                <Button x:Name="btnLogin"
+                        Text="{translator:Translate Registrazione.TornaAlLogin}"
+                        Visual="Material" VerticalOptions="Center" Clicked="btnLogin_Clicked"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

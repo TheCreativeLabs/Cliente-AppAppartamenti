@@ -6,9 +6,9 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Home" NavigationPage.HasNavigationBar="False"
-             BackgroundColor="#F0F0F0">
+             BackgroundColor="#F0F0F0"
+             BackgroundImageSource="Image.jpeg">
     <ContentPage.Content>
-        <ScrollView>
             <StackLayout Orientation="Vertical" Padding="20">
                 <StackLayout.Margin>
                       <OnPlatform x:TypeArguments="Thickness">
@@ -67,48 +67,17 @@
                             </CollectionView.ItemsSource>
                         </CollectionView>
                     </StackLayout>
-                </StackLayout>
 
-                <StackLayout Orientation="Vertical" Margin="0,15,0,0">
-                    <Label Text="I tuoi annunci" FontSize="Title" FontAttributes="Bold" TextColor="Black">
+                    <!--<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
 
-                    </Label>
-
-                    <StackLayout Orientation="Horizontal" HeightRequest="150">
-                        <CollectionView>
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Padding="5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="130"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="130" />
-                                        </Grid.ColumnDefinitions>
-                                        <Frame HeightRequest="120" WidthRequest="120" HasShadow="True" Visual="Default" CornerRadius="20"  BackgroundColor="White">
-                                            <Label Text="Prova"></Label>
-                                        </Frame>
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                            <CollectionView.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Baboon</x:String>
-                                    <x:String>Capuchin Monkey</x:String>
-                                    <x:String>Blue Monkey</x:String>
-                                    <x:String>Squirrel Monkey</x:String>
-                                    <x:String>Golden Lion Tamarin</x:String>
-                                    <x:String>Howler Monkey</x:String>
-                                    <x:String>Japanese Macaque</x:String>
-                                </x:Array>
-                            </CollectionView.ItemsSource>
-                        </CollectionView>
-                    </StackLayout>
+    <Image x:Name="PhotoImage" />
+    <Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1" Clicked="CameraButton_Clicked" />
+</Grid>-->
                 </StackLayout>
             </StackLayout>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

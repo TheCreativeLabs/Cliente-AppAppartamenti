@@ -3,20 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Ricerca">
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <Button x:Name="btnCancel" Text="Cancel" TextColor="Gray" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" Clicked="btnCancel_Clicked"></Button>
+            <Button x:Name="btnCancel" Margin="-10" Text="Annulla" TextColor="Gray" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" Clicked="btnCancel_Clicked"></Button>
 
             <Frame HasShadow="True" Padding="10,5,10,5" Visual="Material">
                 <StackLayout Orientation="Horizontal">
                     <Label FontSize="Large" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
-                    <appappartamenti:MyEntry x:Name="entRicerca" Unfocused="entRicerca_Unfocused" Focused="entRicerca_Focused" TextColor="Gray" Text="Ricerca città o provincia" HorizontalOptions="FillAndExpand"></appappartamenti:MyEntry>
+                    <appappartamenti:CustomEntry
+                        IsRequired="False"
+                        Placeholder="Ricerca per città o provincia"
+                        Visual="Material"
+                        BorderColor="White"
+                        x:Name="entRicerca"
+                        TextChanged="EntRicerca_TextChanged"/>
                 </StackLayout>
             </Frame>
+
+            <ListView x:Name="lvComuni" ItemSelected="LvComuni_Selected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding NomeComune}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Slider x:Name="greenSlider" MinimumTrackColor="Blue"  MaximumTrackColor="red" ThumbColor="Yellow"/>
+
+            <StackLayout x:Name="stk">
+                <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                <Label  VerticalTextAlignment="Center" Text="Bagni: " FontSize="Medium"></Label>
+            </StackLayout>
+              
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

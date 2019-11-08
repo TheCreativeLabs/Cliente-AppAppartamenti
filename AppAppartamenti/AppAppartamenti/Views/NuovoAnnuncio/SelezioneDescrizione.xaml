@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d"
+             x:Class="AppAppartamenti.Views.SelezioneDescrizione"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+            <StackLayout Padding="20">
+                <!-- Bottoni -->
+                <StackLayout Orientation="Horizontal">
+                    <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                        <Label Style="{x:StaticResource BackButton}"></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Descrizione"></Label>
+
+                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                        <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+
+                <ProgressBar Progress="0.3" />
+
+                <appappartamenti:CustomEntry HeightRequest="200" x:Name="edtDescrizione" Visual="Material" VerticalOptions="FillAndExpand" ></appappartamenti:CustomEntry>
+
+                <Button x:Name="btnProcedi" Text="Crea annuncio" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

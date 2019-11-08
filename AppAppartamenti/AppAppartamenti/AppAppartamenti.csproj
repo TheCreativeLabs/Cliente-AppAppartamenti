@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Remove="Views\MenuPage.xaml.cs" />
+    <Compile Remove="Views\NuovoAnnuncio\NuovoAnnuncio.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
     <PackageReference Include="RestSharp" Version="106.6.10" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="4.3.0.947036" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.15" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.4.6-beta" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,4 +36,7 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\NuovoAnnuncio\" />
+  </ItemGroup>
 </Project>

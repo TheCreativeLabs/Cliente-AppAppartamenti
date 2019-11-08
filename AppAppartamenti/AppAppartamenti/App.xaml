@@ -4,19 +4,20 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="AppAppartamenti.App">
+             x:Class="AppAppartamenti.App"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit">
 
     <Application.Resources>
         <ResourceDictionary>
             <!--    Font Awesome     -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
                 <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
-     <On Platform="iOS" Value="Font Awesome 5 Brands" />
+                <On Platform="iOS" Value="Font Awesome 5 Brands" />
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Solid">
                 <On Platform="Android" Value="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" />
-          <On Platform="iOS" Value="Font Awesome 5 Free" />
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
             </OnPlatform>
 
             <Style TargetType="Button" x:Key="primaryButton">
@@ -92,6 +93,7 @@
                  <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
                  <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
                  <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
              </Style>
 
             <Style TargetType="Label" x:Key="BackButton">
@@ -99,6 +101,7 @@
                 <Setter Property="Text" Value="&#xf053;"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Title"></Setter>
             </Style>
 
             <Style TargetType="Label" x:Key="CancelButton">
@@ -106,6 +109,7 @@
                 <Setter Property="Text" Value="&#xf00d;"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Title"></Setter>
             </Style>
 
             <Style TargetType="Frame" x:Key="FrameBackButton">
@@ -122,6 +126,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="Title" />
             </Style>
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioIcon">
