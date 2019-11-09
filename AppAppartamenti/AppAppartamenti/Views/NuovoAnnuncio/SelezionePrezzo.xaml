@@ -36,22 +36,15 @@
                     </Frame>
                 </StackLayout>
 
-
                     <ProgressBar Progress="0.7" Margin="0,0,0,20" />
 
-                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                        <Label VerticalTextAlignment="Center" Text="&#xf153;" FontSize="Medium" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label Text="Inserisci il prezzo" FontSize="Medium"></Label>
-                    </StackLayout>
+                    <Label Text="€ - Inserisci il prezzo"  Margin="0,10,0,0"></Label>
                     <appappartamenti:CustomEntry  x:Name="entPrezzo" Placeholder="Esempio: 120.000" Visual="Material" Keyboard="Numeric"></appappartamenti:CustomEntry>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                        <Label VerticalTextAlignment="Center" Text="&#xf153;/mese" FontSize="Medium" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label Text="spese condominiali" FontSize="Medium"></Label>
-                    </StackLayout>
+                    <Label VerticalTextAlignment="Center"  Margin="0,10,0,0" Text="€/mese - spese condominiali"></Label>
                     <appappartamenti:CustomEntry  x:Name="entSpeseCondominiali" Placeholder="Esempio: 80" Visual="Material" Keyboard="Numeric"></appappartamenti:CustomEntry>
 
-                    <Label Text="Riscaldamento" FontSize="Medium" Margin="0,10,0,0"></Label>
+                    <Label Text="Riscaldamento" Margin="0,10,0,0"></Label>
                     <Frame Padding="1" CornerRadius="5" BorderColor="LightGray" HasShadow="False">
                                     <appappartamenti:CustomEntry x:Name="entRiscaldamento" BorderColor="White" IsEnabled="False" Placeholder="Seleziona" Visual="Material">
                             </appappartamenti:CustomEntry>
@@ -61,7 +54,7 @@
                     </Frame>
                     <Picker x:Name="pckRiscaldamento" IsVisible="False" SelectedIndexChanged="PckRiscaldamento_SelectedIndexChanged" ItemDisplayBinding="{Binding Descrizione}"></Picker>
 
-                    <Label Text="Classe energetica" FontSize="Medium" Margin="0,10,0,0"></Label>
+                    <Label Text="Classe energetica" Margin="0,10,0,0"></Label>
                     <Frame Padding="1" CornerRadius="5" BorderColor="LightGray" HasShadow="False">
                         <appappartamenti:CustomEntry BorderColor="White" IsEnabled="False"  Grid.Column="0" x:Name="entClasseEnergetica" Placeholder="Seleziona" Visual="Material"></appappartamenti:CustomEntry>
                         <Frame.GestureRecognizers>

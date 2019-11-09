@@ -19,7 +19,7 @@ namespace AppAppartamenti.Views
 
         private async void entRicerca_Focused(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new Ricerca());
+            await Navigation.PushModalAsync(new NavigationPage(new Ricerca()));
         }
 
         //private void entRicerca_Unfocused(object sender, FocusEventArgs e)

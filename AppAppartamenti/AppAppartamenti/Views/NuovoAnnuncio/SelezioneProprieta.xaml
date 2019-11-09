@@ -40,7 +40,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding Descrizione}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
+                            <Label Text="{Binding Descrizione}"  VerticalTextAlignment="Center" />
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

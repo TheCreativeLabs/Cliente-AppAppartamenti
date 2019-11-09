@@ -8,6 +8,7 @@
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Login.Login"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
              >
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" Margin="20">
@@ -15,27 +16,19 @@
 
             <Label Text="{translator:Translate Login.ErroreLogin}" FontSize="Medium"  FontAttributes="Bold" TextColor="Red" IsVisible="False" x:Name="lblValidazioneLogin"></Label>
 
-            <appappartamenti:CustomEntry
-                    IsRequired="True"
+            <appappartamenti:MyEntry
                     Placeholder="Email"
-                    Visual="Material"
                     x:Name="entUsername"
                     Keyboard="Email"
                     TextChanged="ent_TextChanged"
                     />
 
-            <appappartamenti:CustomEntry
-                    IsRequired="True"
+            <appappartamenti:MyEntry
                     Placeholder="Password"
-                    Visual="Material"
                     x:Name="entPassword"
                     IsPassword="True"
                     TextChanged="ent_TextChanged"
                     />
-
-            <!--<Entry x:Name="entUsername" Keyboard="Email" Visual="Material" Placeholder="{translator:Translate Login.Username}" TextChanged="ent_TextChanged"></Entry>-->
-
-            <!--<Entry Visual="Material" x:Name="entPassword" Placeholder="{translator:Translate Login.Password}" IsPassword="True" TextChanged="ent_TextChanged"></Entry>-->
 
             <Button Style="{x:StaticResource primaryButton}"  Visual="Material" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" IsEnabled="False" Clicked="btnAccedi_ClickedAsync"></Button>
 
@@ -69,11 +62,11 @@
  
             <Button BorderColor="Red" Visual="Material" FontFamily="{x:StaticResource FA-Brands}"  HorizontalOptions="CenterAndExpand"  TextColor="Red" BackgroundColor="White" Text="&#xf1a0; Accedi con Google">
                 <Button.Style>
-                               <OnPlatform x:TypeArguments="Style">
-                                    <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
-                                    <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
-                                </OnPlatform>
-                            </Button.Style>
+                    <OnPlatform x:TypeArguments="Style">
+                        <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
+                        <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
+                    </OnPlatform>
+                </Button.Style>
             </Button>
 
             <Label x:Name="lblRegistrati" FontAttributes="Bold" Text="{translator:Translate Login.RegisterIfNoAccount}" HorizontalTextAlignment="Center" Margin="0,10,0,0" TextColor="black">

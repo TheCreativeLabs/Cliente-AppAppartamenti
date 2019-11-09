@@ -48,7 +48,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Label Text="{Binding NomeComune}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding NomeComune}" VerticalTextAlignment="Center" />
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
