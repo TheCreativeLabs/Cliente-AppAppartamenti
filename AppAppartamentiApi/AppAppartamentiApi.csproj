@@ -274,6 +274,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AnnunciController.cs" />
+    <Compile Include="Dto\AnnuncioDtoOutput.cs" />
     <Compile Include="Dto\AnnunciDtoOutput.cs" />
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />

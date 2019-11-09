@@ -40,4 +40,10 @@
   <ItemGroup>
     <Folder Include="Views\NuovoAnnuncio\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\DettaglioAnnuncio.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

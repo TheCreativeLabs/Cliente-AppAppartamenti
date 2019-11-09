@@ -56,8 +56,6 @@ namespace AppAppartamenti.Views
             await setMapLocation();
 
             mapsPopup.IsVisible = true;
-
-            //await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio)); FIXME CHIARA, FARE SE SI CLICCA YES NEL POPUP
         }
 
 
