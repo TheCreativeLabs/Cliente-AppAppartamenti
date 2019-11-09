@@ -25,6 +25,7 @@
     <PackageReference Include="Xamarin.Forms.Maps" Version="4.3.0.947036" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.15" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.4.6-beta" />
+    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>

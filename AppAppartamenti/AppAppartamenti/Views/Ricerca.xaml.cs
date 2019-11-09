@@ -21,13 +21,16 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            //entRicerca.Focus();
         }
 
         private async void btnCancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private async void btnRicerca_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ListaAnnunci());
         }
 
         private void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
@@ -36,6 +39,10 @@ namespace AppAppartamenti.Views
             var listaComuni = new ListaComuniViewModel(entRicerca.Text);
             listaComuni.LoadItemsCommand.Execute(null);
             lvComuni.ItemsSource = listaComuni.Items;
+
+            stkRicercaAggiuntiva.IsVisible = false;
+            lvComuni.IsVisible = true;
+            btnRicerca.IsVisible = false;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -47,6 +54,10 @@ namespace AppAppartamenti.Views
 
             //modifico la textbox del comune inserendo il nome completo del comune
             entRicerca.Text = comune.NomeComune;
+
+            lvComuni.IsVisible = false;
+            stkRicercaAggiuntiva.IsVisible = true;
+            btnRicerca.IsVisible = true;
 
             lvComuni.SelectedItem = null;
         }

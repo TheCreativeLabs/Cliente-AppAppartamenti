@@ -21,6 +21,6 @@ namespace AppAppartamenti
             this.BorderColor = Color.FromRgb(220, 220, 220);
             this.TextColor = Color.Black;
             this.CornerRadius = 5;
-        }
+        }   
     }
 }

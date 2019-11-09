@@ -35,26 +35,25 @@
                         <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                             <Label Style="{x:StaticResource CancelButton}"></Label>
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                                </TapGestureRecognizer>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                    </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </StackLayout>
-                <ProgressBar Progress="0.4" />
-
-                <appappartamenti:CustomEntry Margin="0,20,0,0" Title="Comune" HeightRequest="80" x:Name="entCercaComune" Visual="Material" Placeholder="Inserisci il comune" TextChanged="EntCercaComune_TextChanged"></appappartamenti:CustomEntry>
-
-                <ListView x:Name="lvComuni" ItemSelected="LvComuni_Selected" HeightRequest="250" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label Text="{Binding NomeComune}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    <ProgressBar Progress="0.4" />
+                    
+                    <appappartamenti:CustomEntry Margin="0,20,0,0" Title="Comune" HeightRequest="80" x:Name="entCercaComune" Visual="Material" Placeholder="Inserisci il comune" TextChanged="EntCercaComune_TextChanged"></appappartamenti:CustomEntry>
+            
+                    <ListView x:Name="lvComuni" ItemSelected="LvComuni_Selected" HeightRequest="250" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Text="{Binding NomeComune}" VerticalTextAlignment="Center" />
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                 <appappartamenti:CustomEntry Title="Indirizzo" x:Name="entIndirizzo" TextChanged="EntIndirizzo_textChanged" IsVisible="False" Visual="Material" Placeholder="Inserisci l'indirizzo"></appappartamenti:CustomEntry>
 

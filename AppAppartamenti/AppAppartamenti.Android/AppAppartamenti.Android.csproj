@@ -70,6 +70,9 @@
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.4.6-beta</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.RangeSlider">
+      <Version>1.0.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryCustomRenderer.cs" />
@@ -88,6 +91,8 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
+    <AndroidAsset Include="Assets\Roboto-Medium.ttf" />
+    <AndroidAsset Include="Assets\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.xml" />
@@ -111,7 +116,11 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\mipmap-hdpi\Image.jpeg">
+    <AndroidResource Include="Resources\drawable\rounded.axml">
+      <SubType></SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\RoundCornerbutton.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -124,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\xml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\drawable\Image.jpeg">
+      <SubType></SubType>
+      <Generator></Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.App"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit">
 
     <Application.Resources>
@@ -19,7 +20,7 @@
                 <On Platform="Android" Value="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" />
                 <On Platform="iOS" Value="Font Awesome 5 Free" />
             </OnPlatform>
-
+            
             <Style TargetType="Button" x:Key="primaryButton">
                 <Setter Property="BackgroundColor" Value="#ff6b6b"/>
                 <Setter Property="Text" Value="White"/>
@@ -30,16 +31,26 @@
                 <On Platform="iOS" Value="Montserrat-Light" />
             </OnPlatform>
 
-
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
+                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto" />
+                <On Platform="iOS" Value="Roboto" />
+            </OnPlatform>
+
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="Bold">
+                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto Medium" />
+                <On Platform="iOS" Value="Roboto Medium" />
+            </OnPlatform>
+            
+            <!--<OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
                 <On Platform="Android" Value="MyriadPro-Regular.otf#MyriadPro Regular" />
                 <On Platform="iOS" Value="MyriadPro-Regular" />
-            </OnPlatform>
+            </OnPlatform>-->
 
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
-                <Setter Property="HeightRequest" Value="58"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
             </Style>
 
             <Style TargetType="Editor">
@@ -49,6 +60,7 @@
 
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="TextColor" Value="Black"></Setter>
             </Style>
 
             <Style TargetType="Button">
@@ -66,8 +78,8 @@
             </Style>
 
               <Style TargetType="Button" x:Key="IosButtonRadius">
-                <Setter Property="CornerRadius" Value="30"></Setter>
-            </Style>
+                <Setter Property="CornerRadius" Value="20"></Setter>
+              </Style>
 
             <Style TargetType="Button" x:Key="AndroidButtonRadius">
                 <Setter Property="CornerRadius" Value="100"></Setter>
@@ -102,6 +114,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="TextColor" Value="Gray"></Setter>
             </Style>
 
             <Style TargetType="Label" x:Key="CancelButton">
@@ -110,6 +123,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="TextColor" Value="Gray"></Setter>
             </Style>
 
             <Style TargetType="Frame" x:Key="FrameBackButton">
@@ -122,19 +136,22 @@
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioTitle">
                 <Setter Property="Padding" Value="0" />
-                <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="FontSize" Value="Large" />
             </Style>
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioIcon">
-                <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="FontAttributes" Value="{StaticResource FA-Solid}" />
-                <Setter Property="FontFamily" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
+
+            <Style TargetType="appappartamenti:MyEntry">
+                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="HeightRequest" Value="40"></Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
     
