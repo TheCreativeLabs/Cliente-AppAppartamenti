@@ -35,7 +35,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
-               await Navigation.PopAsync();
+                await Navigation.PopAsync();
             }
             catch (Exception Ex)
             {
@@ -53,10 +53,16 @@ namespace AppAppartamenti.Views
         {
             annuncio.Indirizzo = entIndirizzo.Text;
 
-            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio));
+            await setMapLocation();
+
+            mapsPopup.IsVisible = true;
+
+            //await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio)); FIXME CHIARA, FARE SE SI CLICCA YES NEL POPUP
         }
 
-        private async void EntIndirizzo_Unfocused(object sender, EventArgs e)
+
+        //private async void EntIndirizzo_Unfocused(object sender, EventArgs e)
+        private async Task setMapLocation()
         {
             //ottengo la posizione dell'indirizzo.
             List<Position> postionList = new List<Position>();
@@ -81,7 +87,7 @@ namespace AppAppartamenti.Views
                 map.IsVisible = true;
             }
 
-            btnIndirizzoProcedi.IsVisible = true;
+            //btnIndirizzoProcedi.IsVisible = true;
         }
 
         private void EntCercaComune_TextChanged(object sender, TextChangedEventArgs e)
@@ -89,7 +95,7 @@ namespace AppAppartamenti.Views
             //refresh della lista dei comuni
             var listaComuni = new ListaComuniViewModel(entCercaComune.Text);
             listaComuni.LoadItemsCommand.Execute(null);
-            lvComuni.ItemsSource = listaComuni.Items;
+            lvComuni.ItemsSource = listaComuni.Items; 
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -109,9 +115,34 @@ namespace AppAppartamenti.Views
             lvComuni.IsVisible = false;
             entIndirizzo.IsVisible = true;
 
+            //mostro il bottone procedi
+            btnIndirizzoProcedi.IsVisible = true;
+
             // Manually deselect item.
             lvComuni.SelectedItem = null;
 
+        }
+
+        private void EntIndirizzo_textChanged(object sender, TextChangedEventArgs e)
+        {
+            btnIndirizzoProcedi.IsEnabled = true;
+        }
+
+        //private void btnPopupButton_Clicked(object sender, EventArgs e)
+        //{
+        //    mapsPopup.IsVisible = true;
+        //    activityIndicator.IsRunning = true;
+        //}
+
+        private void ButtonPopUpNo(object sender, EventArgs e)
+        {
+            mapsPopup.IsVisible = false;
+        }
+
+        private async void ButtonPopUpSi(object sender, EventArgs e)
+        {
+            mapsPopup.IsVisible = false;
+            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio));
         }
 
     }
