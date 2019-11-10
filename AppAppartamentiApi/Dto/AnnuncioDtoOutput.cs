@@ -27,11 +27,18 @@ namespace AppAppartamentiApi.Dto
                 Prezzo = annuncio.Prezzo,
                 Superficie = annuncio.Superficie,
                 Descrizione = annuncio.Descrizione,
-                TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
-                TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
                 Completato = annuncio.Completato,
                 Cancellato = annuncio.Cancellato
             };
+
+            if (annuncio.TipologiaAnnuncio != null)
+            {
+                dto.TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione;
+            }
+            if (annuncio.TipologiaProprieta != null)
+            {
+                dto.TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione;
+            }
 
             foreach (var imm in annuncio.ImmagineAnnuncio)
             {

@@ -10,6 +10,7 @@
             <Label Text="Welcome to DettaglioAnnuncio"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Item.Indirizzo, Mode=TwoWay}"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppAppartamenti.ViewModels;
+using AppAppartamentiApiClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +16,17 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDetailViewModel viewModel;
 
-        public DettaglioAnnuncio(Guid idAnnuncio)
+        public DettaglioAnnuncio(AnnuncioDtoOutput dto)
         {
-            InitializeComponent(); 
-            
-            BindingContext = viewModel = new AnnuncioDetailViewModel(idAnnuncio);
+            InitializeComponent();
+
+            BindingContext = viewModel  = new AnnuncioDetailViewModel(dto);
+        }
+
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }
