@@ -85,7 +85,8 @@ namespace AppAppartamentiApi.Controllers
 
             annunci.ForEach(x =>
             {
-                x.ImmaginePrincipale = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
+                var img = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).First();
+                x.ImmaginePrincipale = img;
             });
 
             return annunci;
@@ -224,12 +225,43 @@ namespace AppAppartamentiApi.Controllers
         [ResponseType(typeof(List<Comuni>))]
         public List<Comuni> GetListaComuni(string NomeComune)
         {
-            List<Comuni> listaComuni = dbDataContext.Comuni
-                                                .Where(x => x.NomeComune.Any(nome => nome.ToString().StartsWith(NomeComune, StringComparison.OrdinalIgnoreCase)))
-                                                .Take(30)
-                                                .ToList();
+            List<Comuni> listaComuni = new List<Comuni>();
+
+            if (!(string.IsNullOrEmpty(NomeComune)))
+            {
+               listaComuni = dbDataContext.Comuni
+                                        .Where(x => x.NomeComune.ToUpper().Contains(NomeComune))
+                                        .Take(30)
+                                        .ToList();
+            }
 
             return listaComuni;
+        }
+
+        // GET api/values
+        [HttpGet]
+        [Route("ListaClasseEnergetica")]
+        [ResponseType(typeof(List<ClasseEnergetica>))]
+        public List<ClasseEnergetica> GetListaClasseEnergetica()
+        {
+            List<ClasseEnergetica> listaClasseEnergetica = new List<ClasseEnergetica>();
+
+            listaClasseEnergetica = dbDataContext.ClasseEnergetica.ToList();
+
+            return listaClasseEnergetica;
+        }
+
+        // GET api/values
+        [HttpGet]
+        [Route("ListaTipologiaRiscaldamento")]
+        [ResponseType(typeof(List<TipologiaRiscaldamento>))]
+        public List<TipologiaRiscaldamento> GetListaTipologiaRiscaldamento()
+        {
+            List<TipologiaRiscaldamento> listaTipologiaRiscaldamento = new List<TipologiaRiscaldamento>();
+
+            listaTipologiaRiscaldamento = dbDataContext.TipologiaRiscaldamento.ToList();
+
+            return listaTipologiaRiscaldamento;
         }
     }
 }
