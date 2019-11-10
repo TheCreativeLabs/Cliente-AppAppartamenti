@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using AppAppartamenti.ViewModels;
+using AppAppartamentiApiClient;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,9 +18,9 @@ namespace AppAppartamenti.Views
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-
+            base.OnAppearing();
         }
 
         private async void btnCancel_Clicked(object sender, EventArgs e)
@@ -27,20 +28,38 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-        private void entRicerca_Focused(object sender, FocusEventArgs e)
+        private async void btnRicerca_Clicked(object sender, EventArgs e)
         {
-            if (entRicerca.Text == "Ricerca")
-            {
-                entRicerca.Text = "";
-            }
+            await Navigation.PushAsync(new ListaAnnunci());
         }
 
-        private void entRicerca_Unfocused(object sender, FocusEventArgs e)
+        private void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (entRicerca.Text == "")
-            {
-                entRicerca.Text = "Ricerca";
-            }
+            //refresh della lista dei comuni
+            var listaComuni = new ListaComuniViewModel(entRicerca.Text);
+            listaComuni.LoadItemsCommand.Execute(null);
+            lvComuni.ItemsSource = listaComuni.Items;
+
+            stkRicercaAggiuntiva.IsVisible = false;
+            lvComuni.IsVisible = true;
+            btnRicerca.IsVisible = false;
+        }
+
+        async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
+        {
+            Comuni comune = args.SelectedItem as Comuni;
+
+            if (comune == null || comune.CodiceComune == null)
+                return;
+
+            //modifico la textbox del comune inserendo il nome completo del comune
+            entRicerca.Text = comune.NomeComune;
+
+            lvComuni.IsVisible = false;
+            stkRicercaAggiuntiva.IsVisible = true;
+            btnRicerca.IsVisible = true;
+
+            lvComuni.SelectedItem = null;
         }
     }
 }

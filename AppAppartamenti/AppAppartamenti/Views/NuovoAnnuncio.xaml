@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
-             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
-             x:Class="AppAppartamenti.Views.NuovoAnnuncio"
-             NavigationPage.HasNavigationBar="False">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:translator="clr-namespace:AppAppartamenti.Helpers" xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d" x:Class="AppAppartamenti.Views.NuovoAnnuncio" NavigationPage.HasNavigationBar="False">
 
 
     <ContentPage.Resources>
@@ -16,91 +8,260 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal" Padding="20">
-                <Button TextColor="Gray" x:Name="btnBack" Clicked="BtnBack_Clicked"
-                    BackgroundColor="Transparent" WidthRequest="40" Text="&#xf053;" FontSize="Title" Visual="Default" HorizontalOptions="Start"
-                    FontFamily="{x:StaticResource FA-Solid}" HeightRequest="50" IsVisible="False"></Button>
+        <ScrollView>
+            <StackLayout>
+                <!-- Bottoni -->
+                <StackLayout Orientation="Horizontal" Padding="10">
+                    <Frame x:Name="btnBack" IsVisible="False" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                        <Label Style="{x:StaticResource BackButton}"></Label>
 
-                    <Button TextColor="Gray" WidthRequest="40"
-                    BackgroundColor="Transparent" Text="&#xf00d;" FontSize="Title" Visual="Default" HorizontalOptions="EndAndExpand"
-                    FontFamily="{x:StaticResource FA-Solid}" Clicked="BtnCancel_Clicked"  HeightRequest="50"></Button>
-            </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
 
-            <StackLayout x:Name="stkPassaggio1" Orientation="Vertical" Padding="20">
+                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                        <Label Style="{x:StaticResource CancelButton}"></Label>
 
-                <Label FontSize="Subtitle" TextColor="Gray" Text="PASSAGGIO 1"></Label>
-                <ProgressBar Progress="0.2" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
 
+                <!-- Stack tipo di alloggio -->
+                <StackLayout x:Name="stkPassaggio1" Padding="20,0,20,0">
+                    <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Che tipo di alloggio hai?"></Label>
 
-                <Label FontSize="Title" FontAttributes="Bold" Margin="0,10,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"
-                   Text="Che tipo di alloggio hai?" TextColor="Black"></Label>
+                    <ProgressBar Progress="0.2" />
 
-
-               
-                <ListView x:Name="lvTipologiaProprieta" Margin="0,20,0,0"
-                          ItemSelected="lvTipologiaProprieta_Selected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                    <Label Text="{Binding Descrizione}" 
-                                        LineBreakMode="NoWrap"  FontSize="Medium" VerticalTextAlignment="Center" />
+                    <ListView x:Name="lvTipologiaProprieta" ItemSelected="LvTipologiaProprieta_Selected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Text="{Binding Descrizione}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
                                 </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                  
-            </StackLayout>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
 
-            <StackLayout x:Name="stkPassaggio2" Orientation="Vertical" Padding="20" IsVisible="False">
+                <!-- Stack vendita/affitto -->
+                <StackLayout x:Name="stkPassaggio2" Orientation="Vertical" Padding="20,0,20,0" IsVisible="False">
+                    <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Vendita o affitto?"></Label>
 
-                <Label FontSize="Subtitle" TextColor="Gray" Text="PASSAGGIO 2"></Label>
-                <ProgressBar Progress="0.4" />
+                    <ProgressBar Progress="0.3" />
 
-
-                <Label FontSize="Title" FontAttributes="Bold" Margin="0,10,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"
-                   Text="Vendita o affitto?" TextColor="Black"></Label>
-
-
-                <!--ItemSelected="lvTipologiaProprieta_Selected"-->
-                <ListView x:Name="lvTipologiaAnnuncio" ItemSelected="lvTipologiaAnnuncio_Selected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                    <Label Text="{Binding Descrizione}" 
-                                        LineBreakMode="NoWrap"  FontSize="Medium" VerticalTextAlignment="Center" />
+                    <ListView x:Name="lvTipologiaAnnuncio" ItemSelected="LvTipologiaAnnuncio_Selected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Text="{Binding Descrizione}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
                                 </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                  
-            </StackLayout>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
 
-            <StackLayout x:Name="stkPassaggio3" Orientation="Vertical" Padding="20" IsVisible="False">
+                 <!-- Stack posizione -->
+                <StackLayout x:Name="stkPassaggio3" Orientation="Vertical" Padding="20,0,20,0" IsVisible="False">
+                    <Label FontSize="Title" Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Dove si trova?"></Label>
 
-                <Label FontSize="Subtitle" TextColor="Gray" Text="PASSAGGIO 3"></Label>
-                <ProgressBar Progress="0.6" />
+                    <ProgressBar Progress="0.4" />
 
+                    <Entry x:Name="entCercaComune" Visual="Material" Placeholder="Inserisci il comune" TextChanged="EntCercaComune_TextChanged"></Entry>
 
-                <Label FontSize="Title" FontAttributes="Bold" Margin="0,10,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"
-                   Text="Dove si trova?" TextColor="Black"></Label>
-
-
-                <!--ItemSelected="lvTipologiaProprieta_Selected"-->
-                <!--<ListView x:Name="lvTipologiaAnnuncio">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                    <Label Text="{Binding Descrizione}" 
-                                        LineBreakMode="NoWrap"  FontSize="Medium" VerticalTextAlignment="Center" />
+                    <ListView x:Name="lvComuni" ItemSelected="LvComuni_Selected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Text="{Binding NomeComune}" LineBreakMode="NoWrap" FontSize="Medium" VerticalTextAlignment="Center" />
                                 </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>-->
-                  
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Entry x:Name="entIndirizzo" Unfocused="EntIndirizzo_Unfocused" IsVisible="False" Visual="Material" Placeholder="Inserisci l'indirizzo"></Entry>
+
+                    <maps:Map x:Name="map" IsVisible="False" HeightRequest="350" />
+
+                    <Button x:Name="btnIndirizzoProcedi" IsVisible="False" Clicked="BtnIndirizzoProcedi_Clicked" Text="Procedi" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                </StackLayout>
+
+                <!-- Stack informazioni generali -->
+                <StackLayout x:Name="stkPassaggio4" Orientation="Vertical" Padding="20,0,20,20" IsVisible="False">
+                    <Label FontSize="Title" Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Informazioni generali"></Label>
+
+                    <ProgressBar Progress="0.6" Margin="0,0,0,20" />
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="m²" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label Text="Inserisci la superficie" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="entSuperficie" Keyboard="Numeric" Placeholder="Esempio: 120.000" Visual="Material"></Entry>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Camere da letto: " FontSize="Medium"></Label>
+                        <Label x:Name="lblCamereLettoCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpCamereLetto" ValueChanged="StpCamereLetto_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf26c;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Stanze: " FontSize="Medium"></Label>
+                        <Label x:Name="lblStanzeCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged"></Stepper>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Bagni: " FontSize="Medium"></Label>
+                        <Label x:Name="lblBagniCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label  VerticalTextAlignment="Center" Text="Cucine: " FontSize="Medium"></Label>
+                        <Label x:Name="lblCucineCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpCucine" ValueChanged="StpCucine_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+
+                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                        <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label VerticalTextAlignment="Center" Text="Garage/Posto auto: " FontSize="Medium"></Label>
+                        <Label x:Name="lblGarageCount" Text="0" FontSize="Large" FontAttributes="Bold" TextColor="Black"></Label>
+                    </StackLayout>
+                    <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material"></Stepper>
+
+                    <Label Text="Altro" FontSize="Medium"></Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="9*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox x:Name="chkGiardino" Grid.Column="0" Grid.Row="0" IsChecked="False"></CheckBox>
+                        <Label  Grid.Column="1" VerticalTextAlignment="Center" Text="Giardino" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkTerrazzo" Grid.Column="0" Grid.Row="1" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="Terrazzo" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkCantina" Grid.Column="0" Grid.Row="2" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="Cantina" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkPiscina" Grid.Column="0" Grid.Row="3" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" Text="Piscina" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkAscensore" Grid.Column="0" Grid.Row="4" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="Ascensore" FontSize="Medium"></Label>
+
+                        <CheckBox x:Name="chkCondizionatori" Grid.Column="0" Grid.Row="5" IsChecked="False"></CheckBox>
+                        <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="Condizionatori" FontSize="Medium"></Label>
+                    </Grid>
+
+                    <Button Text="Procedi" x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                </StackLayout>
+
+                <!-- Stack prezzo e costi -->
+                <StackLayout x:Name="stkPassaggio5" Orientation="Vertical" Padding="20,0,20,20" IsVisible="False">
+                    <Label FontSize="Title" Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Prezzo e costi"></Label>
+                    <ProgressBar Progress="0.7" Margin="0,0,0,20" />
+
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label VerticalTextAlignment="Center" Text="&#xf153;" FontSize="Medium" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label Text="Inserisci il prezzo" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="entPrezzo" Placeholder="Esempio: 120.000" Visual="Material" Keyboard="Numeric"></Entry>
+
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label VerticalTextAlignment="Center" Text="&#xf153;/mese" FontSize="Medium" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label Text="spese condominiali" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="entSpeseCondominiali" Placeholder="Esempio: 80" Visual="Material" Keyboard="Numeric"></Entry>
+
+                    <Label Text="Riscaldamento" FontSize="Medium"></Label>
+                    <Entry x:Name="entRiscaldamento" Placeholder="Seleziona" ></Entry>
+
+                    <Label Text="Classe energetica" FontSize="Medium"></Label>
+                    <Entry x:Name="entClasseEnergetica" Placeholder="Seleziona"></Entry>
+
+                    <!--<StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label VerticalTextAlignment="Center" Text="&#xf153;/mese spese condominiali" FontSize="Medium" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label Text="Inserisci il prezzo" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Picker x:Name="pckRisaldamento"></Picker>-->
+
+                    <Button Text="Procedi" x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                </StackLayout>
+
+                <!-- Stack immagini -->
+                <StackLayout x:Name="stkPassaggio6" Orientation="Vertical" Padding="20,0,20,20" IsVisible="False">
+                    <Label FontSize="Title" Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Immagini"></Label>
+
+                    <ProgressBar Progress="0.8" Margin="0,0,0,20" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Row="0" Grid.ColumnSpan="2" IsVisible="True" Style="{x:StaticResource NuovoAnnuncioImageFrame}">
+                            <StackLayout VerticalOptions="FillAndExpand">
+                                <Button x:Name="btnImg1" Clicked="OnPickPhotoButtonClicked" Style="{x:StaticResource NuovoAnnuncioAddImage}"></Button>
+                                <Image x:Name="img1" IsVisible="True" Style="{x:StaticResource NuovoAnnuncioImage}"></Image>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="frmImg2" Grid.Row="1" Grid.Column="0" Style="{x:StaticResource NuovoAnnuncioImageFrame}">
+                            <StackLayout VerticalOptions="FillAndExpand">
+                                <Image x:Name="img2" Style="{x:StaticResource NuovoAnnuncioImage}"></Image>
+                                <Button x:Name="btnImg2" Clicked="OnPickPhotoButtonClicked" FontFamily="{x:StaticResource FA-Solid}"></Button>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="frmImg3" Grid.Row="1" Grid.Column="1" Style="{x:StaticResource NuovoAnnuncioImageFrame}">
+                            <StackLayout VerticalOptions="FillAndExpand">
+                                <Image x:Name="img3" Style="{x:StaticResource NuovoAnnuncioImage}"></Image>
+                                <Button x:Name="btnImg3" Clicked="OnPickPhotoButtonClicked" Style="{x:StaticResource NuovoAnnuncioAddImage}"></Button>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="frmImg4" Grid.Row="2" Grid.Column="0" Style="{x:StaticResource NuovoAnnuncioImageFrame}">
+                            <StackLayout VerticalOptions="FillAndExpand">
+                                <Image x:Name="img4" Style="{x:StaticResource NuovoAnnuncioImage}"></Image>
+                                <Button x:Name="btnImg4" Clicked="OnPickPhotoButtonClicked" Style="{x:StaticResource NuovoAnnuncioAddImage}"></Button>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="frmImg5" Grid.Row="2" Grid.Column="1" Style="{x:StaticResource NuovoAnnuncioImageFrame}">
+                            <StackLayout>
+                                <Image x:Name="img5" Style="{x:StaticResource NuovoAnnuncioImage}"></Image>
+                                <Button x:Name="btnImg5" Clicked="OnPickPhotoButtonClicked" Style="{x:StaticResource NuovoAnnuncioAddImage}"></Button>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="frmImg6" Grid.Row="3" Grid.Column="0" Style="{x:StaticResource NuovoAnnuncioImageFrame}">
+                            <StackLayout>
+                                <Image x:Name="img6" Style="{x:StaticResource NuovoAnnuncioImage}"></Image>
+                                <Button x:Name="btnImg6" Clicked="OnPickPhotoButtonClicked" Style="{x:StaticResource NuovoAnnuncioAddImage}"></Button>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+
+                    <Button x:Name="btnImmaginiProcedi" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                </StackLayout>
+
+                <!-- Stack planimetria -->
+                <StackLayout x:Name="stkPassaggio7" Orientation="Vertical" Padding="20,0,20,20" IsVisible="False">
+                    <Label FontSize="Title" Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Planimetria"></Label>
+
+                    <ProgressBar Progress="0.9" Margin="0,0,0,20" />
+
+                    <Button x:Name="btnPlanimetriaProcedi" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

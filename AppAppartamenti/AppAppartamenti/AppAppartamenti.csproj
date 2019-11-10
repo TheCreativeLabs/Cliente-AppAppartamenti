@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Remove="Views\MenuPage.xaml.cs" />
+    <Compile Remove="Views\NuovoAnnuncio\NuovoAnnuncio.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,10 +18,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />  
-    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.3.0.908675" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.3.0.947036" />
     <PackageReference Include="RestSharp" Version="106.6.10" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="4.3.0.947036" />
+    <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.15" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.4.6-beta" />
+    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,13 +38,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Home.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Ricerca.xaml">
+    <Folder Include="Views\NuovoAnnuncio\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\DettaglioAnnuncio.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

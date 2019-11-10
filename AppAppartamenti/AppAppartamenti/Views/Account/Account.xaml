@@ -8,7 +8,7 @@
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
              Title="Account"
-             BackgroundColor="#F0F0F0">
+             BackgroundColor="#F8F8F8">
     <ContentPage.Content>
         <StackLayout Padding="20">
 
@@ -21,30 +21,34 @@
                     </StackLayout.Padding>
 
                     <Frame
-                   HeightRequest="100"
-                   WidthRequest="100"
-                   Padding="0"
-                   IsClippedToBounds="True"
-                           HasShadow="True" Visual="Material">
-                            <Frame.CornerRadius>
-                               <OnPlatform x:TypeArguments="x:Single">
-                                    <On Platform="iOS" Value="50"/>
-                                    <On Platform="Android" Value="100"/>
-                                </OnPlatform>
-                            </Frame.CornerRadius>
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           Padding="0"
+                           IsClippedToBounds="True"
+                                   HasShadow="True" Visual="Material">
+                                    <Frame.CornerRadius>
+                                       <OnPlatform x:TypeArguments="x:Single">
+                                            <On Platform="iOS" Value="50"/>
+                                            <On Platform="Android" Value="100"/>
+                                        </OnPlatform>
+                                    </Frame.CornerRadius>
 
-                            <Image x:Name="imgFotoUtente"  HorizontalOptions="Center" Aspect="Fill"
-                   VerticalOptions="Center"></Image>
+                                    <Image x:Name="imgFotoUtente"  HorizontalOptions="Center" Aspect="Fill"
+                           VerticalOptions="Center"></Image>
+                    </Frame>
 
-                        </Frame>
+                    <Grid VerticalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
 
-                    <Grid VerticalOptions="Center" HeightRequest="50">
+                        </Grid.RowDefinitions>
                         <StackLayout Orientation="Horizontal" Grid.Row="0">
-                        <Label  FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" Text="{Binding Nome}"></Label>
-                        <Label FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" Text="{Binding Cognome}"></Label>
+                        <Label FontSize="Medium"  VerticalTextAlignment="Center" Text="{Binding Nome}"></Label>
+                        <Label  FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Cognome}"></Label>
                         </StackLayout>
 
-                        <Label Grid.Row="1" FontSize="Medium" FontAttributes="Bold" TextColor="Gray" VerticalTextAlignment="Center" Text="{Binding Email}"></Label>
+                        <Label Grid.Row="1" TextColor="Gray" VerticalTextAlignment="Center" Text="{Binding Email}"></Label>
                     </Grid>
                 </StackLayout>
 

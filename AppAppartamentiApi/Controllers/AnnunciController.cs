@@ -21,7 +21,7 @@ namespace AppAppartamentiApi.Controllers
     {
         private DbDataContext dbDataContext = new DbDataContext();
 
-        // GET api/values
+        // GET api/Annunci/Annunci
         [HttpGet]
         [Route("Annunci")]
         [ResponseType(typeof(List<AnnunciDtoOutput>))]
@@ -55,7 +55,7 @@ namespace AppAppartamentiApi.Controllers
             return annunci;
         }
 
-        // GET api/values
+        // GET api/Annunci/AnnunciCurrentUser
         [HttpGet]
         [Route("AnnunciCurrentUser")]
         [ResponseType(typeof(List<AnnunciDtoOutput>))]
@@ -91,6 +91,22 @@ namespace AppAppartamentiApi.Controllers
 
             return annunci;
         }
+
+        // GET api/Annunci/AnnuncioById/?id=1
+        [HttpGet]
+        [Route("AnnuncioById")]
+        [ResponseType(typeof(AnnuncioDtoOutput))]
+        public AnnuncioDtoOutput GetAnnuncioById(Guid Id)
+        {
+            Annuncio annuncio = dbDataContext.Annuncio
+                                        .Include(x => x.Comuni)
+                                        .Include(x => x.ImmagineAnnuncio)
+                                        .SingleOrDefaultAsync(x => x.Id == Id).Result;
+
+            AnnuncioDtoOutput dto = AnnuncioDtoOutput.MapperAnnuncio(annuncio);
+            return dto;
+        }
+
 
         // POST: api/Evento/EventoCreate
         [HttpPost]

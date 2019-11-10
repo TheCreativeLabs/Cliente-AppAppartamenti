@@ -4,21 +4,23 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="AppAppartamenti.App">
+             x:Class="AppAppartamenti.App"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit">
 
     <Application.Resources>
         <ResourceDictionary>
             <!--    Font Awesome     -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
                 <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
-     <On Platform="iOS" Value="Font Awesome 5 Brands" />
+                <On Platform="iOS" Value="Font Awesome 5 Brands" />
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Solid">
                 <On Platform="Android" Value="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" />
-          <On Platform="iOS" Value="Font Awesome 5 Free" />
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
             </OnPlatform>
-
+            
             <Style TargetType="Button" x:Key="primaryButton">
                 <Setter Property="BackgroundColor" Value="#ff6b6b"/>
                 <Setter Property="Text" Value="White"/>
@@ -29,16 +31,26 @@
                 <On Platform="iOS" Value="Montserrat-Light" />
             </OnPlatform>
 
-
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
+                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto" />
+                <On Platform="iOS" Value="Roboto" />
+            </OnPlatform>
+
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="Bold">
+                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto Medium" />
+                <On Platform="iOS" Value="Roboto Medium" />
+            </OnPlatform>
+            
+            <!--<OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
                 <On Platform="Android" Value="MyriadPro-Regular.otf#MyriadPro Regular" />
                 <On Platform="iOS" Value="MyriadPro-Regular" />
-            </OnPlatform>
+            </OnPlatform>-->
 
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
-                <Setter Property="HeightRequest" Value="58"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
             </Style>
 
             <Style TargetType="Editor">
@@ -48,6 +60,7 @@
 
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="TextColor" Value="Black"></Setter>
             </Style>
 
             <Style TargetType="Button">
@@ -65,12 +78,80 @@
             </Style>
 
               <Style TargetType="Button" x:Key="IosButtonRadius">
-                <Setter Property="CornerRadius" Value="30"></Setter>
-            </Style>
+                <Setter Property="CornerRadius" Value="20"></Setter>
+              </Style>
 
             <Style TargetType="Button" x:Key="AndroidButtonRadius">
                 <Setter Property="CornerRadius" Value="100"></Setter>
             </Style>
+
+             <Style TargetType="Frame" x:Key="NuovoAnnuncioImageFrame">
+                 <Setter Property="Padding" Value="0"></Setter>
+                 <Setter Property="HeightRequest" Value="200"></Setter>
+                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                 <Setter Property="IsClippedToBounds" Value="True"></Setter>
+                 <Setter Property="IsVisible" Value="False"></Setter>
+             </Style>
+
+            <Style TargetType="Image" x:Key="NuovoAnnuncioImage">
+                 <Setter Property="Aspect" Value="AspectFill"></Setter>
+                 <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="IsVisible" Value="False"></Setter>
+             </Style>
+
+            <Style TargetType="Button" x:Key="NuovoAnnuncioAddImage">
+                 <Setter Property="Text" Value="&#xf030;"></Setter>
+                 <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                 <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+             </Style>
+
+            <Style TargetType="Label" x:Key="BackButton">
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}" />
+                <Setter Property="Text" Value="&#xf053;"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="TextColor" Value="Gray"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="CancelButton">
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}" />
+                <Setter Property="Text" Value="&#xf00d;"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="TextColor" Value="Gray"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="FrameBackButton">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="BorderColor" Value="Transparent"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="LabelNuovoAnnuncioTitle">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="LabelNuovoAnnuncioIcon">
+                <Setter Property="FontAttributes" Value="{StaticResource FA-Solid}" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="appappartamenti:MyEntry">
+                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="HeightRequest" Value="40"></Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
     
