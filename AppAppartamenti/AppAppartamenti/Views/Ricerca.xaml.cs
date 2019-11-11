@@ -21,6 +21,8 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            entRicerca.Focus();
         }
 
         private async void btnCancel_Clicked(object sender, EventArgs e)

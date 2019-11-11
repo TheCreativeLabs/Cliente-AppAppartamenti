@@ -22,6 +22,7 @@ using Xamarin.Forms.Platform.Android;
 using Color = Xamarin.Forms.Color;
 
 [assembly: ExportRenderer(typeof(MyEntry), typeof(MyEntryRenderer))]
+[assembly: ExportRenderer(typeof(SearchEntry), typeof(SearchEntryRenderer))]
 namespace CustomRenderer
 {
     class MyEntryRenderer : EntryRenderer
@@ -29,17 +30,6 @@ namespace CustomRenderer
         public MyEntryRenderer(Context context) : base(context)
         {
         }
-
-        //protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
-        //{
-        //    base.OnElementChanged(e);
-
-        //    if (Control != null)
-        //    {
-        //        Control.SetBackgroundColor(global::Android.Graphics.Color.LightGreen);
-        //    }
-        //}
-
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
@@ -56,6 +46,35 @@ namespace CustomRenderer
 
                 var shape = new ShapeDrawable(i);
                 shape.Paint.Color = Xamarin.Forms.Color.FromRgb(184, 184, 184).ToAndroid();
+                shape.Paint.SetStyle(Paint.Style.Stroke);
+                nativeEditText.Background = shape;
+                nativeEditText.SetPadding(25, 25, 25, 25);
+            }
+        }
+    }
+
+
+    class SearchEntryRenderer : EntryRenderer
+    {
+        public SearchEntryRenderer(Context context) : base(context)
+        {
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        {
+            base.OnElementChanged(e);
+
+            if (Control != null)
+            {
+                var nativeEditText = (global::Android.Widget.EditText)Control;
+
+                RoundRectShape i = new RoundRectShape(
+                         new float[] { 15, 15, 15, 15, 15, 15, 15, 15 },
+                         null,
+                         new float[] { 15, 15, 15, 15, 15, 15, 15, 15 });
+
+                var shape = new ShapeDrawable(i);
+                shape.Paint.Color = Xamarin.Forms.Color.White.ToAndroid();
                 shape.Paint.SetStyle(Paint.Style.Stroke);
                 nativeEditText.Background = shape;
                 nativeEditText.SetPadding(25, 25, 25, 25);

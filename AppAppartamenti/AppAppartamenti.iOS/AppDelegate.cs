@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
+[assembly: Xamarin.Forms.ExportRenderer(typeof(Xamarin.RangeSlider.Forms.RangeSlider), typeof(Xamarin.RangeSlider.Forms.RangeSliderRenderer))]
 namespace AppAppartamenti.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 

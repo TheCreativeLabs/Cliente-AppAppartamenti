@@ -10,6 +10,12 @@
 
     <Application.Resources>
         <ResourceDictionary>
+              <!--    Font Awesome     -->
+            <Style TargetType="NavigationPage">
+                    <Setter Property="BarBackgroundColor" Value="#ff6b6b"></Setter>
+                    <Setter Property="BarTextColor" Value="White"></Setter>
+            </Style>
+
             <!--    Font Awesome     -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
                 <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
