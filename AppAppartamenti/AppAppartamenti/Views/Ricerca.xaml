@@ -81,7 +81,7 @@
                             
                             <Frame HasShadow="True" Visual="Material">
                                 <StackLayout>
-                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Prezzo" FontSize="Medium" TextColor="Black"></Label>
+                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Superficie" FontSize="Medium" TextColor="Black"></Label>
 
                                     <Grid HorizontalOptions="FillAndExpand">
                                         <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
                                         <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500+" TextColor="Gray"></Label>
                                     </StackLayout>
 
-                                    <forms:RangeSlider x:Name="RangeSlider" MinimumValue="50" MaximumValue="500" LowerValue="100" UpperValue="160" StepValue="10" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
+                                    <forms:RangeSlider x:Name="RangeSlider2" MinimumValue="50" MaximumValue="500" LowerValue="100" UpperValue="160" StepValue="10" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
                                 </StackLayout>
                             </Frame>
 

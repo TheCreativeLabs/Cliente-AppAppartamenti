@@ -8,96 +8,80 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.ListaAnnunci"
              NavigationPage.HasNavigationBar="False"
-           BackgroundColor="#F8F8F8"
+             BackgroundColor="#F8F8F8"
              >
-
    
      <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
             <conv:PrezzoConverter x:Key="PrezzoConverter" />
-
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-            <StackLayout Padding="15">
+            <StackLayout>
+                <StackLayout BackgroundColor="#ff6b6b" Padding="20">
+                    <Frame HasShadow="False" Padding="10" Margin="0,25,0,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label FontSize="Large" TextColor="Black" Margin="10,0,0,0" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" Text="&#xf7ae;"></Label>
 
-                <Frame HasShadow="True" Padding="10,5,0,5" Visual="Material">
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" Text="&#xf053;"></Label>
+                            <BoxView HeightRequest="30" Color="Gray" WidthRequest="1" Margin="10,-5,0,-5" ></BoxView>
 
-                        <appappartamenti:CustomEntry VerticalOptions="Center"
-                            IsRequired="False"
-                            Placeholder="Ricerca per città o provincia"
-                            Visual="Material"
-                            BorderColor="White"
-                            Text="Casalecchio di Reno"
-                            x:Name="entRicerca" IsEnabled="False"/>
-                    </StackLayout>
+                            <appappartamenti:SearchEntry
+                                VerticalOptions="Center"
+                                Visual="Material"
+                                Text="Casalecchio di Reno"
+                                x:Name="entRicerca" IsEnabled="False"/>
+                        </StackLayout>
                    
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="entRicerca_Focused"></TapGestureRecognizer>
-                    </Frame.GestureRecognizers>
-                </Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="entRicerca_Focused"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+                
 
                 <ScrollView>
                     <StackLayout>
+                           <ListView x:Name="AnnunciiListView"
+                                ItemsSource="{Binding Items}"
+                                VerticalOptions="FillAndExpand"
+                                HasUnevenRows="true"
+                                RefreshCommand="{Binding LoadItemsCommand}"
+                                IsPullToRefreshEnabled="true"
+                                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                CachingStrategy="RecycleElement"
+                                ItemSelected="OnItemSelected"
+                                     BackgroundColor="#F8F8F8"
+                                SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame HasShadow="True" Visual="Material" Padding="0" HeightRequest="260" Margin="15"  CornerRadius="2" IsClippedToBounds="True">
+                                            <StackLayout>
+                                                <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
 
-                <StackLayout Orientation="Horizontal" Margin="1">
-                    <Frame CornerRadius="60" HeightRequest="20" WidthRequest="80" Padding="15" HasShadow="True">
-                       <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="3 Stanze" ></Label>
-                    </Frame>
-                    <Frame CornerRadius="60" HeightRequest="10" WidthRequest="90"  Padding="5" HasShadow="True">
-                       <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="1 Bagno" ></Label>
-                    </Frame>
-                    <Frame CornerRadius="60" HeightRequest="10" WidthRequest="100"  Padding="5" HasShadow="True">
-                       <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="70.000 - 100.000€" ></Label>
-                    </Frame>
-                    <Frame CornerRadius="60" HeightRequest="10" WidthRequest="90" Padding="5" HasShadow="True">
-                       <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Affitto" ></Label>
-                    </Frame>
-                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Margin="0,-150,0,0" Padding="10,0,0,0">
+                                                    <Label Text="{Binding TipologiaProprieta}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" ></Label>
+                                                    <Label Text="{Binding Prezzo}"
+                                                           FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
 
+                                                    <Label VerticalTextAlignment="Center" Text="&#xf153;" TextColor="Black" FontFamily="{x:StaticResource FA-Solid}"></Label>
 
-               <ListView x:Name="AnnunciiListView"
-                    ItemsSource="{Binding Items}"
-                    VerticalOptions="FillAndExpand"
-                    HasUnevenRows="true"
-                    RefreshCommand="{Binding LoadItemsCommand}"
-                    IsPullToRefreshEnabled="true"
-                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                    CachingStrategy="RecycleElement"
-                    ItemSelected="OnItemSelected"
-                    SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame HasShadow="True" Visual="Material" Padding="0" HeightRequest="260" Margin="5,10,5,10"  CornerRadius="2" IsClippedToBounds="True">
-                                <StackLayout>
-                                    <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
+                                                    <Label TextColor="White" Margin="0,-360,-10,0" HorizontalOptions="EndAndExpand" WidthRequest="45"  VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                                </StackLayout>
 
-                                    <StackLayout Orientation="Horizontal" Margin="0,-150,0,0" Padding="10,0,0,0">
-                                        <Label Text="{Binding TipologiaProprieta}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" ></Label>
-                                        <Label Text="{Binding Prezzo}"
-                                               FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
-
-                                        <Label VerticalTextAlignment="Center" Text="&#xf153;" TextColor="Black" FontFamily="{x:StaticResource FA-Solid}"></Label>
-
-                                        <Label TextColor="White" Margin="0,-360,-10,0" HorizontalOptions="EndAndExpand" WidthRequest="45"  VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                                    </StackLayout>
-
-                                     <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                        <Label Text="{Binding NomeComune}" TextColor="Gray"  ></Label>
-                                        <Label Text="-" TextColor="Gray" ></Label>
-                                        <Label Text="{Binding Indirizzo}" TextColor="Gray" ></Label>
-                                     </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                                 <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                                                    <Label Text="{Binding NomeComune}" TextColor="Gray"  ></Label>
+                                                    <Label Text="-" TextColor="Gray" ></Label>
+                                                    <Label Text="{Binding Indirizzo}" TextColor="Gray" ></Label>
+                                                 </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackLayout>
                 </ScrollView>
 

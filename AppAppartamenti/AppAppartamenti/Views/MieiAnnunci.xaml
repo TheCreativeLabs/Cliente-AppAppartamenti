@@ -9,7 +9,13 @@
              x:Class="AppAppartamenti.Views.MieiAnnunci"
              NavigationPage.HasNavigationBar="True"
              BackgroundColor="#F8F8F8"
+             Title="I miei annunci"
              >
+
+
+        <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nuovo" Clicked="BtnAdd_Clicked" />
+    </ContentPage.ToolbarItems>
 
    
      <ContentPage.Resources>
@@ -20,36 +26,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            <Label FontSize="Title" VerticalTextAlignment="Center"
-                   Text="{translator:Translate MieiAnnunci.Title}" TextColor="White"></Label>
-
-            <Button HorizontalOptions="EndAndExpand" TextColor="White" WidthRequest="45"
-                    BackgroundColor="Transparent" Text="&#xf067;" FontSize="Medium" Visual="Default"
-                    FontFamily="{x:StaticResource FA-Solid}" Clicked="BtnAdd_Clicked"></Button>
-        </StackLayout>
-    </NavigationPage.TitleView>
-
     <ContentPage.Content>
-            <StackLayout Orientation="Vertical" Padding="15">
-                <!--<StackLayout Orientation="Horizontal">
-                    <Label FontSize="Title" FontAttributes="Bold" VerticalTextAlignment="Center"
-                           Text="{translator:Translate MieiAnnunci.Title}" TextColor="Black"></Label>
-
-                    
-                    <Button HorizontalOptions="EndAndExpand" TextColor="White"
-                            HeightRequest="40"
-                             Text="nuovo &#xf067;" FontSize="Medium" Visual="Default" BackgroundColor="#ff6b6b"
-                            FontFamily="{x:StaticResource FA-Solid}" Clicked="BtnAdd_Clicked">
-                        <Button.Style>
-                               <OnPlatform x:TypeArguments="Style">
-                                    <On Platform="iOS" Value="{x:StaticResource IosButtonRadius}"/>
-                                    <On Platform="Android" Value="{x:StaticResource AndroidButtonRadius}"/>
-                                </OnPlatform>
-                            </Button.Style>
-                    </Button>
-                </StackLayout>-->
 
                <ListView x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
@@ -61,11 +38,12 @@
                     CachingStrategy="RecycleElement"
                     ItemSelected="OnItemSelected"
                     VerticalScrollBarVisibility="Never"
-                    SeparatorVisibility="None">
+                    SeparatorVisibility="None"
+                               BackgroundColor="#F8F8F8">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame HasShadow="True" Visual="Material" Padding="0" HeightRequest="260" Margin="5,10,5,10"  CornerRadius="2" IsClippedToBounds="True">
+                            <Frame HasShadow="True" Visual="Material" Padding="0" HeightRequest="260" Margin="15"  CornerRadius="2" IsClippedToBounds="True">
                                 <StackLayout>
                                     <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
 
@@ -89,6 +67,5 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            </StackLayout>
     </ContentPage.Content>
 </ContentPage>
