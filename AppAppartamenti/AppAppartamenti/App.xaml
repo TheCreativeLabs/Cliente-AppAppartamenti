@@ -16,6 +16,10 @@
                     <Setter Property="BarTextColor" Value="White"></Setter>
             </Style>
 
+            <Style TargetType="ProgressBar">
+                <Setter Property="ProgressColor" Value="#ff6b6b"></Setter>
+            </Style>
+
             <!--    Font Awesome     -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
                 <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
@@ -138,6 +142,8 @@
                 <Setter Property="WidthRequest" Value="50"></Setter>
                 <Setter Property="BorderColor" Value="Transparent"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="HasShadow" Value="False"></Setter>
+
             </Style>
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioTitle">
