@@ -35,6 +35,19 @@ namespace AppAppartamenti.Views
 
             pckClasseEnergetica.ItemsSource = (await annunciClient.GetListaClasseEnergeticaAsync()).ToList();
             pckRiscaldamento.ItemsSource = (await annunciClient.GetListaTipologiaRiscaldamentoAsync()).ToList();
+
+            try
+            {
+                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+                NavigationPage.SetHasNavigationBar(this, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            spBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

@@ -9,36 +9,38 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePrezzo"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
+
+    <NavigationPage.TitleView>
+        <!-- Bottoni -->
+        <StackLayout Orientation="Horizontal" x:Name="spBody" IsVisible="False">
+            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand" Margin="-20,0,0,0">
+                <Label Style="{x:StaticResource BackButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Prezzo e costi"></Label>
+            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
 
     <ContentPage.Content>
+        <StackLayout>
+            <ProgressBar Progress="0.7" Margin="0,0,0,20" />
+
             <StackLayout Padding="20">
-                <!-- Bottoni -->
-                <StackLayout Orientation="Horizontal">
-                    <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
-                        <Label Style="{x:StaticResource BackButton}"></Label>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-
-                    <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Prezzo e costi"></Label>
-
-                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                        <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-                </StackLayout>
-
-                    <ProgressBar Progress="0.7" Margin="0,0,0,20" />
-
-                    <Label Text="€ - Inserisci il prezzo"  Margin="0,10,0,0"></Label>
+                <Label Text="€ - Inserisci il prezzo"  Margin="0,10,0,0"></Label>
                     <appappartamenti:CustomEntry  x:Name="entPrezzo" Placeholder="Esempio: 120.000" Visual="Material" Keyboard="Numeric"></appappartamenti:CustomEntry>
 
                     <Label VerticalTextAlignment="Center"  Margin="0,10,0,0" Text="€/mese - spese condominiali"></Label>
@@ -63,7 +65,9 @@
                     </Frame>
                     <Picker x:Name="pckClasseEnergetica" SelectedIndexChanged="PckClasseEnergetica_SelectedIndexChanged" IsVisible="False" ItemDisplayBinding="{Binding Descrizione}"></Picker>
 
-                    <Button Text="Procedi" x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+            </StackLayout>
+            <Button Text="Avanti"  x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

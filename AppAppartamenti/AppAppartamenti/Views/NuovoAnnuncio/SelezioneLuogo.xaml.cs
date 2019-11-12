@@ -29,6 +29,19 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            try
+            {
+                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+                NavigationPage.SetHasNavigationBar(this, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            slBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -59,7 +72,6 @@ namespace AppAppartamenti.Views
         }
 
 
-        //private async void EntIndirizzo_Unfocused(object sender, EventArgs e)
         private async Task setMapLocation()
         {
             //ottengo la posizione dell'indirizzo.
@@ -93,7 +105,7 @@ namespace AppAppartamenti.Views
             //refresh della lista dei comuni
             var listaComuni = new ListaComuniViewModel(entCercaComune.Text);
             listaComuni.LoadItemsCommand.Execute(null);
-            lvComuni.ItemsSource = listaComuni.Items; 
+            lvComuni.ItemsSource = listaComuni.Items;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -114,7 +126,7 @@ namespace AppAppartamenti.Views
             entIndirizzo.IsVisible = true;
 
             //mostro il bottone procedi
-            btnIndirizzoProcedi.IsVisible = true;
+            //btnIndirizzoProcedi.IsVisible = true;
 
             // Manually deselect item.
             lvComuni.SelectedItem = null;
@@ -125,12 +137,6 @@ namespace AppAppartamenti.Views
         {
             btnIndirizzoProcedi.IsEnabled = true;
         }
-
-        //private void btnPopupButton_Clicked(object sender, EventArgs e)
-        //{
-        //    mapsPopup.IsVisible = true;
-        //    activityIndicator.IsRunning = true;
-        //}
 
         private void ButtonPopUpNo(object sender, EventArgs e)
         {

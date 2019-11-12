@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using AppAppartamenti.Models;
@@ -9,21 +10,23 @@ namespace AppAppartamenti.ViewModels
 {
     public class AnnuncioDetailViewModel : BaseViewModel
     {
+        public class Immagine
+        {
+            public byte[] Value { get; set; }
+        }
         public AnnuncioDtoOutput Item { get; set; }
+        public List<Immagine> Immagini { get; set; }
         ////public Command LoadItemsCommand { get; set; }
         //public Guid idAnnuncio { get; set; }
         public AnnuncioDetailViewModel(AnnuncioDtoOutput item)
         {
-            //if (idAnnuncio != null && idAnnuncio!= Guid.Empty)
-            //{
-                this.Item = item;
-               // LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            //}
-            //else
-            //{
-            //    Item = new AnnuncioDtoOutput(); 
-            //}
-            
+            this.Item = item;
+            this.Immagini = new List<Immagine>();
+            foreach (byte[] imm in item.ImmaginiAnnuncio)
+            {
+                Immagine immagine = new Immagine() { Value = imm };
+                this.Immagini.Add(immagine);
+            }
         }
 
         //async Task ExecuteLoadItemsCommand()

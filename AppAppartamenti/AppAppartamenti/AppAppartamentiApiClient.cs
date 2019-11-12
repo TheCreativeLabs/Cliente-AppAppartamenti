@@ -12,7 +12,6 @@
 
 namespace AppAppartamentiApiClient
 {
-    using System.Threading.Tasks;
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
@@ -1947,11 +1946,6 @@ namespace AppAppartamentiApiClient
 
             return System.Convert.ToString(value, cultureInfo);
         }
-
-        internal Task<AnnuncioDtoOutput> GetAnnuncioByIdAsync(System.Guid? idAnnuncio)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
@@ -2471,6 +2465,63 @@ namespace AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("ImmaginiAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<byte[]> ImmaginiAnnuncio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("UltimoPiano", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? UltimoPiano { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Piano", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Piano { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroCameraLetto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroCameraLetto { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroAltreStanze", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroAltreStanze { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroBagni", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroBagni { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroCucine", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroCucine { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroGarage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroGarage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroPostiAuto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroPostiAuto { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Giardino", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Giardino { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Disponibile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Disponibile { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Ascensore", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Ascensore { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Balcone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Balcone { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Piscina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Piscina { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Cantina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Cantina { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("SpesaMensileCondominio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SpesaMensileCondominio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("TipologiaRiscaldamento", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TipologiaRiscaldamento { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("StatoProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string StatoProprieta { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ClasseEnergetica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ClasseEnergetica { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Condizionatori", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Condizionatori { get; set; }
 
 
     }

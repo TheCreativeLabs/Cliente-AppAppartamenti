@@ -21,6 +21,7 @@ namespace AppAppartamenti.Views
             InitializeComponent();
 
             BindingContext = viewModel  = new AnnuncioDetailViewModel(dto);
+            Carousel.IsVisible = true; 
         }
 
 

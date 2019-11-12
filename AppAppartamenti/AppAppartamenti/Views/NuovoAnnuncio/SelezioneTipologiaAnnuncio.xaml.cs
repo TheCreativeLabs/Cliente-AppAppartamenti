@@ -19,11 +19,14 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
 
+        TipologiaAnnunciViewModel viewModel;
+
         public SelezioneTipologiaAnnuncio(AnnuncioDtoInput Annuncio)
         {
             InitializeComponent();
 
             annuncio = Annuncio;
+            BindingContext = viewModel = new TipologiaAnnunciViewModel();
         }
 
         protected override void OnAppearing()
@@ -31,9 +34,24 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             //Carico la lista della tipologia annuncio
-            var listaTipologiaAnnunci = new TipologiaAnnunciViewModel();
-            listaTipologiaAnnunci.LoadItemsCommand.Execute(null);
-            lvTipologiaAnnuncio.ItemsSource = listaTipologiaAnnunci.Items;
+            //var listaTipologiaAnnunci = new TipologiaAnnunciViewModel();
+            //listaTipologiaAnnunci.LoadItemsCommand.Execute(null);
+            //lvTipologiaAnnuncio.ItemsSource = listaTipologiaAnnunci.Items;
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
+
+            try
+            {
+                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+                NavigationPage.SetHasNavigationBar(this, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            staBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -64,9 +82,19 @@ namespace AppAppartamenti.Views
             annuncio.IdTipologiaAnnuncio = tipologiaAnnuncio.Id;
 
             // Manually deselect item.
-            lvTipologiaAnnuncio.SelectedItem = null;
+            //lvTipologiaAnnuncio.SelectedItem = null;
 
             await Navigation.PushAsync(new SelezioneLuogo(annuncio));
+        }
+
+        async void BtnAvanti_Clicked(object sender, EventArgs e)
+        {
+            if (rbList.SelectedItem != null)
+            {
+                TipologiaAnnuncio tipologiaAnnuncio = viewModel.listaAnnunci.Where(x => (string)x.Descrizione == (string)rbList.SelectedItem).FirstOrDefault();
+                annuncio.IdTipologiaAnnuncio = tipologiaAnnuncio.Id;
+                await Navigation.PushAsync(new SelezioneLuogo(annuncio));
+            }
         }
     }
 }
