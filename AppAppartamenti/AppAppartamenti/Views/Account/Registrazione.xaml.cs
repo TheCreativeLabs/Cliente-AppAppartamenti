@@ -13,6 +13,10 @@ using System.Threading.Tasks;
 using RestSharp.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace AppAppartamenti.Views.Login
 {
@@ -24,6 +28,11 @@ namespace AppAppartamenti.Views.Login
         public Registrazione()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
 
         private async void btnRegistrati_Clicked(object sender, EventArgs e)
@@ -145,6 +154,111 @@ namespace AppAppartamenti.Views.Login
             }
 
             (sender as Button).IsEnabled = true;
+        }
+
+
+        async void ActionImmagini(object sender, EventArgs e)
+        {
+            string action = await DisplayActionSheet("Carica una foto", "Cancel", null, "Scatta foto", "Galleria immagini");
+
+            if (action == "Scatta foto")
+            {
+                TakePhoto();
+            }
+            else if (action == "Galleria immagini")
+            {
+                PickPhoto();
+            }
+        }
+
+
+        async void PickPhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>();
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
+
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                cameraStatus = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
+                storageStatus = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
+            }
+
+            if (cameraStatus != PermissionStatus.Granted && storageStatus != PermissionStatus.Granted)
+            {
+                DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            //{
+            //    Directory = "Sample",
+            //    Name = "test.jpg"
+            //});
+
+            var listaImmagini = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
+            });
+
+            if (listaImmagini == null)
+                return;
+
+
+            imgFotoUtente.Source = ImageSource.FromStream(() => listaImmagini.GetStream());
+            imgFotoUtente.IsVisible = true;
+            //lblFoto.IsVisible = false;
+
+        }
+
+        async void TakePhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>();
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
+
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                cameraStatus = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
+                storageStatus = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
+            }
+
+            if (cameraStatus != PermissionStatus.Granted && storageStatus != PermissionStatus.Granted)
+            {
+                DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            //var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            //{
+            //    PhotoSize = PhotoSize.Medium
+            //});
+
+            MediaFile file = null;
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
+                    SaveToAlbum = true,
+                    DefaultCamera = CameraDevice.Rear,
+                    Directory = "Library",
+                    Name = "Media.jpg"
+                });
+            });
+
+            if (file == null)
+                return;
+
+            //cvImmagini.ItemsSource = mediaFileImages;
+
+            imgFotoUtente.Source = ImageSource.FromStream(() => file.GetStream());
+            imgFotoUtente.IsVisible = true;
+            //lblFoto.IsVisible = false;
         }
     }
 }

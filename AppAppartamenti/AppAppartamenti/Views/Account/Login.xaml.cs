@@ -88,7 +88,7 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
-                await Navigation.PushModalAsync(new NavigationPage(new Registrazione()));
+                await Navigation.PushModalAsync(new NavigationPage(new  Registrazione()));
             }
             catch (Exception ex)
             {

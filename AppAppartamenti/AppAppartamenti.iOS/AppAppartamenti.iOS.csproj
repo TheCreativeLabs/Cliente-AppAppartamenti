@@ -129,34 +129,40 @@
     <BundleResource Include="Resources\MyriadPro-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-handle-disabled.png">
+    <BundleResource Include="Resources\test.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-trackCrossedOver%402x.png">
+    <BundleResource Include="Resources\test2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
     <BundleResource Include="Resources\slider-default7-trackCrossedOver.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-handle%402x.png">
+    <BundleResource Include="Resources\slider-default7-handle-disabled.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-handle-disabled%402x.png">
+    <BundleResource Include="Resources\slider-default7-handle%402x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
     <BundleResource Include="Resources\slider-default7-handle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-track%402x.png">
+    <BundleResource Include="Resources\slider-default7-track.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-trackBackground.png">
+    <BundleResource Include="Resources\slider-default7-trackCrossedOver%402x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
     <BundleResource Include="Resources\slider-default7-trackBackground%402x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\slider-default7-track.png">
+    <BundleResource Include="Resources\slider-default7-handle-disabled%402x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-trackBackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-track%402x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
   </ItemGroup>

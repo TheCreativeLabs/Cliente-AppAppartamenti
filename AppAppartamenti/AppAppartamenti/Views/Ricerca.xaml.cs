@@ -32,7 +32,7 @@ namespace AppAppartamenti.Views
 
         private async void btnRicerca_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ListaAnnunci());
+            await Navigation.PushAsync(new NavigationPage(new ListaAnnunci()));
         }
 
         private void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
