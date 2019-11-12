@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,29 @@ namespace AppAppartamenti.Views
     {
         AnnunciViewModel viewModel;
 
+        public Command PreferitiCommand { get; set; }
+
+
         public ListaAnnunci()
         {
             InitializeComponent();
 
             BindingContext = viewModel = new AnnunciViewModel(false);
+            PreferitiCommand = new Command(() => lblComandiRapidi_Tapped(null, null));
+
+
+            // Your label tap event
+            //var lblPreferiti_tap = new TapGestureRecognizer();
+            //lblPreferiti_tap.Tapped += (s, e) =>
+            //{
+            //    //
+            //    //  Do your work here.
+            //    //
+            //};
+            //lblPreferiti.GestureRecognizers.Add(lblPreferiti_tap);
+
         }
+
 
         protected override void OnAppearing()
         {
@@ -29,6 +47,25 @@ namespace AppAppartamenti.Views
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
+
+        private async void lblComandiRapidi_Tapped(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string action = await DisplayActionSheet("aaa",
+                                                         "bbb", null,
+                                                         "cc",
+                                                         "dd");
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
         private async void entRicerca_Focused(object sender, EventArgs e)
         {

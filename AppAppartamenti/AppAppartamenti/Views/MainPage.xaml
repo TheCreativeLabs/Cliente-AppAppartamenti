@@ -7,7 +7,6 @@
             mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            xmlns:views1="clr-namespace:AppRegali.Views.Account"
             xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="#E8E8E8"
@@ -40,8 +39,8 @@
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf004;"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views:ItemsPage>
-                </views:ItemsPage>
+                <views:AnnunciPreferiti>
+                </views:AnnunciPreferiti>
             </x:Arguments>
         </NavigationPage>
 

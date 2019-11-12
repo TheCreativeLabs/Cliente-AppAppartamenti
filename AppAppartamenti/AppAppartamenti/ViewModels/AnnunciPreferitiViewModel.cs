@@ -12,17 +12,15 @@ using System.Collections.Generic;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AnnunciViewModel : BaseViewModel
+    public class AnnunciPreferitiViewModel : BaseViewModel
     {
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        private bool SoloPersonali { get; set; }
 
-        public AnnunciViewModel(bool SoloAnnunciPersonali)
+        public AnnunciPreferitiViewModel()
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            SoloPersonali = SoloAnnunciPersonali;
           
         }
 
@@ -41,14 +39,7 @@ namespace AppAppartamenti.ViewModels
 
                 ICollection<AnnunciDtoOutput> listaAnnunci;
 
-                if (SoloPersonali)
-                {
-                     listaAnnunci = await annunciClient.GetAnnunciByUserAsync();
-                }
-                else
-                {
-                    listaAnnunci = await annunciClient.GetAnnunciAsync();
-                }
+                listaAnnunci = await annunciClient.GetAnnunciPreferitiAsync();
 
                 foreach (var evento in listaAnnunci)
                 {

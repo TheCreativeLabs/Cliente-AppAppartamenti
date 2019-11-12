@@ -43,7 +43,12 @@
 
                 <ScrollView>
                     <StackLayout>
-                           <ListView x:Name="AnnunciiListView"
+                    <!--<Label x:Name="LblPreferiti0" TextColor="White"  HorizontalOptions="EndAndExpand" WidthRequest="45" VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PreferitiCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>-->
+                    <ListView x:Name="AnnunciiListView"
                                 ItemsSource="{Binding Items}"
                                 VerticalOptions="FillAndExpand"
                                 HasUnevenRows="true"
@@ -68,8 +73,19 @@
 
                                                     <Label VerticalTextAlignment="Center" Text="&#xf153;" TextColor="Black" FontFamily="{x:StaticResource FA-Solid}"></Label>
 
-                                                    <Label TextColor="White" Margin="0,-360,-10,0" HorizontalOptions="EndAndExpand" WidthRequest="45"  VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                                                </StackLayout>
+                                                <!--<Button TextColor="White" Margin="0,-360,0,0"   HorizontalOptions="EndAndExpand" WidthRequest="100" HeightRequest="1" BackgroundColor="Transparent" BorderColor="Transparent" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}"></Button>-->
+                                                    <Label x:Name="LblPreferiti" TextColor="White" Margin="0,-360,-10,0" HorizontalOptions="EndAndExpand" WidthRequest="45" VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}">
+                                                        <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding PreferitiCommand}" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+                                                <!--<Label x:Name="LblPreferiti0" TextColor="Red"  HorizontalOptions="EndAndExpand" WidthRequest="45" VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="PreferitiCommand" />
+                                                    </Label.GestureRecognizers>
+                                                </Label>-->
+                                                <!--<Button Text="aaa" Clicked="lblComandiRapidi_Tapped"></Button>--> 
+                                            </StackLayout>
 
                                                  <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
                                                     <Label Text="{Binding NomeComune}" TextColor="Gray"  ></Label>
