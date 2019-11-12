@@ -42,7 +42,7 @@
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
-                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto" />
+                <On Platform="Android" Value="Roboto-Regular.ttf#Roboto" />
                 <On Platform="iOS" Value="Roboto" />
             </OnPlatform>
 
@@ -92,6 +92,23 @@
               </Style>
 
             <Style TargetType="Button" x:Key="AndroidButtonRadius">
+                <Setter Property="CornerRadius" Value="100"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="IosFrameRadius">
+                <Setter Property="CornerRadius" Value="65"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="AndroidFrameRadius">
+                <Setter Property="CornerRadius" Value="100"></Setter>
+            </Style>
+
+            
+            <Style TargetType="Frame" x:Key="IosFrameRadius2">
+                <Setter Property="CornerRadius" Value="20"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="AndroidFrameRadius2">
                 <Setter Property="CornerRadius" Value="100"></Setter>
             </Style>
 
