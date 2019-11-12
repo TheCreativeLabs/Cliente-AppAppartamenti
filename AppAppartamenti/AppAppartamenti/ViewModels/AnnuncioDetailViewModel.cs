@@ -14,42 +14,41 @@ namespace AppAppartamenti.ViewModels
         {
             public byte[] Value { get; set; }
         }
+
         public AnnuncioDtoOutput Item { get; set; }
         public List<Immagine> Immagini { get; set; }
+
         ////public Command LoadItemsCommand { get; set; }
         //public Guid idAnnuncio { get; set; }
-        public AnnuncioDetailViewModel(AnnuncioDtoOutput item)
+        public AnnuncioDetailViewModel()
         {
-            this.Item = item;
-            this.Immagini = new List<Immagine>();
-            foreach (byte[] imm in item.ImmaginiAnnuncio)
-            {
-                Immagine immagine = new Immagine() { Value = imm };
-                this.Immagini.Add(immagine);
-            }
+            Item = new AnnuncioDtoOutput();
+            Immagini = new List<Immagine>();
+
         }
 
-        //async Task ExecuteLoadItemsCommand()
-        //{
-        //    if (IsBusy)
-        //        return;
+       public static async Task<AnnuncioDetailViewModel> ExecuteLoadItemsCommandAsync(Guid Id)
+        {
+            AnnuncioDetailViewModel annuncioDetailViewModel = new AnnuncioDetailViewModel();
 
-        //    IsBusy = true;
+            try
+            {
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
-        //    try
-        //    {
-        //        AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-        //        Item = await annunciClient.GetAnnuncioByIdAsync(this.idAnnuncio);
+                annuncioDetailViewModel.Item = await annunciClient.GetAnnuncioByIdAsync(Id);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex);
-        //    }
-        //    finally
-        //    {
-        //        IsBusy = false;
-        //    }
-        //}
+                List<Immagine> immagines = new List<Immagine>();
+                foreach (var immagine in annuncioDetailViewModel.Item.ImmaginiAnnuncio)
+                {
+                    annuncioDetailViewModel.Immagini.Add(new Immagine() { Value = immagine });
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return annuncioDetailViewModel;
+        }
     }
 }

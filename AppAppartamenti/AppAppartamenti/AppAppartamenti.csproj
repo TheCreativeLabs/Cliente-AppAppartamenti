@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Remove="Views\MenuPage.xaml.cs" />
     <Compile Remove="Views\NuovoAnnuncio\NuovoAnnuncio.xaml.cs" />
+    <Compile Remove="Utility\CustomNavigationPage.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,13 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="AppAppartamenti.Views.ItemsPage"
-             Title="{Binding Title}"
+             x:Class="AppAppartamenti.Views.Messaggi"
+             Title="Messaggi"
              x:Name="BrowseItemsPage">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
 
     <StackLayout>
         <ListView x:Name="ItemsListView"

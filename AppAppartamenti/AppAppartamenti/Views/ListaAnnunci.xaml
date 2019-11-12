@@ -39,10 +39,6 @@
                         </Frame.GestureRecognizers>
                     </Frame>
                 </StackLayout>
-                
-
-                <ScrollView>
-                    <StackLayout>
                            <ListView x:Name="AnnunciiListView"
                                 ItemsSource="{Binding Items}"
                                 VerticalOptions="FillAndExpand"
@@ -52,8 +48,8 @@
                                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                                 CachingStrategy="RecycleElement"
                                 ItemSelected="OnItemSelected"
-                                     BackgroundColor="#F8F8F8"
-                                SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
+                                BackgroundColor="#F8F8F8"
+                                SeparatorVisibility="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -82,8 +78,6 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    </StackLayout>
-                </ScrollView>
 
                  
 
