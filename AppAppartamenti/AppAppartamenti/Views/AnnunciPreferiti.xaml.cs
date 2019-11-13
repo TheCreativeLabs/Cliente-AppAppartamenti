@@ -41,17 +41,17 @@ namespace AppAppartamenti.Views
             //EventoDtoOutput dettaglioEvento = await eventoClient.GetEventoByIdAsync(new Guid(item.Id));
 
 
-            //await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
-            if (item.Id != null && item.Id != Guid.Empty)
-            {
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                AnnuncioDtoOutput annuncioDetail = await annunciClient.GetAnnuncioByIdAsync((Guid)item.Id);
+            ////await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
+           // if (item.Id != null && item.Id != Guid.Empty)
+           // {
+           //     AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+           //     AnnuncioDtoOutput annuncioDetail = await annunciClient.GetAnnuncioByIdAsync((Guid)item.Id);
 
-                // Manually deselect item.
-                AnnunciiListView.SelectedItem = null;
+           //     // Manually deselect item.
+           //     AnnunciiListView.SelectedItem = null;
 
-                await Navigation.PushAsync(new DettaglioAnnuncio(annuncioDetail));
-            }
+           //     await Navigation.PushAsync(new DettaglioAnnuncio(annuncioDetail));
+           //}
 
         }
     }
