@@ -44,13 +44,13 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Chat">
+        <NavigationPage Title="Messaggi">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views:ItemsPage>
-                </views:ItemsPage>
+                <views:Messaggi>
+                </views:Messaggi>
             </x:Arguments>
         </NavigationPage>
 
