@@ -23,7 +23,14 @@
                 <StackLayout BackgroundColor="#ff6b6b" Padding="20">
                     <Frame HasShadow="False" Padding="10" Margin="0,25,0,0">
                         <StackLayout Orientation="Horizontal">
-                            <Label FontSize="Large" TextColor="Black" Margin="10,0,0,0" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" Text="&#xf7ae;"></Label>
+                               <Button BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold"
+                       FontSize="Large" Text="&#xf053;" FontFamily="{x:StaticResource FA-Solid}"
+                       TextColor="Black" WidthRequest="30" HeightRequest="30" Clicked="BtnBack_Clicked">
+                </Button>
+
+
+                            <!--<Label FontSize="Large" TextColor="Black"  VerticalTextAlignment="Center"
+                                   FontFamily="{x:StaticResource FA-Solid}" Text="&#xf053;"></Label>-->
 
                             <BoxView HeightRequest="30" Color="Gray" WidthRequest="1" Margin="10,-5,0,-5" ></BoxView>
 

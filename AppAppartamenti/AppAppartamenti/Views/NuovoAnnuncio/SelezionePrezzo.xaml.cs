@@ -18,6 +18,8 @@ namespace AppAppartamenti.Views
     public partial class SelezionePrezzo : ContentPage
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
+        List<ClasseEnergetica> listClasseEnergetica = new List<ClasseEnergetica>();
+        List<TipologiaRiscaldamento> listTipologiaRiscaldamento = new List<TipologiaRiscaldamento>();
 
         public SelezionePrezzo(AnnuncioDtoInput Annuncio)
         {
@@ -33,19 +35,29 @@ namespace AppAppartamenti.Views
 
             AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
-            pckClasseEnergetica.ItemsSource = (await annunciClient.GetListaClasseEnergeticaAsync()).ToList();
-            pckRiscaldamento.ItemsSource = (await annunciClient.GetListaTipologiaRiscaldamentoAsync()).ToList();
-
-            try
+            if (listClasseEnergetica == null || listClasseEnergetica.Count ==0)
             {
-                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-                NavigationPage.SetHasNavigationBar(this, true);
+                listClasseEnergetica = (await annunciClient.GetListaClasseEnergeticaAsync()).ToList();
             }
-            catch (Exception ex)
-            {
 
+            if (listTipologiaRiscaldamento == null || listTipologiaRiscaldamento.Count == 0)
+            {
+                listTipologiaRiscaldamento = (await annunciClient.GetListaTipologiaRiscaldamentoAsync()).ToList();
             }
+
+            pckClasseEnergetica.ItemsSource = listClasseEnergetica;
+            pckRiscaldamento.ItemsSource = listTipologiaRiscaldamento;
+
+            //try
+            //{
+            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+            //    NavigationPage.SetHasNavigationBar(this, true);
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
 
             spBody.IsVisible = true;
         }

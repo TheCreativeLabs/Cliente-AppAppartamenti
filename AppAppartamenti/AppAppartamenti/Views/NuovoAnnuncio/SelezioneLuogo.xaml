@@ -6,7 +6,7 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneLuogo"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="False">
 
 
@@ -27,7 +27,7 @@
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Dove si trova?"></Label>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Nuovo annuncio"></Label>
             <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                 <Label Style="{x:StaticResource CancelButton}"></Label>
 
@@ -40,15 +40,18 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
-                <ProgressBar Progress="0.3" />
+            <StackLayout Padding="20"> 
 
-                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" Padding="20,0,20,0" >
-                    <appappartamenti:MyEntry Margin="0,20,0,0" x:Name="entCercaComune"
-                                             Placeholder="Inserisci il comune" TextChanged="EntCercaComune_TextChanged"></appappartamenti:MyEntry>
+                 <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
+                <Label Text="Dove si trova?" HorizontalTextAlignment="Center" ></Label>
+                <ProgressBar Progress="0.3"/>
+            </StackLayout>
 
-                    <ListView x:Name="lvComuni" ItemSelected="LvComuni_Selected" SeparatorVisibility="None" >
+                    <Label Text="Inserisci il comune"></Label>
+                    <appappartamenti:MyEntry  x:Name="entCercaComune"
+                                             Placeholder="Comune" TextChanged="EntCercaComune_TextChanged"></appappartamenti:MyEntry>
+
+                    <ListView x:Name="lvComuni" IsVisible="False" ItemSelected="LvComuni_Selected" SeparatorVisibility="None" >
 
                         <ListView.Footer>
                             <DataTemplate>
@@ -70,37 +73,18 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    
+
+                    <Label Text="Inserisci l'indirizzo" Margin="0,20,0,0"></Label>
                     <appappartamenti:MyEntry x:Name="entIndirizzo"
-                                              TextChanged="EntIndirizzo_textChanged" IsVisible="False"
-                                              Placeholder="Inserisci l'indirizzo"></appappartamenti:MyEntry>
+                                              Unfocused="EntIndirizzo_Unfocused"
+                                              Placeholder="Indirizzo"></appappartamenti:MyEntry>
 
-                </StackLayout>
+                    <maps:Map x:Name="map" IsVisible="False" HeightRequest="200" Margin="0"/>
 
-
-               <Button x:Name="btnIndirizzoProcedi" IsEnabled="False" Text="Avanti"
+                    <Button x:Name="btnIndirizzoProcedi" IsEnabled="False" Text="Avanti" 
                     Clicked="BtnIndirizzoProcedi_Clicked" TextColor="White"
-                    FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
-            </StackLayout>
-
-            <!--Popup Area-->
-            <ContentView x:Name="mapsPopup" BackgroundColor="#C0808080"
-                         Padding="10, 0" IsVisible="false"
-                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                         AbsoluteLayout.LayoutFlags="All">
-                <Frame HasShadow="False" Padding="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" BackgroundColor="White" CornerRadius="10">
-                    <StackLayout>
-                        <Label Text="La posizione è corretta?" FontSize="Large" Margin="15" TextColor="Black" HorizontalOptions="CenterAndExpand"></Label>
-                        <maps:Map x:Name="map" IsVisible="True" HeightRequest="350" Margin="15"/>
-                        <StackLayout Orientation="Horizontal" Margin="15">
-                            <Button Text="No" Clicked="ButtonPopUpNo"  Visual="Material" HorizontalOptions="FillAndExpand" ></Button>
-                            <Button Text="Sì" Clicked="ButtonPopUpSi" Style="{x:StaticResource primaryButton}" Visual="Material" HorizontalOptions="FillAndExpand" ></Button>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-            </ContentView>
-
-        </AbsoluteLayout>
+                     VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+        </StackLayout>
     </ContentPage.Content>
 
 </ContentPage>

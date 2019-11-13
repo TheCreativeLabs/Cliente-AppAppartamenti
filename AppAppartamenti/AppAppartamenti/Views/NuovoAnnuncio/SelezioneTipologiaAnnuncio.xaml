@@ -5,7 +5,7 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.SelezioneTipologiaAnnuncio"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="False">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,7 +16,7 @@
     <NavigationPage.TitleView>
         <!-- Bottoni -->
         <StackLayout Orientation="Horizontal" x:Name="staBody" IsVisible="False">
-            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand" Margin="-20,0,0,0">
+            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
                 <Label Style="{x:StaticResource BackButton}"></Label>
 
                 <Frame.GestureRecognizers>
@@ -24,7 +24,7 @@
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Vendita o affitto?"></Label>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Nuovo annuncio"></Label>
             <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                 <Label Style="{x:StaticResource CancelButton}"></Label>
 
@@ -37,14 +37,17 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-            <StackLayout>
-            <ProgressBar Progress="0.3"/>
-            <input:SelectionView ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1" Color="#ff6b6b">
-                </input:SelectionView>
+        <StackLayout Padding="20">
+                    <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
+                    <Label Text="Vendita o affitto?" HorizontalTextAlignment="Center" ></Label>
+                     <ProgressBar Progress="0.2"/>
+                </StackLayout>
 
-            <Button Text="Avanti" Clicked="BtnAvanti_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+                <input:SelectionView ItemsSource="{Binding Items}"
+                                     RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1" Color="#ff6b6b">
+                    </input:SelectionView>
 
-
+                <Button Text="Avanti" Clicked="BtnAvanti_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

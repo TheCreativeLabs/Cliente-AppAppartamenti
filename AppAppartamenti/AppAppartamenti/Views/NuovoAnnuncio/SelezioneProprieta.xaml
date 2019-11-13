@@ -9,16 +9,15 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneProprieta"
-             NavigationPage.HasNavigationBar="False"
-             BackgroundColor="#F8F8F8">
+             NavigationPage.HasNavigationBar="True"
+             >
 
 
     <NavigationPage.TitleView>
-         <!-- Bottoni -->
             <StackLayout Orientation="Horizontal">
-                <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Margin="60,0,0,0" Text="Che tipo di alloggio hai?"></Label>
-                <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                    <Label Style="{x:StaticResource CancelButton}"></Label>
+                <Label TextColor="White" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0"  HorizontalTextAlignment="Center" Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Nuovo annuncio"></Label>
+                <Frame BorderColor="Transparent" HorizontalOptions="End" Style="{x:StaticResource FrameBackButton}">
+                    <Label  TextColor="White" Style="{x:StaticResource CancelButton}"></Label>
 
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="BtnCancel_Clicked">
@@ -35,13 +34,17 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout x:Name="stkBody" IsVisible="False">
-            <ProgressBar Progress="0.1"/>
+        <StackLayout x:Name="stkBody" IsVisible="False" Padding="20" >
+            <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
+                <Label Text="Che tipo di proprietà hai?" HorizontalTextAlignment="Center" ></Label>
+                <ProgressBar Progress="0.1"/>
+            </StackLayout>
 
-            <input:SelectionView ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1" Color="#ff6b6b">
+            <input:SelectionView ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton"
+                                 ColumnNumber="1" Color="#ff6b6b">
             </input:SelectionView>
 
-            <Button Text="Avanti" Clicked="BtnAvanti_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+            <Button Text="Avanti" VerticalOptions="EndAndExpand" Clicked="BtnAvanti_Clicked" TextColor="White" BackgroundColor="#ff6b6b" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

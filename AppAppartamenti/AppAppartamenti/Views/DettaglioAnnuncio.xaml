@@ -12,11 +12,17 @@
 
     <NavigationPage.TitleView>
             <StackLayout  Orientation="Horizontal">
-                <Label VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf053;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Label>
+                <Button BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold"
+                       FontSize="Large" Text="&#xf053;" FontFamily="{x:StaticResource FA-Solid}"
+                       TextColor="White" WidthRequest="50" Clicked="BtnBack_Clicked" >
+                </Button>
 
-                <Label VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" WidthRequest="30"  FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Label>
+                <Button VerticalOptions="Center" WidthRequest="50" HorizontalOptions="EndAndExpand"
+                        FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;"
+                        FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Button>
 
-                <Label VerticalTextAlignment="Center" HorizontalOptions="End"  WidthRequest="30" FontAttributes="Bold" FontSize="Large" Text="&#xf004;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Label>
+                <Button VerticalOptions="Center" HorizontalOptions="End"  WidthRequest="50" FontAttributes="Bold"
+                        FontSize="Large" Text="&#xf004;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Button>
             </StackLayout>
     </NavigationPage.TitleView>
 
@@ -36,10 +42,10 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-            <ScrollView Scrolled="ScrollView_Scrolled" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,-50,0,0">
+            <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,-50,0,0">
                 <StackLayout>
                     <StackLayout HeightRequest="300" Margin="0,-20,0,0">
-                        <CarouselView ItemsSource="{Binding Immagini}" x:Name="Carousel" IsVisible="False">
+                        <CarouselView ItemsSource="{Binding Immagini}" x:Name="Carousel">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -191,11 +197,17 @@
                     </ScrollView>
 
                    <StackLayout x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="0,40,0,0" Padding="10" Grid.Column="0" HeightRequest="20" Grid.Row="0">
-                      <Label FontAttributes="Bold" FontSize="Large" Text="&#xf053;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Label>
+                        <Button BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold"
+                                FontSize="Large" Text="&#xf053;" FontFamily="{x:StaticResource FA-Solid}"
+                                TextColor="White" WidthRequest="50" Clicked="BtnBack_Clicked" >
+                        </Button>
 
-                      <Label HorizontalOptions="EndAndExpand" WidthRequest="30"  FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Label>
+                        <Button VerticalOptions="Center" WidthRequest="50" HorizontalOptions="EndAndExpand"
+                                FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;"
+                                FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Button>
 
-                      <Label HorizontalOptions="End"  WidthRequest="30" FontAttributes="Bold" FontSize="Large" Text="&#xf004;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Label>
+                        <Button VerticalOptions="Center" HorizontalOptions="End"  WidthRequest="50" FontAttributes="Bold"
+                                FontSize="Large" Text="&#xf004;" FontFamily="{x:StaticResource FA-Solid}" TextColor="White"></Button>
                    </StackLayout>
                 </Grid>
     </ContentPage.Content>

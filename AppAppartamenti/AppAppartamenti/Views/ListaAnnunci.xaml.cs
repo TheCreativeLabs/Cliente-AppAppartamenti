@@ -56,5 +56,18 @@ namespace AppAppartamenti.Views
         {
             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta()));
         }
+
+        private async void BtnBack_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
     }
 }
