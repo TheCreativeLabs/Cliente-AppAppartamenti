@@ -9,8 +9,31 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneImmagini"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="False">
 
+     <NavigationPage.TitleView>
+        <!-- Bottoni -->
+        <StackLayout Orientation="Horizontal"> 
+            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                <Label Style="{x:StaticResource BackButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Nuovo annuncio"></Label>
+            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,52 +42,44 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
             <StackLayout Padding="20">
-                <!-- Bottoni -->
-                <StackLayout Orientation="Horizontal">
-                    <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
-                        <Label Style="{x:StaticResource BackButton}"></Label>
 
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-
-              <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Immagini"></Label>
-
-
-                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                        <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
+                    <Label Text="Immagini" HorizontalTextAlignment="Center" ></Label>
+                     <ProgressBar Progress="0.7"/>
                 </StackLayout>
-
-             
-
-                    <ProgressBar Progress="0.8" Margin="0,0,0,20" />
 
                     <Button Clicked="ActionImmagini" Text="Aggiungi Immagini"></Button>
 
-                    <CollectionView x:Name="cvImmagini">
+
+                    <StackLayout HeightRequest="300" Margin="-20,0,-20,0">
+                            <CarouselView x:Name="cvImmagini" IsVisible="true">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                    </StackLayout>
+
+                    <!--<CollectionView x:Name="cvImmagini">
                         <CollectionView.ItemsLayout>
-                           <GridItemsLayout Orientation="Vertical"
+                           <GridItemsLayout Orientation="Horizontal"
                                             Span="2" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Image HeightRequest="200" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"></Image>
+                                <Image HeightRequest="200" WidthRequest="250" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"></Image>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    </CollectionView>-->
 
-                    <Button x:Name="btnImmaginiProcedi" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                    <Button x:Name="btnImmaginiProcedi" VerticalOptions="EndAndExpand" Text="Avanti" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
             </StackLayout>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

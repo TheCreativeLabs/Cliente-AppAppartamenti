@@ -24,12 +24,6 @@ namespace AppAppartamenti.Views
             InitializeComponent();
 
             IdAnnuncio = Id;
-
-     
-            Carousel.IsVisible = true;
-
-          
-
         }
 
         protected async override void OnAppearing()
@@ -37,6 +31,8 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             BindingContext = viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
+
+            scrollView.IsVisible = true;
         }
 
         async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
@@ -51,6 +47,19 @@ namespace AppAppartamenti.Views
                 NavigationPage.SetHasNavigationBar(this, false);
                 stkHeader.IsVisible = true;
 
+            }
+        }
+
+        private async void BtnBack_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PopAsync();
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
             }
         }
     }

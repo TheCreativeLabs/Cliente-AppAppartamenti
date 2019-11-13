@@ -140,8 +140,9 @@
                 <Setter Property="Text" Value="&#xf053;"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-                <Setter Property="FontSize" Value="Title"></Setter>
-                <Setter Property="TextColor" Value="Gray"></Setter>
+                <Setter Property="FontSize" Value="Large" />
+                                <Setter Property="TextColor" Value="White"></Setter>
+
             </Style>
 
             <Style TargetType="Label" x:Key="CancelButton">
@@ -149,8 +150,8 @@
                 <Setter Property="Text" Value="&#xf00d;"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-                <Setter Property="FontSize" Value="Title"></Setter>
-                <Setter Property="TextColor" Value="Gray"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="Large" />
             </Style>
 
             <Style TargetType="Frame" x:Key="FrameBackButton">
@@ -168,7 +169,9 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White"></Setter>
+
             </Style>
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioIcon">

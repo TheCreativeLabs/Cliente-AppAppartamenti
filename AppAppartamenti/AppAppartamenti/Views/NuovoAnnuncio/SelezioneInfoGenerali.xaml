@@ -9,7 +9,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneInfoGenerali"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="False">
 
     <NavigationPage.TitleView>
@@ -23,7 +23,7 @@
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Informazioni generali"></Label>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Nuovo annuncio"></Label>
             <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                 <Label Style="{x:StaticResource CancelButton}"></Label>
 
@@ -36,57 +36,87 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout ><!--Padding="20"-->
+       <StackLayout>
+           <StackLayout Padding="20">
+                    <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,10" Padding="20">
+                    <Label Text="Informazioni generali" HorizontalTextAlignment="Center" ></Label>
+                     <ProgressBar Progress="0.4"/>
+                </StackLayout>
+           </StackLayout>
 
-                    <ProgressBar Progress="0.6" Margin="0,0,0,20" />
 
-                <StackLayout Margin="20,0,20,0">
+            <Grid VerticalOptions="FillAndExpand" Padding="20,0,20,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                <ScrollView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+
+                <StackLayout>
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="m²" FontAttributes="Bold" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                         <Label Text="Inserisci la superficie"></Label>
                     </StackLayout>
-                    <appappartamenti:CustomEntry TextFontSize="Medium" x:Name="entSuperficie" Keyboard="Numeric" Placeholder="Esempio: 120.000" Visual="Material"></appappartamenti:CustomEntry>
+                    <appappartamenti:MyEntry x:Name="entSuperficie" Keyboard="Numeric" Placeholder="Esempio: 120"></appappartamenti:MyEntry>
 
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                    <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                         <Label  VerticalTextAlignment="Center" Text="Camere da letto:"></Label>
                         <Label x:Name="lblCamereLettoCount" Text="0"  VerticalTextAlignment="Center" FontSize="Large"></Label>
 
-                        <Stepper x:Name="stpCamereLetto" HorizontalOptions="EndAndExpand" ValueChanged="StpCamereLetto_ValueChanged" WidthRequest="80" Minimum="0" Visual="Material"></Stepper>
+                        <Stepper x:Name="stpCamereLetto" HorizontalOptions="EndAndExpand" ValueChanged="StpCamereLetto_ValueChanged" WidthRequest="100" Minimum="0" Visual="Material"></Stepper>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                    <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf52b;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                         <Label  VerticalTextAlignment="Center" Text="Stanze:"></Label>
                         <Label x:Name="lblStanzeCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
-                        <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged" WidthRequest="80" HorizontalOptions="EndAndExpand"></Stepper>
+                        <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                    <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                         <Label  VerticalTextAlignment="Center" Text="Bagni:"></Label>
                         <Label x:Name="lblBagniCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
-                        <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material" WidthRequest="80" HorizontalOptions="EndAndExpand"></Stepper>
+                        <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                    <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                         <Label  VerticalTextAlignment="Center" Text="Cucine:"></Label>
                         <Label x:Name="lblCucineCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
-                    <Stepper x:Name="stpCucine" ValueChanged="StpCucine_ValueChanged" Minimum="0" Visual="Material" WidthRequest="80" HorizontalOptions="EndAndExpand"></Stepper>
+                    <Stepper x:Name="stpCucine" ValueChanged="StpCucine_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
 
                     </StackLayout>
 
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                    <StackLayout Orientation="Horizontal" Margin="0,15,0,0">
+
+
+                    <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                         <Label VerticalTextAlignment="Center" Text="Garage/Posto auto:"></Label>
                         <Label x:Name="lblGarageCount" Text="0" FontSize="Large" VerticalTextAlignment="Center"></Label>
-                        <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material" WidthRequest="80" HorizontalOptions="EndAndExpand"></Stepper>
+                        <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
+
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
                     <Label Text="Altro" FontSize="Medium"></Label>
                     <Grid>
@@ -114,11 +144,12 @@
                         <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="Condizionatori"></Label>
                     </Grid>
 
-                    <!--<Button Text="Procedi" x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>-->
                 </StackLayout>
-                <Button Text="Avanti"  x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
-
-            </StackLayout>
             </ScrollView>
+
+                <Button Grid.Column="0" Grid.Row="1" Text="Avanti"  x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+            </Grid>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

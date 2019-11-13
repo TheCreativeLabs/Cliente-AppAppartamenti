@@ -11,7 +11,8 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="#E8E8E8"
             BarBackgroundColor="White"
-            SelectedTabColor="#ff6b6b">
+            SelectedTabColor="#ff6b6b"
+            NavigationPage.HasNavigationBar="False">
 
     <TabbedPage.Children>
         <NavigationPage Title="Cerca">

@@ -59,7 +59,6 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
             foreach (var item in mediaFileImages)
@@ -68,7 +67,6 @@ namespace AppAppartamenti.Views
                 item.File.GetStream().CopyTo(memoryStream);
                 annuncio.Immagini.Add(memoryStream.ToArray());
             }
-
 
             Navigation.PushAsync(new SelezioneDescrizione(annuncio));
         }

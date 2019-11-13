@@ -40,16 +40,16 @@ namespace AppAppartamenti.Views
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
 
-            try
-            {
-                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-                NavigationPage.SetHasNavigationBar(this, true);
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+            //    NavigationPage.SetHasNavigationBar(this, true);
+            //}
+            //catch (Exception ex)
+            //{
 
-            }
+            //}
 
             staBody.IsVisible = true;
         }
