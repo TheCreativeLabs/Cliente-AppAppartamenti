@@ -4,7 +4,9 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.ExportRenderer(typeof(Xamarin.RangeSlider.Forms.RangeSlider), typeof(Xamarin.RangeSlider.Forms.RangeSliderRenderer))]
 namespace AppAppartamenti.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -22,10 +24,23 @@ namespace AppAppartamenti.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+
+            // define useragent android like
+            //string userAgent =  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0";
+
+            //// set default useragent
+            //NSDictionary dictionary = NSDictionary.FromObjectAndKey(NSObject.FromObject(userAgent), NSObject.FromObject("UserAgent"));
+            //NSUserDefaults.StandardUserDefaults.RegisterDefaults(dictionary);
+
+            NSUserDefaults.StandardUserDefaults.RegisterDefaults(new NSDictionary("UserAgent",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"));
+
+            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
             Plugin.InputKit.Platforms.iOS.Config.Init();
-
+           
             Xamarin.FormsMaps.Init();
 
             LoadApplication(new App());

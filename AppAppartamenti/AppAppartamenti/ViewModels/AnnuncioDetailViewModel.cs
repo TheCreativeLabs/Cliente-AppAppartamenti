@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using AppAppartamenti.Models;
@@ -9,44 +10,45 @@ namespace AppAppartamenti.ViewModels
 {
     public class AnnuncioDetailViewModel : BaseViewModel
     {
-        public AnnuncioDtoOutput Item { get; set; }
-        ////public Command LoadItemsCommand { get; set; }
-        //public Guid idAnnuncio { get; set; }
-        public AnnuncioDetailViewModel(AnnuncioDtoOutput item)
+        public class Immagine
         {
-            //if (idAnnuncio != null && idAnnuncio!= Guid.Empty)
-            //{
-                this.Item = item;
-               // LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            //}
-            //else
-            //{
-            //    Item = new AnnuncioDtoOutput(); 
-            //}
-            
+            public byte[] Value { get; set; }
         }
 
-        //async Task ExecuteLoadItemsCommand()
-        //{
-        //    if (IsBusy)
-        //        return;
+        public AnnuncioDtoOutput Item { get; set; }
+        public List<Immagine> Immagini { get; set; }
 
-        //    IsBusy = true;
+        ////public Command LoadItemsCommand { get; set; }
+        //public Guid idAnnuncio { get; set; }
+        public AnnuncioDetailViewModel()
+        {
+            Item = new AnnuncioDtoOutput();
+            Immagini = new List<Immagine>();
 
-        //    try
-        //    {
-        //        AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-        //        Item = await annunciClient.GetAnnuncioByIdAsync(this.idAnnuncio);
+        }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex);
-        //    }
-        //    finally
-        //    {
-        //        IsBusy = false;
-        //    }
-        //}
+       public static async Task<AnnuncioDetailViewModel> ExecuteLoadItemsCommandAsync(Guid Id)
+        {
+            AnnuncioDetailViewModel annuncioDetailViewModel = new AnnuncioDetailViewModel();
+
+            try
+            {
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+
+                annuncioDetailViewModel.Item = await annunciClient.GetAnnuncioByIdAsync(Id);
+
+                List<Immagine> immagines = new List<Immagine>();
+                foreach (var immagine in annuncioDetailViewModel.Item.ImmaginiAnnuncio)
+                {
+                    annuncioDetailViewModel.Immagini.Add(new Immagine() { Value = immagine });
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return annuncioDetailViewModel;
+        }
     }
 }

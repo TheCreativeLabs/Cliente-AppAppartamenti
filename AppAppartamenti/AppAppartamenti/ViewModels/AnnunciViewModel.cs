@@ -12,18 +12,24 @@ using System.Collections.Generic;
 
 namespace AppAppartamenti.ViewModels
 {
+    public enum TipiRicerca
+    {
+        MieiAnnunci = 0,
+        Tutti = 1,
+        Preferiti = 2
+    }
+
     public class AnnunciViewModel : BaseViewModel
     {
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        private bool SoloPersonali { get; set; }
+        private TipiRicerca TipoRicerca { get; set; }
 
-        public AnnunciViewModel(bool SoloAnnunciPersonali)
+        public AnnunciViewModel(TipiRicerca tipoRicerca)
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            SoloPersonali = SoloAnnunciPersonali;
-          
+            TipoRicerca = tipoRicerca;
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -39,16 +45,20 @@ namespace AppAppartamenti.ViewModels
 
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
-                ICollection<AnnunciDtoOutput> listaAnnunci;
+                ICollection<AnnunciDtoOutput> listaAnnunci = null;
 
-                if (SoloPersonali)
+                if (TipoRicerca == TipiRicerca.MieiAnnunci)
                 {
-                    listaAnnunci = await annunciClient.GetAnnunciByUserAsync();
+                     listaAnnunci = await annunciClient.GetAnnunciByUserAsync();
                 }
-                else
+                else if(TipoRicerca == TipiRicerca.Tutti)
                 {
                     listaAnnunci = await annunciClient.GetAnnunciAsync();
                 }
+                //else if (TipoRicerca == TipiRicerca.Preferiti)
+                //{
+                //    listaAnnunci = await annunciClient.getp();
+                //}
 
                 foreach (var evento in listaAnnunci)
                 {
@@ -63,6 +73,11 @@ namespace AppAppartamenti.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private Task<string> DisplayActionSheet(string v1, string v2, object p, string v3, string v4)
+        {
+            throw new NotImplementedException();
         }
     }
 }

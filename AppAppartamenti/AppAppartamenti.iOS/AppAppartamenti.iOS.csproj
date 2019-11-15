@@ -61,11 +61,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
+    <Compile Include="AppDelegate.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EmptyClass.cs" />
+    <Compile Include="NavigationBarCustomRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -127,6 +130,42 @@
     <BundleResource Include="Resources\MyriadPro-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\test.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\test2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-trackCrossedOver.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-handle-disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-handle%402x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-handle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-track.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-trackCrossedOver%402x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-trackBackground%402x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-handle-disabled%402x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-trackBackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\slider-default7-track%402x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -156,6 +195,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.RangeSlider">
       <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Google">
+      <Version>1.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

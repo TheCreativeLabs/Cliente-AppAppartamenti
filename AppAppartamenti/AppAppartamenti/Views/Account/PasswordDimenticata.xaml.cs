@@ -21,7 +21,25 @@ namespace AppAppartamenti.Views.Login
             InitializeComponent();
         }
 
-        private async void btnProsegui_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            try
+            {
+                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+                NavigationPage.SetHasNavigationBar(this, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            stkBody.IsVisible = true;
+        }
+
+    private async void btnProsegui_Clicked(object sender, EventArgs e)
         {
             try
             {

@@ -5,50 +5,49 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.SelezioneTipologiaAnnuncio"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <!-- Bottoni -->
+        <StackLayout Orientation="Horizontal" x:Name="staBody" IsVisible="False">
+            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                <Label Style="{x:StaticResource BackButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Nuovo annuncio"></Label>
+            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
     <ContentPage.Content>
-            <StackLayout Padding="20">
-               
+        <StackLayout Padding="20">
+                    <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
+                    <Label Text="Vendita o affitto?" HorizontalTextAlignment="Center" ></Label>
+                     <ProgressBar Progress="0.2"/>
+                </StackLayout>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
-                        <Label Style="{x:StaticResource BackButton}"></Label>
+                <input:SelectionView ItemsSource="{Binding Items}"
+                                     RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1" Color="#ff6b6b">
+                    </input:SelectionView>
 
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-
-                         <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Vendita o affitto?"></Label>
-
-                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                        <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-                    </StackLayout>
-
-                    <ProgressBar Progress="0.3"/>
-
-                 <ListView x:Name="lvTipologiaAnnuncio" ItemSelected="LvTipologiaAnnuncio_Selected" Margin="0,20,0,0" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label Text="{Binding Descrizione}" VerticalTextAlignment="Center" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-            </StackLayout>
+                <Button Text="Avanti" Clicked="BtnAvanti_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

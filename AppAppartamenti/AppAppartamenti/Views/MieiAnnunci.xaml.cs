@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppAppartamenti.Utility;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using Xamarin.Forms;
@@ -19,7 +20,7 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciViewModel(true);
+            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.MieiAnnunci);
         }
 
         protected override void OnAppearing()
@@ -42,21 +43,19 @@ namespace AppAppartamenti.Views
 
 
             //await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
-            if(item.Id != null && item.Id != Guid.Empty)
+            if (item.Id != null && item.Id != Guid.Empty)
             {
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                AnnuncioDtoOutput annuncioDetail = await annunciClient.GetAnnuncioByIdAsync((Guid)item.Id);
-                await Navigation.PushAsync(new DettaglioAnnuncio(annuncioDetail));
-            }
+                // Manually deselect item.
+                AnnunciiListView.SelectedItem = null;
 
-            // Manually deselect item.
-            AnnunciiListView.SelectedItem = null;
+                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,false));
+            }
         }
 
 
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta()));
+             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta()));
         }
     }
 }

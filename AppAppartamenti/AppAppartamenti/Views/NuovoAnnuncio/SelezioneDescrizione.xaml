@@ -5,16 +5,44 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.SelezioneDescrizione"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <!-- Bottoni -->
+        <StackLayout Orientation="Horizontal" x:Name="sdBody" IsVisible="False">
+            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand" Margin="-20,0,0,0">
+                <Label Style="{x:StaticResource BackButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Descrizione"></Label>
+            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
+        <StackLayout>
+            <ProgressBar Progress="0.9" />
+
             <StackLayout Padding="20">
                 <!-- Bottoni -->
-                <StackLayout Orientation="Horizontal">
+                <!--<StackLayout Orientation="Horizontal">
                     <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
                         <Label Style="{x:StaticResource BackButton}"></Label>
 
@@ -34,14 +62,16 @@
                             </TapGestureRecognizer>
                         </Frame.GestureRecognizers>
                     </Frame>
-                </StackLayout>
+                </StackLayout>-->
 
-                <ProgressBar Progress="0.3" />
 
                 <appappartamenti:CustomEntry HeightRequest="200" x:Name="edtDescrizione" Visual="Material" VerticalOptions="FillAndExpand" ></appappartamenti:CustomEntry>
 
-                <Button x:Name="btnProcedi" Text="Crea annuncio" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>
+                <!--<Button x:Name="btnProcedi" Text="Crea annuncio" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>-->
 
             </StackLayout>
+            <Button Text="Crea annuncio"  x:Name="btnProcedi" Clicked="BtnImmaginiProcedi_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

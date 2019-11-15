@@ -1,9 +1,17 @@
 /*!
+<<<<<<< Updated upstream
+ * jQuery Validation Plugin v1.17.0
+ *
+ * https://jqueryvalidation.org/
+ *
+ * Copyright (c) 2017 Jörn Zaefferer
+=======
  * jQuery Validation Plugin v1.19.1
  *
  * https://jqueryvalidation.org/
  *
  * Copyright (c) 2019 Jörn Zaefferer
+>>>>>>> Stashed changes
  * Released under the MIT license
  */
 (function( factory ) {
@@ -67,7 +75,10 @@ $.extend( $.fn, {
 					// Prevent form submit to be able to see console output
 					event.preventDefault();
 				}
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
 				function handle() {
 					var hidden, result;
 
@@ -83,7 +94,11 @@ $.extend( $.fn, {
 							.appendTo( validator.currentForm );
 					}
 
+<<<<<<< Updated upstream
+					if ( validator.settings.submitHandler ) {
+=======
 					if ( validator.settings.submitHandler && !validator.settings.debug ) {
+>>>>>>> Stashed changes
 						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
 						if ( hidden ) {
 
@@ -143,7 +158,10 @@ $.extend( $.fn, {
 	// https://jqueryvalidation.org/rules/
 	rules: function( command, argument ) {
 		var element = this[ 0 ],
+<<<<<<< Updated upstream
+=======
 			isContentEditable = typeof this.attr( "contenteditable" ) !== "undefined" && this.attr( "contenteditable" ) !== "false",
+>>>>>>> Stashed changes
 			settings, staticRules, existingRules, data, param, filtered;
 
 		// If nothing is selected, return empty object; can't chain anyway
@@ -151,7 +169,11 @@ $.extend( $.fn, {
 			return;
 		}
 
+<<<<<<< Updated upstream
+		if ( !element.form && element.hasAttribute( "contenteditable" ) ) {
+=======
 		if ( !element.form && isContentEditable ) {
+>>>>>>> Stashed changes
 			element.form = this.closest( "form" )[ 0 ];
 			element.name = this.attr( "name" );
 		}
@@ -395,8 +417,12 @@ $.extend( $.validator, {
 			this.invalid = {};
 			this.reset();
 
+<<<<<<< Updated upstream
+			var groups = ( this.groups = {} ),
+=======
 			var currentForm = this.currentForm,
 				groups = ( this.groups = {} ),
+>>>>>>> Stashed changes
 				rules;
 			$.each( this.settings.groups, function( key, value ) {
 				if ( typeof value === "string" ) {
@@ -412,20 +438,29 @@ $.extend( $.validator, {
 			} );
 
 			function delegate( event ) {
+<<<<<<< Updated upstream
+
+				// Set form expando on contenteditable
+				if ( !this.form && this.hasAttribute( "contenteditable" ) ) {
+=======
 				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
 
 				// Set form expando on contenteditable
 				if ( !this.form && isContentEditable ) {
+>>>>>>> Stashed changes
 					this.form = $( this ).closest( "form" )[ 0 ];
 					this.name = $( this ).attr( "name" );
 				}
 
+<<<<<<< Updated upstream
+=======
 				// Ignore the element if it belongs to another form. This will happen mainly
 				// when setting the `form` attribute of an input to the id of another form.
 				if ( currentForm !== this.form ) {
 					return;
 				}
 
+>>>>>>> Stashed changes
 				var validator = $.data( this.form, "validator" ),
 					eventType = "on" + event.type.replace( /^validate/, "" ),
 					settings = validator.settings;
@@ -620,7 +655,11 @@ $.extend( $.validator, {
 				try {
 					$( this.findLastActive() || this.errorList.length && this.errorList[ 0 ].element || [] )
 					.filter( ":visible" )
+<<<<<<< Updated upstream
+					.focus()
+=======
 					.trigger( "focus" )
+>>>>>>> Stashed changes
 
 					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
 					.trigger( "focusin" );
@@ -649,23 +688,33 @@ $.extend( $.validator, {
 			.not( this.settings.ignore )
 			.filter( function() {
 				var name = this.name || $( this ).attr( "name" ); // For contenteditable
+<<<<<<< Updated upstream
+=======
 				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
 
+>>>>>>> Stashed changes
 				if ( !name && validator.settings.debug && window.console ) {
 					console.error( "%o has no name assigned", this );
 				}
 
 				// Set form expando on contenteditable
+<<<<<<< Updated upstream
+				if ( this.hasAttribute( "contenteditable" ) ) {
+=======
 				if ( isContentEditable ) {
+>>>>>>> Stashed changes
 					this.form = $( this ).closest( "form" )[ 0 ];
 					this.name = name;
 				}
 
+<<<<<<< Updated upstream
+=======
 				// Ignore elements that belong to other/nested forms
 				if ( this.form !== validator.currentForm ) {
 					return false;
 				}
 
+>>>>>>> Stashed changes
 				// Select only the first element for each name, and only those with rules specified
 				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
 					return false;
@@ -711,7 +760,10 @@ $.extend( $.validator, {
 		elementValue: function( element ) {
 			var $element = $( element ),
 				type = element.type,
+<<<<<<< Updated upstream
+=======
 				isContentEditable = typeof $element.attr( "contenteditable" ) !== "undefined" && $element.attr( "contenteditable" ) !== "false",
+>>>>>>> Stashed changes
 				val, idx;
 
 			if ( type === "radio" || type === "checkbox" ) {
@@ -720,7 +772,11 @@ $.extend( $.validator, {
 				return element.validity.badInput ? "NaN" : $element.val();
 			}
 
+<<<<<<< Updated upstream
+			if ( element.hasAttribute( "contenteditable" ) ) {
+=======
 			if ( isContentEditable ) {
+>>>>>>> Stashed changes
 				val = $element.text();
 			} else {
 				val = $element.val();
@@ -781,6 +837,13 @@ $.extend( $.validator, {
 			if ( normalizer ) {
 				val = normalizer.call( element, val );
 
+<<<<<<< Updated upstream
+				if ( typeof val !== "string" ) {
+					throw new TypeError( "The normalizer should return a string value." );
+				}
+
+=======
+>>>>>>> Stashed changes
 				// Delete the normalizer from rules to avoid treating it as a pre-defined method.
 				delete rules.normalizer;
 			}
@@ -1156,6 +1219,9 @@ $.extend( $.validator, {
 				.removeData( "validator" )
 				.find( ".validate-equalTo-blur" )
 					.off( ".validate-equalTo" )
+<<<<<<< Updated upstream
+					.removeClass( "validate-equalTo-blur" );
+=======
 					.removeClass( "validate-equalTo-blur" )
 				.find( ".validate-lessThan-blur" )
 					.off( ".validate-lessThan" )
@@ -1169,6 +1235,7 @@ $.extend( $.validator, {
 				.find( ".validate-greaterThan-blur" )
 					.off( ".validate-greaterThan" )
 					.removeClass( "validate-greaterThan-blur" );
+>>>>>>> Stashed changes
 		}
 
 	},
@@ -1272,12 +1339,15 @@ $.extend( $.validator, {
 
 		for ( method in $.validator.methods ) {
 			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
+<<<<<<< Updated upstream
+=======
 
 			// Cast empty attributes like `data-rule-required` to `true`
 			if ( value === "" ) {
 				value = true;
 			}
 
+>>>>>>> Stashed changes
 			this.normalizeAttributeRule( rules, type, method, value );
 		}
 		return rules;
@@ -1403,7 +1473,11 @@ $.extend( $.validator, {
 			if ( this.checkable( element ) ) {
 				return this.getLength( value, element ) > 0;
 			}
+<<<<<<< Updated upstream
+			return value.length > 0;
+=======
 			return value !== undefined && value !== null && value.length > 0;
+>>>>>>> Stashed changes
 		},
 
 		// https://jqueryvalidation.org/email-method/
@@ -1427,6 +1501,11 @@ $.extend( $.validator, {
 		},
 
 		// https://jqueryvalidation.org/date-method/
+<<<<<<< Updated upstream
+		date: function( value, element ) {
+			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+		},
+=======
 		date: ( function() {
 			var called = false;
 
@@ -1447,6 +1526,7 @@ $.extend( $.validator, {
 				return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
 			};
 		}() ),
+>>>>>>> Stashed changes
 
 		// https://jqueryvalidation.org/dateISO-method/
 		dateISO: function( value, element ) {

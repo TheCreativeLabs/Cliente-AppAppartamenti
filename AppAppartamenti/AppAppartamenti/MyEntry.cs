@@ -23,4 +23,8 @@ namespace AppAppartamenti
             this.CornerRadius = 5;
         }   
     }
+
+    public class SearchEntry : Entry
+    {
+    }
 }

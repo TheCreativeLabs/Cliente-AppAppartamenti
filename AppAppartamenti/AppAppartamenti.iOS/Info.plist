@@ -42,13 +42,20 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string></string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to the camera to take photos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to photos.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>his app needs access to microphone.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app needs access to the photo gallery.</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>NSCameraUsageDescription</key>
+	<string>The app needs to use the camera.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key> NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

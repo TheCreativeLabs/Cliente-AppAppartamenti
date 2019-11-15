@@ -10,6 +10,16 @@
 
     <Application.Resources>
         <ResourceDictionary>
+              <!--    Font Awesome     -->
+            <Style TargetType="NavigationPage">
+                    <Setter Property="BarBackgroundColor" Value="#ff6b6b"></Setter>
+                    <Setter Property="BarTextColor" Value="White"></Setter>
+            </Style>
+
+            <Style TargetType="ProgressBar">
+                <Setter Property="ProgressColor" Value="#ff6b6b"></Setter>
+            </Style>
+
             <!--    Font Awesome     -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
                 <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
@@ -23,7 +33,7 @@
             
             <Style TargetType="Button" x:Key="primaryButton">
                 <Setter Property="BackgroundColor" Value="#ff6b6b"/>
-                <Setter Property="Text" Value="White"/>
+                <Setter Property="TextColor" Value="White"/>
             </Style>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
@@ -32,7 +42,7 @@
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
-                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto" />
+                <On Platform="Android" Value="Roboto-Regular.ttf#Roboto" />
                 <On Platform="iOS" Value="Roboto" />
             </OnPlatform>
 
@@ -85,6 +95,23 @@
                 <Setter Property="CornerRadius" Value="100"></Setter>
             </Style>
 
+            <Style TargetType="Frame" x:Key="IosFrameRadius">
+                <Setter Property="CornerRadius" Value="65"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="AndroidFrameRadius">
+                <Setter Property="CornerRadius" Value="100"></Setter>
+            </Style>
+
+            
+            <Style TargetType="Frame" x:Key="IosFrameRadius2">
+                <Setter Property="CornerRadius" Value="20"></Setter>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="AndroidFrameRadius2">
+                <Setter Property="CornerRadius" Value="100"></Setter>
+            </Style>
+
              <Style TargetType="Frame" x:Key="NuovoAnnuncioImageFrame">
                  <Setter Property="Padding" Value="0"></Setter>
                  <Setter Property="HeightRequest" Value="200"></Setter>
@@ -113,8 +140,9 @@
                 <Setter Property="Text" Value="&#xf053;"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-                <Setter Property="FontSize" Value="Title"></Setter>
-                <Setter Property="TextColor" Value="Gray"></Setter>
+                <Setter Property="FontSize" Value="Large" />
+                                <Setter Property="TextColor" Value="White"></Setter>
+
             </Style>
 
             <Style TargetType="Label" x:Key="CancelButton">
@@ -122,8 +150,8 @@
                 <Setter Property="Text" Value="&#xf00d;"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-                <Setter Property="FontSize" Value="Title"></Setter>
-                <Setter Property="TextColor" Value="Gray"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="Large" />
             </Style>
 
             <Style TargetType="Frame" x:Key="FrameBackButton">
@@ -132,6 +160,8 @@
                 <Setter Property="WidthRequest" Value="50"></Setter>
                 <Setter Property="BorderColor" Value="Transparent"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="HasShadow" Value="False"></Setter>
+
             </Style>
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioTitle">
@@ -139,7 +169,9 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White"></Setter>
+
             </Style>
 
             <Style TargetType="Label" x:Key="LabelNuovoAnnuncioIcon">

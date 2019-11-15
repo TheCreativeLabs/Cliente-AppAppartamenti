@@ -29,6 +29,8 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            slBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -53,13 +55,10 @@ namespace AppAppartamenti.Views
         {
             annuncio.Indirizzo = entIndirizzo.Text;
 
-            await setMapLocation();
-
-            mapsPopup.IsVisible = true;
+            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio));
         }
 
 
-        //private async void EntIndirizzo_Unfocused(object sender, EventArgs e)
         private async Task setMapLocation()
         {
             //ottengo la posizione dell'indirizzo.
@@ -93,7 +92,9 @@ namespace AppAppartamenti.Views
             //refresh della lista dei comuni
             var listaComuni = new ListaComuniViewModel(entCercaComune.Text);
             listaComuni.LoadItemsCommand.Execute(null);
-            lvComuni.ItemsSource = listaComuni.Items; 
+            lvComuni.ItemsSource = listaComuni.Items;
+            lvComuni.IsVisible = true;
+            entIndirizzo.IsVisible = false;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -111,37 +112,19 @@ namespace AppAppartamenti.Views
 
             //nascondo la lista dei comuni e mostro la entry dell'indirizzo
             lvComuni.IsVisible = false;
-            entIndirizzo.IsVisible = true;
 
-            //mostro il bottone procedi
-            btnIndirizzoProcedi.IsVisible = true;
+            entIndirizzo.IsVisible = true;
 
             // Manually deselect item.
             lvComuni.SelectedItem = null;
-
         }
 
-        private void EntIndirizzo_textChanged(object sender, TextChangedEventArgs e)
+
+        private async void EntIndirizzo_Unfocused(object sender, FocusEventArgs e)
         {
+            await setMapLocation();
+
             btnIndirizzoProcedi.IsEnabled = true;
         }
-
-        //private void btnPopupButton_Clicked(object sender, EventArgs e)
-        //{
-        //    mapsPopup.IsVisible = true;
-        //    activityIndicator.IsRunning = true;
-        //}
-
-        private void ButtonPopUpNo(object sender, EventArgs e)
-        {
-            mapsPopup.IsVisible = false;
-        }
-
-        private async void ButtonPopUpSi(object sender, EventArgs e)
-        {
-            mapsPopup.IsVisible = false;
-            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio));
-        }
-
     }
 }

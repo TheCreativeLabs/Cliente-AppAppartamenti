@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
+using Plugin.InputKit.Shared.Controls;
 using RestSharp.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -19,9 +20,13 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
 
+        TipologiaProprietaViewModel viewModel;
+
         public SelezioneProprieta()
         {
             InitializeComponent();
+
+            BindingContext = viewModel = new TipologiaProprietaViewModel();
         }
 
         protected override void OnAppearing()
@@ -29,9 +34,21 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             //Carico la lista delle proprietà
-            var listaTipologiaProprieta = new TipologiaProprietaViewModel();
-            listaTipologiaProprieta.LoadItemsCommand.Execute(null);
-            lvTipologiaProprieta.ItemsSource = listaTipologiaProprieta.Items;
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
+
+            //try
+            //{
+            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+            //    NavigationPage.SetHasNavigationBar(this, true);
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+
+            stkBody.IsVisible = true;
         }
 
         private async void BtnCancel_Clicked(object sender, EventArgs e)
@@ -39,21 +56,14 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-        async void LvTipologiaProprieta_Selected(object sender, SelectedItemChangedEventArgs args)
+        async void BtnAvanti_Clicked(object sender, EventArgs e)
         {
-            TipologiaProprieta proprieta = args.SelectedItem as TipologiaProprieta;
-
-            if (proprieta == null || proprieta.Id == null)
-                return;
-
-            //Modifico l'annuncio.
-            annuncio.IdTipologiaProprieta = proprieta.Id;
-
-            //Manually deselect item.
-            lvTipologiaProprieta.SelectedItem = null;
-
-           await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio));
-            
+            if (rbList.SelectedItem != null)
+            {
+                TipologiaProprieta tipologiaProprieta =  viewModel.listaProprieta.Where(x => x.Descrizione == rbList.SelectedItem).FirstOrDefault();
+                annuncio.IdTipologiaProprieta = tipologiaProprieta.Id;
+                await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio));
+            }
         }
     }
 }

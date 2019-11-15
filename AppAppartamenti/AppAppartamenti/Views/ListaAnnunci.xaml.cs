@@ -19,7 +19,7 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciViewModel(false);
+            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.Tutti);
         }
 
         protected override void OnAppearing()
@@ -42,20 +42,32 @@ namespace AppAppartamenti.Views
             if (item == null || item.Id == null)
                 return;
 
-            //EventoClient eventoClient = new EventoClient(ApiHelper.GetApiClient());
-            //EventoDtoOutput dettaglioEvento = await eventoClient.GetEventoByIdAsync(new Guid(item.Id));
+            if (item.Id != null && item.Id != Guid.Empty)
+            {
+                // Manually deselect item.
+                AnnunciiListView.SelectedItem = null;
 
-
-            //await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
-
-            // Manually deselect item.
-            AnnunciiListView.SelectedItem = null;
+                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,false));
+            }
         }
 
 
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta()));
+        }
+
+        private async void BtnBack_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
     }
 }

@@ -14,12 +14,15 @@ namespace AppAppartamenti.ViewModels
 {
     public class TipologiaProprietaViewModel : BaseViewModel
     {
-        public ObservableCollection<TipologiaProprieta> Items { get; set; }
+        public ObservableCollection<string> Items { get; set; }
+        public List<TipologiaProprieta> listaProprieta { get; set; }
+
         public Command LoadItemsCommand { get; set; }
 
         public TipologiaProprietaViewModel()
         {
-            Items = new ObservableCollection<TipologiaProprieta>();
+            Items = new ObservableCollection<string>();
+            listaProprieta = new List<TipologiaProprieta>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
@@ -37,10 +40,10 @@ namespace AppAppartamenti.ViewModels
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
                 ICollection<TipologiaProprieta> tipologiaProprietas = await annunciClient.GetListaTipologiaProprietaAsync();
-
+                listaProprieta = (List<TipologiaProprieta>)tipologiaProprietas;
                 foreach (var evento in tipologiaProprietas)
                 {
-                    Items.Add(evento);
+                    Items.Add(evento.Descrizione);
                 }
             }
             catch (Exception ex)

@@ -3,61 +3,67 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Login.Registrazione" xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti" NavigationPage.HasNavigationBar="False">
-
-    <!--<NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            <Button BackgroundColor="Transparent" FontSize="Medium" HorizontalOptions="Start" WidthRequest="50" TextColor="White" Text="&#xf00d;" FontFamily="{StaticResource FA-Solid}" Clicked="Cancel_Clicked">
-            </Button>
-
-            <Label FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"  FontFamily="{x:StaticResource FA-Solid}" TextColor="White" FontAttributes="Bold" Text="Nuovo evento"></Label>
-        </StackLayout>
-    </NavigationPage.TitleView>-->
-
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Button BackgroundColor="Transparent" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" WidthRequest="40" TextColor="#ff6b6b" Text="&#xf00d;" FontFamily="{StaticResource FA-Solid}" Clicked="Cancel_Clicked">
+        <StackLayout Padding="20" x:Name="stkBody">
+
+            <Button BackgroundColor="Transparent" FontSize="Title" FontAttributes="Bold"
+                    WidthRequest="40" TextColor="#ff6b6b"
+                    Text="&#xf00d;" FontFamily="{StaticResource FA-Solid}" Margin="0,20,0,0"
+                    HorizontalOptions="EndAndExpand"
+                    Clicked="Cancel_Clicked">
             </Button>
 
-            <StackLayout x:Name="stkFormRegistrazione" IsVisible="True" VerticalOptions="CenterAndExpand" Padding="0" Margin="0,-60,0,0">
-                <!--<Label HorizontalTextAlignment="Center" FontSize="90" TextColor="#c786d3" FontFamily="{x:StaticResource FA-Solid}" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf4be;"></Label>
-                -->
-                <Frame CornerRadius="100" HeightRequest="130" WidthRequest="130" HorizontalOptions="Center" Padding="0" IsClippedToBounds="True" HasShadow="True">
-                    <Image x:Name="imgFotoUtente" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+            <StackLayout x:Name="stkFormRegistrazione" IsVisible="True" VerticalOptions="CenterAndExpand" Padding="0">
+
+                <Frame HeightRequest="130" WidthRequest="130" HorizontalOptions="Center" HasShadow="True"
+                       Padding="0" IsClippedToBounds="True" BorderColor="LightGray" Margin="0,0,0,20">
+                 
+                    <StackLayout>
+                        <Image x:Name="imgFotoUtente" Aspect="Fill" HorizontalOptions="Center" IsVisible="false" VerticalOptions="Center"
+                           ></Image>
+                        <Label x:Name="lblFoto" FontSize="Large"  Text="&#xf030;" VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,55,0,0" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource FA-Solid}"></Label>
+                    </StackLayout>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ActionImmagini"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+
+                    <Frame.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS" Value="{x:StaticResource IosFrameRadius}"/>
+                            <On Platform="Android" Value="{x:StaticResource AndroidFrameRadius}"/>
+                        </OnPlatform>
+                    </Frame.Style>
                 </Frame>
 
-                <Button HeightRequest="50" CornerRadius="10" FontSize="Medium" Visual="Material" WidthRequest="50" TextColor="Black" BackgroundColor="#efefef" Text="&#xf030;" Margin="0,-30,0,10" FontFamily="{StaticResource FA-Solid}" HorizontalOptions="Center" Clicked="OnPickPhotoButtonClicked">
-                </Button>
+                <!--<Button HeightRequest="50" CornerRadius="10" FontSize="Medium" Visual="Material" WidthRequest="50" TextColor="Black" BackgroundColor="#efefef" Text="&#xf030;" Margin="0,-30,0,10" FontFamily="{StaticResource FA-Solid}" HorizontalOptions="Center" Clicked="OnPickPhotoButtonClicked">
+                </Button>-->
 
-                <appappartamenti:CustomEntry x:Name="entNome" Visual="Material"
+                <appappartamenti:MyEntry x:Name="entNome"
                        Placeholder="{translator:Translate Registrazione.Nome}"
-                       TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
+                       TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntNome"></Label>
 
-                <appappartamenti:CustomEntry  x:Name="entCognome" Visual="Material"
-                       Placeholder="{translator:Translate Registrazione.Cognome}" VerticalOptions="Center"
-                    TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
+                <appappartamenti:MyEntry  x:Name="entCognome"
+                       Placeholder="{translator:Translate Registrazione.Cognome}"
+                    TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}"
                        Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntCognome"></Label>
 
-                <!--<DatePicker x:Name="entDataNascita" Visual="Material" VerticalOptions="Center"></DatePicker>
-                -->
-                <!--<Entry x:Name="entDataNascita" Visual="Material" Placeholder="{translator:Translate Registrazione.DataNascita}" VerticalOptions="Center"></Entry>-->
-                <!--
-                <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" FontSize="Small" TextColor="Red" IsVisible="False" x:Name="lblValidatorEntCognome"></Label>-->
-
-                <appappartamenti:CustomEntry   x:Name="entEmail" Visual="Material" Placeholder="{translator:Translate Login.Email}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
+                <appappartamenti:MyEntry  x:Name="entEmail" Placeholder="{translator:Translate Login.Email}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneEmail}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntEmail"></Label>
 
-                <appappartamenti:CustomEntry x:Name="entPassword" Visual="Material" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
+                <appappartamenti:MyEntry x:Name="entPassword" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
                 <Label Text="{translator:Translate Login.MessaggioValidazionePassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntPassword"></Label>
 
-                <appappartamenti:CustomEntry  x:Name="entConfermaPassword" Visual="Material" IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:CustomEntry>
+                <appappartamenti:MyEntry  x:Name="entConfermaPassword"  IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneConfermaPassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntConfermaPassword"></Label>
 
                 <StackLayout Orientation="Horizontal">
-                    <CheckBox IsChecked="true" VerticalOptions="Center"></CheckBox>
+                    <CheckBox IsChecked="true" VerticalOptions="Center" Color="#ff6b6b"></CheckBox>
                     <Label Text="Accetto le condizioni d'uso" VerticalTextAlignment="Center"></Label>
                 </StackLayout>
 
@@ -76,6 +82,9 @@
                         Text="{translator:Translate Registrazione.TornaAlLogin}"
                         Visual="Material" VerticalOptions="Center" Clicked="btnLogin_Clicked"></Button>
             </StackLayout>
+
+
+            <Image Source="test.jpg" Margin="-20" VerticalOptions="EndAndExpand" ></Image>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

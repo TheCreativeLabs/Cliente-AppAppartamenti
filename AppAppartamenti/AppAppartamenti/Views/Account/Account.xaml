@@ -12,7 +12,7 @@
     <ContentPage.Content>
         <StackLayout Padding="20">
 
-                <StackLayout Orientation="Horizontal" Margin="-20,-20,-20,20" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" Margin="-20,-20,-20,20" BackgroundColor="#ff6b6b">
                     <StackLayout.Padding>
                         <OnPlatform x:TypeArguments="Thickness">
                             <On Platform="iOS" Value="20,50,20,20"></On>
@@ -44,11 +44,11 @@
 
                         </Grid.RowDefinitions>
                         <StackLayout Orientation="Horizontal" Grid.Row="0">
-                        <Label FontSize="Medium"  VerticalTextAlignment="Center" Text="{Binding Nome}"></Label>
-                        <Label  FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Cognome}"></Label>
+                        <Label FontSize="Medium"  VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" Text="{Binding Nome}"></Label>
+                        <Label  FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White"  Text="{Binding Cognome}"></Label>
                         </StackLayout>
 
-                        <Label Grid.Row="1" TextColor="Gray" VerticalTextAlignment="Center" Text="{Binding Email}"></Label>
+                        <Label Grid.Row="1" VerticalTextAlignment="Center" TextColor="White" FontAttributes="Bold"  Text="{Binding Email}"></Label>
                     </Grid>
                 </StackLayout>
 

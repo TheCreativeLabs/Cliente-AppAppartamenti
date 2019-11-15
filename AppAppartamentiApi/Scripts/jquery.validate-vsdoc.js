@@ -4,7 +4,11 @@
 * intended to be used only for design-time IntelliSense.  Please use the
 * standard jQuery library for all production use.
 *
+<<<<<<< Updated upstream
+* Comment version: 1.17.0
+=======
 * Comment version: 1.19.1
+>>>>>>> Stashed changes
 */
 
 /*
@@ -15,7 +19,11 @@
 * for informational purposes only and are not the license terms under
 * which Microsoft distributed this file.
 *
+<<<<<<< Updated upstream
+* jQuery Validation Plugin - v1.17.0 - 12/5/2016
+=======
 * jQuery Validation Plugin - v1.19.1 - 12/5/2016
+>>>>>>> Stashed changes
 * https://github.com/jzaefferer/jquery-validation
 * Copyright (c) 2013 Jörn Zaefferer; Licensed MIT
 *

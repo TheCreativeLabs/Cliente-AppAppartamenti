@@ -59,7 +59,6 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
             foreach (var item in mediaFileImages)
@@ -69,7 +68,6 @@ namespace AppAppartamenti.Views
                 annuncio.Immagini.Add(memoryStream.ToArray());
             }
 
-
             Navigation.PushAsync(new SelezioneDescrizione(annuncio));
         }
 
@@ -77,11 +75,11 @@ namespace AppAppartamenti.Views
         {
             await CrossMedia.Current.Initialize();
 
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
-            {
-                DisplayAlert("No Camera", ":( No camera available.", "OK");
-                return;
-            }
+            //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
+            //{
+            //    DisplayAlert("No Camera", ":( No camera available.", "OK");
+            //    return;
+            //}
 
             //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             //{
@@ -109,11 +107,11 @@ namespace AppAppartamenti.Views
         {
             await CrossMedia.Current.Initialize();
 
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-            {
-                DisplayAlert("No Camera", ":( No camera available.", "OK");
-                return;
-            }
+            //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            //{
+            //    DisplayAlert("No Camera", ":( No camera available.", "OK");
+            //    return;
+            //}
 
             //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             //{

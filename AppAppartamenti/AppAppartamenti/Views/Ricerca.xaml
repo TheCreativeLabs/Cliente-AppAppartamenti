@@ -6,34 +6,29 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              mc:Ignorable="d"
-             x:Class="AppAppartamenti.Views.Ricerca" NavigationPage.HasNavigationBar="False"
+             x:Class="AppAppartamenti.Views.Ricerca"
+             NavigationPage.HasNavigationBar="False"
              BackgroundColor="#F0F0F0">
     <ContentPage.Content>
-        <StackLayout Padding="20">
-             <ScrollView VerticalScrollBarVisibility="Always">
-                 <StackLayout Padding="5">
-                    <Button x:Name="btnCancel" Margin="-10" Text="Annulla" TextColor="Gray" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" Clicked="btnCancel_Clicked">
-                        <Button.Margin>
-                             <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="iOS" Value="0"/>
-                             </OnPlatform>
-                        </Button.Margin>
+        <StackLayout Padding="25">
+                    <Button x:Name="btnCancel" Text="Annulla" TextColor="Gray" BackgroundColor="Transparent"
+                            HorizontalOptions="End" VerticalOptions="Center" Clicked="btnCancel_Clicked">
                     </Button>
-                    <Frame HasShadow="True" Padding="10,0,0,0" Visual="Material">
+
+                    <Frame HasShadow="True" Padding="10" Visual="Material">
                         <StackLayout Orientation="Horizontal">
                             <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
-                            <appappartamenti:CustomEntry
-                                IsRequired="False"
+                            <appappartamenti:SearchEntry
                                 Placeholder="Ricerca per città o provincia"
-                                Visual="Material"
-                                BorderColor="White"
                                 x:Name="entRicerca"
-                                TextChanged="EntRicerca_TextChanged"/>
+
+                                TextChanged="EntRicerca_TextChanged"
+                                Visual="Default"/>
                         </StackLayout>
                     </Frame>
 
-                    <ListView x:Name="lvComuni" ItemSelected="LvComuni_Selected" BackgroundColor="Transparent" SeparatorVisibility="None" >
+                    <ListView x:Name="lvComuni" IsVisible="false" ItemSelected="LvComuni_Selected" BackgroundColor="Transparent" SeparatorVisibility="None" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -43,74 +38,113 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <StackLayout x:Name="stkRicercaAggiuntiva" Margin="0,20,0,0">
-                        <Frame HasShadow="True" Visual="Material">
-                            <StackLayout>
-                                <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Prezzo" FontSize="Medium" TextColor="Black"></Label>
 
-                                <Grid HorizontalOptions="FillAndExpand">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                </Grid>
+                <ScrollView VerticalScrollBarVisibility="Always" x:Name="stkRicercaAggiuntiva" >
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="30000" TextColor="Gray" ></Label>
+                        <StackLayout Margin="0,20,0,0">
 
-                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500.000+" TextColor="Gray"></Label>
+                            <Frame HasShadow="False">
+                                <StackLayout>
+                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Vendita o affitto" FontSize="Medium" TextColor="Black"></Label>
+
+                                    <input:RadioButtonGroupView>
+                                            <input:RadioButton Text="Vendita" TextFontSize="15" TextColor="Gray"></input:RadioButton>
+                                            <input:RadioButton Text="Affitto" TextFontSize="15" TextColor="Gray"></input:RadioButton>
+                                    </input:RadioButtonGroupView>
                                 </StackLayout>
+                             </Frame>
 
-                                <forms:RangeSlider x:Name="RangeSlider" MinimumValue="30000" MaximumValue="500000" LowerValue="50000" UpperValue="150000" StepValue="10000" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
-                            </StackLayout>
-                        </Frame>
+                            <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                            <Frame HasShadow="True" Visual="Material">
+                                <StackLayout>
+                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Prezzo" FontSize="Medium" TextColor="Black"></Label>
 
-                         <Frame HasShadow="True" Visual="Material">
-                            <StackLayout>
-                                <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Camere" FontSize="Medium" TextColor="Black"></Label>
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
 
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="7*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="30000" TextColor="Gray" ></Label>
 
-                                    <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="Stanze" TextColor="Gray"></Label>
-                                    <Stepper Visual="Material" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="5"  HorizontalOptions="EndAndExpand"></Stepper>
+                                        <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500.000+" TextColor="Gray"></Label>
+                                    </StackLayout>
 
-                                    <Label Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center"  Text="Bagni" TextColor="Gray"></Label>
-                                    <Stepper Visual="Material" Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
+                                    <forms:RangeSlider x:Name="RangeSlider" MinimumValue="30000" MaximumValue="500000" LowerValue="50000" UpperValue="150000" StepValue="10000" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
+                                </StackLayout>
+                            </Frame>
 
-                                    <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="Posti auto" TextColor="Gray"></Label>
-                                    <Stepper Visual="Material" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
-                                </Grid>
-                            </StackLayout>
-                         </Frame>
+                            <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                            
+                            <Frame HasShadow="True" Visual="Material">
+                                <StackLayout>
+                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Superficie" FontSize="Medium" TextColor="Black"></Label>
 
-                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,10,0,10"></BoxView>
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
 
-                        <Frame HasShadow="False">
-                            <StackLayout>
-                                <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Vendita o affitto" FontSize="Medium" TextColor="Black"></Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="50" TextColor="Gray" ></Label>
 
-                                <input:RadioButtonGroupView>
-                                        <input:RadioButton Text="Vendita" TextFontSize="15" TextColor="Gray"></input:RadioButton>
-                                        <input:RadioButton Text="Affitto" TextFontSize="15" TextColor="Gray"></input:RadioButton>
-                                </input:RadioButtonGroupView>
-                            </StackLayout>
-                         </Frame>
+                                        <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500+" TextColor="Gray"></Label>
+                                    </StackLayout>
+
+                                    <forms:RangeSlider x:Name="RangeSlider2" MinimumValue="50" MaximumValue="500" LowerValue="100" UpperValue="160" StepValue="10" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
+                                </StackLayout>
+                            </Frame>
+
+                            <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                             <Frame HasShadow="True" Visual="Material">
+                                <StackLayout>
+                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Camere" FontSize="Medium" TextColor="Black"></Label>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="Stanze" TextColor="Gray"></Label>
+                                        <Stepper Visual="Material" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="5"  HorizontalOptions="EndAndExpand"></Stepper>
+
+                                        <Label Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center"  Text="Bagni" TextColor="Gray"></Label>
+                                        <Stepper Visual="Material" Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
+
+                                        <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="Posti auto" TextColor="Gray"></Label>
+                                        <Stepper Visual="Material" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
+                                    </Grid>
+                                </StackLayout>
+                             </Frame>
+
+                            <BoxView HeightRequest="1" Color="LightGray" Margin="0,10,0,10"></BoxView>
+
+                            
 
 
-                        <Button x:Name="btnRicerca" Clicked="btnRicerca_Clicked"></Button>
-                    </StackLayout>
+                        </StackLayout>
+                
+                 </ScrollView>
 
 
+                <StackLayout HeightRequest="100" VerticalOptions="EndAndExpand" Margin="-30">
+                    <Frame x:Name="btnRicerca" HeightRequest="100" HasShadow="False" BackgroundColor="#ff6b6b">
+
+                        <Label Text="CERCA" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" ></Label>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="btnRicerca_Clicked"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </StackLayout>
 
-
-             </ScrollView>
-        </StackLayout>
+                </StackLayout>
     </ContentPage.Content>
 </ContentPage>
