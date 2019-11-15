@@ -19,11 +19,16 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDetailViewModel viewModel;
         Guid IdAnnuncio;
-        public DettaglioAnnuncio(Guid Id)
+
+        public DettaglioAnnuncio(Guid Id,bool IsEditable)
         {
             InitializeComponent();
 
             IdAnnuncio = Id;
+
+            btnModifica.IsVisible = IsEditable;
+            stkPulsanti.IsVisible = !IsEditable;
+            
         }
 
         protected async override void OnAppearing()

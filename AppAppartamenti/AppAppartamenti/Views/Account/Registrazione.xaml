@@ -20,15 +20,12 @@
 
                 <Frame HeightRequest="130" WidthRequest="130" HorizontalOptions="Center" HasShadow="True"
                        Padding="0" IsClippedToBounds="True" BorderColor="LightGray" Margin="0,0,0,20">
-
-                      <Image x:Name="imgFotoUtente" Aspect="Fill" HorizontalOptions="Center" IsVisible="false" VerticalOptions="Center"
+                 
+                    <StackLayout>
+                        <Image x:Name="imgFotoUtente" Aspect="Fill" HorizontalOptions="Center" IsVisible="false" VerticalOptions="Center"
                            ></Image>
-                    <!--<StackLayout>
-                        <Image x:Name="imgFotoUtente" Aspect="AspectFill" HorizontalOptions="Center" IsVisible="false" VerticalOptions="Center"
-                           ></Image>
-
                         <Label x:Name="lblFoto" FontSize="Large"  Text="&#xf030;" VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,55,0,0" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource FA-Solid}"></Label>
-                    </StackLayout>-->
+                    </StackLayout>
 
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ActionImmagini"></TapGestureRecognizer>

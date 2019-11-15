@@ -21,6 +21,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Color = Xamarin.Forms.Color;
 
+// this line directly ubleow usings, before namespace declaration
+[assembly: ExportRenderer(typeof(WebView), typeof(DesktopWebViewRenderer))]
 [assembly: ExportRenderer(typeof(MyEntry), typeof(MyEntryRenderer))]
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(SearchEntryRenderer))]
 namespace CustomRenderer
@@ -79,6 +81,17 @@ namespace CustomRenderer
                 nativeEditText.Background = shape;
                 nativeEditText.SetPadding(25, 25, 25, 25);
             }
+        }
+    }
+
+    // this in your namespace
+    public class DesktopWebViewRenderer : WebViewRenderer
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<WebView> e)
+        {
+            base.OnElementChanged(e);
+
+            Control.Settings.UserAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
         }
     }
 }

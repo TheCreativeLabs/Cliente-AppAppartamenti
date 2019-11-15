@@ -15,17 +15,17 @@ using Xamarin.Forms.Xaml;
 namespace AppAppartamenti.Views.Account
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FacebookLogin : ContentPage
+    public partial class GoogleLogin : ContentPage
     {
         String ApiRequest;
 
-        public FacebookLogin()
+        public GoogleLogin()
         {
             InitializeComponent();
 
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
-            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/", true).Result.ToList()[1];
+            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/", true).Result.First();
             string apiRequest = $"{AppSetting.ApiEndpoint.Replace(".com/",".com")}{externalLoginViewModel.Url}";
             apiRequest = apiRequest.Replace("www.", "");
             ApiRequest = apiRequest;
@@ -53,7 +53,7 @@ namespace AppAppartamenti.Views.Account
                 Application.Current.Properties[Api.ApiHelper.AccessTokenKey] = accessToken;
 
                 //Salvo il nelle properties che l'utente ha fatto accesso con Facebook
-                Api.ApiHelper.SetFacebookLogin(true);
+                Api.ApiHelper.SetProvider(ApiHelper.LoginProvider.Google);
 
                 //creo il client e setto il Baerer Token
                 HttpClient httpClient = new HttpClient();

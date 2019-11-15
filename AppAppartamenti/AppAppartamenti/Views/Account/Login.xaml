@@ -68,14 +68,14 @@
                     </StackLayout>
 
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="btnAccediFacebook_Clicked"></TapGestureRecognizer>
+                        <TapGestureRecognizer Tapped="BtnGoogleAuth_Clicked"></TapGestureRecognizer>
                     </Frame.GestureRecognizers>
                     <Frame.Style>
-                    <OnPlatform x:TypeArguments="Style">
+                            <OnPlatform x:TypeArguments="Style">
                                 <On Platform="iOS" Value="{x:StaticResource IosFrameRadius2}"/>
                                 <On Platform="Android" Value="{x:StaticResource AndroidFrameRadius2}"/>
                             </OnPlatform>
-                        </Frame.Style>
+                    </Frame.Style>
                 </Frame>
 
                 <Label x:Name="lblRegistrati" Text="{translator:Translate Login.RegisterIfNoAccount}" HorizontalTextAlignment="Center" Margin="0,10,0,0" TextColor="black">

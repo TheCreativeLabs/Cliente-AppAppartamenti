@@ -45,13 +45,11 @@ namespace AppAppartamenti.Views
             //await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
             if (item.Id != null && item.Id != Guid.Empty)
             {
-                
                 // Manually deselect item.
                 AnnunciiListView.SelectedItem = null;
 
-                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value));
+                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,false));
             }
-
         }
 
 

@@ -209,7 +209,7 @@ namespace AppAppartamenti.Views.Login
 
             imgFotoUtente.Source = ImageSource.FromStream(() => listaImmagini.GetStream());
             imgFotoUtente.IsVisible = true;
-            //lblFoto.IsVisible = false;
+            lblFoto.IsVisible = false;
 
         }
 

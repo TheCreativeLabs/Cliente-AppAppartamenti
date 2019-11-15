@@ -196,6 +196,9 @@
     <PackageReference Include="Xamarin.Forms.RangeSlider">
       <Version>1.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.Google">
+      <Version>1.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

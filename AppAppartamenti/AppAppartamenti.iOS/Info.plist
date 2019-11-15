@@ -53,9 +53,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>The app needs to use the camera.</string>
 	<key>NSAppTransportSecurity</key>
-<dict>
-    <key> NSAllowsArbitraryLoadsInWebContent</key>
-    <true/>
-</dict>
+	<dict>
+		<key> NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

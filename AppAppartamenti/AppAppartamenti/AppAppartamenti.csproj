@@ -27,6 +27,7 @@
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.15" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.4.6-beta" />
     <PackageReference Include="Xamarin.Forms.RangeSlider" Version="1.0.2" />
+    <PackageReference Include="Plugin.Google" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

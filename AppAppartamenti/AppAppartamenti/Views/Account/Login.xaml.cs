@@ -102,9 +102,6 @@ namespace AppAppartamenti.Views.Login
             try
             {
                 await Navigation.PushAsync(new NavigationPage(new Account.FacebookLogin()));
-
-                //Application.Current.MainPage = new Account.FacebookLogin();
-
             }
             catch (Exception ex)
             {
@@ -112,6 +109,20 @@ namespace AppAppartamenti.Views.Login
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
+
+        private async void BtnGoogleAuth_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushAsync(new NavigationPage(new Account.GoogleLogin()));
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
 
         private async void ent_TextChanged(object sender, TextChangedEventArgs e)
         {

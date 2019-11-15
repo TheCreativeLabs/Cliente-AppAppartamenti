@@ -11,9 +11,15 @@ namespace AppAppartamenti.Api
 {
     public static class ApiHelper
     {
+        public enum LoginProvider
+        {
+            Facebook = 0,
+            Google = 1,
+            Email = 2
+        }
 
         public const string AccessTokenKey = "Access_Token";
-        public const string IsFacebookLoginKey = "Is_Facebook_Login";
+        public const string ProviderKey = "Provider_Key";
 
         public class BearerToken
         {
@@ -109,28 +115,46 @@ namespace AppAppartamenti.Api
         }
 
         /// <summary>
-        /// Salva nella cache se l'utente si è loggato con facebook.
+        /// Salva nella cache se l'utente si è loggato con facebook, google o email.
         /// </summary>
-        /// <param name="IsFacebookLogin"></param>
-        public static void SetFacebookLogin(bool IsFacebookLogin)
+        /// <param name="Provider"></param>
+        public static void SetProvider(LoginProvider Provider)
         {
-            Application.Current.Properties[IsFacebookLoginKey] = IsFacebookLogin;
+            Application.Current.Properties[ProviderKey] = Provider;
         }
 
         /// <summary>
-        /// Restituisce se l'utente si è loggato con facebook.
+        /// Restituisce se l'utente si è loggato con facebook,google o email.
         /// </summary>
         /// <returns></returns>
-        public static bool GetFacebookLogin()
+        public static LoginProvider GetProvider()
         {
-            bool isFacebookLogin = false;
+            LoginProvider provider = LoginProvider.Email;
 
-            if (Application.Current.Properties.ContainsKey(IsFacebookLoginKey))
+            if (Application.Current.Properties.ContainsKey(ProviderKey))
             {
-                isFacebookLogin = (bool)Application.Current.Properties[IsFacebookLoginKey];
+                provider = (LoginProvider)Application.Current.Properties[ProviderKey];
             }
 
-            return isFacebookLogin;
+            return provider;
+        }
+
+
+
+        /// <summary>
+        /// Rimuove il provider.
+        /// </summary>
+        /// <returns></returns>
+        public static string RemoveProvider()
+        {
+            string accessToken = null;
+
+            if (Application.Current.Properties.ContainsKey(ProviderKey))
+            {
+                Application.Current.Properties.Remove(ProviderKey);
+            }
+
+            return accessToken;
         }
 
         /// <summary>
