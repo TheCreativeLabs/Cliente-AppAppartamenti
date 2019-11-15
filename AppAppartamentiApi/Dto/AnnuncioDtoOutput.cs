@@ -7,8 +7,19 @@ using System.Web;
 
 namespace AppAppartamentiApi.Dto
 {
+    public class ImmagineAnnuncioContainer
+    {
+        public byte[] Immagine { get; set; }
+
+        public ImmagineAnnuncioContainer(byte[] Imm)
+        {
+            this.Immagine = Imm;
+        }
+    }
+
     public class AnnuncioDtoOutput
     {
+        
 
         public AnnuncioDtoOutput(){
             ImmaginiAnnuncio = new List<byte[]>();
@@ -28,7 +39,23 @@ namespace AppAppartamentiApi.Dto
                 Superficie = annuncio.Superficie,
                 Descrizione = annuncio.Descrizione,
                 Completato = annuncio.Completato,
-                Cancellato = annuncio.Cancellato
+                Cancellato = annuncio.Cancellato,
+                UltimoPiano = annuncio.UltimoPiano,
+                Piano = annuncio.Piano,
+                NumeroCameraLetto = annuncio.
+                NumeroAltreStanze = annuncio.NumeroAltreStanze,
+                NumeroBagni = annuncio.NumeroBagni,
+                NumeroCucine = annuncio.NumeroCucine,
+                NumeroGarage = annuncio.NumeroGarage,
+                NumeroPostiAuto = annuncio.NumeroPostiAuto,
+                Giardino = annuncio.Giardino,
+                Disponibile = annuncio.Disponibile,
+                Ascensore = annuncio.Ascensore,
+                Balcone = annuncio.Balcone,
+                Piscina = annuncio.Piscina,
+                Cantina = annuncio.Cantina,
+                SpesaMensileCondominio = annuncio.SpesaMensileCondominio,
+                Condizionatori = annuncio.Condizionatori
             };
 
             if (annuncio.TipologiaAnnuncio != null)
@@ -39,10 +66,23 @@ namespace AppAppartamentiApi.Dto
             {
                 dto.TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione;
             }
+            if (annuncio.TipologiaRiscaldamento != null)
+            {
+                dto.TipologiaRiscaldamento = annuncio.TipologiaRiscaldamento.Descrizione;
+            }
+            if (annuncio.StatoProprieta != null)
+            {
+                dto.StatoProprieta = annuncio.StatoProprieta.Descrizione;
+            }
+            if (annuncio.ClasseEnergetica != null)
+            {
+                dto.ClasseEnergetica = annuncio.ClasseEnergetica.Descrizione;
+            }
 
             foreach (var imm in annuncio.ImmagineAnnuncio)
             {
                 dto.ImmaginiAnnuncio.Add(imm.Immagine);
+                
             }
 
             return dto;
@@ -80,6 +120,49 @@ namespace AppAppartamentiApi.Dto
 
         public byte[] ImmaginePrincipale { get; set; }
 
+        //public List<ImmagineAnnuncioContainer> ImmaginiAnnuncio { get; set; }
         public List<byte[]> ImmaginiAnnuncio { get; set; }
+
+        public bool UltimoPiano { get; set; }
+
+        public int Piano { get; set; }
+
+        public int NumeroCameraLetto { get; set; }
+
+        public int NumeroAltreStanze { get; set; }
+
+        public int NumeroBagni { get; set; }
+
+        public int NumeroCucine { get; set; }
+
+        public int NumeroGarage { get; set; }
+
+        public int NumeroPostiAuto { get; set; }
+
+        public bool Giardino { get; set; }
+
+        public bool Disponibile { get; set; }
+
+        public bool Ascensore { get; set; }
+
+        public bool Balcone { get; set; }
+
+        public bool Piscina { get; set; }
+
+        public bool Cantina { get; set; }
+
+        public double? SpesaMensileCondominio { get; set; }
+
+        public string TipologiaRiscaldamento { get; set; }
+
+        public string StatoProprieta { get; set; }
+
+        public string ClasseEnergetica { get; set; }
+
+        public bool Condizionatori { get; set; }
+
+
+
+
     }
 }

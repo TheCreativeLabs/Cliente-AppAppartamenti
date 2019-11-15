@@ -101,10 +101,75 @@ namespace AppAppartamentiApi.Controllers
             Annuncio annuncio = dbDataContext.Annuncio
                                         .Include(x => x.Comuni)
                                         .Include(x => x.ImmagineAnnuncio)
+                                        .Include(x => x.TipologiaAnnuncio)
+                                        .Include(x => x.TipologiaProprieta)
+                                        .Include(x => x.TipologiaRiscaldamento)
                                         .SingleOrDefaultAsync(x => x.Id == Id).Result;
 
             AnnuncioDtoOutput dto = AnnuncioDtoOutput.MapperAnnuncio(annuncio);
             return dto;
+        }
+
+        // GET api/Annunci/Annunci
+        [HttpGet]
+        [Route("Preferiti")]
+        [ResponseType(typeof(List<AnnunciDtoOutput>))]
+        public async Task<List<AnnunciDtoOutput>> GetAnnunciPreferitiAsync()
+        {
+            var id = new Guid(User.Identity.GetUserId());
+
+            List<Guid> idAnnunciPreferiti = await dbDataContext.AnnunciPreferiti
+                                    .Where(x => x.IdUser == id)
+                                    .Select(x => x.IdAnnuncio).ToListAsync();
+
+            List<AnnunciDtoOutput> annunci = dbDataContext.Annuncio
+                                                .Include(x => x.Comuni)
+                                                .Where(x => idAnnunciPreferiti.Contains(x.Id))
+                                             .Select(annuncio => new AnnunciDtoOutput()
+                                             {
+                                                 Id = annuncio.Id,
+                                                 IdUtente = annuncio.IdUtente,
+                                                 DataCreazione = annuncio.DataCreazione,
+                                                 DataModifica = annuncio.DataModifica,
+                                                 CodiceComune = annuncio.ComuneCodice,
+                                                 NomeComune = annuncio.Comuni.NomeComune,
+                                                 Indirizzo = annuncio.Indirizzo,
+                                                 Prezzo = annuncio.Prezzo,
+                                                 Superficie = annuncio.Superficie,
+                                                 Descrizione = annuncio.Descrizione,
+                                                 TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
+                                                 TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
+                                                 Completato = annuncio.Completato,
+                                                 Cancellato = annuncio.Cancellato
+                                             }).ToList();
+
+            annunci.ForEach(x =>
+            {
+                x.ImmaginePrincipale = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
+            });
+
+            return annunci;
+        }
+
+        // GET api/Annunci/AnnuncioById/?id=1
+        [HttpGet]
+        [Route("AggiungiAPreferiti")]
+        [ResponseType(typeof(AnnuncioDtoOutput))]
+        public async Task<IHttpActionResult> AggiungiAPreferiti(Guid IdAnnuncio)
+        {
+            var id = new Guid(User.Identity.GetUserId());
+
+            AnnunciPreferiti preferito = new AnnunciPreferiti()
+            {
+                Id = Guid.NewGuid(),
+                IdAnnuncio = IdAnnuncio,
+                IdUser = id
+            };
+
+            dbDataContext.AnnunciPreferiti.Add(preferito);
+
+            await dbDataContext.SaveChangesAsync();
+            return Ok(preferito);
         }
 
 

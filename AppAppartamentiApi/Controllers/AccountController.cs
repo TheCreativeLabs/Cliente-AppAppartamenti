@@ -63,7 +63,7 @@ namespace AppAppartamentiApi.Controllers
 
             return new UserInfoViewModel
             {
-                Email = User.Identity.GetUserName(),
+                Email = User.Identity.GetUserName(), //externalLogin.Email, 
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
@@ -234,6 +234,9 @@ namespace AppAppartamentiApi.Controllers
         [Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
+            //qui facebook arriva con error=null e isAuthenticated= true (al secondo passaggio)
+            //invece google ha error=access_denied e isAuthenticated=false (al secondo passaggio) ma è strano perchè entrambi passano da ExecuteAsync di ChallengeResult
+            //con errore 401
             if (error != null)
             {
                 return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
@@ -277,8 +280,8 @@ namespace AppAppartamentiApi.Controllers
             else
             {
                 // IEnumerable<Claim> claims = externalLogin.Claims;
-                //IEnumerable<Claim> claims = externalLogin.Claims;// externalLogin.GetClaims();
                 IEnumerable<Claim> claims = externalLogin.GetClaims();
+                //IEnumerable<Claim> claims = externalLogin.GetClaims();
                 ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
                 Authentication.SignIn(identity);
             }
@@ -346,7 +349,7 @@ namespace AppAppartamentiApi.Controllers
                 return GetErrorResult(result);
             }
 
-            ////registro l'utente nella tabella UserInfo del db DATA
+            //registro l'utente nella tabella UserInfo del db DATA
             DbDataContext dbDataContext = new DbDataContext();
 
             UserInfo userInfo = new UserInfo()
@@ -469,10 +472,6 @@ namespace AppAppartamentiApi.Controllers
                 return GetErrorResult(result);
             }
 
-            //TODO:
-            // 1) Aggiungere alla tabella UserInfo la colonna PhotoUrl
-            // 2) Registrare l'utente dentro la tabella UserInfo prendendo i valori dai Claims (User.Identity.Claims)
-            // 3) Dentro il metodo che restituisce le user info restituire anche l'url della foto
             DbDataContext dbDataContext = new DbDataContext();
             //Registra l'utente dentro la tabella UserInfo del db Data prendendo i valori dai Claims
             UserInfo userInfo = new UserInfo()
@@ -503,6 +502,7 @@ namespace AppAppartamentiApi.Controllers
 
             dbDataContext.UserInfo.Add(userInfo);
             dbDataContext.SaveChanges();
+
 
             return Ok();
         }
@@ -597,7 +597,6 @@ namespace AppAppartamentiApi.Controllers
             public string LoginProvider { get; set; }
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
-
             public string Email { get; set; }
             public IList<Claim> Claims { get; private set; }
 

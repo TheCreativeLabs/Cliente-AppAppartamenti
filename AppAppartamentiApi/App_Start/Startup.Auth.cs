@@ -33,7 +33,9 @@ namespace AppAppartamentiApi
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             //app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";
@@ -47,6 +49,9 @@ namespace AppAppartamentiApi
                 AllowInsecureHttp = true
             };
 
+
+
+
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
 
@@ -59,10 +64,22 @@ namespace AppAppartamentiApi
             //    consumerKey: "",
             //    consumerSecret: "");
 
+            //var facebookOption = new FacebookAuthenticationOptions()
+            //{
+            //    AppId = "971997736480952",
+            //    AppSecret = "483348891fbc0f94cf3a6e40cdbbaf1d",
+            //    BackchannelHttpHandler = new FacebookBackChannelHandler(),
+            //    UserInformationEndpoint = "https://graph.facebook.com/v2.4/me/?fields=id,email,name"
+            //};
+
+            //facebookOption.Scope.Add("email");
+
+            //app.UseFacebookAuthentication(facebookOption);
+
             var options = new FacebookAuthenticationOptions
             {
-                AppId = "2512554998794203",
-                AppSecret = "630053704de44a45a8793021b0fbea4f",
+                AppId = "971997736480952",
+                AppSecret = "483348891fbc0f94cf3a6e40cdbbaf1d",
 
                 Provider = new FacebookProvider
                 {
@@ -81,31 +98,41 @@ namespace AppAppartamentiApi
                         }
                         context.Identity.AddClaim(new Claim("fb_accecctoken", context.AccessToken));
 
+
                         await Task.FromResult(context);
                     }
+
 
                 },
                 UserInformationEndpoint = "https://graph.facebook.com/v2.5/me?fields=id,name,email,first_name,last_name,location,birthday,picture.width(500).height(500)",
             };
-
             options.Scope.Add("public_profile");
             options.Scope.Add("email");
             options.Scope.Add("user_birthday");
             options.Scope.Add("user_location");
+            //options.Scope.Add("picture");
             options.Fields.Add("birthday");
             options.Fields.Add("picture.width(500).height(500)");
 
             app.UseFacebookAuthentication(options);
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+            //OAuthWebSecurity.RegisterClient(
+            //    new MyFacebookClient(
+            //        appId: "971997736480952",
+            //        appSecret: "483348891fbc0f94cf3a6e40cdbbaf1d"),
+            //    "facebook", null
+            //);
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //app.UseFacebookAuthentication(
+            //    appId: "971997736480952",
+            //    appSecret: "483348891fbc0f94cf3a6e40cdbbaf1d")
+            //    ;
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "334122790129-hfu28retie355qusqvl46755ai15nlto.apps.googleusercontent.com",
+                ClientSecret = "NRqsdLin5IBYoU9fM9ZlAmR1"
+            });
         }
     }
 }
