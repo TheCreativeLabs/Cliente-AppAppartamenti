@@ -2,7 +2,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="bgimg">
+    <div class="container-fluid">
+        <div id="navMenu" class="row">
+            <div class="col-6 offset-6">
+                <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a id="btnAccedi" class="nav-link" href="#">Accedi</a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-8 offset-2">
+                <div class="shadow-lg p-1 mb-5 bg-white rounded">
+                    <div class="input-group input-group-lg" style="border: none;">
+                        <div class="input-group-prepend" style="background-color: white;">
+                            <span class="input-group-text" id="basic-addon1" style="background-color: white;border: none;">
+                                <i class="fas fa-search col-1"></i>
+                            </span>
+                        </div>
+                        <input id="txtRicerca" type="text" class="form-control" placeholder="Cerca per città o provincia" aria-label="Username" aria-describedby="basic-addon1" style="border: none;">
+                    </div>
+
+                    <div id="divRicercaAggiuntiva" style="display: none;">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/home.js" asp-append-version="true"></script>
+}

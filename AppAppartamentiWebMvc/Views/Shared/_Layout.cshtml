@@ -16,10 +16,15 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/css/brands.min.css" />
+    <link rel="stylesheet" href="~/css/solid.min.css" />
+    <link rel="stylesheet" href="~/css/regular.min.css" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav style="display:none;" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AppAppartamentiWebMvc</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -39,12 +44,9 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <partial name="_CookieConsentPartial" />
+        
+     @RenderBody()
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -70,8 +72,48 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
+    <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-6">
+                      <h4>Accedi</h4>
+                  </div>
+                  <div class="col-6">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                  </div>
+              </div>
+
+              <div class="row p-3 justify-content-center">
+                    <input class="form-control col-12 mb-2" type="email" placeholder="Email">
+                    <input class="form-control col-12 mb-2" type="password" placeholder="Password">
+                    <button type="submit" class="btn btn-primary mb-2 btn-block">Accedi</button>
+
+                    <div>
+                        <a class="text-muted" href="#"><small> Password dimenticata? Ti aiuteremo a recuperarla</small></a>
+
+                        <hr>
+                    </div>
+
+                    <a href="#" class="btn btn-outline-primary" role="button" aria-pressed="true"><i class="fab fa-facebook-f"></i>&nbsp;Accedi con Facebook</a>
+                    <a href="#" class="btn btn-outline-danger ml-2" role="button" aria-pressed="true"> <i class="fab fa-google"></i>&nbsp;Accedi con Google</a>
+
+                    <div>
+                        <hr>
+                        <a class="text-muted" href="#"><small> Non sei ancora registrato? Registrati</small></a>
+                    </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

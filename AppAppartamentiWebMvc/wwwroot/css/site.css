@@ -41,16 +41,24 @@ html {
   min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
+
 .footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+}
+
+
+.bgimg {
+    background-image: url(../Images/Home.jpg);
+    height: 700px;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#navMenu .col-6 .nav .nav-item .nav-link {
+    color: white;
 }
