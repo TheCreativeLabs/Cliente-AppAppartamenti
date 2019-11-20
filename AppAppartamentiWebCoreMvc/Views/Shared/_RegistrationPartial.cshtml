@@ -1,0 +1,54 @@
+﻿<div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-6">
+                    <h4>Registrati</h4>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row p-3 justify-content-center">
+                <div class="col-12">
+                    <form asp-controller="Login" asp-action="Accedi" method="post">
+                    <div class="form-group">
+                        <label for="txtNome">Nome</label>
+                        <input class="form-control" id="txtNome" placeholder="Es: Mario">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCognome">Cognome</label>
+                        <input class="form-control" id="txtCognome" placeholder="Es: Rossi">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDataNascita">Data di nascita</label>
+                        <input class="form-control" id="txtDataNascita" placeholder="Es: 01/01/1960">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtEmail">Email</label>
+                        <input type="email" class="form-control" id="txtEmail" placeholder="Es: mario.rossi@dominio.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPassword">Password</label>
+                        <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtRipetiPassword">Ripeti la password</label>
+                        <input type="password" class="form-control" id="txtRipetiPassword" placeholder="Password">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Accetto le condizioni d'uso</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Registrati</button>
+                </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

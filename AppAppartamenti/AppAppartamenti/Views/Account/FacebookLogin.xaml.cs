@@ -53,7 +53,7 @@ namespace AppAppartamenti.Views.Account
                 Application.Current.Properties[Api.ApiHelper.AccessTokenKey] = accessToken;
 
                 //Salvo il nelle properties che l'utente ha fatto accesso con Facebook
-                Api.ApiHelper.SetFacebookLogin(true);
+                Api.ApiHelper.SetProvider(ApiHelper.LoginProvider.Facebook);
 
                 //creo il client e setto il Baerer Token
                 HttpClient httpClient = new HttpClient();

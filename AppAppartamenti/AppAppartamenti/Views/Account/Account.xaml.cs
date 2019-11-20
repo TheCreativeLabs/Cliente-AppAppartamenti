@@ -82,10 +82,15 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
-                if (Api.ApiHelper.GetFacebookLogin())
+                if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Facebook)
                 {
                     //Vado alla pagina di logout di facebook
                     Application.Current.MainPage = new NavigationPage(new FacebookLogout());
+                }
+                else if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Google)
+                {
+                    //Vado alla pagina di logout di facebook
+                    Application.Current.MainPage = new NavigationPage(new GoogleLogout());
                 }
                 else
                 {
