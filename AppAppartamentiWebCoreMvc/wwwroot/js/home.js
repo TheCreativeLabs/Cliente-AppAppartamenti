@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     $("#nav").addClass("navbar-transparent");
+    $("#navSearchBar").hide();
 
     window.onscroll = function () { changeScroll() };
 
@@ -13,11 +14,12 @@
 });
 
 function changeScroll() {
-    if (document.body.scrollTop > 170 || document.documentElement.scrollTop > 170) {
+    if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
         $("#nav").removeClass("navbar-transparent");
-
+        $("#navSearchBar").show();
     } else {
         $("#nav").addClass("navbar-transparent");
+        $("#navSearchBar").hide();
     }
 }
 

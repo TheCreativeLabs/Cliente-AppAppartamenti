@@ -24,43 +24,64 @@
 
 <body>
     <header>
-        <nav id="nav" class="navbar navbar-expand-sm fixed-top navbar-light bg-light mb-3 shadow-lg">
+        <nav id="nav" class="navbar navbar-expand-sm fixed-top navbar-light bg-white mb-3 shadow-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link">Preferiti</a>
+                                <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List"> Preferiti</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Login" asp-action="LogOut">I miei annunci</a>
+                                <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">I miei annunci</a>
                             </li>
                         }
                     </ul>
+
+                    <form id="navSearchBar" class="navbar-center">
+                       <div class="input-group" style="text-align: center;">
+                          <input id="searchbarInput" type="text" class="form-control" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
+                          <div class="input-group-append">
+                            <a class="btn btn-primary disabled" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
+                          </div>
+                        </div>
+                        <div id="searchBarFilters" class="col-12 shadow bg-light " style="display:none;">
+                            <hr>
+                        </div>
+                    </form>
+
                     <ul class="navbar-nav justify-content-end">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link">Il mio account</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Login" asp-action="LogOut">Esci</a>
-                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name <img src="" alt="..." class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right border-0 bg-light shadow" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Informazioni personali</a>
+                                    <a class="dropdown-item" href="#">Impostazioni</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">Esci</a>
+                                </div>
+                              </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="modal" data-target="#modalSignIn">Registrati</a>
+                                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalSignIn">Registrati</a>
                             </li>
                             <li class="nav-item">
-                                <a id="btnAccedi" class="nav-link" href="#" data-toggle="modal" data-target="#modalLogin">Accedi</a>
+                                <a id="btnAccedi" class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalLogin">Accedi</a>
                             </li>
                         }
                     </ul>
             </div>
         </nav>
     </header>
+
+    @RenderSection("SubHeader", required: false)
+
 
     <partial name="_CookieConsentPartial" />
         
@@ -69,7 +90,7 @@
     <partial name="_RegistrationPartial" />
     <partial name="_LoginPartial" />
 
-    <footer class="footer text-muted pt-5 bg-light" style="margin-top:100px; border-top:3px solid #ff6b6b;">
+    <footer class="footer pt-5 bg-dark text-white" style="margin-top:100px; border-top:3px solid #ff6b6b;">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md">
@@ -78,39 +99,39 @@
                 <div class="col-6 col-md">
                   <h5>Features</h5>
                   <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
+                    <li><a  href="#">Cool stuff</a></li>
+                    <li><a href="#">Random feature</a></li>
+                    <li><a href="#">Team feature</a></li>
+                    <li><a href="#">Stuff for developers</a></li>
+                    <li><a  href="#">Another one</a></li>
+                    <li><a  href="#">Last time</a></li>
                   </ul>
                 </div>
                 <div class="col-6 col-md">
                   <h5>Resources</h5>
                   <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
+                    <li><a href="#">Resource</a></li>
+                    <li><a href="#">Resource name</a></li>
+                    <li><a href="#">Another resource</a></li>
+                    <li><a href="#">Final resource</a></li>
                   </ul>
                 </div>
                 <div class="col-6 col-md">
                   <h5>Resources</h5>
                   <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Business</a></li>
-                    <li><a class="text-muted" href="#">Education</a></li>
-                    <li><a class="text-muted" href="#">Government</a></li>
-                    <li><a class="text-muted" href="#">Gaming</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Education</a></li>
+                    <li><a href="#">Government</a></li>
+                    <li><a href="#">Gaming</a></li>
                   </ul>
                 </div>
                 <div class="col-6 col-md">
                   <h5>About</h5>
                   <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a  href="#">Terms</a></li>
                   </ul>
                 </div>
               </div>
@@ -124,9 +145,9 @@
                 </div>
                  <div class="col-6 text-right">
                      seguici su
-                     <button type="button" class="btn btn-outline-dark rounded-circle btn-social"><i class="fab fa-facebook-f"></i></button>
-                     <button type="button" class="btn btn-outline-dark rounded-circle btn-social"><i class="fab fa-instagram"></i></button>
-                     <button type="button" class="btn btn-outline-dark rounded-circle btn-social"><i class="fab fa-twitter"></i></button>
+                     <button type="button" class="btn btn-outline-white rounded-circle btn-social"><i class="fab fa-facebook-f"></i></button>
+                     <button type="button" class="btn btn-outline-white rounded-circle btn-social"><i class="fab fa-instagram"></i></button>
+                     <button type="button" class="btn btn-outline-white rounded-circle btn-social"><i class="fab fa-twitter"></i></button>
                 </div>
             </div>
         </div>

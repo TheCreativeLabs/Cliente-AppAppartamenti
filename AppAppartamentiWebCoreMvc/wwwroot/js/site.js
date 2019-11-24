@@ -2,39 +2,32 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-    //$(document).ready(function () {
-    //    $("#nav").addClass("navbar-transparent");
 
-    //    window.onscroll = function () { changeScroll() };
 
-    //    HideFiltriAggiuntivi();
+$(document).ready(function () {
+    //sul focus mostro i filtri aggiuntivi
+    let searchbarInput = document.getElementById("searchbarInput");
+    searchbarInput.addEventListener("focus", ShowSearchbarInput);
+    searchbarInput.addEventListener("blur", HideSearchbarInput);
+    searchbarInput.addEventListener("keyup", EnableSearch);
+});
 
-    //    //sul focus mostro i filtri aggiuntivi
-    //    let txtRicerca = document.getElementById("txtRicerca");
-    //    txtRicerca.addEventListener("focus", ShowFiltriAggiuntivi);
-    //    txtRicerca.addEventListener("blur", HideFiltriAggiuntivi);
+function EnableSearch() {
+    if (document.getElementById("searchbarInput").value == "") {
+        $("#buttonSearch").addClass("disabled");
+    } else {
+        $("#buttonSearch").removeClass("disabled");
+    }
+}
 
-    //    let btnAccedi = document.getElementById("btnAccedi");
-    //    btnAccedi.addEventListener("click", ShowModalLogin);
-    //});
+function ShowSearchbarInput() {
+    $("#searchBarFilters").show();
+}
 
-    //function changeScroll() {
-    //    if (document.body.scrollTop > 170 || document.documentElement.scrollTop > 170) {
-    //        $("#nav").removeClass("navbar-transparent");
+function HideSearchbarInput() {
+    $("#searchBarFilters").hide();
+}
 
-    //    } else {
-    //        $("#nav").addClass("navbar-transparent");
-    //    }
-    //}
-
-    //function ShowFiltriAggiuntivi() {
-    //    $("#divRicercaAggiuntiva").show();
-    //}
-
-    //function HideFiltriAggiuntivi() {
-    //    $("#divRicercaAggiuntiva").hide();
-    //}
-
-    //function ShowModalLogin() {
-    //    $("#modalLogin").modal("show");
-    //}
+function NavigateToDetail(Url) {
+    window.location.href = Url;
+}

@@ -1,0 +1,216 @@
+﻿@model AppAppartamentiApiClient.AnnuncioDtoOutput
+
+@{
+    ViewData["Title"] = "Dettaglio annuncio";
+}
+
+@section SubHeader {
+    <div id="secondnav" class="sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-9">
+                    <h6>
+                        @Model.TipologiaProprieta in @Model.TipologiaAnnuncio
+                        <small class="text-muted">@Model.Indirizzo,  @Model.NomeComune</small> -
+                        @Model.Prezzo €
+                    </h6>
+                </div>
+
+                <div class="col-3">
+                    <button class="btn btn-primary btn-sm  btn-block">Prenota una visita</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-6 offset-1">
+            <h5>
+                @Model.TipologiaProprieta in @Model.TipologiaAnnuncio
+                <br />
+                <small class="text-muted">@Model.NomeComune</small>
+                <br />
+                @Model.Prezzo €
+            </h5>
+        </div>
+
+        <div class="col-4">
+            <button type="button" class="btn btn-sm btn-outline-dark btn-sm float-right"><i class="fas fa-heart"></i>&nbsp;Salva</button>
+
+            <button type="button" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
+
+            <button type="button" class="btn btn-outline-dark  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
+
+            <br />
+
+            <button class="btn btn-primary btn-sm  mt-3 btn-block">Prenota una visita</button>
+        </div>
+
+        <div class="col-10 offset-1">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @{
+                        bool isLiActiveInserted = false;
+                        @for (int i = 0; i < Model.ImmaginiAnnuncio.Count(); i++)
+                        {
+                            if (!isLiActiveInserted)
+                            {
+                                <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
+
+                                isLiActiveInserted = true;
+                            }
+                            else
+                            {
+                                <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                            }
+                        }
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @{
+                        bool isActiveInserted = false;
+
+                        foreach (var item in Model.ImmaginiAnnuncio)
+                        {
+                            if (!isActiveInserted)
+                            {
+                                <div class="carousel-item active" style="max-height: 500px">
+                                    @{
+                                        var base64 = Convert.ToBase64String(item);
+                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    }
+
+                                    <img src="@imgSrc" class="d-block w-100" alt="image" />
+                                </div>
+
+                                isActiveInserted = true;
+                            }
+                            else
+                            {
+                                <div class="carousel-item" style="max-height: 500px">
+                                    @{
+                                        var base64 = Convert.ToBase64String(item);
+                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    }
+
+                                    <img src="@imgSrc" class="d-block w-100" alt="image" />
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-3 shadow-sm mt-3">
+                <p>
+                    @Model.Descrizione
+                </p>
+            </div>
+
+            <div class="bg-white p-3 shadow-sm mt-3">
+                <h5>Caratteristiche principali</h5>
+
+                <p class="border-bottom p-2">
+                    <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
+                </p>
+
+                <p class="border-bottom p-2">
+
+                    <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
+                </p>
+
+                <p class="border-bottom p-2">
+
+                    <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
+                </p>
+
+                <p class="border-bottom p-2">
+
+                    <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
+                </p>
+
+                <p class="border-bottom p-2">
+
+                    <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
+                </p>
+
+                @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
+                }
+
+                @if (Model.Balcone.HasValue && Model.Balcone.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
+                }
+
+                @if (Model.Cantina.HasValue && Model.Cantina.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
+                }
+
+                @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
+                }
+
+                @if (Model.Giardino.HasValue && Model.Giardino.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
+                }
+
+                @if (Model.Piscina.HasValue && Model.Piscina.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
+                }
+
+                @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
+                {
+                    <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
+                }
+            </div>
+
+            <div class="bg-white p-3 shadow-sm mt-3">
+                <h5>Costi</h5>
+
+                @Model.Prezzo
+                @Model.SpesaMensileCondominio
+            </div>
+
+            <div class="bg-white p-3 shadow-sm mt-3">
+                <h5>Posizione</h5>
+
+                @Model.Indirizzo, @Model.NomeComune
+
+
+                <div id="googleMap" style="width:100%;height:400px;"></div>
+
+                <script>function myMap() {
+                        var mapProp = {
+                            center: new google.maps.LatLng(51.508742, -0.120850),
+                            zoom: 5,
+                        };
+                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                    }</script>
+
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIBdGKmybeAjYgd5ZlT5x6UamFuILjTvU&callback=myMap"></script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/annunci-details.js" asp-append-version="true"></script>
+}
+

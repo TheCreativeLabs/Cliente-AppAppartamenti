@@ -11,6 +11,8 @@ using AppAppartamenti.Api;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using AppAppartamentiApiClient;
+using static AppAppartamenti.Api.ApiHelper;
+using Microsoft.AspNetCore.Http;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -26,14 +28,20 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> AccediAsync(string Email, string Password)
         {
-            var token = await ApiHelper.SetTokenAsync(_configuration.GetValue<string>("MySetting:ApiEndpoint"), Email, Password);
+            BearerToken bearerToken = await ApiHelper.SetTokenAsync(_configuration.GetValue<string>("MySetting:ApiEndpoint"), Email, Password);
 
-            var claims = new List<Claim>
+            if (bearerToken != null && !string.IsNullOrEmpty(bearerToken.AccessToken))
             {
-                new Claim("user", Email),
-            };
+                //HttpContext.Session.SetString("ACCESS_TOKEN", bearerToken.AccessToken);
 
-            await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
+                var claims = new List<Claim>
+                {
+                    new Claim("user", Email),
+                    new Claim("token", bearerToken.AccessToken)
+                };
+
+                await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
+            }
 
             return Redirect("/");
         }
@@ -66,6 +74,5 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             return Redirect("/");
         }
-
     }
 }

@@ -104,6 +104,7 @@ html {
     left: 5%;
     background-color: #e5e5e5;
 }
+
 .product-device {
     position: absolute;
     right: 10%;
@@ -117,8 +118,9 @@ html {
 }
 
 .btn-primary{
-     background-color: #ff6b6b !important;
-     color:white;
+    border-color:#ff6b6b !important;
+    background-color: #ff6b6b !important;
+    color:white;
 }
 
 .bg-primary{
@@ -127,4 +129,73 @@ html {
 
 .text-primary{
     color: #ff6b6b !important;
+}
+
+.container-custom{
+    margin-top:80px;
+}
+
+.card-annuncio{
+    border:none !important;
+    height:290px !important;
+    cursor:pointer;
+}
+
+.card-annuncio:hover{
+   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important
+}
+
+
+
+.card-annuncio .card-body .card-text{
+    margin-bottom:5px !important;
+}
+
+.card-img-annuncio {
+    height: 290px !important;
+    border-radius: calc(0.25rem - 1px) 0px 0px calc(0.25rem - 1px) !important;
+}
+
+.navbar-center
+{
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    text-align: center;
+    margin: 0px;
+}
+
+#searchBarFilters{
+    height: 300px;
+    position: absolute;
+    z-index: 900;
+    width: 100%;
+}
+
+
+.fa-custom, .fas-custom{
+    -webkit-text-stroke: 1.5px white;
+}
+
+.sub-nav{
+    margin-top:66px;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(../webfonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: robotoLight;
+  src: url(../webfonts/Roboto-Light.ttf);
+}
+
+
+body{
+    font-family:"myFirstFont"
+}
+
+p{
+    font-size:85%;
 }

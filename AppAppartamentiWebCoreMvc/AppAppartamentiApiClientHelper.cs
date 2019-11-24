@@ -1,4 +1,5 @@
 ﻿using AppAppartamentiApiClient;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -83,11 +84,10 @@ namespace AppAppartamenti.Api
             return bearerToken;
         }
 
-        //// Ottiene il Token
+        // Ottiene il Token
         //public static string GetToken()
         //{
         //    string accessToken = null;
-
         //    if (Application.Current.Properties.ContainsKey(AccessTokenKey))
         //    {
         //        accessToken = Application.Current.Properties[AccessTokenKey].ToString();
