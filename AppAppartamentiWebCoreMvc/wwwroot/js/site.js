@@ -10,6 +10,47 @@ $(document).ready(function () {
     searchbarInput.addEventListener("focus", ShowSearchbarInput);
     searchbarInput.addEventListener("blur", HideSearchbarInput);
     searchbarInput.addEventListener("keyup", EnableSearch);
+
+    let btnSignIn = document.getElementById("btnSignIn");
+    btnSignIn.addEventListener("click", ShowModalSignIn);
+
+    let btnSignUp = document.getElementById("btnSignUp");
+    btnSignUp.addEventListener("click", ShowModalSignUp);
+
+    // This button will increment the value
+    $('[data-quantity="plus"]').click(function (e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+        // If is not undefined
+        if (!isNaN(currentVal)) {
+            // Increment
+            $('input[name=' + fieldName + ']').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name=' + fieldName + ']').val(0);
+        }
+    });
+    // This button will decrement the value till 0
+    $('[data-quantity="minus"]').click(function (e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[name=' + fieldName + ']').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name=' + fieldName + ']').val(0);
+        }
+    });
 });
 
 function EnableSearch() {
@@ -30,4 +71,14 @@ function HideSearchbarInput() {
 
 function NavigateToDetail(Url) {
     window.location.href = Url;
+}
+
+function ShowModalSignIn(){
+    $("#modalLogin").modal("show");
+    $("#modalSignUp").modal("hide");
+}
+
+function ShowModalSignUp(){
+    $("#modalLogin").modal("hide");
+    $("#modalSignUp").modal("show");
 }

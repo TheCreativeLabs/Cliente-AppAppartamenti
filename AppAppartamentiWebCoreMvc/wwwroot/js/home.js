@@ -14,7 +14,7 @@
 });
 
 function changeScroll() {
-    if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         $("#nav").removeClass("navbar-transparent");
         $("#navSearchBar").show();
     } else {

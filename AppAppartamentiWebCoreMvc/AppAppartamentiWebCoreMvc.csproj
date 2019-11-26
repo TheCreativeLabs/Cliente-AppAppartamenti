@@ -202,6 +202,7 @@
     <Content Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
     <Content Remove="wwwroot\js\home %28copy%29.js" />
     <Content Remove="wwwroot\webfonts\Roboto-Light.ttf" />
+    <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -278,5 +279,6 @@
     <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
     <None Include="wwwroot\js\annunci-details.js" />
     <None Include="wwwroot\webfonts\Roboto-Light.ttf" />
+    <None Include="wwwroot\js\annunci-create.js" />
   </ItemGroup>
 </Project>

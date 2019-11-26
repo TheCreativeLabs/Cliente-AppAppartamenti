@@ -22,12 +22,30 @@
     <link rel="stylesheet" href="~/css/regular.min.css" />
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="70">
     <header>
-        <nav id="nav" class="navbar navbar-expand-sm fixed-top navbar-light bg-white mb-3 shadow-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
-                    <ul class="navbar-nav flex-grow-1">
+        <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-lg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+             <div class="container-fluid">
+                 <div class="navbar-collapse collapsible-navbar">
+               <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
+                     </div>
+               <form id="navSearchBar" class="navbar-start">
+                    <div class="input-group" style="text-align: center;">
+                        <input id="searchbarInput" type="text" class="form-control" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
+                        <div class="input-group-append">
+                        <a class="btn btn-primary disabled" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
+                        </div>
+                    </div>
+                    <div id="searchBarFilters" class="col-12 shadow bg-light " style="display:none;">
+                        <hr>
+                    </div>
+                </form>
+
+                <div class="navbar-collapse collapsible-navbar">
+                    <ul class="navbar-nav justify-content-end">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -36,27 +54,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">I miei annunci</a>
                             </li>
-                        }
-                    </ul>
-
-                    <form id="navSearchBar" class="navbar-center">
-                       <div class="input-group" style="text-align: center;">
-                          <input id="searchbarInput" type="text" class="form-control" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
-                          <div class="input-group-append">
-                            <a class="btn btn-primary disabled" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
-                          </div>
-                        </div>
-                        <div id="searchBarFilters" class="col-12 shadow bg-light " style="display:none;">
-                            <hr>
-                        </div>
-                    </form>
-
-                    <ul class="navbar-nav justify-content-end">
-                        @if (User.Identity.IsAuthenticated)
-                        {
+                            <li class="nav-item">
+                                <a asp-action="Create" asp-controller="Annunci" class="nav-link text-dark">Pubblica un annuncio</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @User.Identity.Name <img src="" alt="..." class="rounded-circle">
+                                    @User.Identity.Name
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right border-0 bg-light shadow" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Informazioni personali</a>
@@ -64,33 +67,32 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">Esci</a>
                                 </div>
-                              </li>
+                            </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalSignIn">Registrati</a>
+                                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalSignUp">Registrati</a>
                             </li>
                             <li class="nav-item">
                                 <a id="btnAccedi" class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalLogin">Accedi</a>
                             </li>
                         }
                     </ul>
-            </div>
+                </div>
+             </div>
         </nav>
     </header>
 
     @RenderSection("SubHeader", required: false)
 
-
     <partial name="_CookieConsentPartial" />
         
-     @RenderBody()
+    @RenderBody()
 
-    <partial name="_RegistrationPartial" />
-    <partial name="_LoginPartial" />
+   
 
-    <footer class="footer pt-5 bg-dark text-white" style="margin-top:100px; border-top:3px solid #ff6b6b;">
+    <footer class="footer pt-5 bg-dark text-white">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md">
@@ -145,9 +147,9 @@
                 </div>
                  <div class="col-6 text-right">
                      seguici su
-                     <button type="button" class="btn btn-outline-white rounded-circle btn-social"><i class="fab fa-facebook-f"></i></button>
-                     <button type="button" class="btn btn-outline-white rounded-circle btn-social"><i class="fab fa-instagram"></i></button>
-                     <button type="button" class="btn btn-outline-white rounded-circle btn-social"><i class="fab fa-twitter"></i></button>
+                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-facebook-f"></i></button>
+                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-instagram"></i></button>
+                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-twitter"></i></button>
                 </div>
             </div>
         </div>
@@ -171,8 +173,8 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     @RenderSection("Scripts", required: false)
 </body>

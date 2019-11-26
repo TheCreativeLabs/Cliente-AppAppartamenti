@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using AppAppartamentiApiClient;
 using static AppAppartamenti.Api.ApiHelper;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -32,7 +33,6 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             if (bearerToken != null && !string.IsNullOrEmpty(bearerToken.AccessToken))
             {
-                //HttpContext.Session.SetString("ACCESS_TOKEN", bearerToken.AccessToken);
 
                 var claims = new List<Claim>
                 {
@@ -47,23 +47,13 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUpAsync(string Nome, string Cognome, DateTime DataNascita, string Email, string Password, string ConfermaPassword)
+        public async Task<IActionResult> SignUpAsync(RegisterUserBindingModel Model)
         {
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
 
-            RegisterUserBindingModel registerUserBindingModel = new RegisterUserBindingModel()
-            {
-                Name = Nome,
-                BirthName = Nome,
-                Surname = Cognome,
-                DataNascita = DataNascita,
-                Password = Password,
-                ConfirmPassword = ConfermaPassword,
-                ImmagineProfilo = null,
-                Email = Email
-            };
+            Model.BirthName = Model.Name;
 
-            await accountClient.RegisterAsync(registerUserBindingModel);
+            await accountClient.RegisterAsync(Model);
 
             return Redirect("/");
         }
