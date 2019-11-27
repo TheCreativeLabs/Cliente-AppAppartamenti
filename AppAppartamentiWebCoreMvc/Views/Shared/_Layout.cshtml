@@ -49,19 +49,24 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+                                <a asp-action="Create" asp-controller="Annunci" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">Pubblica un annuncio</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List"> Preferiti</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">I miei annunci</a>
                             </li>
-                            <li class="nav-item">
-                                <a asp-action="Create" asp-controller="Annunci" class="nav-link text-dark">Pubblica un annuncio</a>
-                            </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @User.Identity.Name
+                                <a class="nav-link text-dark p-0 m-0"  href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img id="profileImage" class="rounded-circle" width="45" height="45" style="margin-top:-5px"/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right border-0 bg-light shadow" aria-labelledby="navbarDropdownMenuLink">
+                                    <div class="bg-light p-3 border-bottom text-center">
+                                    <h6 id="lblNomeCognome" >
+                                    </h6>
+                                    <small id="lblEmail" class="text-muted"></small>
+                                        </div>
                                     <a class="dropdown-item" href="#">Informazioni personali</a>
                                     <a class="dropdown-item" href="#">Impostazioni</a>
                                     <div class="dropdown-divider"></div>

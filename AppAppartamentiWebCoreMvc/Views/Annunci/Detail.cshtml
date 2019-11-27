@@ -26,26 +26,28 @@
 
 <div class="container container-custom">
     <div class="row">
-        <div class="col-6 offset-1">
-            <h5>
-                @Model.TipologiaProprieta in @Model.TipologiaAnnuncio
-                <br />
-                <small class="text-muted">@Model.NomeComune</small>
-                <br />
-                @Model.Prezzo €
-            </h5>
-        </div>
+        <div class="col-10 offset-1 p-3">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
 
-        <div class="col-4">
             <button type="button" class="btn btn-sm btn-outline-dark btn-sm float-right"><i class="fas fa-heart"></i>&nbsp;Salva</button>
 
             <button type="button" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
 
             <button type="button" class="btn btn-outline-dark  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
 
-            <br />
+            <hr class="mt-2" />
+        </div>
+        <div class="col-6 offset-1">
+            <h5>
+                <strong>@Model.TipologiaProprieta</strong> in <strong>@Model.TipologiaAnnuncio</strong> a <strong>@Model.Prezzo €</strong>
+                <br />
+                <small class="text-muted">@Model.NomeComune</small>
+            </h5>
+        </div>
 
-            <button class="btn btn-primary btn-sm  mt-3 btn-block">Prenota una visita</button>
+        <div class="col-4">
+
+            <button class="btn btn-primary btn-block">Prenota una visita</button>
         </div>
 
         <div class="col-10 offset-1">
@@ -117,93 +119,139 @@
                 </p>
             </div>
 
-            <div class="bg-white p-3 shadow-sm mt-3">
-                <h5>Caratteristiche principali</h5>
+            <div class="card bg-white shadow-sm mt-3 border-0">
+                <div class="card-header p-2 border-0">
+                    <h5 class="mb-0">Caratteristiche principali</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
+                    </p>
 
-                <p>
-                    <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
-                </p>
+                    <p>
 
-                <p >
+                        <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
+                    </p>
 
-                    <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
-                </p>
+                    <p>
 
-                <p >
+                        <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
+                    </p>
 
-                    <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
-                </p>
+                    <p>
 
-                <p >
+                        <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
+                    </p>
 
-                    <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
-                </p>
+                    <p>
 
-                <p >
+                        <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
+                    </p>
 
-                    <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
-                </p>
+                    @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
+                    }
 
-                @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
-                }
+                    @if (Model.Balcone.HasValue && Model.Balcone.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
+                    }
 
-                @if (Model.Balcone.HasValue && Model.Balcone.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
-                }
+                    @if (Model.Cantina.HasValue && Model.Cantina.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
+                    }
 
-                @if (Model.Cantina.HasValue && Model.Cantina.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
-                }
+                    @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
+                    }
 
-                @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
-                }
+                    @if (Model.Giardino.HasValue && Model.Giardino.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
+                    }
 
-                @if (Model.Giardino.HasValue && Model.Giardino.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
-                }
+                    @if (Model.Piscina.HasValue && Model.Piscina.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
+                    }
 
-                @if (Model.Piscina.HasValue && Model.Piscina.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
-                }
-
-                @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
-                {
-                    <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
-                }
+                    @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
+                    {
+                        <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
+                    }
+                </div>
             </div>
 
-            <div class="bg-white p-3 shadow-sm mt-3">
-                <h5>Costi</h5>
+            <div class="card bg-white shadow-sm mt-3 border-0">
+                <div class="card-header p-2 border-0">
+                    <h5 class="mb-0">Costi</h5>
+                </div>
+                <div class="card-body">
+                    <label asp-for="CodiceComune" class="control-label col-form-label-sm"></label>:&nbsp;
+                    @Model.Prezzo €
 
-                @Model.Prezzo
-                @Model.SpesaMensileCondominio
+                    <br />
+                    <label asp-for="SpesaMensileCondominio" class="control-label col-form-label-sm"></label>:&nbsp;
+                    @Model.SpesaMensileCondominio €\mese
+
+                    <br />
+                    <label asp-for="TipologiaRiscaldamento" class="control-label col-form-label-sm"></label>:&nbsp;
+                    @Model.TipologiaRiscaldamento
+
+                    <br />
+                    <label asp-for="ClasseEnergetica" class="control-label col-form-label-sm"></label>:&nbsp;
+                    @Model.ClasseEnergetica
+
+                    <br />
+                    <div id="btnGroupEnergy" class="btn-group" role="group" aria-label="Basic example">
+                         @{
+                             IEnumerable<AppAppartamentiApiClient.ClasseEnergetica> classeEnergetica = (IEnumerable<AppAppartamentiApiClient.ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+
+                             foreach (var item in classeEnergetica)
+                             {
+                                 @if (item.Descrizione == Model.ClasseEnergetica) {
+                                 <button type="button" class="btn disabled energy-@item.Descrizione active">@item.Descrizione</button>
+
+                                 }
+                                 else
+                                 {
+
+                                 <button type="button" class="btn disabled energy-@item.Descrizione">@item.Descrizione</button>
+
+                                 }
+                             }
+                         }
+                    </div>
+
+
+                    
+                </div>
             </div>
 
-            <div class="bg-white p-3 shadow-sm mt-3">
-                <h5>Posizione</h5>
+            <div class="card bg-white shadow-sm mt-3 border-0">
+                <div class="card-header p-2 border-0">
+                    <h5 class="mb-0">Posizione</h5>
+                </div>
+                <div class="card-body">
+                    @Model.Indirizzo, @Model.NomeComune
 
-                @Model.Indirizzo, @Model.NomeComune
+                    <div id="googleMap" style="width:100%;height:400px;"></div>
 
+                    <script>
+                        function myMap() {
+                            var mapProp = {
+                                center: new google.maps.LatLng(51.508742, -0.120850),
+                                zoom: 5,
+                            };
+                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                        }
+                    </script>
 
-                <div id="googleMap" style="width:100%;height:400px;"></div>
-
-                <script>function myMap() {
-                        var mapProp = {
-                            center: new google.maps.LatLng(51.508742, -0.120850),
-                            zoom: 5,
-                        };
-                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                    }</script>
-
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIBdGKmybeAjYgd5ZlT5x6UamFuILjTvU&callback=myMap"></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIBdGKmybeAjYgd5ZlT5x6UamFuILjTvU&callback=myMap"></script>
+                </div>
             </div>
         </div>
     </div>

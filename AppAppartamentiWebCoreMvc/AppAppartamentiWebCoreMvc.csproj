@@ -13,7 +13,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Index.cshtml" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
     <Content Remove="wwwroot\images\.home.jpg.icloud" />
     <Content Remove="wwwroot\css\brands.min.css" />
     <Content Remove="wwwroot\css\regular.min.css" />
@@ -22,9 +21,7 @@
     <Content Remove="wwwroot\images\download.jpg" />
     <Content Remove="wwwroot\images\home.jpg" />
     <Content Remove="wwwroot\images\home2.jpeg" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
     <Content Remove="wwwroot\js\site.js" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.eot" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.svg" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.ttf" />
@@ -54,8 +51,6 @@
     <Content Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
     <Content Remove="wwwroot\lib\jquery\LICENSE.txt" />
     <Content Remove="wwwroot\lib\jquery\dist\jquery.js" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
     <Content Remove="wwwroot\css\solid.min.css" />
     <Content Remove="wwwroot\js\home.js" />
@@ -133,14 +128,12 @@
     <Content Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
     <Content Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
     <Content Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
     <Content Remove="Views\Index.cshtml" />
     <Content Remove="Views\AnnunciPreferiti\AnnunciPreferiti\List.cshtml" />
     <Content Remove="wwwroot\css\Detail.cshtml" />
     <Content Remove="wwwroot\js\home.js" />
     <Content Remove="wwwroot\images\Roboto-Regular.ttf" />
     <Content Remove="wwwroot\css\Roboto-Regular.ttf" />
-    <Content Remove="wwwroot\js\site %28copy%29.js" />
     <Content Remove="wwwroot\webfonts\Roboto-Medium.ttf" />
     <Content Remove="wwwroot\webfonts\Roboto-Regular.ttf" />
     <Content Remove="wwwroot\favicon.ico" />
@@ -203,6 +196,7 @@
     <Content Remove="wwwroot\js\home %28copy%29.js" />
     <Content Remove="wwwroot\webfonts\Roboto-Light.ttf" />
     <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
+    <Content Remove="wwwroot\js\facebook-login.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -344,6 +338,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\annunci-details.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\facebook-login.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\facebook-login %28copy%29.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\google-login.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

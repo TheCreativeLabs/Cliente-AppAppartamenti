@@ -23,6 +23,11 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View();
         }
 
+        public IActionResult FacebookLogin()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

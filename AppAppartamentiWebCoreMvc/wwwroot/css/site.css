@@ -135,6 +135,7 @@ html {
 
 .container-custom{
     margin-top:80px;
+    min-height: 350px;
 }
 
 .card-annuncio{
@@ -185,9 +186,9 @@ html {
 }
 
 
-.fa-custom, .fas-custom{
+/*.fa-custom, .fas-custom{
     -webkit-text-stroke: 1.5px white;
-}
+}*/
 
 .sub-nav{
     margin-top:66px;
@@ -237,3 +238,40 @@ p{
     }
 }
 
+
+.energy-A{
+    background-color:#7fb800 !important;
+}
+
+.energy-B{
+    background-color:#91d100;
+}
+
+.energy-C{
+    background-color:#ebc400;
+}
+
+.energy-D{
+    background-color:#eb9d00;
+}
+
+.energy-E{
+    background-color:#e67300;
+}
+
+.energy-F{
+    background-color:#d22300;
+}
+
+.energy-G{
+    background-color:#b80000;
+}
+
+#btnGroupEnergy .active{
+    margin:-5px;
+   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+#btnGroupEnergy .disabled{
+    opacity:1;
+}

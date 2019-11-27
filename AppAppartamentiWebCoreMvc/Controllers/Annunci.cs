@@ -45,6 +45,10 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
             var annuncio = await annunciClient.GetAnnuncioByIdAsync(Id);
 
+            var classiEnergetiche = await annunciClient.GetListaClasseEnergeticaAsync();
+            ViewData["ListaClassiEnergetiche"] = classiEnergetiche.AsEnumerable();
+
+
             return View(annuncio);
         }
 
