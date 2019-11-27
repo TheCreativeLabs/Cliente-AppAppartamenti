@@ -21,6 +21,10 @@ namespace AppAppartamentiApi.Models
         [StringLength(128)]
         public string Descrizione { get; set; }
 
+        [Required]
+        [StringLength(32)]
+        public string Codice { get; set; }
+
         public bool Abilitato { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
