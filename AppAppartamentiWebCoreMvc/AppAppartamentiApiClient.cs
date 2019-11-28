@@ -1307,18 +1307,99 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciByUserAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciByUserAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, string orderBy)
         {
-            return GetAnnunciByUserAsync(System.Threading.CancellationToken.None);
+            return GetAnnunciByUserAsync(pageNumber, pageSize, idTipologiaAnnuncio, idTipologiaProprieta, comuneCodice, priceMin, priceMax, houseSizeMin, houseSizeMax, bedrooms, bathrooms, kitchens, parkingSpaces, garages, backyard, terrace, cellar, pool, elevator, orderBy, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciByUserAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciByUserAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, string orderBy, System.Threading.CancellationToken cancellationToken)
         {
+            if (pageNumber == null)
+                throw new System.ArgumentNullException("pageNumber");
+
+            if (pageSize == null)
+                throw new System.ArgumentNullException("pageSize");
+
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/AnnunciCurrentUser");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/AnnunciCurrentUser?");
+            urlBuilder_.Append(System.Uri.EscapeDataString("pageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Append(System.Uri.EscapeDataString("pageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            if (idTipologiaAnnuncio != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("idTipologiaAnnuncio") + "=").Append(System.Uri.EscapeDataString(ConvertToString(idTipologiaAnnuncio, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (idTipologiaProprieta != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("idTipologiaProprieta") + "=").Append(System.Uri.EscapeDataString(ConvertToString(idTipologiaProprieta, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (comuneCodice != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("comuneCodice") + "=").Append(System.Uri.EscapeDataString(ConvertToString(comuneCodice, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (priceMin != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("priceMin") + "=").Append(System.Uri.EscapeDataString(ConvertToString(priceMin, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (priceMax != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("priceMax") + "=").Append(System.Uri.EscapeDataString(ConvertToString(priceMax, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (houseSizeMin != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("houseSizeMin") + "=").Append(System.Uri.EscapeDataString(ConvertToString(houseSizeMin, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (houseSizeMax != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("houseSizeMax") + "=").Append(System.Uri.EscapeDataString(ConvertToString(houseSizeMax, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (bedrooms != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("bedrooms") + "=").Append(System.Uri.EscapeDataString(ConvertToString(bedrooms, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (bathrooms != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("bathrooms") + "=").Append(System.Uri.EscapeDataString(ConvertToString(bathrooms, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kitchens != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("kitchens") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kitchens, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (parkingSpaces != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("parkingSpaces") + "=").Append(System.Uri.EscapeDataString(ConvertToString(parkingSpaces, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (garages != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("garages") + "=").Append(System.Uri.EscapeDataString(ConvertToString(garages, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (backyard != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("backyard") + "=").Append(System.Uri.EscapeDataString(ConvertToString(backyard, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (terrace != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("terrace") + "=").Append(System.Uri.EscapeDataString(ConvertToString(terrace, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (cellar != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("cellar") + "=").Append(System.Uri.EscapeDataString(ConvertToString(cellar, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pool != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("pool") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pool, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (elevator != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("elevator") + "=").Append(System.Uri.EscapeDataString(ConvertToString(elevator, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderBy != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("orderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderBy, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
@@ -2773,6 +2854,11 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.StringLength(128)]
         public string Descrizione { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Codice", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        public string Codice { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }
 
@@ -2922,6 +3008,11 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.StringLength(128)]
         public string Descrizione { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Codice", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        public string Codice { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }
 
@@ -3016,6 +3107,11 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.StringLength(128)]
         public string Descrizione { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Codice", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        public string Codice { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }
 
@@ -3035,6 +3131,11 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(128)]
         public string Descrizione { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Codice", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        public string Codice { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Abilitato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Abilitato { get; set; }

@@ -30,6 +30,8 @@
     <Folder Include="Views\AnnunciPreferiti\" />
     <Folder Include="Views\AnnunciPersonali\" />
     <Folder Include="Views\Annunci\" />
+    <Folder Include="Utility\" />
+    <Folder Include="Utility\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />

@@ -23,17 +23,23 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> ListAsync()
+        public IActionResult ListAsync()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> RefreshListAsync(int ListPage)
         {
             HttpClient httpClient = new HttpClient();
-
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-            AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+            AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
             var annunci = await annunciClient.GetAnnunciAsync();
 
-            return View(annunci.AsEnumerable());
+            ViewData["ListPage"] = ListPage;
+
+            return PartialView("_AnnunciPartial", annunci);
         }
 
         public async Task<IActionResult> DetailAsync(Guid Id)
@@ -70,7 +76,6 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             ViewData["ListaTipologieAnnunci"] = tipologiaAnnunci.AsEnumerable();
             ViewData["ListaClassiEnergetiche"] = classiEnergetiche.AsEnumerable();
             ViewData["ListaTipologieRiscaldamento"] = tipologiaRiscaldamento.AsEnumerable();
-
 
             return View();
         }

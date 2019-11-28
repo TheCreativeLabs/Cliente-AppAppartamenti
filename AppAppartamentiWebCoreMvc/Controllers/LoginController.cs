@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using AppAppartamentiWebCoreMvc.Extensions;
+using AppAppartamentiWebCoreMvc.Utility;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -36,14 +38,20 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         [Authorize]
         public async Task<string> GetUserInfoAsync()
         {
-            HttpClient httpClient = new HttpClient();
-            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            //ottengo le info dalla sessione.
+            UserInfoDto userInfoDto = HttpContext.Session.GetObject<UserInfoDto>(Constants.UserInfoKey);
 
-            //ottengo l'url da chiamare per l'autenticazione su Facebook
-            AccountClient accountClient = new AccountClient(httpClient);
+            //se non sono in sessione ricarico i dati
+            if (userInfoDto == null)
+            {
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+                AccountClient accountClient = new AccountClient(httpClient);
 
-            UserInfoDto userInfoDto = await accountClient.GetCurrentUserInfoAsync();
+                userInfoDto = await accountClient.GetCurrentUserInfoAsync();
+                HttpContext.Session.SetObject(Constants.UserInfoKey,userInfoDto);
+            }
 
             return JsonConvert.SerializeObject(userInfoDto);
         }
@@ -192,6 +200,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
         public async Task<IActionResult> LogOutAsync()
         {
+            HttpContext.Session.Clear();
+
             await HttpContext.SignOutAsync();
 
             return Redirect("/");

@@ -24,15 +24,15 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
         public async Task<IActionResult> ListAsync()
         {
-            HttpClient httpClient = new HttpClient();
-            //var accessToken = HttpContext.Session.GetString("ACCESS_TOKEN");
-            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            //HttpClient httpClient = new HttpClient();
+            ////var accessToken = HttpContext.Session.GetString("ACCESS_TOKEN");
+            //var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            //httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-            AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
-            var annunci = await annunciClient.GetAnnunciByUserAsync();
+            //AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+            //var annunci = await annunciClient.GetAnnunciByUserAsync();
 
-            return View(annunci.AsEnumerable());
+            return View();// annunci.AsEnumerable());
         }
 
 

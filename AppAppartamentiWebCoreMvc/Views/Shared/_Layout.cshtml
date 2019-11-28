@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="~/css/brands.min.css" />
     <link rel="stylesheet" href="~/css/solid.min.css" />
     <link rel="stylesheet" href="~/css/regular.min.css" />
+    <link rel="stylesheet" href="~/css/nouislider.min.css" />
 </head>
 
 <body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="70">
@@ -95,9 +96,10 @@
         
     @RenderBody()
 
-   
+    <partial name="_FilterModal" />
 
-    <footer class="footer pt-5 bg-dark text-white">
+
+        <footer class="footer pt-5 bg-dark text-white position-relative">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md">
@@ -146,11 +148,11 @@
             <hr />
 
             <div class="row p-5">
-                <div class="col-6">
+                <div class="col">
                     &copy; 2019 - AppAppartamentiWebMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
                 </div>
-                 <div class="col-6 text-right">
+                 <div class="col text-right">
                      seguici su
                      <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-facebook-f"></i></button>
                      <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-instagram"></i></button>
@@ -159,6 +161,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="~/js/wNumb.min.js" asp-append-version="true"></script>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -178,9 +182,12 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/nouislider.min.js" asp-append-version="true"></script>
+    
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     @RenderSection("Scripts", required: false)
 </body>
 </html>
