@@ -23,12 +23,14 @@ namespace AppAppartamentiWebCoreMvc.Controllers
     {
         IConfiguration _configuration;
 
+        string ApiEndpoint;
+
         public LoginController(IConfiguration configuration)
         {
             _configuration = configuration;
-        }
 
-        public const string ApiEndpoint = "https://appappartamentiapi.appregaliapitest.com/";
+            ApiEndpoint = _configuration.GetValue<string>("MySetting:ApiEndpoint");
+        }
 
         [HttpPost]
         [Authorize]
@@ -52,7 +54,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
 
-            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("https://localhost:5001/Home/FacebookLogin", true).Result.ToList()[1];
+            string FacebookOauthUrl = _configuration.GetValue<string>("MySetting:FacebookOauthUrl");
+            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync(FacebookOauthUrl, true).Result.ToList()[1];
 
             string apiRequest = $"{ApiEndpoint.Replace(".com/", ".com")}{externalLoginViewModel.Url}";
             apiRequest = apiRequest.Replace("www.", "");
@@ -107,16 +110,15 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
 
-            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("https://localhost:5001/Home/FacebookLogin", true).Result.ToList()[0];
+            string GoogleOauthUrl = _configuration.GetValue<string>("MySetting:GoogleOauthUrl");
+            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync(GoogleOauthUrl, true).Result.ToList()[0];
 
             string apiRequest = $"{ApiEndpoint.Replace(".com/", ".com")}{externalLoginViewModel.Url}";
             apiRequest = apiRequest.Replace("www.", "");
 
-
             HttpContext.Session.SetString("ApiUrl", apiRequest);
             return apiRequest;
         }
-
 
         [HttpPost]
         public async Task<string> GoogleLoginResultAsync(string token)

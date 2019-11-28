@@ -213,21 +213,16 @@
                              foreach (var item in classeEnergetica)
                              {
                                  @if (item.Descrizione == Model.ClasseEnergetica) {
-                                 <button type="button" class="btn disabled energy-@item.Descrizione active">@item.Descrizione</button>
 
+                                        <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
                                  }
                                  else
                                  {
-
-                                 <button type="button" class="btn disabled energy-@item.Descrizione">@item.Descrizione</button>
-
+                                    <button type="button" class="btn disabled energy-@item.Descrizione">@item.Descrizione</button>
                                  }
                              }
                          }
                     </div>
-
-
-                    
                 </div>
             </div>
 
