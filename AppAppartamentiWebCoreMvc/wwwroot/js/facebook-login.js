@@ -5,8 +5,6 @@ $(document).ready(function () {
     var access_token = window.location.href.replace(window.location.href.slice(window.location.href.indexOf("&token_type=bearer&expires_in="), window.location.href.length), "")
     access_token = access_token.replace("https://localhost:5001/Home/FacebookLogin#access_token=", "");
 
-    alert(access_token);
-
     $.ajax({
         type: "POST",
         url: "/Login/FacebookLoginResult",
