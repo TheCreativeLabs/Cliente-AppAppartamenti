@@ -1,6 +1,6 @@
 ﻿<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div class="modal-content ">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Filtri</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -8,8 +8,37 @@
         </button>
       </div>
       <div class="modal-body">
-          <div class="container-fluid" style="max-height: 700px;overflow-y: scroll">
+          <div class="container-fluid">
               <div class="row">
+
+                  <div class="col-12">
+                    <h6 class="mt-2">Tipologia proprieta</h6>
+                        @{
+                            IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
+                        @foreach (var proprieta in tipologiaProprieta)
+                        {
+                                <div class="form-check ml-2 ">
+                            <input class="mr-2  form-check-input" type="radio"  value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
+                                    </div>
+                                    }
+                        }
+                  </div>
+
+                  <div class="col-12">
+                      <h6 class="mt-2">Tipologia annuncio</h6>
+
+                         @{
+                             IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
+                            @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
+                            {
+                                <div class="form-check ml-2 ">
+                                <input class="mr-2 form-check-input"  type="radio"  value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" /><small>@tipologiaAnnuncio.Descrizione</small><br />
+                             </div>  
+                            }
+                         }
+                  </div>
+
+
                   <div class="col-12">
                       <h6 class="mt-3 mb-5">Prezzo</h6>
                       <div id="sliderPrezzo"></div>
@@ -127,6 +156,34 @@
                           </div>
                       </div>
                   </div>
+
+                  <div class="col-12 mt-5">
+                      <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="customSwitchAscensore">
+                          <label class="custom-control-label" for="customSwitchAscensore">Ascensore</label>
+                        </div>
+                  </div>
+
+                  <div class="col-12 mt-2">
+                      <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="customSwitchPiscina">
+                          <label class="custom-control-label" for="customSwitchPiscina">Piscina</label>
+                        </div>
+                  </div>
+
+                  <div class="col-12 mt-2">
+                      <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="customSwitchCantina">
+                          <label class="custom-control-label" for="customSwitchCantina">Cantina</label>
+                        </div>
+                  </div>
+
+                  <div class="col-12 mt-2">
+                      <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="customSwitchGiaridno">
+                          <label class="custom-control-label" for="customSwitchGiaridno">Giaridno</label>
+                        </div>
+                  </div>
               </div>
           </div>
        </div>
@@ -137,3 +194,5 @@
     </div>
   </div>
 </div>
+
+<script src="~/js/filter-modal.js" asp-append-version="true"></script>

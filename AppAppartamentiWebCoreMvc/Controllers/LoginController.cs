@@ -34,27 +34,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             ApiEndpoint = _configuration.GetValue<string>("MySetting:ApiEndpoint");
         }
 
-        [HttpPost]
-        [Authorize]
-        public async Task<string> GetUserInfoAsync()
-        {
-            //ottengo le info dalla sessione.
-            UserInfoDto userInfoDto = HttpContext.Session.GetObject<UserInfoDto>(Constants.UserInfoKey);
-
-            //se non sono in sessione ricarico i dati
-            if (userInfoDto == null)
-            {
-                HttpClient httpClient = new HttpClient();
-                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-                AccountClient accountClient = new AccountClient(httpClient);
-
-                userInfoDto = await accountClient.GetCurrentUserInfoAsync();
-                HttpContext.Session.SetObject(Constants.UserInfoKey,userInfoDto);
-            }
-
-            return JsonConvert.SerializeObject(userInfoDto);
-        }
+       
 
         [HttpPost]
         public string GetFacebookExternalLogin()

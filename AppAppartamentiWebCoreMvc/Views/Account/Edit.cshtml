@@ -1,0 +1,95 @@
+﻿@model AppAppartamentiApiClient.UpdateUserBindingModel
+
+@{
+    ViewData["Title"] = "Modifica profilo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-sm-6 offset-3 col-xs-12">
+             <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla home</a>
+
+            <h2 class="mt-2 mb-2">Modifica le tue informazioni</h2>
+        
+        <form asp-action="Edit">
+            @{
+                AppAppartamentiApiClient.UserInfoDto userInfo = (AppAppartamentiApiClient.UserInfoDto)ViewData["UserInfo"];
+            }
+        
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @{
+                var imgSrc = userInfo.PhotoUrl;
+
+                if (userInfo.FotoProfilo != null)
+                {
+                    var base64 = Convert.ToBase64String(userInfo.FotoProfilo);
+                    imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
+                }
+            }
+
+            <div class="mb-2" style="height:200px; width:200px">
+                <img id="imgFotoProfilo" src="@imgSrc"  alt="image" class="d-block w-100" />
+            </div>
+
+            <div class="form-group">
+                <input  type="file" class="file-input" id="imageid">
+                <label class="file-label border bg-light p-2 rounded" for="imageid"><i class="fas fa-camera"></i></label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" value="@userInfo.Nome" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" value="@userInfo.Cognome" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" value="@userInfo.Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DataNascita" class="control-label"></label>
+
+                @{
+                    if (userInfo.DataDiNascita.HasValue)
+                    {
+                     <input asp-for="DataNascita" type="date" class="form-control" value="@userInfo.DataDiNascita.Value.ToString("yyyy-MM-dd")" />
+                    }
+                    else
+                    {
+                     <input asp-for="DataNascita" type="date" class="form-control"  />
+                    }
+                }
+
+                <span asp-validation-for="DataNascita" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="display:none">
+                <label asp-for="ImmagineProfilo" class="control-label"></label>
+                <input  asp-for="ImmagineProfilo" class="form-control" value="@userInfo.FotoProfilo" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+      
+
+              </form>
+            </div>
+        </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/account-edit.js" asp-append-version="true"></script>
+}
+
