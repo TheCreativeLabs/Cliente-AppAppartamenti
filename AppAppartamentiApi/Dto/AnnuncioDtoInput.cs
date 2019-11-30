@@ -70,5 +70,9 @@ namespace AppAppartamentiApi.Dto
 
         [Required]
         public List<byte[]> Immagini { get; set; }
+
+        public List<Guid> IdsImmaginiToDelete { get; set; }
+
+        public DateTime? DataScadenza { get; set; }
     }
 }

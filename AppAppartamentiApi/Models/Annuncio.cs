@@ -25,6 +25,9 @@ namespace AppAppartamentiApi.Models
         public DateTime? DataModifica { get; set; }
 
         [Required]
+        public DateTime DataScadenza { get; set; }
+
+        [Required]
         [StringLength(512)]
         public string Indirizzo { get; set; }
 
