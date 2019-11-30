@@ -56,8 +56,9 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            if (viewModel == null)
-            {
+            //ricarico ogni volta, perchè è possibile che i dati siano cambiati (ad esempio se ho appena modificato la informazioni personali)
+            //if (viewModel == null)
+            //{
                 AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
                 UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
 
@@ -74,7 +75,7 @@ namespace AppAppartamenti.Views.Account
                     imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
                 }
 
-            }
+            //}
         }
 
 

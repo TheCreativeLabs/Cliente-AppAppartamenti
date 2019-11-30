@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
@@ -75,29 +76,29 @@
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                 <Label FontAttributes="Bold" Text="{Binding Item.Prezzo}" HorizontalTextAlignment="Center" FontSize="Large"></Label>
-                                <Label FontAttributes="Bold" Text="€" HorizontalTextAlignment="Center" FontSize="Large"></Label>
+                                <Label FontAttributes="Bold" Text="{translator:Translate CurrencySimbol}" HorizontalTextAlignment="Center" FontSize="Large"></Label>
                         </StackLayout>
 
           
 
                         <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                        <Label Text="Descrizione" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+                            <Label Text="{translator:Translate DettaglioAnnuncio.Description}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
                         <Label Text="{Binding Item.Descrizione}"  TextColor="Gray"></Label>
 
                         <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                        <Label Text="Informazioni Generali" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+                            <Label Text="{translator:Translate DettaglioAnnuncio.GeneralInfo}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
 
                         <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Text="m²"  Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label  VerticalTextAlignment="Center" Text="Metratura:" TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.HouseSize}" TextColor="Gray"></Label>
                             <Label Text="{Binding Item.Superficie}"  TextColor="Gray"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal"  Margin="0,10,0,0">
                             <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label  VerticalTextAlignment="Center" Text="Camere da letto:"  TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Bedrooms}"  TextColor="Gray"></Label>
                                 <Label Text="{Binding Item.NumeroCameraLetto}"  VerticalTextAlignment="Center"  TextColor="Gray"></Label>
                         </StackLayout>
 
@@ -109,26 +110,26 @@
 
                         <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label  VerticalTextAlignment="Center" Text="Bagni:"  TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Bathrooms}"  TextColor="Gray"></Label>
                                 <Label x:Name="lblBagniCount" Text="{Binding Item.NumeroBagni}" VerticalTextAlignment="Center" TextColor="Gray" ></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label  VerticalTextAlignment="Center" Text="Cucine:" TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Kitchens}" TextColor="Gray"></Label>
                                 <Label x:Name="lblCucineCount" Text="{Binding Item.NumeroCucine}" VerticalTextAlignment="Center" TextColor="Gray"></Label>
 
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                             <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label VerticalTextAlignment="Center" Text="Garage/Posto auto:" TextColor="Gray"></Label>
+                                <Label VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Parking}" TextColor="Gray"></Label>
                                 <Label x:Name="lblGarageCount" Text="{Binding Item.NumeroGarage}" VerticalTextAlignment="Center" TextColor="Gray"></Label>
                         </StackLayout>
 
                         <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                        <Label Text="Altre informazioni" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+                            <Label Text="{translator:Translate DettaglioAnnuncio.Other}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -139,30 +140,30 @@
                             </Grid.ColumnDefinitions>
 
                             <CheckBox x:Name="chkGiardino" Grid.Column="0" Grid.Row="0" IsChecked="{Binding Item.Giardino}" IsEnabled="False"></CheckBox>
-                            <Label  Grid.Column="1" Grid.Row="0" VerticalTextAlignment="Center" Text="Giardino" TextColor="Gray"></Label>
+                                <Label  Grid.Column="1" Grid.Row="0" VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Backyard}" TextColor="Gray"></Label>
 
                             <CheckBox x:Name="chkTerrazzo" Grid.Column="2" Grid.Row="0" IsChecked="{Binding Item.Balcone}" IsEnabled="False"></CheckBox>
-                            <Label Grid.Column="3" Grid.Row="0" VerticalTextAlignment="Center" Text="Terrazzo" TextColor="Gray"></Label>
+                                <Label Grid.Column="3" Grid.Row="0" VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Terrace}" TextColor="Gray"></Label>
 
                             <CheckBox x:Name="chkCantina" Grid.Column="0" Grid.Row="1" IsChecked="{Binding Item.Cantina}" IsEnabled="False"></CheckBox>
-                            <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="Cantina" TextColor="Gray"></Label>
+                                <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Cellar}" TextColor="Gray"></Label>
 
                             <CheckBox x:Name="chkPiscina" Grid.Column="2" Grid.Row="1" IsChecked="{Binding Item.Piscina}" IsEnabled="False"></CheckBox>
-                            <Label Grid.Column="3" Grid.Row="1" VerticalTextAlignment="Center" Text="Piscina" TextColor="Gray"></Label>
+                                <Label Grid.Column="3" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Pool}" TextColor="Gray"></Label>
 
                             <CheckBox x:Name="chkAscensore" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Ascensore}" IsEnabled="False"></CheckBox>
-                            <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="Ascensore" TextColor="Gray"></Label>
+                                <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Elevator}" TextColor="Gray"></Label>
 
                             <CheckBox x:Name="chkCondizionatori" Grid.Column="2" Grid.Row="2" IsChecked="{Binding Item.Condizionatori}" IsEnabled="False"></CheckBox>
-                            <Label Grid.Column="3" Grid.Row="2" VerticalTextAlignment="Center" Text="Condizionatori" TextColor="Gray"></Label>
+                                <Label Grid.Column="3" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.AirConditioners}" TextColor="Gray"></Label>
                         </Grid>
 
                         <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                            <Label Text="Costi" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+                            <Label Text="{translator:Translate DettaglioAnnuncio.Costs}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
                 
                             <StackLayout Orientation="Horizontal" >
-                                <Label  VerticalTextAlignment="Center" Text="Spese condominiali:" TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.CondominiumFees}" TextColor="Gray"></Label>
                                 <Label x:Name="lblSpeseCondominiali" Text="{Binding Item.SpesaMensileCondominio}" VerticalTextAlignment="Center" TextColor="Gray"></Label>
                                 <Label Text="€/mese" TextColor="Gray"></Label>
 
@@ -173,18 +174,18 @@
 
                             <Label Text="Energia" FontSize="Subtitle" Margin="0,10,0,0"></Label>
                             <StackLayout Orientation="Horizontal" >
-                                <Label  VerticalTextAlignment="Center" Text="Riscaldamento" TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Heat}" TextColor="Gray"></Label>
                                 <Label x:Name="lblRiscaldamento" Text="{Binding Item.TipologiaRiscaldamento}" VerticalTextAlignment="Center" TextColor="Gray"></Label>
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" >
-                                <Label  VerticalTextAlignment="Center" Text="Classe energetica:" TextColor="Gray"></Label>
+                                <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.EnergyClass}" TextColor="Gray"></Label>
                                 <Label x:Name="lblClasseEnergetica" Text="{Binding Item.ClasseEnergetica}" VerticalTextAlignment="Center" TextColor="Gray"></Label>
                             </StackLayout>
 
                                   <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                        <Label Text="Posizione" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+                            <Label Text="{translator:Translate DettaglioAnnuncio.Location}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
 
                         <maps:Map x:Name="map" IsVisible="True" HeightRequest="250" Margin="-20,0,-20,0"/>
 
@@ -213,12 +214,12 @@
                     </StackLayout>
 
 
-                    <Button Visual="Material" IsVisible="False" Text="Modifica" x:Name="btnModifica" ></Button>
+                <Button Visual="Material" IsVisible="False" Text="{translator:Translate DettaglioAnnuncio.Edit}" x:Name="btnModifica" ></Button>
 
                     <StackLayout x:Name="stkPulsanti" Orientation="Horizontal" Padding="20" BackgroundColor="White" IsVisible="false" VerticalOptions="EndAndExpand"  Grid.Row="1" Grid.Column="0">
 
                         <!--<Button Visual="Material" Text="Aiuto" HorizontalOptions="Start"></Button>-->
-                        <Button Visual="Material" Style="{x:StaticResource primaryButton}" Text="Nuovo appuntamento" HorizontalOptions="CenterAndExpand"></Button>
+                    <Button Visual="Material" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="CenterAndExpand"></Button>
                         <!--<Button Visual="Material" Text="Messaggio" HorizontalOptions="End"></Button>-->
                     </StackLayout>
                 </Grid>

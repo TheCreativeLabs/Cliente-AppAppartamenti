@@ -8,6 +8,7 @@
              x:Class="AppAppartamenti.Views.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="#E8E8E8"
             BarBackgroundColor="White"
@@ -15,17 +16,17 @@
             NavigationPage.HasNavigationBar="False">
 
     <TabbedPage.Children>
-        <NavigationPage Title="Cerca">
+        <NavigationPage Title="{translator:Translate MainPage.Search}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf689;"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views:Home Title="Cerca">
+                <views:Home Title="{translator:Translate MainPage.Search}">
                 </views:Home>   
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="I miei annunci">
+        <NavigationPage Title="{translator:Translate MainPage.MyListing}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf08d;"/>
             </NavigationPage.IconImageSource>
@@ -35,7 +36,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Preferiti">
+        <NavigationPage Title="{translator:Translate MainPage.Saved}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf004;"/>
             </NavigationPage.IconImageSource>
@@ -45,7 +46,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Messaggi">
+        <NavigationPage Title="{translator:Translate MainPage.Messages}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;"/>
             </NavigationPage.IconImageSource>
@@ -55,7 +56,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Account">
+        <NavigationPage Title="{translator:Translate MainPage.Account}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;"/>
             </NavigationPage.IconImageSource>

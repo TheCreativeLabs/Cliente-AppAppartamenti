@@ -9,12 +9,12 @@
              x:Class="AppAppartamenti.Views.MieiAnnunci"
              NavigationPage.HasNavigationBar="True"
              BackgroundColor="#F8F8F8"
-             Title="I miei annunci"
+             Title="{translator:Translate MieiAnnunci.MyListing}"
              >
 
 
         <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nuovo" Clicked="BtnAdd_Clicked" />
+        <ToolbarItem Text="{translator:Translate MieiAnnunci.New}" Clicked="BtnAdd_Clicked" />
     </ContentPage.ToolbarItems>
 
    

@@ -64,7 +64,7 @@
 
                 <StackLayout Orientation="Horizontal">
                     <CheckBox IsChecked="true" VerticalOptions="Center" Color="#ff6b6b"></CheckBox>
-                    <Label Text="Accetto le condizioni d'uso" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{translator:Translate Registrazione.AccettoTermini}" VerticalTextAlignment="Center"></Label>
                 </StackLayout>
 
                 <Button Style="{x:StaticResource primaryButton}"

@@ -11,16 +11,17 @@ namespace AppAppartamenti.Helpers
     [ContentProperty ("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        private CultureInfo ci;
+        public CultureInfo ci;
         const string ResourceId = "AppAppartamenti.AppResources";
 
-        private static readonly Lazy<ResourceManager> ResMgr = new Lazy<ResourceManager>(()=> new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
+        public static readonly Lazy<ResourceManager> ResMgr = new Lazy<ResourceManager>(()=> new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
 
         public TranslateExtension()
         {
             if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
             {
-                ci = new CultureInfo("it"); //DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+                //ci = new CultureInfo("it"); //DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+                ci = new CultureInfo("en");
             }
         }
 

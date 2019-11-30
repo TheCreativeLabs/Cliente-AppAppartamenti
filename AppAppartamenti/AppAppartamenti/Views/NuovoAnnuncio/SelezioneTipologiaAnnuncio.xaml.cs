@@ -91,7 +91,8 @@ namespace AppAppartamenti.Views
         {
             if (rbList.SelectedItem != null)
             {
-                TipologiaAnnuncio tipologiaAnnuncio = viewModel.listaAnnunci.Where(x => (string)x.Descrizione == (string)rbList.SelectedItem).FirstOrDefault();
+                //TipologiaAnnuncio tipologiaAnnuncio = viewModel.listaAnnunci.Where(x => (string)x.Descrizione == (string)rbList.SelectedItem).FirstOrDefault();
+                TipologiaAnnuncio tipologiaAnnuncio = viewModel.translationsMap[(string)rbList.SelectedItem];
                 annuncio.IdTipologiaAnnuncio = tipologiaAnnuncio.Id;
                 await Navigation.PushAsync(new SelezioneLuogo(annuncio));
             }

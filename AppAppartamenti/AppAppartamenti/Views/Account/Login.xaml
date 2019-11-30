@@ -20,14 +20,14 @@
                 <Label Text="{translator:Translate Login.ErroreLogin}" FontSize="Medium"  FontAttributes="Bold" TextColor="Red" IsVisible="False" x:Name="lblValidazioneLogin"></Label>
 
                 <appappartamenti:MyEntry
-                        Placeholder="Email"
+                        Placeholder="{translator:Translate Login.Email}"
                         x:Name="entUsername"
                         Keyboard="Email"
                         TextChanged="ent_TextChanged"
                         />
 
                 <appappartamenti:MyEntry
-                        Placeholder="Password"
+                        Placeholder="{translator:Translate Login.Password}"
                         x:Name="entPassword"
                         IsPassword="True"
                         TextChanged="ent_TextChanged"
@@ -47,7 +47,7 @@
                 <Frame HorizontalOptions="Center" WidthRequest="200" HeightRequest="30" HasShadow="False" BackgroundColor="#1e73be" Padding="5">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
                         <Label FontFamily="{x:StaticResource FA-Brands}" TextColor="White"  Text="&#xf39e;"></Label>
-                        <Label Text="Accedi con Facebook" TextColor="White"></Label>
+                        <Label Text="{translator:Translate Login.FacebookSignIn}" TextColor="White"></Label>
                     </StackLayout>
 
                     <Frame.GestureRecognizers>
@@ -64,7 +64,7 @@
               <Frame HorizontalOptions="Center" WidthRequest="200" HeightRequest="30" BorderColor="#DB4437" HasShadow="False" Padding="5">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
                         <Label FontFamily="{x:StaticResource FA-Brands}" TextColor="#DB4437"  Text="&#xf1a0;"></Label>
-                        <Label Text="Accedi con Google" TextColor="#DB4437"></Label>
+                        <Label Text="{translator:Translate Login.GoogleSignIn}" TextColor="#DB4437"></Label>
                     </StackLayout>
 
                     <Frame.GestureRecognizers>
