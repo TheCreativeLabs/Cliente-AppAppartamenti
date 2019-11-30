@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account.CambiaPassword" xml:space="preserve">
-    <value>Cambia Password</value>
+    <value>Change Password</value>
   </data>
   <data name="CambiaPassword.MessaggioValidazionePassword" xml:space="preserve">
-    <value>La Password inserita non è valida.</value>
+    <value>The entered password is incorrect.</value>
   </data>
   <data name="ChangePassword.ConfirmNewPassword" xml:space="preserve">
     <value>Confirm new password</value>
@@ -130,13 +130,13 @@
     <value>Continue</value>
   </data>
   <data name="ChangePassword.InsertNewPassword" xml:space="preserve">
-    <value>Insert new password</value>
+    <value>Enter new password</value>
   </data>
   <data name="ChangePassword.NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
   <data name="ChangePassword.OldPassword" xml:space="preserve">
-    <value>Inserisci la vecchia password</value>
+    <value>Enter old password</value>
   </data>
   <data name="EventoInserisci.Annulla" xml:space="preserve">
     <value>Annulla</value>
@@ -145,34 +145,34 @@
     <value>Inserisci</value>
   </data>
   <data name="Login.ConfermaPassword" xml:space="preserve">
-    <value>Conferma Password</value>
+    <value>Confirm password</value>
   </data>
   <data name="Login.Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="Login.ErroreLogin" xml:space="preserve">
-    <value>La Email o la Password non sono corretti.</value>
+    <value>Email or password are incorrect.</value>
   </data>
   <data name="Login.FacebookSignIn" xml:space="preserve">
     <value>Sign in with Facebook</value>
   </data>
   <data name="Login.ForgotPassword" xml:space="preserve">
-    <value>Hai dimenticato la password? Ti aiuteremo a recuperarla.</value>
+    <value>Forgotten password?</value>
   </data>
   <data name="Login.MessaggioPasswordObbligatoria" xml:space="preserve">
-    <value>Inserire una password</value>
+    <value>Enter new password</value>
   </data>
   <data name="Login.MessaggioUsernameObbligatorio" xml:space="preserve">
-    <value>Inserire uno username</value>
+    <value>Enter username</value>
   </data>
   <data name="Login.MessaggioValidazioneConfermaPassword" xml:space="preserve">
-    <value>Le due password non corrispondono.</value>
+    <value>Passwords don't match.</value>
   </data>
   <data name="Login.MessaggioValidazioneEmail" xml:space="preserve">
-    <value>Inserire una email valida.</value>
+    <value>Enter a valid email.</value>
   </data>
   <data name="Login.MessaggioValidazionePassword" xml:space="preserve">
-    <value>Inserire una password valida, almeno 8 caratteri comprendenti lettere minuscole, maiuscole, numeri e caratteri speciali.</value>
+    <value>Password must contain 8 characters, including upper and lower case, at least 1 number and 1 special character.</value>
   </data>
   <data name="Login.Or" xml:space="preserve">
     <value>or</value>
@@ -190,7 +190,7 @@
     <value>Email</value>
   </data>
   <data name="Menu.Logout" xml:space="preserve">
-    <value>Esci</value>
+    <value>Logout</value>
   </data>
   <data name="MessaggioValidazioneVecchiaPassword" xml:space="preserve">
     <value />
@@ -199,55 +199,441 @@
     <value>Crea nuovo evento</value>
   </data>
   <data name="Registrazione.Bottone" xml:space="preserve">
-    <value>Registrati</value>
+    <value>Register</value>
   </data>
   <data name="Registrazione.Cognome" xml:space="preserve">
-    <value>Cognome</value>
+    <value>Surname</value>
   </data>
   <data name="Registrazione.DataNascita" xml:space="preserve">
-    <value>Data di nascita</value>
+    <value>Date of birth</value>
   </data>
   <data name="Registrazione.MessaggioCampoObbligatorio" xml:space="preserve">
-    <value>Questo campo è obbligatorio.</value>
+    <value>Required field</value>
   </data>
   <data name="Registrazione.Nome" xml:space="preserve">
-    <value>Nome</value>
+    <value>Name</value>
   </data>
   <data name="Registrazione.SottotitoloSuccesso" xml:space="preserve">
-    <value>Riceverà una email con il link di conferma</value>
+    <value>We are sending you the confirmation link by email</value>
   </data>
   <data name="Registrazione.Titolo" xml:space="preserve">
-    <value>Registrazione</value>
+    <value>Registration</value>
   </data>
   <data name="Registrazione.TitoloSuccesso" xml:space="preserve">
-    <value>Registrazione avvenuta con successo</value>
+    <value>Registration completed successfully</value>
   </data>
   <data name="Registrazione.TornaAlLogin" xml:space="preserve">
-    <value>Vai alla pagina di login</value>
+    <value>Go to login page</value>
   </data>
   <data name="Restore.RecuperaPassword" xml:space="preserve">
-    <value>Recupera la password</value>
+    <value>Send new password</value>
   </data>
   <data name="Restore.RestoreSuccesso" xml:space="preserve">
-    <value>Ti è stata inviata una email contenente la nuova password.</value>
+    <value>An email with the new password has been sent to you.</value>
   </data>
   <data name="Restore.Titolo" xml:space="preserve">
-    <value>Hai dimenticato la password? Inserisci la tua mail, ti invieremo una nuova password.</value>
+    <value>Forgot your password? Enter your email, we will send you a new password.</value>
   </data>
-    <data name="Account.InformazioniPersonali" xml:space="preserve">
-    <value>Informazioni personali</value>
+  <data name="Account.InformazioniPersonali" xml:space="preserve">
+    <value>Personal information</value>
   </data>
-    <data name="Account.NotificheSuggerimenti" xml:space="preserve">
-    <value>Notifiche e suggerimenti</value>
+  <data name="Account.NotificheSuggerimenti" xml:space="preserve">
+    <value>Notification and suggestions</value>
   </data>
-       <data name="Account.InformativaPrivacy" xml:space="preserve">
-    <value>Informazioni e privacy</value>
+  <data name="Account.InformativaPrivacy" xml:space="preserve">
+    <value>Privacy and info</value>
   </data>
-        <data name="MieiAnnunci.Title" xml:space="preserve">
-    <value>I miei annunci</value>
+  <data name="MieiAnnunci.Title" xml:space="preserve">
+    <value>My listings</value>
   </data>
-    
-           <data name="MieiAnnunci.Nuovo" xml:space="preserve">
-    <value>Nuovo annuncio</value>
+  <data name="MieiAnnunci.Nuovo" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="CurrencySimbol" xml:space="preserve">
+    <value>€</value>
+  </data>
+  <data name="DettaglioAnnuncio.AirConditioners" xml:space="preserve">
+    <value>Air conditioners</value>
+  </data>
+  <data name="DettaglioAnnuncio.Backyard" xml:space="preserve">
+    <value>Backyard</value>
+  </data>
+  <data name="DettaglioAnnuncio.Bathrooms" xml:space="preserve">
+    <value>Bathrooms:</value>
+  </data>
+  <data name="DettaglioAnnuncio.Bedrooms" xml:space="preserve">
+    <value>Bedrooms:</value>
+  </data>
+  <data name="DettaglioAnnuncio.Cellar" xml:space="preserve">
+    <value>Cellar</value>
+  </data>
+  <data name="DettaglioAnnuncio.CondominiumFees" xml:space="preserve">
+    <value>Condominium fees:</value>
+  </data>
+  <data name="DettaglioAnnuncio.Costs" xml:space="preserve">
+    <value>Costs</value>
+  </data>
+  <data name="DettaglioAnnuncio.Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DettaglioAnnuncio.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="DettaglioAnnuncio.Elevator" xml:space="preserve">
+    <value>Elevator</value>
+  </data>
+  <data name="DettaglioAnnuncio.EnergyClass" xml:space="preserve">
+    <value>Energy class:</value>
+  </data>
+  <data name="DettaglioAnnuncio.GeneralInfo" xml:space="preserve">
+    <value>General info</value>
+  </data>
+  <data name="DettaglioAnnuncio.Heat" xml:space="preserve">
+    <value>Heat:</value>
+  </data>
+  <data name="DettaglioAnnuncio.HouseSize" xml:space="preserve">
+    <value>House size:</value>
+  </data>
+  <data name="DettaglioAnnuncio.Kitchens" xml:space="preserve">
+    <value>Kitchens:</value>
+  </data>
+  <data name="DettaglioAnnuncio.Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="DettaglioAnnuncio.NewInspection" xml:space="preserve">
+    <value>New Inspection</value>
+  </data>
+  <data name="DettaglioAnnuncio.Other" xml:space="preserve">
+    <value>More information</value>
+  </data>
+  <data name="DettaglioAnnuncio.Parking" xml:space="preserve">
+    <value>Garages/parking spaces:</value>
+  </data>
+  <data name="DettaglioAnnuncio.Pool" xml:space="preserve">
+    <value>Pool</value>
+  </data>
+  <data name="DettaglioAnnuncio.Terrace" xml:space="preserve">
+    <value>Terrace</value>
+  </data>
+  <data name="ErrorPage.BackHome" xml:space="preserve">
+    <value>Back to home</value>
+  </data>
+  <data name="ErrorPage.ErrorMessage" xml:space="preserve">
+    <value>An error occurred, try again later.</value>
+  </data>
+  <data name="Home.RecentSearch" xml:space="preserve">
+    <value>Search history</value>
+  </data>
+  <data name="Home.StartSearch" xml:space="preserve">
+    <value>Start search</value>
+  </data>
+  <data name="Login.GoogleSignIn" xml:space="preserve">
+    <value>Sign in with Google</value>
+  </data>
+  <data name="MieiAnnunci.MyListing" xml:space="preserve">
+    <value>My listings</value>
+  </data>
+  <data name="MieiAnnunci.New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NewItemPage.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="NewItemPage.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Registrazione.AccettoTermini" xml:space="preserve">
+    <value>I agree to the terms of use</value>
+  </data>
+  <data name="Ricerca.Bathrooms" xml:space="preserve">
+    <value>Bathrooms</value>
+  </data>
+  <data name="Ricerca.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Ricerca.HouseSize" xml:space="preserve">
+    <value>House size</value>
+  </data>
+  <data name="Ricerca.ParkingSpaces" xml:space="preserve">
+    <value>Parking spaces</value>
+  </data>
+  <data name="Ricerca.Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Ricerca.Rent" xml:space="preserve">
+    <value>Rent</value>
+  </data>
+  <data name="Ricerca.Rooms" xml:space="preserve">
+    <value>Rooms</value>
+  </data>
+  <data name="Ricerca.RoomsSection" xml:space="preserve">
+    <value>Rooms</value>
+  </data>
+  <data name="Ricerca.Sale" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+  <data name="Ricerca.SaleRent" xml:space="preserve">
+    <value>Sale or rent</value>
+  </data>
+  <data name="Ricerca.Search" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
+  <data name="Ricerca.SearchPlaceholder" xml:space="preserve">
+    <value>Search locality</value>
+  </data>
+  <data name="SelezioneDescrizione.CreaAnnuncio" xml:space="preserve">
+    <value>Create listing</value>
+  </data>
+  <data name="SelezioneDescrizione.Descrizione" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SelezioneImmagini.AggiungiImmagini" xml:space="preserve">
+    <value>Add images</value>
+  </data>
+  <data name="SelezioneImmagini.Avanti" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezioneImmagini.Immagini" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="SelezioneImmagini.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezioneInfoGenerali.AirConditioners" xml:space="preserve">
+    <value>Air conditioners</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Backyard" xml:space="preserve">
+    <value>Backyard</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Bathrooms" xml:space="preserve">
+    <value>Bathrooms:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Bedrooms" xml:space="preserve">
+    <value>Bedrooms:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Cellar" xml:space="preserve">
+    <value>Cellar</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Elevator" xml:space="preserve">
+    <value>Elevator</value>
+  </data>
+  <data name="SelezioneInfoGenerali.EnterHouseSize" xml:space="preserve">
+    <value>Enter house size</value>
+  </data>
+  <data name="SelezioneInfoGenerali.HouseSizeExample" xml:space="preserve">
+    <value>e.g. 120</value>
+  </data>
+  <data name="SelezioneInfoGenerali.InformazioniGenerali" xml:space="preserve">
+    <value>General info</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Kitchens" xml:space="preserve">
+    <value>Kitchens:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Parking" xml:space="preserve">
+    <value>Garages/parking spaces:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Pool" xml:space="preserve">
+    <value>Pool</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Rooms" xml:space="preserve">
+    <value>Other rooms:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.SquareMeters" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Terrace" xml:space="preserve">
+    <value>Terrace</value>
+  </data>
+  <data name="SelezioneLuogo.Address" xml:space="preserve">
+    <value>Enter address</value>
+  </data>
+  <data name="SelezioneLuogo.AddressPlaceholder" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="SelezioneLuogo.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezioneLuogo.Locality" xml:space="preserve">
+    <value>Enter locality</value>
+  </data>
+  <data name="SelezioneLuogo.LocalityPlaceholder" xml:space="preserve">
+    <value>Locality</value>
+  </data>
+  <data name="SelezioneLuogo.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezioneLuogo.WhereQuestion" xml:space="preserve">
+    <value>Where is it?</value>
+  </data>
+  <data name="SelezionePrezzo.CondominiumFees" xml:space="preserve">
+    <value>€/month - Condominium fees</value>
+  </data>
+  <data name="SelezionePrezzo.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezionePrezzo.Costs" xml:space="preserve">
+    <value>Price and cost</value>
+  </data>
+  <data name="SelezionePrezzo.EnergyClass" xml:space="preserve">
+    <value>Energy class</value>
+  </data>
+  <data name="SelezionePrezzo.EnterPrice" xml:space="preserve">
+    <value>€ - Enter price</value>
+  </data>
+  <data name="SelezionePrezzo.FeesExample" xml:space="preserve">
+    <value>e.g. 80</value>
+  </data>
+  <data name="SelezionePrezzo.Heat" xml:space="preserve">
+    <value>Heat</value>
+  </data>
+  <data name="SelezionePrezzo.HeatSelect" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelezionePrezzo.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezionePrezzo.PriceExample" xml:space="preserve">
+    <value>e.g. 120.000</value>
+  </data>
+  <data name="SelezionePrezzo.Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelezioneProprieta.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezioneProprieta.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezioneProprieta.PropertyType" xml:space="preserve">
+    <value>What kind of property do you have?</value>
+  </data>
+  <data name="SelezioneTipologiaAnnuncio.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezioneTipologiaAnnuncio.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezioneTipologiaAnnuncio.SaleRent" xml:space="preserve">
+    <value>Sale or rent?</value>
+  </data>
+  <data name="MainPage.Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MainPage.Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="MainPage.Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="MainPage.MyListing" xml:space="preserve">
+    <value>My listing</value>
+  </data>
+  <data name="MainPage.Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="APARTMENT" xml:space="preserve">
+    <value>Apartment</value>
+  </data>
+  <data name="ATTIC" xml:space="preserve">
+    <value>Attic</value>
+  </data>
+  <data name="LOFT_APARTMENT" xml:space="preserve">
+    <value>Loft apartment</value>
+  </data>
+  <data name="PENTHOUSE" xml:space="preserve">
+    <value>Penthouse</value>
+  </data>
+  <data name="ROOM" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="VILLA" xml:space="preserve">
+    <value>Villa/House</value>
+  </data>
+  <data name="A1" xml:space="preserve">
+    <value>A1</value>
+  </data>
+  <data name="A2" xml:space="preserve">
+    <value>A2</value>
+  </data>
+  <data name="A3" xml:space="preserve">
+    <value>A3</value>
+  </data>
+  <data name="A4" xml:space="preserve">
+    <value>A4</value>
+  </data>
+  <data name="ABSENT" xml:space="preserve">
+    <value>Absent</value>
+  </data>
+  <data name="B" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="C" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="CENTRALIZED" xml:space="preserve">
+    <value>Centralized</value>
+  </data>
+  <data name="D" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="F" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="G" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="INDEPENDENT" xml:space="preserve">
+    <value>Independent</value>
+  </data>
+  <data name="ListaAnnunci.Locality" xml:space="preserve">
+    <value>Locality</value>
+  </data>
+  <data name="RENT" xml:space="preserve">
+    <value>Rent</value>
+  </data>
+  <data name="SALE" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+  <data name="WAITING" xml:space="preserve">
+    <value>Waiting certification</value>
+  </data>
+  <data name="A" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="A+" xml:space="preserve">
+    <value>A+</value>
+  </data>
+  <data name="ChangePassword.Title" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="InformazionePersonali.DateOfBirth" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="InformazionePersonali.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="InformazionePersonali.Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="InformazionePersonali.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="InformazionePersonali.Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="InformazionePersonali.Title" xml:space="preserve">
+    <value>Personal information</value>
   </data>
 </root>

@@ -35,6 +35,7 @@
     <Folder Include="Views\Annunci\" />
     <Folder Include="Utility\" />
     <Folder Include="Utility\Extensions\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />
@@ -48,6 +49,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\facebook-login %28copy%29.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\annunci-create %28copy%29.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\filter-modal.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\account-edit.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -23,7 +23,7 @@
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Nuovo annuncio"></Label>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NuovoAnnuncio}"></Label>
             <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                 <Label Style="{x:StaticResource CancelButton}"></Label>
 
@@ -39,7 +39,7 @@
        <StackLayout>
            <StackLayout Padding="20">
                     <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,10" Padding="20">
-                    <Label Text="Informazioni generali" HorizontalTextAlignment="Center" ></Label>
+                    <Label Text="{translator:Translate SelezioneInfoGenerali.InformazioniGenerali}" HorizontalTextAlignment="Center" ></Label>
                      <ProgressBar Progress="0.4"/>
                 </StackLayout>
            </StackLayout>
@@ -59,16 +59,16 @@
                 <StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="m²" FontAttributes="Bold" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label Text="Inserisci la superficie"></Label>
+                            <Label Text="{translator:Translate SelezioneInfoGenerali.SquareMeters}" FontAttributes="Bold" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                            <Label Text="{translator:Translate SelezioneInfoGenerali.EnterHouseSize}"></Label>
                     </StackLayout>
-                    <appappartamenti:MyEntry x:Name="entSuperficie" Keyboard="Numeric" Placeholder="Esempio: 120"></appappartamenti:MyEntry>
+                        <appappartamenti:MyEntry x:Name="entSuperficie" Keyboard="Numeric" Placeholder="{translator:Translate SelezioneInfoGenerali.HouseSizeExample}"></appappartamenti:MyEntry>
 
                     <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label  VerticalTextAlignment="Center" Text="Camere da letto:"></Label>
+                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Bedrooms}"></Label>
                         <Label x:Name="lblCamereLettoCount" Text="0"  VerticalTextAlignment="Center" FontSize="Large"></Label>
 
                         <Stepper x:Name="stpCamereLetto" HorizontalOptions="EndAndExpand" ValueChanged="StpCamereLetto_ValueChanged" WidthRequest="100" Minimum="0" Visual="Material"></Stepper>
@@ -79,7 +79,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf52b;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label  VerticalTextAlignment="Center" Text="Stanze:"></Label>
+                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Rooms}"></Label>
                         <Label x:Name="lblStanzeCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
                         <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
@@ -89,7 +89,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label  VerticalTextAlignment="Center" Text="Bagni:"></Label>
+                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Bathrooms}"></Label>
                         <Label x:Name="lblBagniCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
                         <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
@@ -99,7 +99,7 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label  VerticalTextAlignment="Center" Text="Cucine:"></Label>
+                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Kitchens}"></Label>
                         <Label x:Name="lblCucineCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
                     <Stepper x:Name="stpCucine" ValueChanged="StpCucine_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
 
@@ -111,14 +111,14 @@
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        <Label VerticalTextAlignment="Center" Text="Garage/Posto auto:"></Label>
+                            <Label VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Parking}"></Label>
                         <Label x:Name="lblGarageCount" Text="0" FontSize="Large" VerticalTextAlignment="Center"></Label>
                         <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
                     <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-                    <Label Text="Altro" FontSize="Medium"></Label>
+                        <Label Text="{translator:Translate SelezioneInfoGenerali.Other}" FontSize="Medium"></Label>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -126,28 +126,28 @@
                         </Grid.ColumnDefinitions>
 
                         <CheckBox x:Name="chkGiardino" Grid.Column="0" Grid.Row="0" IsChecked="False"></CheckBox>
-                        <Label  Grid.Column="1" VerticalTextAlignment="Center" Text="Giardino"></Label>
+                            <Label  Grid.Column="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Backyard}"></Label>
 
                         <CheckBox x:Name="chkTerrazzo" Grid.Column="0" Grid.Row="1" IsChecked="False"></CheckBox>
-                        <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="Terrazzo"></Label>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Terrace}"></Label>
 
                         <CheckBox x:Name="chkCantina" Grid.Column="0" Grid.Row="2" IsChecked="False"></CheckBox>
-                        <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="Cantina"></Label>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Cellar}"></Label>
 
                         <CheckBox x:Name="chkPiscina" Grid.Column="0" Grid.Row="3" IsChecked="False"></CheckBox>
-                        <Label Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" Text="Piscina"></Label>
+                            <Label Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Pool}"></Label>
 
                         <CheckBox x:Name="chkAscensore" Grid.Column="0" Grid.Row="4" IsChecked="False"></CheckBox>
-                        <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="Ascensore"></Label>
+                            <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
 
                         <CheckBox x:Name="chkCondizionatori" Grid.Column="0" Grid.Row="5" IsChecked="False"></CheckBox>
-                        <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="Condizionatori"></Label>
+                            <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
                     </Grid>
 
                 </StackLayout>
             </ScrollView>
 
-                <Button Grid.Column="0" Grid.Row="1" Text="Avanti"  x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+                <Button Grid.Column="0" Grid.Row="1" Text="{translator:Translate SelezioneInfoGenerali.Continue}"  x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
             </Grid>
 
         </StackLayout>

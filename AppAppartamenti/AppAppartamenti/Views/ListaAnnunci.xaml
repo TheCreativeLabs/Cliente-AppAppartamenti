@@ -37,7 +37,7 @@
                             <appappartamenti:SearchEntry
                                 VerticalOptions="Center"
                                 Visual="Material"
-                                Text="Casalecchio di Reno"
+                                Text="{translator:Translate ListaAnnunci.Locality}"
                                 x:Name="entRicerca" IsEnabled="False"/>
                         </StackLayout>
                    

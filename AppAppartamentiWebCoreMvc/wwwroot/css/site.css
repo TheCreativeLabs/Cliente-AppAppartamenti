@@ -310,3 +310,53 @@ p{
     max-width:40px !important;
     text-align:center;
 }
+
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+#ui-id-1{
+    background-color: #f8f9fa !important;
+    padding: 0.25rem !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0.25rem !important;
+    border: 0 !important;
+    z-index:1050 !important;
+}
+
+.ui-menu-item:hover, .ui-menu-item-wrapper:hover{
+    background-color: transparent !important;
+    border:none !important;
+    color:black !important;
+}
+
+.form-control{
+    max-width:350px !important;
+}
+
+#txtRicerca{
+    max-width:unset !important;
+}
+
+.file-label {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
+
+.file-input {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}

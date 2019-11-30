@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.SelezioneDescrizione"
@@ -70,7 +71,7 @@
                 <!--<Button x:Name="btnProcedi" Text="Crea annuncio" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>-->
 
             </StackLayout>
-            <Button Text="Crea annuncio"  x:Name="btnProcedi" Clicked="BtnImmaginiProcedi_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+            <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}"  x:Name="btnProcedi" Clicked="BtnImmaginiProcedi_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
 
         </StackLayout>
     </ContentPage.Content>

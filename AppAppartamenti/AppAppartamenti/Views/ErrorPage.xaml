@@ -4,15 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              x:Class="AppAppartamenti.Views.ErrorPage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
             <Label  Text="&#xf071;" TextColor="Red" FontSize="Header" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}"></Label>
 
-            <Label Text="Si è verificato un errore, riprovare più tardi." TextColor="Red" FontSize="Subtitle"  HorizontalTextAlignment="Center"></Label>
+            <Label Text="{translator:Translate ErrorPage.ErrorMessage}" TextColor="Red" FontSize="Subtitle"  HorizontalTextAlignment="Center"></Label>
 
-            <Button x:Name="btnTornaAllaHome" Clicked="btnTornaAllaHome_Clicked" BorderColor="Red"  CornerRadius="30" BorderWidth="2" BackgroundColor="white" Visual="Material" TextColor="black" Text="Torna alla home" HorizontalOptions="Center"></Button>
+            <Button x:Name="btnTornaAllaHome" Clicked="btnTornaAllaHome_Clicked" BorderColor="Red"  CornerRadius="30" BorderWidth="2" BackgroundColor="white" Visual="Material" TextColor="black" Text="{translator:Translate ErrorPage.BackHome}" HorizontalOptions="Center"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

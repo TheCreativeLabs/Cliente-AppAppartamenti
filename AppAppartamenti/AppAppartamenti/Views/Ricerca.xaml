@@ -5,13 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Ricerca"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#F0F0F0">
     <ContentPage.Content>
         <StackLayout Padding="25">
-                    <Button x:Name="btnCancel" Text="Annulla" TextColor="Gray" BackgroundColor="Transparent"
+            <Button x:Name="btnCancel" Text="{translator:Translate Ricerca.Cancel}" TextColor="Gray" BackgroundColor="Transparent"
                             HorizontalOptions="End" VerticalOptions="Center" Clicked="btnCancel_Clicked">
                     </Button>
 
@@ -20,7 +21,7 @@
                             <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
                             <appappartamenti:SearchEntry
-                                Placeholder="Ricerca per città o provincia"
+                                Placeholder="{translator:Translate Ricerca.SearchPlaceholder}"
                                 x:Name="entRicerca"
 
                                 TextChanged="EntRicerca_TextChanged"
@@ -45,11 +46,11 @@
 
                             <Frame HasShadow="False">
                                 <StackLayout>
-                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Vendita o affitto" FontSize="Medium" TextColor="Black"></Label>
+                            <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="{translator:Translate Ricerca.SaleRent}" FontSize="Medium" TextColor="Black"></Label>
 
                                     <input:RadioButtonGroupView>
-                                            <input:RadioButton Text="Vendita" TextFontSize="15" TextColor="Gray"></input:RadioButton>
-                                            <input:RadioButton Text="Affitto" TextFontSize="15" TextColor="Gray"></input:RadioButton>
+                                <input:RadioButton Text="{translator:Translate Ricerca.Sale}" TextFontSize="15" TextColor="Gray"></input:RadioButton>
+                                <input:RadioButton Text="{translator:Translate Ricerca.Rent}" TextFontSize="15" TextColor="Gray"></input:RadioButton>
                                     </input:RadioButtonGroupView>
                                 </StackLayout>
                              </Frame>
@@ -58,7 +59,7 @@
 
                             <Frame HasShadow="True" Visual="Material">
                                 <StackLayout>
-                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Prezzo" FontSize="Medium" TextColor="Black"></Label>
+                            <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="{translator:Translate Ricerca.Price}" FontSize="Medium" TextColor="Black"></Label>
 
                                     <Grid HorizontalOptions="FillAndExpand">
                                         <Grid.ColumnDefinitions>
@@ -67,6 +68,7 @@
                                         </Grid.ColumnDefinitions>
                                     </Grid>
 
+                                    <!--FIXME internazionalizzazione/mostrare nel format corretto i numeri-->
                                     <StackLayout Orientation="Horizontal">
                                         <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="30000" TextColor="Gray" ></Label>
 
@@ -81,7 +83,7 @@
                             
                             <Frame HasShadow="True" Visual="Material">
                                 <StackLayout>
-                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Superficie" FontSize="Medium" TextColor="Black"></Label>
+                            <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="{translator:Translate Ricerca.HouseSize}" FontSize="Medium" TextColor="Black"></Label>
 
                                     <Grid HorizontalOptions="FillAndExpand">
                                         <Grid.ColumnDefinitions>
@@ -104,7 +106,7 @@
 
                              <Frame HasShadow="True" Visual="Material">
                                 <StackLayout>
-                                    <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="Camere" FontSize="Medium" TextColor="Black"></Label>
+                            <Label VerticalTextAlignment="Center" FontAttributes="Bold" Text="{translator:Translate Ricerca.RoomsSection}" FontSize="Medium" TextColor="Black"></Label>
 
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -112,13 +114,13 @@
                                             <ColumnDefinition Width="3*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="Stanze" TextColor="Gray"></Label>
+                                <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Rooms}" TextColor="Gray"></Label>
                                         <Stepper Visual="Material" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="5"  HorizontalOptions="EndAndExpand"></Stepper>
 
-                                        <Label Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center"  Text="Bagni" TextColor="Gray"></Label>
+                                <Label Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center"  Text="{translator:Translate Ricerca.Bathrooms}" TextColor="Gray"></Label>
                                         <Stepper Visual="Material" Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
 
-                                        <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="Posti auto" TextColor="Gray"></Label>
+                                <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.ParkingSpaces}" TextColor="Gray"></Label>
                                         <Stepper Visual="Material" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
                                     </Grid>
                                 </StackLayout>
@@ -137,7 +139,7 @@
                 <StackLayout HeightRequest="100" VerticalOptions="EndAndExpand" Margin="-30">
                     <Frame x:Name="btnRicerca" HeightRequest="100" HasShadow="False" BackgroundColor="#ff6b6b">
 
-                        <Label Text="CERCA" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" ></Label>
+                    <Label Text="{translator:Translate Ricerca.Search}" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" ></Label>
 
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="btnRicerca_Clicked"></TapGestureRecognizer>

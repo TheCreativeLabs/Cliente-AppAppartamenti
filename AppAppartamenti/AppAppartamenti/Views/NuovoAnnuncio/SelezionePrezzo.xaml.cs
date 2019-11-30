@@ -21,6 +21,9 @@ namespace AppAppartamenti.Views
         List<ClasseEnergetica> listClasseEnergetica = new List<ClasseEnergetica>();
         List<TipologiaRiscaldamento> listTipologiaRiscaldamento = new List<TipologiaRiscaldamento>();
 
+        static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
+
+
         public SelezionePrezzo(AnnuncioDtoInput Annuncio)
         {
             InitializeComponent();
@@ -102,12 +105,15 @@ namespace AppAppartamenti.Views
 
         public void PckRiscaldamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            entRiscaldamento.Text = ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Descrizione;
+            //entRiscaldamento.Text = ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Descrizione;
+            entRiscaldamento.Text = Helpers.TranslateExtension.ResMgr.Value.GetString(((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Codice, translate.ci);
         }
 
         public void PckClasseEnergetica_SelectedIndexChanged(object sender, EventArgs e)
         {
-            entClasseEnergetica.Text = ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Descrizione;
+            //entClasseEnergetica.Text = ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Descrizione;
+            entClasseEnergetica.Text = Helpers.TranslateExtension.ResMgr.Value.GetString(((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Codice, translate.ci);
+
         }
     }
 }

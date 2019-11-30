@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              x:Class="AppAppartamenti.Views.Home" NavigationPage.HasNavigationBar="False"
             BackgroundColor="#F8F8F8">
     <ContentPage.Content>
@@ -22,7 +23,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
-                                <Label Text="Inzia la ricerca" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Gray"></Label>
+                        <Label Text="{translator:Translate Home.StartSearch}" VerticalTextAlignment="Center" FontSize="Medium" TextColor="Gray"></Label>
                             </StackLayout>
 
                             <Frame.GestureRecognizers>
@@ -34,7 +35,7 @@
                 <StackLayout Orientation="Vertical" Margin="0,15,-20,0">
 
 
-                    <Label Text="Ricerche recenti" FontSize="Title" FontAttributes="Bold" TextColor="Black">
+                <Label Text="{translator:Translate Home.RecentSearch}" FontSize="Title" FontAttributes="Bold" TextColor="Black">
                     </Label>
 
                     <StackLayout Orientation="Horizontal" HeightRequest="150">

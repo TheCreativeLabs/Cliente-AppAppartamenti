@@ -1,10 +1,11 @@
 // Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 $(document).ready(function () {
+
+    $('#divFilterModal').load($("#divFilterModal").data("url"));
+
     //sul focus mostro i filtri aggiuntivi
     let searchbarInput = document.getElementById("searchbarInput");
-    searchbarInput.addEventListener("focus", ShowSearchbarInput);
-    searchbarInput.addEventListener("blur", HideSearchbarInput);
     searchbarInput.addEventListener("keyup", EnableSearch);
 
     //This button will increment the value
@@ -81,6 +82,7 @@ $(document).ready(function () {
         });
     });
 
+    //TODO:capire se l'utente è loggato.
     GetUserInfo();
 });
 
@@ -89,7 +91,7 @@ function GetUserInfo() {
 
     $.ajax({
         type: "POST",
-        url: "/Login/GetUserInfo",
+        url: "/Account/GetUserInfo",
         contentType: "application/json; charset=utf-8",
         success: function (result, status, xhr) {
             var userInfo = JSON.parse(result);
@@ -115,18 +117,39 @@ function EnableSearch() {
         $("#buttonSearch").addClass("disabled");
     } else {
         $("#buttonSearch").removeClass("disabled");
+       var nomeComune = $("#searchbarInput").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/ListaComuni",
+            data: { NomeComune:nomeComune},
+            dataType: "json",
+            cache: false,
+            success: function (result, status, xhr) {
+                var nam = [];
+                for (var i = 0; i < result.length; i++) {
+                    nam.push(result[i].NomeComune);
+                }
+
+                $("#searchbarInput").autocomplete({
+                    source: nam
+                });
+            },
+            error: function (xhr, status, error) {
+                //console.log("Error during EnableSearch");
+            }
+        });
     }
-}
-
-function ShowSearchbarInput() {
-    $("#searchBarFilters").show();
-}
-
-function HideSearchbarInput() {
-    $("#searchBarFilters").hide();
 }
 
 function NavigateToDetail(Url) {
     window.location.href = Url;
 }
+
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
 

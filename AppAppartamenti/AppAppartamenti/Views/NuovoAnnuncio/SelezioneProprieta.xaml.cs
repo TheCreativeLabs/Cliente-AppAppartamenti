@@ -60,7 +60,8 @@ namespace AppAppartamenti.Views
         {
             if (rbList.SelectedItem != null)
             {
-                TipologiaProprieta tipologiaProprieta =  viewModel.listaProprieta.Where(x => x.Descrizione == rbList.SelectedItem).FirstOrDefault();
+                TipologiaProprieta tipologiaProprieta =  viewModel.translationsMap[(string) rbList.SelectedItem];
+                //TipologiaProprieta tipologiaProprieta = viewModel.listaProprieta.Where(x => x.Descrizione == rbList.SelectedItem).FirstOrDefault();
                 annuncio.IdTipologiaProprieta = tipologiaProprieta.Id;
                 await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio));
             }
