@@ -34,11 +34,35 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View(annunci.AsEnumerable());
         }
 
-       
-
-        public IActionResult Privacy()
+        public async Task<string> AddAsync(Guid IdAnnuncio)
         {
-            return View();
+            if (IdAnnuncio != Guid.Empty)
+            {
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+                await annunciClient.AggiungiAPreferitiAsync(IdAnnuncio);
+            }
+
+            return "OK";
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RimuoviPreferitoAsync(Guid IdAnnuncio)
+        {
+            if (IdAnnuncio != Guid.Empty)
+            {
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+                //Metodo per rimuovere un preferito
+            }
+
+            return RedirectToAction("List");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

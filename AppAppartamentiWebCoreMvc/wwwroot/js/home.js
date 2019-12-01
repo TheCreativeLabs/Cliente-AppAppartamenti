@@ -2,6 +2,9 @@
     $("#nav").addClass("navbar-transparent");
     $("#navSearchBar").hide();
 
+    let searchbarInput = document.getElementById("txtRicerca");
+    searchbarInput.addEventListener("keyup", EnableSearch);
+
     window.onscroll = function () { changeScroll() };
 
     $('#btnSignIn').click(ShowModalSignIn);
@@ -28,5 +31,35 @@ function ShowModalSignIn() {
 function ShowModalSignUp() {
     $("#modalLogin").modal("hide");
     $("#modalSignUp").modal("show");
+}
+
+function EnableSearch() {
+    if (document.getElementById("txtRicerca").value == "") {
+        $("#btnSearchHome").addClass("disabled");
+    } else {
+        $("#btnSearchHome").removeClass("disabled");
+        var nomeComune = $("#txtRicerca").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/ListaComuni",
+            data: { NomeComune: nomeComune },
+            dataType: "json",
+            cache: false,
+            success: function (result, status, xhr) {
+                var nam = [];
+                for (var i = 0; i < result.length; i++) {
+                    nam.push(result[i].NomeComune);
+                }
+
+                $("#txtRicerca").autocomplete({
+                    source: nam
+                });
+            },
+            error: function (xhr, status, error) {
+                //console.log("Error during EnableSearch");
+            }
+        });
+    }
 }
 

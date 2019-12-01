@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
 using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.Extensions;
+using AppAppartamentiWebCoreMvc.Utility;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -54,7 +56,6 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var classiEnergetiche = await annunciClient.GetListaClasseEnergeticaAsync();
             ViewData["ListaClassiEnergetiche"] = classiEnergetiche.AsEnumerable();
 
-
             return View(annuncio);
         }
 
@@ -93,10 +94,6 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View("../Home/Index");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }

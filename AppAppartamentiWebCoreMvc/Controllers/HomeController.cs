@@ -10,6 +10,8 @@ using System.Net.Http;
 using AppAppartamentiApiClient;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using AppAppartamentiWebCoreMvc.Extensions;
+using AppAppartamentiWebCoreMvc.Utility;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -57,7 +59,18 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             ViewData["ListaTipologiaProprieta"] = listTipologiaProprieta;
             ViewData["ListaTipologiaAnnuncio"] = listTipologiaAnnuncio;
 
-            return PartialView("_FilterModal");
+            var FilterModel = HttpContext.Session.GetObject<FilterModalViewModel>(Constants.FilterModalKey);
+
+            return PartialView("_FilterModal",FilterModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public string SaveSearchFilter(FilterModalViewModel Model)
+        {
+            HttpContext.Session.SetObject(Constants.FilterModalKey, Model);
+
+            return "OK";
         }
 
         [HttpPost]

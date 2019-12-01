@@ -38,7 +38,7 @@
                         <div class="input-group" style="text-align: center;">
                             <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-right-0" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
                             <div class="input-group-append">
-                                <a id="btnFiltri2" data-toggle="modal" data-target="#exampleModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ Altri filtri</small></a>
+                                <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ Altri filtri</small></a>
                             </div>
                             <div class="input-group-append">
                             <a class="btn btn-primary disabled" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
@@ -69,7 +69,7 @@
                                     </h6>
                                     <small id="lblEmail" class="text-muted"></small>
                                         </div>
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Edit">Modifica profilo</a>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Detail">Profilo</a>
                                     <a class="dropdown-item" href="#">Impostazioni</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">Esci</a>

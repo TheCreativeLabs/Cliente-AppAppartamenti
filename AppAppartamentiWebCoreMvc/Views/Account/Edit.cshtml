@@ -7,19 +7,18 @@
 
 <div class="container container-custom">
     <div class="row">
-        <div class="col-sm-6 offset-3 col-xs-12">
-             <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla home</a>
+        <div class="col-sm-8 offset-2 col-xs-12 mb-3">
+                     <a asp-action="Detail" asp-controller="Account" class="text-info float-right mt-4">Annulla</a>
 
-            <h2 class="mt-2 mb-2">Modifica le tue informazioni</h2>
-        
-        <form asp-action="Edit">
-            @{
+            <h2 class="mt-2 mb-2">Informazioni personali</h2>
+        </div>
+
+        @{
                 AppAppartamentiApiClient.UserInfoDto userInfo = (AppAppartamentiApiClient.UserInfoDto)ViewData["UserInfo"];
             }
-        
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @{
+        <div class="col-sm-3 offset-2 col-xs-12">
+                 @{
                 var imgSrc = userInfo.PhotoUrl;
 
                 if (userInfo.FotoProfilo != null)
@@ -28,15 +27,19 @@
                     imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
                 }
             }
-
-            <div class="mb-2" style="height:200px; width:200px">
-                <img id="imgFotoProfilo" src="@imgSrc"  alt="image" class="d-block w-100" />
+            <div class="mb-2 mx-auto" style="height:200px; width:200px">
+                <img id="imgFotoProfilo" src="@imgSrc" width="200" height="200"  alt="image" class="rounded-circle d-block w-100" />
             </div>
-
-            <div class="form-group">
+            <div class="form-group text-center">
                 <input  type="file" class="file-input" id="imageid">
-                <label class="file-label border bg-light p-2 rounded" for="imageid"><i class="fas fa-camera"></i></label>
+                <label class="file-label p-2 text-primary" for="imageid">Aggiorna foto</label>
             </div>
+        </div>
+
+        <div class="col-sm-5 col-xs-12">
+        
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>

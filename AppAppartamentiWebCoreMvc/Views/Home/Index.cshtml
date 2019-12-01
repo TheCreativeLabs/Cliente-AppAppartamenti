@@ -5,7 +5,7 @@
 <div class="bgimg">
     <div class="container-fluid">
         <div class="row mt-5">
-            <div class="col-8 offset-2" style="margin-top:100px;">
+            <div class="col-sm-8 offset-sm-2 col-xs-12 p-1" style="margin-top:100px;">
                 <div class="shadow-lg p-1 mb-5 bg-white rounded">
                     <div class="input-group input-group-lg" style="border: none;">
                         <div class="input-group-prepend" style="background-color: white;">
@@ -15,10 +15,10 @@
                         </div>
                         <input id="txtRicerca" type="text" class="form-control" placeholder="Cerca per città o provincia" aria-label="Username" aria-describedby="basic-addon1" style="border: none;">
                         <div class="input-group-append">
-                            <a id="btnFiltri2" data-toggle="modal" data-target="#exampleModal" class="btn btn-link text-dark" href="#"><small>+ Altri filtri</small></a>
+                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark" href="#"><small>+ Altri filtri</small></a>
                         </div>
                         <div class="input-group-append">
-                            <a class="btn btn-primary disabled" id="button-addon2"
+                            <a id="btnSearchHome" class="btn btn-primary disabled"
                                style="border-radius:0.3rem !important;"
                                asp-controller="Annunci" asp-action="List">Cerca</a>
                         </div>

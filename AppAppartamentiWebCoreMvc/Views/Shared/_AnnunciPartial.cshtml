@@ -2,7 +2,8 @@
 
 @foreach (var item in Model)
 {
-            <div class="card card-annuncio mb-3 shadow-sm" onclick="NavigateToDetail('@Url.Action("Detail", "Annunci", new { Id = item.Id })')">
+    //onclick="NavigateToDetail('@Url.Action("Detail", "Annunci", new { Id = item.Id })')"
+            <div class="card card-annuncio mb-3 shadow-sm" >
                 <div class="row no-gutters">
                   <div class="col-md-6">
                         @{
@@ -19,9 +20,9 @@
                     <div class="col-md-6">
                         <div class="card-body p-0">
                             <div class="card-header p-1 bg-light  border-0" style="text-align: end;">
-                                <button type="button" class="btn btn-sm btn-outline-dark btn-sm mr-1"><i class="fas fa-heart"></i></button>
+                                <button type="button" data-id="@item.Id" onclick="AddPreferred(this,'@Url.Action("Add", "AnnunciPreferiti", new { Id = item.Id })')" class="btn mr-1"><i class="fas fa-heart"></i></button>
 
-                                <button type="button" class="btn btn-sm btn-outline-dark btn-sm mr-1"><i class="fas fa-share-alt"></i></button>
+                                <button type="button" class="btn mr-1"><i class="fas fa-share-alt"></i></button>
                             </div>
 
                             <div class="p-3 mt-2">

@@ -3,6 +3,7 @@
 $(document).ready(function () {
     ReloadList();
 
+
     $('#loadFromMainFrame').click(function (e) {
         e.preventdefault;
 
@@ -22,4 +23,21 @@ function ReloadList() {
 
 function HideLoader() {
     $("#listLoader").hide();
+}
+
+
+function AddPreferred(btn,url) {
+    event.stopPropagation();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: "application/json; charset=utf-8",
+        success: function (result, status, xhr) {
+            $(btn).addClass("text-primary");
+        },
+        error: function (xhr, status, error) {
+
+        }
+    });
 }

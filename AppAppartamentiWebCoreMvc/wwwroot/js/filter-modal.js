@@ -20,6 +20,17 @@
         range: {
             'min': 30000,
             'max': 500000
+        },
+        format: {
+            // 'to' the formatted value. Receives a number.
+            to: function (value) {
+                return value;
+            },
+            // 'from' the formatted value.
+            // Receives a string, should return a number.
+            from: function (value) {
+                return Number(value);
+            }
         }
     });
 
@@ -33,6 +44,14 @@
         range: {
             'min': 50,
             'max': 500
+        },
+        format: {
+            to: function (value) {
+                return value;
+            },
+            from: function (value) {
+                return Number(value);
+            }
         }
     });
 
@@ -81,7 +100,11 @@
             $('input[name=' + fieldName + ']').val(0);
         }
     });
+
+    $("#btnSaveFilter").click(function (e) { SaveFilter() });
 });
+
+
 
 function setCookie(name, value, days) {
     var expires = "";
@@ -106,6 +129,44 @@ function getCookie(name) {
 
 function eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;';
+}
+
+function SaveFilter() {
+    letRangePrice = sliderPrezzo.noUiSlider.get();
+    letRangeDimension = sliderDimensione.noUiSlider.get();
+
+    let ModelObj = {
+        IdTipologiaProprieta: $("#selectTipologiaProprieta").val(),
+        IdTipologiaAnnuncio: $("#selectTipologiaAnnuncio").val(),
+        PrezzoMin: letRangePrice[0],
+        PrezzoMax: letRangePrice[1],
+        DimensioneMin: letRangeDimension[0],
+        DimensioneMax: letRangeDimension[1],
+        NumeroBagni : $("#NumeroBagni").val(),
+        NumeroAltreStanze: $("#NumeroAltreStanze").val(),
+        NumeroCamereLetto: $("#NumeroCamereLetto").val(),
+        NumeroCucine: $("#NumeroCucine").val(),
+        NumeroGarage: $("#NumeroGarage").val(),
+        NumeroPostiAuto: $("#NumeroPostiAuto").val(),
+        Ascensore: $("#customSwitchAscensore").is(":checked"),
+        Cantina: $("#customSwitchCantina").is(":checked"),
+        Giardino: $("#customSwitchGiaridno").is(":checked"),
+        Piscina: $("#customSwitchPiscina").is(":checked")
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/Home/SaveSearchFilter",
+        data: { Model: ModelObj },
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            $("#filterModal").modal("hide");
+        },
+        error: function (xhr, status, error) {
+            console.log("Error during EnableSearch");
+        }
+    });
 }
 
 
