@@ -15,6 +15,7 @@ namespace AppAppartamentiApi.Models
 
         public virtual DbSet<Annuncio> Annuncio { get; set; }
         public virtual DbSet<AnnunciPreferiti> AnnunciPreferiti { get; set; }
+        public virtual DbSet<AnnuncioMessaggi> AnnuncioMessaggi { get; set; }
         public virtual DbSet<ClasseEnergetica> ClasseEnergetica { get; set; }
         public virtual DbSet<Comuni> Comuni { get; set; }
         public virtual DbSet<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
@@ -23,6 +24,8 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<TipologiaProprieta> TipologiaProprieta { get; set; }
         public virtual DbSet<TipologiaRiscaldamento> TipologiaRiscaldamento { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<ImmaginePlanimetria> ImmaginePlanimetria { get; set; }
+        public virtual DbSet<Video> Video { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,6 +41,12 @@ namespace AppAppartamentiApi.Models
 
             modelBuilder.Entity<Annuncio>()
                 .HasMany(e => e.ImmagineAnnuncio)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.AnnuncioMessaggi)
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
                 .WillCascadeOnDelete(false);

@@ -717,12 +717,29 @@ namespace AppAppartamentiApi.Controllers
         [ResponseType(typeof(UserInfoDto))]
         public async Task<IHttpActionResult> GetCurrentUserInfoAsync()
         {
-            var idUser = User.Identity.GetUserId();
+            var idUser = new Guid(User.Identity.GetUserId());
+            //DbDataContext dbDataContext = new DbDataContext();
+            //ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+            //UserInfo userInfo = await dbDataContext.UserInfo.SingleOrDefaultAsync(x => x.IdAspNetUser == new Guid(idUser));
+            //string email = await applicationDbContext.Users.Where(x => x.Id == idUser).Select(x => x.Email).FirstOrDefaultAsync();
+
+            ////FIXME inserire anche immagine da Facebook 
+            ////ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            //UserInfoDto dto = UserInfoMapper.UserInfoToUserInfoDto(userInfo, email);
+            //return Ok(dto);
+            return await GetUserInfoAsync(idUser);
+        }
+
+        [HttpGet]
+        [Route("UserInfo/{idUser}")]
+        [ResponseType(typeof(UserInfoDto))]
+        public async Task<IHttpActionResult> GetUserInfoAsync(Guid idUser)
+        {
             DbDataContext dbDataContext = new DbDataContext();
             ApplicationDbContext applicationDbContext = new ApplicationDbContext();
-            UserInfo userInfo = await dbDataContext.UserInfo.SingleOrDefaultAsync(x => x.IdAspNetUser == new Guid(idUser));
-            string email = await applicationDbContext.Users.Where(x => x.Id == idUser).Select(x => x.Email).FirstOrDefaultAsync();
-        
+            UserInfo userInfo = await dbDataContext.UserInfo.SingleOrDefaultAsync(x => x.IdAspNetUser == idUser);
+            string email = await applicationDbContext.Users.Where(x => x.Id == idUser.ToString()).Select(x => x.Email).FirstOrDefaultAsync();
+
             //FIXME inserire anche immagine da Facebook 
             //ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             UserInfoDto dto = UserInfoMapper.UserInfoToUserInfoDto(userInfo, email);

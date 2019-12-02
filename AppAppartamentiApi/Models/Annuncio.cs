@@ -14,6 +14,8 @@ namespace AppAppartamentiApi.Models
         {
             AnnunciPreferiti = new HashSet<AnnunciPreferiti>();
             ImmagineAnnuncio = new HashSet<ImmagineAnnuncio>();
+            AnnuncioMessaggi = new HashSet<AnnuncioMessaggi>();
+
         }
 
         public Guid Id { get; set; }
@@ -103,5 +105,13 @@ namespace AppAppartamentiApi.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
+
+        public virtual ImmaginePlanimetria ImmaginePlanimetria { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnnuncioMessaggi> AnnuncioMessaggi { get; set; }
+
+        public virtual Video Video { get; set; }
+
     }
 }
