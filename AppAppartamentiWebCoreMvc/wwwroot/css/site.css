@@ -317,9 +317,17 @@ p{
   color: white;
 }
 
+.text-facebook{
+    color:#3B5998 !important;
+}
+
 .twitter {
   background-color: #55ACEE;
   color: white;
+}
+
+.text-whatsapp{
+    color:#25d366 !important;
 }
 
 .google {

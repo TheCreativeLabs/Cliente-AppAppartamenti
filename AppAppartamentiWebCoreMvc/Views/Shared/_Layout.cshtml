@@ -70,6 +70,7 @@
                                     <small id="lblEmail" class="text-muted"></small>
                                         </div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Detail">Profilo</a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Impostazioni</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">Esci</a>
@@ -96,6 +97,7 @@
     <partial name="_CookieConsentPartial" />
         
     @RenderBody()
+
         <div id="divFilterModal" data-url="@Url.Action("FilterModal", "Home")">
         </div>
 

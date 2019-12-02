@@ -2,8 +2,11 @@
 
 @foreach (var item in Model)
 {
-    //onclick="NavigateToDetail('@Url.Action("Detail", "Annunci", new { Id = item.Id })')"
-            <div class="card card-annuncio mb-3 shadow-sm" >
+    
+        string detailUrl = @Url.Action("Detail", "Annunci", new { Id = item.Id });
+    
+
+            <div class="card card-annuncio mb-3 shadow-sm" onclick="NavigateToDetail('@detailUrl')">
                 <div class="row no-gutters">
                   <div class="col-md-6">
                         @{
@@ -19,10 +22,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body p-0">
-                            <div class="card-header p-1 bg-light  border-0" style="text-align: end;">
-                                <button type="button" data-id="@item.Id" onclick="AddPreferred(this,'@Url.Action("Add", "AnnunciPreferiti", new { Id = item.Id })')" class="btn mr-1"><i class="fas fa-heart"></i></button>
-
-                                <button type="button" class="btn mr-1"><i class="fas fa-share-alt"></i></button>
+                            <div class="card-header p-1 bg-light border-0" style="text-align: end;">
+                                <button type="button" data-id="@item.Id" onclick="AddPreferred(this,'@Url.Action("Add", "AnnunciPreferiti")','@item.Id')" class="btn mr-1">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
                             </div>
 
                             <div class="p-3 mt-2">
@@ -51,6 +57,8 @@
                 </div>
             </div>
 
+            @await Html.PartialAsync("_ShareModal", item.Id)
+
             //@Html.DisplayFor(modelItem => item.Id)
             //@Html.DisplayFor(modelItem => item.IdUtente)
             //@Html.DisplayFor(modelItem => item.IdUtente)
@@ -58,5 +66,7 @@
             //@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             //@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         }
+
+
 
 

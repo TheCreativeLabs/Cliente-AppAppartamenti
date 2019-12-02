@@ -31,7 +31,7 @@
 
             <button type="button" class="btn btn-sm btn-outline-dark btn-sm float-right"><i class="fas fa-heart"></i>&nbsp;Salva</button>
 
-            <button type="button" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
+            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
 
             <button type="button" class="btn btn-outline-dark  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
 
@@ -252,8 +252,10 @@
     </div>
 </div>
 
+@await Html.PartialAsync("_ShareModal", Model.Id)
 
 @section Scripts {
     <script src="~/js/annunci-details.js" asp-append-version="true"></script>
+    <script src="~/js/share-modal.js" asp-append-version="true"></script>
 }
 

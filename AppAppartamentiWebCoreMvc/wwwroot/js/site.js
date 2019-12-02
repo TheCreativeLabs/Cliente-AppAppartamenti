@@ -153,3 +153,38 @@ const toBase64 = file => new Promise((resolve, reject) => {
     reader.onerror = error => reject(error);
 });
 
+function AddPreferred(btn, url, id) {
+    event.stopPropagation();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { Id: id },
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (result, status, xhr) {
+            $(btn).addClass("text-primary");
+        },
+        error: function (xhr, status, error) {
+
+        }
+    });
+}
+
+function RemovePreferred(btn, url, id) {
+    event.stopPropagation();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { Id: id },
+        dataType: json,
+        contentType: "application/json; charset=utf-8",
+        success: function (result, status, xhr) {
+            $(btn).addClass("text-primary");
+        },
+        error: function (xhr, status, error) {
+
+        }
+    });
+}
