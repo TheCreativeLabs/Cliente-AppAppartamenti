@@ -43,7 +43,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
                 AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
-                await annunciClient.AggiungiAPreferitiAsync(IdAnnuncio);
+                await annunciClient.AggiungiPreferitoAsync(IdAnnuncio);
             }
 
             return "OK";
@@ -59,7 +59,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
                 AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
-                //Metodo per rimuovere un preferito
+                await annunciClient.RimuoviPreferitoAsync(IdAnnuncio);
             }
 
             return RedirectToAction("List");

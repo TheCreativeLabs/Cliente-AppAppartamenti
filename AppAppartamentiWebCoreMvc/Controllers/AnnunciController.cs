@@ -37,7 +37,12 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
             AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
-            var annunci = await annunciClient.GetAnnunciAsync();
+            var FilterModel = HttpContext.Session.GetObject<FilterModalViewModel>(Constants.FilterModalKey);
+
+            var annunci = await annunciClient.GetAnnunciAsync(ListPage,5,FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
+                FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
+                FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage,FilterModel.Giardino,null,FilterModel.Cantina,
+                FilterModel.Piscina,FilterModel.Ascensore,null,null);
 
             ViewData["ListPage"] = ListPage;
 

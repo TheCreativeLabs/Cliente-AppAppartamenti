@@ -1,7 +1,7 @@
 ﻿@model AppAppartamentiApiClient.UserInfoDto
 
 @{
-    ViewData["Title"] = "Modifica profilo";
+    ViewData["Title"] = "Informazioni personali";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,8 +22,8 @@
                     imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
                 }
 
-                  <div class="mb-2 mx-auto" style="height:200px; width:200px">
-                <img id="imgFotoProfilo" src="@imgSrc" width="200" height="200"  alt="image" class="rounded-circle d-block w-100" />
+               <div class="mb-2 mx-auto image-profile-edit" >
+                    <img id="profileImage" src="@imgSrc"  alt="image" class="rounded-circle d-block w-100" />
             </div>
             }
         </div>

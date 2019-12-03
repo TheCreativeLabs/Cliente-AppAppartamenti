@@ -1,96 +1,94 @@
 ﻿@model AppAppartamentiApiClient.UpdateUserBindingModel
 
 @{
-    ViewData["Title"] = "Modifica profilo";
+    ViewData["Title"] = "Informazioni personali";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container container-custom">
     <div class="row">
         <div class="col-sm-8 offset-2 col-xs-12 mb-3">
-                     <a asp-action="Detail" asp-controller="Account" class="text-info float-right mt-4">Annulla</a>
+            <a asp-action="Detail" asp-controller="Account" class="text-info float-right mt-4">Annulla</a>
 
             <h2 class="mt-2 mb-2">Informazioni personali</h2>
         </div>
 
         @{
-                AppAppartamentiApiClient.UserInfoDto userInfo = (AppAppartamentiApiClient.UserInfoDto)ViewData["UserInfo"];
-            }
+            AppAppartamentiApiClient.UserInfoDto userInfo = (AppAppartamentiApiClient.UserInfoDto)ViewData["UserInfo"];
+        }
 
         <div class="col-sm-3 offset-2 col-xs-12">
-                 @{
+            @{
                 var imgSrc = userInfo.PhotoUrl;
 
                 if (userInfo.FotoProfilo != null)
                 {
                     var base64 = Convert.ToBase64String(userInfo.FotoProfilo);
-                    imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                 }
             }
-            <div class="mb-2 mx-auto" style="height:200px; width:200px">
-                <img id="imgFotoProfilo" src="@imgSrc" width="200" height="200"  alt="image" class="rounded-circle d-block w-100" />
+            <div class="mb-2 mx-auto image-profile-edit">
+                <img id="profileImage" src="@imgSrc" alt="image" class="rounded-circle d-block w-100 " />
             </div>
             <div class="form-group text-center">
-                <input  type="file" class="file-input" id="imageid">
-                <label class="file-label p-2 text-primary" for="imageid">Aggiorna foto</label>
+                <input type="file" class="file-input" id="inputAddImage">
+                <label class="file-label p-2 text-primary" for="inputAddImage">Aggiorna foto</label>
             </div>
         </div>
 
         <div class="col-sm-5 col-xs-12">
-        
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" value="@userInfo.Nome" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" value="@userInfo.Nome" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" value="@userInfo.Cognome" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Surname" class="control-label"></label>
+                    <input asp-for="Surname" class="form-control" value="@userInfo.Cognome" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" value="@userInfo.Email" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="DataNascita" class="control-label"></label>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" value="@userInfo.Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-                @{
-                    if (userInfo.DataDiNascita.HasValue)
-                    {
-                     <input asp-for="DataNascita" type="date" class="form-control" value="@userInfo.DataDiNascita.Value.ToString("yyyy-MM-dd")" />
+                <div class="form-group">
+                    <label asp-for="DataNascita" class="control-label"></label>
+
+                    @{
+                        if (userInfo.DataDiNascita.HasValue)
+                        {
+                            <input asp-for="DataNascita" type="date" class="form-control" value="@userInfo.DataDiNascita.Value.ToString("yyyy-MM-dd")" />
+                        }
+                        else
+                        {
+                            <input asp-for="DataNascita" type="date" class="form-control" />
+                        }
                     }
-                    else
-                    {
-                     <input asp-for="DataNascita" type="date" class="form-control"  />
-                    }
-                }
 
-                <span asp-validation-for="DataNascita" class="text-danger"></span>
-            </div>
+                    <span asp-validation-for="DataNascita" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="display:none">
-                <label asp-for="ImmagineProfilo" class="control-label"></label>
-                <input  asp-for="ImmagineProfilo" class="form-control" value="@userInfo.FotoProfilo" />
-            </div>
+                <div class="form-group" style="display:none">
+                    <label asp-for="ImmagineProfilo" class="control-label"></label>
+                    <input asp-for="ImmagineProfilo" class="form-control" value="@userInfo.FotoProfilo" />
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Salva" class="btn btn-primary" />
-            </div>
-      
+                <div class="form-group">
+                    <input type="submit" value="Salva" class="btn btn-primary" />
+                </div>
 
-              </form>
-            </div>
+
+            </form>
         </div>
+    </div>
 </div>
-
 
 @section Scripts {
     <script src="~/js/account-edit.js" asp-append-version="true"></script>

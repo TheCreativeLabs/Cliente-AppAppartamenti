@@ -70,7 +70,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         {
             HttpContext.Session.SetObject(Constants.FilterModalKey, Model);
 
-            return "OK";
+            return JsonConvert.SerializeObject("OK");
         }
 
         [HttpPost]

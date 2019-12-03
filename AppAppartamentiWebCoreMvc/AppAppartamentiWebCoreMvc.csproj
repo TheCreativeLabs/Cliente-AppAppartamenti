@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Index.cshtml" />
@@ -36,6 +37,10 @@
     <Folder Include="Utility\" />
     <Folder Include="Utility\Extensions\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="wwwroot\bundle\" />
+    <Folder Include="wwwroot\lib\multirange\" />
+    <Folder Include="wwwroot\lib\nouislider\" />
+    <Folder Include="wwwroot\lib\wNumb\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />

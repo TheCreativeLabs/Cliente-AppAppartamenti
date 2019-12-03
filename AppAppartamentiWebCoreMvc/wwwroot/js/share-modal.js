@@ -12,9 +12,5 @@
     })
 });
 
-//Apre l'url in una nuova scheda
-function OpenUrl(url) {
-    var win = window.open(url, '_blank');
-    win.focus();
-}
+
 

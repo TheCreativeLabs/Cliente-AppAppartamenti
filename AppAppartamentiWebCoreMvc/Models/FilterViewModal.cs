@@ -4,9 +4,13 @@ namespace AppAppartamentiWebCoreMvc.Models
 {
     public class FilterModalViewModel
     {
-        public Guid IdTipologiaProprieta { get; set; }
+        public int CodiceComune { get; set; }
 
-        public Guid IdTipologiaAnnuncio { get; set; }
+        public string NomeComune { get; set; }
+
+        public Guid? IdTipologiaProprieta { get; set; }
+
+        public Guid? IdTipologiaAnnuncio { get; set; }
 
         public int PrezzoMin { get; set; }
 

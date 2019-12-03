@@ -103,7 +103,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 }
             }
 
-            return RedirectToAction("Edit");
+            return RedirectToAction("Detail");
         }
     }
 }

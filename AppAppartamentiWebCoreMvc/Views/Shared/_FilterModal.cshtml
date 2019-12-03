@@ -16,14 +16,13 @@
                         <div class="col-12 mb-4">
                             <h6 >Tipologia proprieta</h6>
 
-                             
                             @{ 
 
                                     IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
 
                                           @Html.DropDownListFor(m => m.IdTipologiaProprieta,
                                             new SelectList(tipologiaProprieta,"Id","Descrizione",Model?.IdTipologiaProprieta),
-                                             null,new {@id="selectTipologiaProprieta", @class = "custom-select" })
+                                             "Tutti",new {@id="selectTipologiaProprieta", @class = "custom-select" })
 
                           }
 
@@ -38,7 +37,7 @@
 
                                 @Html.DropDownListFor(m => m.IdTipologiaProprieta,
                                             new SelectList(listaTipologiaAnnuncio,"Id","Descrizione",Model?.IdTipologiaAnnuncio),
-                                             null,new {@id="selectTipologiaAnnuncio", @class = "custom-select" })
+                                             "Tutti",new {@id="selectTipologiaAnnuncio", @class = "custom-select" })
                               
                             }
                         </div>
@@ -183,8 +182,8 @@
 
                         <div class="col-12 mb-4">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitchGiaridno" checked="@Model?.Giardino">
-                                <label class="custom-control-label" for="customSwitchGiaridno">Giaridno</label>
+                                <input type="checkbox" class="custom-control-input" id="customSwitchGiardino" checked="@Model?.Giardino">
+                                <label class="custom-control-label" for="customSwitchGiardino">Giardino</label>
                             </div>
                         </div>
                     </div>
@@ -197,5 +196,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    var codiceComune = "@Model?.CodiceComune";
+    var nomeComune = "@Model?.NomeComune";
+</script>
 
 <script src="~/js/filter-modal.js" asp-append-version="true"></script>
