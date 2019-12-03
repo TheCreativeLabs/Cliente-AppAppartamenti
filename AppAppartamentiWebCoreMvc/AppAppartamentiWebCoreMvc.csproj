@@ -25,6 +25,8 @@
     <Content Remove="wwwroot\css\Roboto-Regular.ttf" />
     <Content Remove="wwwroot\js\home %28copy%29.js" />
     <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
+    <Content Remove="Views\AnnunciPreferiti\Detail.cshtml" />
+    <Content Remove="Views\AnnunciPersonali\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />

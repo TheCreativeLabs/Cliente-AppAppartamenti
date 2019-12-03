@@ -159,13 +159,13 @@ const toBase64 = file => new Promise((resolve, reject) => {
 //Aggiunge l'annuncio ai preferiti
 function AddPreferred(btn, url, id) {
     event.stopPropagation();
-
+    alert(id);
+    alert(url);
     $.ajax({
         type: "POST",
         url: url,
         data: { Id: id },
         dataType: "json",
-        contentType: "application/json; charset=utf-8",
         success: function (result, status, xhr) {
             $(btn).addClass("text-primary");
         },
@@ -183,8 +183,7 @@ function RemovePreferred(btn, url, id) {
         type: "POST",
         url: url,
         data: { Id: id },
-        dataType: json,
-        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         success: function (result, status, xhr) {
             $(btn).addClass("text-primary");
         },

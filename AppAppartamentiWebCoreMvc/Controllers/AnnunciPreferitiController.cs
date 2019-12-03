@@ -9,6 +9,7 @@ using AppAppartamentiWebCoreMvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -22,7 +23,12 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> ListAsync()
+        public IActionResult ListAsync()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> RefreshListAsync()
         {
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
@@ -31,38 +37,39 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
             var annunci = await annunciClient.GetAnnunciPreferitiAsync();
 
-            return View(annunci.AsEnumerable());
-        }
-
-        public async Task<string> AddAsync(Guid IdAnnuncio)
-        {
-            if (IdAnnuncio != Guid.Empty)
-            {
-                HttpClient httpClient = new HttpClient();
-                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-
-                AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
-                await annunciClient.AggiungiPreferitoAsync(IdAnnuncio);
-            }
-
-            return "OK";
+            return PartialView("_AnnunciPartial", annunci);
         }
 
         [HttpPost]
-        public async Task<IActionResult> RimuoviPreferitoAsync(Guid IdAnnuncio)
+        public async Task<string> AddAsync(Guid Id)
         {
-            if (IdAnnuncio != Guid.Empty)
+            if (Id != Guid.Empty)
             {
                 HttpClient httpClient = new HttpClient();
                 var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
                 AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
-                await annunciClient.RimuoviPreferitoAsync(IdAnnuncio);
+                await annunciClient.AggiungiPreferitoAsync(Id);
             }
 
-            return RedirectToAction("List");
+            return JsonConvert.SerializeObject("OK");
+        }
+
+        [HttpPost]
+        public async Task<string> RimuoviPreferitoAsync(Guid Id)
+        {
+            if (Id != Guid.Empty)
+            {
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+                await annunciClient.RimuoviPreferitoAsync(Id);
+            }
+
+            return JsonConvert.SerializeObject("OK");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

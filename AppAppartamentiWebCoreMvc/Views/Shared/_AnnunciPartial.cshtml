@@ -4,7 +4,6 @@
 {
     
         string detailUrl = @Url.Action("Detail", "Annunci", new { Id = item.Id });
-    
 
             <div class="card card-annuncio mb-3 shadow-sm" onclick="NavigateToDetail('@detailUrl')">
                 <div class="row no-gutters">
@@ -66,8 +65,5 @@
             //@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             //@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         }
-
-
-
 
 <script src="~/js/share-modal.js" asp-append-version="true"></script>

@@ -1,0 +1,350 @@
+﻿@model AppAppartamentiApiClient.AnnuncioDtoInput
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-12">
+            <h2>Pubblica un nuovo annuncio</h2>
+            <div class="progress" style="height: 10px;">
+              <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-sm-3 col-xs-12 position-fixed mt-3">
+            <div id="smallTitle">
+                <h6>Nuovo annuncio</h6>
+                <div class="progress" style="height: 5px;">
+                  <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <nav id="navbar-create" class="navbar navbar-light">
+                <nav class="nav nav-pills flex-column">
+                    <a class="nav-link text-dark" href="#tipologia-proprieta">Tipologia proprietà</a>
+                    <a class="nav-link text-dark" href="#tipologia-annuncio">Tipologia annuncio</a>
+                    <a class="nav-link text-dark" href="#posizione">Posizione</a>
+                    <a class="nav-link text-dark" href="#prezzo">Prezzo e costi</a>
+                    <a class="nav-link text-dark " href="#caratteristiche">Caratteristiche</a>
+                    <a class="nav-link text-dark" href="#descrizione">Descrizione</a>
+                    <a class="nav-link text-dark" href="#immagini">Immagini</a>
+                    <a class="nav-link text-dark" href="#planimetria">Planimetria</a>
+                </nav>
+            </nav>
+        </div>
+
+        <div class="col-md-9 col-sm-9 col-xs-12 offset-3">
+            <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div  class="shadow-sm mt-3 mb-3 p-3">
+                     <h5 id="tipologia-proprieta" class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">Tipologia proprietà</h5>
+                     <div class="form-group">
+                         @{
+                             IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
+                            @foreach (var proprieta in tipologiaProprieta)
+                            {
+                                <input class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
+                            }
+                             <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
+                         }
+                    </div>
+                </div>
+
+                <div class="shadow-sm mb-3 p-3">
+                     <h5 id="tipologia-annuncio" class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">Tipologia annuncio</h5>
+                     <div class="form-group">
+                         @{
+                             IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
+                            @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
+                            {
+                                <input class="mr-2"  type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" /><small>@tipologiaAnnuncio.Descrizione</small><br />
+                            }
+                            <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
+                         }
+                    </div>
+                </div>
+
+                <div class="shadow-sm mb-3 p-3">
+                     <h5 id="posizione" class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">Posizione</h5>
+                     <div class="form-group">
+                            <label asp-for="CodiceComune" class="control-label col-form-label-sm"></label>
+                            <input asp-for="CodiceComune" type="text" class="form-control form-control-sm" />
+                            <span asp-validation-for="CodiceComune" class="text-danger"></span>
+                     </div>
+                     <div class="form-group">
+                            <label asp-for="Indirizzo" class="control-label col-form-label-sm"></label>
+                            <input asp-for="Indirizzo" class="form-control form-control-sm" />
+                            <span asp-validation-for="Indirizzo" class="text-danger"></span>
+                     </div>
+                </div>
+
+                 <div class="shadow-sm mb-3 p-3">
+                     <h5 id="prezzo" class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">Prezzo e costi</h5>
+                     <div class="form-group">
+                             <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>
+                             <div class="input-group input-group-sm">
+                                <input asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm"/>
+                                  <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
+                                </div>
+                             </div>
+                             <span asp-validation-for="Prezzo" class="text-danger"></span>
+                     </div>
+
+                     <div class="form-group">
+                        <label asp-for="SpesaMensileCondominio" class="control-label col-form-label-sm"></label>
+                            <div class="input-group input-group-sm">
+                            <input asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm"/>
+                                <div class="input-group-append">
+                            <span class="input-group-text" id="inputGroup-SpesaMensileCondominio-sm">€/Mese</span>
+                            </div>
+                            </div>
+                        <span asp-validation-for="SpesaMensileCondominio" class="text-danger"></span>
+                     </div>
+
+                     <div class="form-group">
+                     @{
+                         IEnumerable<AppAppartamentiApiClient.TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<AppAppartamentiApiClient.TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
+                     }
+                     <label  class="control-label col-form-label-sm">Tipologia riscaldamento</label>
+                         <br />
+                     @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
+                    new SelectList(tipologiaRiscaldamento,"Id","Descrizione"),
+                    "Tipologia riscaldamento", new { @class = "custom-select custom-select-sm" })
+                         </div>
+
+                     <div class="form-group">
+                     @{
+                         IEnumerable<AppAppartamentiApiClient.ClasseEnergetica> classeEnergetica = (IEnumerable<AppAppartamentiApiClient.ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+                     }
+                     <label  class="control-label col-form-label-sm">Classe energetica</label>
+                         <br />
+
+                     @Html.DropDownListFor(m => m.IdClasseEnergetica,
+                    new SelectList(classeEnergetica,"Id","Descrizione"),
+                    "Classe energetica", new { @class = "custom-select custom-select-sm" })
+
+                         </div>
+                </div>
+
+                <div class="shadow-sm mb-3 p-3">
+                    <h5 id="caratteristiche" class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">Caratteristiche</h5>
+
+                    <div class="form-group">
+                        <label asp-for="Superficie" class="control-label col-form-label-sm"></label>
+                        <div class="input-group input-group-sm">
+                            <input asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-Superficie-sm">m²</span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Superficie" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-group-counter">
+                        <label asp-for="NumeroCameraLetto" class="control-label col-form-label-sm"></label>
+
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCameraLetto">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" value="0" asp-for="NumeroCameraLetto">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCameraLetto">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span asp-validation-for="NumeroCameraLetto" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-group-counter">
+                        <label asp-for="NumeroAltreStanze" class="control-label col-form-label-sm"></label>
+
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" value="0" asp-for="NumeroAltreStanze">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span asp-validation-for="NumeroAltreStanze" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-group-counter">
+                        <label asp-for="NumeroBagni" class="control-label col-form-label-sm"></label>
+
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" value="0" asp-for="NumeroBagni">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span asp-validation-for="NumeroBagni" class="text-danger"></span>
+                    </div>
+
+                     <div class="form-group form-group-counter">
+                        <label asp-for="NumeroCucine" class="control-label col-form-label-sm"></label>
+
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" value="0" asp-for="NumeroCucine">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span asp-validation-for="NumeroCucine" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-group-counter">
+                        <label asp-for="NumeroGarage" class="control-label col-form-label-sm"></label>
+
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" value="0" asp-for="NumeroGarage">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span asp-validation-for="NumeroGarage" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-group-counter">
+                        <label asp-for="NumeroPostiAuto" class="control-label col-form-label-sm"></label>
+
+                        <div class="input-group plus-minus-input">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroPostiAuto">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" value="0" asp-for="NumeroPostiAuto">
+                            <div class="input-group-button">
+                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <span asp-validation-for="NumeroPostiAuto" class="text-danger"></span>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label asp-for="Piano" class="control-label col-form-label-sm"></label>
+                        <input asp-for="Piano" class="form-control form-control-sm" />
+                        <span asp-validation-for="Piano" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="UltimoPiano"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="UltimoPiano"></label>
+                        <span asp-validation-for="UltimoPiano" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Giardino"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="Giardino"></label>
+                        <span asp-validation-for="Giardino" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Ascensore"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="Ascensore"></label>
+                        <span asp-validation-for="Ascensore" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Balcone"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="Balcone"></label>
+                        <span asp-validation-for="Balcone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Piscina"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="Piscina"></label>
+                        <span asp-validation-for="Piscina" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Cantina"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="Cantina"></label>
+                        <span asp-validation-for="Cantina" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Condizionatori"-->
+                        <label class="form-check-label col-form-label-sm" asp-for="Condizionatori"></label>
+                        <span asp-validation-for="Condizionatori" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="shadow-sm mt-3 mb-3 p-3">
+                     <h5 id="descrizione" class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Descrizione</h5>
+                     <div class="form-group">
+                        <label asp-for="Descrizione" class="control-label  col-form-label-sm"></label>
+                        <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
+                        <span asp-validation-for="Descrizione" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="shadow-sm mt-3 mb-3 p-3">
+                     <h5 id="immagini" class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Immagini</h5>
+                     <div class="form-group">
+                        <label asp-for="Immagini" class="control-label  col-form-label-sm"></label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" multiple asp-for="Immagini">
+                            <label class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Pubblica l'annuncio" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/annunci-create.js" asp-append-version="true"></script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

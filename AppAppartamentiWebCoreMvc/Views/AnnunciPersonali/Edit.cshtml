@@ -4,10 +4,14 @@
     ViewData["Title"] = "View";
 }
 
+
+@{
+    AppAppartamentiApiClient.AnnunciDtoOutput annuncio = (AppAppartamentiApiClient.AnnunciDtoOutput)ViewData["Annuncio"];
+}
 <div class="container container-custom">
     <div class="row">
         <div class="col-12">
-            <h2>Pubblica un nuovo annuncio</h2>
+            <h2>Modifica il tuo annuncio</h2>
             <div class="progress" style="height: 10px;">
               <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
@@ -36,7 +40,7 @@
         </div>
 
         <div class="col-md-9 col-sm-9 col-xs-12 offset-3">
-            <form asp-action="View">
+            <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div  class="shadow-sm mt-3 mb-3 p-3">
                      <h5 id="tipologia-proprieta" class="mb-2 p-3 bg-light border-bottom" style="
@@ -46,7 +50,10 @@
                              IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
                             @foreach (var proprieta in tipologiaProprieta)
                             {
+                                string isChecked = (annuncio.TipologiaProprieta == proprieta.Descrizione ? "checked" : "");
+                                
                                 <input class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
+                                @Html.RadioButtonFor(model => model.IdTipologiaProprieta, proprieta.Id,new { @class = "mr-2", @checked=@isChecked}) @proprieta.Descrizione<br />
                             }
                              <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
                          }

@@ -31,10 +31,10 @@ function LoadFilter() {
 
         let sliderPrezzo = $('#sliderPrezzo');
 
-        let prezzoMin = $(sliderPrezzo).data("minValue");
+        let prezzoMin = $(sliderPrezzo).data("min");
         prezzoMin = ((prezzoMin == undefined || prezzoMin == null || prezzoMin == 0) ? 50000 : prezzoMin);
 
-        let prezzoMax = $(sliderPrezzo).data("maxValue");
+        let prezzoMax = $(sliderPrezzo).data("max");
         prezzoMax = ((prezzoMax == undefined || prezzoMax == null || prezzoMax == 0) ? 250000 : prezzoMax);
 
         noUiSlider.create(document.getElementById("sliderPrezzo"), {
@@ -73,11 +73,11 @@ function LoadFilter() {
 
         let sliderDimensione = $('#sliderDimensione');
 
-        let dimensioneMin = $(sliderPrezzo).data("minValue");
+        let dimensioneMin = $(sliderDimensione).data("min");
         dimensioneMin = ((dimensioneMin == undefined || dimensioneMin == null || dimensioneMin == 0) ? 60 : dimensioneMin);
 
 
-        let dimensioneMax = $(sliderPrezzo).data("maxValue");
+        let dimensioneMax = $(sliderDimensione).data("max");
         dimensioneMax = ((dimensioneMax == undefined || dimensioneMax == null || dimensioneMax == 0) ? 250 : dimensioneMax);
 
         noUiSlider.create(document.getElementById("sliderDimensione"), {
