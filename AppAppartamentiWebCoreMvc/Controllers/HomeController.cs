@@ -77,7 +77,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         [Authorize]
         public async Task<string> ListaComuni(string NomeComune)
         {
-            ICollection<Comuni> comuni = null;
+            ICollection<ComuneDto> comuni = null;
 
             if (!string.IsNullOrEmpty(NomeComune))
             {

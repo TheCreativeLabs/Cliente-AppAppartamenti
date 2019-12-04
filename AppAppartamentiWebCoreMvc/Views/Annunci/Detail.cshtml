@@ -22,231 +22,250 @@
             </div>
         </div>
     </div>
-}
+} 
 
 <div class="container container-custom">
     <div class="row">
-        <div class="col-10 offset-1 p-3">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-12 p-3">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
 
-            <button type="button" class="btn btn-sm btn-outline-dark btn-sm float-right"><i class="fas fa-heart"></i>&nbsp;Salva</button>
+                    <button type="button" class="btn btn-sm btn-outline-dark btn-sm float-right"><i class="fas fa-heart"></i>&nbsp;Salva</button>
 
-            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
+                    <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
 
-            <button type="button" class="btn btn-outline-dark  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
+                    <button type="button" class="btn btn-outline-dark  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
 
-            <hr class="mt-2" />
-        </div>
-        <div class="col-6 offset-1">
-            <h5>
-                <strong>@Model.TipologiaProprieta</strong> in <strong>@Model.TipologiaAnnuncio</strong> a <strong>@Model.Prezzo €</strong>
-                <br />
-                <small class="text-muted">@Model.NomeComune</small>
-            </h5>
-        </div>
+                    <hr class="mt-2" />
+                </div>
+                <div class="col-12">
+                    <h5>
+                        <strong>@Model.TipologiaProprieta</strong> in <strong>@Model.TipologiaAnnuncio</strong> a <strong>@Model.Prezzo €</strong>
+                        <br />
+                        <small class="text-muted">@Model.NomeComune</small>
+                    </h5>
+                </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @{
+                                bool isLiActiveInserted = false;
+                                @for (int i = 0; i < Model.ImmaginiAnnuncio.Count(); i++)
+                                {
+                                    if (!isLiActiveInserted)
+                                    {
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
 
-        <div class="col-4">
-
-            <button class="btn btn-primary btn-block">Prenota una visita</button>
-        </div>
-
-        <div class="col-10 offset-1">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    @{
-                        bool isLiActiveInserted = false;
-                        @for (int i = 0; i < Model.ImmaginiAnnuncio.Count(); i++)
-                        {
-                            if (!isLiActiveInserted)
-                            {
-                                <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
-
-                                isLiActiveInserted = true;
-                            }
-                            else
-                            {
-                                <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
-                            }
-                        }
-                    }
-                </ol>
-                <div class="carousel-inner">
-                    @{
-                        bool isActiveInserted = false;
-
-                        foreach (var item in Model.ImmaginiAnnuncio)
-                        {
-                            if (!isActiveInserted)
-                            {
-                                <div class="carousel-item active" style="max-height: 500px">
-                                    @{
-                                        var base64 = Convert.ToBase64String(item);
-                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                        isLiActiveInserted = true;
                                     }
-
-                                    <img src="@imgSrc" class="d-block w-100" alt="image" />
-                                </div>
-
-                                isActiveInserted = true;
-                            }
-                            else
-                            {
-                                <div class="carousel-item" style="max-height: 500px">
-                                    @{
-                                        var base64 = Convert.ToBase64String(item);
-                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    else
+                                    {
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
                                     }
-
-                                    <img src="@imgSrc" class="d-block w-100" alt="image" />
-                                </div>
+                                }
                             }
-                        }
-                    }
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+                        </ol>
+                        <div class="carousel-inner">
+                            @{
+                                bool isActiveInserted = false;
 
-            <div class="bg-white p-3 shadow-sm mt-3">
-                <p>
-                    @Model.Descrizione
-                </p>
-            </div>
+                                foreach (var item in Model.ImmaginiAnnuncio)
+                                {
+                                    if (!isActiveInserted)
+                                    {
+                                        <div class="carousel-item active" style="max-height: 500px">
+                                            @{
+                                                var base64 = Convert.ToBase64String(item);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            }
 
-            <div class="card bg-white shadow-sm mt-3 border-0">
-                <div class="card-header p-2 border-0">
-                    <h5 class="mb-0 p-1">Caratteristiche principali</h5>
-                </div>
-                <div class="card-body">
-                    <p>
-                        <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
-                    </p>
+                                            <img src="@imgSrc" class="d-block w-100" alt="image" />
+                                        </div>
 
-                    <p>
+                                        isActiveInserted = true;
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item" style="max-height: 500px">
+                                            @{
+                                                var base64 = Convert.ToBase64String(item);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            }
 
-                        <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
-                    </p>
+                                            <img src="@imgSrc" class="d-block w-100" alt="image" />
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
 
-                    <p>
+                    <div class="bg-white p-3 shadow-sm mt-3">
+                        <p>
+                            @Model.Descrizione
+                        </p>
+                    </div>
 
-                        <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
-                    </p>
+                    <div class="card bg-white shadow-sm mt-3 border-0">
+                        <div class="card-header p-2 border-0">
+                            <h5 class="mb-0 p-1">Caratteristiche principali</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
+                            </p>
 
-                    <p>
+                            <p>
 
-                        <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
-                    </p>
+                                <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
+                            </p>
 
-                    <p>
+                            <p>
 
-                        <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
-                    </p>
+                                <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
+                            </p>
 
-                    @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
-                    }
+                            <p>
 
-                    @if (Model.Balcone.HasValue && Model.Balcone.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
-                    }
+                                <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
+                            </p>
 
-                    @if (Model.Cantina.HasValue && Model.Cantina.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
-                    }
+                            <p>
 
-                    @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
-                    }
+                                <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
+                            </p>
 
-                    @if (Model.Giardino.HasValue && Model.Giardino.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
-                    }
+                            @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
+                            }
 
-                    @if (Model.Piscina.HasValue && Model.Piscina.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
-                    }
+                            @if (Model.Balcone.HasValue && Model.Balcone.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
+                            }
 
-                    @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
-                    {
-                        <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
-                    }
-                </div>
-            </div>
+                            @if (Model.Cantina.HasValue && Model.Cantina.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
+                            }
 
-            <div class="card bg-white shadow-sm mt-3 border-0">
-                <div class="card-header p-2 border-0">
-                    <h5 class="mb-0 p-1">Costi</h5>
-                </div>
-                <div class="card-body">
-                    <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>:&nbsp;
-                    @Model.Prezzo €
+                            @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
+                            }
 
-                    <br />
-                    <label asp-for="SpesaMensileCondominio" class="control-label col-form-label-sm"></label>:&nbsp;
-                    @Model.SpesaMensileCondominio €\mese
+                            @if (Model.Giardino.HasValue && Model.Giardino.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
+                            }
 
-                    <br />
-                    <label asp-for="TipologiaRiscaldamento" class="control-label col-form-label-sm"></label>:&nbsp;
-                    @Model.TipologiaRiscaldamento
+                            @if (Model.Piscina.HasValue && Model.Piscina.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
+                            }
 
-                    <br />
-                    <label asp-for="ClasseEnergetica" class="control-label col-form-label-sm"></label>:&nbsp;
-                    @Model.ClasseEnergetica
+                            @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
+                            {
+                                <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
+                            }
+                        </div>
+                    </div>
 
-                    <br />
-                    <div id="btnGroupEnergy" class="btn-group btn-block" role="group" aria-label="Basic example">
-                         @{
-                             IEnumerable<AppAppartamentiApiClient.ClasseEnergetica> classeEnergetica = (IEnumerable<AppAppartamentiApiClient.ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+                    <div class="card bg-white shadow-sm mt-3 border-0">
+                        <div class="card-header p-2 border-0">
+                            <h5 class="mb-0 p-1">Costi</h5>
+                        </div>
+                        <div class="card-body">
+                            <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>:&nbsp;
+                            @Model.Prezzo €
 
-                             foreach (var item in classeEnergetica)
-                             {
-                                 @if (item.Descrizione == Model.ClasseEnergetica) {
+                            <br />
+                            <label asp-for="SpesaMensileCondominio" class="control-label col-form-label-sm"></label>:&nbsp;
+                            @Model.SpesaMensileCondominio €\mese
 
-                                    <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
-                                 }
-                                 else
-                                 {
-                                    <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus")">@item.Descrizione</button>
-                                 }
-                             }
-                         }
+                            <br />
+                            <label asp-for="TipologiaRiscaldamento" class="control-label col-form-label-sm"></label>:&nbsp;
+                            @Model.TipologiaRiscaldamento
+
+                            <br />
+                            <label asp-for="ClasseEnergetica" class="control-label col-form-label-sm"></label>:&nbsp;
+                            @Model.ClasseEnergetica
+
+                            <br />
+                            <div id="btnGroupEnergy" class="btn-group btn-block" role="group" aria-label="Basic example">
+                                @{
+                                    IEnumerable<AppAppartamentiApiClient.ClasseEnergetica> classeEnergetica = (IEnumerable<AppAppartamentiApiClient.ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+
+                                    foreach (var item in classeEnergetica)
+                                    {
+                                        @if (item.Descrizione == Model.ClasseEnergetica)
+                                        {
+
+                                            <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus")">@item.Descrizione</button>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-white shadow-sm mt-3 border-0">
+                        <div class="card-header p-2 border-0">
+                            <h5 class="mb-0 p-1">Posizione</h5>
+                        </div>
+                        <div class="card-body">
+                            @Model.Indirizzo, @Model.NomeComune
+
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+
+                            <script>function myMap() {
+                                    var mapProp = {
+                                        center: new google.maps.LatLng(51.508742, -0.120850),
+                                        zoom: 5,
+                                    };
+                                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                                }</script>
+
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIBdGKmybeAjYgd5ZlT5x6UamFuILjTvU&callback=myMap"></script>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-3">
+             @{
+                 AppAppartamentiApiClient.UserInfoDto userInfo = (AppAppartamentiApiClient.UserInfoDto)ViewData["UserInfo"];
+             }
 
-            <div class="card bg-white shadow-sm mt-3 border-0">
-                <div class="card-header p-2 border-0">
-                    <h5 class="mb-0 p-1">Posizione</h5>
+            <div class="border rounded p-3">
+                @{
+                    var base642 = Convert.ToBase64String(userInfo.FotoProfilo);
+                    var imgSrc2 = String.Format("data:image/gif;base64,{0}", base642);
+                }
+
+                <div class="mx-auto" style="width:100px;height:100px">
+                    <img src="@imgSrc2" class="d-block w-100 h-100 rounded-circle" alt="image" />
                 </div>
-                <div class="card-body">
-                    @Model.Indirizzo, @Model.NomeComune
 
-                    <div id="googleMap" style="width:100%;height:400px;"></div>
+                <h6 class="text-center mx-auto mb-3">@userInfo.Nome @userInfo.Cognome</h6>
 
-                    <script>
-                        function myMap() {
-                            var mapProp = {
-                                center: new google.maps.LatLng(51.508742, -0.120850),
-                                zoom: 5,
-                            };
-                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                        }
-                    </script>
+                <button class="btn btn-primary btn-sm btn-block"><i class="fas fa-calendar-day"></i>&nbsp;Prenota una visita</button>
 
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIBdGKmybeAjYgd5ZlT5x6UamFuILjTvU&callback=myMap"></script>
-                </div>
+                <button class="btn btn-success btn-sm btn-block"><i class="fas fa-comments"></i>&nbsp;Manda un messaggio</button>
             </div>
         </div>
     </div>

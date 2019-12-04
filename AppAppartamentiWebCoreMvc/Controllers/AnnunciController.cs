@@ -42,7 +42,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var annunci = await annunciClient.GetAnnunciAsync(ListPage,5,FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
                 FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
                 FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage,FilterModel.Giardino,null,FilterModel.Cantina,
-                FilterModel.Piscina,FilterModel.Ascensore,null,null);
+                FilterModel.Piscina,FilterModel.Ascensore,null);
 
             ViewData["ListPage"] = ListPage;
 
@@ -61,13 +61,13 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var classiEnergetiche = await annunciClient.GetListaClasseEnergeticaAsync();
             ViewData["ListaClassiEnergetiche"] = classiEnergetiche.AsEnumerable();
 
+            AccountClient accountClient = new AccountClient(httpClient);
+            UserInfoDto userInfo = await accountClient.GetUserInfoAsync(annuncio.IdUtente.Value);
+            ViewData["UserInfo"] = userInfo;
+
             return View(annuncio);
         }
 
         
-
-        
-
-       
     }
 }
