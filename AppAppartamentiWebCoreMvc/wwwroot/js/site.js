@@ -149,12 +149,7 @@ function NavigateToDetail(Url) {
     window.location.href = Url;
 }
 
-const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
+
 
 //Aggiunge l'annuncio ai preferiti
 function AddPreferred(btn, url, id) {

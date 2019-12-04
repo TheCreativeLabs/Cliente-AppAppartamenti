@@ -386,3 +386,11 @@ p{
     height:200px;
     width:200px;
 }
+
+.agent-popover{
+    height:60px;
+    width:60px;
+    bottom:10px;
+    right:90px;
+    z-index:1050;
+}

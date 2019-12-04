@@ -4,6 +4,10 @@
     ViewData["Title"] = "View";
 }
 
+<div class="position-fixed">
+
+</div>
+
 <div class="container container-custom">
     <div class="row">
         <div class="col-12">
@@ -23,14 +27,16 @@
 
             <nav id="navbar-create" class="navbar navbar-light">
                 <nav class="nav nav-pills flex-column">
-                    <a class="nav-link text-dark" href="#tipologia-proprieta">Tipologia proprietà</a>
+                    <a class="nav-link text-dark active" href="#tipologia-proprieta">Tipologia proprietà</a>
                     <a class="nav-link text-dark" href="#tipologia-annuncio">Tipologia annuncio</a>
                     <a class="nav-link text-dark" href="#posizione">Posizione</a>
                     <a class="nav-link text-dark" href="#prezzo">Prezzo e costi</a>
                     <a class="nav-link text-dark " href="#caratteristiche">Caratteristiche</a>
                     <a class="nav-link text-dark" href="#descrizione">Descrizione</a>
                     <a class="nav-link text-dark" href="#immagini">Immagini</a>
-                    <a class="nav-link text-dark" href="#planimetria">Planimetria</a>
+                    <a class="nav-link text-dark" href="#planimetrie">Planimetria</a>
+                    <a class="nav-link text-dark" href="#video">Video</a>
+                    <a class="nav-link text-dark" href="#agenda">Agenda</a>
                 </nav>
             </nav>
         </div>
@@ -38,8 +44,8 @@
         <div class="col-md-9 col-sm-9 col-xs-12 offset-3">
             <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div  class="shadow-sm mt-3 mb-3 p-3">
-                     <h5 id="tipologia-proprieta" class="mb-2 p-3 bg-light border-bottom" style="
+                <div id="tipologia-proprieta" class="shadow-sm mt-3 mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">Tipologia proprietà</h5>
                      <div class="form-group">
                          @{
@@ -53,8 +59,8 @@
                     </div>
                 </div>
 
-                <div class="shadow-sm mb-3 p-3">
-                     <h5 id="tipologia-annuncio" class="mb-2 p-3 bg-light border-bottom" style="
+                <div id="tipologia-annuncio" class="shadow-sm mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">Tipologia annuncio</h5>
                      <div class="form-group">
                          @{
@@ -68,8 +74,8 @@
                     </div>
                 </div>
 
-                <div class="shadow-sm mb-3 p-3">
-                     <h5 id="posizione" class="mb-2 p-3 bg-light border-bottom" style="
+                <div id="posizione" class="shadow-sm mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">Posizione</h5>
                      <div class="form-group">
                             <label asp-for="CodiceComune" class="control-label col-form-label-sm"></label>
@@ -83,8 +89,8 @@
                      </div>
                 </div>
 
-                 <div class="shadow-sm mb-3 p-3">
-                     <h5 id="prezzo" class="mb-2 p-3 bg-light border-bottom" style="
+                 <div id="prezzo" class="shadow-sm mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">Prezzo e costi</h5>
                      <div class="form-group">
                              <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>
@@ -133,8 +139,8 @@
                          </div>
                 </div>
 
-                <div class="shadow-sm mb-3 p-3">
-                    <h5 id="caratteristiche" class="mb-2 p-3 bg-light border-bottom" style="
+                <div id="caratteristiche" class="shadow-sm mb-3 p-3">
+                    <h5  class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">Caratteristiche</h5>
 
                     <div class="form-group">
@@ -314,8 +320,8 @@
                 </div>
 
 
-                <div class="shadow-sm mt-3 mb-3 p-3">
-                     <h5 id="descrizione" class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Descrizione</h5>
+                <div id="descrizione" class="shadow-sm mt-3 mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Descrizione</h5>
                      <div class="form-group">
                         <label asp-for="Descrizione" class="control-label  col-form-label-sm"></label>
                         <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
@@ -323,13 +329,66 @@
                     </div>
                 </div>
 
-                <div class="shadow-sm mt-3 mb-3 p-3">
-                     <h5 id="immagini" class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Immagini</h5>
+                <div id="immagini" class="shadow-sm mt-3 mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Immagini</h5>
                      <div class="form-group">
                         <label asp-for="Immagini" class="control-label  col-form-label-sm"></label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" multiple asp-for="Immagini">
-                            <label class="custom-file-label">Choose file</label>
+                        <div class="form-group text-center">
+                            <input type="file" data-list-name="containerImmagini" class="file-input" id="immaginiInput">
+                            <label class="file-label p-2 text-primary border w-50" for="immaginiInput">+ Aggiungi immagine</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row" id="containerImmagini">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="planimetrie" class="shadow-sm mt-3 mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Planimetrie</h5>
+                     <div class="form-group">
+                        <label asp-for="ImmaginePlanimetria" class="control-label  col-form-label-sm"></label>
+                        <div class="form-group text-center">
+                            <input type="file" data-list-name="containerPlanimetria" class="file-input" id="planimetriaInput">
+                            <label class="file-label p-2 text-primary border w-50" for="planimetriaInput">+ Aggiungi planimetria</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row" id="containerPlanimetria">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="video" class="shadow-sm mt-3 mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Planimetrie</h5>
+                     <div class="form-group">
+                        <label asp-for="Video" class="control-label  col-form-label-sm"></label>
+                        <div class="form-group text-center">
+                            <input type="file" data-list-name="containerVideo" class="file-input" id="videoInput">
+                            <label class="file-label p-2 text-primary border w-50" for="videoInput">+ Aggiungi planimetria</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row" id="containerVideo">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="agenda" class="shadow-sm mt-3 mb-3 p-3">
+                     <h5  class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Agenda</h5>
+                     <div class="form-group">
+                        <label class="control-label  col-form-label-sm">Agenda</label>
+                        <div class="form-group text-center">
+                            <input type="file" data-list-name="containerVideo" class="file-input" id="videoInput">
+                            <label class="file-label p-2 text-primary border w-50" for="videoInput">+ Aggiungi planimetria</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row" id="containerVideo">
                         </div>
                     </div>
                 </div>
@@ -342,9 +401,11 @@
     </div>
 </div>
 
+ @{await Html.RenderPartialAsync("_VirtualAgentSell");}
+
 @section Scripts {
     <script src="~/js/annunci-create.js" asp-append-version="true"></script>
-
+    <script src="~/js/virtual-agent-sell.js" asp-append-version="true"></script>
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
