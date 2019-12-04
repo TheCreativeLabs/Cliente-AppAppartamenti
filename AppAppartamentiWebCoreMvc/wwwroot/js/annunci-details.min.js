@@ -1,0 +1,1 @@
+function changeScroll(){document.body.scrollTop>100||document.documentElement.scrollTop>100?($("#secondnav").show(),$("#nav").removeClass("shadow-lg")):($("#secondnav").hide(),$("#nav").addClass("shadow-lg"))}$(document).ready(function(){$("#secondnav").hide();window.onscroll=function(){changeScroll()}});

@@ -41,6 +41,15 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return JsonConvert.SerializeObject(userInfoDto);
         }
 
+        public async Task<IActionResult> DetailAsync()
+        {
+            //ottengo le info sull'utente
+            UserInfoDto userInfoDto = await GetCurrentUserInfoAsync();
+
+            return View(userInfoDto);
+        }
+
+
         public async Task<IActionResult> EditAsync()
         {
             //ottengo le info sull'utente
@@ -94,7 +103,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 }
             }
 
-            return RedirectToAction("Edit");
+            return RedirectToAction("Detail");
         }
     }
 }

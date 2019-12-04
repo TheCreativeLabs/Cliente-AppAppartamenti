@@ -317,9 +317,17 @@ p{
   color: white;
 }
 
+.text-facebook{
+    color:#3B5998 !important;
+}
+
 .twitter {
   background-color: #55ACEE;
   color: white;
+}
+
+.text-whatsapp{
+    color:#25d366 !important;
 }
 
 .google {
@@ -327,23 +335,21 @@ p{
   color: white;
 }
 
-#ui-id-1{
+.ui-menu{
     background-color: #f8f9fa !important;
     padding: 0.25rem !important;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     border-radius: 0.25rem !important;
     border: 0 !important;
     z-index:1050 !important;
+    max-height:300px !important;
+    overflow-y:scroll !important;
 }
 
 .ui-menu-item:hover, .ui-menu-item-wrapper:hover{
     background-color: transparent !important;
     border:none !important;
     color:black !important;
-}
-
-.form-control{
-    max-width:350px !important;
 }
 
 #txtRicerca{
@@ -359,4 +365,24 @@ p{
    opacity: 0;
    position: absolute;
    z-index: -1;
+}
+
+.ui-autocomplete.source:hover {
+    background: #454545;
+}
+
+.search-spinner {
+    margin-left: -40px;
+    z-index: 1050 !important;
+    display:none;
+}
+
+.image-profile-edit{
+    height:200px;
+    width:200px;
+}
+
+.image-profile-edit img{
+    height:200px;
+    width:200px;
 }

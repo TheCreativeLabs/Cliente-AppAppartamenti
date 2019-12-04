@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AppAppartamentiWebMvc</title>
+    <title>@ViewData["Title"] - App appartamenti</title>
 
-    <environment include="Development">
+    <!--<environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
     <environment exclude="Development">
@@ -13,14 +13,15 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/fontawesome.min.css" />
     <link rel="stylesheet" href="~/css/brands.min.css" />
     <link rel="stylesheet" href="~/css/solid.min.css" />
     <link rel="stylesheet" href="~/css/regular.min.css" />
-    <link rel="stylesheet" href="~/css/nouislider.min.css" />
+    <link rel="stylesheet" href="~/css/nouislider.min.css" />-->
+    <link rel="stylesheet" href="~/bundle/bundle.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
@@ -29,21 +30,25 @@
         <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-lg">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="container-fluid">
-                 <div class="navbar-collapse collapsible-navbar">
+            </button>
+            <div class="container-fluid">
+                <div class="navbar-collapse collapsible-navbar">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
-                     </div>
-                        <form id="navSearchBar" class="navbar-start">
-                        <div class="input-group" style="text-align: center;">
-                            <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-right-0" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
-                            <div class="input-group-append">
-                                <a id="btnFiltri2" data-toggle="modal" data-target="#exampleModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ Altri filtri</small></a>
-                            </div>
-                            <div class="input-group-append">
-                            <a class="btn btn-primary disabled" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
-                            </div>
+                </div>
+                <form id="navSearchBar" class="navbar-start">
+                    <input id="codiceComune" type="number" value="" style="display: none;" />
+                    <div class="input-group" style="text-align: center;">
+                        <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-right-0 search-textbox" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
+                        <div class="search-spinner spinner-border spinner-border-sm text-secondary mt-2" role="status">
+                            <span class="sr-only">Loading...</span>
                         </div>
+                        <div class="input-group-append">
+                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ Altri filtri</small></a>
+                        </div>
+                        <div class="input-group-append">
+                            <a class="btn btn-primary disabled search-button" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
+                        </div>
+                    </div>
                 </form>
 
                 <div class="navbar-collapse collapsible-navbar">
@@ -51,7 +56,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a asp-action="Create" asp-controller="Annunci" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">Pubblica un annuncio</a>
+                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">Pubblica un annuncio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List"> Preferiti</a>
@@ -60,16 +65,17 @@
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">I miei annunci</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark p-0 m-0"  href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img id="profileImage" class="rounded-circle" width="45" height="45" style="margin-top:-5px"/>
+                                <a class="nav-link text-dark p-0 m-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img id="profileImage" class="rounded-circle" width="45" height="45" style="        margin-top: -5px" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right border-0 bg-light shadow" aria-labelledby="navbarDropdownMenuLink">
                                     <div class="bg-light p-3 border-bottom text-center">
-                                    <h6 id="lblNomeCognome" >
-                                    </h6>
-                                    <small id="lblEmail" class="text-muted"></small>
-                                        </div>
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Edit">Modifica profilo</a>
+                                        <h6 id="lblNomeCognome">
+                                        </h6>
+                                        <small id="lblEmail" class="text-muted"></small>
+                                    </div>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Detail">Profilo</a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Impostazioni</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">Esci</a>
@@ -87,63 +93,66 @@
                         }
                     </ul>
                 </div>
-             </div>
+            </div>
         </nav>
     </header>
 
     @RenderSection("SubHeader", required: false)
 
-    <partial name="_CookieConsentPartial" />
-        
-    @RenderBody()
-        <div id="divFilterModal" data-url="@Url.Action("FilterModal", "Home")">
-        </div>
+     @{await Html.RenderPartialAsync("_ErrorPartial");}
 
-        <footer class="footer pt-5 bg-dark text-white position-relative">
+    <partial name="_CookieConsentPartial" />
+
+    @RenderBody()
+
+    <div id="divFilterModal" data-url="@Url.Action("FilterModal", "Home")">
+    </div>
+
+    <footer class="footer pt-5 bg-dark text-white position-relative">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md">
-                  <i class="fas fa-igloo h2"></i>
+                    <i class="fas fa-igloo h2"></i>
                 </div>
                 <div class="col-6 col-md">
-                  <h5>Features</h5>
-                  <ul class="list-unstyled text-small">
-                    <li><a  href="#">Cool stuff</a></li>
-                    <li><a href="#">Random feature</a></li>
-                    <li><a href="#">Team feature</a></li>
-                    <li><a href="#">Stuff for developers</a></li>
-                    <li><a  href="#">Another one</a></li>
-                    <li><a  href="#">Last time</a></li>
-                  </ul>
+                    <h5>Features</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a href="#">Cool stuff</a></li>
+                        <li><a href="#">Random feature</a></li>
+                        <li><a href="#">Team feature</a></li>
+                        <li><a href="#">Stuff for developers</a></li>
+                        <li><a href="#">Another one</a></li>
+                        <li><a href="#">Last time</a></li>
+                    </ul>
                 </div>
                 <div class="col-6 col-md">
-                  <h5>Resources</h5>
-                  <ul class="list-unstyled text-small">
-                    <li><a href="#">Resource</a></li>
-                    <li><a href="#">Resource name</a></li>
-                    <li><a href="#">Another resource</a></li>
-                    <li><a href="#">Final resource</a></li>
-                  </ul>
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a href="#">Resource</a></li>
+                        <li><a href="#">Resource name</a></li>
+                        <li><a href="#">Another resource</a></li>
+                        <li><a href="#">Final resource</a></li>
+                    </ul>
                 </div>
                 <div class="col-6 col-md">
-                  <h5>Resources</h5>
-                  <ul class="list-unstyled text-small">
-                    <li><a href="#">Business</a></li>
-                    <li><a href="#">Education</a></li>
-                    <li><a href="#">Government</a></li>
-                    <li><a href="#">Gaming</a></li>
-                  </ul>
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Government</a></li>
+                        <li><a href="#">Gaming</a></li>
+                    </ul>
                 </div>
                 <div class="col-6 col-md">
-                  <h5>About</h5>
-                  <ul class="list-unstyled text-small">
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Locations</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a  href="#">Terms</a></li>
-                  </ul>
+                    <h5>About</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Locations</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
                 </div>
-              </div>
+            </div>
 
             <hr />
 
@@ -152,18 +161,21 @@
                     &copy; 2019 - AppAppartamentiWebMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
                 </div>
-                 <div class="col text-right">
-                     seguici su
-                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-facebook-f"></i></button>
-                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-instagram"></i></button>
-                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-twitter"></i></button>
+                <div class="col text-right">
+                    seguici su
+                    <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-facebook-f"></i></button>
+                    <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-instagram"></i></button>
+                    <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-twitter"></i></button>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="~/js/wNumb.min.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        var loggedUser = "@User.Identity.Name";
+    </script>
 
+   <!-- <script src="~/js/wNumb.min.js" asp-append-version="true"></script>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -173,20 +185,19 @@
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"></script>
     </environment>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/nouislider.min.js" asp-append-version="true"></script>
+    -->
+    <script src="~/bundle/bundle.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     @RenderSection("Scripts", required: false)
 </body>

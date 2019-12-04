@@ -7,66 +7,26 @@
 <div class="container container-custom">
     <div class="col-8 offset-2">
         <h2>
-            @Model.Count() Annunci
-
-            <div class="btn-group float-right mt-2">
-                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-sort-amount-down-alt"></i> Ordina per
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-76px, 31px, 0px);">
-                    <button class="dropdown-item" type="button">Action</button>
-                    <button class="dropdown-item" type="button">Another action</button>
-                    <button class="dropdown-item" type="button">Something else here</button>
-                </div>
-            </div>
+            Preferiti
         </h2>
 
         <hr />
 
-        @foreach (var item in Model)
-        {
-            <div class="card card-annuncio mb-3 shadow-sm" onclick="NavigateToDetail('@Url.Action("Detail", "Annunci",new { Id = item.Id })')">
-                <div class="row no-gutters">
-                    <div class="col-md-6">
-                        @{
-                            var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
-                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                        }
+        <div id="annunci">
+        </div>
 
-                        <img src="@imgSrc" class="card-img card-img-annuncio" alt="image" />
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body p-0">
-                            <div class="card-header p-1 bg-light  border-0" style="text-align: end;">
-                                <button type="button" class="btn btn-sm btn-outline-dark btn-sm mr-1"><i class="fas fa-heart"></i></button>
-
-                                <button type="button" class="btn btn-sm btn-outline-dark btn-sm mr-1"><i class="fas fa-share-alt"></i></button>
-                            </div>
-
-                            <div class="p-3 mt-2">
-                                <h6>
-                                    @item.TipologiaProprieta in  @item.TipologiaAnnuncio
-                                    <br />
-                                    <small class="text-muted">@item.Indirizzo, @item.NomeComune</small>
-                                    <br />
-                                    <strong>@item.Prezzo €</strong>
-                                </h6>
-
-                                <hr />
-
-                                <small>@item.Descrizione.Substring(0,200)...</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="d-flex justify-content-center">
+            <div id="listLoader" class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-
-            //@Html.DisplayFor(modelItem => item.Id)
-            //@Html.DisplayFor(modelItem => item.IdUtente)
-            //@Html.DisplayFor(modelItem => item.IdUtente)
-            //@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            //@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            //@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        }
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var UrlRefresh = "@Url.Action("RefreshList", "AnnunciPreferiti" )";
+    </script>
+
+    <script src="~/js/annunci-list.js" asp-append-version="true"></script>
+}

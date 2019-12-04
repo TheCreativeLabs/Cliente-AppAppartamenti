@@ -132,6 +132,9 @@ namespace AppAppartamentiApi
             {
                 ClientId = "334122790129-hfu28retie355qusqvl46755ai15nlto.apps.googleusercontent.com",
                 ClientSecret = "NRqsdLin5IBYoU9fM9ZlAmR1"
+
+
+
             });
         }
     }

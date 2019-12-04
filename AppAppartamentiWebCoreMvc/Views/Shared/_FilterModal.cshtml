@@ -1,198 +1,205 @@
-﻿<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Filtri</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div class="container-fluid">
-              <div class="row">
+﻿@model FilterModalViewModel
 
-                  <div class="col-12">
-                    <h6 class="mt-2">Tipologia proprieta</h6>
-                        @{
-                            IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
-                        @foreach (var proprieta in tipologiaProprieta)
-                        {
-                                <div class="form-check ml-2 ">
-                            <input class="mr-2  form-check-input" type="radio"  value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
-                                    </div>
-                                    }
-                        }
-                  </div>
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Filtri</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
 
-                  <div class="col-12">
-                      <h6 class="mt-2">Tipologia annuncio</h6>
+                        <div class="col-12 mb-4">
+                            <h6 >Tipologia proprieta</h6>
 
-                         @{
-                             IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
-                            @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
-                            {
-                                <div class="form-check ml-2 ">
-                                <input class="mr-2 form-check-input"  type="radio"  value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" /><small>@tipologiaAnnuncio.Descrizione</small><br />
-                             </div>  
+                            @{ 
+
+                                    IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
+
+                                          @Html.DropDownListFor(m => m.IdTipologiaProprieta,
+                                            new SelectList(tipologiaProprieta,"Id","Descrizione",Model?.IdTipologiaProprieta),
+                                             "Tutti",new {@id="selectTipologiaProprieta", @class = "custom-select" })
+
+                          }
+
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <h6>Tipologia annuncio</h6>
+
+                            @{
+                                IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
+
+
+                                @Html.DropDownListFor(m => m.IdTipologiaProprieta,
+                                            new SelectList(listaTipologiaAnnuncio,"Id","Descrizione",Model?.IdTipologiaAnnuncio),
+                                             "Tutti",new {@id="selectTipologiaAnnuncio", @class = "custom-select" })
+                              
                             }
-                         }
-                  </div>
-
-
-                  <div class="col-12">
-                      <h6 class="mt-3 mb-5">Prezzo</h6>
-                      <div id="sliderPrezzo"></div>
-                      <p class="float-left text-muted small">50.000</p>
-                      <p class="float-right text-muted small">500.000</p>
-                  </div>
-
-                  <div class="col-12">
-                      <h6 class="mt-3 mb-5">Dimensione</h6>
-                      <div id="sliderDimensione"></div>
-                      <p class="float-left text-muted small">50</p>
-                      <p class="float-right text-muted small">500</p>
-                  </div>
-
-                  <hr />
-
-                  <div class="col-xs-12 col-sm-4">
-                      <h6 class="mt-3 mb-3">Bagni</h6>
-                      <div class="input-group plus-minus-input justify-content-center">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
-                                  <i class="fa fa-minus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                          <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled name="NumeroBagni" value="0">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-4">
-                      <h6 class="mt-3 mb-3">Camere da letto</h6>
-                      <div class="input-group plus-minus-input justify-content-center">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="CamereLetto">
-                                  <i class="fa fa-minus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                          <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled name="CamereLetto" value="0">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="CamereLetto">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-4">
-                      <h6 class="mt-3 mb-3">Altre stanze</h6>
-                      <div class="input-group plus-minus-input justify-content-center">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
-                                  <i class="fa fa-minus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                          <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled name="NumeroAltreStanze" value="0">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-4">
-                      <h6 class="mt-3 mb-3">Cucine</h6>
-                      <div class="input-group plus-minus-input justify-content-center">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
-                                  <i class="fa fa-minus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                          <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled name="NumeroCucine" value="0">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-4">
-                      <h6 class="mt-3 mb-3">Garage</h6>
-                      <div class="input-group plus-minus-input justify-content-center">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
-                                  <i class="fa fa-minus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                          <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled name="NumeroGarage" value="0">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-4">
-                      <h6 class="mt-3 mb-3">Posti auto</h6>
-                      <div class="input-group plus-minus-input justify-content-center">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="PostiAuto">
-                                  <i class="fa fa-minus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                          <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled name="PostiAuto" value="0">
-                          <div class="input-group-button">
-                              <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="PostiAuto">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-12 mt-5">
-                      <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="customSwitchAscensore">
-                          <label class="custom-control-label" for="customSwitchAscensore">Ascensore</label>
                         </div>
-                  </div>
 
-                  <div class="col-12 mt-2">
-                      <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="customSwitchPiscina">
-                          <label class="custom-control-label" for="customSwitchPiscina">Piscina</label>
+
+                        <div class="col-12 mb-4">
+                            <h6 class="mb-5">Prezzo</h6>
+                            <div id="sliderPrezzo" data-min="@Model?.PrezzoMin" data-max="@Model?.PrezzoMax"></div>
+                            <p class="float-left text-muted small">50.000€</p>
+                            <p class="float-right text-muted small">500.000€</p>
                         </div>
-                  </div>
 
-                  <div class="col-12 mt-2">
-                      <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="customSwitchCantina">
-                          <label class="custom-control-label" for="customSwitchCantina">Cantina</label>
+                        <div class="col-12 mb-4">
+                            <h6 class="mb-5" >Dimensione</h6>
+                            <div id="sliderDimensione" data-min="@Model?.DimensioneMin" data-max="@Model?.DimensioneMax"></div>
+                            <p class="float-left text-muted small">50m²</p>
+                            <p class="float-right text-muted small">500m²</p>
                         </div>
-                  </div>
 
-                  <div class="col-12 mt-2">
-                      <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="customSwitchGiaridno">
-                          <label class="custom-control-label" for="customSwitchGiaridno">Giaridno</label>
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <h6 class="mb-3">Bagni</h6>
+                            <div class="input-group plus-minus-input justify-content-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled  id="NumeroBagni" name="NumeroBagni" value="@Model?.NumeroBagni">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                  </div>
-              </div>
-          </div>
-       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Ok</button>
-      </div>
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <h6 class="mb-3">Camere da letto</h6>
+                            <div class="input-group plus-minus-input justify-content-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCamereLetto">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroCamereLetto" name="NumeroCamereLetto" value="@Model?.NumeroCamereLetto">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCamereLetto">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <h6 class="mb-3">Altre stanze</h6>
+                            <div class="input-group plus-minus-input justify-content-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroAltreStanze" name="NumeroAltreStanze" value="@Model?.NumeroAltreStanze">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <h6 class="mb-3">Cucine</h6>
+                            <div class="input-group plus-minus-input justify-content-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroCucine" name="NumeroCucine" value="@Model?.NumeroCucine">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <h6 class="mb-3">Garage</h6>
+                            <div class="input-group plus-minus-input justify-content-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroGarage"  name="NumeroGarage" value="@Model?.NumeroGarage">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4 mb-4">
+                            <h6 class="mb-3">Posti auto</h6>
+                            <div class="input-group plus-minus-input justify-content-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroPostiAuto">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroPostiAuto" name="NumeroPostiAuto" value="@Model?.NumeroPostiAuto">
+                                <div class="input-group-button">
+                                    <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12  mb-4">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitchAscensore" checked="@Model?.Ascensore">
+                                <label class="custom-control-label" for="customSwitchAscensore">Ascensore</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitchPiscina" checked="@Model?.Piscina">
+                                <label class="custom-control-label" for="customSwitchPiscina">Piscina</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitchCantina" checked="@Model?.Cantina">
+                                <label class="custom-control-label" for="customSwitchCantina">Cantina</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitchGiardino" checked="@Model?.Giardino">
+                                <label class="custom-control-label" for="customSwitchGiardino">Giardino</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="btnSaveFilter" type="button" class="btn btn-primary">Salva filtri</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+<script>
+    var codiceComune = "@Model?.CodiceComune";
+    var nomeComune = "@Model?.NomeComune";
+</script>
 
 <script src="~/js/filter-modal.js" asp-append-version="true"></script>

@@ -1,11 +1,15 @@
 ﻿$(document).ready(function () {
     $("#nav").addClass("navbar-transparent");
     $("#navSearchBar").hide();
-
     window.onscroll = function () { changeScroll() };
-
     $('#btnSignIn').click(ShowModalSignIn);
     $('#btnSignUp').click(ShowModalSignUp);
+
+    if (loggedUser != null && loggedUser.length > 0) {
+        $("#txtSearchHome").keyup(function () {
+            EnableSearch(this);
+        })
+    }
 });
 
 function changeScroll() {
@@ -29,4 +33,6 @@ function ShowModalSignUp() {
     $("#modalLogin").modal("hide");
     $("#modalSignUp").modal("show");
 }
+
+
 

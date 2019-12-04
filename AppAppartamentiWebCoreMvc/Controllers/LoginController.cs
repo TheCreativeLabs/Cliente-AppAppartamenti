@@ -34,8 +34,6 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             ApiEndpoint = _configuration.GetValue<string>("MySetting:ApiEndpoint");
         }
 
-       
-
         [HttpPost]
         public string GetFacebookExternalLogin()
         {
@@ -52,7 +50,6 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             HttpContext.Session.SetString("ApiUrl", apiRequest);
             return apiRequest;
         }
-
 
         [HttpPost]
         public async Task<string> FacebookLoginResultAsync(string token)

@@ -1,0 +1,69 @@
+﻿@model AppAppartamentiApiClient.UserInfoDto
+
+@{
+    ViewData["Title"] = "Informazioni personali";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-sm-8 offset-2 col-xs-12 mb-3">
+         <a asp-action="Edit" asp-controller="Account" class="text-primary float-right mt-4">Modifica profilo</a>
+         <h2 class="mt-2 mb-2">Informazioni personali</h2>
+        </div>
+
+        <div class="col-sm-3 offset-2 col-xs-12">
+            @{
+                var imgSrc = Model.PhotoUrl;
+
+                if (Model.FotoProfilo != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.FotoProfilo);
+                    imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
+                }
+
+               <div class="mb-2 mx-auto image-profile-edit" >
+                    <img id="profileImage" src="@imgSrc"  alt="image" class="rounded-circle d-block w-100" />
+            </div>
+            }
+        </div>
+
+        <div class="col-sm-5 col-xs-12">
+
+        <form>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" disabled value="@Model.Nome" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cognome" class="control-label"></label>
+                <input asp-for="Cognome" class="form-control" disabled value="@Model.Cognome" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email"  disabled class="form-control" value="@Model.Email" />
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DataDiNascita" class="control-label"></label>
+
+                @{
+                    if (Model.DataDiNascita.HasValue)
+                    {
+                     <input asp-for="DataDiNascita" disabled type="date" class="form-control" value="@Model.DataDiNascita.Value.ToString("yyyy-MM-dd")" />
+                    }
+                    else
+                    {
+                     <input asp-for="DataDiNascita" disabled type="date" class="form-control"  />
+                    }
+                }
+            </div>
+
+              </form>
+            </div>
+        </div>
+</div>
+
+

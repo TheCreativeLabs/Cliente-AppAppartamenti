@@ -4,12 +4,16 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Index.cshtml" />
@@ -21,6 +25,8 @@
     <Content Remove="wwwroot\css\Roboto-Regular.ttf" />
     <Content Remove="wwwroot\js\home %28copy%29.js" />
     <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
+    <Content Remove="Views\AnnunciPreferiti\Detail.cshtml" />
+    <Content Remove="Views\AnnunciPersonali\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -33,6 +39,10 @@
     <Folder Include="Utility\" />
     <Folder Include="Utility\Extensions\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="wwwroot\bundle\" />
+    <Folder Include="wwwroot\lib\multirange\" />
+    <Folder Include="wwwroot\lib\nouislider\" />
+    <Folder Include="wwwroot\lib\wNumb\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />
@@ -55,6 +65,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\account-edit.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\filter-modal %28copy%29.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\share-modal.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

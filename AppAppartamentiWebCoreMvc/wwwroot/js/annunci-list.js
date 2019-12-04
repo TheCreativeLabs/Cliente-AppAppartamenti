@@ -23,3 +23,5 @@ function ReloadList() {
 function HideLoader() {
     $("#listLoader").hide();
 }
+
+
