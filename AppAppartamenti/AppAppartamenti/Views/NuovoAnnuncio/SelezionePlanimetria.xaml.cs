@@ -18,8 +18,10 @@ using Xamarin.Forms.Xaml;
 namespace AppAppartamenti.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelezioneImmagini : ContentPage
+    public partial class SelezionePlanimetria : ContentPage
     {
+        static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
+
 
         private class MediaFileImage
         {
@@ -30,7 +32,7 @@ namespace AppAppartamenti.Views
 
         private List<MediaFileImage> mediaFileImages = new List<MediaFileImage>();
 
-        public SelezioneImmagini(AnnuncioDtoInput Annuncio)
+        public SelezionePlanimetria(AnnuncioDtoInput Annuncio)
         {
             InitializeComponent();
             annuncio = Annuncio;
@@ -65,10 +67,10 @@ namespace AppAppartamenti.Views
             {
                 MemoryStream memoryStream = new MemoryStream();
                 item.File.GetStream().CopyTo(memoryStream);
-                annuncio.Immagini.Add(memoryStream.ToArray());
+                annuncio.ImmaginePlanimetria = (memoryStream.ToArray());
             }
 
-            Navigation.PushAsync(new SelezionePlanimetria(annuncio));
+            Navigation.PushAsync(new SelezioneDescrizione(annuncio));
         }
 
         async void PickPhoto()
@@ -95,6 +97,7 @@ namespace AppAppartamenti.Views
             if (listaImmagini == null)
                 return;
 
+            //prendo solo 1 foto
             foreach (var item in listaImmagini)
             {
                 mediaFileImages.Add(new MediaFileImage { File = item });
@@ -133,12 +136,19 @@ namespace AppAppartamenti.Views
 
         async void ActionImmagini(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Carica una foto", "Cancel", null, "Scatta foto", "Galleria immagini");
+            string scatta = Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.TakePicture", translate.ci);
+            string galleria = Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.PhotoGallery", translate.ci);
 
-            if (action == "Scatta foto") {
+            string action = await DisplayActionSheet(Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.UploadPhoto", translate.ci),
+                Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.Cancel", translate.ci),
+                null,
+                scatta,
+                galleria);
+
+            if (action == scatta) {
                 TakePhoto();
             }
-            else if(action == "Galleria immagini")
+            else if(action == galleria)
             {
                 PickPhoto();
             }

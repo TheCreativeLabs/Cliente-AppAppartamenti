@@ -1,22 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" mc:Ignorable="d"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             mc:Ignorable="d" 
              x:Class="AppAppartamenti.Views.SelezioneDescrizione"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="False">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <NavigationPage.TitleView>
         <!-- Bottoni -->
-        <StackLayout Orientation="Horizontal" x:Name="sdBody" IsVisible="False">
+        <StackLayout Orientation="Horizontal" x:Name="spBody" IsVisible="False">
             <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand" Margin="-20,0,0,0">
                 <Label Style="{x:StaticResource BackButton}"></Label>
 
@@ -25,7 +29,7 @@
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="Descrizione"></Label>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezionePrezzo.NuovoAnnuncio}"></Label>
             <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                 <Label Style="{x:StaticResource CancelButton}"></Label>
 
@@ -38,40 +42,17 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ProgressBar Progress="0.9" />
-
-            <StackLayout Padding="20">
-                <!-- Bottoni -->
-                <!--<StackLayout Orientation="Horizontal">
-                    <Frame x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
-                        <Label Style="{x:StaticResource BackButton}"></Label>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-
-                    <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" Text="Descrizione"></Label>
-
-                    <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                        <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                            </TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-                </StackLayout>-->
-
-
-                <appappartamenti:CustomEntry HeightRequest="200" x:Name="edtDescrizione" Visual="Material" VerticalOptions="FillAndExpand" ></appappartamenti:CustomEntry>
-
-                <!--<Button x:Name="btnProcedi" Text="Crea annuncio" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" Visual="Material"></Button>-->
-
+        <StackLayout Padding="20">
+            <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,10" Padding="20">
+                <Label Text="{translator:Translate SelezioneDescrizione.Descrizione}" HorizontalTextAlignment="Center" ></Label>
+                <ProgressBar Progress="0.9"/>
             </StackLayout>
-            <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}"  x:Name="btnProcedi" Clicked="BtnImmaginiProcedi_Clicked" TextColor="White" FontSize="Large" CornerRadius="0" HeightRequest="100" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+
+
+            <Label Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
+            <appappartamenti:MyEntry  x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></appappartamenti:MyEntry>
+
+            <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
 
         </StackLayout>
     </ContentPage.Content>

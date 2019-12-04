@@ -9,6 +9,7 @@
              x:Class="AppAppartamenti.Views.ListaAnnunci"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#F8F8F8"
+             xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
              >
    
      <ContentPage.Resources>
@@ -57,6 +58,9 @@
                                 ItemSelected="OnItemSelected"
                                 BackgroundColor="#F8F8F8"
                                 SeparatorVisibility="None">
+                            <ListView.Behaviors>
+                                <b:InfiniteScroll LoadMoreCommand="{Binding LoadMore}" />
+                            </ListView.Behaviors>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePlanimetria"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="False">
+
+     <NavigationPage.TitleView>
+        <!-- Bottoni -->
+        <StackLayout Orientation="Horizontal"> 
+            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
+                <Label Style="{x:StaticResource BackButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezionePlanimetria.NuovoAnnuncio}"></Label>
+            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
+                <Label Style="{x:StaticResource CancelButton}"></Label>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:MediaFileImageSourceConverter x:Key="MediaFileToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+            <StackLayout Padding="20">
+
+                <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
+                <Label Text="{translator:Translate SelezionePlanimetria.Planimetria}" HorizontalTextAlignment="Center" ></Label>
+                     <ProgressBar Progress="0.8"/>
+                </StackLayout>
+
+            <Button Clicked="ActionImmagini" Text="{translator:Translate SelezionePlanimetria.AddImage}"></Button>
+
+
+                    <StackLayout HeightRequest="300" Margin="-20,0,-20,0">
+                            <CarouselView x:Name="cvImmagini" IsVisible="true">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                    </StackLayout>
+
+                    <!--<CollectionView x:Name="cvImmagini">
+                        <CollectionView.ItemsLayout>
+                           <GridItemsLayout Orientation="Horizontal"
+                                            Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image HeightRequest="200" WidthRequest="250" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"></Image>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>-->
+
+            <Button x:Name="btnImmaginiProcedi" VerticalOptions="EndAndExpand" Text="{translator:Translate SelezionePlanimetria.Continue}" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

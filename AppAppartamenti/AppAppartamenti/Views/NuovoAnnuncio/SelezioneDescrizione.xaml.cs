@@ -31,18 +31,18 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
-            try
-            {
-                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-                NavigationPage.SetHasNavigationBar(this, true);
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+            //    NavigationPage.SetHasNavigationBar(this, true);
+            //}
+            //catch (Exception ex)
+            //{
 
-            }
+            //}
 
-            sdBody.IsVisible = true;
+            spBody.IsVisible = true;
 
 
         }
@@ -66,7 +66,7 @@ namespace AppAppartamenti.Views
         }
 
 
-        private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
+        private async void BtnDescrizioneProcedi_Clicked(object sender, EventArgs e)
         {
             annuncio.Descrizione = edtDescrizione.Text;
 

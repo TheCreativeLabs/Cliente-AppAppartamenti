@@ -636,4 +636,28 @@
   <data name="InformazionePersonali.Title" xml:space="preserve">
     <value>Personal information</value>
   </data>
+  <data name="SelezionePlanimetira.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SelezionePlanimetira.PhotoGallery" xml:space="preserve">
+    <value>Photos Gallery</value>
+  </data>
+  <data name="SelezionePlanimetira.TakePicture" xml:space="preserve">
+    <value>Take a picture</value>
+  </data>
+  <data name="SelezionePlanimetira.UploadPhoto" xml:space="preserve">
+    <value>Upload photo</value>
+  </data>
+  <data name="SelezionePlanimetria.AddImage" xml:space="preserve">
+    <value>Select image</value>
+  </data>
+  <data name="SelezionePlanimetria.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezionePlanimetria.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezionePlanimetria.Planimetria" xml:space="preserve">
+    <value>Planimetry</value>
+  </data>
 </root>
