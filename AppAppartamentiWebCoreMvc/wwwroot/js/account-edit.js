@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     try{
-        $("#inputAddImage").change(await function () {
+        $("#inputAddImage").change(function () {
             GetProfileImage();
         })
     }catch(ex){

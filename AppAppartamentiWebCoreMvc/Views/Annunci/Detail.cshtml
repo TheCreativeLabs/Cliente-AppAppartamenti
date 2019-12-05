@@ -5,19 +5,29 @@
 }
 
 @section SubHeader {
+<!--d-none d-sm-block -->
     <div id="secondnav" class="sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
                     <h6>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
                         @Model.TipologiaProprieta in @Model.TipologiaAnnuncio
                         <small class="text-muted">@Model.Indirizzo,  @Model.NomeComune</small> -
                         @Model.Prezzo €
                     </h6>
                 </div>
 
-                <div class="col-3">
-                    <button class="btn btn-primary btn-sm  btn-block">Prenota una visita</button>
+                <div class="col-3 text-right">
+                    <button class="btn btn-light btn-sm"><i class="fas fa-exclamation-triangle"></i></button>
+
+                    <button class="btn btn-light btn-sm" onclick="event.stopPropagation();$('#shareModal').modal('show');" ><i class="fas fa-share-alt"></i></button>
+
+                    <button class="btn btn-light btn-sm" data-id="@Model.Id" onclick="AddPreferred(this,'@Url.Action("Add", "AnnunciPreferiti")','@Model.Id')"><i class="fas fa-heart"></i></button>
+
+                    <button class="btn btn-primary btn-sm "><i class="fas fa-calendar-day"></i></button>
+
+                    <button class="btn btn-success btn-sm"><i class="fas fa-comments"></i></button>
                 </div>
             </div>
         </div>
@@ -26,24 +36,24 @@
 
 <div class="container container-custom">
     <div class="row">
-        <div class="col-9">
+        <div class="col-sm-12 p-3">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
+
+            <button type="button" class="btn btn-sm btn-light btn-sm float-right" data-id="@Model.Id" onclick="AddPreferred(this,'@Url.Action("Add", "AnnunciPreferiti")','@Model.Id')"><i class="fas fa-heart"></i>&nbsp;Salva</button>
+
+            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-light mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
+
+            <button type="button" class="btn btn-light  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
+
+            <hr class="mt-3 mb-0" />
+        </div>
+        <div class="col-sm-9">
             <div class="row">
-                <div class="col-12 p-3">
-                    <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
-
-                    <button type="button" class="btn btn-sm btn-outline-dark btn-sm float-right"><i class="fas fa-heart"></i>&nbsp;Salva</button>
-
-                    <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-outline-dark mr-2 btn-sm float-right"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
-
-                    <button type="button" class="btn btn-outline-dark  mr-2 btn-sm float-right"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
-
-                    <hr class="mt-2" />
-                </div>
                 <div class="col-12">
                     <h5>
                         <strong>@Model.TipologiaProprieta</strong> in <strong>@Model.TipologiaAnnuncio</strong> a <strong>@Model.Prezzo €</strong>
                         <br />
-                        <small class="text-muted">@Model.NomeComune</small>
+                        <small class="text-muted">@Model.Indirizzo,  @Model.NomeComune</small>
                     </h5>
                 </div>
                 <div class="col-12">
@@ -74,13 +84,13 @@
                                 {
                                     if (!isActiveInserted)
                                     {
-                                        <div class="carousel-item active" style="max-height: 500px">
+                                        <div class="carousel-item active" style="height: 500px">
                                             @{
                                                 var base64 = Convert.ToBase64String(item);
                                                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                                             }
 
-                                            <img src="@imgSrc" class="d-block w-100" alt="image" />
+                                            <img src="@imgSrc" class="w-100 h-100" alt="image" />
                                         </div>
 
                                         isActiveInserted = true;
@@ -120,6 +130,14 @@
                             <h5 class="mb-0 p-1">Caratteristiche principali</h5>
                         </div>
                         <div class="card-body">
+                            <label asp-for="Superficie" class="control-label col-form-label-sm"></label>:&nbsp;
+                            @Model.Superficie m²
+
+                            <br />
+
+                            <label asp-for="Piano" class="control-label col-form-label-sm"></label>:&nbsp;
+                            @Model.Piano
+
                             <p>
                                 <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
                             </p>
@@ -186,8 +204,15 @@
                             <h5 class="mb-0 p-1">Costi</h5>
                         </div>
                         <div class="card-body">
-                            <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>:&nbsp;
-                            @Model.Prezzo €
+                            @{
+                                string prezzo = string.Format("{0}{1}", Model.Prezzo, "€");
+                                if (Model.TipologiaAnnuncio == "Affitto") {
+                                    prezzo = string.Format("{0}{1}", Model.Prezzo, "€/Mese");
+                                     
+                                } 
+                            }
+                            <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>
+                            @prezzo
 
                             <br />
                             <label asp-for="SpesaMensileCondominio" class="control-label col-form-label-sm"></label>:&nbsp;
@@ -211,14 +236,34 @@
                                         @if (item.Descrizione == Model.ClasseEnergetica)
                                         {
 
-                                            <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
+                                            <button type="button" class="btn disabled bg-light energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
                                         }
                                         else
                                         {
-                                            <button type="button" class="btn disabled energy-@item.Descrizione.Replace("+","plus")">@item.Descrizione</button>
+                                            <button type="button" class="btn disabled bg-light energy-@item.Descrizione.Replace("+","plus")">@item.Descrizione</button>
                                         }
                                     }
                                 }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-white shadow-sm mt-3 border-0">
+                        <div class="card-header p-2 border-0">
+                            <h5 class="mb-0 p-1">Planimetria</h5>
+                        </div>
+                        <div class="card-body">
+                             <div style="height:400px">
+                                @{
+                                    var srcPlanimetria = string.Empty;
+                                    if (Model.ImmaginiPlanimetria != null && Model.ImmaginiPlanimetria.Any() )
+                                    {
+                                        var base64Planimetria = Convert.ToBase64String(Model.ImmaginiPlanimetria.First());
+                                        srcPlanimetria = String.Format("data:image/gif;base64,{0}", base64Planimetria);
+                                    }
+                                }
+
+                                <img src="@srcPlanimetria" class="w-100 h-100" alt="image" />
                             </div>
                         </div>
                     </div>
@@ -230,35 +275,26 @@
                         <div class="card-body">
                             @Model.Indirizzo, @Model.NomeComune
 
-                            <div id="googleMap" style="width:100%;height:400px;"></div>
-
-                            <script>function myMap() {
-                                    var mapProp = {
-                                        center: new google.maps.LatLng(51.508742, -0.120850),
-                                        zoom: 5,
-                                    };
-                                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                                }</script>
-
-                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIBdGKmybeAjYgd5ZlT5x6UamFuILjTvU&callback=myMap"></script>
+                            <div id="googleMap" data-address="@Model.Indirizzo,@Model.NomeComune" class="map w-100" style="height:400px;"></div>
+                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-sm-3">
              @{
                  AppAppartamentiApiClient.UserInfoDto userInfo = (AppAppartamentiApiClient.UserInfoDto)ViewData["UserInfo"];
              }
 
-            <div class="border rounded p-3">
+            <div class="border rounded p-3 mt-1">
                 @{
                     var base642 = Convert.ToBase64String(userInfo.FotoProfilo);
                     var imgSrc2 = String.Format("data:image/gif;base64,{0}", base642);
                 }
 
                 <div class="mx-auto" style="width:100px;height:100px">
-                    <img src="@imgSrc2" class="d-block w-100 h-100 rounded-circle" alt="image" />
+                    <img src="@imgSrc2" class="w-100 h-100 rounded-circle" alt="image" />
                 </div>
 
                 <h6 class="text-center mx-auto mb-3">@userInfo.Nome @userInfo.Cognome</h6>
@@ -274,7 +310,9 @@
 @await Html.PartialAsync("_ShareModal", Model.Id)
 
 @section Scripts {
-    <script src="~/js/annunci-details.js" asp-append-version="true"></script>
-    <script src="~/js/share-modal.js" asp-append-version="true"></script>
+    <script src="~/js/annunci-details.min.js" asp-append-version="true"></script>
+    <script src="~/js/share-modal.min.js" asp-append-version="true"></script>
+    <script src="~/js/share-modal.min.js" asp-append-version="true"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUDWKfs6tGF891vL-VwXYubP_IKuG8exg&callback=setMap"></script>
 }
 

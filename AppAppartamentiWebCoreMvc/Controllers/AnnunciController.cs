@@ -18,6 +18,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
     [Authorize]
     public class AnnunciController : Controller
     {
+        
+
         private readonly ILogger<HomeController> _logger;
 
         public AnnunciController(ILogger<HomeController> logger)

@@ -188,7 +188,7 @@ function RemovePreferred(btn, url, id) {
     });
 }
 
-//Abilita il pulsante di ricerca deigli annunci
+//Abilita il pulsante di ricerca dei comuni
 function EnableSearch(searchTextbox) {
     try{
         let searchButton = $(".search-button");
