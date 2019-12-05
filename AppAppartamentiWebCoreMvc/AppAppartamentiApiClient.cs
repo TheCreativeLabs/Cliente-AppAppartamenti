@@ -2809,6 +2809,8 @@ namespace AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("PhotoUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PhotoUrl { get; set; }
+
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.24.0 (Newtonsoft.Json v11.0.0.0)")]
@@ -3061,9 +3063,8 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.Guid IdTipologiaAnnuncio { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("IdStatoProprieta", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public System.Guid IdStatoProprieta { get; set; }
+        [Newtonsoft.Json.JsonProperty("IdStatoProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdStatoProprieta { get; set; }
 
         [Newtonsoft.Json.JsonProperty("IdClasseEnergetica", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -3457,6 +3458,9 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdAnnuncio { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Annuncio Annuncio { get; set; }
+
 
     }
 
@@ -3511,6 +3515,9 @@ namespace AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdAnnuncio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Annuncio Annuncio { get; set; }
 
 
     }

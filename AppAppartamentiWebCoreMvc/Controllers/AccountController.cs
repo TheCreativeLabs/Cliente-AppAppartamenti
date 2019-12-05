@@ -88,6 +88,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 {
                     Model.BirthName = Model.Name;
 
+                    Model.ImmagineProfilo = Utility.Utility.Compress(Model.ImmagineProfilo);
+
                     HttpClient httpClient = new HttpClient();
                     var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
                     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);

@@ -140,7 +140,7 @@ html {
 
 .card-annuncio{
     border:none !important;
-    height:290px !important;
+    /*height:290px !important;*/
     cursor:pointer;
 }
 
@@ -172,7 +172,7 @@ html {
 {
     position: absolute;
     width: 40%;
-    left:80px;
+    left:60px;
     text-align: center;
     margin: 0px;
     top:10px;
@@ -238,33 +238,36 @@ p{
     }
 }
 
+.energy-Aplus{
+    background-color:#6d9e00 !important;
+}
 
 .energy-A{
     background-color:#7fb800 !important;
 }
 
 .energy-B{
-    background-color:#91d100;
+    background-color:#91d100 !important;
 }
 
 .energy-C{
-    background-color:#ebc400;
+    background-color:#ebc400 !important;
 }
 
 .energy-D{
-    background-color:#eb9d00;
+    background-color:#eb9d00 !important;
 }
 
 .energy-E{
-    background-color:#e67300;
+    background-color:#e67300 !important;
 }
 
 .energy-F{
-    background-color:#d22300;
+    background-color:#d22300 !important;
 }
 
 .energy-G{
-    background-color:#b80000;
+    background-color:#b80000 !important;
 }
 
 #btnGroupEnergy .active{
@@ -363,7 +366,7 @@ p{
 
 .file-input {
    opacity: 0;
-   position: absolute;
+   /*position: absolute;*/
    z-index: -1;
 }
 
@@ -393,4 +396,8 @@ p{
     bottom:10px;
     right:90px;
     z-index:1050;
+}
+
+img{
+    object-fit: cover;
 }

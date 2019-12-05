@@ -10,12 +10,12 @@
 
 <body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="90">
     <header>
-        <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-lg">
+        <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-sm pl-1 pr-1">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="container-fluid">
-                <div class="navbar-collapse collapsible-navbar">
+            <div class="container-fluid pl-1 pr-1">
+                <div class="navbar-collapse collapsible-navbar collapse hide">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
                 </div>
                 <form id="navSearchBar" class="navbar-start">
@@ -34,7 +34,7 @@
                     </div>
                 </form>
 
-                <div class="navbar-collapse collapsible-navbar">
+                <div class="navbar-collapse collapsible-navbar collapse hide">
                     <ul class="navbar-nav justify-content-end">
                         @if (User.Identity.IsAuthenticated)
                         {
