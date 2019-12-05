@@ -56,7 +56,7 @@ namespace AppAppartamentiApi.Dto
                 Cantina = annuncio.Cantina,
                 SpesaMensileCondominio = annuncio.SpesaMensileCondominio,
                 Condizionatori = annuncio.Condizionatori
-            };
+        };
 
             if (annuncio.TipologiaAnnuncio != null)
             {
@@ -83,6 +83,20 @@ namespace AppAppartamentiApi.Dto
             {
                 dto.ImmaginiAnnuncio.Add(imm.Immagine);
                 
+            }
+
+            if(annuncio.ImmaginiPlanimetria != null) { 
+                foreach (var imm in annuncio.ImmaginiPlanimetria)
+                {
+                    dto.ImmaginiPlanimetria.Add(imm.Immagine);
+
+                }
+            }
+
+            if (annuncio.Video != null)
+            {
+                Video video = annuncio.Video.OfType<Video>().FirstOrDefault();
+                if (video != null) dto.Video = video.VideoBytes;
             }
 
             return dto;
@@ -161,6 +175,9 @@ namespace AppAppartamentiApi.Dto
 
         public bool Condizionatori { get; set; }
 
+        public byte[] Video { get; set;  }
+
+        public List<byte[]> ImmaginiPlanimetria { get; set; }
 
 
 

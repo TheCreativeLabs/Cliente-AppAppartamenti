@@ -16,5 +16,7 @@ namespace AppAppartamentiApi.Models
         public byte[] VideoBytes { get; set; }
 
         public Guid IdAnnuncio { get; set; }
+
+        public virtual Annuncio Annuncio { get; set; }
     }
 }

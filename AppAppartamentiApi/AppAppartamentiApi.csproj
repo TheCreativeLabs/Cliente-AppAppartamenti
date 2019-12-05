@@ -282,6 +282,7 @@
     <Compile Include="Dto\AnnuncioDtoOutput.cs" />
     <Compile Include="Dto\AnnunciDtoOutput.cs" />
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
+    <Compile Include="Dto\ComuneDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="FacebookBackChannelHandler.cs" />

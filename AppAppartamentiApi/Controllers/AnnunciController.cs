@@ -23,16 +23,14 @@ namespace AppAppartamentiApi.Controllers
 
         public enum AnnunciOrder
         {
-            PRICE = 0,
-            SIZE =1,
-            CREATION_DATE = 2
+            PRICE_ASC = 0,
+            PRICE_DESC = 1,
+            SIZE_ASC =2,
+            SIZE_DESC = 3,
+            CREATION_DATE_ASC = 4,
+            CREATION_DATE_DESC = 5
         }
 
-        public enum OrderDirection
-        {
-            ASC = 0,
-            DESC =1
-        }
 
         // GET api/Annunci/Annunci
         /// <summary>
@@ -83,8 +81,7 @@ namespace AppAppartamentiApi.Controllers
                                                        bool? cellar = null,
                                                        bool? pool = null,
                                                        bool? elevator = null,
-                                                       AnnunciOrder? orderBy = null,
-                                                       OrderDirection? orderDirection = null)
+                                                       AnnunciOrder? orderBy = null)
         {
 
             //List<AnnunciDtoOutput> annunci = dbDataContext.Annuncio
@@ -94,54 +91,47 @@ namespace AppAppartamentiApi.Controllers
                                                 & (idTipologiaProprieta == null || x.IdTipologiaProprieta == idTipologiaProprieta)
                                                 & (comuneCodice == null || x.ComuneCodice == comuneCodice)
                                                 & (priceMin == null || x.Prezzo >= priceMin)
-                                                & (priceMax == null || x.Prezzo <= priceMax)
+                                                & (priceMax == null || priceMax >= 500000 || x.Prezzo <= priceMax)
                                                 & (houseSizeMin == null || x.Superficie >= houseSizeMin)
-                                                & (houseSizeMax == null || x.Superficie <= houseSizeMax)
+                                                & (houseSizeMax == null || houseSizeMax >= 300 || x.Superficie <= houseSizeMax)
                                                 & (bedrooms == null || x.NumeroCameraLetto >= bedrooms)
                                                 & (bathrooms == null || x.NumeroBagni >= bathrooms)
                                                 & (kitchens == null || x.NumeroCucine >= kitchens)
                                                 & (parkingSpaces == null || x.NumeroPostiAuto >= parkingSpaces)
                                                 & (garages == null || x.NumeroGarage >= garages)
-                                                & (backyard == null || x.Giardino == backyard)
-                                                & (terrace == null || x.Balcone == terrace)
-                                                & (cellar == null || x.Cantina == cellar)
-                                                & (pool == null || x.Piscina == pool)
-                                                & (elevator == null || x.Ascensore == elevator)
+                                                & (backyard == null || backyard == false || x.Giardino == backyard)
+                                                & (terrace == null || terrace  == false || x.Balcone == terrace)
+                                                & (cellar == null || cellar == false || x.Cantina == cellar)
+                                                & (pool == null || pool == false || x.Piscina == pool)
+                                                & (elevator == null || elevator == false || x.Ascensore == elevator)
                                         );
 
 
-            if (orderBy == null || AnnunciOrder.CREATION_DATE == orderBy)
+            if (orderBy == null || AnnunciOrder.CREATION_DATE_ASC == orderBy)
             {
-                if (orderDirection != null && OrderDirection.ASC == orderDirection)
-                {
                     query = query.OrderBy(x => x.DataCreazione);
-                }
-                else
-                {
-                    query = query.OrderByDescending(x => x.DataCreazione);
-                }
-            } else if( AnnunciOrder.PRICE == orderBy)
+            }
+            else if(AnnunciOrder.CREATION_DATE_DESC == orderBy)
             {
-                if (orderDirection != null && OrderDirection.ASC == orderDirection)
-                {
+                query = query.OrderByDescending(x => x.DataCreazione);
+            } 
+            else if( AnnunciOrder.PRICE_ASC == orderBy)
+            {
                     query = query.OrderBy(x => x.Prezzo);
-                }
-                else
-                {
-                    query = query.OrderByDescending(x => x.Prezzo);
-                }
             }
-            else if (AnnunciOrder.SIZE == orderBy)
+            else if(AnnunciOrder.PRICE_DESC == orderBy)
             {
-                if (orderDirection != null && OrderDirection.ASC == orderDirection)
-                {
-                    query = query.OrderBy(x => x.Superficie);
-                }
-                else
-                {
-                    query = query.OrderByDescending(x => x.Superficie);
-                }
+                query = query.OrderByDescending(x => x.Prezzo);
             }
+            else if (AnnunciOrder.SIZE_ASC == orderBy)
+            {
+                    query = query.OrderBy(x => x.Superficie);
+            }
+            else if (AnnunciOrder.SIZE_DESC == orderBy)
+            {
+                query = query.OrderByDescending(x => x.Superficie);
+            }
+            
             List<AnnunciDtoOutput> annunci = query
                                        //.OrderBy(x =>  x.DataCreazione) //FIXME ORDINAMENTO
                                         .Skip(pageSize * (pageNumber - 1))
@@ -164,12 +154,11 @@ namespace AppAppartamentiApi.Controllers
                                                  Cancellato = annuncio.Cancellato
                                              }).ToList();
 
-            //FIXME MOMENTANEAMENTE COMMENTATO PER NON FARE DOWNLOAD DI TROPPI DATI, SCOMMENTARE PER AVERE LE IMMAGINI
 
-            //annunci.ForEach(x =>
-            //{
-            //    x.ImmaginePrincipale = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
-            //});
+            annunci.ForEach(x =>
+            {
+                x.ImmaginePrincipale = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
+            });
             return annunci;
         }
 
@@ -204,12 +193,11 @@ namespace AppAppartamentiApi.Controllers
                                             Cancellato = annuncio.Cancellato
                                         }).ToList();
 
-            //FIXME MOMENTANEAMENTE COMMENTATO PER NON FARE DOWNLOAD DI TROPPI DATI, SCOMMENTARE PER AVERE LE IMMAGINI
-            //annunci.ForEach(x =>
-            //{
-            //    var img = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
-            //    x.ImmaginePrincipale = img;
-            //});
+            annunci.ForEach(x =>
+            {
+                var img = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
+                x.ImmaginePrincipale = img;
+            });
 
             return annunci;
         }
@@ -293,7 +281,7 @@ namespace AppAppartamentiApi.Controllers
             return Ok(preferito);
         }
 
-        // GET api/Annunci/AnnuncioById/?id=1
+        // GET api/Annunci/RimuoviPreferito/?id=1
         [HttpPost]
         [Route("RimuoviPreferito")]
         public async Task<IHttpActionResult> RimuoviPreferito(Guid IdAnnuncio)
@@ -353,7 +341,7 @@ namespace AppAppartamentiApi.Controllers
                 IdTipologiaRiscaldamento = Annuncio.IdTipologiaRiscaldamento,
                 IdTipologiaProprieta = Annuncio.IdTipologiaProprieta,
                 IdTipologiaAnnuncio = Annuncio.IdTipologiaAnnuncio,
-                IdStatoProprieta = Annuncio.IdStatoProprieta,
+                IdStatoProprieta = (Annuncio.IdStatoProprieta  == Guid.Empty ? null : Annuncio.IdStatoProprieta),
                 IdClasseEnergetica = Annuncio.IdClasseEnergetica,
                 Condizionatori = Annuncio.Condizionatori,
                 Completato = Annuncio.Completato,
@@ -378,15 +366,18 @@ namespace AppAppartamentiApi.Controllers
 
             if (Annuncio.ImmaginePlanimetria != null)
             {
-                //Creo l'immaginePlanimetria
-                ImmaginePlanimetria immaginePlanimetria = new ImmaginePlanimetria()
+                foreach (byte[] immagine in Annuncio.ImmaginePlanimetria)
                 {
-                    Id = Guid.NewGuid(),
-                    Immagine = Annuncio.ImmaginePlanimetria,
-                    IdAnnuncio = annuncio.Id
-                };
+                    //Creo l'immaginePlanimetria
+                    ImmaginePlanimetria immaginePlanimetria = new ImmaginePlanimetria()
+                    {
+                        Id = Guid.NewGuid(),
+                        Immagine = immagine,
+                        IdAnnuncio = annuncio.Id
+                    };
 
-                dbDataContext.ImmaginePlanimetria.Add(immaginePlanimetria);
+                    dbDataContext.ImmaginePlanimetria.Add(immaginePlanimetria);
+                }
             }
 
             if (Annuncio.Video != null)
@@ -436,7 +427,11 @@ namespace AppAppartamentiApi.Controllers
             }
 
             //Cerco l'annuncio
-            Annuncio annuncio = await dbDataContext.Annuncio.Include(x => x.ImmagineAnnuncio).Where(x => x.Id == IdAnnuncio).FirstOrDefaultAsync();
+            Annuncio annuncio = await dbDataContext.Annuncio
+                                        .Include(x => x.ImmagineAnnuncio)
+                                        .Include(x => x.ImmaginiPlanimetria)
+                                        .Include(x => x.Video)
+                                        .Where(x => x.Id == IdAnnuncio).FirstOrDefaultAsync();
             if (annuncio == null)
             {
                 return NotFound();
@@ -474,6 +469,9 @@ namespace AppAppartamentiApi.Controllers
             annuncio.UltimoPiano = Annuncio.UltimoPiano;
             annuncio.IdClasseEnergetica = Annuncio.IdClasseEnergetica;
 
+            //fixme gestione veloce, elimino e ricreo le immagini
+            dbDataContext.ImmagineAnnuncio.RemoveRange(annuncio.ImmagineAnnuncio);
+
             foreach (byte[] immagine in Annuncio.Immagini)
             {
                 //Creo l'immagine
@@ -487,34 +485,40 @@ namespace AppAppartamentiApi.Controllers
                 dbDataContext.ImmagineAnnuncio.Add(immagineAnnuncio);
             }
 
-            foreach (Guid idImmagineToDelete in Annuncio.IdsImmaginiToDelete) {
-                ImmagineAnnuncio imm = await dbDataContext.ImmagineAnnuncio.Where(x => x.Id == idImmagineToDelete).FirstOrDefaultAsync();
-                dbDataContext.ImmagineAnnuncio.Remove(imm);
-            }
+            //foreach (Guid idImmagineToDelete in Annuncio.IdsImmaginiToDelete) {
+            //    ImmagineAnnuncio imm = await dbDataContext.ImmagineAnnuncio.Where(x => x.Id == idImmagineToDelete).FirstOrDefaultAsync();
+            //    dbDataContext.ImmagineAnnuncio.Remove(imm);
+            //}
+
+            //fixme gestione veloce, elimino e ricreo le planimetrie
+            dbDataContext.ImmaginePlanimetria.RemoveRange(annuncio.ImmaginiPlanimetria);
 
             if (Annuncio.ImmaginePlanimetria != null)
             {
-                ImmaginePlanimetria imm;
-                imm = await dbDataContext.ImmaginePlanimetria.Where(x => x.IdAnnuncio == annuncio.Id).FirstOrDefaultAsync();
-                if (imm == null) {
-                    imm = new ImmaginePlanimetria();
-                    imm.Id = new Guid();
+                foreach (byte[] immagine in Annuncio.ImmaginePlanimetria)
+                {
+                    //Creo l'immagine
+                    ImmaginePlanimetria immaginePlan= new ImmaginePlanimetria()
+                    {
+                        Id = Guid.NewGuid(),
+                        Immagine = immagine,
+                        IdAnnuncio = annuncio.Id
+                    };
+
+                    dbDataContext.ImmaginePlanimetria.Add(immaginePlan);
                 }
-                imm.IdAnnuncio = annuncio.Id;
-                imm.Immagine = Annuncio.ImmaginePlanimetria;
             }
+
+            //fixme gestione veloce (todo)
+            dbDataContext.Video.RemoveRange(annuncio.Video);
 
             if (Annuncio.Video != null)
             {
-                Video vid;
-                vid = await dbDataContext.Video.Where(x => x.IdAnnuncio == annuncio.Id).FirstOrDefaultAsync();
-                if (vid == null)
-                {
-                    vid = new Video();
-                    vid.Id = new Guid();
-                }
+                Video vid = new Video();
+                vid.Id = new Guid();
                 vid.IdAnnuncio = annuncio.Id;
                 vid.VideoBytes = Annuncio.Video;
+                dbDataContext.Video.Add(vid);
             }
 
             try
@@ -599,16 +603,20 @@ namespace AppAppartamentiApi.Controllers
         // GET api/values
         [HttpGet]
         [Route("ListaComuni")]
-        [ResponseType(typeof(List<Comuni>))]
-        public List<Comuni> GetListaComuni(string NomeComune)
+        [ResponseType(typeof(List<ComuneDto>))]
+        public List<ComuneDto> GetListaComuni(string NomeComune)
         {
-            List<Comuni> listaComuni = new List<Comuni>();
+            List<ComuneDto> listaComuni = new List<ComuneDto>();
 
             if (!(string.IsNullOrEmpty(NomeComune)))
             {
                listaComuni = dbDataContext.Comuni
-                                        .Where(x => x.NomeComune.ToUpper().Contains(NomeComune))
-                                        .Take(30)
+                                        .Where(x => x.NomeComune.ToUpper().StartsWith(NomeComune.ToUpper()))
+                                        .Take(1000)
+                                        .Select(comune => new ComuneDto() { 
+                                            NomeComune = comune.NomeComune,
+                                            CodiceComune = comune.CodiceComune
+                                        })
                                         .ToList();
             }
 

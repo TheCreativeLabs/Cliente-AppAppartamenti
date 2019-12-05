@@ -46,6 +46,18 @@ namespace AppAppartamentiApi.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.Video)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.ImmaginiPlanimetria)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Annuncio>()
                 .HasMany(e => e.AnnuncioMessaggi)
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
