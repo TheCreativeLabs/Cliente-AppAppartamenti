@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using AppAppartamenti.Api;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using static AppAppartamenti.Api.ApiHelper;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
@@ -166,6 +166,12 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUpAsync(RegisterUserBindingModel Model)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return Redirect("/");
+            }
+
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
 
             Model.BirthName = Model.Name;

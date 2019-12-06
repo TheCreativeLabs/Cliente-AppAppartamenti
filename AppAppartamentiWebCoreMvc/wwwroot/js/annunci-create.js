@@ -22,7 +22,45 @@ $(document).ready(function () {
     $("#input-comune").keyup(function () {
         EnableCitySearch(this);
     })
+
+    $(".btn-time-slot").click(function () {
+        CreateNewTimeSlot(this);
+    })
+
+    $(".btn-toggle-slot").click(function () {
+        ToggleSlot(this);
+    });
+
+    $(".btn-remove-slot").click(function () {
+        RemoveSlot(this);
+    })
 });
+
+function RemoveSlot(button) {
+    $(button).parent().remove();
+}
+
+function ToggleSlot(button) {
+    var target = $(button).data("target");
+
+    if ($(target).css("display") == "none") {
+        $(target).show();
+        
+    } else {
+        $(target).hide();
+    }
+}
+
+function CreateNewTimeSlot(timeslotButton) {
+    var target = $(timeslotButton).data("target");
+    var currentIndex = $(target).data("index");
+
+    var newElement = $(target).clone();
+    newElement.removeAttr("id");
+    newElement.children(".btn-remove-slot").show();
+    newElement.removeAttr("data-index");
+    newElement.appendTo($(timeslotButton).parent().parent());
+}
 
 function changeScroll() {
     if (document.body.scrollTop > 70 || document.documentElement.scrollTop > 70) {
