@@ -108,7 +108,8 @@ namespace AppAppartamentiApi.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
+        
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -130,6 +131,7 @@ namespace AppAppartamentiApi.Models
         public byte[] ImmagineProfilo { get; set; }
 
         [Display(Name = "DataNascita")]
+        [DataType(DataType.Date)]
         public DateTime? DataNascita { get; set; }
     }
 
@@ -158,6 +160,7 @@ namespace AppAppartamentiApi.Models
         public byte[] ImmagineProfilo { get; set; }
 
         [Display(Name = "DataNascita")]
+        [DataType(DataType.Date)]
         public DateTime? DataNascita { get; set; }
     }
 }

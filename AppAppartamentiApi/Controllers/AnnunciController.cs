@@ -206,17 +206,26 @@ namespace AppAppartamentiApi.Controllers
         [HttpGet]
         [Route("AnnuncioById")]
         [ResponseType(typeof(AnnuncioDtoOutput))]
-        public AnnuncioDtoOutput GetAnnuncioById(Guid Id)
+        public async Task<AnnuncioDtoOutput> GetAnnuncioById(Guid Id)
         {
-            Annuncio annuncio = dbDataContext.Annuncio
+            Annuncio annuncio = await dbDataContext.Annuncio
                                         .Include(x => x.Comuni)
                                         .Include(x => x.ImmagineAnnuncio)
                                         .Include(x => x.TipologiaAnnuncio)
                                         .Include(x => x.TipologiaProprieta)
                                         .Include(x => x.TipologiaRiscaldamento)
-                                        .SingleOrDefaultAsync(x => x.Id == Id).Result;
+                                        .Include(x => x.ImmaginiPlanimetria)
+                                        .SingleOrDefaultAsync(x => x.Id == Id);
 
-            AnnuncioDtoOutput dto = AnnuncioDtoOutput.MapperAnnuncio(annuncio);
+            var idCurrentUser = new Guid(User.Identity.GetUserId());
+
+            AnnunciPreferiti preferiti = await dbDataContext.AnnunciPreferiti
+                                            .Where(x => x.IdUser == idCurrentUser && x.IdAnnuncio == Id)
+                                            .FirstOrDefaultAsync();
+            bool preferito = preferiti != null;
+
+            AnnuncioDtoOutput dto = AnnuncioDtoOutput.MapperAnnuncio(annuncio, preferito);
+
             return dto;
         }
 
@@ -531,9 +540,7 @@ namespace AppAppartamentiApi.Controllers
                throw;
             }
 
-            //return StatusCode(HttpStatusCode.NoContent);
-            return Ok(AnnuncioDtoOutput.MapperAnnuncio(annuncio));
-            //CreatedAtRoute("UpdateEvento", new { id = evento.Id }, evento);
+            return Ok(AnnuncioDtoOutput.MapperAnnuncio(annuncio, false)); //l'annuncio  è dell'utente corrente quindi non ha senso che sia tra suoi preferiti: passo sempre preferito = false
         }
 
         // DELETE: api/Evento/AnnuncioDelete/5

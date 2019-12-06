@@ -117,5 +117,7 @@ namespace AppAppartamentiApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Video> Video { get; set; }
 
+        public virtual string CoordinateGeografiche { get; set;  }
+
     }
 }
