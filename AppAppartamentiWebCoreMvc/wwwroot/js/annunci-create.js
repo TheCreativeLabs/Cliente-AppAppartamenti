@@ -34,6 +34,8 @@ $(document).ready(function () {
     $(".btn-remove-slot").click(function () {
         RemoveSlot(this);
     })
+
+    $("#btn-virtual-agent").dropdown('toggle');
 });
 
 function RemoveSlot(button) {

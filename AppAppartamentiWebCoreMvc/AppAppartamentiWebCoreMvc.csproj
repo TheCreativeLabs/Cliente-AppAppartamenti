@@ -30,6 +30,11 @@
     <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
     <Content Remove="Views\AnnunciPreferiti\Detail.cshtml" />
     <Content Remove="Views\AnnunciPersonali\Detail.cshtml" />
+    <Content Remove="wwwroot\lib\fullcalendar\core\locales\en-nz.js" />
+    <Content Remove="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
+    <Content Remove="wwwroot\lib\fullcalendar\moment\main.d.ts" />
+    <Content Remove="wwwroot\lib\fullcalendar\moment\main.esm.js" />
+    <Content Remove="wwwroot\bundle\bundle.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -52,6 +57,8 @@
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Shared\" />
     <Folder Include="Resources\AppAppartamentiApiClient\" />
+    <Folder Include="Resources\Views\AnnunciPersonali\" />
+    <Folder Include="wwwroot\lib\fullcalendar\moment\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />

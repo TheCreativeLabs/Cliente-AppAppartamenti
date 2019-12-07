@@ -20,12 +20,15 @@
     <title>@ViewData["Title"] - App appartamenti</title>
     <link rel="stylesheet" href="~/bundle/bundle.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/core@4.3.1/main.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.css">
 </head>
 
 <body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="90">
     <header>
         <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-sm pl-1 pr-1">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="container-fluid pl-1 pr-1">
@@ -56,11 +59,37 @@
                             <li class="nav-item">
                                 <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
                             </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List">@_localizer["FavoritesLabel"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
+                            </li>
+                            <li class="nav-item dropdown ">
+                                <a class="nav-link text-dark p-1 m-1" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Agenda
+                                </a>
+                                <div class="dropdown-menu dropdown-agenda dropdown-menu-right border-0 bg-white shadow" aria-labelledby="navbarDropdownMenuLink" style="width:700px;height:430px;">
+                                    <div class="p-3">
+                                        <div class="container-flui">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <div id="calendar"></div>
+                                                </div>
+                                                <div class="col-5">
+                                                    <a href="#" class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
+                                                    <ul class="list-group list-group-flush mt-5">
+                                                        <li class="list-group-item">Appuntamento 1</li>
+                                                        <li class="list-group-item">Appuntamento 2</li>
+                                                        <li class="list-group-item">Appuntamento 3</li>
+                                                        <li class="list-group-item">Appuntamento 4</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark p-0 m-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,22 +105,20 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">@_localizer["SettingsLabel"]</a>
                                     <div class="dropdown-divider"></div>
-                                    <div class="p-3">
-                                        <a href="#" data-toggle="modal" data-target="#exampleModal">
-                                              <img src="@string.Format("../Images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+                                            <img src="@string.Format("../Images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
 
-                                               @{
-                                                   if (requestCulture.RequestCulture.UICulture.Name == "en-US")
-                                                   {
-                                                       @:English
-                                                   }
-                                                   else
-                                                   {
-                                                       @:Italiano
-                                                   }
-                                               }
-                                        </a>
-                                    </div>
+                                            @{
+                                                if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                                                {
+                                                    @:English
+                                                }
+                                                else
+                                                {
+                                                    @:Italiano
+                                                }
+                                            }
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">@_localizer["LogoutLabel"]</a>
                                 </div>
@@ -193,9 +220,36 @@
     <script type="text/javascript">
         var loggedUser = "@User.Identity.Name";
     </script>
- 
+
     <script src="~/bundle/bundle.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/core@4.3.1/main.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/interaction@4.3.0/main.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.js"></script>
+
+    <script type="text/javascript">
+       $(document).ready(function () {
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    plugins: ['dayGrid', 'timeGrid'],
+                    themeSystem: 'bootstrap',
+                    header: {
+                        left: 'title',
+                        center: '',
+                        right: ''
+                    },
+                    footer: {
+                        left: '',
+                        center: '',
+                        right: ''
+                    }
+                });
+
+                calendar.render();
+            });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     @RenderSection("Scripts", required: false)
 </body>

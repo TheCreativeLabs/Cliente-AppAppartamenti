@@ -192,6 +192,7 @@ html {
 
 .sub-nav{
     margin-top:66px;
+    z-index:1000;
 }
 
 @font-face {
@@ -416,4 +417,45 @@ img{
     border-color:#ff6b6b !important;
     background-color: #ff6b6b !important;
     color:white !important;
-} 
+}
+
+
+.dropdown-menu-agent{
+    height:400px;
+    width:400px;
+    overflow-y:scroll;
+    top:-20px !important;
+}
+
+
+.fc-day-grid-container{
+    height:unset !important;
+    
+}
+
+.fc-dayGrid-view .fc-body .fc-row {
+    min-height: 3em !important;
+}
+
+.fc-widget-header > table > thead > tr{
+    height: 2em !important;
+}
+
+.fc-widget-header > table > thead > tH{
+    vertical-align: middle !important;
+}
+
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+    border-color:white !important;
+}
+
+.fc-toolbar h2 {
+    font-size: 1.2em !important;
+    margin: 0;
+}
+
+.fc-today{
+    background-color:lightcoral !important;
+    color:white !important;
+}
+
