@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using AppAppartamenti.Api;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using static AppAppartamenti.Api.ApiHelper;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;

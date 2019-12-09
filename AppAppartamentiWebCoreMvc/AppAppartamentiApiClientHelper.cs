@@ -1,4 +1,4 @@
-﻿using AppAppartamentiApiClient;
+﻿using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;

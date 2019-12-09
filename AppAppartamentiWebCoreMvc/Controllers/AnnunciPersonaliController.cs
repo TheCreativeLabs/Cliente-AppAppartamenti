@@ -9,7 +9,7 @@ using AppAppartamentiWebCoreMvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
-using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using System.Collections.ObjectModel;
 
 namespace AppAppartamentiWebCoreMvc.Controllers

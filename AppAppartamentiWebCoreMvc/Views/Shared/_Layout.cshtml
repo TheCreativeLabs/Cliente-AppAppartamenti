@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IViewLocalizer _localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .ToList();
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,18 +32,19 @@
                 <div class="navbar-collapse collapsible-navbar collapse hide">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
                 </div>
+
                 <form id="navSearchBar" class="navbar-start">
                     <input id="codiceComune" type="number" value="" style="display: none;" />
                     <div class="input-group" style="text-align: center;">
-                        <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-right-0 search-textbox" placeholder="Cerca per città o provincia" aria-label="Cerca per città o provincia" aria-describedby="buttonSearch">
+                        <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-right-0 search-textbox" placeholder="@_localizer["SearchPlaceholder"]" aria-label="@_localizer["SearchPlaceholder"]" aria-describedby="buttonSearch">
                         <div class="search-spinner spinner-border spinner-border-sm text-secondary mt-2" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                         <div class="input-group-append">
-                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ Altri filtri</small></a>
+                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ @_localizer["OtherFilterLabel"]</small></a>
                         </div>
                         <div class="input-group-append">
-                            <a class="btn btn-primary disabled search-button" id="buttonSearch" asp-controller="Annunci" asp-action="List">Cerca</a>
+                            <a class="btn btn-primary disabled search-button" id="buttonSearch" asp-controller="Annunci" asp-action="List">@_localizer["Search"]</a>
                         </div>
                     </div>
                 </form>
@@ -39,13 +54,13 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">Pubblica un annuncio</a>
+                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List"> Preferiti</a>
+                                <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List">@_localizer["FavoritesLabel"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">I miei annunci</a>
+                                <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark p-0 m-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,21 +72,38 @@
                                         </h6>
                                         <small id="lblEmail" class="text-muted"></small>
                                     </div>
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Detail">Profilo</a>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Detail">@_localizer["ProfileLabel"]</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Impostazioni</a>
+                                    <a class="dropdown-item" href="#">@_localizer["SettingsLabel"]</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">Esci</a>
+                                    <div class="p-3">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                                              <img src="@string.Format("../Images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+
+                                               @{
+                                                   if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                                                   {
+                                                       @:English
+                                                   }
+                                                   else
+                                                   {
+                                                       @:Italiano
+                                                   }
+                                               }
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">@_localizer["LogoutLabel"]</a>
                                 </div>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalSignUp">Registrati</a>
+                                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalSignUp">@_localizer["SignInLabel"]</a>
                             </li>
                             <li class="nav-item">
-                                <a id="btnAccedi" class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalLogin">Accedi</a>
+                                <a id="btnAccedi" class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalLogin">@_localizer["LogInLabel"]</a>
                             </li>
                         }
                     </ul>
@@ -80,6 +112,7 @@
         </nav>
     </header>
 
+
     @RenderSection("SubHeader", required: false)
 
      @{await Html.RenderPartialAsync("_ErrorPartial");}
@@ -87,6 +120,9 @@
     <partial name="_CookieConsentPartial" />
 
     @RenderBody()
+
+    @await Html.PartialAsync("_SelectLanguagePartial")
+
 
     <div id="divFilterModal" data-url="@Url.Action("FilterModal", "Home")">
     </div>
@@ -145,7 +181,7 @@
 
                 </div>
                 <div class="col text-right">
-                    seguici su
+                    @_localizer["FollowUsLabel"]
                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-facebook-f"></i></button>
                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-instagram"></i></button>
                     <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-twitter"></i></button>

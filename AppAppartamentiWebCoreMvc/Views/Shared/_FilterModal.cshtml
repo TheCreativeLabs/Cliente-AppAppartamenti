@@ -16,7 +16,7 @@
                             <h6>Tipologia annuncio</h6>
 
                             @{
-                                IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
+                                IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
 
 
                                 @Html.DropDownListFor(m => m.IdTipologiaProprieta,
@@ -31,7 +31,7 @@
 
                             @{ 
 
-                                    IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
+                                    IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
 
                                           @Html.DropDownListFor(m => m.IdTipologiaProprieta,
                                             new SelectList(tipologiaProprieta,"Id","Descrizione",Model?.IdTipologiaProprieta),

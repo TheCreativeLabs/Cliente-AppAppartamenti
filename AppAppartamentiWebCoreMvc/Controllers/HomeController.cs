@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AppAppartamentiWebCoreMvc.Models;
 using System.Net.Http;
-using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using AppAppartamentiWebCoreMvc.Extensions;
 using AppAppartamentiWebCoreMvc.Utility;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -92,6 +94,17 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             }
 
             return JsonConvert.SerializeObject(comuni);
+        }
+
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }
