@@ -306,10 +306,12 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Annuncio.cs" />
     <Compile Include="Models\AnnunciPreferiti.cs" />
+    <Compile Include="Models\Appuntamento.cs" />
     <Compile Include="Models\ClasseEnergetica.cs" />
     <Compile Include="Models\AnnuncioMessaggi.cs" />
     <Compile Include="Models\Comuni.cs" />
     <Compile Include="Models\DbDataContext.cs" />
+    <Compile Include="Models\FasceOrarie.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImmagineAnnuncio.cs" />
     <Compile Include="Models\ImmaginePlanimetria.cs" />

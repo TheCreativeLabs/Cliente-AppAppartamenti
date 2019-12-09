@@ -78,7 +78,7 @@ namespace AppAppartamentiApi.Dto
             }
             if (annuncio.ClasseEnergetica != null)
             {
-                dto.ClasseEnergetica = annuncio.ClasseEnergetica.Descrizione;
+                dto.ClasseEnergetica = annuncio.ClasseEnergetica.Codice;
             }
 
             foreach (var imm in annuncio.ImmagineAnnuncio)

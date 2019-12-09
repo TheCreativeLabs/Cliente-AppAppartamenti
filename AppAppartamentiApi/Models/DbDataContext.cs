@@ -26,6 +26,8 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<ImmaginePlanimetria> ImmaginePlanimetria { get; set; }
         public virtual DbSet<Video> Video { get; set; }
+        public virtual DbSet<Appuntamento> Appuntamento { get; set; }
+        public virtual DbSet<FasceOrarie> FasceOrarie { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -92,6 +94,20 @@ namespace AppAppartamentiApi.Models
                 .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.TipologiaRiscaldamento)
                 .HasForeignKey(e => e.IdTipologiaRiscaldamento);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.FasceOrarie)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+            //.HasOptional(e => e.FasceOrarie)
+            //.WithOptionalPrincipal(e => e.Annuncio);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.Appuntamenti)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
         }
     }
 }

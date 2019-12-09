@@ -70,9 +70,6 @@
     <data name="PostAdLabel" xml:space="preserve">
     <value>Post an ad</value>
   </data>
-     <data name="PostAdLabel" xml:space="preserve">
-    <value>Post an ad</value>
-  </data>
      <data name="FavoritesLabel" xml:space="preserve">
     <value>Favorites</value>
   </data>

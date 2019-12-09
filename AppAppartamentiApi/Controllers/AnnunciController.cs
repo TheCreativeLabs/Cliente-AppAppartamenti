@@ -214,6 +214,7 @@ namespace AppAppartamentiApi.Controllers
                                         .Include(x => x.TipologiaAnnuncio)
                                         .Include(x => x.TipologiaProprieta)
                                         .Include(x => x.TipologiaRiscaldamento)
+                                        .Include(x => x.ClasseEnergetica)
                                         .Include(x => x.ImmaginiPlanimetria)
                                         .SingleOrDefaultAsync(x => x.Id == Id);
 
@@ -425,7 +426,7 @@ namespace AppAppartamentiApi.Controllers
 
         // PUT: api/Evento/EventoUpdate/1
         [HttpPut]
-        [Route("AnnuncioUpdate/{IdEvento:Guid}")]
+        [Route("AnnuncioUpdate/{IdAnnuncio:Guid}")]
         [ResponseType(typeof(AnnuncioDtoOutput))]
         public async Task<IHttpActionResult> UpdateAnnuncio([FromUri]Guid IdAnnuncio, [FromBody]AnnuncioDtoInput Annuncio)
         {
