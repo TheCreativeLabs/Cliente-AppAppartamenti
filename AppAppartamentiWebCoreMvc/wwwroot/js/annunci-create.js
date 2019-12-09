@@ -36,6 +36,14 @@ $(document).ready(function () {
     })
 
     $("#btn-virtual-agent").dropdown('toggle');
+
+    $("#create-pills-tab .nav-link").click(function() {
+        if (!($("#form-create").valid())) {
+            $("#create-pills-tab .active").addClass("nav-error-link");
+        } else {
+            $("#create-pills-tab .active").removeClass("nav-error-link");
+        }
+    });
 });
 
 function RemoveSlot(button) {

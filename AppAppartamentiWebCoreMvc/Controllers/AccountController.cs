@@ -107,5 +107,35 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             return RedirectToAction("Detail");
         }
+
+        public IActionResult EditPasswordAsync()
+        {
+           return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditPasswordAsync(ChangePasswordBindingModel Model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                AccountClient accountClient = new AccountClient(httpClient);
+                accountClient.ChangePasswordAsync(Model);
+            }
+            catch (Exception ex)
+            {
+                ViewBag["Risultato"] = ex;
+            }
+
+            return RedirectToAction("Detail");
+        }
     }
 }

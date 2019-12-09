@@ -57,7 +57,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-primary p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
+                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-info p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
                             </li>
                             
                             <li class="nav-item">
@@ -66,19 +66,19 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
                             </li>
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link text-dark p-1 m-1" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark p-1 m-1" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Agenda
                                 </a>
-                                <div class="dropdown-menu dropdown-agenda dropdown-menu-right border-0 bg-white shadow" aria-labelledby="navbarDropdownMenuLink" style="width:700px;height:430px;">
+                                <div class="dropdown-menu dropdown-agenda dropdown-menu-right border-0 bg-white shadow" aria-labelledby="agenda-menu-link" style="width:700px;height:430px;">
                                     <div class="p-3">
                                         <div class="container-flui">
                                             <div class="row">
                                                 <div class="col-7">
-                                                    <div id="calendar"></div>
+                                                    <div id="nav-calendar"></div>
                                                 </div>
                                                 <div class="col-5">
-                                                    <a href="#" class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
+                                                    <a asp-controller="Agenda" asp-action="Detail"  class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
                                                     <ul class="list-group list-group-flush mt-5">
                                                         <li class="list-group-item">Appuntamento 1</li>
                                                         <li class="list-group-item">Appuntamento 2</li>
@@ -106,7 +106,7 @@
                                     <a class="dropdown-item" href="#">@_localizer["SettingsLabel"]</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
-                                            <img src="@string.Format("../Images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+                                            <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
 
                                             @{
                                                 if (requestCulture.RequestCulture.UICulture.Name == "en-US")
@@ -219,6 +219,13 @@
 
     <script type="text/javascript">
         var loggedUser = "@User.Identity.Name";
+        var selectedLanguage = "@requestCulture.RequestCulture.UICulture.Name.ToLower()";
+
+        if (selectedLanguage == "en-us") {
+            selectedLanguage = "en";
+        } else {
+            selectedLanguage = "it";
+        }
     </script>
 
     <script src="~/bundle/bundle.min.js" asp-append-version="true"></script>
@@ -227,29 +234,33 @@
     <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/interaction@4.3.0/main.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/core@4.3.1/locales/it.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/core@4.3.1/locales/en-gb.js"></script>
 
     <script type="text/javascript">
-       $(document).ready(function () {
-                var calendarEl = document.getElementById('calendar');
+        $(document).ready(function () {
+            var calendarEl = document.getElementById('nav-calendar');
 
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    plugins: ['dayGrid', 'timeGrid'],
-                    themeSystem: 'bootstrap',
-                    header: {
-                        left: 'title',
-                        center: '',
-                        right: ''
-                    },
-                    footer: {
-                        left: '',
-                        center: '',
-                        right: ''
-                    }
-                });
-
-                calendar.render();
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid', 'timeGrid'],
+                locale:selectedLanguage,
+                themeSystem: 'bootstrap',
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: ''
+                },
+                footer: {
+                    left: '',
+                    center: '',
+                    right: ''
+                }
             });
+
+            calendar.render();
+        });
     </script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     @RenderSection("Scripts", required: false)
 </body>

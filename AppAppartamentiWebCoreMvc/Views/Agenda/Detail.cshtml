@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Agenda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-sm-7">
+            <div id="calendar2"></div>
+        </div>
+        <div class="col-sm-5">
+            <ul class="list-group list-group-flush mt-5">
+                <li class="list-group-item">Appuntamento 1</li>
+                <li class="list-group-item">Appuntamento 2</li>
+                <li class="list-group-item">Appuntamento 3</li>
+                <li class="list-group-item">Appuntamento 4</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var calendarEl2 = document.getElementById('calendar2');
+
+            var calendar2 = new FullCalendar.Calendar(calendarEl2, {
+                plugins: ['dayGrid', 'timeGrid', 'interaction'],
+                locale: selectedLanguage,
+                themeSystem: 'bootstrap',
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next'
+                },
+                footer: {
+                    left: '',
+                    center: '',
+                    right: ''
+                },
+                dateClick: function(info) {
+                    alert('Clicked on: ' + info.dateStr);
+                }
+            });
+
+            calendar2.render();
+        });
+    </script>
+}

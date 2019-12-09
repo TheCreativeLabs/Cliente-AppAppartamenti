@@ -59,43 +59,40 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Cerca</value>
   </data>
       <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Search by city or province</value>
+    <value>Cerca per città o provincia</value>
   </data>
    <data name="OtherFilterLabel" xml:space="preserve">
-    <value>Other filters</value>
+    <value>Altri filtri</value>
   </data>
     <data name="PostAdLabel" xml:space="preserve">
-    <value>Post an ad</value>
-  </data>
-     <data name="PostAdLabel" xml:space="preserve">
-    <value>Post an ad</value>
+    <value>Pubblica un annuncio</value>
   </data>
      <data name="FavoritesLabel" xml:space="preserve">
-    <value>Favorites</value>
+    <value>Preferiti</value>
   </data>
      <data name="MyAdsLabel" xml:space="preserve">
-    <value>My ads</value>
+    <value>I miei annunci</value>
   </data>
          <data name="ProfileLabel" xml:space="preserve">
-    <value>Profile</value>
+    <value>Profilo</value>
   </data>
      <data name="SettingsLabel" xml:space="preserve">
-    <value>Settings</value>
+    <value>Impostazioni</value>
   </data>
       <data name="LogoutLabel" xml:space="preserve">
-    <value>Logout</value>
+    <value>Esci</value>
   </data>
        <data name="SignInLabel" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Registrati</value>
   </data>   
     <data name="LogInLabel" xml:space="preserve">
-    <value>Log in</value>
+    <value>Accedi</value>
   </data>
      <data name="FollowUsLabel" xml:space="preserve">
-    <value>Follow us</value>
+    <value>Seguici su</value>
   </data>
     
 </root>

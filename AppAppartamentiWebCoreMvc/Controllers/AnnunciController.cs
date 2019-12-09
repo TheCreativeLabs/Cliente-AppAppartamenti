@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using AppAppartamentiWebCoreMvc.Extensions;
 using AppAppartamentiWebCoreMvc.Utility;
+using static AppAppartamentiWebCoreMvc.Utility.Utility;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -32,8 +33,14 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View();
         }
 
-        public async Task<ActionResult> RefreshListAsync(int ListPage)
+        public async Task<ActionResult> RefreshListAsync(int ListPage, int? Order)
         {
+            OrderBy? orderBy = null;
+            if(Order != null)
+            {
+                 orderBy = (OrderBy)Order;
+            }
+
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
@@ -41,10 +48,10 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
             var FilterModel = HttpContext.Session.GetObject<FilterModalViewModel>(Constants.FilterModalKey);
 
-            var annunci = await annunciClient.GetAnnunciAsync(ListPage,5,FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
+            var annunci = await annunciClient.GetAnnunciAsync(ListPage,10,FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
                 FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
                 FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage,FilterModel.Giardino,null,FilterModel.Cantina,
-                FilterModel.Piscina,FilterModel.Ascensore,null);
+                FilterModel.Piscina,FilterModel.Ascensore, orderBy);
 
             ViewData["ListPage"] = ListPage;
 

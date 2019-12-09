@@ -20,9 +20,9 @@
         </div>
 
         <div class="col-sm-3 mt-4">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div class="nav flex-column nav-pills" id="create-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link text-dark active" id="tipologia-proprieta-tab" data-toggle="pill" href="#tipologia-proprieta" role="tab" aria-controls="tipologia-proprieta" aria-selected="true">
-                    <i class="fas fa-exclamation-circle text-danger small"></i>&nbsp;@_localizer["PropertyType"]
+                    @_localizer["PropertyType"]
                 </a>
                 <a class="nav-link text-dark" id="tipologia-annuncio-tab" data-toggle="pill" href="#tipologia-annuncio" role="tab" aria-controls="tipologia-annuncio" aria-selected="false">@_localizer["Adtype"]</a>
                 <a class="nav-link text-dark" id="posizione-tab" data-toggle="pill" href="#posizione" role="tab" aria-controls="posizione" aria-selected="false">@_localizer["Position"]</a>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-sm-9 mt-4">
-            <form asp-action="Create">
+            <form asp-action="Create" id="form-create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="tipologia-proprieta" role="tabpanel" aria-labelledby="tipologia-proprieta-tab">
@@ -91,11 +91,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <span asp-validation-for="CodiceComune" class="text-danger"></span>
                             </div>
-                            <div class="form-group" style="display:none;">
-                                <label asp-for="CodiceComune" class="control-label col-form-label-sm"></label>
-                                <input asp-for="CodiceComune" type="text" class="form-control form-control-sm" />
+                            <div class="form-group">
+                                <input asp-for="CodiceComune" type="text" class="form-control form-control-sm d-none" />
+                                <span asp-validation-for="CodiceComune" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Indirizzo" class="control-label col-form-label-sm"></label>
@@ -103,9 +102,14 @@
                                 <span asp-validation-for="Indirizzo" class="text-danger"></span>
                             </div>
 
+                            <!--<div class="form-group">
+                                <label asp-for="CoordinateGeografiche" class="control-label col-form-label-sm d-none"></label>
+                                <input asp-for="CoordinateGeografiche" class="form-control form-control-sm disabled d-none" />
+                                <span asp-validation-for="CoordinateGeografiche" class="text-danger"></span>
+                            </div>-->
+
                             <div id="googleMap" class="map w-100" style="height:400px;display:none">
                             </div>
-
                         </div>
                     </div>
                     <div id="prezzo" class="tab-pane fade" role="tabpanel" aria-labelledby="prezzo-tab">

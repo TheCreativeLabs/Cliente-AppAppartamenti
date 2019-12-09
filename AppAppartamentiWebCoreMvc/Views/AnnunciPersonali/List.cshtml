@@ -11,6 +11,16 @@
 
         <hr />
 
+
+        @{
+            if(Model == null || !(Model.Any()))
+            {
+                <div class="col-12 alert bg-light">
+                    <h6>Non sono presenti annunci.</h6>
+                </div>
+            }
+        }
+
         @foreach (var item in Model)
         {
             string detailUrl = @Url.Action("Edit", "AnnunciPersonali", new { Id = item.Id });

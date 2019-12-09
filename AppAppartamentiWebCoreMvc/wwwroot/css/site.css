@@ -1,4 +1,9 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿:root{
+    --color-primary:#ff6b6b;
+}
+
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -120,17 +125,17 @@ html {
 }
 
 .btn-primary{
-    border-color:#ff6b6b !important;
-    background-color: #ff6b6b !important;
+    border-color: var(--color-primary) !important; /*#ff6b6b !important;*/
+    background-color: var(--color-primary) !important;
     color:white;
 }
 
 .bg-primary{
-    background-color: #ff6b6b !important;
+    background-color: var(--color-primary) !important;
 }
 
 .text-primary{
-    color: #ff6b6b !important;
+    color: var(--color-primary) !important;
 }
 
 .container-custom{
@@ -220,7 +225,7 @@ p{
 
 .nav-pills .active{
     background-color:rgb(248, 249, 250) !important;
-    border-left: 4px lightcoral solid;
+    border-left: 4px var(--color-primary) solid;
 }
 
 .form-control-sm, .custom-select-sm ,.input-group-sm > .form-control{
@@ -303,7 +308,7 @@ p{
 }
 
 .noUi-connect{
-    background-color:#ff6b6b !important;
+    background-color:var(--cyan) !important;
 }
 
 .plus-minus-input{
@@ -414,8 +419,8 @@ img{
 }
 
 .btn-group-toggle .active{
-    border-color:#ff6b6b !important;
-    background-color: #ff6b6b !important;
+    border-color:var(--color-primary) !important;
+    background-color: var(--color-primary) !important;
     color:white !important;
 }
 
@@ -428,34 +433,66 @@ img{
 }
 
 
-.fc-day-grid-container{
+#nav-calendar .fc-day-grid-container{
     height:unset !important;
     
 }
 
-.fc-dayGrid-view .fc-body .fc-row {
+#nav-calendar .fc-dayGrid-view .fc-body .fc-row {
     min-height: 3em !important;
 }
 
-.fc-widget-header > table > thead > tr{
+#nav-calendar .fc-widget-header > table > thead > tr{
     height: 2em !important;
 }
-
-.fc-widget-header > table > thead > tH{
+#nav-calendar .fc-widget-header > table > thead > tH{
     vertical-align: middle !important;
 }
 
-.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+#nav-calendar .fc-unthemed .fc-content, #nav-calendar .fc-unthemed .fc-divider,#nav-calendar .fc-unthemed .fc-list-heading td,#nav-calendar .fc-unthemed .fc-list-view,#nav-calendar .fc-unthemed .fc-popover,#nav-calendar .fc-unthemed .fc-row, #nav-calendar .fc-unthemed tbody,#nav-calendar .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
     border-color:white !important;
 }
 
-.fc-toolbar h2 {
+#nav-calendar .fc-toolbar h2 {
     font-size: 1.2em !important;
     margin: 0;
 }
 
-.fc-today{
-    background-color:lightcoral !important;
+#nav-calendar .fc-today{
+    background-color: var(--color-primary) !important;
     color:white !important;
 }
 
+
+.fc-widget-header{
+    min-height:2rem!important;
+    background-color:var(--cyan) !important;
+    color:white !important;
+}
+
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+    border: none !important;
+}
+
+    .fc-unthemed td.fc-today {
+        background: lightcoral !important;
+        color:white !important;
+
+    }
+
+.fc-button {
+    padding:.2rem .65em !important ;
+    background-color: var(--light) !important;
+    color: var(--dark) !important;
+    border-color: var(--light) !important;
+}
+
+
+.nav-error-link{
+    border-color: var(--red) !important;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
