@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Messaggi"
              Title="Messaggi"
-             x:Name="BrowseItemsPage">
+             x:Name="BrowseItemsPage"
+             BackgroundColor="{StaticResource SfondoColor}">
 
     <StackLayout>
         <ListView x:Name="ItemsListView"

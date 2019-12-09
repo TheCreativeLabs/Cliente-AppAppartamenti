@@ -51,7 +51,7 @@ namespace AppAppartamenti.ViewModels
                 }
                 else if (TipoRicerca == TipiRicerca.Tutti)
                 {
-                    news = await annunciClient.GetAnnunciAsync(currentPage, pageSize, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                    news = await annunciClient.GetAnnunciAsync(currentPage, pageSize, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
                     //quando ricarico prendo la prima pagina
                 }
 
@@ -100,7 +100,7 @@ namespace AppAppartamenti.ViewModels
                 }
                 else if(TipoRicerca == TipiRicerca.Tutti)
                 {
-                    listaAnnunci = await annunciClient.GetAnnunciAsync(currentPage, pageSize, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null, null, null);
+                    listaAnnunci = await annunciClient.GetAnnunciAsync(currentPage, pageSize, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null, null);
                     //quando ricarico prendo la prima pagina
                 }
                 //else if (TipoRicerca == TipiRicerca.Preferiti)

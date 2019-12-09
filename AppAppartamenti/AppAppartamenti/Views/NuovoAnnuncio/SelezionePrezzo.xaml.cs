@@ -18,15 +18,24 @@ namespace AppAppartamenti.Views
     public partial class SelezionePrezzo : ContentPage
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
+        AnnuncioDetailViewModel dtoToModify;
         List<ClasseEnergetica> listClasseEnergetica = new List<ClasseEnergetica>();
         List<TipologiaRiscaldamento> listTipologiaRiscaldamento = new List<TipologiaRiscaldamento>();
 
         static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
 
-        public SelezionePrezzo(AnnuncioDtoInput Annuncio)
+        public SelezionePrezzo(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
+            this.dtoToModify = dtoToModify;
             InitializeComponent();
+
+            if (this.dtoToModify != null)
+            {
+                entPrezzo.Text = dtoToModify.Item.Prezzo != null ? dtoToModify.Item.Prezzo.ToString() : null;
+                entSpeseCondominiali.Text = dtoToModify.Item.SpesaMensileCondominio != null ? dtoToModify.Item.SpesaMensileCondominio.ToString() : null;
+                
+            }
 
             annuncio = Annuncio;
         }
@@ -50,6 +59,16 @@ namespace AppAppartamenti.Views
 
             pckClasseEnergetica.ItemsSource = listClasseEnergetica;
             pckRiscaldamento.ItemsSource = listTipologiaRiscaldamento;
+
+            if (dtoToModify != null && dtoToModify.Item.ClasseEnergetica != null)
+            {
+                //FIXME LE SEGUENTI DUE RIGHE FUNZIONANO SOLO X LINGUA ITALIANA, CAMBIARE GESTIONE E LAVORARE CON IL CODICE INVECE CHE CON LA DESCRIZIONE 
+                pckClasseEnergetica.SelectedItem = listClasseEnergetica.Where(x => x.Descrizione == dtoToModify.Item.ClasseEnergetica).FirstOrDefault();
+            }
+            if (dtoToModify != null && dtoToModify.Item.TipologiaRiscaldamento!=null)
+            {
+                pckRiscaldamento.SelectedItem = listTipologiaRiscaldamento.Where(x => x.Descrizione == dtoToModify.Item.TipologiaRiscaldamento).FirstOrDefault();
+            }
 
             //try
             //{
@@ -87,10 +106,10 @@ namespace AppAppartamenti.Views
         {
             annuncio.Prezzo = double.Parse(entPrezzo.Text);
             annuncio.SpesaMensileCondominio = double.Parse(entSpeseCondominiali.Text);
-            annuncio.IdClasseEnergetica = ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Id;
-            annuncio.IdTipologiaRiscaldamento = ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Id;
+            annuncio.IdClasseEnergetica = (Guid) ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Id;
+            annuncio.IdTipologiaRiscaldamento = (Guid) ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Id;
 
-            await Navigation.PushAsync(new SelezioneImmagini(annuncio));
+            await Navigation.PushAsync(new SelezioneImmagini(annuncio, dtoToModify));
         }
 
         private void EntClasseEnergetica_Focused(object sender, EventArgs e)

@@ -131,10 +131,21 @@ namespace AppAppartamentiApi
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "334122790129-hfu28retie355qusqvl46755ai15nlto.apps.googleusercontent.com",
-                ClientSecret = "NRqsdLin5IBYoU9fM9ZlAmR1"
+                ClientSecret = "NRqsdLin5IBYoU9fM9ZlAmR1",
+                Provider = new GoogleOAuth2AuthenticationProvider()
+                {
+                    OnAuthenticated = (context) =>
+                    {
+                        foreach (var claim in context.User)
+                        {
+                            var claimType = string.Format("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/{0}", claim.Key);
+                            string claimValue = claim.Value.ToString();
+                            context.Identity.AddClaim(new Claim(claimType, claimValue, "http://www.w3.org/2001/XMLSchema#string"));
+                        }
 
-
-
+                        return Task.FromResult(0);
+                    }
+                }
             });
         }
     }

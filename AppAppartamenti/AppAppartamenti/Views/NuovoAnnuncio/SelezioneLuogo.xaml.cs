@@ -17,18 +17,35 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SelezioneLuogo : ContentPage
     {
-        AnnuncioDtoInput annuncio;
+        AnnuncioDtoInput annuncio; 
+        AnnuncioDetailViewModel dtoToModify;
 
-        public SelezioneLuogo(AnnuncioDtoInput Annuncio)
+        public SelezioneLuogo(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
+            this.dtoToModify = dtoToModify;
             InitializeComponent();
 
             annuncio = Annuncio;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (dtoToModify != null)
+            {
+                lvComuni.SelectedItem = new ComuneDto()
+                {
+                    NomeComune = dtoToModify.Item.NomeComune,
+                    CodiceComune = dtoToModify.Item.CodiceComune
+                };
+                if (!String.IsNullOrEmpty(dtoToModify.Item.Indirizzo))
+                {
+                    entIndirizzo.Text = dtoToModify.Item.Indirizzo;
+                    await setMapLocation();
+                }
+                btnIndirizzoProcedi.IsEnabled = true;
+            }
 
             slBody.IsVisible = true;
         }
@@ -55,7 +72,7 @@ namespace AppAppartamenti.Views
         {
             annuncio.Indirizzo = entIndirizzo.Text;
 
-            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio));
+            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio, dtoToModify));
         }
 
 
@@ -99,7 +116,7 @@ namespace AppAppartamenti.Views
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
         {
-            Comuni comune = args.SelectedItem as Comuni;
+            ComuneDto comune = args.SelectedItem as ComuneDto;
 
             if (comune == null || comune.CodiceComune == null)
                 return;

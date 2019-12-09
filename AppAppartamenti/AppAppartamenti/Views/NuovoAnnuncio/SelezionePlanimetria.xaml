@@ -38,6 +38,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:MediaFileImageSourceConverter x:Key="MediaFileToImage" />
+            <conv:ByteArrayToImageSourceConverter x:Key="BytesToImage" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -60,7 +61,10 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding File, Converter={StaticResource MediaFileToImage}}"/>
+                                <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Image, Converter={StaticResource BytesToImage}}"/>
+                                            <Button Grid.Row="0"  Text="&#xf2ed;" TextColor="Red" FontFamily="{x:StaticResource FA-Solid}" BackgroundColor="Transparent"
+                                                        FontSize="Large" Margin="5" HorizontalOptions="EndAndExpand" Clicked="BtnDelete_Clicked" CommandParameter="{Binding Id}" >
+                                            </Button>
                                         </Grid>
                                     </DataTemplate>
                                 </CarouselView.ItemTemplate>

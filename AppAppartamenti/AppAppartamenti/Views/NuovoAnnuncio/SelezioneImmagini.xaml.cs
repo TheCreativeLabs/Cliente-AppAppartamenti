@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,17 +22,26 @@ namespace AppAppartamenti.Views
     public partial class SelezioneImmagini : ContentPage
     {
 
-        private class MediaFileImage
+        //private class MediaFileImage
+        //{
+        //    public  MediaFile File { get; set; }
+        //}
+
+        public class ImageWithId
         {
-            public  MediaFile File { get; set; }
+            public int Id { get; set; }
+            public byte[] Image { get; set; }
         }
 
         AnnuncioDtoInput annuncio;
+        AnnuncioDetailViewModel dtoToModify;
 
-        private List<MediaFileImage> mediaFileImages = new List<MediaFileImage>();
+        //private List<MediaFileImage> mediaFileImages = new List<MediaFileImage>();
+        private List<ImageWithId> bytesImages= new List<ImageWithId>();
 
-        public SelezioneImmagini(AnnuncioDtoInput Annuncio)
+        public SelezioneImmagini(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
+            this.dtoToModify = dtoToModify;
             InitializeComponent();
             annuncio = Annuncio;
         }
@@ -39,6 +49,16 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (this.dtoToModify != null && this.dtoToModify.Immagini != null && this.dtoToModify.Immagini.Count != 0)
+            {
+                foreach (var item in dtoToModify.Immagini)
+                {
+                    int id = bytesImages.Count + 1;
+                    ImageWithId imm = new ImageWithId() { Id = id, Image = item.Value };
+                    bytesImages.Add(imm);
+                }
+                cvImmagini.ItemsSource = bytesImages.ToArray();
+            }
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -61,14 +81,18 @@ namespace AppAppartamenti.Views
 
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
-            foreach (var item in mediaFileImages)
+            //foreach (var item in mediaFileImages)
+            //{
+            //    MemoryStream memoryStream = new MemoryStream();
+            //    item.File.GetStream().CopyTo(memoryStream);
+            //    annuncio.Immagini.Add(memoryStream.ToArray());
+            //}
+            foreach (var item in bytesImages)
             {
-                MemoryStream memoryStream = new MemoryStream();
-                item.File.GetStream().CopyTo(memoryStream);
-                annuncio.Immagini.Add(memoryStream.ToArray());
+                annuncio.Immagini.Add(item.Image);
             }
 
-            Navigation.PushAsync(new SelezionePlanimetria(annuncio));
+            await Navigation.PushAsync(new SelezionePlanimetria(annuncio, dtoToModify));
         }
 
         async void PickPhoto()
@@ -89,18 +113,26 @@ namespace AppAppartamenti.Views
 
             List<MediaFile> listaImmagini = await CrossMedia.Current.PickPhotosAsync(new Plugin.Media.Abstractions.PickMediaOptions
             {
-                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small
             });
 
             if (listaImmagini == null)
                 return;
 
+            //bytesImages.Clear();
             foreach (var item in listaImmagini)
             {
-                mediaFileImages.Add(new MediaFileImage { File = item });
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    item.GetStream().CopyTo(memoryStream);
+                    int id = bytesImages.Count + 1;
+                    ImageWithId imm = new ImageWithId() { Id = id, Image = memoryStream.ToArray() };
+                    bytesImages.Add(imm);
+                    //mediaFileImages.Add(new MediaFileImage { File = item });
+                }
             }
-
-            cvImmagini.ItemsSource = mediaFileImages;
+            //cvImmagini.ItemsSource = mediaFileImages;
+            cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 
         async void TakePhoto()
@@ -122,7 +154,7 @@ namespace AppAppartamenti.Views
             var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 SaveToAlbum = true,
-                PhotoSize = PhotoSize.Medium
+                PhotoSize = PhotoSize.Small
             });
 
             if (file == null)
@@ -142,6 +174,13 @@ namespace AppAppartamenti.Views
             {
                 PickPhoto();
             }
+        }
+
+        private async void BtnDelete_Clicked(object sender, EventArgs e)
+        {
+            var idImmagine = ((Button)sender).CommandParameter;
+            bytesImages.RemoveAll(x => x.Id == (int) idImmagine);
+            cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 
     }

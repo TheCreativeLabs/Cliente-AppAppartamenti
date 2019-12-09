@@ -1311,15 +1311,15 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, OrderBy? orderBy, OrderDirection? orderDirection)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, OrderBy? orderBy)
         {
-            return GetAnnunciAsync(pageNumber, pageSize, idTipologiaAnnuncio, idTipologiaProprieta, comuneCodice, priceMin, priceMax, houseSizeMin, houseSizeMax, bedrooms, bathrooms, kitchens, parkingSpaces, garages, backyard, terrace, cellar, pool, elevator, orderBy, orderDirection, System.Threading.CancellationToken.None);
+            return GetAnnunciAsync(pageNumber, pageSize, idTipologiaAnnuncio, idTipologiaProprieta, comuneCodice, priceMin, priceMax, houseSizeMin, houseSizeMax, bedrooms, bathrooms, kitchens, parkingSpaces, garages, backyard, terrace, cellar, pool, elevator, orderBy, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, OrderBy? orderBy, OrderDirection? orderDirection, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, OrderBy? orderBy, System.Threading.CancellationToken cancellationToken)
         {
             if (pageNumber == null)
                 throw new System.ArgumentNullException("pageNumber");
@@ -1402,10 +1402,6 @@ namespace AppAppartamentiApiClient
             if (orderBy != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("orderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderBy, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (orderDirection != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("orderDirection") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderDirection, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -1894,27 +1890,22 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio, string idEvento)
+        public System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio)
         {
-            return UpdateAnnuncioAsync(idAnnuncio, annuncio, idEvento, System.Threading.CancellationToken.None);
+            return UpdateAnnuncioAsync(idAnnuncio, annuncio, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio, string idEvento, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio, System.Threading.CancellationToken cancellationToken)
         {
-            if (idEvento == null)
-                throw new System.ArgumentNullException("idEvento");
-
             if (idAnnuncio == null)
                 throw new System.ArgumentNullException("idAnnuncio");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/AnnuncioUpdate/{IdEvento}?");
-            urlBuilder_.Replace("{IdEvento}", System.Uri.EscapeDataString(ConvertToString(idEvento, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Append(System.Uri.EscapeDataString("IdAnnuncio") + "=").Append(System.Uri.EscapeDataString(ConvertToString(idAnnuncio, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/AnnuncioUpdate/{IdAnnuncio}");
+            urlBuilder_.Replace("{IdAnnuncio}", System.Uri.EscapeDataString(ConvertToString(idAnnuncio, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
@@ -2107,7 +2098,7 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Comuni>> GetListaComuniAsync(string nomeComune)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ComuneDto>> GetListaComuniAsync(string nomeComune)
         {
             return GetListaComuniAsync(nomeComune, System.Threading.CancellationToken.None);
         }
@@ -2115,7 +2106,7 @@ namespace AppAppartamentiApiClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Comuni>> GetListaComuniAsync(string nomeComune, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ComuneDto>> GetListaComuniAsync(string nomeComune, System.Threading.CancellationToken cancellationToken)
         {
             if (nomeComune == null)
                 throw new System.ArgumentNullException("nomeComune");
@@ -2153,7 +2144,7 @@ namespace AppAppartamentiApiClient
                         var status_ = ((int)response_.StatusCode).ToString();
                         if (status_ == "200")
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Comuni>>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ComuneDto>>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
@@ -2163,7 +2154,7 @@ namespace AppAppartamentiApiClient
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(System.Collections.Generic.ICollection<Comuni>);
+                        return default(System.Collections.Generic.ICollection<ComuneDto>);
                     }
                     finally
                     {
@@ -2725,7 +2716,8 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 6)]
         public string Password { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("ConfirmPassword", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("ConfirmPassword", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string ConfirmPassword { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.Always)]
@@ -2917,9 +2909,6 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Cancellato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Cancellato { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("ImmaginePrincipale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] ImmaginePrincipale { get; set; }
-
         [Newtonsoft.Json.JsonProperty("ImmaginiAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<byte[]> ImmaginiAnnuncio { get; set; }
 
@@ -2980,6 +2969,15 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Condizionatori", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Condizionatori { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Video", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public byte[] Video { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ImmaginiPlanimetria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<byte[]> ImmaginiPlanimetria { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("FlagPreferito", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? FlagPreferito { get; set; }
+
 
     }
 
@@ -2994,94 +2992,95 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.StringLength(512)]
         public string Indirizzo { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Prezzo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Prezzo { get; set; }
+        [Newtonsoft.Json.JsonProperty("Prezzo", Required = Newtonsoft.Json.Required.Always)]
+        public double Prezzo { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Superficie", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Superficie { get; set; }
+        [Newtonsoft.Json.JsonProperty("Superficie", Required = Newtonsoft.Json.Required.Always)]
+        public double Superficie { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("UltimoPiano", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? UltimoPiano { get; set; }
+        [Newtonsoft.Json.JsonProperty("UltimoPiano", Required = Newtonsoft.Json.Required.Always)]
+        public bool UltimoPiano { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Piano", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Piano { get; set; }
+        [Newtonsoft.Json.JsonProperty("Piano", Required = Newtonsoft.Json.Required.Always)]
+        public int Piano { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("NumeroCameraLetto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NumeroCameraLetto { get; set; }
+        [Newtonsoft.Json.JsonProperty("NumeroCameraLetto", Required = Newtonsoft.Json.Required.Always)]
+        public int NumeroCameraLetto { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("NumeroAltreStanze", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NumeroAltreStanze { get; set; }
+        [Newtonsoft.Json.JsonProperty("NumeroAltreStanze", Required = Newtonsoft.Json.Required.Always)]
+        public int NumeroAltreStanze { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("NumeroBagni", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NumeroBagni { get; set; }
+        [Newtonsoft.Json.JsonProperty("NumeroBagni", Required = Newtonsoft.Json.Required.Always)]
+        public int NumeroBagni { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("NumeroCucine", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NumeroCucine { get; set; }
+        [Newtonsoft.Json.JsonProperty("NumeroCucine", Required = Newtonsoft.Json.Required.Always)]
+        public int NumeroCucine { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("NumeroGarage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NumeroGarage { get; set; }
+        [Newtonsoft.Json.JsonProperty("NumeroGarage", Required = Newtonsoft.Json.Required.Always)]
+        public int NumeroGarage { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("NumeroPostiAuto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NumeroPostiAuto { get; set; }
+        [Newtonsoft.Json.JsonProperty("NumeroPostiAuto", Required = Newtonsoft.Json.Required.Always)]
+        public int NumeroPostiAuto { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Giardino", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Giardino { get; set; }
+        [Newtonsoft.Json.JsonProperty("Giardino", Required = Newtonsoft.Json.Required.Always)]
+        public bool Giardino { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Disponibile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Disponibile { get; set; }
+        [Newtonsoft.Json.JsonProperty("Disponibile", Required = Newtonsoft.Json.Required.Always)]
+        public bool Disponibile { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Ascensore", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Ascensore { get; set; }
+        [Newtonsoft.Json.JsonProperty("Ascensore", Required = Newtonsoft.Json.Required.Always)]
+        public bool Ascensore { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Balcone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Balcone { get; set; }
+        [Newtonsoft.Json.JsonProperty("Balcone", Required = Newtonsoft.Json.Required.Always)]
+        public bool Balcone { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Piscina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Piscina { get; set; }
+        [Newtonsoft.Json.JsonProperty("Piscina", Required = Newtonsoft.Json.Required.Always)]
+        public bool Piscina { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Cantina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Cantina { get; set; }
+        [Newtonsoft.Json.JsonProperty("Cantina", Required = Newtonsoft.Json.Required.Always)]
+        public bool Cantina { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Descrizione", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(8000)]
         public string Descrizione { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("SpesaMensileCondominio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? SpesaMensileCondominio { get; set; }
+        [Newtonsoft.Json.JsonProperty("SpesaMensileCondominio", Required = Newtonsoft.Json.Required.Always)]
+        public double SpesaMensileCondominio { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("IdTipologiaRiscaldamento", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? IdTipologiaRiscaldamento { get; set; }
+        [Newtonsoft.Json.JsonProperty("IdTipologiaRiscaldamento", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid IdTipologiaRiscaldamento { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("IdTipologiaProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? IdTipologiaProprieta { get; set; }
+        [Newtonsoft.Json.JsonProperty("IdTipologiaProprieta", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid IdTipologiaProprieta { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("IdTipologiaAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? IdTipologiaAnnuncio { get; set; }
+        [Newtonsoft.Json.JsonProperty("IdTipologiaAnnuncio", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid IdTipologiaAnnuncio { get; set; }
 
         [Newtonsoft.Json.JsonProperty("IdStatoProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdStatoProprieta { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("IdClasseEnergetica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? IdClasseEnergetica { get; set; }
+        [Newtonsoft.Json.JsonProperty("IdClasseEnergetica", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid IdClasseEnergetica { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Condizionatori", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Condizionatori { get; set; }
+        [Newtonsoft.Json.JsonProperty("Condizionatori", Required = Newtonsoft.Json.Required.Always)]
+        public bool Condizionatori { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Completato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Completato { get; set; }
+        [Newtonsoft.Json.JsonProperty("Completato", Required = Newtonsoft.Json.Required.Always)]
+        public bool Completato { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("Cancellato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Cancellato { get; set; }
+        [Newtonsoft.Json.JsonProperty("Cancellato", Required = Newtonsoft.Json.Required.Always)]
+        public bool Cancellato { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Immagini", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<byte[]> Immagini { get; set; } = new System.Collections.ObjectModel.Collection<byte[]>();
 
-        [Newtonsoft.Json.JsonProperty("IdsImmaginiToDelete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<System.Guid> IdsImmaginiToDelete { get; set; }
-
         [Newtonsoft.Json.JsonProperty("ImmaginePlanimetria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] ImmaginePlanimetria { get; set; }
+        public System.Collections.Generic.ICollection<byte[]> ImmaginePlanimetria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Video", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] Video { get; set; }
@@ -3244,14 +3243,23 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("ImmagineAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("ImmaginePlanimetria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ImmaginePlanimetria ImmaginePlanimetria { get; set; }
+        [Newtonsoft.Json.JsonProperty("ImmaginiPlanimetria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ImmaginePlanimetria> ImmaginiPlanimetria { get; set; }
 
         [Newtonsoft.Json.JsonProperty("AnnuncioMessaggi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<AnnuncioMessaggi> AnnuncioMessaggi { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Video", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Video Video { get; set; }
+        public System.Collections.Generic.ICollection<Video> Video { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CoordinateGeografiche", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CoordinateGeografiche { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("FasceOrarie", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<FasceOrarie> FasceOrarie { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Appuntamenti", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Appuntamento> Appuntamenti { get; set; }
 
 
     }
@@ -3455,6 +3463,9 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdAnnuncio { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Annuncio Annuncio { get; set; }
+
 
     }
 
@@ -3510,6 +3521,89 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdAnnuncio { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Annuncio Annuncio { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class FasceOrarie
+    {
+        [Newtonsoft.Json.JsonProperty("Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Monday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Monday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Tuesday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Tuesday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Wednesday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Wednesday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Thursday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Thursday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Friday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Friday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Saturday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Saturday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Sunday", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)]
+        public string Sunday { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdAnnuncio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Annuncio Annuncio { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class Appuntamento
+    {
+        [Newtonsoft.Json.JsonProperty("Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdAnnuncio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("IdRichiedente", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdRichiedente { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("IdDestinatario", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdDestinatario { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Data { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Annuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Annuncio Annuncio { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ComuneDto
+    {
+        [Newtonsoft.Json.JsonProperty("NomeComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
+        public string NomeComune { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CodiceComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CodiceComune { get; set; }
+
 
     }
 
@@ -3522,14 +3616,11 @@ namespace AppAppartamentiApiClient
 
         _2 = 2,
 
-    }
+        _3 = 3,
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum OrderDirection
-    {
-        _0 = 0,
+        _4 = 4,
 
-        _1 = 1,
+        _5 = 5,
 
     }
 

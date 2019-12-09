@@ -14,12 +14,12 @@ namespace AppAppartamenti.ViewModels
 {
     public class ListaComuniViewModel : BaseViewModel
     {
-        public ObservableCollection<Comuni> Items { get; set; }
+        public ObservableCollection<ComuneDto> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ListaComuniViewModel(string NomeComune)
         {
-            Items = new ObservableCollection<Comuni>();
+            Items = new ObservableCollection<ComuneDto>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(NomeComune));
         }
 
@@ -35,7 +35,7 @@ namespace AppAppartamenti.ViewModels
                 Items.Clear();
 
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                ICollection<Comuni> listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
+                ICollection<ComuneDto> listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
 
                 foreach (var evento in listaComuni)
                 {

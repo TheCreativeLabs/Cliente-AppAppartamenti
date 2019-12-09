@@ -48,14 +48,14 @@ namespace AppAppartamenti.Views
                 // Manually deselect item.
                 AnnunciiListView.SelectedItem = null;
 
-                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,false));
+                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,true));
             }
         }
 
 
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
-             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta()));
+             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta(null))); //è un nuovo annuncio, non devo passare l'annuncio da modificare
         }
     }
 }

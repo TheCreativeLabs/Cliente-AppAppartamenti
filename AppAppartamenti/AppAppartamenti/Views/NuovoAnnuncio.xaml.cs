@@ -187,7 +187,7 @@ namespace AppAppartamenti.Views
                 return;
 
             //Modifico l'annuncio.
-            annuncio.IdTipologiaProprieta = proprieta.Id;
+            annuncio.IdTipologiaProprieta = (Guid) proprieta.Id;
 
             //Nascondo lo stack precedente e mostro il prossimo.
             stkPassaggio1.IsVisible = false;
@@ -210,7 +210,7 @@ namespace AppAppartamenti.Views
             if (tipologiaAnnuncio == null || tipologiaAnnuncio.Id == null)
                 return;
 
-            annuncio.IdTipologiaAnnuncio = tipologiaAnnuncio.Id;
+            annuncio.IdTipologiaAnnuncio = (Guid) tipologiaAnnuncio.Id;
 
             stkPassaggio2.IsVisible = false;
             stkPassaggio3.IsVisible = true;

@@ -18,18 +18,20 @@ namespace AppAppartamenti.Views
     public partial class SelezioneTipologiaAnnuncio : ContentPage
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
+        AnnuncioDetailViewModel dtoToModify;
 
         TipologiaAnnunciViewModel viewModel;
 
-        public SelezioneTipologiaAnnuncio(AnnuncioDtoInput Annuncio)
+        public SelezioneTipologiaAnnuncio(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel outputDtoToModify)
         {
+            dtoToModify = outputDtoToModify;
             InitializeComponent();
 
             annuncio = Annuncio;
             BindingContext = viewModel = new TipologiaAnnunciViewModel();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
@@ -38,7 +40,12 @@ namespace AppAppartamenti.Views
             //listaTipologiaAnnunci.LoadItemsCommand.Execute(null);
             //lvTipologiaAnnuncio.ItemsSource = listaTipologiaAnnunci.Items;
             if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+                await viewModel.ExecuteLoadItemsCommand();
+
+            if (dtoToModify != null && dtoToModify.Item != null)
+            {
+                rbList.SelectedItem = viewModel.Items.Where(x => x == dtoToModify.Item.TipologiaAnnuncio).FirstOrDefault(); //FIXME CON TRADUZIONI, FUNZIONA SOLO IN ITALIANO
+            }
 
             //try
             //{
@@ -79,12 +86,12 @@ namespace AppAppartamenti.Views
             if (tipologiaAnnuncio == null || tipologiaAnnuncio.Id == null)
                 return;
 
-            annuncio.IdTipologiaAnnuncio = tipologiaAnnuncio.Id;
+            annuncio.IdTipologiaAnnuncio = (Guid) tipologiaAnnuncio.Id;
 
             // Manually deselect item.
             //lvTipologiaAnnuncio.SelectedItem = null;
 
-            await Navigation.PushAsync(new SelezioneLuogo(annuncio));
+            await Navigation.PushAsync(new SelezioneLuogo(annuncio, dtoToModify));
         }
 
         async void BtnAvanti_Clicked(object sender, EventArgs e)
@@ -93,8 +100,8 @@ namespace AppAppartamenti.Views
             {
                 //TipologiaAnnuncio tipologiaAnnuncio = viewModel.listaAnnunci.Where(x => (string)x.Descrizione == (string)rbList.SelectedItem).FirstOrDefault();
                 TipologiaAnnuncio tipologiaAnnuncio = viewModel.translationsMap[(string)rbList.SelectedItem];
-                annuncio.IdTipologiaAnnuncio = tipologiaAnnuncio.Id;
-                await Navigation.PushAsync(new SelezioneLuogo(annuncio));
+                annuncio.IdTipologiaAnnuncio = (Guid) tipologiaAnnuncio.Id;
+                await Navigation.PushAsync(new SelezioneLuogo(annuncio, dtoToModify));
             }
         }
     }

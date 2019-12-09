@@ -21,7 +21,7 @@ namespace AppAppartamenti.Helpers
             if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
             {
                 //ci = new CultureInfo("it"); //DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-                ci = new CultureInfo("en");
+                ci = new CultureInfo("it");
             }
         }
 

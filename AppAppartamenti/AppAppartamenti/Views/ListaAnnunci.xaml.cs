@@ -54,7 +54,7 @@ namespace AppAppartamenti.Views
 
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta()));
+            await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta(null)));
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

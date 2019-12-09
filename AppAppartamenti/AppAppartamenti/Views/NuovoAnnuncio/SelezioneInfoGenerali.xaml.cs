@@ -18,12 +18,44 @@ namespace AppAppartamenti.Views
     public partial class SelezioneInfoGenerali : ContentPage
     {
         AnnuncioDtoInput annuncio;
+        AnnuncioDetailViewModel dtoToModify;
 
-        public SelezioneInfoGenerali(AnnuncioDtoInput Annuncio)
+        public SelezioneInfoGenerali(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
+            this.dtoToModify = dtoToModify;
             InitializeComponent();
 
-            annuncio = Annuncio;
+            if (this.dtoToModify != null)
+            {
+                entSuperficie.Text = dtoToModify.Item.Superficie.ToString();
+
+                stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroCameraLetto);
+                lblCamereLettoCount.Text = dtoToModify.Item.NumeroCameraLetto.ToString();
+
+                stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroAltreStanze);
+                lblStanzeCount.Text = dtoToModify.Item.NumeroAltreStanze.ToString();
+
+                stpBagni.Value = Convert.ToDouble(dtoToModify.Item.NumeroBagni);
+                lblBagniCount.Text = dtoToModify.Item.NumeroBagni.ToString();
+
+                stpCucine.Value = Convert.ToDouble(dtoToModify.Item.NumeroCucine);
+                lblCucineCount.Text = dtoToModify.Item.NumeroCucine.ToString();
+
+                stpGarage.Value = Convert.ToDouble(dtoToModify.Item.NumeroGarage);
+                lblGarageCount.Text = dtoToModify.Item.NumeroGarage.ToString();
+
+                stpParkingSpaces.Value = Convert.ToDouble(dtoToModify.Item.NumeroPostiAuto);
+                lblParkingSpacesCount.Text = dtoToModify.Item.NumeroPostiAuto.ToString();
+
+                chkCantina.IsChecked = dtoToModify.Item.Cantina != null ? (bool) dtoToModify.Item.Cantina : false;
+                chkPiscina.IsChecked = dtoToModify.Item.Piscina != null ? (bool)dtoToModify.Item.Piscina : false;
+                chkAscensore.IsChecked = dtoToModify.Item.Ascensore != null ? (bool)dtoToModify.Item.Ascensore : false;
+                chkTerrazzo.IsChecked = dtoToModify.Item.Balcone != null ? (bool)dtoToModify.Item.Balcone : false;
+                chkGiardino.IsChecked = dtoToModify.Item.Giardino != null ? (bool)dtoToModify.Item.Giardino : false;
+                chkCondizionatori.IsChecked = dtoToModify.Item.Condizionatori != null ? (bool)dtoToModify.Item.Condizionatori : false;
+            }
+
+                annuncio = Annuncio;
         }
 
         protected override void OnAppearing()
@@ -63,6 +95,7 @@ namespace AppAppartamenti.Views
             annuncio.NumeroCameraLetto = int.Parse(stpCamereLetto.Value.ToString());
             annuncio.NumeroCucine = int.Parse(stpCucine.Value.ToString());
             annuncio.NumeroGarage = int.Parse(stpGarage.Value.ToString());
+            annuncio.NumeroPostiAuto = int.Parse(stpParkingSpaces.Value.ToString());
             annuncio.Cantina = chkCantina.IsChecked;
             annuncio.Piscina = chkPiscina.IsChecked;
             annuncio.Ascensore = chkAscensore.IsChecked;
@@ -70,7 +103,7 @@ namespace AppAppartamenti.Views
             annuncio.Giardino = chkGiardino.IsChecked;
             annuncio.Condizionatori = chkCondizionatori.IsChecked;
 
-            await Navigation.PushAsync(new SelezionePrezzo(annuncio));
+            await Navigation.PushAsync(new SelezionePrezzo(annuncio, dtoToModify));
         }
 
         #region Stepper
@@ -98,6 +131,11 @@ namespace AppAppartamenti.Views
             void StpGarage_ValueChanged(object sender, ValueChangedEventArgs e)
             {
                 lblGarageCount.Text = stpGarage.Value.ToString();
+            }
+
+            void StpParkingSpaces_ValueChanged(object sender, ValueChangedEventArgs e)
+            {
+                lblParkingSpacesCount.Text = stpParkingSpaces.Value.ToString();
             }
 
         #endregion

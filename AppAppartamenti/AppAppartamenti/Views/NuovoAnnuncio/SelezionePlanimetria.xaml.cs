@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using RestSharp.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using static AppAppartamenti.Views.SelezioneImmagini;
 
 namespace AppAppartamenti.Views
 {
@@ -23,17 +25,14 @@ namespace AppAppartamenti.Views
         static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
 
-        private class MediaFileImage
-        {
-            public  MediaFile File { get; set; }
-        }
-
         AnnuncioDtoInput annuncio;
+        AnnuncioDetailViewModel dtoToModify;
 
-        private List<MediaFileImage> mediaFileImages = new List<MediaFileImage>();
+        private List<ImageWithId> bytesImages = new List<ImageWithId>();
 
-        public SelezionePlanimetria(AnnuncioDtoInput Annuncio)
+        public SelezionePlanimetria(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
+            this.dtoToModify = dtoToModify;
             InitializeComponent();
             annuncio = Annuncio;
         }
@@ -41,6 +40,16 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (this.dtoToModify != null && this.dtoToModify.Immagini != null && this.dtoToModify.Immagini.Count != 0)
+            {
+                foreach (var item in dtoToModify.ImmaginiPlanimetria)
+                {
+                    int id = bytesImages.Count + 1;
+                    ImageWithId imm = new ImageWithId() { Id = id, Image = item.Value };
+                    bytesImages.Add(imm);
+                }
+                cvImmagini.ItemsSource = bytesImages.ToArray();
+            }
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -63,14 +72,16 @@ namespace AppAppartamenti.Views
 
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
-            foreach (var item in mediaFileImages)
+            if (annuncio.ImmaginePlanimetria == null)
             {
-                MemoryStream memoryStream = new MemoryStream();
-                item.File.GetStream().CopyTo(memoryStream);
-                annuncio.ImmaginePlanimetria = (memoryStream.ToArray());
+                annuncio.ImmaginePlanimetria = new Collection<byte[]>();
+            }
+            foreach (var item in bytesImages)
+            {
+                annuncio.ImmaginePlanimetria.Add(item.Image);
             }
 
-            Navigation.PushAsync(new SelezioneDescrizione(annuncio));
+            await Navigation.PushAsync(new SelezioneDescrizione(annuncio, dtoToModify));
         }
 
         async void PickPhoto()
@@ -100,10 +111,17 @@ namespace AppAppartamenti.Views
             //prendo solo 1 foto
             foreach (var item in listaImmagini)
             {
-                mediaFileImages.Add(new MediaFileImage { File = item });
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    item.GetStream().CopyTo(memoryStream);
+                    int id = bytesImages.Count + 1;
+                    ImageWithId imm = new ImageWithId() { Id = id, Image = memoryStream.ToArray() };
+                    bytesImages.Add(imm);
+                    //mediaFileImages.Add(new MediaFileImage { File = item });
+                }
             }
 
-            cvImmagini.ItemsSource = mediaFileImages;
+            cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 
         async void TakePhoto()
@@ -152,6 +170,13 @@ namespace AppAppartamenti.Views
             {
                 PickPhoto();
             }
+        }
+
+        private async void BtnDelete_Clicked(object sender, EventArgs e)
+        {
+            var idImmagine = ((Button)sender).CommandParameter;
+            bytesImages.RemoveAll(x => x.Id == (int)idImmagine);
+            cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 
     }

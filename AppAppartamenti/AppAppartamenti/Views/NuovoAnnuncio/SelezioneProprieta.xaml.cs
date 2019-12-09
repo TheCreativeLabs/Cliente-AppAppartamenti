@@ -19,23 +19,30 @@ namespace AppAppartamenti.Views
     public partial class SelezioneProprieta : ContentPage
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
+        AnnuncioDetailViewModel dtoToModify;
 
         TipologiaProprietaViewModel viewModel;
 
-        public SelezioneProprieta()
+        public SelezioneProprieta(AnnuncioDetailViewModel annuncioDetailViewModel)
         {
+            dtoToModify = annuncioDetailViewModel;
             InitializeComponent();
 
             BindingContext = viewModel = new TipologiaProprietaViewModel();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             //Carico la lista delle proprietà
             if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+                await viewModel.ExecuteLoadItemsCommand();
+
+            if (dtoToModify!=null)
+            {
+                rbList.SelectedItem = viewModel.Items.Where(x => x == dtoToModify.Item.TipologiaProprieta).FirstOrDefault(); //FIXME CON TRADUZIONI, FUNZIONA SOLO IN ITALIANO
+            }
 
             //try
             //{
@@ -62,8 +69,8 @@ namespace AppAppartamenti.Views
             {
                 TipologiaProprieta tipologiaProprieta =  viewModel.translationsMap[(string) rbList.SelectedItem];
                 //TipologiaProprieta tipologiaProprieta = viewModel.listaProprieta.Where(x => x.Descrizione == rbList.SelectedItem).FirstOrDefault();
-                annuncio.IdTipologiaProprieta = tipologiaProprieta.Id;
-                await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio));
+                annuncio.IdTipologiaProprieta =(Guid) tipologiaProprieta.Id;
+                await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio, dtoToModify));
             }
         }
     }
