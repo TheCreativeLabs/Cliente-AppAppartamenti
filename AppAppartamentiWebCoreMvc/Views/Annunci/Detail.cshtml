@@ -5,8 +5,7 @@
 }
 
 @section SubHeader {
-<!--d-none d-sm-block -->
-    <div id="secondnav" class="sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
+    <div id="secondnav" class="d-none sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
@@ -25,7 +24,7 @@
 
                     <button class="btn btn-light btn-sm" data-id="@Model.Id" onclick="AddPreferred(this,'@Url.Action("Add", "AnnunciPreferiti")','@Model.Id')"><i class="fas fa-heart"></i></button>
 
-                    <button class="btn btn-primary btn-sm "><i class="fas fa-calendar-day"></i></button>
+                    <button class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#appointmentModal"><i class="fas fa-calendar-day"></i></button>
 
                     <button class="btn btn-success btn-sm"><i class="fas fa-comments"></i></button>
                 </div>
@@ -299,7 +298,7 @@
 
                 <h6 class="text-center mx-auto mb-3">@userInfo.Nome @userInfo.Cognome</h6>
 
-                <button class="btn btn-primary btn-sm btn-block"><i class="fas fa-calendar-day"></i>&nbsp;Prenota una visita</button>
+                <button class="btn btn-primary btn-sm btn-block" href="#" data-toggle="modal" data-target="#appointmentModal"><i class="fas fa-calendar-day"></i>&nbsp;Prenota una visita</button>
 
                 <button class="btn btn-success btn-sm btn-block"><i class="fas fa-comments"></i>&nbsp;Manda un messaggio</button>
             </div>
@@ -309,10 +308,51 @@
 
 @await Html.PartialAsync("_ShareModal", Model.Id)
 
+<div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel">Prendi un nuovo appuntamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div id="appointment-caledar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script src="~/js/annunci-details.min.js" asp-append-version="true"></script>
     <script src="~/js/share-modal.min.js" asp-append-version="true"></script>
-    <script src="~/js/share-modal.min.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var calendarEl2 = document.getElementById('appointment-caledar');
+
+            var calendar2 = new FullCalendar.Calendar(calendarEl2, {
+                plugins: ['dayGrid', 'timeGrid', 'interaction'],
+                locale: selectedLanguage,
+                themeSystem: 'bootstrap',
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next'
+                },
+                footer: {
+                    left: '',
+                    center: '',
+                    right: ''
+                },
+                dateClick: function(info) {
+                    alert('Clicked on: ' + info.dateStr);
+                }
+            });
+
+            calendar2.render();
+        });
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUDWKfs6tGF891vL-VwXYubP_IKuG8exg&callback=setMap"></script>
 }
 

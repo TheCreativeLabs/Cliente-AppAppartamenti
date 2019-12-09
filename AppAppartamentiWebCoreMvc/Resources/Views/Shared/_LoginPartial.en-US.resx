@@ -59,41 +59,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Title" xml:space="preserve">
-    <value>Home</value>
+    <value>Log in</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
+      <data name="SignInFacebook" xml:space="preserve">
+    <value>Log in with Facebook</value>
   </data>
-      <data name="CardDescription1" xml:space="preserve">
-    <value>Find the house that suits you best.</value>
+      <data name="SignInGoogle" xml:space="preserve">
+    <value>Log in with Google</value>
   </data>
-     <data name="CardButtonText1" xml:space="preserve">
-    <value>Start searching</value>
+    <data name="SignInGoogle" xml:space="preserve">
+    <value>Log in with Google</value>
   </data>
-       <data name="CardDescription2" xml:space="preserve">
-    <value>
-        Make an appointment directly from the app</value>
-  </data>
-     <data name="CardButtonText2" xml:space="preserve">
-    <value>Start searching</value>
-  </data>
-       <data name="CardDescription3" xml:space="preserve">
-    <value>Enter your sale or rental ad. It's free.</value>
-  </data>
-     <data name="CardButtonText3" xml:space="preserve">
-    <value>Post an ad</value>
-  </data>
-        <data name="DownloadAppTitle" xml:space="preserve">
-    <value>Download the app for mobile devices!</value>
-  </data>
-     <data name="DownloadAppDescription" xml:space="preserve">
-    <value>Start searching through millions of apartments and save your favorites.</value>
-  </data>
-      <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Search by city or province</value>
-  </data>
-   <data name="OtheFilterLabel" xml:space="preserve">
-    <value>Other filters</value>
-  </data>
-
+     <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password? We will help you recover it</value>
+    </data>
+        <data name="NotRegistered" xml:space="preserve">
+    <value>Not registered yet?</value>
+    </data>
+      <data name="SignUp" xml:space="preserve">
+    <value>Sign up</value>
+    </data>
 </root>

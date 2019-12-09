@@ -24,7 +24,13 @@ $(document).ready(function () {
     $("#btnGoogleLogin").click(function (e) {
         GoogleLogin();
     });
+
+    $(".dropdown-agenda").click(function (e) {
+        e.stopPropagation();
+    });
 });
+
+
 
 //Gestisce l'autenticazione con facebook
 function FacebookLogin(){

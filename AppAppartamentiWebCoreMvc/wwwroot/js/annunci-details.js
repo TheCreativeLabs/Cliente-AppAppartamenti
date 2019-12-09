@@ -6,18 +6,17 @@
 
 function changeScroll() {
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        $("#secondnav").show();
+        $("#secondnav").addClass("d-sm-block ");
         $("#nav").removeClass("shadow-sm");
        
     } else {
-        $("#secondnav").hide();
+        $("#secondnav").removeClass("d-sm-block ");
         $("#nav").addClass("shadow-sm");
     }
 }
 
 function setMap() {
     var address = $("#googleMap").data("address");
-
     if (address != null && address.length > 0) {
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'address': address }, function (results, status) {
@@ -33,7 +32,6 @@ function setMap() {
                     position: results[0].geometry.location
                 });
                 map.setCenter(results[0].geometry.location);
-
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
