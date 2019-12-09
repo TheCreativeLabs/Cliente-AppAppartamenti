@@ -282,6 +282,7 @@
     <Compile Include="Dto\AnnuncioDtoOutput.cs" />
     <Compile Include="Dto\AnnunciDtoOutput.cs" />
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
+    <Compile Include="Dto\ComuneDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="FacebookBackChannelHandler.cs" />
@@ -305,10 +306,12 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Annuncio.cs" />
     <Compile Include="Models\AnnunciPreferiti.cs" />
+    <Compile Include="Models\Appuntamento.cs" />
     <Compile Include="Models\ClasseEnergetica.cs" />
     <Compile Include="Models\AnnuncioMessaggi.cs" />
     <Compile Include="Models\Comuni.cs" />
     <Compile Include="Models\DbDataContext.cs" />
+    <Compile Include="Models\FasceOrarie.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImmagineAnnuncio.cs" />
     <Compile Include="Models\ImmaginePlanimetria.cs" />

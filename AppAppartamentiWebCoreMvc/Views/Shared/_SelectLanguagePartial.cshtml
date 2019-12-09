@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .ToList();
+
+    //.Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+             @{
+                 foreach (var item in cultureItems)
+                 {
+                     <a asp-controller="Home" 
+                        asp-action="SetLanguage" asp-route-culture="@item.Name" asp-route-returnUrl="@returnUrl">
+                        <img src="@string.Format("/Images/{0}.png", item.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+@{
+    if (item.Name == "en-US")
+    {
+               @:English
+           }
+    else
+    {
+               @:Italiano
+           }
+       }
+                     </a>
+    }
+             }
+      </div>
+    </div>
+  </div>
+</div>

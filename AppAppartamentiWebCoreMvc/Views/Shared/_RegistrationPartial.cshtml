@@ -1,4 +1,6 @@
-﻿@model AppAppartamentiApiClient.RegisterUserBindingModel
+﻿@model RegisterUserBindingModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer _localizer
 
 <div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -7,7 +9,7 @@
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
-                        <h4>Registrati</h4>
+                        <h4>@_localizer["Title"]</h4>
                     </div>
                     <div class="col-6">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -20,34 +22,33 @@
                     <div class="col-12">
                         <form asp-controller="Login" asp-action="SignUp" >
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                            <!--<div class="form-group">
-                                <input asp-for="ImmagineProfilo" class="form-control" />
-                                <span asp-validation-for="ImmagineProfilo" class="text-danger"></span>
-                            </div>-->
                             <div class="form-group">
-                                <input asp-for="Name" placeholder="Nome" class="form-control" />
+                                <input asp-for="Name" data-val-required="@_localizer["Required"]" placeholder="@_localizer["Name"]" class="form-control" />
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input asp-for="Surname" placeholder="Cognome" class="form-control" />
+                                <input asp-for="Surname" data-val-required="@_localizer["Required"]" placeholder="@_localizer["Surname"]" class="form-control" />
                                 <span asp-validation-for="Surname" class="text-danger"></span>
                             </div>
+                            <div class="form-group">
+                                <input asp-for="Email" data-val-required="@_localizer["Required"]" placeholder="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
                              <div class="form-group">
-                                <input asp-for="DataNascita" placeholder="Data di nascita" class="form-control" />
+                                <input asp-for="DataNascita" placeholder="@_localizer["BirthDate"]" class="form-control" />
                                 <span asp-validation-for="DataNascita" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input asp-for="Password" placeholder="Password" class="form-control" />
+                                <input asp-for="Password" data-val-required="@_localizer["Required"]" placeholder="Password" class="form-control" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input asp-for="ConfirmPassword" placeholder="Conferma password"  class="form-control" />
+                                <input asp-for="ConfirmPassword" data-val-required="@_localizer["Required"]" placeholder="@_localizer["ConfirmPassword"]"  class="form-control" />
                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                             </div>
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Accetto le condizioni d'uso</label>
+                                <label class="form-check-label" for="exampleCheck1">@_localizer["ConfirmCondition"]</label>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary btn-block" value="Registrati" />
@@ -57,9 +58,8 @@
                         <hr />
 
                         <a id="btnSignIn" class="text-muted btn btn-block btn-link btn-sm">
-                            Sei già registrato? <strong class="text-primary">Accedi</strong>
+                            @_localizer["IsLogin"] <strong class="text-primary">@_localizer["LogIn"]</strong>
                         </a>
-
                     </div>
                 </div>
                 </div>

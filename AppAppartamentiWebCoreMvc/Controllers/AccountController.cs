@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using AppAppartamenti.Api;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using static AppAppartamenti.Api.ApiHelper;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
@@ -88,6 +88,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 {
                     Model.BirthName = Model.Name;
 
+                    Model.ImmagineProfilo = Utility.Utility.Compress(Model.ImmagineProfilo);
+
                     HttpClient httpClient = new HttpClient();
                     var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
                     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
@@ -101,6 +103,36 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 {
                     ViewBag["Risultato"] = ex;
                 }
+            }
+
+            return RedirectToAction("Detail");
+        }
+
+        public IActionResult EditPasswordAsync()
+        {
+           return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditPasswordAsync(ChangePasswordBindingModel Model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                AccountClient accountClient = new AccountClient(httpClient);
+                accountClient.ChangePasswordAsync(Model);
+            }
+            catch (Exception ex)
+            {
+                ViewBag["Risultato"] = ex;
             }
 
             return RedirectToAction("Detail");

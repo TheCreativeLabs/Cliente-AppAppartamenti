@@ -12,10 +12,20 @@ $(document).ready(function () {
         listPage = listPage + 1;
         ReloadList();
     });
+
+    $('#select-order').change(function () {
+        ReloadList();
+    });
 });
 
 function ReloadList() {
-    $('#annunci').load(UrlRefresh);
+
+    let url = UrlRefresh;
+    let order = $("#select-order").val();
+    if (order != "") {
+        url = url + "&Order=" + $("#select-order").val();
+    }
+    $('#annunci').load(url);
    
     setInterval('HideLoader()', 10000);
 }

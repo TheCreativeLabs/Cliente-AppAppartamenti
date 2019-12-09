@@ -14,6 +14,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Index.cshtml" />
@@ -27,6 +31,13 @@
     <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
     <Content Remove="Views\AnnunciPreferiti\Detail.cshtml" />
     <Content Remove="Views\AnnunciPersonali\Detail.cshtml" />
+    <Content Remove="wwwroot\lib\fullcalendar\core\locales\en-nz.js" />
+    <Content Remove="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
+    <Content Remove="wwwroot\lib\fullcalendar\moment\main.d.ts" />
+    <Content Remove="wwwroot\lib\fullcalendar\moment\main.esm.js" />
+    <Content Remove="wwwroot\bundle\bundle.min.js" />
+    <Content Remove="Views\Account\Account\Edit.cshtml" />
+    <Content Remove="Views\Agenda\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -43,6 +54,15 @@
     <Folder Include="wwwroot\lib\multirange\" />
     <Folder Include="wwwroot\lib\nouislider\" />
     <Folder Include="wwwroot\lib\wNumb\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Views\" />
+    <Folder Include="Resources\Views\Home\" />
+    <Folder Include="Resources\Views\Home\" />
+    <Folder Include="Resources\Views\Shared\" />
+    <Folder Include="Resources\AppAppartamentiApiClient\" />
+    <Folder Include="Resources\Views\AnnunciPersonali\" />
+    <Folder Include="wwwroot\lib\fullcalendar\moment\" />
+    <Folder Include="Views\Agenda\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />
@@ -73,5 +93,20 @@
     <Content Update="wwwroot\js\share-modal.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\js\account-edit %28copy%29.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\virtual-agent-sell.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\13.2.0.42\lib\mono\Xamarin.iOS\Facades\System.Drawing.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Views\Home\Home\Index.en-US.resx" />
+    <EmbeddedResource Remove="Resources\AppAppartamentiApiClient\AppAppartamentiApiClient\RegisterUserBindingModel.en-US.resx" />
   </ItemGroup>
 </Project>

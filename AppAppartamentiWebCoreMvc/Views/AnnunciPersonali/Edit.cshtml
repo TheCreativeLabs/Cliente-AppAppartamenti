@@ -1,4 +1,4 @@
-﻿@model AppAppartamentiApiClient.AnnuncioDtoInput
+﻿@model AnnuncioDtoInput
 
 @{
     ViewData["Title"] = "View";
@@ -6,7 +6,7 @@
 
 
 @{
-    AppAppartamentiApiClient.AnnunciDtoOutput annuncio = (AppAppartamentiApiClient.AnnunciDtoOutput)ViewData["Annuncio"];
+    AnnunciDtoOutput annuncio = (AnnunciDtoOutput)ViewData["Annuncio"];
 }
 <div class="container container-custom">
     <div class="row">
@@ -47,7 +47,7 @@
     margin: -1rem;">Tipologia proprietà</h5>
                      <div class="form-group">
                          @{
-                             IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
+                             IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
                             @foreach (var proprieta in tipologiaProprieta)
                             {
                                 string isChecked = (annuncio.TipologiaProprieta == proprieta.Descrizione ? "checked" : "");
@@ -65,7 +65,7 @@
     margin: -1rem;">Tipologia annuncio</h5>
                      <div class="form-group">
                          @{
-                             IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
+                             IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
                             @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
                             {
                                 <input class="mr-2"  type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" /><small>@tipologiaAnnuncio.Descrizione</small><br />
@@ -117,7 +117,7 @@
 
                      <div class="form-group">
                      @{
-                         IEnumerable<AppAppartamentiApiClient.TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<AppAppartamentiApiClient.TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
+                         IEnumerable<TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
                      }
                      <label  class="control-label col-form-label-sm">Tipologia riscaldamento</label>
                          <br />
@@ -128,7 +128,7 @@
 
                      <div class="form-group">
                      @{
-                         IEnumerable<AppAppartamentiApiClient.ClasseEnergetica> classeEnergetica = (IEnumerable<AppAppartamentiApiClient.ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+                         IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
                      }
                      <label  class="control-label col-form-label-sm">Classe energetica</label>
                          <br />

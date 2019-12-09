@@ -12,13 +12,26 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
+                        <div class="col-12 mb-4">
+                            <h6>Tipologia annuncio</h6>
+
+                            @{
+                                IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
+
+
+                                @Html.DropDownListFor(m => m.IdTipologiaProprieta,
+                                            new SelectList(listaTipologiaAnnuncio,"Id","Descrizione",Model?.IdTipologiaAnnuncio),
+                                            null,new {@id="selectTipologiaAnnuncio", @class = "custom-select" })
+                              
+                            }
+                        </div>
 
                         <div class="col-12 mb-4">
                             <h6 >Tipologia proprieta</h6>
 
                             @{ 
 
-                                    IEnumerable<AppAppartamentiApiClient.TipologiaProprieta> tipologiaProprieta = (IEnumerable<AppAppartamentiApiClient.TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
+                                    IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
 
                                           @Html.DropDownListFor(m => m.IdTipologiaProprieta,
                                             new SelectList(tipologiaProprieta,"Id","Descrizione",Model?.IdTipologiaProprieta),
@@ -27,21 +40,6 @@
                           }
 
                         </div>
-
-                        <div class="col-12 mb-4">
-                            <h6>Tipologia annuncio</h6>
-
-                            @{
-                                IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<AppAppartamentiApiClient.TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
-
-
-                                @Html.DropDownListFor(m => m.IdTipologiaProprieta,
-                                            new SelectList(listaTipologiaAnnuncio,"Id","Descrizione",Model?.IdTipologiaAnnuncio),
-                                             "Tutti",new {@id="selectTipologiaAnnuncio", @class = "custom-select" })
-                              
-                            }
-                        </div>
-
 
                         <div class="col-12 mb-4">
                             <h6 class="mb-5">Prezzo</h6>
@@ -189,7 +187,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button id="btnSaveFilter" type="button" class="btn btn-primary">Salva filtri</button>
             </div>

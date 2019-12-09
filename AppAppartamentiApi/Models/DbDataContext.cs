@@ -26,6 +26,8 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<ImmaginePlanimetria> ImmaginePlanimetria { get; set; }
         public virtual DbSet<Video> Video { get; set; }
+        public virtual DbSet<Appuntamento> Appuntamento { get; set; }
+        public virtual DbSet<FasceOrarie> FasceOrarie { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +43,18 @@ namespace AppAppartamentiApi.Models
 
             modelBuilder.Entity<Annuncio>()
                 .HasMany(e => e.ImmagineAnnuncio)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.Video)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.ImmaginiPlanimetria)
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
                 .WillCascadeOnDelete(false);
@@ -80,6 +94,20 @@ namespace AppAppartamentiApi.Models
                 .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.TipologiaRiscaldamento)
                 .HasForeignKey(e => e.IdTipologiaRiscaldamento);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.FasceOrarie)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
+            //.HasOptional(e => e.FasceOrarie)
+            //.WithOptionalPrincipal(e => e.Annuncio);
+
+            modelBuilder.Entity<Annuncio>()
+                .HasMany(e => e.Appuntamenti)
+                .WithRequired(e => e.Annuncio)
+                .HasForeignKey(e => e.IdAnnuncio)
+                .WillCascadeOnDelete(false);
         }
     }
 }

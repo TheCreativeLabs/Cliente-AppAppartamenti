@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer _localizer
+@{
+    ViewData["Title"] = _localizer["Title"];
 }
 
 <div class="bgimg">
@@ -8,22 +10,22 @@
             <div class="col-sm-8 offset-sm-2 col-xs-12 p-1" style="margin-top:100px;">
                 <div class="shadow-lg p-1 mb-5 bg-white rounded">
                     <div class="input-group input-group-lg" style="border: none;">
-                        <div class="input-group-prepend" style="background-color: white;">
+                        <div class="input-group-prepend d-none d-sm-block" style="background-color: white;">
                             <span class="input-group-text" id="basic-addon1" style="background-color: white;border: none;">
                                 <i class="fas fa-search col-1"></i>
                             </span>
                         </div>
-                        <input id="txtSearchHome" type="text" class="form-control search-textbox" placeholder="Cerca per città o provincia" aria-label="Username" aria-describedby="basic-addon1" style="border: none;">
+                        <input id="txtSearchHome" type="text" class="form-control search-textbox" placeholder="@_localizer["SearchPlaceholder"]" aria-label="Username" aria-describedby="basic-addon1" style="border: none;">
                         <div class="search-spinner spinner-border spinner-border-sm text-secondary mt-3" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                         <div class="input-group-append">
-                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark" href="#"><small>+ Altri filtri</small></a>
+                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark" href="#"><small>+ @_localizer["OtherFilterLabel"]</small></a>
                         </div>
                         <div class="input-group-append">
                             <a id="btnSearchHome" class="btn btn-primary disabled search-button"
                                style="border-radius:0.3rem !important;"
-                               asp-controller="Annunci" asp-action="List">Cerca</a>
+                               asp-controller="Annunci" asp-action="List">@_localizer["Search"]</a>
                         </div>
                     </div>
                 </div>
@@ -38,33 +40,26 @@
             <div class="card mb-4 shadow-sm" style="height:350px">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
-                    <p class="card-text">Cerca la casa più adatta a te.</p>
-                    <div class="justify-content-center">
-                        <button type="button" class="btn btn-primary">Inzia a cercare</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm" style="height:350px">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                    <p class="card-text">Prendi appuntamento direttamente dall'app</p>
-                    <div class="justify-content-center">
-                        <button type="button" class="btn btn-primary">Prendi un appuntamento</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm" style="height:350px">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                    <p class="card-text">Inserisci il tuo annuncio di vendita o affitto. È gratis.</p>
-                    <div class="justify-content-center">
+                    <p class="card-text">
+                        @_localizer["CardDescription1"]
 
-                        <button type="button" class="btn btn-primary">Pubblica annuncio</button>
-                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm" style="height:350px">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                <div class="card-body">
+                    <p class="card-text">@_localizer["CardButtonText2"]</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm" style="height:350px">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                <div class="card-body">
+                    <p class="card-text">@_localizer["CardButtonText3"]</p>
                 </div>
             </div>
         </div>
@@ -73,8 +68,8 @@
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light mt-5">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h3 class="display-4 font-weight-normal">Scarica l'app per dispositivi mobile!</h3>
-        <p class="lead font-weight-normal">Inizia a cercar e tra milioni di appartamenti e salva i tuoi preferiti.</p>
+        <h3 class="display-4 font-weight-normal">@_localizer["DownloadAppTitle"]</h3>
+        <p class="lead font-weight-normal">@_localizer["DownloadAppDescription"]</p>
         <a class="btn btn-outline-secondary" href="#">
             <i class="fab fa-apple"></i> App Store
         </a>

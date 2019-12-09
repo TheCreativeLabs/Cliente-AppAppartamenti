@@ -14,6 +14,10 @@ namespace AppAppartamentiApi.Models
         {
             AnnunciPreferiti = new HashSet<AnnunciPreferiti>();
             ImmagineAnnuncio = new HashSet<ImmagineAnnuncio>();
+            Appuntamenti = new HashSet<Appuntamento>();
+            FasceOrarie = new HashSet<FasceOrarie>();
+            ImmaginiPlanimetria = new HashSet<ImmaginePlanimetria>();
+            Video = new HashSet<Video>();
             AnnuncioMessaggi = new HashSet<AnnuncioMessaggi>();
 
         }
@@ -106,12 +110,22 @@ namespace AppAppartamentiApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImmagineAnnuncio> ImmagineAnnuncio { get; set; }
 
-        public virtual ImmaginePlanimetria ImmaginePlanimetria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImmaginePlanimetria> ImmaginiPlanimetria { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnnuncioMessaggi> AnnuncioMessaggi { get; set; }
 
-        public virtual Video Video { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Video> Video { get; set; }
+
+        public virtual string CoordinateGeografiche { get; set;  }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FasceOrarie> FasceOrarie { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appuntamento> Appuntamenti { get; set; }
 
     }
 }

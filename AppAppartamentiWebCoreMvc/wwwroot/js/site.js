@@ -24,7 +24,13 @@ $(document).ready(function () {
     $("#btnGoogleLogin").click(function (e) {
         GoogleLogin();
     });
+
+    $(".dropdown-agenda").click(function (e) {
+        e.stopPropagation();
+    });
 });
+
+
 
 //Gestisce l'autenticazione con facebook
 function FacebookLogin(){
@@ -149,12 +155,7 @@ function NavigateToDetail(Url) {
     window.location.href = Url;
 }
 
-const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
+
 
 //Aggiunge l'annuncio ai preferiti
 function AddPreferred(btn, url, id) {
@@ -193,7 +194,7 @@ function RemovePreferred(btn, url, id) {
     });
 }
 
-//Abilita il pulsante di ricerca deigli annunci
+//Abilita il pulsante di ricerca dei comuni
 function EnableSearch(searchTextbox) {
     try{
         let searchButton = $(".search-button");

@@ -23,9 +23,10 @@ namespace AppAppartamentiApi.Dto
 
         public AnnuncioDtoOutput(){
             ImmaginiAnnuncio = new List<byte[]>();
+            ImmaginiPlanimetria = new List<byte[]>();
         }
 
-        public static AnnuncioDtoOutput MapperAnnuncio(Annuncio annuncio)
+        public static AnnuncioDtoOutput MapperAnnuncio(Annuncio annuncio, bool preferito)
         {
             AnnuncioDtoOutput dto = new AnnuncioDtoOutput() {
                 Id = annuncio.Id,
@@ -55,8 +56,9 @@ namespace AppAppartamentiApi.Dto
                 Piscina = annuncio.Piscina,
                 Cantina = annuncio.Cantina,
                 SpesaMensileCondominio = annuncio.SpesaMensileCondominio,
-                Condizionatori = annuncio.Condizionatori
-            };
+                Condizionatori = annuncio.Condizionatori,
+                FlagPreferito = preferito
+        };
 
             if (annuncio.TipologiaAnnuncio != null)
             {
@@ -76,13 +78,27 @@ namespace AppAppartamentiApi.Dto
             }
             if (annuncio.ClasseEnergetica != null)
             {
-                dto.ClasseEnergetica = annuncio.ClasseEnergetica.Descrizione;
+                dto.ClasseEnergetica = annuncio.ClasseEnergetica.Codice;
             }
 
             foreach (var imm in annuncio.ImmagineAnnuncio)
             {
                 dto.ImmaginiAnnuncio.Add(imm.Immagine);
                 
+            }
+
+            if(annuncio.ImmaginiPlanimetria != null) { 
+                foreach (var imm in annuncio.ImmaginiPlanimetria)
+                {
+                    dto.ImmaginiPlanimetria.Add(imm.Immagine);
+
+                }
+            }
+
+            if (annuncio.Video != null)
+            {
+                Video video = annuncio.Video.OfType<Video>().FirstOrDefault();
+                if (video != null) dto.Video = video.VideoBytes;
             }
 
             return dto;
@@ -118,9 +134,6 @@ namespace AppAppartamentiApi.Dto
 
         public bool Cancellato { get; set; }
 
-        public byte[] ImmaginePrincipale { get; set; }
-
-        //public List<ImmagineAnnuncioContainer> ImmaginiAnnuncio { get; set; }
         public List<byte[]> ImmaginiAnnuncio { get; set; }
 
         public bool UltimoPiano { get; set; }
@@ -161,8 +174,10 @@ namespace AppAppartamentiApi.Dto
 
         public bool Condizionatori { get; set; }
 
+        public byte[] Video { get; set;  }
 
+        public List<byte[]> ImmaginiPlanimetria { get; set; }
 
-
+        public bool FlagPreferito { get; set; }
     }
 }

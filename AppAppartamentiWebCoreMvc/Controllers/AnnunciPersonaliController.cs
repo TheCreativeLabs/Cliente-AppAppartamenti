@@ -9,7 +9,8 @@ using AppAppartamentiWebCoreMvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
-using AppAppartamentiApiClient;
+using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
+using System.Collections.ObjectModel;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -95,6 +96,23 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         public async Task<IActionResult> CreateAsync(AnnuncioDtoInput Model)
         {
             HttpClient httpClient = new HttpClient();
+
+            Collection<byte[]> immagini = new Collection<byte[]>();
+            foreach (var item in Model.Immagini)
+            {
+                immagini.Add(Utility.Utility.Compress(item));
+            }
+
+            Model.Immagini = immagini;
+
+            Collection<byte[]> planimetrie = new Collection<byte[]>();
+            foreach (var item in Model.ImmaginePlanimetria)
+            {
+                planimetrie.Add(Utility.Utility.Compress(item));
+            }
+
+            Model.ImmaginePlanimetria = planimetrie;
+
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
