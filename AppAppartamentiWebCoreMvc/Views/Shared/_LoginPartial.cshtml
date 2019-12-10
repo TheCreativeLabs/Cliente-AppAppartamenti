@@ -15,31 +15,44 @@
                         </button>
                   </div>
               </div>
-
+              <div id="login-error" class="row d-none">
+                  <div class="col-12">
+                      <h6 class="text-danger"><strong>La password o la email inserita non è corretta.</strong></h6>
+                    </div>
+                </div>
+              <form id="form-login" class="needs-validation mt-2" novalidate>
               <div class="row">
                   <div class="col-12">
-                  <form asp-controller="Login" asp-action="Accedi" method="post" class="needs-validation" novalidate>
-                    <input name="Email" class="form-control col-12 mb-2" type="email" placeholder="Email" required>
-                    <input name="Password" class="form-control col-12 mb-2" type="password" placeholder="Password" required>
-                    <button type="submit" class="btn btn-primary mb-2 btn-block">@_localizer["Title"]</button>
+                    <input id="email" name="email" class="form-control col-12 mb-2" type="email" placeholder="Email" required>
+                    <input id="password" name="password" class="form-control col-12 mb-2" type="password" placeholder="Password" required>
+
+                    <button id="btn-login" type="button" data-url="@Url.Action("Login", "Login")" class="btn btn-primary mb-2 btn-block">
+                        <span id="spinner-login" class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                         @_localizer["Title"]
+                    </button>
 
                     <div>
-                        <a class="text-muted" href="#"><small>@_localizer["ForgotPassword"]</small></a>
+                        <a id="btn-restore-modal" class="text-muted" href="#"><small>@_localizer["ForgotPassword"]</small></a>
                         <hr>
                     </div>
 
-                    <bttton id="btnFacebookLogin" class="btn btn-block fb" ><i class="fab fa-facebook-f"></i>&nbsp;@_localizer["SignInFacebook"]</bttton>
-                    <bttton id="btnGoogleLogin" class="btn btn-block google"> <i class="fab fa-google"></i>&nbsp;@_localizer["SignInGoogle"]</bttton>
+                    <button id="btnFacebookLogin" type="button" class="btn btn-block fb">
+                        <span class="spinner d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <i class="fab fa-facebook-f"></i>&nbsp;@_localizer["SignInFacebook"]
+                      </button>
+                    <button id="btnGoogleLogin" type="button" class="btn btn-block google">
+                        <span id="spinner-login" class="spinner d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <i class="fab fa-google"></i>&nbsp;@_localizer["SignInGoogle"]
+                    </button>
 
                     <div>
                         <hr>
                         <a id="btnSignUp" class="text-muted btn btn-block btn-link btn-sm"
                            href="#">@_localizer["NotRegistered"] <strong class="text-primary">@_localizer["SignUp"]</strong></a>
                     </div>
-
-                 </form>
-                      </div>
+                </div>
               </div>
+            </form>
           </div>
         </div>
       </div>

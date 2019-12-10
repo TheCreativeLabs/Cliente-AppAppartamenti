@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              x:Class="AppAppartamenti.Views.Home" NavigationPage.HasNavigationBar="False"
-            BackgroundColor="#F8F8F8">
+            BackgroundColor="{StaticResource SfondoColor}">
     <ContentPage.Content>
             <StackLayout Orientation="Vertical" Padding="20">
                 <StackLayout.Margin>

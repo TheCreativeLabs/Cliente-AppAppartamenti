@@ -17,6 +17,7 @@ namespace AppAppartamenti.ViewModels
 
         public AnnuncioDtoOutput Item { get; set; }
         public List<Immagine> Immagini { get; set; }
+        public List<Immagine> ImmaginiPlanimetria { get; set; }
 
         ////public Command LoadItemsCommand { get; set; }
         //public Guid idAnnuncio { get; set; }
@@ -24,6 +25,7 @@ namespace AppAppartamenti.ViewModels
         {
             Item = new AnnuncioDtoOutput();
             Immagini = new List<Immagine>();
+            ImmaginiPlanimetria = new List<Immagine>();
 
         }
 
@@ -41,6 +43,13 @@ namespace AppAppartamenti.ViewModels
                 foreach (var immagine in annuncioDetailViewModel.Item.ImmaginiAnnuncio)
                 {
                     annuncioDetailViewModel.Immagini.Add(new Immagine() { Value = immagine });
+                }
+
+                if (annuncioDetailViewModel.Item.ImmaginiPlanimetria != null && annuncioDetailViewModel.Item.ImmaginiPlanimetria.Count != 0) {
+                    foreach (var immaginePl in annuncioDetailViewModel.Item.ImmaginiPlanimetria)
+                    {
+                        annuncioDetailViewModel.ImmaginiPlanimetria.Add(new Immagine() { Value = immaginePl });
+                    }
                 }
             }
             catch (Exception ex)

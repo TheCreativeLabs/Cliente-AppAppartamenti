@@ -456,7 +456,7 @@
   <data name="SelezioneInfoGenerali.Terrace" xml:space="preserve">
     <value>Terrazzo</value>
   </data>
-  <data name="SelezioneInfoGenerali.WhereQuestion" xml:space="preserve">
+  <data name="Luogo.WhereQuestion" xml:space="preserve">
     <value>Dove si trova?</value>
   </data>
   <data name="SelezioneLuogo.Address" xml:space="preserve">
@@ -632,5 +632,62 @@
   </data>
   <data name="InformazionePersonali.Title" xml:space="preserve">
     <value>Informazioni personali</value>
+  </data>
+  <data name="SelezionePlanimetira.Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="SelezionePlanimetira.PhotoGallery" xml:space="preserve">
+    <value>Galleria foto</value>
+  </data>
+  <data name="SelezionePlanimetira.TakePicture" xml:space="preserve">
+    <value>Scatta foto</value>
+  </data>
+  <data name="SelezionePlanimetira.UploadPhoto" xml:space="preserve">
+    <value>Carica una foto</value>
+  </data>
+  <data name="SelezionePlanimetria.AddImage" xml:space="preserve">
+    <value>Seleziona immagine</value>
+  </data>
+  <data name="SelezionePlanimetria.Continue" xml:space="preserve">
+    <value>Avanti</value>
+  </data>
+  <data name="SelezionePlanimetria.NuovoAnnuncio" xml:space="preserve">
+    <value>Nuovo annuncio</value>
+  </data>
+  <data name="SelezionePlanimetria.Planimetria" xml:space="preserve">
+    <value>Planimetria</value>
+  </data>
+  <data name="DettaglioAnnuncio.Planimetria" xml:space="preserve">
+    <value>Planimetria</value>
+  </data>
+  <data name="DettaglioAnnuncio.Garages" xml:space="preserve">
+    <value>Garage:</value>
+  </data>
+  <data name="DettaglioAnnuncio.In" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="DettaglioAnnuncio.ParkingSpaces" xml:space="preserve">
+    <value>Posti auto:</value>
+  </data>
+  <data name="InformazionePersonali.ChangePhoto" xml:space="preserve">
+    <value>Cambia foto</value>
+  </data>
+  <data name="ModificaAnnuncio.Save" xml:space="preserve">
+    <value>SALVA</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Garages" xml:space="preserve">
+    <value>Garage:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.ParkingSpaces" xml:space="preserve">
+    <value>Posti auto:</value>
+  </data>
+  <data name="SelezioneLuogo.Locality" xml:space="preserve">
+    <value>Inserisci il comune</value>
+  </data>
+  <data name="SelezioneLuogo.LocalityPlaceholder" xml:space="preserve">
+    <value>Comune</value>
+  </data>
+  <data name="SelezioneLuogo.WhereQuestion" xml:space="preserve">
+    <value>Dove si trova?</value>
   </data>
 </root>

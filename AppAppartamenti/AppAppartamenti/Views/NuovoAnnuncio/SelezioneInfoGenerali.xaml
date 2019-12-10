@@ -110,13 +110,23 @@
 
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Parking}"></Label>
+                            <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.ParkingSpaces}"></Label>
+                        <Label x:Name="lblParkingSpacesCount" Text="0" FontSize="Large" VerticalTextAlignment="Center"></Label>
+                        <Stepper x:Name="stpParkingSpaces" ValueChanged="StpParkingSpaces_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
+                    </StackLayout>
+
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                    <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf494;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        <Label VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Garages}"></Label>
                         <Label x:Name="lblGarageCount" Text="0" FontSize="Large" VerticalTextAlignment="Center"></Label>
                         <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
                         <Label Text="{translator:Translate SelezioneInfoGenerali.Other}" FontSize="Medium"></Label>
                     <Grid>

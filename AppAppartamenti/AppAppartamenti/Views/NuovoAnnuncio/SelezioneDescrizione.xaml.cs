@@ -19,9 +19,11 @@ namespace AppAppartamenti.Views
     public partial class SelezioneDescrizione : ContentPage
     {
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
+        AnnuncioDetailViewModel dtoToModify;
 
-        public SelezioneDescrizione(AnnuncioDtoInput Annuncio)
+        public SelezioneDescrizione(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
+            this.dtoToModify = dtoToModify;
             InitializeComponent();
 
             annuncio = Annuncio;
@@ -30,19 +32,23 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            try
+            if (dtoToModify != null && dtoToModify.Item != null)
             {
-                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-                NavigationPage.SetHasNavigationBar(this, true);
-            }
-            catch (Exception ex)
-            {
-
+                edtDescrizione.Text = dtoToModify.Item.Descrizione;
             }
 
-            sdBody.IsVisible = true;
+            //try
+            //{
+            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
+            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
+            //    NavigationPage.SetHasNavigationBar(this, true);
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+
+            spBody.IsVisible = true;
 
 
         }
@@ -66,12 +72,47 @@ namespace AppAppartamenti.Views
         }
 
 
-        private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
+        private async void BtnDescrizioneProcedi_Clicked(object sender, EventArgs e)
         {
             annuncio.Descrizione = edtDescrizione.Text;
+            if(dtoToModify != null && dtoToModify.Item != null)
+            {
+                if(dtoToModify.Item.Cancellato != null)
+                {
+                    annuncio.Cancellato = (bool)dtoToModify.Item.Cancellato;
+                }
+                if (dtoToModify.Item.Completato != null)
+                {
+                    annuncio.Completato = (bool)dtoToModify.Item.Completato;
+                }
+                if (dtoToModify.Item.Disponibile != null)
+                {
+                    annuncio.Disponibile = (bool)dtoToModify.Item.Disponibile;
+                }
+                //if (dtoToModify.Item.IdStatoProprieta!= null)
+                //{
+                //    annuncio.IdStatoProprieta = dtoToModify.Item.IdStatoProprieta;
+                //}
+                if (dtoToModify.Item.Piano != null)
+                {
+                    annuncio.Piano = (int)dtoToModify.Item.Piano;
+                }
+                if (dtoToModify.Item.UltimoPiano!=null)
+                {
+                    annuncio.UltimoPiano = (bool)dtoToModify.Item.UltimoPiano;
+                }
+            }
 
+
+            //TODO TRY CATCH
             AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
-            await annunciClient.InsertAnnuncioAsync(annuncio);
+            if (dtoToModify == null) // caso inserimento
+            {
+                await annunciClient.InsertAnnuncioAsync(annuncio);
+            } else if(dtoToModify.Item.Id != null)
+            {
+                await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
+            }
 
             await Navigation.PopModalAsync();
         }

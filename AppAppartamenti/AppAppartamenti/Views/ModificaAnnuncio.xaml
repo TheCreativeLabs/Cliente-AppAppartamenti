@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             mc:Ignorable="d"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"
+             x:Class="AppAppartamenti.Views.ModificaAnnuncio"
+             BackgroundColor="{StaticResource SfondoColor}"
+             >
+
+    <!--<NavigationPage.TitleView>
+        <StackLayout  Orientation="Horizontal">
+
+            <Label x:Name="btnBackNavBar" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Large" Text="&#xf053;"  Padding="10,0,10,0"
+                   FontFamily="{x:StaticResource FA-Solid}" TextColor="White">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnBack_Clicked"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium" Text="{translator:Translate  ModificaAnnuncio.Save}" Padding="10,0,10,0"
+                    TextColor="White" x:Name="btnSaveNavBar" HorizontalOptions="EndAndExpand" >
+                --><!--<Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
+                </Label.GestureRecognizers>--><!--
+            </Label>
+        </StackLayout>
+    </NavigationPage.TitleView>-->
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{translator:Translate ModificaAnnuncio.Save}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+
+        <!--<Grid VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>-->
+
+            <ScrollView x:Name="scrollView" IsVisible="False"  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,-50,0,0" VerticalOptions="FillAndExpand" >
+                <StackLayout>
+                    <!--<StackLayout HeightRequest="300" Margin="0,-20,0,0">
+                        <CarouselView ItemsSource="{Binding Immagini}" x:Name="Carousel">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Value, Converter={StaticResource ByteArrayToImage}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                    </StackLayout>-->
+
+
+                    <StackLayout Padding="20">
+                        
+
+
+
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                        <Label Text="{translator:Translate SelezioneTipologiaAnnuncio.SaleRent}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+
+                        <input:SelectionView 
+                                    RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1" Color="#ff6b6b">
+                        </input:SelectionView>
+
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                        <Label Text="{translator:Translate SelezioneProprieta.PropertyType}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+                        
+                        <input:SelectionView RowSpacing="20" Margin="20" x:Name="selProprList" SelectionType="RadioButton"
+                            ColumnNumber="1" Color="#ff6b6b" >
+                        </input:SelectionView>
+                        
+                        <!--Luogo-->
+                        
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                        <Label Text="{translator:Translate SelezioneProprieta.PropertyType}"  FontSize="Subtitle" Margin="0,10,0,0"></Label>
+
+                        <Label Text="{translator:Translate SelezioneLuogo.Locality}"></Label>
+                        <appappartamenti:MyEntry  x:Name="entCercaComune"
+                                        Placeholder="{translator:Translate SelezioneLuogo.LocalityPlaceholder}" TextChanged="EntCercaComune_TextChanged"></appappartamenti:MyEntry>
+
+                        <ListView x:Name="lvComuni" IsVisible="False" ItemSelected="LvComuni_Selected" SeparatorVisibility="None" >
+
+                            <ListView.Footer>
+                                <DataTemplate>
+                                    <ContentView />
+                                </DataTemplate>
+                            </ListView.Footer>
+
+                            <ListView.FooterTemplate>
+                                <DataTemplate>
+                                    <ContentView />
+                                </DataTemplate>
+                            </ListView.FooterTemplate>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label Text="{Binding NomeComune}" VerticalTextAlignment="Center" />
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <Label Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,20,0,0"></Label>
+                        <appappartamenti:MyEntry x:Name="entIndirizzoModifica"
+                                            Unfocused="EntIndirizzo_Unfocused"
+                                            Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></appappartamenti:MyEntry>
+
+                        <maps:Map x:Name="mapModifica" IsVisible="False" HeightRequest="200" Margin="0"/>
+
+                        <!-- Info generali-->
+
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                        <Label Text="{translator:Translate SelezioneInfoGenerali.InformazioniGenerali}" FontSize="Subtitle" Margin="0,10,0,0"></Label>
+
+                        <Grid VerticalOptions="FillAndExpand" Padding="20,0,20,20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <ScrollView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+
+                                    <StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{translator:Translate SelezioneInfoGenerali.SquareMeters}" FontAttributes="Bold" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label Text="{translator:Translate SelezioneInfoGenerali.EnterHouseSize}"></Label>
+                                        </StackLayout>
+                                        <appappartamenti:MyEntry x:Name="entSuperficie" Keyboard="Numeric" Placeholder="{translator:Translate SelezioneInfoGenerali.HouseSizeExample}"></appappartamenti:MyEntry>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Bedrooms}"></Label>
+                                            <Label x:Name="lblCamereLettoCount" Text="0"  VerticalTextAlignment="Center" FontSize="Large"></Label>
+
+                                            <Stepper x:Name="stpCamereLetto" HorizontalOptions="EndAndExpand" ValueChanged="StpCamereLetto_ValueChanged" WidthRequest="100" Minimum="0" Visual="Material"></Stepper>
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="&#xf52b;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Rooms}"></Label>
+                                            <Label x:Name="lblStanzeCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
+                                            <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Bathrooms}"></Label>
+                                            <Label x:Name="lblBagniCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
+                                            <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label  VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Kitchens}"></Label>
+                                            <Label x:Name="lblCucineCount" Text="0" VerticalTextAlignment="Center" FontSize="Large" ></Label>
+                                            <Stepper x:Name="stpCucine" ValueChanged="StpCucine_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
+
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.ParkingSpaces}"></Label>
+                                            <Label x:Name="lblParkingSpacesCount" Text="0" FontSize="Large" VerticalTextAlignment="Center"></Label>
+                                            <Stepper x:Name="stpParkingSpaces" ValueChanged="StpParkingSpaces_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="&#xf494;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                            <Label VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Garages}"></Label>
+                                            <Label x:Name="lblGarageCount" Text="0" FontSize="Large" VerticalTextAlignment="Center"></Label>
+                                            <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
+                                        <Label Text="{translator:Translate SelezioneInfoGenerali.Other}" FontSize="Medium"></Label>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                <ColumnDefinition Width="9*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <CheckBox x:Name="chkGiardino" Grid.Column="0" Grid.Row="0" IsChecked="False"></CheckBox>
+                                            <Label  Grid.Column="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Backyard}"></Label>
+
+                                            <CheckBox x:Name="chkTerrazzo" Grid.Column="0" Grid.Row="1" IsChecked="False"></CheckBox>
+                                            <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Terrace}"></Label>
+
+                                            <CheckBox x:Name="chkCantina" Grid.Column="0" Grid.Row="2" IsChecked="False"></CheckBox>
+                                            <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Cellar}"></Label>
+
+                                            <CheckBox x:Name="chkPiscina" Grid.Column="0" Grid.Row="3" IsChecked="False"></CheckBox>
+                                            <Label Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Pool}"></Label>
+
+                                            <CheckBox x:Name="chkAscensore" Grid.Column="0" Grid.Row="4" IsChecked="False"></CheckBox>
+                                            <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
+
+                                            <CheckBox x:Name="chkCondizionatori" Grid.Column="0" Grid.Row="5" IsChecked="False"></CheckBox>
+                                            <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
+                                        </Grid>
+
+                                    </StackLayout>
+                                </ScrollView>
+
+                        </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+                           
+
+
+                        </StackLayout>
+                </StackLayout>
+                
+                <!-- FIXME per evitare bianco su bianco si può mettere un'ombra ai pulsanti (cioè al testo del button) come descritto in questo articolo
+                https://theconfuzedsourcecode.wordpress.com/2017/02/06/is-it-possible-to-add-a-text-shadow-in-button-with-xamarin-forms/ -->
+             </ScrollView>
+
+            <!-- Navbar trasparente -->
+                <!--<StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="0,0,0,0" >
+                    
+                    <Label BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Large" Text="&#xf053;"  Padding="20,20,20,20"
+                            FontFamily="{x:StaticResource FA-Solid}" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnBack_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label x:Name="btnShare" BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;" Padding="10,0,10,0"
+                           FontFamily="{x:StaticResource FA-Solid}" TextColor="White" HorizontalOptions="EndAndExpand">
+                                --><!--<Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>--><!--
+                    </Label>
+
+                    <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf004;" Padding="10,0,10,0"
+                                FontFamily="{x:StaticResource FA-Solid}" TextColor="White" x:Name="btnPreferiti" HorizontalOptions="End" >
+                        --><!--<Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>--><!--
+                    </Label>
+
+                    <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="{translator:Translate  ModificaAnnuncio.Save}" Padding="10,0,10,0"
+                                FontFamily="{x:StaticResource FA-Solid}" TextColor="White" x:Name="btnSave" HorizontalOptions="EndAndExpand" >
+                        --><!--<Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>--><!--
+                    </Label>
+                </StackLayout>--> <!--WidthRequest="50"-->
+
+
+
+
+                <!--<StackLayout x:Name="stkPulsanti" Orientation="Horizontal" Padding="20" BackgroundColor="Transparent" IsVisible="false" VerticalOptions="EndAndExpand"  Grid.Row="1" Grid.Column="0">
+
+                    --><!--<Button Visual="Material" Text="Aiuto" HorizontalOptions="Start"></Button>--><!--
+                    <Button Visual="Material" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="CenterAndExpand"></Button>
+                    --><!--<Button Visual="Material" Text="Messaggio" HorizontalOptions="End"></Button>--><!--
+                </StackLayout>-->
+            <!--</Grid>-->
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

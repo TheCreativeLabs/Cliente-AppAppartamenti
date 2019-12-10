@@ -326,6 +326,10 @@ p{
   color: white;
 }
 
+.fb:hover{
+    color:white;
+}
+
 .text-facebook{
     color:#3B5998 !important;
 }
@@ -342,6 +346,10 @@ p{
 .google {
   background-color: #dd4b39;
   color: white;
+}
+
+.google:hover{
+    color:white;
 }
 
 .ui-menu{
@@ -495,4 +503,8 @@ img{
     background-repeat: no-repeat;
     background-position: right calc(.375em + .1875rem) center;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.error{
+    color:var(--red) !important;
 }

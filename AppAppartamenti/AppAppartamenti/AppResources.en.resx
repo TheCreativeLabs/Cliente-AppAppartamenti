@@ -636,4 +636,52 @@
   <data name="InformazionePersonali.Title" xml:space="preserve">
     <value>Personal information</value>
   </data>
+  <data name="SelezionePlanimetira.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SelezionePlanimetira.PhotoGallery" xml:space="preserve">
+    <value>Photos Gallery</value>
+  </data>
+  <data name="SelezionePlanimetira.TakePicture" xml:space="preserve">
+    <value>Take a picture</value>
+  </data>
+  <data name="SelezionePlanimetira.UploadPhoto" xml:space="preserve">
+    <value>Upload photo</value>
+  </data>
+  <data name="SelezionePlanimetria.AddImage" xml:space="preserve">
+    <value>Select image</value>
+  </data>
+  <data name="SelezionePlanimetria.Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="SelezionePlanimetria.NuovoAnnuncio" xml:space="preserve">
+    <value>New listing</value>
+  </data>
+  <data name="SelezionePlanimetria.Planimetria" xml:space="preserve">
+    <value>Planimetry</value>
+  </data>
+  <data name="DettaglioAnnuncio.Planimetria" xml:space="preserve">
+    <value>Planimetry</value>
+  </data>
+  <data name="DettaglioAnnuncio.Garages" xml:space="preserve">
+    <value>Garages:</value>
+  </data>
+  <data name="DettaglioAnnuncio.In" xml:space="preserve">
+    <value>For</value>
+  </data>
+  <data name="DettaglioAnnuncio.ParkingSpaces" xml:space="preserve">
+    <value>Parking spaces:</value>
+  </data>
+  <data name="InformazionePersonali.ChangePhoto" xml:space="preserve">
+    <value>Change photo</value>
+  </data>
+  <data name="ModificaAnnuncio.Save" xml:space="preserve">
+    <value>SAVE</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Garages" xml:space="preserve">
+    <value>Garages:</value>
+  </data>
+  <data name="SelezioneInfoGenerali.ParkingSpaces" xml:space="preserve">
+    <value>Parking spaces:</value>
+  </data>
 </root>

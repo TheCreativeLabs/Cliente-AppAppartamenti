@@ -35,23 +35,26 @@
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                              <div class="form-group">
-                                <input asp-for="DataNascita" placeholder="@_localizer["BirthDate"]" class="form-control" />
+                                <input asp-for="DataNascita" type="date" placeholder="@_localizer["BirthDate"]" class="form-control" />
                                 <span asp-validation-for="DataNascita" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input asp-for="Password" data-val-required="@_localizer["Required"]" placeholder="Password" class="form-control" />
+                                <input asp-for="Password" type="password" data-val-required="@_localizer["Required"]" placeholder="Password" class="form-control" />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input asp-for="ConfirmPassword" data-val-required="@_localizer["Required"]" placeholder="@_localizer["ConfirmPassword"]"  class="form-control" />
+                                <input asp-for="ConfirmPassword" type="password" data-val-required="@_localizer["Required"]" placeholder="@_localizer["ConfirmPassword"]"  class="form-control" />
                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    <div id="confirm-password-error" class="text-danger d-none">
+                                        Le password non coincidono.
+                                </div>
                             </div>
                             <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <input type="checkbox" class="form-check-input" id="condition-check">
                                 <label class="form-check-label" for="exampleCheck1">@_localizer["ConfirmCondition"]</label>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-block" value="Registrati" />
+                                <input id="btn-signin" type="submit" class="btn btn-primary btn-block" disabled value="Registrati" />
                             </div>
                         </form>
 

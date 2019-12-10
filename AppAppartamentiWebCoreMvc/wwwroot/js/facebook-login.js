@@ -24,4 +24,20 @@ $(document).ready(function () {
     });
 });
 
+function FbLogin(token) {
+    $.ajax({
+        type: "POST",
+        url: "/Login/FbLogin",
+        data: { token: token },
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            window.location.href = url.origin + "/Home/Index";
+        },
+        error: function (xhr, status, error) {
+            alert("error");
+        }
+    });
+}
+
 

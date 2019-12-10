@@ -27,8 +27,10 @@ namespace AppAppartamenti.Views
             IdAnnuncio = Id;
 
             btnModifica.IsVisible = IsEditable;
+            btnModificaNavBar.IsVisible = IsEditable;
+            btnPreferiti.IsVisible = !IsEditable;
+            btnPreferitoNavBar.IsVisible = !IsEditable;
             stkPulsanti.IsVisible = !IsEditable;
-            
         }
 
         protected async override void OnAppearing()
@@ -60,6 +62,22 @@ namespace AppAppartamenti.Views
             try
             {
                 await Navigation.PopAsync();
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private async void BtnModifica_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                //await Navigation.PopAsync();
+                //await Navigation.PushAsync(new ModificaAnnuncio(viewModel.Item.Id.Value));
+                
+                await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(viewModel)));
             }
             catch (Exception Ex)
             {

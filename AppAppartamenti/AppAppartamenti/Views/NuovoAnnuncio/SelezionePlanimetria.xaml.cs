@@ -15,31 +15,22 @@ using RestSharp.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using static AppAppartamenti.Views.SelezioneImmagini;
 
 namespace AppAppartamenti.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelezioneImmagini : ContentPage
+    public partial class SelezionePlanimetria : ContentPage
     {
+        static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
-        //private class MediaFileImage
-        //{
-        //    public  MediaFile File { get; set; }
-        //}
-
-        public class ImageWithId
-        {
-            public int Id { get; set; }
-            public byte[] Image { get; set; }
-        }
 
         AnnuncioDtoInput annuncio;
         AnnuncioDetailViewModel dtoToModify;
 
-        //private List<MediaFileImage> mediaFileImages = new List<MediaFileImage>();
-        private List<ImageWithId> bytesImages= new List<ImageWithId>();
+        private List<ImageWithId> bytesImages = new List<ImageWithId>();
 
-        public SelezioneImmagini(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
+        public SelezionePlanimetria(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
             this.dtoToModify = dtoToModify;
             InitializeComponent();
@@ -51,7 +42,7 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
             if (this.dtoToModify != null && this.dtoToModify.Immagini != null && this.dtoToModify.Immagini.Count != 0)
             {
-                foreach (var item in dtoToModify.Immagini)
+                foreach (var item in dtoToModify.ImmaginiPlanimetria)
                 {
                     int id = bytesImages.Count + 1;
                     ImageWithId imm = new ImageWithId() { Id = id, Image = item.Value };
@@ -81,18 +72,16 @@ namespace AppAppartamenti.Views
 
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
-            //foreach (var item in mediaFileImages)
-            //{
-            //    MemoryStream memoryStream = new MemoryStream();
-            //    item.File.GetStream().CopyTo(memoryStream);
-            //    annuncio.Immagini.Add(memoryStream.ToArray());
-            //}
+            if (annuncio.ImmaginePlanimetria == null)
+            {
+                annuncio.ImmaginePlanimetria = new Collection<byte[]>();
+            }
             foreach (var item in bytesImages)
             {
-                annuncio.Immagini.Add(item.Image);
+                annuncio.ImmaginePlanimetria.Add(item.Image);
             }
 
-            await Navigation.PushAsync(new SelezionePlanimetria(annuncio, dtoToModify));
+            await Navigation.PushAsync(new SelezioneDescrizione(annuncio, dtoToModify));
         }
 
         async void PickPhoto()
@@ -113,13 +102,13 @@ namespace AppAppartamenti.Views
 
             List<MediaFile> listaImmagini = await CrossMedia.Current.PickPhotosAsync(new Plugin.Media.Abstractions.PickMediaOptions
             {
-                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
             });
 
             if (listaImmagini == null)
                 return;
 
-            //bytesImages.Clear();
+            //prendo solo 1 foto
             foreach (var item in listaImmagini)
             {
                 using (MemoryStream memoryStream = new MemoryStream())
@@ -131,7 +120,7 @@ namespace AppAppartamenti.Views
                     //mediaFileImages.Add(new MediaFileImage { File = item });
                 }
             }
-            //cvImmagini.ItemsSource = mediaFileImages;
+
             cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 
@@ -154,7 +143,7 @@ namespace AppAppartamenti.Views
             var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 SaveToAlbum = true,
-                PhotoSize = PhotoSize.Small
+                PhotoSize = PhotoSize.Medium
             });
 
             if (file == null)
@@ -165,12 +154,19 @@ namespace AppAppartamenti.Views
 
         async void ActionImmagini(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Carica una foto", "Cancel", null, "Scatta foto", "Galleria immagini");
+            string scatta = Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.TakePicture", translate.ci);
+            string galleria = Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.PhotoGallery", translate.ci);
 
-            if (action == "Scatta foto") {
+            string action = await DisplayActionSheet(Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.UploadPhoto", translate.ci),
+                Helpers.TranslateExtension.ResMgr.Value.GetString("SelezionePlanimetira.Cancel", translate.ci),
+                null,
+                scatta,
+                galleria);
+
+            if (action == scatta) {
                 TakePhoto();
             }
-            else if(action == "Galleria immagini")
+            else if(action == galleria)
             {
                 PickPhoto();
             }
@@ -179,7 +175,7 @@ namespace AppAppartamenti.Views
         private async void BtnDelete_Clicked(object sender, EventArgs e)
         {
             var idImmagine = ((Button)sender).CommandParameter;
-            bytesImages.RemoveAll(x => x.Id == (int) idImmagine);
+            bytesImages.RemoveAll(x => x.Id == (int)idImmagine);
             cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 

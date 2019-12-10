@@ -9,6 +9,8 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -19,18 +21,62 @@ namespace AppAppartamenti.ViewModels
         Preferiti = 2
     }
 
-    public class AnnunciViewModel : BaseViewModel
+    public class AnnunciViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public Command LoadMore { get; set; }
         private TipiRicerca TipoRicerca { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private int currentPage = 1;
+        private int pageSize = 5;
 
         public AnnunciViewModel(TipiRicerca tipoRicerca)
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             TipoRicerca = tipoRicerca;
+
+
+            OnpropertyChanged("Items");
+            this.LoadMore = new Command(async () => {
+                //var newNews = repo.getNews(1);
+                ICollection<AnnunciDtoOutput> news = null;
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+
+
+                if (TipoRicerca == TipiRicerca.MieiAnnunci)
+                {
+                    news = await annunciClient.GetAnnunciByUserAsync(currentPage, pageSize); //quando ricarico prendo la prima pagina
+                }
+                else if (TipoRicerca == TipiRicerca.Tutti)
+                {
+                    news = await annunciClient.GetAnnunciAsync(currentPage, pageSize, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                    //quando ricarico prendo la prima pagina
+                }
+
+                currentPage += 1;
+
+                if(news != null) { 
+                    foreach (var item in news)
+                    {
+                        Items.Add(item);
+                        OnpropertyChanged("Items");
+                    }
+                }
+            });
+
         }
+
+        void OnpropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
 
         async Task ExecuteLoadItemsCommand()
         {
@@ -41,6 +87,7 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
+                currentPage = 1;
                 Items.Clear();
 
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
@@ -49,11 +96,12 @@ namespace AppAppartamenti.ViewModels
 
                 if (TipoRicerca == TipiRicerca.MieiAnnunci)
                 {
-                     listaAnnunci = await annunciClient.GetAnnunciByUserAsync();
+                    listaAnnunci = await annunciClient.GetAnnunciByUserAsync(currentPage,pageSize); //quando ricarico prendo la prima pagina
                 }
                 else if(TipoRicerca == TipiRicerca.Tutti)
                 {
-                    listaAnnunci = await annunciClient.GetAnnunciAsync();
+                    listaAnnunci = await annunciClient.GetAnnunciAsync(currentPage, pageSize, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null, null);
+                    //quando ricarico prendo la prima pagina
                 }
                 //else if (TipoRicerca == TipiRicerca.Preferiti)
                 //{

@@ -17,12 +17,20 @@ $(document).ready(function () {
 
     //Login con Facebook
     $("#btnFacebookLogin").click(function (e) {
-        FacebookLogin();
+        FacebookLogin(this);
     });
 
     //Login con Google
     $("#btnGoogleLogin").click(function (e) {
-        GoogleLogin();
+        GoogleLogin(this);
+    });
+
+    $("#btn-login").click(function (e) {
+        if ($("#form-login").valid()) {
+            Login($(this).data("url"));
+        } else {
+            $("#form-login").addClass('was-validated');
+        }
     });
 
     $(".dropdown-agenda").click(function (e) {
@@ -33,7 +41,8 @@ $(document).ready(function () {
 
 
 //Gestisce l'autenticazione con facebook
-function FacebookLogin(){
+function FacebookLogin(button) {
+    $(button).children(".spinner").removeClass("d-none");
     $.ajax({
         type: "POST",
         url: "/Login/GetFacebookExternalLogin",
@@ -42,13 +51,16 @@ function FacebookLogin(){
             window.location.href = result;
         },
         error: function (xhr, status, error) {
+            $(button).children(".spinner").addClass("d-none");
             TrapError("Error during FacebookLogin");
         }
     });
 }
 
 //Gestisce l'autenticazione con google
-function GoogleLogin(){
+function GoogleLogin(button) {
+    $(button).children(".spinner").removeClass("d-none");
+
     $.ajax({
         type: "POST",
         url: "/Login/GetGoogleExternalLogin",
@@ -57,7 +69,8 @@ function GoogleLogin(){
             window.location.href = result;
         },
         error: function (xhr, status, error) {
-           TrapError("Error during GoogleLogin");
+            $(button).children(".spinner").addClass("d-none");
+            TrapError("Error during GoogleLogin");
         }
     });
 }
@@ -155,7 +168,27 @@ function NavigateToDetail(Url) {
     window.location.href = Url;
 }
 
+function Login(url) {
+    $("#spinner-login").removeClass("d-none");
+    $("#btn-login").attr("disabled","disabled");
 
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { Email: $("#email").val(), Password: $("#password").val()},
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            location.reload();
+        },
+        error: function (xhr, status, error) {
+            $("#spinner-login").addClass("d-none");
+            $("#btn-login").removeAttr("disabled");
+            $("#login-error").removeClass("d-none");
+            Console.log("Error in Login function: " + error)
+        }
+    });
+}
 
 //Aggiunge l'annuncio ai preferiti
 function AddPreferred(btn, url, id) {

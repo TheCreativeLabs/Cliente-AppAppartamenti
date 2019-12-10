@@ -8,7 +8,7 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneImmagini"
+             mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePlanimetria"
              NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="False">
 
@@ -23,7 +23,7 @@
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezioneImmagini.NuovoAnnuncio}"></Label>
+            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezionePlanimetria.NuovoAnnuncio}"></Label>
             <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
                 <Label Style="{x:StaticResource CancelButton}"></Label>
 
@@ -46,27 +46,27 @@
             <StackLayout Padding="20">
 
                 <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
-                <Label Text="{translator:Translate SelezioneImmagini.Immagini}" HorizontalTextAlignment="Center" ></Label>
-                     <ProgressBar Progress="0.7"/>
+                <Label Text="{translator:Translate SelezionePlanimetria.Planimetria}" HorizontalTextAlignment="Center" ></Label>
+                     <ProgressBar Progress="0.8"/>
                 </StackLayout>
 
-            <Button Clicked="ActionImmagini" Text="{translator:Translate SelezioneImmagini.AggiungiImmagini}"></Button>
+            <Button Clicked="ActionImmagini" Text="{translator:Translate SelezionePlanimetria.AddImage}"></Button>
 
 
                     <StackLayout HeightRequest="300" Margin="-20,0,-20,0">
                             <CarouselView x:Name="cvImmagini" IsVisible="true">
                                 <CarouselView.ItemTemplate>
                                     <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
                                 <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Image, Converter={StaticResource BytesToImage}}"/>
-                                <Button Grid.Row="0"  Text="&#xf2ed;" TextColor="Red" FontFamily="{x:StaticResource FA-Solid}" BackgroundColor="Transparent"
-                                            FontSize="Large" Margin="5" HorizontalOptions="EndAndExpand" Clicked="BtnDelete_Clicked" CommandParameter="{Binding Id}" >
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
+                                            <Button Grid.Row="0"  Text="&#xf2ed;" TextColor="Red" FontFamily="{x:StaticResource FA-Solid}" BackgroundColor="Transparent"
+                                                        FontSize="Large" Margin="5" HorizontalOptions="EndAndExpand" Clicked="BtnDelete_Clicked" CommandParameter="{Binding Id}" >
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
                                 </CarouselView.ItemTemplate>
                             </CarouselView>
                     </StackLayout>
@@ -83,7 +83,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>-->
 
-            <Button x:Name="btnImmaginiProcedi" VerticalOptions="EndAndExpand" Text="{translator:Translate SelezioneImmagini.Avanti}" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
+            <Button x:Name="btnImmaginiProcedi" VerticalOptions="EndAndExpand" Text="{translator:Translate SelezionePlanimetria.Continue}" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
             </StackLayout>
     </ContentPage.Content>
 </ContentPage>
