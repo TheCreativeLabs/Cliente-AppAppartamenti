@@ -3,23 +3,49 @@
     Layout = null;
 }
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Facebool Login</title>
+    <link rel="stylesheet" href="~/bundle/bundle.min.css" />
+</head>
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-            asp-fallback-test="window.jQuery"
-            crossorigin="anonymous"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-            crossorigin="anonymous"
-            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-    </script>
-</environment>
-<script src="~/js/facebook-login.js" asp-append-version="true"></script>
+<body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="90">
+        <div class="container-fluid">
+            <div class="row" style="margin-top:20%">
+<div class="col-12">
+                <div class="d-flex justify-content-center mt-5">
+                  <div class="spinner-border text-primary bg-info" role="status" style="width: 4rem; height: 4rem;">
+                    <span class="sr-only">Loading...</span>
+                  </div><br>
+
+
+<h6 class="ml-2 mt-4">Caricamento in corso...</h6>
+                </div>
+            </div></div>
+        </div>
+
+
+            <environment include="Development">
+                <script src="~/lib/jquery/dist/jquery.js"></script>
+                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+            </environment>
+            <environment exclude="Development">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                        asp-fallback-test="window.jQuery"
+                        crossorigin="anonymous"
+                        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+                </script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                        asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                        asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                        crossorigin="anonymous"
+                        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+                </script>
+            </environment>
+            <script src="~/js/facebook-login.js" asp-append-version="true"></script>
+    </body>
+</html>

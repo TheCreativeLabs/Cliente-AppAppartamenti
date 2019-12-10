@@ -62,6 +62,11 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AccountClient accountClient = new AccountClient(httpClient);
             UserInfoViewModel userInfoViewModel = await accountClient.GetUserInfoAsync();
 
+            if(userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.LoginProvider != "Facebook")
+            {
+                throw new Exception("La email è associata ad un altro account");
+            }
+
             if (userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
             {
                 RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
@@ -116,6 +121,11 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AccountClient accountClient = new AccountClient(httpClient);
             UserInfoViewModel userInfoViewModel = await accountClient.GetUserInfoAsync();
 
+            if (userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.LoginProvider != "Google")
+            {
+                throw new Exception("La email è associata ad un altro account");
+            }
+
             if (userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
             {
                 RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
@@ -144,7 +154,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AccediAsync(string Email, string Password)
+        public async Task<string> LoginAsync(string Email, string Password)
         {
             BearerToken bearerToken = await ApiHelper.SetTokenAsync(_configuration.GetValue<string>("MySetting:ApiEndpoint"), Email, Password);
 
@@ -152,29 +162,42 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             {
 
                 var claims = new List<Claim>
-                {
-                    new Claim("user", Email),
-                    new Claim("token", bearerToken.AccessToken)
-                };
+            {
+                new Claim("user", Email),
+                new Claim("token", bearerToken.AccessToken)
+            };
 
                 await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
             }
 
-            return Redirect("/");
+            return JsonConvert.SerializeObject("OK");
+        }
+
+        [HttpPost]
+        public async Task<string> RestorePasswordAsync(string Email)
+        {
+            //creo il client e setto il Baerer Token
+            HttpClient httpClient = new HttpClient();
+
+            //Ottengo le info sull'utente connesso per verificare se è già registrato
+            AccountClient accountClient = new AccountClient(httpClient);
+            await accountClient.RestorePasswordAsync(Email);
+
+            return JsonConvert.SerializeObject("OK");
         }
 
         [HttpPost]
         public async Task<IActionResult> SignUpAsync(RegisterUserBindingModel Model)
         {
-
+            Model.BirthName = Model.Name;
+            ModelState.Clear();
+            TryValidateModel(Model);
             if (!ModelState.IsValid)
             {
                 return Redirect("/");
             }
 
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
-
-            Model.BirthName = Model.Name;
 
             await accountClient.RegisterAsync(Model);
 
@@ -185,6 +208,12 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         {
             HttpContext.Session.Clear();
 
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            AccountClient accountClient = new AccountClient(httpClient);
+            await accountClient.LogoutAsync();
             await HttpContext.SignOutAsync();
 
             return Redirect("/");
