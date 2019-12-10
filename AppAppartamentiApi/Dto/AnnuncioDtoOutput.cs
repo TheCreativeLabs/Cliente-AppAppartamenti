@@ -57,8 +57,9 @@ namespace AppAppartamentiApi.Dto
                 Cantina = annuncio.Cantina,
                 SpesaMensileCondominio = annuncio.SpesaMensileCondominio,
                 Condizionatori = annuncio.Condizionatori,
-                FlagPreferito = preferito
-        };
+                FlagPreferito = preferito,
+                CoordinateGeografiche = annuncio.CoordinateGeografiche
+    };
 
             if (annuncio.TipologiaAnnuncio != null)
             {
@@ -179,5 +180,7 @@ namespace AppAppartamentiApi.Dto
         public List<byte[]> ImmaginiPlanimetria { get; set; }
 
         public bool FlagPreferito { get; set; }
+
+        public string CoordinateGeografiche { get; set; }
     }
 }

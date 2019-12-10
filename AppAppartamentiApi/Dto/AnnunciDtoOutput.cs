@@ -10,8 +10,8 @@ namespace AppAppartamentiApi.Dto
     public class AnnunciDtoOutput
     {
 
-        public AnnunciDtoOutput(){
-
+        public AnnunciDtoOutput() {
+            FlagPreferito = false;
         }
 
         public static AnnunciDtoOutput MapperAnnuncio(Annuncio annuncio)
@@ -22,7 +22,7 @@ namespace AppAppartamentiApi.Dto
                 DataCreazione = annuncio.DataCreazione,
                 DataModifica = annuncio.DataModifica,
                 CodiceComune = annuncio.ComuneCodice,
-                NomeComune  =annuncio.Comuni.NomeComune,
+                NomeComune = annuncio.Comuni.NomeComune,
                 Indirizzo = annuncio.Indirizzo,
                 Prezzo = annuncio.Prezzo,
                 Superficie = annuncio.Superficie,
@@ -65,5 +65,7 @@ namespace AppAppartamentiApi.Dto
         public bool Cancellato { get; set; }
 
         public byte[] ImmaginePrincipale { get; set; }
+
+        public bool FlagPreferito { get; set;}
     }
 }
