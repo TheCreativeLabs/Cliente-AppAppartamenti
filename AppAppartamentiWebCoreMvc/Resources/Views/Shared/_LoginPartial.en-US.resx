@@ -79,4 +79,12 @@
       <data name="SignUp" xml:space="preserve">
     <value>Sign up</value>
     </data>
+       <data name="Or" xml:space="preserve">
+    <value>Or</value>
+    </data>
+        <data name="Error" xml:space="preserve">
+    <value>The password you entered is incorrect. Please try again or choose another login option.</value>
+    </data>
+
+    
 </root>

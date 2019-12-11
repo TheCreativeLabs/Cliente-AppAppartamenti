@@ -1,10 +1,14 @@
-﻿@model FilterModalViewModel
+﻿
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@model FilterModalViewModel
+@inject IViewLocalizer _localizer
 
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content ">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Filtri</h5>
+                <h5 class="modal-title" id="exampleModalLabel">@_localizer["Title"]</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +17,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 mb-4">
-                            <h6>Tipologia annuncio</h6>
+                            <label class="h6">@_localizer["AdType"]</label>
 
                             @{
                                 IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
@@ -27,7 +31,7 @@
                         </div>
 
                         <div class="col-12 mb-4">
-                            <h6 >Tipologia proprieta</h6>
+                            <label class="h6">@_localizer["PropertyType"]</label>
 
                             @{ 
 
@@ -42,21 +46,23 @@
                         </div>
 
                         <div class="col-12 mb-4">
-                            <h6 class="mb-5">Prezzo</h6>
+                            <label class="h6 mb-5">@_localizer["Price"]</label>
+
                             <div id="sliderPrezzo" data-min="@Model?.PrezzoMin" data-max="@Model?.PrezzoMax"></div>
                             <p class="float-left text-muted small">50.000€</p>
                             <p class="float-right text-muted small">500.000€</p>
                         </div>
 
                         <div class="col-12 mb-4">
-                            <h6 class="mb-5" >Dimensione</h6>
+                            <label class="h6 mb-5">@_localizer["Surface"]</label>
+
                             <div id="sliderDimensione" data-min="@Model?.DimensioneMin" data-max="@Model?.DimensioneMax"></div>
                             <p class="float-left text-muted small">50m²</p>
                             <p class="float-right text-muted small">500m²</p>
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                            <h6 class="mb-3">Bagni</h6>
+                            <label class="h6">@_localizer["BathroomNumber"]</label>
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
@@ -73,7 +79,8 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                            <h6 class="mb-3">Camere da letto</h6>
+                           <label class="h6">@_localizer["BedroomNumber"]</label>
+                            
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCamereLetto">
@@ -90,7 +97,8 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                            <h6 class="mb-3">Altre stanze</h6>
+                            <label class="h6">@_localizer["OtherRoomNumber"]</label>
+
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
@@ -107,7 +115,8 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                            <h6 class="mb-3">Cucine</h6>
+                            <label class="h6">@_localizer["KitchensNumber"]</label>
+
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
@@ -124,7 +133,8 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                            <h6 class="mb-3">Garage</h6>
+                            <label class="h6">@_localizer["GarageNumber"]</label>
+
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
@@ -141,7 +151,8 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                            <h6 class="mb-3">Posti auto</h6>
+                            <label class="h6">@_localizer["CarSeatsNumber"]</label>
+
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroPostiAuto">
@@ -160,35 +171,35 @@
                         <div class="col-12  mb-4">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitchAscensore" checked="@Model?.Ascensore">
-                                <label class="custom-control-label" for="customSwitchAscensore">Ascensore</label>
+                                <label class="custom-control-label" for="customSwitchAscensore">@_localizer["Lift"]</label>
                             </div>
                         </div>
 
                         <div class="col-12 mb-4">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitchPiscina" checked="@Model?.Piscina">
-                                <label class="custom-control-label" for="customSwitchPiscina">Piscina</label>
+                                <label class="custom-control-label" for="customSwitchPiscina">@_localizer["Pool"]</label>
                             </div>
                         </div>
 
                         <div class="col-12 mb-4">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitchCantina" checked="@Model?.Cantina">
-                                <label class="custom-control-label" for="customSwitchCantina">Cantina</label>
+                                <label class="custom-control-label" for="customSwitchCantina">@_localizer["Cellar"]</label>
                             </div>
                         </div>
 
                         <div class="col-12 mb-4">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitchGiardino" checked="@Model?.Giardino">
-                                <label class="custom-control-label" for="customSwitchGiardino">Giardino</label>
+                                <label class="custom-control-label" for="customSwitchGiardino">@_localizer["Gardens"]</label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btnSaveFilter" type="button" class="btn btn-primary">Salva filtri</button>
+                <button id="btnSaveFilter" type="button" class="btn btn-primary">@_localizer["SaveFilter"]</button>
             </div>
         </div>
     </div>

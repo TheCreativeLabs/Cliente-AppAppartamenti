@@ -88,6 +88,10 @@
       <data name="IsLogin" xml:space="preserve">
     <value>Are you already registered?</value>
     </data>
-    
-  
+      <data name="PasswordMatch" xml:space="preserve">
+    <value>Passwords do not match</value>
+    </data>
+      <data name="Or" xml:space="preserve">
+    <value>Or</value>
+    </data>
 </root>

@@ -2,6 +2,21 @@
 var listaComuni = [];
 
 $(document).ready(function () {
+    $.urlParam = function (name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+            .exec(window.location.href.replace("#", "?"));
+        if (results == null) {
+            return 0;
+        }
+        return results[1] || 0;
+    }
+
+    var providerError = $.urlParam('provider_error');
+
+    if (providerError == 1) {
+        $("#modal-provider-error").modal("show");
+    }
+
     //Se l'utente è loggato carico le informazioni
     if (loggedUser != null && loggedUser.length > 0) {
         GetUserInfo();
@@ -25,11 +40,10 @@ $(document).ready(function () {
         GoogleLogin(this);
     });
 
-    $("#btn-login").click(function (e) {
+    $("#btn-login").click(function (evt) {
+        evt.preventDefault();
         if ($("#form-login").valid()) {
             Login($(this).data("url"));
-        } else {
-            $("#form-login").addClass('was-validated');
         }
     });
 
@@ -43,6 +57,8 @@ $(document).ready(function () {
 //Gestisce l'autenticazione con facebook
 function FacebookLogin(button) {
     $(button).children(".spinner").removeClass("d-none");
+    $(button).attr("disabled", "disabled");
+
     $.ajax({
         type: "POST",
         url: "/Login/GetFacebookExternalLogin",
@@ -52,6 +68,7 @@ function FacebookLogin(button) {
         },
         error: function (xhr, status, error) {
             $(button).children(".spinner").addClass("d-none");
+            $(button).removeAttr("disabled");
             TrapError("Error during FacebookLogin");
         }
     });
@@ -60,6 +77,7 @@ function FacebookLogin(button) {
 //Gestisce l'autenticazione con google
 function GoogleLogin(button) {
     $(button).children(".spinner").removeClass("d-none");
+    $(button).attr("disabled", "disabled");
 
     $.ajax({
         type: "POST",
@@ -70,6 +88,7 @@ function GoogleLogin(button) {
         },
         error: function (xhr, status, error) {
             $(button).children(".spinner").addClass("d-none");
+            $(button).removeAttr("disabled");
             TrapError("Error during GoogleLogin");
         }
     });
@@ -185,23 +204,25 @@ function Login(url) {
             $("#spinner-login").addClass("d-none");
             $("#btn-login").removeAttr("disabled");
             $("#login-error").removeClass("d-none");
-            Console.log("Error in Login function: " + error)
+            console.log("Error in Login function: " + error)
         }
     });
 }
 
 //Aggiunge l'annuncio ai preferiti
-function AddPreferred(btn, url, id) {
+function AddPreferred(btn, id) {
     event.stopPropagation();
-    alert(id);
-    alert(url);
+
+    $(btn).addClass("text-primary");
+    $(btn).attr("data-preferred", "True");
+
     $.ajax({
         type: "POST",
-        url: url,
+        url: '/AnnunciPreferiti/Add',
         data: { Id: id },
         dataType: "json",
         success: function (result, status, xhr) {
-            $(btn).addClass("text-primary");
+            
         },
         error: function (xhr, status, error) {
             TrapError("Error during AddPreferred");
@@ -209,23 +230,40 @@ function AddPreferred(btn, url, id) {
     });
 }
 
-//Rimuove l'annuncio ai preferiti
-function RemovePreferred(btn, url, id) {
+function AddOrRemovePreferred(btn, id) {
     event.stopPropagation();
+
+    if ($(btn).data("preferred") == "True") {
+        RemovePreferred(btn, id);
+    } else {
+        AddPreferred(btn, id);
+    }
+}
+
+//Rimuove l'annuncio ai preferiti
+function RemovePreferred(btn, id) {
+    event.stopPropagation();
+
+    if (window.location.href.indexOf("/AnnunciPreferiti") > -1) {
+        $(btn).closest("div.card-annuncio").remove();
+    } else {
+        $(btn).removeClass("text-primary");
+        $(btn).attr("data-preferred", "False");
+    }
 
     $.ajax({
         type: "POST",
-        url: url,
+        url: '/AnnunciPreferiti/Remove',
         data: { Id: id },
         dataType: "json",
         success: function (result, status, xhr) {
-            $(btn).addClass("text-primary");
         },
         error: function (xhr, status, error) {
             TrapError("Error during ButtonPlusIncrement");
         }
     });
 }
+
 
 //Abilita il pulsante di ricerca dei comuni
 function EnableSearch(searchTextbox) {

@@ -1890,27 +1890,22 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio, string idEvento)
+        public System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio)
         {
-            return UpdateAnnuncioAsync(idAnnuncio, annuncio, idEvento, System.Threading.CancellationToken.None);
+            return UpdateAnnuncioAsync(idAnnuncio, annuncio, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio, string idEvento, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AnnuncioDtoOutput> UpdateAnnuncioAsync(System.Guid idAnnuncio, AnnuncioDtoInput annuncio, System.Threading.CancellationToken cancellationToken)
         {
-            if (idEvento == null)
-                throw new System.ArgumentNullException("idEvento");
-
             if (idAnnuncio == null)
                 throw new System.ArgumentNullException("idAnnuncio");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/AnnuncioUpdate/{IdEvento}?");
-            urlBuilder_.Replace("{IdEvento}", System.Uri.EscapeDataString(ConvertToString(idEvento, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Append(System.Uri.EscapeDataString("IdAnnuncio") + "=").Append(System.Uri.EscapeDataString(ConvertToString(idAnnuncio, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/AnnuncioUpdate/{IdAnnuncio}");
+            urlBuilder_.Replace("{IdAnnuncio}", System.Uri.EscapeDataString(ConvertToString(idAnnuncio, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
@@ -2864,6 +2859,9 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("ImmaginePrincipale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] ImmaginePrincipale { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("FlagPreferito", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? FlagPreferito { get; set; }
+
 
     }
 
@@ -2983,6 +2981,9 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("FlagPreferito", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FlagPreferito { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("CoordinateGeografiche", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CoordinateGeografiche { get; set; }
+
 
     }
 
@@ -3089,6 +3090,10 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("Video", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] Video { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("CoordinateGeografiche", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string CoordinateGeografiche { get; set; }
 
 
     }

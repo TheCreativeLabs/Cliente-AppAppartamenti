@@ -58,7 +58,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return PartialView("_AnnunciPartial", annunci);
         }
 
-        public async Task<IActionResult> DetailAsync(Guid Id)
+        public async Task<IActionResult> DetailAsync(Guid Id, bool Preferiti)
         {
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
@@ -73,7 +73,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AccountClient accountClient = new AccountClient(httpClient);
             UserInfoDto userInfo = await accountClient.GetUserInfoAsync(annuncio.IdUtente.Value);
             ViewData["UserInfo"] = userInfo;
-
+            ViewData["Preferiti"] = Preferiti;
             return View(annuncio);
         }
 

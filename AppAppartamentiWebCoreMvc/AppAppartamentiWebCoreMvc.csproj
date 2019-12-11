@@ -64,10 +64,10 @@
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Shared\" />
-    <Folder Include="Resources\AppAppartamentiApiClient\" />
     <Folder Include="Resources\Views\AnnunciPersonali\" />
     <Folder Include="wwwroot\lib\fullcalendar\moment\" />
     <Folder Include="Views\Agenda\" />
+    <Folder Include="Resources\Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />

@@ -2,44 +2,61 @@
 @inject IViewLocalizer _localizer
 
 <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="display: none;">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
-          <div class="modal-body">
-              <div class="row">
-                  <div class="col-6">
-                      <h4>@_localizer["Title"]</h4>
-                  </div>
-                  <div class="col-6">
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4>@_localizer["Title"]</h4>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
                         </button>
-                  </div>
-              </div>
-              <div id="login-error" class="row d-none">
-                  <div class="col-12">
-                      <h6 class="text-danger"><strong>La password o la email inserita non è corretta.</strong></h6>
                     </div>
                 </div>
-              <form id="form-login" class="needs-validation mt-2" novalidate>
-              <div class="row">
-                  <div class="col-12">
-                    <input id="email" name="email" class="form-control col-12 mb-2" type="email" placeholder="Email" required>
-                    <input id="password" name="password" class="form-control col-12 mb-2" type="password" placeholder="Password" required>
+                <div id="login-error" class="row d-none">
+                    <div class="col-12">
+                        <p class="text-danger bg-light rounded p-2">
+                            @_localizer["Error"]
+                        </p>
+                    </div>
+                </div>
+                <form id="form-login" class="mt-4">
+                    <div class="form-row mb-3">
+                        <div class="col-12">
+                            <input id="email" name="email" class="form-control"  data-val-required="Required" type="email" data-val="true" placeholder="Email" required>
+                            <span class="field-validation-valid text-danger"data-valmsg-for="email" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Password" data-val-required="Required" data-val="true" required>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-light bg-light border btn-show-password">
+                                        <i class="far fa-eye"></i>
+                                        <i class="far fa-eye-slash d-none"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="password" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
 
-                    <button id="btn-login" type="button" data-url="@Url.Action("Login", "Login")" class="btn btn-primary mb-2 btn-block">
+                    <button id="btn-login" type="submit" data-url="@Url.Action("Login", "Login")" class="btn btn-primary mb-2 btn-block">
                         <span id="spinner-login" class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                         @_localizer["Title"]
+                        @_localizer["Title"]
                     </button>
 
-                    <div>
-                        <a id="btn-restore-modal" class="text-muted" href="#"><small>@_localizer["ForgotPassword"]</small></a>
-                        <hr>
-                    </div>
+                    <a id="btn-restore-modal" class="text-muted" href="#"><small>@_localizer["ForgotPassword"]</small></a>
+
+                    <div class="separator mt-4 mb-4">@_localizer["Or"]</div>
 
                     <button id="btnFacebookLogin" type="button" class="btn btn-block fb">
                         <span class="spinner d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         <i class="fab fa-facebook-f"></i>&nbsp;@_localizer["SignInFacebook"]
-                      </button>
+                    </button>
                     <button id="btnGoogleLogin" type="button" class="btn btn-block google">
                         <span id="spinner-login" class="spinner d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         <i class="fab fa-google"></i>&nbsp;@_localizer["SignInGoogle"]
@@ -50,32 +67,8 @@
                         <a id="btnSignUp" class="text-muted btn btn-block btn-link btn-sm"
                            href="#">@_localizer["NotRegistered"] <strong class="text-primary">@_localizer["SignUp"]</strong></a>
                     </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        </form>
+    </div>
+</div>
       </div>
     </div>
-
-
-<script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-          'use strict';
-          window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-              form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-              }, false);
-            });
-          }, false);
-        })();
-</script>

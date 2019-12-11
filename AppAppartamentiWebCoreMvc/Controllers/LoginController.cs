@@ -62,8 +62,10 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AccountClient accountClient = new AccountClient(httpClient);
             UserInfoViewModel userInfoViewModel = await accountClient.GetUserInfoAsync();
 
-            if(userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.LoginProvider != "Facebook")
+            if(userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider != "Facebook")
             {
+                await accountClient.LogoutAsync();
+
                 throw new Exception("La email è associata ad un altro account");
             }
 
@@ -123,6 +125,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             if (userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.LoginProvider != "Google")
             {
+                await accountClient.LogoutAsync();
                 throw new Exception("La email è associata ad un altro account");
             }
 
