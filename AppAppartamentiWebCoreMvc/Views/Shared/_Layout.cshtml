@@ -67,9 +67,14 @@
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark p-1 m-1" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link text-dark p-1 m-1 d-none d-sm-block" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Agenda
                                 </a>
+
+                                <a class="nav-link text-dark d-block d-sm-none" asp-controller="Agenda" asp-action="Detail">
+                                    Agenda
+                                </a>
+
                                 <div class="dropdown-menu dropdown-agenda dropdown-menu-right border-0 bg-white shadow" aria-labelledby="agenda-menu-link" style="width:700px;height:430px;">
                                     <div class="p-3">
                                         <div class="container-flui">
