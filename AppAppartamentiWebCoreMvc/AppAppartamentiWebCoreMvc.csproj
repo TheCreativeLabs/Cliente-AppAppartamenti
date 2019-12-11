@@ -31,18 +31,11 @@
     <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
     <Content Remove="Views\AnnunciPreferiti\Detail.cshtml" />
     <Content Remove="Views\AnnunciPersonali\Detail.cshtml" />
-    <Content Remove="wwwroot\lib\fullcalendar\core\locales\en-nz.js" />
     <Content Remove="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
     <Content Remove="wwwroot\lib\fullcalendar\moment\main.d.ts" />
-    <Content Remove="wwwroot\lib\fullcalendar\moment\main.esm.js" />
-    <Content Remove="wwwroot\bundle\bundle.min.js" />
     <Content Remove="Views\Account\Account\Edit.cshtml" />
     <Content Remove="Views\Agenda\Edit.cshtml" />
-    <Content Remove="wwwroot\js\annunci-create.min.js" />
-    <Content Remove="wwwroot\js\annunci-details.min.js" />
-    <Content Remove="wwwroot\js\annunci-list.min.js" />
-    <Content Remove="wwwroot\bundle\bundle.min.js" />
-    <Content Remove="wwwroot\js\annunci-details.min.js" />
+    <Content Remove="wwwroot\lib\fullcalendar\core\main.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -55,17 +48,12 @@
     <Folder Include="Utility\" />
     <Folder Include="Utility\Extensions\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="wwwroot\bundle\" />
-    <Folder Include="wwwroot\lib\multirange\" />
-    <Folder Include="wwwroot\lib\nouislider\" />
-    <Folder Include="wwwroot\lib\wNumb\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Views\" />
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Shared\" />
     <Folder Include="Resources\Views\AnnunciPersonali\" />
-    <Folder Include="wwwroot\lib\fullcalendar\moment\" />
     <Folder Include="Views\Agenda\" />
     <Folder Include="Resources\Views\Account\" />
   </ItemGroup>
@@ -74,34 +62,16 @@
     <None Remove="wwwroot\js\annunci-create.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Update="wwwroot\js\annunci-create.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\annunci-details.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\js\facebook-login %28copy%29.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\annunci-create %28copy%29.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\js\filter-modal.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\account-edit.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\js\filter-modal %28copy%29.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\js\share-modal.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\js\account-edit %28copy%29.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\virtual-agent-sell.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -113,5 +83,10 @@
   <ItemGroup>
     <EmbeddedResource Remove="Resources\Views\Home\Home\Index.en-US.resx" />
     <EmbeddedResource Remove="Resources\AppAppartamentiApiClient\AppAppartamentiApiClient\RegisterUserBindingModel.en-US.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\lib\fullcalendar\core\main.d.ts" />
+    <TypeScriptCompile Include="wwwroot\lib\fullcalendar\moment\main.d.ts" />
+    <TypeScriptCompile Include="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
   </ItemGroup>
 </Project>
