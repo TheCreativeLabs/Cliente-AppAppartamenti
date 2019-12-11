@@ -2,6 +2,21 @@
 var listaComuni = [];
 
 $(document).ready(function () {
+    $.urlParam = function (name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+            .exec(window.location.href.replace("#", "?"));
+        if (results == null) {
+            return 0;
+        }
+        return results[1] || 0;
+    }
+
+    var providerError = $.urlParam('provider_error');
+
+    if (providerError == 1) {
+        $("#modal-provider-error").modal("show");
+    }
+
     //Se l'utente è loggato carico le informazioni
     if (loggedUser != null && loggedUser.length > 0) {
         GetUserInfo();
@@ -25,11 +40,10 @@ $(document).ready(function () {
         GoogleLogin(this);
     });
 
-    $("#btn-login").click(function (e) {
+    $("#btn-login").click(function (evt) {
+        evt.preventDefault();
         if ($("#form-login").valid()) {
             Login($(this).data("url"));
-        } else {
-            $("#form-login").addClass('was-validated');
         }
     });
 
@@ -43,6 +57,8 @@ $(document).ready(function () {
 //Gestisce l'autenticazione con facebook
 function FacebookLogin(button) {
     $(button).children(".spinner").removeClass("d-none");
+    $(button).attr("disabled", "disabled");
+
     $.ajax({
         type: "POST",
         url: "/Login/GetFacebookExternalLogin",
@@ -52,6 +68,7 @@ function FacebookLogin(button) {
         },
         error: function (xhr, status, error) {
             $(button).children(".spinner").addClass("d-none");
+            $(button).removeAttr("disabled");
             TrapError("Error during FacebookLogin");
         }
     });
@@ -60,6 +77,7 @@ function FacebookLogin(button) {
 //Gestisce l'autenticazione con google
 function GoogleLogin(button) {
     $(button).children(".spinner").removeClass("d-none");
+    $(button).attr("disabled", "disabled");
 
     $.ajax({
         type: "POST",
@@ -70,6 +88,7 @@ function GoogleLogin(button) {
         },
         error: function (xhr, status, error) {
             $(button).children(".spinner").addClass("d-none");
+            $(button).removeAttr("disabled");
             TrapError("Error during GoogleLogin");
         }
     });
@@ -185,7 +204,7 @@ function Login(url) {
             $("#spinner-login").addClass("d-none");
             $("#btn-login").removeAttr("disabled");
             $("#login-error").removeClass("d-none");
-            Console.log("Error in Login function: " + error)
+            console.log("Error in Login function: " + error)
         }
     });
 }

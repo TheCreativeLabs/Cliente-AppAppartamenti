@@ -38,18 +38,32 @@
         if ($(this).is(":checked")) {
             $("#btn-signin").removeAttr("disabled");
         } else {
-            $("#btn-signin").attr("disabled","disabled");
+            $("#btn-signin").attr("disabled", "disabled");
 
         }
     });
 
     $("#ConfirmPassword").blur(function () {
-        if ($(this).val() != $("#Password").val()) {
+        if ($(this).val() == "" || $(this).val() != $("#Password").val()) {
             $("#confirm-password-error").removeClass("d-none");
             $(this).addClass("input-validation-error");
         } else {
             $("#confirm-password-error").addClass("d-none");
             $(this).removeClass("input-validation-error");
+        }
+    });
+
+    $(".btn-show-password").click(function () {
+        let passwordInput = $(this).parent().parent().children("input");
+
+        if ($(passwordInput).attr("type") == "text") {
+            $($(this).children()[0]).removeClass("d-none");
+            $($(this).children()[1]).addClass("d-none");
+            $(passwordInput).attr("type", "password");
+        } else {
+            $($(this).children()[0]).addClass("d-none");
+            $($(this).children()[1]).removeClass("d-none");
+            $(passwordInput).attr("type", "text");
         }
     });
 });
@@ -70,7 +84,7 @@ function RestorePassword(url) {
         error: function (xhr, status, error) {
             $("#spinner-restore").addClass("d-none");
             $("#btn-restore").removeAttr("disabled");
-            Console.log("Error in RestorePassword function: " + error)
+            console.log("Error in RestorePassword function: " + error)
         }
     });
 }

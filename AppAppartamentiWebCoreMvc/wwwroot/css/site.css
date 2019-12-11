@@ -201,7 +201,7 @@ html {
 }
 
 @font-face {
-  font-family: myFirstFont;
+  font-family: Regular;
   src: url(../webfonts/Roboto-Regular.ttf);
 }
 
@@ -210,9 +210,23 @@ html {
   src: url(../webfonts/Roboto-Light.ttf);
 }
 
+@font-face {
+  font-family: Medium;
+  src: url(../webfonts/Roboto-Medium.ttf);
+}
+
+@font-face {
+  font-family: Bold;
+  src: url(../webfonts/Roboto-Bold.ttf);
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family:"Bold" !important;
+    color: var(--dark);
+}
 
 body{
-    font-family:"myFirstFont"
+    font-family:"Regular"
 }
 
 p{
@@ -507,4 +521,50 @@ img{
 
 .error{
     color:var(--red) !important;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color:gray;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid lightgray;
+}
+
+.separator::before {
+    margin-right: .25em;
+}
+
+.separator::after {
+    margin-left: .25em;
+}
+
+.field-validation-error{
+    font-size:80%;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color:  var(--color-primary);
+  box-shadow: unset; /* 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6)*/
+  outline: 0 none;
 }
