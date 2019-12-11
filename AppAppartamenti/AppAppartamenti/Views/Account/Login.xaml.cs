@@ -101,7 +101,8 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
-                await Navigation.PushAsync(new NavigationPage(new Account.FacebookLogin()));
+                await Navigation.PushAsync(new Account.FacebookLogin());
+                //Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value, true))
             }
             catch (Exception ex)
             {

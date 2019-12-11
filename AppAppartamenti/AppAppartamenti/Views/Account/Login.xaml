@@ -86,7 +86,7 @@
 
             </StackLayout>
 
-            <Image Source="test.jpg" Margin="-20" VerticalOptions="EndAndExpand" ></Image>
+            <Image Source="test.jpg" Margin="-20" VerticalOptions="EndAndExpand" HeightRequest="100"></Image>
 
         </StackLayout>
     </ContentPage.Content>

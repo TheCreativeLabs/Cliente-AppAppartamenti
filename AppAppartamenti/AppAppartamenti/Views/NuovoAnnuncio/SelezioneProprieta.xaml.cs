@@ -39,7 +39,7 @@ namespace AppAppartamenti.Views
             if (viewModel.Items.Count == 0)
                 await viewModel.ExecuteLoadItemsCommand();
 
-            if (dtoToModify!=null)
+            if (rbList.SelectedItem == null && dtoToModify !=null && dtoToModify.Item != null)
             {
                 rbList.SelectedItem = viewModel.Items.Where(x => x == dtoToModify.Item.TipologiaProprieta).FirstOrDefault(); //FIXME CON TRADUZIONI, FUNZIONA SOLO IN ITALIANO
             }

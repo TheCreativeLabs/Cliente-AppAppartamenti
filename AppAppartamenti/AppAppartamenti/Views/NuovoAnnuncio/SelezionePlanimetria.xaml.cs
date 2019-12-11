@@ -40,7 +40,7 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.dtoToModify != null && this.dtoToModify.Immagini != null && this.dtoToModify.Immagini.Count != 0)
+            if ((bytesImages == null || bytesImages.Count == 0 ) && this.dtoToModify != null && this.dtoToModify.Immagini != null && this.dtoToModify.Immagini.Count != 0)
             {
                 foreach (var item in dtoToModify.ImmaginiPlanimetria)
                 {

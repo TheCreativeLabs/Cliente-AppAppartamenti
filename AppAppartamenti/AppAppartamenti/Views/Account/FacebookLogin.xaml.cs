@@ -66,8 +66,7 @@ namespace AppAppartamenti.Views.Account
                 //TODO: Controllare che la risposta del server sia OK
 
                 //Se l'utente non è registrato allora lo registro
-                //TODO: Controllare che userInfoViewModel sia valorizzato (.HasRegistered potrebbe andare in errore)
-                if (userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
+                if (userInfoViewModel != null && userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
                 {
                     RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
                     {
@@ -87,10 +86,19 @@ namespace AppAppartamenti.Views.Account
 
                     Content = webView;
                 }
-                else
+                else if (userInfoViewModel == null || userInfoViewModel.HasRegistered.HasValue == false) // ci sono stati degli errori
+                {
+                    //TODO mostrare pagina di errore
+                }
+                else if(userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "FACEBOOK") //utente già registrato con FB: accede
                 {
                     //Application.Current.MainPage = new NavigationPage( new MainPage());
                     Application.Current.MainPage = new MainPage();
+                }
+                else //l'utente è già registrato ma NON con facebook: è registrato con Google o con la mail, quindi non può accedere
+                {
+                    await DisplayAlert("Attenzione", "Esiste già un account registrato con la tua mail.", "OK");
+                    await Navigation.PopAsync();
                 }
             }
         }

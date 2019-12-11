@@ -32,7 +32,7 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (dtoToModify != null && dtoToModify.Item != null)
+            if (edtDescrizione.Text == null || dtoToModify != null && dtoToModify.Item != null)
             {
                 edtDescrizione.Text = dtoToModify.Item.Descrizione;
             }

@@ -91,6 +91,18 @@ namespace AppAppartamentiApi
                             {
                                 context.Identity.AddClaim(new Claim("dateofbirth", x.Value.ToString()));
                             }
+                            else if (x.Key == "name")
+                            {
+                                //DO NOTHING, skippo, perchè contiene sia nome che cognome e queste informazioni le recupero una alla volta da first_name e last_name
+                            }
+                            else if (x.Key == "first_name")
+                            {
+                                context.Identity.AddClaim(new Claim("name", x.Value.ToString()));
+                            }
+                            else if (x.Key == "last_name")
+                            {
+                                context.Identity.AddClaim(new Claim("family_name", x.Value.ToString()));
+                            }
                             else
                             {
                                 context.Identity.AddClaim(new Claim(x.Key, x.Value.ToString()));

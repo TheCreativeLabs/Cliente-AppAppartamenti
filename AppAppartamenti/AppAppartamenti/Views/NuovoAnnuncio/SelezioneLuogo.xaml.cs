@@ -32,14 +32,16 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
-            if (dtoToModify != null)
+            if ( dtoToModify != null)
             {
-                lvComuni.SelectedItem = new ComuneDto()
-                {
-                    NomeComune = dtoToModify.Item.NomeComune,
-                    CodiceComune = dtoToModify.Item.CodiceComune
-                };
-                if (!String.IsNullOrEmpty(dtoToModify.Item.Indirizzo))
+                if(lvComuni.SelectedItem == null) { 
+                    lvComuni.SelectedItem = new ComuneDto()
+                        {
+                            NomeComune = dtoToModify.Item.NomeComune,
+                            CodiceComune = dtoToModify.Item.CodiceComune
+                        };
+                }
+                if (entIndirizzo.Text == null && !String.IsNullOrEmpty(dtoToModify.Item.Indirizzo))
                 {
                     entIndirizzo.Text = dtoToModify.Item.Indirizzo;
                     await setMapLocation();

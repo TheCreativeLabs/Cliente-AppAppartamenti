@@ -14,8 +14,11 @@ namespace AppAppartamenti
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<MockDataStore>();            //DependencyService.Register<MockDataStore>();
             MainPage = new NavigationPage(new Login());
+            //var mainPage = new Login();
+            //var rootPage = new NavigationPage(mainPage);
+            //Navigation
         }
 
         protected override void OnStart()

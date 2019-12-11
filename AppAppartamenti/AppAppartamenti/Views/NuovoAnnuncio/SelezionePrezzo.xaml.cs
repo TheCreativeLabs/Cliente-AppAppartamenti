@@ -32,8 +32,14 @@ namespace AppAppartamenti.Views
 
             if (this.dtoToModify != null)
             {
-                entPrezzo.Text = dtoToModify.Item.Prezzo != null ? dtoToModify.Item.Prezzo.ToString() : null;
-                entSpeseCondominiali.Text = dtoToModify.Item.SpesaMensileCondominio != null ? dtoToModify.Item.SpesaMensileCondominio.ToString() : null;
+                if (entPrezzo.Text == null)
+                {
+                    entPrezzo.Text = dtoToModify.Item.Prezzo != null ? dtoToModify.Item.Prezzo.ToString() : null;
+                }
+                if (entSpeseCondominiali.Text == null)
+                {
+                    entSpeseCondominiali.Text = dtoToModify.Item.SpesaMensileCondominio != null ? dtoToModify.Item.SpesaMensileCondominio.ToString() : null;
+                }
                 
             }
 
@@ -60,12 +66,12 @@ namespace AppAppartamenti.Views
             pckClasseEnergetica.ItemsSource = listClasseEnergetica;
             pckRiscaldamento.ItemsSource = listTipologiaRiscaldamento;
 
-            if (dtoToModify != null && dtoToModify.Item.ClasseEnergetica != null)
+            if (pckClasseEnergetica.SelectedItem ==null && dtoToModify != null && dtoToModify.Item.ClasseEnergetica != null)
             {
                 //FIXME LE SEGUENTI DUE RIGHE FUNZIONANO SOLO X LINGUA ITALIANA, CAMBIARE GESTIONE E LAVORARE CON IL CODICE INVECE CHE CON LA DESCRIZIONE 
                 pckClasseEnergetica.SelectedItem = listClasseEnergetica.Where(x => x.Descrizione == dtoToModify.Item.ClasseEnergetica).FirstOrDefault();
             }
-            if (dtoToModify != null && dtoToModify.Item.TipologiaRiscaldamento!=null)
+            if (pckRiscaldamento.SelectedItem  == null && dtoToModify != null && dtoToModify.Item.TipologiaRiscaldamento!=null)
             {
                 pckRiscaldamento.SelectedItem = listTipologiaRiscaldamento.Where(x => x.Descrizione == dtoToModify.Item.TipologiaRiscaldamento).FirstOrDefault();
             }

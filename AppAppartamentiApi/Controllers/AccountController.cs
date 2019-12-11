@@ -443,10 +443,10 @@ namespace AppAppartamentiApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
 
             var identity = (ClaimsIdentity)User.Identity;
-           
+
             var nome = identity.Claims.FirstOrDefault(x => x.Type == "first_name");
             var cognome = identity.Claims.FirstOrDefault(x => x.Type == "last_name");
             var datiPicture = identity.Claims.FirstOrDefault(x => x.Type == "picture");
