@@ -66,7 +66,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
             AnnunciClient annunciClient = new AnnunciClient(httpClient);
-            var annuncio = await annunciClient.UpdateAnnuncioAsync(Id, Model, null);
+            var annuncio = await annunciClient.UpdateAnnuncioAsync(Id, Model);
 
             return RedirectToAction("List");
         }
@@ -95,6 +95,11 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(AnnuncioDtoInput Model)
         {
+            if (!ModelState.IsValid)
+            {
+                RedirectToPage("/");
+            }
+
             HttpClient httpClient = new HttpClient();
 
             Collection<byte[]> immagini = new Collection<byte[]>();

@@ -57,29 +57,25 @@
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Title" xml:space="preserve">
-    <value>Accedi</value>
+  </resheader>  <data name="Title" xml:space="preserve">
+    <value>Informazioni personali</value>
   </data>
-      <data name="SignInFacebook" xml:space="preserve">
-    <value>Accedi con Facebook</value>
+    
+    <data name="EditProfile" xml:space="preserve">
+    <value>Modifica il profilo</value>
   </data>
-      <data name="SignInGoogle" xml:space="preserve">
-    <value>Accedi con Google</value>
+     <data name="EditPassword" xml:space="preserve">
+    <value>Modifica la password</value>
   </data>
-     <data name="ForgotPassword" xml:space="preserve">
-    <value>Hai dimenticato la password? Ti aiuteremo a recuperarla.</value>
-    </data>
-        <data name="NotRegistered" xml:space="preserve">
-    <value>Non ancora registrato?</value>
-    </data>
-      <data name="SignUp" xml:space="preserve">
-    <value>Registrati</value>
-    </data>
-       <data name="Or" xml:space="preserve">
-    <value>Oppure</value>
-    </data>
-    <data name="Error" xml:space="preserve">
-    <value>La password che hai inserito non è corretta. Riprova o scegli un'altra opzione di accesso.</value>
-    </data>
+  
+    <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+     <data name="Surname" xml:space="preserve">
+    <value>Cognome</value>
+  </data>
+     <data name="BirthDate" xml:space="preserve">
+    <value>Data di nascita</value>
+  </data>
+
 </root>

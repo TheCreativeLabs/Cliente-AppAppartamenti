@@ -98,7 +98,7 @@ async function GetImmagini(input,listname,inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><input style="display:none" name="' +inputname+'['+numImage+']" value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><button onclick="RemoveFile(this)" class="btn-remove btn btn-light rounded-circle position-fixed border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' +inputname+'['+numImage+']" value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
 
     numImage += 1;
 }
@@ -118,7 +118,7 @@ async function GetPlanimetrie(input, listname, inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><button onclick="RemoveFile(this)" class="btn-remove btn btn-light rounded-circle position-fixed border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
 
     numPlanimetria += 1;
 }
@@ -144,6 +144,7 @@ function setMap() {
                 });
                 map.setCenter(results[0].geometry.location);
 
+                $("#CoordinateGeografiche").val(results[0].geometry.location.lat() + ";" + results[0].geometry.location.lng());
 
                 $("#googleMap").show();
             } else {
@@ -185,7 +186,7 @@ function EnableCitySearch(searchTextbox) {
                     $(searchTextbox).autocomplete({
                         source: nomiComuni,
                         select: function (event, ui) {
-                            $("#Indirizzo").removeClass("disabled");
+                            $("#Indirizzo").removeAttr("disabled");
                             var value = ui.item.value;
                             for (var i = 0; i < comuni.length; i++) {
                                 if (comuni[i].NomeComune == value) {
@@ -211,4 +212,7 @@ function EnableCitySearch(searchTextbox) {
     }
 }
 
+function RemoveFile(button) {
+    $(button).parent().remove();
+}
 

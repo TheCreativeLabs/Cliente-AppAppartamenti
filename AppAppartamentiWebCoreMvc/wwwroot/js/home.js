@@ -29,8 +29,6 @@
     $("#btn-restore").click(function (e) {
         if ($("#form-restore").valid()) {
             RestorePassword($(this).data("url"));
-        } else {
-            $("#form-restore").addClass('was-validated');
         }
     });
 
