@@ -1,5 +1,6 @@
 ﻿using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace AppAppartamentiApi.Providers
 
         public static async Task SendAsync(string EmailTo, string Subject, string Body)
         {
-            var apiKey = "";
+            var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("AppAppartamenti@app.com", "AppAppartamenti");
             var subject = Subject;

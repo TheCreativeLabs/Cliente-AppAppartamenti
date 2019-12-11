@@ -38,6 +38,11 @@
     <Content Remove="wwwroot\bundle\bundle.min.js" />
     <Content Remove="Views\Account\Account\Edit.cshtml" />
     <Content Remove="Views\Agenda\Edit.cshtml" />
+    <Content Remove="wwwroot\js\annunci-create.min.js" />
+    <Content Remove="wwwroot\js\annunci-details.min.js" />
+    <Content Remove="wwwroot\js\annunci-list.min.js" />
+    <Content Remove="wwwroot\bundle\bundle.min.js" />
+    <Content Remove="wwwroot\js\annunci-details.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />

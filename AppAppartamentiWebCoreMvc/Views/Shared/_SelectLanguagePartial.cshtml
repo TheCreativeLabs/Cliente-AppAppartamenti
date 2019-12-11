@@ -17,38 +17,40 @@
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 }
 
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+          <h5>Seleziona una lingua</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-             @{
-                 foreach (var item in cultureItems)
-                 {
-                     <a asp-controller="Home" 
-                        asp-action="SetLanguage" asp-route-culture="@item.Name" asp-route-returnUrl="@returnUrl">
-                        <img src="@string.Format("/Images/{0}.png", item.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
-@{
-    if (item.Name == "en-US")
-    {
-               @:English
-           }
-    else
-    {
-               @:Italiano
-           }
-       }
-                     </a>
-    }
-             }
+          <div class="container-fluid">
+              <div class="row">
+                  @{
+                     foreach (var item in cultureItems)
+                     {
+                        <a class="btn btn-lg btn-outline-secondary col-4 mr-2" asp-controller="Home" 
+                                asp-action="SetLanguage" asp-route-culture="@item.Name" asp-route-returnUrl="@returnUrl">
+                            <img src="@string.Format("/Images/{0}.png", item.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+                            @{
+                                if (item.Name == "en-US")
+                                {
+                                    <small>English</small>
+                                }
+                                else
+                                {
+                                    <small>Italiano</small>
+                                }
+                            }
+                        </a>
+                    }
+                 }
+              </div>
+          </div>
       </div>
     </div>
   </div>

@@ -60,12 +60,28 @@ namespace AppAppartamentiApi.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var userName = User.Identity.GetUserName();
+            ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+            var user = applicationDbContext.Users.Where(x => x.Email == userName).FirstOrDefault();
+            string login = null;
+            if (user == null || string.IsNullOrEmpty(user.Email))
+            {
+                user = null;// TODO: NON SONO REGISTRATO
+            }
+            else
+            {
+                if (user.Logins.Any())
+                {
+                    //TODO: Sono registrato, ottengo il provider
+                    login = user.Logins.First().LoginProvider;
+                }
+            }
 
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(), //externalLogin.Email, 
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                HasRegistered = user != null,//externalLogin == null,
+                LoginProvider = login//externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
 
@@ -340,6 +356,7 @@ namespace AppAppartamentiApi.Controllers
                 return BadRequest(ModelState);
             }
 
+
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -357,7 +374,7 @@ namespace AppAppartamentiApi.Controllers
                 Cognome = model.Surname,
                 Nome = model.Name,
                 IdAspNetUser = new Guid(user.Id),
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 FotoProfilo = model.ImmagineProfilo,
                 DataDiNascita = model.DataNascita
             };
@@ -443,12 +460,12 @@ namespace AppAppartamentiApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
 
             var identity = (ClaimsIdentity)User.Identity;
-
-            var nome = identity.Claims.FirstOrDefault(x => x.Type == "first_name");
-            var cognome = identity.Claims.FirstOrDefault(x => x.Type == "last_name");
+           
+            var nome = identity.Claims.FirstOrDefault(x => x.Type == "name");
+            var cognome = identity.Claims.FirstOrDefault(x => x.Type == "family_name");
             var datiPicture = identity.Claims.FirstOrDefault(x => x.Type == "picture");
             var dataDiNascitaString = identity.Claims.FirstOrDefault(x => x.Type == "dateofbirth");
 

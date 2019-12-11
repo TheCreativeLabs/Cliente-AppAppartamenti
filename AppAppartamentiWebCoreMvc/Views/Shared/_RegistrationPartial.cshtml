@@ -6,7 +6,6 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
                         <h4>@_localizer["Title"]</h4>
@@ -18,51 +17,72 @@
                     </div>
                 </div>
 
-                <div class="row p-3 justify-content-center">
-                    <div class="col-12">
-                        <form asp-controller="Login" asp-action="SignUp" >
+                <form asp-controller="Login" asp-action="SignUp" class="mt-4">
+                    <div class="form-row">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
+                            <div class="col-sm-12 mb-3">
                                 <input asp-for="Name" data-val-required="@_localizer["Required"]" placeholder="@_localizer["Name"]" class="form-control" />
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="col-sm-12 mb-3">
                                 <input asp-for="Surname" data-val-required="@_localizer["Required"]" placeholder="@_localizer["Surname"]" class="form-control" />
                                 <span asp-validation-for="Surname" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="col-sm-12 mb-3">
                                 <input asp-for="Email" data-val-required="@_localizer["Required"]" placeholder="Email" class="form-control" />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
-                             <div class="form-group">
-                                <input asp-for="DataNascita" placeholder="@_localizer["BirthDate"]" class="form-control" />
+                            <div class="col-sm-12 mb-3">
+                                <input asp-for="DataNascita" type="date" placeholder="@_localizer["BirthDate"]" class="form-control" />
                                 <span asp-validation-for="DataNascita" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <input asp-for="Password" data-val-required="@_localizer["Required"]" placeholder="Password" class="form-control" />
+                            <div class="col-sm-12 mb-3">
+                                <div class="input-group">
+                                    <input asp-for="Password" type="password" data-val-required="@_localizer["Required"]" placeholder="Password" class="form-control">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-light bg-light border btn-show-password">
+                                            <i class="far fa-eye"></i>
+                                            <i class="far fa-eye-slash d-none"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <input asp-for="ConfirmPassword" data-val-required="@_localizer["Required"]" placeholder="@_localizer["ConfirmPassword"]"  class="form-control" />
+                            <div class="col-sm-12 mb-3">
+                                <div class="input-group">
+                                    <input asp-for="ConfirmPassword" required type="password" data-val-required="@_localizer["Required"]" placeholder="@_localizer["ConfirmPassword"]" class="form-control">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-light bg-light border btn-show-password">
+                                            <i class="far fa-eye"></i>
+                                            <i class="far fa-eye-slash d-none"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                <div id="confirm-password-error" class="text-danger d-none">
+                                    Le password non coincidono.
+                                </div>
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <div class="col-sm-12 mb-3"><div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="condition-check">
                                 <label class="form-check-label" for="exampleCheck1">@_localizer["ConfirmCondition"]</label>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-block" value="Registrati" />
+                        </div>
+                            <div class="col-sm-12 mb-3">
+                                <input id="btn-signin" type="submit" class="btn btn-primary btn-block" disabled value="Registrati" />
                             </div>
-                        </form>
 
-                        <hr />
+                           
 
-                        <a id="btnSignIn" class="text-muted btn btn-block btn-link btn-sm">
-                            @_localizer["IsLogin"] <strong class="text-primary">@_localizer["LogIn"]</strong>
-                        </a>
+                        <div class="col-sm-12 mb-3">
+                            <div class="separator mt-4 mb-4">oppure</div>
+
+                            <a id="btnSignIn" href="#" class="text-muted btn btn-block btn-link btn-sm">
+                                @_localizer["IsLogin"] <strong class="text-primary">@_localizer["LogIn"]</strong>
+                            </a>
+                            </div>
                     </div>
-                </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

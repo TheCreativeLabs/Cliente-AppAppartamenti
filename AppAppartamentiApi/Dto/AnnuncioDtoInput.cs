@@ -118,5 +118,8 @@ namespace AppAppartamentiApi.Dto
         public List<byte[]> ImmaginePlanimetria { get; set; }
 
         public byte[] Video { get; set; }
+
+        [Required]
+        public string CoordinateGeografiche { get; set; }
     }
 }

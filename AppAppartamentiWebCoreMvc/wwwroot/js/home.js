@@ -2,15 +2,93 @@
     $("#nav").addClass("navbar-transparent");
     $("#navSearchBar").hide();
     window.onscroll = function () { changeScroll() };
-    $('#btnSignIn').click(ShowModalSignIn);
-    $('#btnSignUp').click(ShowModalSignUp);
+
+    $('#btnSignIn').click(function () {
+        ShowModalSignIn();
+    });
+
+    $('#btnSignUp').click(function () {
+        ShowModalSignUp();
+    });
+
+    $('#btn-restore-modal').click(function () {
+        ShowRestoreModal();
+    });
+
+    $("#btn-back-login").click(function () {
+        $("#modal-restore").modal("hide");
+        $("#modalLogin").modal("show");
+    })
 
     if (loggedUser != null && loggedUser.length > 0) {
         $("#txtSearchHome").keyup(function () {
             EnableSearch(this);
         })
     }
+
+    $("#btn-restore").click(function (e) {
+        if ($("#form-restore").valid()) {
+            RestorePassword($(this).data("url"));
+        } else {
+            $("#form-restore").addClass('was-validated');
+        }
+    });
+
+    $("#condition-check").change(function () {
+        if ($(this).is(":checked")) {
+            $("#btn-signin").removeAttr("disabled");
+        } else {
+            $("#btn-signin").attr("disabled", "disabled");
+
+        }
+    });
+
+    $("#ConfirmPassword").blur(function () {
+        if ($(this).val() == "" || $(this).val() != $("#Password").val()) {
+            $("#confirm-password-error").removeClass("d-none");
+            $(this).addClass("input-validation-error");
+        } else {
+            $("#confirm-password-error").addClass("d-none");
+            $(this).removeClass("input-validation-error");
+        }
+    });
+
+    $(".btn-show-password").click(function () {
+        let passwordInput = $(this).parent().parent().children("input");
+
+        if ($(passwordInput).attr("type") == "text") {
+            $($(this).children()[0]).removeClass("d-none");
+            $($(this).children()[1]).addClass("d-none");
+            $(passwordInput).attr("type", "password");
+        } else {
+            $($(this).children()[0]).addClass("d-none");
+            $($(this).children()[1]).removeClass("d-none");
+            $(passwordInput).attr("type", "text");
+        }
+    });
 });
+
+function RestorePassword(url) {
+    $("#spinner-restore").removeClass("d-none");
+    $("#btn-restore").attr("disabled", "disabled");
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { Email: $("#email-restore").val() },
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            location.reload();
+        },
+        error: function (xhr, status, error) {
+            $("#spinner-restore").addClass("d-none");
+            $("#btn-restore").removeAttr("disabled");
+            console.log("Error in RestorePassword function: " + error)
+        }
+    });
+}
+
 
 function changeScroll() {
     if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -20,6 +98,11 @@ function changeScroll() {
         $("#nav").addClass("navbar-transparent");
         $("#navSearchBar").hide();
     }
+}
+//mostra la modale di login
+function ShowRestoreModal() {
+    $("#modalLogin").modal("hide");
+    $("#modal-restore").modal("show");
 }
 
 //mostra la modale di login

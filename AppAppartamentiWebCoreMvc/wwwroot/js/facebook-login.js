@@ -2,8 +2,16 @@ $(document).ready(function () {
     var url_string = window.location.href;
     var url = new URL(url_string);
 
-    var access_token = window.location.href.replace(window.location.href.slice(window.location.href.indexOf("&token_type=bearer&expires_in="), window.location.href.length), "")
-    access_token = access_token.replace("https://localhost:5001/Home/FacebookLogin#access_token=", "");
+    $.urlParam = function (name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+            .exec(window.location.href.replace("#","?"));
+        if (results == null) {
+            return 0;
+        }
+        return results[1] || 0;
+    }
+
+    var access_token = $.urlParam('access_token');
 
     $.ajax({
         type: "POST",
@@ -19,9 +27,8 @@ $(document).ready(function () {
             }
         },
         error: function (xhr, status, error) {
-            alert("error");
+            window.location.href = url.origin + "/Home/Index?provider_error=1";
         }
     });
 });
-
 

@@ -84,6 +84,8 @@ namespace AppAppartamentiApi.Controllers
                                                        AnnunciOrder? orderBy = null)
         {
 
+            Guid idCurrent = new Guid(User.Identity.GetUserId());
+
             //List<AnnunciDtoOutput> annunci = dbDataContext.Annuncio
             IQueryable<Annuncio> query = dbDataContext.Annuncio
                                             .Include(x => x.Comuni)
@@ -105,7 +107,6 @@ namespace AppAppartamentiApi.Controllers
                                                 & (pool == null || pool == false || x.Piscina == pool)
                                                 & (elevator == null || elevator == false || x.Ascensore == elevator)
                                         );
-
 
             if (orderBy == null || AnnunciOrder.CREATION_DATE_ASC == orderBy)
             {
@@ -133,25 +134,31 @@ namespace AppAppartamentiApi.Controllers
             }
             
             List<AnnunciDtoOutput> annunci = query
-                                       //.OrderBy(x =>  x.DataCreazione) //FIXME ORDINAMENTO
+                                       //.OrderBy(x =>  x.DataCreazione) 
                                         .Skip(pageSize * (pageNumber - 1))
                                         .Take(pageSize)
-                                             .Select(annuncio => new AnnunciDtoOutput()
+                                        //.Join(dbDataContext.AnnunciPreferiti, // the source table of the inner join
+                                        //          annuncio => annuncio.Id,        // Select the primary key (the first part of the "on" clause in an sql "join" statement)
+                                        //          prefe => prefe.IdAnnuncio,   // Select the foreign key (the second part of the "on" clause)
+                                        //          (annuncio, prefe) => new { Annuncio = annuncio, AnnunciPreferiti = prefe }) // selection
+                                        //       .Where(postAndMeta => postAndMeta.AnnunciPreferiti.IdUser == idCurrent)   // where statement
+                                             .Select(annJoinPrefe => new AnnunciDtoOutput()
                                              {
-                                                 Id = annuncio.Id,
-                                                 IdUtente = annuncio.IdUtente,
-                                                 DataCreazione = annuncio.DataCreazione,
-                                                 DataModifica = annuncio.DataModifica,
-                                                 CodiceComune = annuncio.ComuneCodice,
-                                                 NomeComune = annuncio.Comuni.NomeComune,
-                                                 Indirizzo = annuncio.Indirizzo,
-                                                 Prezzo = annuncio.Prezzo,
-                                                 Superficie = annuncio.Superficie,
-                                                 Descrizione = annuncio.Descrizione,
-                                                 TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
-                                                 TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
-                                                 Completato = annuncio.Completato,
-                                                 Cancellato = annuncio.Cancellato
+                                                 Id = annJoinPrefe.Id,
+                                                 IdUtente = annJoinPrefe.IdUtente,
+                                                 DataCreazione = annJoinPrefe.DataCreazione,
+                                                 DataModifica = annJoinPrefe.DataModifica,
+                                                 CodiceComune = annJoinPrefe.ComuneCodice,
+                                                 NomeComune = annJoinPrefe.Comuni.NomeComune,
+                                                 Indirizzo = annJoinPrefe.Indirizzo,
+                                                 Prezzo = annJoinPrefe.Prezzo,
+                                                 Superficie = annJoinPrefe.Superficie,
+                                                 Descrizione = annJoinPrefe.Descrizione,
+                                                 TipologiaAnnuncio = annJoinPrefe.TipologiaAnnuncio.Descrizione,
+                                                 TipologiaProprieta = annJoinPrefe.TipologiaProprieta.Descrizione,
+                                                 Completato = annJoinPrefe.Completato,
+                                                 Cancellato = annJoinPrefe.Cancellato,
+                                                 FlagPreferito =  (dbDataContext.AnnunciPreferiti.Where(x => x.IdAnnuncio == annJoinPrefe.Id && x.IdUser == idCurrent).Any())//annJoinPrefe.AnnunciPreferiti != null ? true : false
                                              }).ToList();
 
 
@@ -355,7 +362,8 @@ namespace AppAppartamentiApi.Controllers
                 IdClasseEnergetica = Annuncio.IdClasseEnergetica,
                 Condizionatori = Annuncio.Condizionatori,
                 Completato = Annuncio.Completato,
-                Cancellato = Annuncio.Cancellato
+                Cancellato = Annuncio.Cancellato,
+                CoordinateGeografiche = Annuncio.CoordinateGeografiche
             };
 
             //Salvo l'annuncio sul DB

@@ -51,7 +51,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var annunci = await annunciClient.GetAnnunciAsync(ListPage,10,FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
                 FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
                 FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage,FilterModel.Giardino,null,FilterModel.Cantina,
-                FilterModel.Piscina,FilterModel.Ascensore, orderBy);
+                FilterModel.Piscina,FilterModel.Ascensore, null);
 
             ViewData["ListPage"] = ListPage;
 
@@ -77,6 +77,5 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View(annuncio);
         }
 
-        
     }
 }
