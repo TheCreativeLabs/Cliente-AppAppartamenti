@@ -25,7 +25,7 @@ namespace AppAppartamentiApi.Providers
             var plainTextContent = Body;
             var htmlContent = Body;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = await client.SendEmailAsync(msg);
+            await client.SendEmailAsync(msg);
         }
     }
 }
