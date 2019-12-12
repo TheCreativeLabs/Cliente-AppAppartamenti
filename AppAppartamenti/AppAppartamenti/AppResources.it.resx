@@ -690,4 +690,13 @@
   <data name="SelezioneLuogo.WhereQuestion" xml:space="preserve">
     <value>Dove si trova?</value>
   </data>
+  <data name="Login.AlertMailAlreadySigned" xml:space="preserve">
+    <value>Esiste già un account registrato con la tua mail.</value>
+  </data>
+  <data name="Login.AlertOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Login.Warning" xml:space="preserve">
+    <value>Attenzione</value>
+  </data>
 </root>

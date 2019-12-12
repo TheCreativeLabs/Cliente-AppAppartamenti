@@ -684,4 +684,13 @@
   <data name="SelezioneInfoGenerali.ParkingSpaces" xml:space="preserve">
     <value>Parking spaces:</value>
   </data>
+  <data name="Login.AlertMailAlreadySigned" xml:space="preserve">
+    <value>An account with you email already exists.</value>
+  </data>
+  <data name="Login.AlertOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Login.Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
 </root>

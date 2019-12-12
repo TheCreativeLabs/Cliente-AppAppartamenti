@@ -64,42 +64,50 @@ namespace AppAppartamenti.Views.Account
                 UserInfoViewModel userInfoViewModel = await accountClient.GetUserInfoAsync();
 
                 //TODO: Controllare che la risposta del server sia OK
-
-                //Se l'utente non è registrato allora lo registro
-                if (userInfoViewModel != null && userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
-                {
-                    RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
+                try { 
+                    //Caso di errore
+                    if (userInfoViewModel == null || userInfoViewModel.HasRegistered == null || userInfoViewModel.HasRegistered.HasValue == false)
                     {
-                        Email = userInfoViewModel.Email
-                    };
-
-                    //registro l'utente
-                    await accountClient.RegisterExternalAsync(registerExternalBindingModel);
-
-                    var webView = new WebView
+                        //TODO mostrare pagina di errore
+                        throw new ApplicationException();
+                    }
+                    else if (userInfoViewModel.HasRegistered.Value == false) //Se l'utente non è registrato allora lo registro
                     {
-                        Source = ApiRequest,
-                        HeightRequest = 1
-                    };
+                        RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
+                        {
+                            Email = userInfoViewModel.Email
+                        };
 
-                    webView.Navigated += WebViewOnNavigated;
+                        //registro l'utente
+                        await accountClient.RegisterExternalAsync(registerExternalBindingModel);
 
-                    Content = webView;
+                        var webView = new WebView
+                        {
+                            Source = ApiRequest,
+                            HeightRequest = 1
+                        };
+
+                        webView.Navigated += WebViewOnNavigated;
+
+                        Content = webView;
+                    }
+                    else if(userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "FACEBOOK") //utente già registrato con FB: accede
+                    {
+                        //Application.Current.MainPage = new NavigationPage( new MainPage());
+                        Application.Current.MainPage = new MainPage();
+                    }
+                    else //l'utente è già registrato ma NON con facebook: è registrato con Google o con la mail, quindi non può accedere
+                    {
+                        string alertTitle = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.Warning", translate.ci);
+                        string alertContent = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertMailAlreadySigned", translate.ci);
+                        string alertOk = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertOk", translate.ci);
+                        await DisplayAlert(alertTitle,
+                            alertContent,
+                            alertOk); Api.ApiHelper.DeleteToken();
+                        Application.Current.MainPage = new Login.Login();
+                    }
                 }
-                else if (userInfoViewModel == null || userInfoViewModel.HasRegistered.HasValue == false) // ci sono stati degli errori
-                {
-                    //TODO mostrare pagina di errore
-                }
-                else if(userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "FACEBOOK") //utente già registrato con FB: accede
-                {
-                    //Application.Current.MainPage = new NavigationPage( new MainPage());
-                    Application.Current.MainPage = new MainPage();
-                }
-                else //l'utente è già registrato ma NON con facebook: è registrato con Google o con la mail, quindi non può accedere
-                {
-                    await DisplayAlert("Attenzione", "Esiste già un account registrato con la tua mail.", "OK");
-                    await Navigation.PopAsync();
-                }
+                catch { };
             }
         }
 

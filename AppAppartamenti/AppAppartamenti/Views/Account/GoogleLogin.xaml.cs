@@ -18,6 +18,7 @@ namespace AppAppartamenti.Views.Account
     public partial class GoogleLogin : ContentPage
     {
         String ApiRequest;
+        static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
         public GoogleLogin()
         {
@@ -67,6 +68,11 @@ namespace AppAppartamenti.Views.Account
 
                 //Se l'utente non è registrato allora lo registro
                 //TODO: Controllare che userInfoViewModel sia valorizzato (.HasRegistered potrebbe andare in errore)
+                if (userInfoViewModel == null || userInfoViewModel.HasRegistered == null || userInfoViewModel.HasRegistered.HasValue == false)
+                {
+                    //TODO mostrare pagina di errore
+                    throw new ApplicationException();
+                }
                 if (userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
                 {
                     RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
@@ -87,10 +93,23 @@ namespace AppAppartamenti.Views.Account
 
                     Content = webView;
                 }
-                else
+                else if (userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "GOOGLE") //utente già registrato con GOOGLE: accede
                 {
                     //Application.Current.MainPage = new NavigationPage( new MainPage());
                     Application.Current.MainPage = new MainPage();
+                }
+                else //l'utente è già registrato ma NON con facebook: è registrato con Facebook o con la mail, quindi non può accedere
+                {
+                    string alertTitle = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.Warning", translate.ci);
+                    string alertContent = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertMailAlreadySigned", translate.ci);
+                    string alertOk = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertOk", translate.ci);
+                    
+                    await DisplayAlert(alertTitle,
+                        alertContent,
+                        alertOk);
+                    Api.ApiHelper.DeleteToken();
+                    Application.Current.MainPage = new Login.Login();
+
                 }
             }
         }
