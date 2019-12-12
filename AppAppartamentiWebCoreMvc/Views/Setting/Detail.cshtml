@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IViewLocalizer _localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .ToList();
+}
+
+@inject IViewLocalizer _localizer
+@{
+    ViewData["Title"] = "Impostazioni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <h2 class="mt-2 mb-2">@_localizer["Title"]</h2>
+            <hr />
+
+            <div class="col-sm-4">
+              <div class="shadow border-0 rounded-pill">
+                <a href="#" class="btn stretched-link" data-toggle="modal" data-target="#modal-share">
+                        <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+
+                        @{
+                            if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                            {
+                                @:English
+                            }
+                            else
+                            {
+                                @:Italiano
+                            }
+                        }
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

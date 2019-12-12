@@ -1,4 +1,6 @@
-﻿@model AnnuncioDtoInput
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+@model AnnuncioDtoInput
 
 @{
     ViewData["Title"] = "View";
@@ -10,339 +12,649 @@
 
 <div class="container container-custom">
     <div class="row">
-        <div class="col-12">
-            <h2>Modifica il tuo annuncio</h2>
-            <div class="progress" style="height: 10px;">
-              <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+        <div class="col-sm-11">
+            <h2>@_localizer["Title"]</h2>
+        </div>
+        <div class="col-sm-1 text-right">
+            @{await Html.RenderPartialAsync("_VirtualAgentSell");}
         </div>
 
-        <div class="col-md-2 col-sm-3 col-xs-12 position-fixed mt-3">
-            <div id="smallTitle">
-                <h6>Nuovo annuncio</h6>
-                <div class="progress" style="height: 5px;">
-                  <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+        <div class="col-sm-3 mt-4">
+            <div class="nav flex-column nav-pills" id="create-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link text-dark active" id="tipologia-proprieta-tab" data-toggle="pill" href="#tipologia-proprieta" role="tab" aria-controls="tipologia-proprieta" aria-selected="true">
+                    @_localizer["PropertyType"]
+                </a>
+                <a class="nav-link text-dark" id="tipologia-annuncio-tab" data-toggle="pill" href="#tipologia-annuncio" role="tab" aria-controls="tipologia-annuncio" aria-selected="false">@_localizer["Adtype"]</a>
+                <a class="nav-link text-dark" id="posizione-tab" data-toggle="pill" href="#posizione" role="tab" aria-controls="posizione" aria-selected="false">@_localizer["Position"]</a>
+                <a class="nav-link text-dark" id="prezzo-tab" data-toggle="pill" href="#prezzo" role="tab" aria-controls="prezzo" aria-selected="false">@_localizer["PriceAndCost"]</a>
+                <a class="nav-link text-dark" id="caratteristiche-tab" data-toggle="pill" href="#caratteristiche" role="tab" aria-controls="caratteristiche" aria-selected="false">@_localizer["Features"]</a>
+                <a class="nav-link text-dark" id="descrizione-tab" data-toggle="pill" href="#descrizione" role="tab" aria-controls="descrizione" aria-selected="false">@_localizer["Description"]</a>
+                <a class="nav-link text-dark" id="immagini-tab" data-toggle="pill" href="#immagini" role="tab" aria-controls="immagini" aria-selected="false">@_localizer["Images"]</a>
+                <a class="nav-link text-dark" id="planimetrie-tab" data-toggle="pill" href="#planimetrie" role="tab" aria-controls="planimetrie" aria-selected="false">@_localizer["Planimetry"]</a>
+                <a class="nav-link text-dark" id="video-tab" data-toggle="pill" href="#video" role="tab" aria-controls="video" aria-selected="false">@_localizer["Video"]</a>
+                <a class="nav-link text-dark" id="agenda-tab" data-toggle="pill" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">@_localizer["AgendaTitle"]</a>
             </div>
-
-            <nav id="navbar-create" class="navbar navbar-light">
-                <nav class="nav nav-pills flex-column">
-                    <a class="nav-link text-dark" href="#tipologia-proprieta">Tipologia proprietà</a>
-                    <a class="nav-link text-dark" href="#tipologia-annuncio">Tipologia annuncio</a>
-                    <a class="nav-link text-dark" href="#posizione">Posizione</a>
-                    <a class="nav-link text-dark" href="#prezzo">Prezzo e costi</a>
-                    <a class="nav-link text-dark " href="#caratteristiche">Caratteristiche</a>
-                    <a class="nav-link text-dark" href="#descrizione">Descrizione</a>
-                    <a class="nav-link text-dark" href="#immagini">Immagini</a>
-                    <a class="nav-link text-dark" href="#planimetria">Planimetria</a>
-                </nav>
-            </nav>
         </div>
+        <div class="col-sm-9 mt-4">
+            <form asp-action="Create" id="form-create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="tipologia-proprieta" role="tabpanel" aria-labelledby="tipologia-proprieta-tab">
+                        <div class="shadow-sm p-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
+                                    margin: -1rem;">
+                                @_localizer["PropertyType"]
+                            </h5>
+                            <div class="form-group">
+                                @{
+                                    
+                                    IEnumerable<TipologiaProprieta> tipologiaProprieta2 = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
+                                    @foreach (var proprieta in tipologiaProprieta2)
+                                    {
+                                        if (annuncio.TipologiaProprieta == proprieta.Descrizione ) {
+                                        }
+                                        else {
+                                        } //string isChecked = (? "checked" : "");
 
-        <div class="col-md-9 col-sm-9 col-xs-12 offset-3">
-            <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div  class="shadow-sm mt-3 mb-3 p-3">
-                     <h5 id="tipologia-proprieta" class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">Tipologia proprietà</h5>
-                     <div class="form-group">
-                         @{
-                             IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
-                            @foreach (var proprieta in tipologiaProprieta)
-                            {
-                                string isChecked = (annuncio.TipologiaProprieta == proprieta.Descrizione ? "checked" : "");
-                                
-                                <input class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
-                                @Html.RadioButtonFor(model => model.IdTipologiaProprieta, proprieta.Id,new { @class = "mr-2", @checked=@isChecked}) @proprieta.Descrizione<br />
-                            }
-                             <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
-                         }
+                                        <input class="mr-2" type="radio" checked asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
+                                    }
+                                    <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
+                                }
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div id="tipologia-annuncio" class="tab-pane fade" role="tabpanel" aria-labelledby="tipologia-annuncio-tab">
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">
+                                @_localizer["Adtype"]
+                            </h5>
+                            <div class="form-group">
+                                @{
+                                    IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
+                                    @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
+                                    {
 
-                <div class="shadow-sm mb-3 p-3">
-                     <h5 id="tipologia-annuncio" class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">Tipologia annuncio</h5>
-                     <div class="form-group">
-                         @{
-                             IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
-                            @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
-                            {
-                                <input class="mr-2"  type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" /><small>@tipologiaAnnuncio.Descrizione</small><br />
-                            }
-                            <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
-                         }
+                                        <input  data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
+                                    }
+                                    <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
+                                }
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="shadow-sm mb-3 p-3">
-                     <h5 id="posizione" class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">Posizione</h5>
-                     <div class="form-group">
-                            <label asp-for="CodiceComune" class="control-label col-form-label-sm"></label>
-                            <input asp-for="CodiceComune" type="text" class="form-control form-control-sm" />
-                            <span asp-validation-for="CodiceComune" class="text-danger"></span>
-                     </div>
-                     <div class="form-group">
-                            <label asp-for="Indirizzo" class="control-label col-form-label-sm"></label>
-                            <input asp-for="Indirizzo" class="form-control form-control-sm" />
-                            <span asp-validation-for="Indirizzo" class="text-danger"></span>
-                     </div>
-                </div>
-
-                 <div class="shadow-sm mb-3 p-3">
-                     <h5 id="prezzo" class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">Prezzo e costi</h5>
-                     <div class="form-group">
-                             <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>
-                             <div class="input-group input-group-sm">
-                                <input asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm"/>
-                                  <div class="input-group-append">
-                                <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
+                    <div id="posizione" class="tab-pane fade" role="tabpanel" aria-labelledby="posizione-tab">
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">
+                                @_localizer["Position"]
+                            </h5>
+                            <div class="form-group form-group-sm">
+                                <label asp-for="CodiceComune" class="control-label"></label>
+                                <div class="input-group  mb-3">
+                                    <input id="input-comune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                    <div class="input-group-append">
+                                        <div id="city-spinner" class="spinner-border spinner-border-sm text-secondary mt-2" role="status" style="display:none;margin-left:-2rem;z-index:1050 !important">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
                                 </div>
-                             </div>
-                             <span asp-validation-for="Prezzo" class="text-danger"></span>
-                     </div>
-
-                     <div class="form-group">
-                        <label asp-for="SpesaMensileCondominio" class="control-label col-form-label-sm"></label>
-                            <div class="input-group input-group-sm">
-                            <input asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm"/>
-                                <div class="input-group-append">
-                            <span class="input-group-text" id="inputGroup-SpesaMensileCondominio-sm">€/Mese</span>
                             </div>
+                            <div class="form-group form-group-sm">
+                                <input data-val-required="@_localizer["Required"]" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                <span asp-validation-for="CodiceComune" class="text-danger"></span>
                             </div>
-                        <span asp-validation-for="SpesaMensileCondominio" class="text-danger"></span>
-                     </div>
+                            <div class="form-group form-group-sm">
+                                <label data-val-required="@_localizer["Required"]" asp-for="Indirizzo" class="control-label "></label>
+                                <input asp-for="Indirizzo" class="form-control" disabled/>
+                                <span asp-validation-for="Indirizzo" class="text-danger"></span>
+                            </div>
 
-                     <div class="form-group">
-                     @{
-                         IEnumerable<TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
-                     }
-                     <label  class="control-label col-form-label-sm">Tipologia riscaldamento</label>
-                         <br />
-                     @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
-                    new SelectList(tipologiaRiscaldamento,"Id","Descrizione"),
-                    "Tipologia riscaldamento", new { @class = "custom-select custom-select-sm" })
-                         </div>
+                            <div class="form-group form-group-sm">
+                                <input asp-for="CoordinateGeografiche" class="form-control d-none" />
+                                <span asp-validation-for="CoordinateGeografiche" class="text-danger"></span>
+                            </div>
 
-                     <div class="form-group">
-                     @{
-                         IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
-                     }
-                     <label  class="control-label col-form-label-sm">Classe energetica</label>
-                         <br />
+                            <div id="googleMap" class="map w-100" style="height:400px;display:none">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="prezzo" class="tab-pane fade" role="tabpanel" aria-labelledby="prezzo-tab">
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">
+                                @_localizer["PriceAndCost"]
+                            </h5>
+                            <div class="form-group form-group-sm">
+                                <label asp-for="Prezzo" class="control-label">
+                                    @_localizer["Price"]
+                                </label>
+                                <div class="input-group">
+                                    <input data-val-required="@_localizer["Required"]"  asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Prezzo" class="text-danger"></span>
+                            </div>
 
-                     @Html.DropDownListFor(m => m.IdClasseEnergetica,
-                    new SelectList(classeEnergetica,"Id","Descrizione"),
-                    "Classe energetica", new { @class = "custom-select custom-select-sm" })
+                            <div class="form-group form-group-sm">
+                                <label asp-for="SpesaMensileCondominio" class="control-label">
+                                    @_localizer["MonthlyCosts"]
+                                </label>
+                                <div class="input-group">
+                                    <input data-val-required="@_localizer["Required"]"  asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="inputGroup-SpesaMensileCondominio-sm">€/Mese</span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="SpesaMensileCondominio" class="text-danger"></span>
+                            </div>
 
-                         </div>
+                            <div class="form-group form-group-sm">
+                                @{
+                                    IEnumerable<TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
+                                }
+                                <label class="control-label">
+                                    @_localizer["HeatingType"]
+                                </label>
+                                <br />
+                                @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
+                                                             new SelectList(tipologiaRiscaldamento, "Id", "Descrizione"),
+                                                             "Tipologia riscaldamento", new { @class = "custom-select" })
+                            </div>
+
+                            <div class="form-group form-group-sm">
+                                @{
+                                    IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+                                }
+                                <label class="control-label">
+                                    @_localizer["EnergeticClass"]
+
+                                    </label>
+                                <br />
+
+                                @Html.DropDownListFor(m => m.IdClasseEnergetica,
+                                                             new SelectList(classeEnergetica, "Id", "Descrizione"),
+                                                             "Classe energetica", new { @class = "custom-select" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="caratteristiche" class="tab-pane fade" role="tabpanel" aria-labelledby="caratteristiche-tab">
+
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
+    margin: -1rem;">
+                            @_localizer["Features"]
+
+                            </h5>
+
+                            <div class="form-group form-group-sm">
+                                <label asp-for="Superficie" class="control-label">
+                                    @_localizer["Surface"]
+                                </label>
+                                <div class="input-group">
+                                    <input  data-val-required="@_localizer["Required"]"  asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="inputGroup-Superficie-sm">m²</span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Superficie" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group form-group-counter">
+                                <label asp-for="NumeroCameraLetto" class="control-label col-form-label-sm">
+                                    @_localizer["BedroomNumber"]
+                                </label>
+
+                                <div class="input-group plus-minus-input">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCameraLetto">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" value="0" asp-for="NumeroCameraLetto">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCameraLetto">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="NumeroCameraLetto" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group form-group-counter">
+                                <label asp-for="NumeroAltreStanze" class="control-label col-form-label-sm">
+                                    @_localizer["OtherRoomNumber"]
+                                </label>
+
+                                <div class="input-group plus-minus-input">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" value="0" asp-for="NumeroAltreStanze">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="NumeroAltreStanze" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group form-group-counter">
+                                <label asp-for="NumeroBagni" class="control-label col-form-label-sm">
+                                    @_localizer["BathroomNumber"]
+                                </label>
+
+                                <div class="input-group plus-minus-input">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" value="0" asp-for="NumeroBagni">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="NumeroBagni" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group form-group-counter">
+                                <label asp-for="NumeroCucine" class="control-label col-form-label-sm">
+                                    @_localizer["KitchensNumber"]
+                                </label>
+
+                                <div class="input-group plus-minus-input">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" value="0" asp-for="NumeroCucine">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="NumeroCucine" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group form-group-counter">
+                                <label asp-for="NumeroGarage" class="control-label col-form-label-sm">
+                                    @_localizer["GarageNumber"]
+                                </label>
+
+                                <div class="input-group plus-minus-input">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" value="0" asp-for="NumeroGarage">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="NumeroGarage" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group form-group-counter">
+                                <label asp-for="NumeroPostiAuto" class="control-label col-form-label-sm">
+                                    @_localizer["CarSeatsNumber"]
+                                </label>
+
+                                <div class="input-group plus-minus-input">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroPostiAuto">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" value="0" asp-for="NumeroPostiAuto">
+                                    <div class="input-group-button">
+                                        <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="NumeroPostiAuto" class="text-danger"></span>
+                            </div>
+
+                            <hr />
+
+                            <div class="form-group form-group-sm">
+                                <label asp-for="Piano" class="control-label">
+                                    @_localizer["Floor"]
+                                </label>
+                                <input data-val-required="@_localizer["Required"]" asp-for="Piano" class="form-control" />
+                                <span asp-validation-for="Piano" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="UltimoPiano" />
+                                <label class="form-check-label" asp-for="UltimoPiano">
+                                    @_localizer["TopFloor"]
+                                </label>
+                                <span asp-validation-for="UltimoPiano" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Giardino" />
+                                <label class="form-check-label" asp-for="Giardino">
+                                    @_localizer["Garden"]
+                                </label>
+                                <span asp-validation-for="Giardino" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Ascensore" /> <!---->
+                                <label class="form-check-label" asp-for="Ascensore">
+                                    @_localizer["Lift"]
+                                </label>
+                                <span asp-validation-for="Ascensore" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Balcone"/> <!--asp-for="Balcone"-->
+                                <label class="form-check-label" asp-for="Balcone">
+                                     @_localizer["Balcony"]
+                                </label>
+                                <span asp-validation-for="Balcone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Piscina" /> <!--asp-for="Piscina"-->
+                                <label class="form-check-label" asp-for="Piscina">
+                                     @_localizer["Pool"]
+                                </label>
+                                <span asp-validation-for="Piscina" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Cantina" /> <!---->
+                                <label class="form-check-label" asp-for="Cantina">
+                                     @_localizer["Cellar"]
+                                </label>
+                                <span asp-validation-for="Cantina" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Condizionatori" /> <!---->
+                                <label class="form-check-label" asp-for="Condizionatori">
+                                    @_localizer["Conditioners"]
+                                </label>
+                                <span asp-validation-for="Condizionatori" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="descrizione" class="tab-pane fade" role="tabpanel" aria-labelledby="descrizione-tab">
+
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Description"]</h5>
+                            <div class="form-group">
+                                <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
+                                <span asp-validation-for="Descrizione" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="immagini" class="tab-pane fade" role="tabpanel" aria-labelledby="immagini-tab">
+
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Images"]</h5>
+                            <div class="form-group">
+                                <div class="form-group text-center">
+                                    <input type="file" data-input-name="Immagini" data-list-name="containerImmagini" class="file-input" id="input-immagini">
+                                    <label class="file-label p-2 text-primary border w-50" for="input-immagini">+ Aggiungi immagine</label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="row" id="containerImmagini">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="planimetrie" class="tab-pane fade" role="tabpanel" aria-labelledby="planimetrie-tab">
+
+
+                        <div class="shadow-sm  p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Planimetry"]</h5>
+                            <div class="form-group">
+                                <div class="form-group text-center">
+                                    <input type="file" data-input-name="ImmaginePlanimetria" data-list-name="containerPlanimetria" class="file-input" id="input-planimetria">
+                                    <label class="file-label p-2 text-primary border w-50" for="input-planimetria">+ Aggiungi planimetria</label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="row" id="containerPlanimetria">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="video" class="tab-pane fade" role="tabpanel" aria-labelledby="video-tab">
+
+                        <div class="shadow-sm  p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Video"]</h5>
+                            <div class="form-group">
+                                <div class="form-group text-center">
+                                    <input type="file" data-list-name="containerVideo" class="file-input" id="videoInput">
+                                    <label class="file-label p-2 text-primary border w-50" for="videoInput">+ Aggiungi video</label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="row" id="containerVideo">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="agenda" class="tab-pane fade" role="tabpanel" aria-labelledby="agenda-tab">
+
+                        <div class="shadow-sm p-3">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["AgendaTitle"]&nbsp;<small class="text-muted">@_localizer["AgendaSubtitle"]</small></h5>
+
+                            <div class="btn-group-toggle text-center mt-3" data-toggle="buttons">
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divMonday">
+                                    <input type="checkbox"> @_localizer["Monday"]
+                                </label>
+
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divTuesday">
+                                    <input type="checkbox"> @_localizer["Tuesday"]
+                                </label>
+
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divWednesday">
+                                    <input type="checkbox"> @_localizer["Wednesday"]
+                                </label>
+
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divThursday">
+                                    <input type="checkbox"> @_localizer["Thursday"]
+                                </label>
+
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divFriday">
+                                    <input type="checkbox"> @_localizer["Friday"]
+                                </label>
+
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divSaturday">
+                                    <input type="checkbox"> @_localizer["Saturday"]
+                                </label>
+
+                                <label class="btn-toggle-slot btn btn-light" data-target="#divSunday">
+                                    <input type="checkbox"> @_localizer["Sunday"]
+                                </label>
+                            </div>
+
+                            <hr />
+
+                            <div id="divMonday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                    @_localizer["Monday"]
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-monday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-monday" data-index="0" class="input-group mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend ">
+                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+
+                                <input type="text" id="TimeSlotMonday" style="display:none;" />
+                            </div>
+
+                            <div id="divTuesday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                    @_localizer["Tuesday"]
+
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-tuesday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-tuesday" class="input-group mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+                            </div>
+
+                            <div id="divWednesday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                   @_localizer["Wednesday"]
+
+
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-wednesday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-wednesday" class="input-group mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+                            </div>
+
+                            <div id="divThursday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                    @_localizer["Thursday"]
+
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-thursday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-thursday" class="input-group mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+                            </div>
+
+                            <div id="divFriday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                    @_localizer["Friday"]
+
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-friday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-friday" class="input-group mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+                            </div>
+
+                            <div id="divSaturday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                    @_localizer["Saturday"]
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-saturday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-saturday" class="input-group  mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+                            </div>
+
+                            <div id="divSunday" class="mt-5" style="display:none">
+                                <label class="h6">
+                                    @_localizer["Saturday"]
+
+                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-sunday">@_localizer["AddTimeSlot"]</a>
+                                </label>
+
+                                <div id="slot-time-sunday" class="input-group mb-3">
+                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@_localizer["From"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">@_localizer["To"]</span>
+                                    </div>
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="shadow-sm mb-3 p-3">
-                    <h5 id="caratteristiche" class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">Caratteristiche</h5>
-
-                    <div class="form-group">
-                        <label asp-for="Superficie" class="control-label col-form-label-sm"></label>
-                        <div class="input-group input-group-sm">
-                            <input asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="inputGroup-Superficie-sm">m²</span>
-                            </div>
-                        </div>
-                        <span asp-validation-for="Superficie" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group form-group-counter">
-                        <label asp-for="NumeroCameraLetto" class="control-label col-form-label-sm"></label>
-
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCameraLetto">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" value="0" asp-for="NumeroCameraLetto">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCameraLetto">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="NumeroCameraLetto" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group form-group-counter">
-                        <label asp-for="NumeroAltreStanze" class="control-label col-form-label-sm"></label>
-
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" value="0" asp-for="NumeroAltreStanze">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="NumeroAltreStanze" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group form-group-counter">
-                        <label asp-for="NumeroBagni" class="control-label col-form-label-sm"></label>
-
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" value="0" asp-for="NumeroBagni">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="NumeroBagni" class="text-danger"></span>
-                    </div>
-
-                     <div class="form-group form-group-counter">
-                        <label asp-for="NumeroCucine" class="control-label col-form-label-sm"></label>
-
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" value="0" asp-for="NumeroCucine">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="NumeroCucine" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group form-group-counter">
-                        <label asp-for="NumeroGarage" class="control-label col-form-label-sm"></label>
-
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" value="0" asp-for="NumeroGarage">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="NumeroGarage" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group form-group-counter">
-                        <label asp-for="NumeroPostiAuto" class="control-label col-form-label-sm"></label>
-
-                        <div class="input-group plus-minus-input">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroPostiAuto">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" value="0" asp-for="NumeroPostiAuto">
-                            <div class="input-group-button">
-                                <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="NumeroPostiAuto" class="text-danger"></span>
-                    </div>
-
-                    <hr />
-
-                    <div class="form-group">
-                        <label asp-for="Piano" class="control-label col-form-label-sm"></label>
-                        <input asp-for="Piano" class="form-control form-control-sm" />
-                        <span asp-validation-for="Piano" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="UltimoPiano"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="UltimoPiano"></label>
-                        <span asp-validation-for="UltimoPiano" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Giardino"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="Giardino"></label>
-                        <span asp-validation-for="Giardino" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Ascensore"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="Ascensore"></label>
-                        <span asp-validation-for="Ascensore" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Balcone"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="Balcone"></label>
-                        <span asp-validation-for="Balcone" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Piscina"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="Piscina"></label>
-                        <span asp-validation-for="Piscina" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Cantina"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="Cantina"></label>
-                        <span asp-validation-for="Cantina" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox"/> <!--asp-for="Condizionatori"-->
-                        <label class="form-check-label col-form-label-sm" asp-for="Condizionatori"></label>
-                        <span asp-validation-for="Condizionatori" class="text-danger"></span>
-                    </div>
-                </div>
-
-
-                <div class="shadow-sm mt-3 mb-3 p-3">
-                     <h5 id="descrizione" class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Descrizione</h5>
-                     <div class="form-group">
-                        <label asp-for="Descrizione" class="control-label  col-form-label-sm"></label>
-                        <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
-                        <span asp-validation-for="Descrizione" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="shadow-sm mt-3 mb-3 p-3">
-                     <h5 id="immagini" class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">Immagini</h5>
-                     <div class="form-group">
-                        <label asp-for="Immagini" class="control-label  col-form-label-sm"></label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" multiple asp-for="Immagini">
-                            <label class="custom-file-label">Choose file</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Pubblica l'annuncio" class="btn btn-primary" />
+                <div class="form-group mt-3">
+                    <input type="submit" value="@_localizer["PublishAd"]" class="btn btn-primary" />
                 </div>
             </form>
         </div>

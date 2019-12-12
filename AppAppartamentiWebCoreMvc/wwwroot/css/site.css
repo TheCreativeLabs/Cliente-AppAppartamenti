@@ -585,3 +585,7 @@ select:focus{
 #nav{
    min-height: 60px !important;
 }
+
+footer a{
+    color:var(--light) !important;
+}

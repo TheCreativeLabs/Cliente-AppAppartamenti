@@ -36,6 +36,8 @@
     <Content Remove="Views\Account\Account\Edit.cshtml" />
     <Content Remove="Views\Agenda\Edit.cshtml" />
     <Content Remove="wwwroot\lib\fullcalendar\core\main.d.ts" />
+    <Content Remove="Views\Account %28copy%29\Edit.cshtml" />
+    <Content Remove="Views\Account %28copy%29\EditPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -56,6 +58,7 @@
     <Folder Include="Resources\Views\AnnunciPersonali\" />
     <Folder Include="Views\Agenda\" />
     <Folder Include="Resources\Views\Account\" />
+    <Folder Include="Views\Setting\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />
