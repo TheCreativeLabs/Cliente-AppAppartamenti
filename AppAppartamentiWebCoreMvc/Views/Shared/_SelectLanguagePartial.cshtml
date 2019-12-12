@@ -33,7 +33,7 @@
                   @{
                      foreach (var item in cultureItems)
                      {
-                        <a class="btn btn-lg btn-outline-secondary col-4 mr-2" asp-controller="Home" 
+                        <a class="btn btn-lg btn-outline-dark col-4 mr-2" asp-controller="Home" 
                                 asp-action="SetLanguage" asp-route-culture="@item.Name" asp-route-returnUrl="@returnUrl">
                             <img src="@string.Format("/Images/{0}.png", item.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
                             @{

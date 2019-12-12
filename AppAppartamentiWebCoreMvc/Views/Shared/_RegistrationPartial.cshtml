@@ -32,10 +32,11 @@
                                 <input asp-for="Email" data-val-required="@_localizer["Required"]" placeholder="Email" class="form-control" />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
+
                             <div class="col-sm-12 mb-3">
                                 <input asp-for="DataNascita" type="date" placeholder="@_localizer["BirthDate"]" class="form-control" />
-                                <span asp-validation-for="DataNascita" class="text-danger"></span>
                             </div>
+
                             <div class="col-sm-12 mb-3">
                                 <div class="input-group">
                                     <input asp-for="Password" type="password" data-val-required="@_localizer["Required"]" placeholder="Password" class="form-control">
