@@ -460,10 +460,10 @@ namespace AppAppartamentiApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
 
             var identity = (ClaimsIdentity)User.Identity;
-           
+
             var nome = identity.Claims.FirstOrDefault(x => x.Type == "name");
             var cognome = identity.Claims.FirstOrDefault(x => x.Type == "family_name");
             var datiPicture = identity.Claims.FirstOrDefault(x => x.Type == "picture");
