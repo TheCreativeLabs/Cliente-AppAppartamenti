@@ -18,6 +18,7 @@ namespace AppAppartamenti.Views.Account
     public partial class FacebookLogin : ContentPage
     {
         String ApiRequest;
+        static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
         public FacebookLogin()
         {

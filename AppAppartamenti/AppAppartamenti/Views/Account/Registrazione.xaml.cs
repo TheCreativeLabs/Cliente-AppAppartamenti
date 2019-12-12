@@ -100,7 +100,7 @@ namespace AppAppartamenti.Views.Login
 
                     //TODO: gestire la data di nascita
 
-                    await accountClient.RegisterAsync(registerBindingModel);
+                    var response = await accountClient.RegisterAsync(registerBindingModel);
 
                     stkFormRegistrazione.IsVisible = false;
                     stkRegistrazioneAvvenuta.IsVisible = true;

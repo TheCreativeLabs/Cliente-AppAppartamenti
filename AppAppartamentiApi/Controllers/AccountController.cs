@@ -55,14 +55,32 @@ namespace AppAppartamentiApi.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // GET api/Account/UserInfo
+        /// <summary>
+        /// Restituisce le informazioni di registrazione dell'utente corrente
+        /// cioè ci dice se il current è registrato o no, e con che provider
+        /// </summary>
+        /// <returns>Informazione di registrazione dell'utente current</returns>
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             var userName = User.Identity.GetUserName();
+
+            return GetRegistrationUserInfoByMail(userName);
+
+
+        }
+
+        /// <summary>
+        /// Restituisce le informazioni DI REGISTRAZIONE di un utente, data la sua mail.
+        /// cioè ci dice se la mail è già registrata o no, e, se sì, con che provider
+        /// </summary>
+        /// <returns>Informazioni di registrazione di un utente data la sua mail</returns>
+        private UserInfoViewModel GetRegistrationUserInfoByMail(string mail)
+        {
             ApplicationDbContext applicationDbContext = new ApplicationDbContext();
-            var user = applicationDbContext.Users.Where(x => x.Email == userName).FirstOrDefault();
+            var user = applicationDbContext.Users.Where(x => x.Email == mail).FirstOrDefault();
             string login = null;
             if (user == null || string.IsNullOrEmpty(user.Email))
             {
@@ -79,7 +97,7 @@ namespace AppAppartamentiApi.Controllers
 
             return new UserInfoViewModel
             {
-                Email = User.Identity.GetUserName(), //externalLogin.Email, 
+                Email = mail, //externalLogin.Email, 
                 HasRegistered = user != null,//externalLogin == null,
                 LoginProvider = login//externalLogin != null ? externalLogin.LoginProvider : null
             };
@@ -356,6 +374,11 @@ namespace AppAppartamentiApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            UserInfoViewModel registrationInfo = GetRegistrationUserInfoByMail(model.Email);
+            if (registrationInfo.HasRegistered == true)
+            {
+                return Conflict();
+            }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
