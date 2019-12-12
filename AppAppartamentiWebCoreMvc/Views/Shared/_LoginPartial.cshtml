@@ -17,7 +17,9 @@
                 </div>
                 <div id="login-error" class="row d-none">
                     <div class="col-12">
-                        <p class="text-danger bg-light rounded p-2">La password che hai inserito non è corretta. Riprova o scegli un'altra opzione di accesso.</p>
+                        <p class="text-danger bg-light rounded p-2">
+                            @_localizer["Error"]
+                        </p>
                     </div>
                 </div>
                 <form id="form-login" class="mt-4">
@@ -49,7 +51,7 @@
 
                     <a id="btn-restore-modal" class="text-muted" href="#"><small>@_localizer["ForgotPassword"]</small></a>
 
-                    <div class="separator mt-4 mb-4">oppure</div>
+                    <div class="separator mt-4 mb-4">@_localizer["Or"]</div>
 
                     <button id="btnFacebookLogin" type="button" class="btn btn-block fb">
                         <span class="spinner d-none spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

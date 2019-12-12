@@ -59,27 +59,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Title" xml:space="preserve">
-    <value>Accedi</value>
+    <value>Recover your password</value>
   </data>
-      <data name="SignInFacebook" xml:space="preserve">
-    <value>Accedi con Facebook</value>
+     <data name="Subtitle" xml:space="preserve">
+    <value>Enter the email address associated with your account and we'll send you a new password.</value>
   </data>
-      <data name="SignInGoogle" xml:space="preserve">
-    <value>Accedi con Google</value>
+     <data name="Backbutton" xml:space="preserve">
+    <value>Back to login</value>
   </data>
-     <data name="ForgotPassword" xml:space="preserve">
-    <value>Hai dimenticato la password? Ti aiuteremo a recuperarla.</value>
-    </data>
-        <data name="NotRegistered" xml:space="preserve">
-    <value>Non ancora registrato?</value>
-    </data>
-      <data name="SignUp" xml:space="preserve">
-    <value>Registrati</value>
-    </data>
-       <data name="Or" xml:space="preserve">
-    <value>Oppure</value>
-    </data>
-    <data name="Error" xml:space="preserve">
-    <value>La password che hai inserito non è corretta. Riprova o scegli un'altra opzione di accesso.</value>
-    </data>
+      <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
 </root>

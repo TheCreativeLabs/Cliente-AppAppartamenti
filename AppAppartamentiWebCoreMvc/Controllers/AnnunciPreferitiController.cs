@@ -57,7 +57,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<string> RimuoviPreferitoAsync(Guid Id)
+        public async Task<string> RemoveAsync(Guid Id)
         {
             if (Id != Guid.Empty)
             {

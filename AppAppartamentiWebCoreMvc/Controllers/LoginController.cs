@@ -62,7 +62,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AccountClient accountClient = new AccountClient(httpClient);
             UserInfoViewModel userInfoViewModel = await accountClient.GetUserInfoAsync();
 
-            if(userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.LoginProvider != "Facebook")
+            if(userInfoViewModel.HasRegistered.HasValue == true && userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider != "Facebook")
             {
                 await accountClient.LogoutAsync();
 

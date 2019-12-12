@@ -19,12 +19,15 @@ $(document).ready(function () {
 });
 
 function ReloadList() {
-
     let url = UrlRefresh;
-    let order = $("#select-order").val();
-    if (order != "") {
-        url = url + "&Order=" + $("#select-order").val();
+
+    if ($("#select-order").lenght > 0) {
+        let order = $("#select-order").val();
+        if (order != "") {
+            url = url + "&Order=" + $("#select-order").val();
+        }
     }
+
     $('#annunci').load(url);
    
     setInterval('HideLoader()', 10000);

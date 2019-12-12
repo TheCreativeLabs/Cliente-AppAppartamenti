@@ -241,6 +241,9 @@ select the days and time slots in which you are available to receive a visit
     <value>Publish ad
     </value>
   </data>
-    
+    <data name="Required" xml:space="preserve">
+    <value>Required.
+    </value>
+  </data>
 
 </root>

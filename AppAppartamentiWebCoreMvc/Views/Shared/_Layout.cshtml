@@ -67,9 +67,14 @@
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark p-1 m-1" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link text-dark p-1 m-1 d-none d-sm-block" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Agenda
                                 </a>
+
+                                <a class="nav-link text-dark d-block d-sm-none" asp-controller="Agenda" asp-action="Detail">
+                                    Agenda
+                                </a>
+
                                 <div class="dropdown-menu dropdown-agenda dropdown-menu-right border-0 bg-white shadow" aria-labelledby="agenda-menu-link" style="width:700px;height:430px;">
                                     <div class="p-3">
                                         <div class="container-flui">
@@ -96,16 +101,17 @@
                                     <img id="profileImage" class="rounded-circle" width="45" height="45" style="        margin-top: -5px" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right border-0 bg-light shadow" aria-labelledby="navbarDropdownMenuLink">
-                                    <div class="bg-light p-3 border-bottom text-center">
+                                    <div class="bg-light p-3 text-center">
                                         <h6 id="lblNomeCognome">
                                         </h6>
                                         <small id="lblEmail" class="text-muted"></small>
                                     </div>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Detail">@_localizer["ProfileLabel"]</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">@_localizer["SettingsLabel"]</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-share">
                                             <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
 
                                             @{
@@ -131,6 +137,22 @@
                             </li>
                             <li class="nav-item">
                                 <a id="btnAccedi" class="nav-link text-dark" href="#" data-toggle="modal" data-target="#modalLogin">@_localizer["LogInLabel"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-dark" data-toggle="modal" data-target="#modal-share">
+                                        <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+
+                                        @{
+                                            if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                                            {
+                                                @:English
+                                            }
+                                            else
+                                            {
+                                                @:Italiano
+                                            }
+                                        }
+                                </a>
                             </li>
                         }
                     </ul>

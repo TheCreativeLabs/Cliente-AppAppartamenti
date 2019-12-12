@@ -58,56 +58,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title" xml:space="preserve">
-    <value>Pubblica un annuncio</value>
+<data name="Title" xml:space="preserve">
+    <value>Filtri</value>
   </data>
-    <data name="VirtualAgentTitle" xml:space="preserve">
-    <value>Ciao, son qui per aiutarti!</value>
-  </data>
-     <data name="VirtualAgentSubitle" xml:space="preserve">
-    <value>Posso darti consigli e indicarti tutto ciò che ti serve per vendere al meglio la tua casa</value>
-  </data>
-      <data name="PropertyType" xml:space="preserve">
-    <value>Tipologia propretà</value>
-  </data>
-    <data name="Adtype" xml:space="preserve">
+      <data name="Adtype" xml:space="preserve">
     <value>Tipologia annuncio</value>
   </data>
-     <data name="Position" xml:space="preserve">
-    <value>Posizione</value>
+    
+       <data name="PropertyType" xml:space="preserve">
+    <value>Tipologia propretà</value>
   </data>
-     <data name="PriceAndCost" xml:space="preserve">
-    <value>Prezzo e costi</value>
-  </data>
-      <data name="Price" xml:space="preserve">
+    
+        <data name="Price" xml:space="preserve">
     <value>Prezzo</value>
   </data>
-      <data name="MonthlyCosts" xml:space="preserve">
-    <value>
-        Costi mensili
-    </value>
-  </data>
-    <data name="HeatingType" xml:space="preserve">
-    <value>
-        Heating type
-    </value>
-  </data>
-    <data name="EnergeticClass" xml:space="preserve">
-    <value>   
-        Classe energetica
-    </value>
-  </data>
-     <data name="Features" xml:space="preserve">
-    <value>   
-        Caratteristiche
-    </value>
-  </data>
+    
      <data name="Surface" xml:space="preserve">
     <value>   
         Superficie
     </value>
   </data>
-    <data name="BedroomNumber" xml:space="preserve">
+    
+     <data name="BedroomNumber" xml:space="preserve">
     <value>Numero camere da letto
     </value>
   </data>
@@ -135,22 +107,7 @@
     </value>
   </data>
     
-     <data name="Floor" xml:space="preserve">
-    <value>Piano
-    </value>
-  </data>
-    
-    <data name="TopFloor" xml:space="preserve">
-    <value>Ultimo piano
-    </value>
-  </data>
-    
-    <data name="Garden" xml:space="preserve">
-    <value>Giardino
-    </value>
-  </data>
-    
-     <data name="Lift" xml:space="preserve">
+    <data name="Lift" xml:space="preserve">
     <value>Ascensore
     </value>
   </data>
@@ -170,80 +127,13 @@
     <value>Condizionatori
     </value>
   </data>
-   <data name="Description" xml:space="preserve">
-    <value>Descrizione
-    </value>
-  </data>
-     <data name="Images" xml:space="preserve">
-    <value>Immagini
-    </value>
-  </data>
-     <data name="Planimetry" xml:space="preserve">
-    <value>Planimetria
-    </value>
-  </data>
-     <data name="Video" xml:space="preserve">
-    <value>Video
-    </value>
-  </data>
-  <data name="AgendaTitle" xml:space="preserve">
-    <value>
-        Agenda
-    </value>
-  </data>
-    <data name="AgendaSubtitle" xml:space="preserve">
-    <value>
-        Seleziona i giorni e le fasce orarie in cui sei disponibile per mostrare l'appartamento.
-    </value>
-  </data>
-    <data name="Monday" xml:space="preserve">
-    <value>Lunedì
-    </value>
-  </data>
-     <data name="Tuesday" xml:space="preserve">
-    <value>Martedì
-    </value>
-  </data>
-      <data name="Wednesday" xml:space="preserve">
-    <value>Mercoledì
-    </value>
-  </data>
-      <data name="Thursday" xml:space="preserve">
-    <value>Giovedì
-    </value>
-  </data>
-      <data name="Friday" xml:space="preserve">
-    <value>Venerdì
-    </value>
-  </data>
-      <data name="Saturday" xml:space="preserve">
-    <value>Sabato
-    </value>
-  </data>
-      <data name="Sunday" xml:space="preserve">
-    <value>Domenica
-    </value>
-  </data>
     
-       <data name="From" xml:space="preserve">
-    <value>Dalle ore
+    <data name="SaveFilter" xml:space="preserve">
+    <value>Salva i filtri
     </value>
   </data>
-  <data name="To" xml:space="preserve">
-    <value>Alle ore
-    </value>
-  </data>
-    <data name="AddTimeSlot" xml:space="preserve">
-    <value>+Aggiungi fascia oraria
-    </value>
-  </data>
-     <data name="PublishAd" xml:space="preserve">
-    <value>Pubblica annuncio
-    </value>
-  </data>
-    
-    <data name="Required" xml:space="preserve">
-    <value>Campo obbligatorio.
+    <data name="Garden" xml:space="preserve">
+    <value>Giardino
     </value>
   </data>
 </root>

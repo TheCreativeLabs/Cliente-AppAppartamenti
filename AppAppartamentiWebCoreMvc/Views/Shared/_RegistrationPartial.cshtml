@@ -60,7 +60,7 @@
                                 </div>
                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 <div id="confirm-password-error" class="text-danger d-none">
-                                    Le password non coincidono.
+                                    @_localizer["PasswordMatch"]
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-3"><div class="form-check">
@@ -68,19 +68,18 @@
                                 <label class="form-check-label" for="exampleCheck1">@_localizer["ConfirmCondition"]</label>
                             </div>
                         </div>
-                            <div class="col-sm-12 mb-3">
-                                <input id="btn-signin" type="submit" class="btn btn-primary btn-block" disabled value="Registrati" />
-                            </div>
-
-                           
 
                         <div class="col-sm-12 mb-3">
-                            <div class="separator mt-4 mb-4">oppure</div>
+                            <input id="btn-signin" type="submit" class="btn btn-primary btn-block" disabled value="@_localizer["SignIn"]" />
+                        </div>
+
+                        <div class="col-sm-12 mb-3">
+                            <div class="separator mt-4 mb-4">@_localizer["Or"]</div>
 
                             <a id="btnSignIn" href="#" class="text-muted btn btn-block btn-link btn-sm">
                                 @_localizer["IsLogin"] <strong class="text-primary">@_localizer["LogIn"]</strong>
                             </a>
-                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

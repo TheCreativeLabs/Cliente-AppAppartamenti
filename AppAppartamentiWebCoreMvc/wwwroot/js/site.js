@@ -210,17 +210,19 @@ function Login(url) {
 }
 
 //Aggiunge l'annuncio ai preferiti
-function AddPreferred(btn, url, id) {
+function AddPreferred(btn, id) {
     event.stopPropagation();
-    alert(id);
-    alert(url);
+
+    $(btn).addClass("text-primary");
+    $(btn).attr("data-preferred", "True");
+
     $.ajax({
         type: "POST",
-        url: url,
+        url: '/AnnunciPreferiti/Add',
         data: { Id: id },
         dataType: "json",
         success: function (result, status, xhr) {
-            $(btn).addClass("text-primary");
+            
         },
         error: function (xhr, status, error) {
             TrapError("Error during AddPreferred");
@@ -228,23 +230,40 @@ function AddPreferred(btn, url, id) {
     });
 }
 
-//Rimuove l'annuncio ai preferiti
-function RemovePreferred(btn, url, id) {
+function AddOrRemovePreferred(btn, id) {
     event.stopPropagation();
+
+    if ($(btn).data("preferred") == "True") {
+        RemovePreferred(btn, id);
+    } else {
+        AddPreferred(btn, id);
+    }
+}
+
+//Rimuove l'annuncio ai preferiti
+function RemovePreferred(btn, id) {
+    event.stopPropagation();
+
+    if (window.location.href.indexOf("/AnnunciPreferiti") > -1) {
+        $(btn).closest("div.card-annuncio").remove();
+    } else {
+        $(btn).removeClass("text-primary");
+        $(btn).attr("data-preferred", "False");
+    }
 
     $.ajax({
         type: "POST",
-        url: url,
+        url: '/AnnunciPreferiti/Remove',
         data: { Id: id },
         dataType: "json",
         success: function (result, status, xhr) {
-            $(btn).addClass("text-primary");
         },
         error: function (xhr, status, error) {
             TrapError("Error during ButtonPlusIncrement");
         }
     });
 }
+
 
 //Abilita il pulsante di ricerca dei comuni
 function EnableSearch(searchTextbox) {

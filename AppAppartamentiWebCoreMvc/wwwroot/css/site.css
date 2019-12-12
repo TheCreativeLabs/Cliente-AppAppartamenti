@@ -1,5 +1,6 @@
 ﻿:root{
     --color-primary:#ff6b6b;
+    --color-secondary: var(--cyan);
 }
 
 
@@ -563,8 +564,19 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
-  border-color:  var(--color-primary);
+.uneditable-input:focus ,
+.btn:focus,
+select:focus{
+  border: 1px solid var(--color-secondary) !important;
   box-shadow: unset; /* 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6)*/
   outline: 0 none;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: var(--color-secondary) !important;
+    background-color: var(--color-secondary) !important;
+}
+
+.form-group-sm input {
+    max-width: 350px !important;
 }

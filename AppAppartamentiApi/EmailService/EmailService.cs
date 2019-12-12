@@ -17,7 +17,8 @@ namespace AppAppartamentiApi.Providers
 
         public static async Task SendAsync(string EmailTo, string Subject, string Body)
         {
-            var apiKey = Properties.Settings.Default.SendGridApiKey;// ConfigurationManager.AppSettings["SendGridApiKey"];
+            //var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
+            var apiKey = ConfigurationManager.AppSettings["SendGridApiKey"];
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("AppAppartamenti@app.com", "AppAppartamenti");
             var subject = Subject;
