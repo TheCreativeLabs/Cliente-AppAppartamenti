@@ -227,10 +227,11 @@ h1,h2,h3,h4,h5,h6{
 }
 
 body{
-    font-family:"Regular"
+    font-family:"Regular" !important;
 }
 
 p{
+    font-family:"Regular" !important;
     font-size:90%;
 }
 
@@ -579,4 +580,8 @@ select:focus{
 
 .form-group-sm input {
     max-width: 350px !important;
+}
+
+#nav{
+   min-height: 60px !important;
 }
