@@ -62,7 +62,7 @@
     <value>Cerca</value>
   </data>
       <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Cerca per città o provincia</value>
+    <value>Cerca per città</value>
   </data>
    <data name="OtherFilterLabel" xml:space="preserve">
     <value>Altri filtri</value>
