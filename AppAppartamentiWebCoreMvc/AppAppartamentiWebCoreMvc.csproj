@@ -21,28 +21,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Index.cshtml" />
-    <Content Remove="wwwroot\images\.home.jpg.icloud" />
     <Content Remove="Views\Index.cshtml" />
     <Content Remove="Views\AnnunciPreferiti\AnnunciPreferiti\List.cshtml" />
-    <Content Remove="wwwroot\css\Detail.cshtml" />
-    <Content Remove="wwwroot\images\Roboto-Regular.ttf" />
-    <Content Remove="wwwroot\css\Roboto-Regular.ttf" />
-    <Content Remove="wwwroot\js\home %28copy%29.js" />
-    <Content Remove="wwwroot\js\annunci-details %28copy%29.js" />
     <Content Remove="Views\AnnunciPreferiti\Detail.cshtml" />
     <Content Remove="Views\AnnunciPersonali\Detail.cshtml" />
-    <Content Remove="wwwroot\lib\fullcalendar\core\locales\en-nz.js" />
-    <Content Remove="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
-    <Content Remove="wwwroot\lib\fullcalendar\moment\main.d.ts" />
-    <Content Remove="wwwroot\lib\fullcalendar\moment\main.esm.js" />
-    <Content Remove="wwwroot\bundle\bundle.min.js" />
     <Content Remove="Views\Account\Account\Edit.cshtml" />
     <Content Remove="Views\Agenda\Edit.cshtml" />
-    <Content Remove="wwwroot\js\annunci-create.min.js" />
-    <Content Remove="wwwroot\js\annunci-details.min.js" />
-    <Content Remove="wwwroot\js\annunci-list.min.js" />
-    <Content Remove="wwwroot\bundle\bundle.min.js" />
-    <Content Remove="wwwroot\js\annunci-details.min.js" />
+    <Content Remove="wwwroot\lib\fullcalendar\core\main.d.ts" />
+    <Content Remove="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
+    <Content Remove="wwwroot\lib\fullcalendar\moment\main.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -55,55 +42,14 @@
     <Folder Include="Utility\" />
     <Folder Include="Utility\Extensions\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="wwwroot\bundle\" />
-    <Folder Include="wwwroot\lib\multirange\" />
-    <Folder Include="wwwroot\lib\nouislider\" />
-    <Folder Include="wwwroot\lib\wNumb\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Views\" />
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Home\" />
     <Folder Include="Resources\Views\Shared\" />
     <Folder Include="Resources\Views\AnnunciPersonali\" />
-    <Folder Include="wwwroot\lib\fullcalendar\moment\" />
     <Folder Include="Views\Agenda\" />
     <Folder Include="Resources\Views\Account\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="wwwroot\js\annunci-details.js" />
-    <None Remove="wwwroot\js\annunci-create.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="wwwroot\js\annunci-create.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\annunci-details.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\facebook-login %28copy%29.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\annunci-create %28copy%29.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\filter-modal.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\account-edit.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\filter-modal %28copy%29.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\share-modal.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\account-edit %28copy%29.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\js\virtual-agent-sell.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing.Common">
@@ -113,5 +59,150 @@
   <ItemGroup>
     <EmbeddedResource Remove="Resources\Views\Home\Home\Index.en-US.resx" />
     <EmbeddedResource Remove="Resources\AppAppartamentiApiClient\AppAppartamentiApiClient\RegisterUserBindingModel.en-US.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\.DS_Store" />
+    <None Include="wwwroot\bundle\bundle.min.js" />
+    <None Include="wwwroot\css\.DS_Store" />
+    <None Include="wwwroot\images\.DS_Store" />
+    <None Include="wwwroot\js\.DS_Store" />
+    <None Include="wwwroot\js\account-edit.js" />
+    <None Include="wwwroot\js\account-edit.min.js" />
+    <None Include="wwwroot\js\annunci-create.js" />
+    <None Include="wwwroot\js\annunci-create.min.js" />
+    <None Include="wwwroot\js\annunci-details.js" />
+    <None Include="wwwroot\js\annunci-details.min.js" />
+    <None Include="wwwroot\js\annunci-list.js" />
+    <None Include="wwwroot\js\annunci-list.min.js" />
+    <None Include="wwwroot\js\facebook-login.js" />
+    <None Include="wwwroot\js\facebook-login.min.js" />
+    <None Include="wwwroot\js\filter-modal.js" />
+    <None Include="wwwroot\js\filter-modal.min.js" />
+    <None Include="wwwroot\js\google-login.js" />
+    <None Include="wwwroot\js\google-login.min.js" />
+    <None Include="wwwroot\js\home.js" />
+    <None Include="wwwroot\js\home.min.js" />
+    <None Include="wwwroot\js\share-modal.js" />
+    <None Include="wwwroot\js\share-modal.min.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\js\virtual-agent-sell.js" />
+    <None Include="wwwroot\js\virtual-agent-sell.min.js" />
+    <None Include="wwwroot\lib\.DS_Store" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\fullcalendar\.DS_Store" />
+    <None Include="wwwroot\lib\fullcalendar\core\.DS_Store" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales-all.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales-all.min.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\af.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar-dz.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar-kw.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar-ly.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar-ma.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar-sa.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar-tn.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ar.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\bg.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\bs.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ca.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\cs.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\da.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\de.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\el.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\en-au.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\en-gb.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\en-nz.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\es-us.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\es.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\et.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\eu.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\fa.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\fi.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\fr-ca.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\fr-ch.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\fr.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\gl.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\he.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\hi.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\hr.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\hu.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\id.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\is.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\it.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ja.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ka.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\kk.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ko.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\lb.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\lt.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\lv.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\mk.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ms.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\nb.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\nl.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\nn.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\pl.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\pt-br.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\pt.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ro.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\ru.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\sk.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\sl.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\sq.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\sr-cyrl.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\sr.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\sv.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\th.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\tr.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\uk.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\vi.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\zh-cn.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\locales\zh-tw.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\main.esm.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\main.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar\core\README.md" />
+    <None Include="wwwroot\lib\fullcalendar\daygrid\main.esm.js" />
+    <None Include="wwwroot\lib\fullcalendar\daygrid\main.js" />
+    <None Include="wwwroot\lib\fullcalendar\daygrid\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar\daygrid\README.md" />
+    <None Include="wwwroot\lib\fullcalendar\moment\main.esm.js" />
+    <None Include="wwwroot\lib\fullcalendar\moment\main.js" />
+    <None Include="wwwroot\lib\fullcalendar\moment\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar\moment\README.md" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\lib\multirange\multirange.js" />
+    <None Include="wwwroot\lib\nouislider\nouislider.js" />
+    <None Include="wwwroot\lib\nouislider\nouislider.min.js" />
+    <None Include="wwwroot\lib\wNumb\wNumb.min.js" />
+    <None Include="wwwroot\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\webfonts\fa-solid-900.woff2" />
   </ItemGroup>
 </Project>
