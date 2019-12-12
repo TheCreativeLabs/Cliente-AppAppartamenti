@@ -28,13 +28,12 @@
 <body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="90">
     <header>
         <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-sm pl-1 pr-1">
-            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0 p-1" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-igloo h3 text-primary"></i>
+                <i class="fas fa-sort-down text-dark"></i>
             </button>
             <div class="container-fluid pl-1 pr-1">
-                <div class="navbar-collapse collapsible-navbar collapse hide">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
-                </div>
+                <a class="navbar-brand d-none d-sm-block" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
 
                 <form id="navSearchBar" class="navbar-start">
                     <input id="codiceComune" type="number" value="" style="display: none;" />
@@ -57,7 +56,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-sm btn-info p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
+                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-info p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
                             </li>
                             
                             <li class="nav-item">
@@ -109,7 +108,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Detail">@_localizer["ProfileLabel"]</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">@_localizer["SettingsLabel"]</a>
+                                    <a class="dropdown-item" asp-controller="Setting" asp-action="Detail">@_localizer["SettingsLabel"]</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-share">
                                             <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
@@ -160,7 +159,6 @@
             </div>
         </nav>
     </header>
-
 
     @RenderSection("SubHeader", required: false)
 

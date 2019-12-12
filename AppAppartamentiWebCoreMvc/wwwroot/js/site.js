@@ -50,9 +50,21 @@ $(document).ready(function () {
     $(".dropdown-agenda").click(function (e) {
         e.stopPropagation();
     });
+
+    $(".btn-show-password").click(function () {
+        let passwordInput = $(this).parent().parent().children("input");
+
+        if ($(passwordInput).attr("type") == "text") {
+            $($(this).children()[0]).removeClass("d-none");
+            $($(this).children()[1]).addClass("d-none");
+            $(passwordInput).attr("type", "password");
+        } else {
+            $($(this).children()[0]).addClass("d-none");
+            $($(this).children()[1]).removeClass("d-none");
+            $(passwordInput).attr("type", "text");
+        }
+    });
 });
-
-
 
 //Gestisce l'autenticazione con facebook
 function FacebookLogin(button) {
@@ -263,7 +275,6 @@ function RemovePreferred(btn, id) {
         }
     });
 }
-
 
 //Abilita il pulsante di ricerca dei comuni
 function EnableSearch(searchTextbox) {
