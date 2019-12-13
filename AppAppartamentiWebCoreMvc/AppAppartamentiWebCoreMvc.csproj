@@ -81,9 +81,4 @@
     <EmbeddedResource Remove="Resources\Views\Home\Home\Index.en-US.resx" />
     <EmbeddedResource Remove="Resources\AppAppartamentiApiClient\AppAppartamentiApiClient\RegisterUserBindingModel.en-US.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\lib\fullcalendar\core\main.d.ts" />
-    <TypeScriptCompile Include="wwwroot\lib\fullcalendar\moment\main.d.ts" />
-    <TypeScriptCompile Include="wwwroot\lib\fullcalendar\daygrid\main.d.ts" />
-  </ItemGroup>
 </Project>

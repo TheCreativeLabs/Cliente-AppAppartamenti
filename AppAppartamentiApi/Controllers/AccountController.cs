@@ -19,6 +19,8 @@ using AppAppartamentiApi.Results;
 using System.Linq;
 using System.Web.Http.Description;
 using System.Data.Entity;
+using System.Web.Http.Results;
+using System.Net;
 
 namespace AppAppartamentiApi.Controllers
 {
@@ -377,7 +379,8 @@ namespace AppAppartamentiApi.Controllers
             UserInfoViewModel registrationInfo = GetRegistrationUserInfoByMail(model.Email);
             if (registrationInfo.HasRegistered == true)
             {
-                return Conflict();
+                //return Conflict();
+                return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "USER_ALREADY_EXIST", this);
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
@@ -484,13 +487,28 @@ namespace AppAppartamentiApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            string nome = null;
+            string cognome = null;
+            string datiPicture = null;
+            string dataDiNascitaString = null;
 
             var identity = (ClaimsIdentity)User.Identity;
 
-            var nome = identity.Claims.FirstOrDefault(x => x.Type == "name");
-            var cognome = identity.Claims.FirstOrDefault(x => x.Type == "family_name");
-            var datiPicture = identity.Claims.FirstOrDefault(x => x.Type == "picture");
-            var dataDiNascitaString = identity.Claims.FirstOrDefault(x => x.Type == "dateofbirth");
+            if (identity.Claims.First().Issuer == "Google")
+            {
+                nome = identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/given_name").Value;
+                cognome = identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/family_name").Value;
+                datiPicture = identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/picture").Value;
+                //google non fornisce datadinascita
+                //dataDiNascitaString = identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/dateofbirth").Value;
+            }
+            else
+            {
+                nome = identity.Claims.FirstOrDefault(x => x.Type == "name").Value;
+                cognome = identity.Claims.FirstOrDefault(x => x.Type == "family_name").Value;
+                datiPicture = identity.Claims.FirstOrDefault(x => x.Type == "picture").Value;
+                dataDiNascitaString = identity.Claims.FirstOrDefault(x => x.Type == "dateofbirth").Value;
+            }
 
             //var info = await Authentication.GetExternalLoginInfoAsync();
             var info = await AuthenticationManager_GetExternalLoginInfoAsync_WithExternalBearer();
@@ -518,27 +536,31 @@ namespace AppAppartamentiApi.Controllers
             //Registra l'utente dentro la tabella UserInfo del db Data prendendo i valori dai Claims
             UserInfo userInfo = new UserInfo()
             {
-                Cognome = cognome != null ? cognome.Value : null,
-                Nome = nome != null ? nome.Value : null,
+                Cognome = cognome != null ? cognome : null,
+                Nome = nome != null ? nome : null,
                 IdAspNetUser = new Guid(user.Id),
                 Id = Guid.NewGuid()
             };
             //se è presente, setto data di nascita
             if (dataDiNascitaString != null)
             {
-                userInfo.DataDiNascita = (DateTime.ParseExact(dataDiNascitaString.Value, "MM/dd/yyyy",
+                userInfo.DataDiNascita = (DateTime.ParseExact(dataDiNascitaString, "MM/dd/yyyy",
                                             System.Globalization.CultureInfo.InvariantCulture));
             }
             //se è presente, setta url della foto
-            if (datiPicture != null)
+            if (datiPicture != null && identity.Claims.First().Issuer == "Facebook")
             {
                 //JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 //FacebookImageData imageData = (FacebookImageData)json_serializer.DeserializeObject(datiPicture.Value);
                 //userInfo.PhotoUrl = imageData.data.url;
-                datiPicture.Value.IndexOf("url\": \"");
-                var url = datiPicture.Value.Substring(datiPicture.Value.IndexOf("url\": \"") + 7);
+                datiPicture.IndexOf("url\": \"");
+                var url = datiPicture.Substring(datiPicture.IndexOf("url\": \"") + 7);
                 url = url.Substring(0, url.IndexOf("\""));
                 userInfo.PhotoUrl = url;
+            }
+            else
+            {
+                userInfo.PhotoUrl = datiPicture;
             }
 
 
