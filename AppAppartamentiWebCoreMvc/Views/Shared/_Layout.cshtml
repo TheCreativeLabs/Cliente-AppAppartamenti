@@ -19,7 +19,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - App appartamenti</title>
     <link rel="stylesheet" href="~/bundle/bundle.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/core@4.3.1/main.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.css">
@@ -30,7 +29,7 @@
         <nav id="nav" class="navbar navbar-expand-lg fixed-top navbar-light bg-white mb-3 shadow-sm pl-1 pr-1">
             <button class="navbar-toggler border-0 p-1" type="button" data-toggle="collapse" data-target=".collapsible-navbar" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-igloo h3 text-primary"></i>
-                <i class="fas fa-sort-down text-dark"></i>
+                <i class="fas fa-sort-down" style="margin-top: -10px !important;"></i>
             </button>
             <div class="container-fluid pl-1 pr-1">
                 <a class="navbar-brand d-none d-sm-block" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
@@ -99,8 +98,8 @@
                                 <a class="nav-link text-dark p-0 m-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img id="profileImage" class="rounded-circle" width="45" height="45" style="        margin-top: -5px" />
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right border-0 bg-light shadow" aria-labelledby="navbarDropdownMenuLink">
-                                    <div class="bg-light p-3 text-center">
+                                <div class="dropdown-menu dropdown-menu-right border-0 bg-white shadow" aria-labelledby="navbarDropdownMenuLink">
+                                    <div class="p-3 text-center">
                                         <h6 id="lblNomeCognome">
                                         </h6>
                                         <small id="lblEmail" class="text-muted"></small>
@@ -244,9 +243,9 @@
                 </div>
                 <div class="col text-right">
                     @_localizer["FollowUsLabel"]
-                    <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-facebook-f"></i></button>
-                    <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-instagram"></i></button>
-                    <button type="button" class="btn btn-outline-light rounded-circle btn-social text-white"><i class="fab fa-twitter"></i></button>
+                    <button type="button" class="btn btn-social text-white"><i class="fab fa-facebook-f"></i></button>
+                    <button type="button" class="btn btn-social text-white"><i class="fab fa-instagram"></i></button>
+                    <button type="button" class="btn btn-social text-white"><i class="fab fa-twitter"></i></button>
                 </div>
             </div>
         </div>

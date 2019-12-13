@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     $("#nav").addClass("navbar-transparent");
     $("#navSearchBar").hide();
+
     window.onscroll = function () { changeScroll() };
 
     $('#btnSignIn').click(function () {

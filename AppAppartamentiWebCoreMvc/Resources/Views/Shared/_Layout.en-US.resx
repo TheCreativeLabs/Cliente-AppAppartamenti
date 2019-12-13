@@ -62,7 +62,7 @@
     <value>Search</value>
   </data>
       <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Search by city or province</value>
+    <value>Search by city</value>
   </data>
    <data name="OtherFilterLabel" xml:space="preserve">
     <value>Other filters</value>

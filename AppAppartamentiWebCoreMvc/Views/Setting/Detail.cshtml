@@ -24,24 +24,41 @@
             <h2 class="mt-2 mb-2">@_localizer["Title"]</h2>
             <hr />
 
-            <div class="col-sm-4">
-              <div class="shadow border-0 rounded-pill">
-                <a href="#" class="btn stretched-link" data-toggle="modal" data-target="#modal-share">
-                        <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+            <div class="col-sm-4 text-center">
+              <div class="shadow border-0 rounded-pill p-2">
+                <label class="h6">@_localizer["Language"]</label>
+                <br />
 
-                        @{
-                            if (requestCulture.RequestCulture.UICulture.Name == "en-US")
-                            {
-                                @:English
-                            }
-                            else
-                            {
-                                @:Italiano
-                            }
+                <a href="#" class="btn stretched-link" data-toggle="modal" data-target="#modal-share">
+                    <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+
+                    @{
+                        if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                        {
+                            @:English
                         }
+                        else
+                        {
+                            @:Italiano
+                        }
+                    }
                 </a>
               </div>
             </div>
+
+            <div class="col-sm-4 text-center">
+              <div class="shadow border-0 rounded-pill p-2">
+                <label class="h6">@_localizer["Notifications"]</label>
+                <br />
+
+                <div class="custom-control custom-switch">
+                  <label for="">@_localizer["Disabled"]</label>
+                  <input type="checkbox" class="custom-control-input" id="customSwitch1" value="true">
+                  <label class="custom-control-label" for="customSwitch1">@_localizer["Enabled"]</label>
+                </div>
+              </div>
+            </div>
+
         </div>
     </div>
 </div>

@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-sm-9 mt-4">
-            <form asp-action="Create" id="form-create">
+            <form asp-action="Create" id="form-create" asp-route-Id="@annuncio.Id">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="tipologia-proprieta" role="tabpanel" aria-labelledby="tipologia-proprieta-tab">
@@ -47,16 +47,20 @@
                             </h5>
                             <div class="form-group">
                                 @{
-                                    
                                     IEnumerable<TipologiaProprieta> tipologiaProprieta2 = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
                                     @foreach (var proprieta in tipologiaProprieta2)
                                     {
-                                        if (annuncio.TipologiaProprieta == proprieta.Descrizione ) {
-                                        }
-                                        else {
-                                        } //string isChecked = (? "checked" : "");
+                                        if (annuncio.TipologiaProprieta.ToUpper() == proprieta.Descrizione.ToUpper())
+                                        {
+                                            <input class="mr-2" type="radio" checked asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
 
-                                        <input class="mr-2" type="radio" checked asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" /><small>@proprieta.Descrizione</small><br />
+                                        }
+                                        else
+                                        {
+                                            <input class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
+
+                                        }
+
                                     }
                                     <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
                                 }
@@ -74,8 +78,15 @@
                                     IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
                                     @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
                                     {
+                                        if (annuncio.TipologiaAnnuncio.ToUpper() == tipologiaAnnuncio.Descrizione.ToUpper())
+                                        {
+                                            <input checked data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
+                                        }
+                                        else
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
+                                        }
 
-                                        <input  data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
                                     }
                                     <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
                                 }
@@ -91,7 +102,7 @@
                             <div class="form-group form-group-sm">
                                 <label asp-for="CodiceComune" class="control-label"></label>
                                 <div class="input-group  mb-3">
-                                    <input id="input-comune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                    <input id="input-comune" value="@annuncio.NomeComune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
                                     <div class="input-group-append">
                                         <div id="city-spinner" class="spinner-border spinner-border-sm text-secondary mt-2" role="status" style="display:none;margin-left:-2rem;z-index:1050 !important">
                                             <span class="sr-only">Loading...</span>
@@ -100,17 +111,17 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <input data-val-required="@_localizer["Required"]" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                <input data-val-required="@_localizer["Required"]" value="@annuncio.CodiceComune" asp-for="CodiceComune" type="text" class="form-control d-none" />
                                 <span asp-validation-for="CodiceComune" class="text-danger"></span>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label data-val-required="@_localizer["Required"]" asp-for="Indirizzo" class="control-label "></label>
-                                <input asp-for="Indirizzo" class="form-control" disabled/>
+                                <input asp-for="Indirizzo" class="form-control" value="@annuncio.Indirizzo" />
                                 <span asp-validation-for="Indirizzo" class="text-danger"></span>
                             </div>
 
                             <div class="form-group form-group-sm">
-                                <input asp-for="CoordinateGeografiche" class="form-control d-none" />
+                                <input asp-for="CoordinateGeografiche" value="@annuncio.CoordinateGeografiche" class="form-control d-none" />
                                 <span asp-validation-for="CoordinateGeografiche" class="text-danger"></span>
                             </div>
 
@@ -120,8 +131,7 @@
                     </div>
                     <div id="prezzo" class="tab-pane fade" role="tabpanel" aria-labelledby="prezzo-tab">
                         <div class="shadow-sm p-3">
-                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">
                                 @_localizer["PriceAndCost"]
                             </h5>
                             <div class="form-group form-group-sm">
@@ -129,7 +139,7 @@
                                     @_localizer["Price"]
                                 </label>
                                 <div class="input-group">
-                                    <input data-val-required="@_localizer["Required"]"  asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                    <input data-val-required="@_localizer["Required"]" value="@annuncio.Prezzo" asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
                                     </div>
@@ -142,7 +152,7 @@
                                     @_localizer["MonthlyCosts"]
                                 </label>
                                 <div class="input-group">
-                                    <input data-val-required="@_localizer["Required"]"  asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                    <input data-val-required="@_localizer["Required"]" value="@annuncio.SpesaMensileCondominio" asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="inputGroup-SpesaMensileCondominio-sm">€/Mese</span>
                                     </div>
@@ -151,32 +161,37 @@
                             </div>
 
                             <div class="form-group form-group-sm">
-                                @{
-                                    IEnumerable<TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
-                                }
+
                                 <label class="control-label">
                                     @_localizer["HeatingType"]
                                 </label>
                                 <br />
-                                @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
-                                                             new SelectList(tipologiaRiscaldamento, "Id", "Descrizione"),
-                                                             "Tipologia riscaldamento", new { @class = "custom-select" })
-                            </div>
 
-                            <div class="form-group form-group-sm">
                                 @{
-                                    IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+                                    IEnumerable<TipologiaRiscaldamento> TipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
+                                    var selectedRiscaldamento = TipologiaRiscaldamento.Where(x => x.Descrizione.ToUpper() == annuncio.TipologiaRiscaldamento.ToUpper()).FirstOrDefault();
+
+                                    @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
+                                             new SelectList(TipologiaRiscaldamento, "Id", "Descrizione",selectedRiscaldamento.Id),
+                                             "Seleziona...", new { @class = "custom-select" });
                                 }
+                            </div>
+                            <div class="form-group form-group-sm">
+
                                 <label class="control-label">
                                     @_localizer["EnergeticClass"]
 
-                                    </label>
+                                </label>
                                 <br />
 
-                                @Html.DropDownListFor(m => m.IdClasseEnergetica,
-                                                             new SelectList(classeEnergetica, "Id", "Descrizione"),
-                                                             "Classe energetica", new { @class = "custom-select" })
+                                @{
+                                    IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+                                    var selectedClasseEnergetica = classeEnergetica.Where(x => x.Descrizione.ToUpper() == annuncio.ClasseEnergetica.ToUpper()).FirstOrDefault();
 
+                                    @Html.DropDownListFor(m => m.IdClasseEnergetica,
+                                             new SelectList(classeEnergetica, "Id", "Descrizione", selectedClasseEnergetica.Id),
+                                             "Seleziona...", new { @class = "custom-select" });
+                                }
                             </div>
                         </div>
                     </div>
@@ -185,7 +200,7 @@
                         <div class="shadow-sm p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">
-                            @_localizer["Features"]
+                                @_localizer["Features"]
 
                             </h5>
 
@@ -194,7 +209,7 @@
                                     @_localizer["Surface"]
                                 </label>
                                 <div class="input-group">
-                                    <input  data-val-required="@_localizer["Required"]"  asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm" />
+                                    <input data-val-required="@_localizer["Required"]" value="@annuncio.Superficie" asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm" />
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="inputGroup-Superficie-sm">m²</span>
                                     </div>
@@ -213,7 +228,7 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" value="0" asp-for="NumeroCameraLetto">
+                                    <input value="@annuncio.NumeroCameraLetto" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" asp-for="NumeroCameraLetto">
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCameraLetto">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -234,7 +249,7 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" value="0" asp-for="NumeroAltreStanze">
+                                    <input value="@annuncio.NumeroAltreStanze" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" asp-for="NumeroAltreStanze">
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -255,7 +270,7 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" value="0" asp-for="NumeroBagni">
+                                    <input value="@annuncio.NumeroBagni" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" asp-for="NumeroBagni">
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -276,7 +291,7 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" value="0" asp-for="NumeroCucine">
+                                    <input value="@annuncio.NumeroCucine" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" asp-for="NumeroCucine">
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -297,7 +312,7 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" value="0" asp-for="NumeroGarage">
+                                    <input value="@annuncio.NumeroGarage" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" asp-for="NumeroGarage">
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -318,7 +333,7 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" value="0" asp-for="NumeroPostiAuto">
+                                    <input value="@annuncio.NumeroPostiAuto" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" asp-for="NumeroPostiAuto">
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -334,12 +349,24 @@
                                 <label asp-for="Piano" class="control-label">
                                     @_localizer["Floor"]
                                 </label>
-                                <input data-val-required="@_localizer["Required"]" asp-for="Piano" class="form-control" />
+
+                                <input value="@annuncio.Piano" data-val-required="@_localizer["Required"]" asp-for="Piano" class="form-control" />
                                 <span asp-validation-for="Piano" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="UltimoPiano" />
+                                @{
+                                    if (annuncio.UltimoPiano.HasValue && annuncio.UltimoPiano.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="UltimoPiano" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="UltimoPiano" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="UltimoPiano">
                                     @_localizer["TopFloor"]
                                 </label>
@@ -347,7 +374,17 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Giardino" />
+                                @{ if (annuncio.Giardino.HasValue && annuncio.Giardino.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Giardino" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Giardino" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Giardino">
                                     @_localizer["Garden"]
                                 </label>
@@ -355,7 +392,17 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Ascensore" /> <!---->
+                                @{ if (annuncio.Ascensore.HasValue && annuncio.Ascensore.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Ascensore" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Ascensore" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Ascensore">
                                     @_localizer["Lift"]
                                 </label>
@@ -363,31 +410,71 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Balcone"/> <!--asp-for="Balcone"-->
+                                @{ if (annuncio.Balcone.HasValue && annuncio.Balcone.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Balcone" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Balcone" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Balcone">
-                                     @_localizer["Balcony"]
+                                    @_localizer["Balcony"]
                                 </label>
                                 <span asp-validation-for="Balcone" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Piscina" /> <!--asp-for="Piscina"-->
+                                @{ if (annuncio.Piscina.HasValue && annuncio.Piscina.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Piscina" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Piscina" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Piscina">
-                                     @_localizer["Pool"]
+                                    @_localizer["Pool"]
                                 </label>
                                 <span asp-validation-for="Piscina" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Cantina" /> <!---->
+                                @{ if (annuncio.Cantina.HasValue && annuncio.Cantina.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Cantina" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Cantina" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Cantina">
-                                     @_localizer["Cellar"]
+                                    @_localizer["Cellar"]
                                 </label>
                                 <span asp-validation-for="Cantina" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Condizionatori" /> <!---->
+                                @{ if (annuncio.Condizionatori.HasValue && annuncio.Condizionatori.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Condizionatori" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Condizionatori" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Condizionatori">
                                     @_localizer["Conditioners"]
                                 </label>
@@ -396,11 +483,10 @@
                         </div>
                     </div>
                     <div id="descrizione" class="tab-pane fade" role="tabpanel" aria-labelledby="descrizione-tab">
-
                         <div class="shadow-sm p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Description"]</h5>
                             <div class="form-group">
-                                <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
+                                @Html.TextArea("Descrizione","@annuncio.Descrizion", new {@rows="10",@class="form-control" })
                                 <span asp-validation-for="Descrizione" class="text-danger"></span>
                             </div>
                         </div>
@@ -423,8 +509,6 @@
                         </div>
                     </div>
                     <div id="planimetrie" class="tab-pane fade" role="tabpanel" aria-labelledby="planimetrie-tab">
-
-
                         <div class="shadow-sm  p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Planimetry"]</h5>
                             <div class="form-group">
@@ -441,7 +525,6 @@
                         </div>
                     </div>
                     <div id="video" class="tab-pane fade" role="tabpanel" aria-labelledby="video-tab">
-
                         <div class="shadow-sm  p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Video"]</h5>
                             <div class="form-group">
@@ -459,7 +542,6 @@
 
                     </div>
                     <div id="agenda" class="tab-pane fade" role="tabpanel" aria-labelledby="agenda-tab">
-
                         <div class="shadow-sm p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["AgendaTitle"]&nbsp;<small class="text-muted">@_localizer["AgendaSubtitle"]</small></h5>
 
@@ -542,7 +624,7 @@
 
                             <div id="divWednesday" class="mt-5" style="display:none">
                                 <label class="h6">
-                                   @_localizer["Wednesday"]
+                                    @_localizer["Wednesday"]
 
 
                                     <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-wednesday">@_localizer["AddTimeSlot"]</a>
@@ -662,7 +744,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/annunci-create.js" asp-append-version="true"></script>
+    <!--<script src="~/js/annunci-create.js" asp-append-version="true"></script>-->
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
