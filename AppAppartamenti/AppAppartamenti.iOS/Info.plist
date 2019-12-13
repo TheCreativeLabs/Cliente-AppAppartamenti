@@ -38,6 +38,9 @@
 	<array>
 		<string>fa-brands-400.ttf</string>
 		<string>MyriadPro-Regular.otf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Regular.ttf</string>
 		<string>Font Awesome 5 Free-Solid-900.otf</string>
 	</array>
 	<key>CFBundleExecutable</key>

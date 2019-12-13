@@ -4,33 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Login.Registrazione" xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true">
 
     <ContentPage.Content>
-        <StackLayout Padding="20" x:Name="stkBody">
+        <StackLayout Style="{x:StaticResource StackContainer}">
+                <Button BackgroundColor="Transparent"
+                        Text="&#xf00d;" HorizontalOptions="Start" Style="{x:StaticResource NavBackButton}" 
+                        Clicked="Cancel_Clicked">
+                </Button>
+                <Label Style="{x:StaticResource Title}" Text="{translator:Translate Registrazione.Bottone}"></Label>
 
-            <Button BackgroundColor="Transparent" FontSize="Title" FontAttributes="Bold"
-                    WidthRequest="40" TextColor="#ff6b6b"
-                    Text="&#xf00d;" FontFamily="{StaticResource FA-Solid}" Margin="0,20,0,0"
-                    HorizontalOptions="EndAndExpand"
-                    Clicked="Cancel_Clicked">
-            </Button>
-
-            <StackLayout x:Name="stkFormRegistrazione" IsVisible="True" VerticalOptions="CenterAndExpand" Padding="0">
-
-                <Frame HeightRequest="130" WidthRequest="130" HorizontalOptions="Center" HasShadow="True"
-                       Padding="0" IsClippedToBounds="True" BorderColor="LightGray" Margin="0,0,0,20">
-                 
-                    <StackLayout>
-                        <Image x:Name="imgFotoUtente" Aspect="Fill" HorizontalOptions="Center" IsVisible="false" VerticalOptions="Center"
-                           ></Image>
-                        <Label x:Name="lblFoto" FontSize="Large"  Text="&#xf030;" VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,55,0,0" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource FA-Solid}"></Label>
-                    </StackLayout>
-
+                <Frame HeightRequest="90" WidthRequest="90" HorizontalOptions="Center" HasShadow="True"
+                       Padding="0" IsClippedToBounds="True" BorderColor="LightGray">
+                        <Image x:Name="imgFotoUtente" Aspect="Fill" HorizontalOptions="Center"  IsVisible="false" VerticalOptions="Center"></Image>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ActionImmagini"></TapGestureRecognizer>
                     </Frame.GestureRecognizers>
-
                     <Frame.Style>
                         <OnPlatform x:TypeArguments="Style">
                             <On Platform="iOS" Value="{x:StaticResource IosFrameRadius}"/>
@@ -39,8 +30,7 @@
                     </Frame.Style>
                 </Frame>
 
-                <!--<Button HeightRequest="50" CornerRadius="10" FontSize="Medium" Visual="Material" WidthRequest="50" TextColor="Black" BackgroundColor="#efefef" Text="&#xf030;" Margin="0,-30,0,10" FontFamily="{StaticResource FA-Solid}" HorizontalOptions="Center" Clicked="OnPickPhotoButtonClicked">
-                </Button>-->
+                <Label x:Name="lblFoto" Text="Aggiungi una foto" Margin="0,0,10,0" HorizontalOptions="Center"></Label>
 
                 <appappartamenti:MyEntry x:Name="entNome"
                        Placeholder="{translator:Translate Registrazione.Nome}"
@@ -68,23 +58,10 @@
                 </StackLayout>
 
                 <Button Style="{x:StaticResource primaryButton}"
-                        Visual="Material"
                         Text="{translator:Translate Registrazione.Bottone}"
-                        x:Name="btnRegistrati" Clicked="btnRegistrati_Clicked"
-                        IsEnabled="False"></Button>
-            </StackLayout>
+                        x:Name="btnRegistrati" Clicked="btnRegistrati_Clicked"></Button>
 
-            <StackLayout x:Name="stkRegistrazioneAvvenuta" IsVisible="False">
-                <Label FontSize="40" FontAttributes="Bold" TextColor="Black" Margin="0,0,0,10" Text="{translator:Translate Registrazione.TitoloSuccesso}"></Label>
-                <Label FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="0,0,0,10" Text="{translator:Translate Registrazione.SottotitoloSuccesso}"></Label>
-
-                <Button x:Name="btnLogin"
-                        Text="{translator:Translate Registrazione.TornaAlLogin}"
-                        Visual="Material" VerticalOptions="Center" Clicked="btnLogin_Clicked"></Button>
-            </StackLayout>
-
-
-            <Image Source="test.jpg" Margin="-20" VerticalOptions="EndAndExpand" ></Image>
+            <Image Source="test.jpg" Margin="-20" IsVisible="False" VerticalOptions="EndAndExpand" ></Image>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

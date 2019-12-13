@@ -33,10 +33,10 @@
                         TextChanged="ent_TextChanged"
                         />
 
-                <Button Style="{x:StaticResource primaryButton}"  Visual="Material" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" IsEnabled="False" Clicked="btnAccedi_ClickedAsync"></Button>
-
+                <Button Style="{x:StaticResource primaryButton}" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" IsEnabled="False" Clicked="btnAccedi_ClickedAsync">
+                </Button>
           
-                  <Label Text="{translator:Translate Login.ForgotPassword}" HorizontalTextAlignment="Center" TextColor="black">
+                <Label Text="{translator:Translate Login.ForgotPassword}" HorizontalTextAlignment="Center" TextColor="black">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </Label.GestureRecognizers>
@@ -54,11 +54,11 @@
                         <TapGestureRecognizer Tapped="btnAccediFacebook_Clicked"></TapGestureRecognizer>
                     </Frame.GestureRecognizers>
                     <Frame.Style>
-                    <OnPlatform x:TypeArguments="Style">
-                                <On Platform="iOS" Value="{x:StaticResource IosFrameRadius2}"/>
-                                <On Platform="Android" Value="{x:StaticResource AndroidFrameRadius2}"/>
-                            </OnPlatform>
-                        </Frame.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS" Value="{x:StaticResource IosFrameRadius2}"/>
+                            <On Platform="Android" Value="{x:StaticResource AndroidFrameRadius2}"/>
+                        </OnPlatform>
+                    </Frame.Style>
                 </Frame>
 
               <Frame HorizontalOptions="Center" WidthRequest="200" HeightRequest="30" BorderColor="#DB4437" HasShadow="False" Padding="5">
@@ -86,7 +86,7 @@
 
             </StackLayout>
 
-            <Image Source="test.jpg" Margin="-20" VerticalOptions="EndAndExpand" HeightRequest="100"></Image>
+            <Image Source="test.jpg" Margin="-20" IsVisible="false" VerticalOptions="EndAndExpand" HeightRequest="100"></Image>
 
         </StackLayout>
     </ContentPage.Content>

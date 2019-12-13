@@ -229,7 +229,10 @@
     <value>Ti è stata inviata una email contenente la nuova password.</value>
   </data>
   <data name="Restore.Titolo" xml:space="preserve">
-    <value>Hai dimenticato la password? Inserisci la tua mail, ti invieremo una nuova password.</value>
+    <value>Recupera la tua password</value>
+  </data>
+    <data name="Restore.Subtitle" xml:space="preserve">
+    <value>Inserisci l'indirizzo email associato al tuo account e ti invieremo una nuova password.</value>
   </data>
   <data name="Account.InformazioniPersonali" xml:space="preserve">
     <value>Informazioni personali</value>
@@ -321,6 +324,10 @@
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Ricerche recenti</value>
   </data>
+     <data name="Home.Shartcut" xml:space="preserve">
+    <value>Scorciatoie</value>
+  </data>
+   
   <data name="Home.StartSearch" xml:space="preserve">
     <value>Inzia la ricerca</value>
   </data>

@@ -98,5 +98,10 @@ namespace AppAppartamenti.Views.Login
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
+
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

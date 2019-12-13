@@ -11,12 +11,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Colors-->
-            <Color x:Key="SfondoColor">#F8F8F8</Color>
+            <Color x:Key="SfondoColor">#fff</Color>
+            <Color x:Key="SecodaryColor">#17a2b8</Color>
+            <Color x:Key="PrimaryColor">#ff6b6b</Color>
+            <Color x:Key="DarkColor">#343a40</Color>
+            <Color x:Key="GrayColor">#868e96</Color>
             
-              <!--    Font Awesome     -->
+            <!--    Font Awesome     -->
             <Style TargetType="NavigationPage">
-                    <Setter Property="BarBackgroundColor" Value="#ff6b6b"></Setter>
-                    <Setter Property="BarTextColor" Value="White"></Setter>
+                <Setter Property="BarBackgroundColor" Value="#fff"></Setter>
+                <Setter Property="BarTextColor" Value="Black"></Setter>
             </Style>
 
             <Style TargetType="ProgressBar">
@@ -33,10 +37,30 @@
                 <On Platform="Android" Value="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" />
                 <On Platform="iOS" Value="Font Awesome 5 Free" />
             </OnPlatform>
-            
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="BodyFont">
+                <On Platform="Android" Value="Roboto-Regular.ttf#Roboto" />
+                <On Platform="iOS" Value="Roboto-Regular" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="TitleFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Roboto Bold" />
+                <On Platform="iOS" Value="Roboto-Bold" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="PrimaryButtonCornerRadius" x:TypeArguments="x:Double" iOS="20" Android="50"></OnPlatform>
+
             <Style TargetType="Button" x:Key="primaryButton">
                 <Setter Property="BackgroundColor" Value="#ff6b6b"/>
                 <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="{StaticResource PrimaryButtonCornerRadius}"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="NavBackButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="{StaticResource SecodaryColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
+                <Setter Property="FontSize" Value="Title"></Setter>
             </Style>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
@@ -44,49 +68,56 @@
                 <On Platform="iOS" Value="Montserrat-Light" />
             </OnPlatform>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
-                <On Platform="Android" Value="Roboto-Regular.ttf#Roboto" />
-                <On Platform="iOS" Value="Roboto" />
-            </OnPlatform>
+            <Style TargetType="Label" x:Key="Title">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
 
+            <Style TargetType="StackLayout" x:Key="StackContainer">
+               <Setter Property="Padding" Value="20"></Setter>
+            </Style>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="Bold">
-                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto Medium" />
-                <On Platform="iOS" Value="Roboto Medium" />
-            </OnPlatform>
-            
-            <!--<OnPlatform x:TypeArguments="x:String" x:Key="BoldFont2">
+            <Style TargetType="Label" x:Key="Subtitle">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontSize" Value="Subtitle"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource GrayColor}"></Setter>
+                <Setter Property="Margin" Value="0,0,0,20"></Setter>
+            </Style>
+
+            <!--<OnPlatform x:TypeArguments="x:String" x:Key="BodyFont">
                 <On Platform="Android" Value="MyriadPro-Regular.otf#MyriadPro Regular" />
                 <On Platform="iOS" Value="MyriadPro-Regular" />
             </OnPlatform>-->
 
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="HeightRequest" Value="40"></Setter>
             </Style>
 
             <Style TargetType="Editor">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
-                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
             </Style>
 
             <Style TargetType="Button">
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
-                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontSize" Value="Default" />
             </Style>
 
             <Style TargetType="Label" x:Key="LabelValidatore">
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="TextColor" Value="Red"></Setter>
                 <Setter Property="FontSize" Value="Small"></Setter>
                 <Setter Property="IsVisible" Value="False"></Setter>
-                <Setter Property="Margin" Value="0,-8,0,5"></Setter>
+                <Setter Property="Margin" Value="0,-5,0,5"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
 
@@ -99,7 +130,7 @@
             </Style>
 
             <Style TargetType="Frame" x:Key="IosFrameRadius">
-                <Setter Property="CornerRadius" Value="65"></Setter>
+                <Setter Property="CornerRadius" Value="40"></Setter>
             </Style>
 
             <Style TargetType="Frame" x:Key="AndroidFrameRadius">
@@ -183,7 +214,7 @@
             </Style>
 
             <Style TargetType="appappartamenti:MyEntry">
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont2}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="HeightRequest" Value="40"></Setter>
             </Style>
 
