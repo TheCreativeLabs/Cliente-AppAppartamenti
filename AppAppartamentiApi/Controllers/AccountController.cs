@@ -557,6 +557,9 @@ namespace AppAppartamentiApi.Controllers
                 var url = datiPicture.Substring(datiPicture.IndexOf("url\": \"") + 7);
                 url = url.Substring(0, url.IndexOf("\""));
                 userInfo.PhotoUrl = url;
+            } else
+            {
+                userInfo.PhotoUrl = datiPicture;
             }
             else
             {
