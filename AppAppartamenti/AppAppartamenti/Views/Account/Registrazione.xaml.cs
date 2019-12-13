@@ -24,6 +24,7 @@ namespace AppAppartamenti.Views.Login
     public partial class Registrazione : ContentPage
     {
         byte[] img;
+        static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
         public Registrazione()
         {
@@ -108,7 +109,21 @@ namespace AppAppartamenti.Views.Login
             }
             catch (Exception ex)
             {
-                //TODO Gestire l'errore navigando alla pagina specifica.
+                if (ex.Message == "USER_ALREADY_EXIST")
+                {
+                    string alertTitle = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.Warning", translate.ci);
+                    string alertContent = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertMailAlreadySigned", translate.ci);
+                    string alertOk = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertOk", translate.ci);
+
+                    await DisplayAlert(alertTitle,
+                        alertContent,
+                        alertOk);
+                    Api.ApiHelper.DeleteToken();
+                    Application.Current.MainPage = new Login();
+                } else
+                {
+                    //TODO Gestire l'errore navigando alla pagina specifica.
+                }
             }
         }
         private void btnLogin_Clicked(object sender, EventArgs e)
