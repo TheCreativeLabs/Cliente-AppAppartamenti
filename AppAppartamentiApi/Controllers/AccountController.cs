@@ -561,10 +561,6 @@ namespace AppAppartamentiApi.Controllers
             {
                 userInfo.PhotoUrl = datiPicture;
             }
-            else
-            {
-                userInfo.PhotoUrl = datiPicture;
-            }
 
 
             dbDataContext.UserInfo.Add(userInfo);

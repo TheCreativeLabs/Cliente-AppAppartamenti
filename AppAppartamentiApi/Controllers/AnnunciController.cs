@@ -411,6 +411,22 @@ namespace AppAppartamentiApi.Controllers
                 dbDataContext.Video.Add(video);
             }
 
+            if (Annuncio.DisponibilitaOraria != null)
+            {
+                FasceOrarie fasceOrarie = new FasceOrarie();
+                fasceOrarie.Id = Guid.NewGuid();
+                fasceOrarie.IdAnnuncio = annuncio.Id;
+                fasceOrarie.Monday = Annuncio.DisponibilitaOraria.fasceOrarieLunedi ?? null;
+                fasceOrarie.Tuesday = Annuncio.DisponibilitaOraria.fasceOrarieMartedi ?? null;
+                fasceOrarie.Wednesday = Annuncio.DisponibilitaOraria.fasceOrarieMercoledi ?? null;
+                fasceOrarie.Thursday = Annuncio.DisponibilitaOraria.fasceOrarieGiovedi ?? null;
+                fasceOrarie.Friday = Annuncio.DisponibilitaOraria.fasceOrarieVenerdi ?? null;
+                fasceOrarie.Saturday = Annuncio.DisponibilitaOraria.fasceOrarieSabato ?? null;
+                fasceOrarie.Sunday = Annuncio.DisponibilitaOraria.fasceOrarieDomenica ?? null;
+
+                dbDataContext.FasceOrarie.Add(fasceOrarie);
+            }
+
             await dbDataContext.SaveChangesAsync();
 
             //try

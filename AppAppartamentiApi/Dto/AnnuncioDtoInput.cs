@@ -121,5 +121,7 @@ namespace AppAppartamentiApi.Dto
 
         [Required]
         public string CoordinateGeografiche { get; set; }
+
+        public DisponibilitaOrariaDtoInput DisponibilitaOraria { get; set; }
     }
 }
