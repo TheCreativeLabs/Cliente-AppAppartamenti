@@ -20,4 +20,27 @@ namespace AppAppartamenti.iOS
             Control.BorderStyle = UITextBorderStyle.None;
         }
     }
+
+    //public class EntryFocusRender : EntryRenderer
+    //{
+    //    protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+    //    {
+    //        base.OnElementChanged(e);
+    //        e.NewElement.Unfocused += (sender, evt) =>
+    //        {
+    //            if (Control != null)
+    //            {
+    //                Control.TintColor = UIColor.LightGray;
+    //            }
+    //        };
+    //        e.NewElement.Focused += (sender, evt) =>
+    //        {
+    //            if (Control != null)
+    //            {
+    //                Control.BorderStyle = UITextBorderStyle.RoundedRect;
+    //                Control.TintColor = UIColor.Red;
+    //            }
+    //        };
+    //    }
+    //}
 }

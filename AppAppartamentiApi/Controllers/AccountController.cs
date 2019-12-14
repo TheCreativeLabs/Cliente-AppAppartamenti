@@ -19,6 +19,8 @@ using AppAppartamentiApi.Results;
 using System.Linq;
 using System.Web.Http.Description;
 using System.Data.Entity;
+using System.Web.Http.Results;
+using System.Net;
 
 namespace AppAppartamentiApi.Controllers
 {
@@ -377,7 +379,8 @@ namespace AppAppartamentiApi.Controllers
             UserInfoViewModel registrationInfo = GetRegistrationUserInfoByMail(model.Email);
             if (registrationInfo.HasRegistered == true)
             {
-                return Conflict();
+                //return Conflict();
+                return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "USER_ALREADY_EXIST", this);
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
@@ -487,11 +490,11 @@ namespace AppAppartamentiApi.Controllers
             string nome = null;
             string cognome = null;
             string datiPicture = null;
-            string dataDiNascitaString =null;
+            string dataDiNascitaString = null;
 
             var identity = (ClaimsIdentity)User.Identity;
 
-            if(identity.Claims.First().Issuer == "Google")
+            if (identity.Claims.First().Issuer == "Google")
             {
                 nome = identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/given_name").Value;
                 cognome = identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/family_name").Value;
@@ -555,6 +558,10 @@ namespace AppAppartamentiApi.Controllers
                 url = url.Substring(0, url.IndexOf("\""));
                 userInfo.PhotoUrl = url;
             } else
+            {
+                userInfo.PhotoUrl = datiPicture;
+            }
+            else
             {
                 userInfo.PhotoUrl = datiPicture;
             }

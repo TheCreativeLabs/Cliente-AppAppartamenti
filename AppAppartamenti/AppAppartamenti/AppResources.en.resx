@@ -232,7 +232,10 @@
     <value>An email with the new password has been sent to you.</value>
   </data>
   <data name="Restore.Titolo" xml:space="preserve">
-    <value>Forgot your password? Enter your email, we will send you a new password.</value>
+    <value>Recover your password</value>
+  </data>
+     <data name="Restore.Subtitle" xml:space="preserve">
+    <value>Enter the email address associated with your account and we'll send you a new password.</value>
   </data>
   <data name="Account.InformazioniPersonali" xml:space="preserve">
     <value>Personal information</value>
@@ -323,6 +326,9 @@
   </data>
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Search history</value>
+  </data>
+    <data name="Home.Shartcut" xml:space="preserve">
+    <value>Shartcut</value>
   </data>
   <data name="Home.StartSearch" xml:space="preserve">
     <value>Start search</value>
