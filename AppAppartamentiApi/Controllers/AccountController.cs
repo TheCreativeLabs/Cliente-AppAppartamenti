@@ -558,10 +558,6 @@ namespace AppAppartamentiApi.Controllers
                 url = url.Substring(0, url.IndexOf("\""));
                 userInfo.PhotoUrl = url;
             }
-            else
-            {
-                userInfo.PhotoUrl = datiPicture;
-            }
 
 
             dbDataContext.UserInfo.Add(userInfo);
