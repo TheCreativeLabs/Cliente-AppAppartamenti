@@ -115,7 +115,7 @@ function CreateNewTimeSlot(timeslotButton) {
         ComponiFasceOrarie(this);
     });
     newTo.val(null);
-    newElement.appendTo($(timeslotButton).parent().parent());
+    newElement.appendTo($(timeslotButton).parent());
 }
 
 function changeScroll() {
