@@ -488,159 +488,177 @@
 
                             <hr />
 
-                            <div id="divMonday" class="mt-5" style="display:none">
+                            <div id="divMonday" class="mt-5 " style="display:none" data-for="#DisponibilitaOraria_FasceOrarieLunedi">
                                 <label class="h6">
                                     @_localizer["Monday"]
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-monday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-monday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-monday" data-index="0" class="input-group mb-3">
+                                <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text rounded-left">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
 
-                                <input type="text" id="TimeSlotMonday" style="display:none;" />
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieLunedi" style="display:none;" />
                             </div>
 
-                            <div id="divTuesday" class="mt-5" style="display:none">
+                            <div id="divTuesday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieMartedi">
                                 <label class="h6">
                                     @_localizer["Tuesday"]
 
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-tuesday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-tuesday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-tuesday" class="input-group mb-3">
+                                <div id="slot-time-tuesday" class="input-group mb-3  input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieMartedi" style="display:none;" />
+
                             </div>
 
-                            <div id="divWednesday" class="mt-5" style="display:none">
+                            <div id="divWednesday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieMercoledi">
                                 <label class="h6">
-                                   @_localizer["Wednesday"]
+                                    @_localizer["Wednesday"]
 
 
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-wednesday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-wednesday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-wednesday" class="input-group mb-3">
+                                <div id="slot-time-wednesday" class="input-group mb-3 input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieMercoledi" style="display:none;" />
+
                             </div>
 
-                            <div id="divThursday" class="mt-5" style="display:none">
+                            <div id="divThursday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieGiovedi">
                                 <label class="h6">
                                     @_localizer["Thursday"]
 
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-thursday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-thursday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-thursday" class="input-group mb-3">
+                                <div id="slot-time-thursday" class="input-group mb-3 input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieGiovedi" style="display:none;" />
+
                             </div>
 
-                            <div id="divFriday" class="mt-5" style="display:none">
+                            <div id="divFriday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieVenerdi">
                                 <label class="h6">
                                     @_localizer["Friday"]
 
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-friday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-friday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-friday" class="input-group mb-3">
+                                <div id="slot-time-friday" class="input-group mb-3 input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieVenerdi" style="display:none;" />
+
                             </div>
 
-                            <div id="divSaturday" class="mt-5" style="display:none">
+                            <div id="divSaturday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieSabato">
                                 <label class="h6">
                                     @_localizer["Saturday"]
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-saturday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-saturday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-saturday" class="input-group  mb-3">
+                                <div id="slot-time-saturday" class="input-group  mb-3 input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieSabato" style="display:none;" />
+
                             </div>
 
-                            <div id="divSunday" class="mt-5" style="display:none">
+                            <div id="divSunday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieDomenica">
                                 <label class="h6">
-                                    @_localizer["Saturday"]
+                                    @_localizer["Sunday"]
 
-                                    <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-sunday">@_localizer["AddTimeSlot"]</a>
                                 </label>
+                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-sunday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-sunday" class="input-group mb-3">
+                                <div id="slot-time-sunday" class="input-group mb-3 input-time-slot">
                                     <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
                                 </div>
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieDomenica" style="display:none;" />
+
                             </div>
                         </div>
                     </div>

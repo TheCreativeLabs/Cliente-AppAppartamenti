@@ -5,7 +5,9 @@ using UIKit;
 using System;
 using iOS.Renderers;
 using AppAppartamenti.Utility;
+using CoreGraphics;
 
+[assembly: ExportRenderer(typeof(NavigationPage), typeof(ShadowNavigationBarRenderer))]
 [assembly: ExportRenderer(typeof(CustomNavigationPage), typeof(CustomNavigationRenderer))]
 namespace iOS.Renderers
 {
@@ -33,5 +35,23 @@ namespace iOS.Renderers
         }
     }
 
-   
+
+    public class ShadowNavigationBarRenderer : NavigationRenderer
+    {
+        protected override void OnElementChanged(VisualElementChangedEventArgs e)
+        {
+            base.OnElementChanged(e);
+
+            if (this.Element == null) return;
+
+            NavigationBar.Layer.ShadowColor = UIColor.LightGray.CGColor;
+            NavigationBar.Layer.ShadowOffset = new CGSize(0, 0);
+            NavigationBar.Layer.ShadowOpacity = 1;
+
+            // remove lower border and shadow of the navigation bar
+            NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
+            NavigationBar.ShadowImage = new UIImage();
+        }
+    }
+
 }

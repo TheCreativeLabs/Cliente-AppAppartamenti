@@ -102,9 +102,6 @@ namespace AppAppartamenti.Views.Login
                     //TODO: gestire la data di nascita
 
                     var response = await accountClient.RegisterAsync(registerBindingModel);
-
-                    stkFormRegistrazione.IsVisible = false;
-                    stkRegistrazioneAvvenuta.IsVisible = true;
                 }
             }
             catch (Exception ex)
@@ -185,7 +182,6 @@ namespace AppAppartamenti.Views.Login
                 PickPhoto();
             }
         }
-
 
         async void PickPhoto()
         {

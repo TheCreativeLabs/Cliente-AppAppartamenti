@@ -24,19 +24,6 @@ namespace AppAppartamenti.Views.Login
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            try
-            {
-                ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-                ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-                NavigationPage.SetHasNavigationBar(this, true);
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            stkBody.IsVisible = true;
         }
 
     private async void btnProsegui_Clicked(object sender, EventArgs e)
@@ -53,9 +40,6 @@ namespace AppAppartamenti.Views.Login
                     HttpClient httpClient = new HttpClient();
                     AccountClient accountClient = new AccountClient(httpClient);
                     await accountClient.RestorePasswordAsync(entEmail.Text);
-
-                    stkFormRestore.IsVisible = false;
-                    stkRestoreAvvenuto.IsVisible = true;
                 }
             }
             catch (Exception ex)
@@ -64,27 +48,9 @@ namespace AppAppartamenti.Views.Login
             }
         }
 
-        private void btnLogin_Clicked(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = new NavigationPage(new Login());
-        }
-
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
-        }
-
-        private void entEmail_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Controllo che username e password siano valorizzati.
-            if (!(String.IsNullOrEmpty(entEmail.Text)))
-            {
-                btnProsegui.IsEnabled = true;
-            }
-            else
-            {
-                btnProsegui.IsEnabled = false;
-            }
         }
     }
 }

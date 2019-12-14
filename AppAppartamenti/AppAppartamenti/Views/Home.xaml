@@ -6,10 +6,10 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             x:Class="AppAppartamenti.Views.Home" NavigationPage.HasNavigationBar="False"
-            BackgroundColor="{StaticResource SfondoColor}">
+             x:Class="AppAppartamenti.Views.Home"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-            <StackLayout Orientation="Vertical" Padding="20">
+            <StackLayout Style="{x:StaticResource StackContainer}">
                 <StackLayout.Margin>
                       <OnPlatform x:TypeArguments="Thickness">
                                 <On Platform="iOS" Value="0"/>
@@ -32,13 +32,11 @@
                         </Frame>
                 </StackLayout>
 
-                <StackLayout Orientation="Vertical" Margin="0,15,-20,0">
+                <StackLayout Orientation="Vertical" Margin="0,0,-20,0">
 
+                <Label Style="{x:StaticResource Title}" Text="{translator:Translate Home.RecentSearch}"></Label>
 
-                <Label Text="{translator:Translate Home.RecentSearch}" FontSize="Title" FontAttributes="Bold" TextColor="Black">
-                    </Label>
-
-                    <StackLayout Orientation="Horizontal" HeightRequest="150">
+                <StackLayout Orientation="Horizontal" HeightRequest="150">
                         <CollectionView>
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal" />
@@ -74,16 +72,11 @@
                         </CollectionView>
                     </StackLayout>
 
-                    <!--<Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
-        <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-
-    <Image x:Name="PhotoImage" />
-    <Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1" Clicked="CameraButton_Clicked" />
-</Grid>-->
                 </StackLayout>
+
+
+                <Label Style="{x:StaticResource Title}" Margin="0,20,0,0" Text="{translator:Translate Home.Shartcut}"></Label>
+
             </StackLayout>
     </ContentPage.Content>
 </ContentPage>

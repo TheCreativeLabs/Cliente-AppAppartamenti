@@ -7,15 +7,11 @@
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.MieiAnnunci"
-             NavigationPage.HasNavigationBar="True"
-             BackgroundColor="#F8F8F8"
              Title="{translator:Translate MieiAnnunci.MyListing}"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             NavigationPage.HasNavigationBar="False"
              >
-
-
-        <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{translator:Translate MieiAnnunci.New}" Clicked="BtnAdd_Clicked" />
-    </ContentPage.ToolbarItems>
 
    
      <ContentPage.Resources>
@@ -27,10 +23,19 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label HorizontalTextAlignment="Start" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.MyListing}"></Label>
 
-               <ListView x:Name="AnnunciiListView"
+                <Button BackgroundColor="Transparent"
+                    Text="&#xf055;" HorizontalOptions="EndAndExpand" FontSize="Title" Padding="20,20,20,0"  VerticalOptions="CenterAndExpand" Style="{x:StaticResource NavBackButton}" 
+                    Clicked="BtnAdd_Clicked">
+                </Button>
+            </StackLayout>
+
+            <ListView x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
-                    VerticalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
                     IsPullToRefreshEnabled="true"
@@ -38,27 +43,25 @@
                     CachingStrategy="RecycleElement"
                     ItemSelected="OnItemSelected"
                     VerticalScrollBarVisibility="Never"
-                    SeparatorVisibility="None"
-                               BackgroundColor="#F8F8F8">
+                    SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame HasShadow="True" Visual="Material" Padding="0" HeightRequest="260" Margin="15"  CornerRadius="2" IsClippedToBounds="True">
+                            <Frame HasShadow="True" Visual="Material" HeightRequest="260" Padding="0" Margin="15"  CornerRadius="2" IsClippedToBounds="True">
                                 <StackLayout>
                                     <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
 
                                     <StackLayout Orientation="Horizontal" Margin="0,-150,0,0" Padding="10,0,0,0">
-                                        <Label Text="{Binding TipologiaProprieta}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" ></Label>
-                                        <Label Text="{Binding Prezzo}"
-                                               FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
+                                        <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource Title}"  FontSize="Header"></Label>
+                                        <Label Text="{Binding Prezzo}"  Style="{x:StaticResource Title}"  FontSize="Header"/>
 
-                                        <Label VerticalTextAlignment="Center" Text="&#xf153;" TextColor="Black" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                        <Label VerticalTextAlignment="Center" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}"></Label>
                                     </StackLayout>
 
                                      <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                        <Label Text="{Binding NomeComune}" TextColor="Gray"  ></Label>
-                                        <Label Text="-" TextColor="Gray" ></Label>
-                                        <Label Text="{Binding Indirizzo}" TextColor="Gray" ></Label>
+                                        <Label Text="{Binding NomeComune}" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
+                                        <Label Text="-" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
+                                        <Label Text="{Binding Indirizzo}" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
                                      </StackLayout>
                                 </StackLayout>
                             </Frame>
@@ -66,6 +69,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>
