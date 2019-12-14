@@ -75,7 +75,7 @@ namespace AppAppartamentiApi.Dto
         [Required]
         [DefaultValue(false)]
         public bool Piscina { get; set; }
-        
+
         [Required]
         [DefaultValue(false)]
         public bool Cantina { get; set; }

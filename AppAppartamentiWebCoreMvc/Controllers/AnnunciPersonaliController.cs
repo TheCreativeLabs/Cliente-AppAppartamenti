@@ -117,7 +117,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             }
 
             Model.ImmaginePlanimetria = planimetrie;
-
+            
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 

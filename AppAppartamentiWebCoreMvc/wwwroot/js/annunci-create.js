@@ -1,5 +1,6 @@
 ﻿var numImage = 0;
 var numPlanimetria = 0;
+var numFasceLun = 0;
 
 $(document).ready(function () {
     $("#smallTitle").hide();
@@ -44,7 +45,42 @@ $(document).ready(function () {
             $("#create-pills-tab .active").removeClass("nav-error-link");
         }
     });
+
+    $('input[name="fasciaOrariaFrom"]').change(function () {
+        ComponiFasceOrarie(this);
+    });
+
+    $('input[name="fasciaOrariaTo"]').change(function () {
+        ComponiFasceOrarie(this);
+    });
+
 });
+
+function ComponiFasceOrarie(input) {
+    var superParent = $(input).parent().parent();
+
+    //$(".div-fasce-by-day").each(function (i) {
+    var idValoreFasceGiornaliere = $(superParent).data("for");
+    var fasce = null;
+    if ($(superParent).children(".input-time-slot").length > 0) {
+        fasce = "";
+        $(superParent).children(".input-time-slot").each(
+            function (j) {
+                fasce += $(this).children('input[name="fasciaOrariaFrom"]').val();
+                fasce += "-";
+                fasce += $(this).children('input[name="fasciaOrariaTo"]').val();
+                fasce += ";";
+            }
+        );
+    }
+    $(idValoreFasceGiornaliere).val(fasce);
+        
+    //});
+
+
+}
+
+
 
 function RemoveSlot(button) {
     $(button).parent().remove();
@@ -69,6 +105,16 @@ function CreateNewTimeSlot(timeslotButton) {
     newElement.removeAttr("id");
     newElement.children(".btn-remove-slot").show();
     newElement.removeAttr("data-index");
+    var newFrom = newElement.children('input[name="fasciaOrariaFrom"]');
+    newFrom.change(function () {
+        ComponiFasceOrarie(this);
+    });
+    newFrom.val(null);
+    var newTo = newElement.children('input[name="fasciaOrariaTo"]');
+    newTo.change(function () {
+        ComponiFasceOrarie(this);
+    });
+    newTo.val(null);
     newElement.appendTo($(timeslotButton).parent().parent());
 }
 
