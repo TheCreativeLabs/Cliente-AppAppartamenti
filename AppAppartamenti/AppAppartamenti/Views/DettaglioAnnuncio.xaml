@@ -9,34 +9,43 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
-             BackgroundColor="{StaticResource SfondoColor}"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
              >
 
-    <NavigationPage.TitleView>
-        <StackLayout  Orientation="Horizontal">
-
-            <Label x:Name="btnBackNavBar" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Large" Text="&#xf053;"  Padding="10,0,10,0"
+    <NavigationPage.TitleView >
+        <StackLayout Orientation="Horizontal" Padding="0">
+            <!--<Label x:Name="btnBackNavBar" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Large" Text="&#xf053;"  Padding="10,0,10,0"
                    FontFamily="{x:StaticResource FA-Solid}" TextColor="White">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnBack_Clicked"></TapGestureRecognizer>
                 </Label.GestureRecognizers>
-            </Label>
+            </Label>-->
 
-            <Label x:Name="btnShareNavBar" BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;" Padding="10,0,10,0"
+            <Button Style="{x:StaticResource NavBackButton}" Pressed="BtnBack_Clicked" Text="&#xf053;" 
+                   FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="StartAndExpand">
+            </Button>
+
+            <Button Style="{x:StaticResource NavBackButton}" Pressed="BtnBack_Clicked" Text="&#xf044;" 
+                   FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
+            </Button>
+
+            <Button Style="{x:StaticResource NavBackButton}" Pressed="BtnBack_Clicked" Text="&#xf004;"
+                   FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" WidthRequest="50">
+            </Button>
+
+            <Label IsVisible="false" x:Name="btnShareNavBar" BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;" Padding="10,0,10,0"
                    FontFamily="{x:StaticResource FA-Solid}" TextColor="White" HorizontalOptions="EndAndExpand">
-                <!--<Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
-                </Label.GestureRecognizers>-->
             </Label>
 
-            <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf004;" Padding="10,0,10,0"
+            <Label IsVisible="false" BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf004;"
                    FontFamily="{x:StaticResource FA-Solid}" TextColor="White" x:Name="btnPreferitoNavBar" HorizontalOptions="End" >
                 <!--<Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
                 </Label.GestureRecognizers>-->
             </Label>
 
-            <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf044;" Padding="10,0,10,0"
+            <Label IsVisible="false" BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf044;" Padding="10,0,10,0"
                    FontFamily="{x:StaticResource FA-Solid}" TextColor="White" x:Name="btnModificaNavBar" HorizontalOptions="End" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="BtnModifica_Clicked"></TapGestureRecognizer>

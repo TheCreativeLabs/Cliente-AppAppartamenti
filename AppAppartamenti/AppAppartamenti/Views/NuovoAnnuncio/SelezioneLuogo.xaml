@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneLuogo"
-             NavigationPage.HasNavigationBar="True"
-             NavigationPage.HasBackButton="False">
-
+             mc:Ignorable="d"
+             x:Class="AppAppartamenti.Views.SelezioneLuogo"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -17,8 +19,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <!-- Bottoni -->
+    <!--<NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" x:Name="slBody" IsVisible="False">
             <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
                 <Label Style="{x:StaticResource BackButton}"></Label>
@@ -38,53 +39,63 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </StackLayout>
-    </NavigationPage.TitleView>
+    </NavigationPage.TitleView>-->
 
-    <ContentPage.Content>
-            <StackLayout Padding="20"> 
+<ContentPage.Content>
+        <StackLayout Style="{x:StaticResource StackContainer}">
 
-                 <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,20" Padding="20">
-                <Label Text="{translator:Translate SelezioneLuogo.WhereQuestion}" HorizontalTextAlignment="Center" ></Label>
-                <ProgressBar Progress="0.3"/>
+            <StackLayout Orientation="Horizontal">
+                  <Button BackgroundColor="Transparent"
+                        Text="&#xf053;" HorizontalOptions="StartAndExpand" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
+                        Clicked="BtnBack_Clicked">
+                  </Button>
+
+                  <Button BackgroundColor="Transparent"
+                            Text="&#xf00d;" HorizontalOptions="End" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
+                            Clicked="BtnCancel_Clicked">
+                  </Button>
             </StackLayout>
 
+            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
+            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneLuogo.WhereQuestion}"></Label>
+            <ProgressBar Progress="0.3" Margin="0,0,0,20"/>
+
             <Label Text="{translator:Translate SelezioneLuogo.Locality}"></Label>
-                    <appappartamenti:MyEntry  x:Name="entCercaComune"
-                                             Placeholder="{translator:Translate SelezioneLuogo.LocalityPlaceholder}" TextChanged="EntCercaComune_TextChanged"></appappartamenti:MyEntry>
+            <Entry  x:Name="entCercaComune" Placeholder="{translator:Translate SelezioneLuogo.LocalityPlaceholder}" TextChanged="EntCercaComune_TextChanged"></Entry>
 
-                    <ListView x:Name="lvComuni" IsVisible="False" ItemSelected="LvComuni_Selected" SeparatorVisibility="None" >
+            <ListView x:Name="lvComuni" IsVisible="False" ItemSelected="LvComuni_Selected" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
+                <ListView.Footer>
+                    <DataTemplate>
+                        <ContentView />
+                    </DataTemplate>
+                </ListView.Footer>
 
-                        <ListView.Footer>
-                            <DataTemplate>
-                                <ContentView />
-                            </DataTemplate>
-                        </ListView.Footer>
+                <ListView.FooterTemplate>
+                    <DataTemplate>
+                        <Label/>
+                    </DataTemplate>
+                </ListView.FooterTemplate>
 
-                        <ListView.FooterTemplate>
-                            <DataTemplate>
-                                <ContentView />
-                            </DataTemplate>
-                        </ListView.FooterTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding NomeComune}" VerticalTextAlignment="Center" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Label Text="{Binding NomeComune}" VerticalTextAlignment="Center" />
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+            <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
-            <Label Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,20,0,0"></Label>
-                    <appappartamenti:MyEntry x:Name="entIndirizzo"
-                                              Unfocused="EntIndirizzo_Unfocused"
-                                              Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></appappartamenti:MyEntry>
+            <Label x:Name="lblIndirizzo" Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,0,20,0"></Label>
+            <Entry x:Name="entIndirizzo"
+                                        Unfocused="EntIndirizzo_Unfocused"
+                                        Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></Entry>
 
-                    <maps:Map x:Name="map" IsVisible="False" HeightRequest="200" Margin="0"/>
+            <maps:Map x:Name="map" IsVisible="False" HeightRequest="200" Margin="0"/>
 
             <Button x:Name="btnIndirizzoProcedi" IsEnabled="False" Text="{translator:Translate SelezioneLuogo.Continue}" 
-                    Clicked="BtnIndirizzoProcedi_Clicked" TextColor="White"
-                     VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+                    Clicked="BtnIndirizzoProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
         </StackLayout>
     </ContentPage.Content>
 

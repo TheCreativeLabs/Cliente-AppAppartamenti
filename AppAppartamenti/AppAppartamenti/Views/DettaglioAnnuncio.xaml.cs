@@ -53,7 +53,6 @@ namespace AppAppartamenti.Views
             {
                 NavigationPage.SetHasNavigationBar(this, false);
                 stkHeader.IsVisible = true;
-
             }
         }
 

@@ -18,12 +18,14 @@ namespace AppAppartamenti.Views.Account
             InitializeComponent();
         }
 
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            stkContainer.IsVisible = false;
-            indLoading.IsVisible = true;
-            indLoading.IsRunning = true;
                 
             AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
             UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
@@ -41,10 +43,6 @@ namespace AppAppartamenti.Views.Account
                 imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
             }
             entDataNascita.Text = viewModel.DataDiNascita.Value.ToString("dd/MM/yyyy", new CultureInfo("en")); //FIXME CULTURE INFO, LANGUAGE, LOCALE
-
-            stkContainer.IsVisible = true;
-            indLoading.IsVisible = false;
-            indLoading.IsRunning = false;
         }
 
         private async void BtnSave_Clicked(object sender, EventArgs e)

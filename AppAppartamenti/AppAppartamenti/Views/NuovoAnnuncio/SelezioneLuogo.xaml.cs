@@ -48,8 +48,6 @@ namespace AppAppartamenti.Views
                 }
                 btnIndirizzoProcedi.IsEnabled = true;
             }
-
-            slBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -114,6 +112,8 @@ namespace AppAppartamenti.Views
             lvComuni.ItemsSource = listaComuni.Items;
             lvComuni.IsVisible = true;
             entIndirizzo.IsVisible = false;
+            lblIndirizzo.IsVisible = false;
+            btnIndirizzoProcedi.IsVisible = false;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -133,6 +133,8 @@ namespace AppAppartamenti.Views
             lvComuni.IsVisible = false;
 
             entIndirizzo.IsVisible = true;
+            lblIndirizzo.IsVisible = true;
+            btnIndirizzoProcedi.IsVisible = true;
 
             // Manually deselect item.
             lvComuni.SelectedItem = null;

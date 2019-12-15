@@ -8,26 +8,24 @@
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
              Title="Account"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                 <StackLayout Orientation="Horizontal">
-                    <Frame
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           Padding="0"
+                     <Frame
+                           CornerRadius="50"
+                           HeightRequest="60"
+                           WidthRequest="60"
                            IsClippedToBounds="True"
-                         HasShadow="False" HorizontalOptions="Center"  VerticalOptions="Center">
-                                    <Frame.CornerRadius>
-                                       <OnPlatform x:TypeArguments="x:Single">
-                                            <On Platform="iOS" Value="50"/>
-                                            <On Platform="Android" Value="100"/>
-                                        </OnPlatform>
-                                    </Frame.CornerRadius>
-
-                                    <Image x:Name="imgFotoUtente"  Aspect="AspectFill"
-                          ></Image>
+                           HasShadow="True"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                      <Image x:Name="imgFotoUtente" 
+                             Aspect="AspectFill"
+                             Margin="-20"
+                             HeightRequest="100"
+                             WidthRequest="100" />
                     </Frame>
 
                     <Grid VerticalOptions="Center">
@@ -44,23 +42,37 @@
                     </Grid>
                 </StackLayout>
 
-            <BoxView HeightRequest="3" HorizontalOptions="FillAndExpand" Margin="-20,0,-20,20" Color="#F0F0F0"></BoxView>
+            <BoxView HeightRequest="3" HorizontalOptions="FillAndExpand" Margin="-20,0,-20,10" Color="#F0F0F0"></BoxView>
 
-            <Button x:Name="btnInfoPersonali" Text="{translator:Translate Account.InformazioniPersonali}" Visual="Material" Clicked="BtnInfoPersonali_Clicked"> </Button>
+            <ListView  x:Name="listView" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Text="{Binding DisplayName}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                            <Label FontFamily="{x:StaticResource FA-Solid}"
+                                   Grid.Column="1"
+                                   Text="{Binding Icona}" FontSize="Large" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
 
-            <Button x:Name="btnCambiaPassword" Text="{translator:Translate Account.CambiaPassword}" Visual="Material" Clicked="BtnCambiaPassword_Clicked"></Button>
+            </ListView.ItemTemplate>
+                   <ListView.Footer>
+          <Label />
+        </ListView.Footer>
+        </ListView>
 
-            <Button x:Name="btnNotificheSuggerimenti" Text="{translator:Translate Account.NotificheSuggerimenti}" Visual="Material" Clicked="BtnCambiaPassword_Clicked"></Button>
-
-            <Button x:Name="btnInformativaPrivacy" Text="{translator:Translate Account.InformativaPrivacy}" Visual="Material" Clicked="BtnCambiaPassword_Clicked"></Button>
-
-            <!--<Button x:Name="btnLogOut" VerticalOptions="EndAndExpand" Clicked="BtnLogOut_Clicked" Text="{translator:Translate Menu.Logout}" Visual="Material" TextColor="Gray" BackgroundColor="Transparent"></Button>-->
-
-            <Label x:Name="lblLogOut" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="Medium" Text="{translator:Translate Menu.Logout}">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnLogOut_Clicked"></TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
+        <!--<Label x:Name="lblLogOut" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="Medium" Text="{translator:Translate Menu.Logout}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BtnLogOut_Clicked"></TapGestureRecognizer>
+            </Label.GestureRecognizers>
+        </Label>-->
 
         </StackLayout>
     </ContentPage.Content>

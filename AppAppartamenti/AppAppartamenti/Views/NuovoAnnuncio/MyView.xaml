@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppAppartamenti.Converter.MyView">
+    <ContentView.Content>
+       
+    <StackLayout Orientation="Horizontal" HeightRequest="150">
+        <CollectionView x:Name="lvStepMenu">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="130"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                        </Grid.ColumnDefinitions>
+                        <Frame HeightRequest="120" Padding="0" WidthRequest="120" HasShadow="True" Visual="Material" CornerRadius="20"  BackgroundColor="White">
+                            <StackLayout>
+                                <Label Text="{Binding DisplayName}" Margin="10" ></Label>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

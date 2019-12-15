@@ -324,7 +324,7 @@
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Ricerche recenti</value>
   </data>
-     <data name="Home.Shartcut" xml:space="preserve">
+     <data name="Home.Shortcut" xml:space="preserve">
     <value>Scorciatoie</value>
   </data>
    
@@ -380,7 +380,7 @@
     <value>Vendita o affitto</value>
   </data>
   <data name="Ricerca.Search" xml:space="preserve">
-    <value>CERCA</value>
+    <value>Cerca</value>
   </data>
   <data name="Ricerca.SearchPlaceholder" xml:space="preserve">
     <value>Ricerca per città o provincia</value>

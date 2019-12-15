@@ -327,7 +327,7 @@
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Search history</value>
   </data>
-    <data name="Home.Shartcut" xml:space="preserve">
+    <data name="Home.Shortcut" xml:space="preserve">
     <value>Shartcut</value>
   </data>
   <data name="Home.StartSearch" xml:space="preserve">

@@ -4,6 +4,7 @@ using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -15,6 +16,13 @@ using Xamarin.Forms.Xaml;
 
 namespace AppAppartamenti.Views.Account
 {
+    public class MenuItem
+    {
+        public Page  RedirectPage { get; set; }
+        public string DisplayName { get; set; }
+        public string Icona { get; set; }
+    }
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Account : ContentPage
     {
@@ -24,31 +32,38 @@ namespace AppAppartamenti.Views.Account
         {
             InitializeComponent();
 
+            ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
+            items.Add(new MenuItem() { DisplayName = "Informazioni personali", Icona = "\uf007", RedirectPage =new InformazioniPersonali() });
+            items.Add(new MenuItem() { DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
+            items.Add(new MenuItem() { DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
+            items.Add(new MenuItem() { DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = null });
+            items.Add(new MenuItem() { DisplayName = "Privacy", Icona = "\uf505", RedirectPage = null });
+            items.Add(new MenuItem() { DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
+
+            listView.ItemsSource = items;
         }
 
-
-        private async void BtnCambiaPassword_Clicked(object sender, EventArgs e)
+        async void OnItemTapped(object obj,ItemTappedEventArgs e)
         {
-            try
-            {
-                await Navigation.PushAsync(new Login.CambiaPassword());
-            }
-            catch (Exception Ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
+            var item = e.Item as MenuItem;
 
-        private void BtnInfoPersonali_Clicked(object sender, EventArgs e)
-        {
-            try
+            if (item == null)
+                return;
+
+            listView.SelectedItem = null;
+
+            if(item.RedirectPage == null)
             {
-                Navigation.PushAsync(new InformazioniPersonali());
+                string action = await DisplayActionSheet("Continuare?","Cancel", "Log out");
+
+                if(action == "Log out")
+                {
+                    await LogOut();
+                }
             }
-            catch (Exception)
+            else
             {
-                throw;
+                await Navigation.PushAsync(item.RedirectPage);
             }
         }
 
@@ -56,30 +71,25 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            //ricarico ogni volta, perchè è possibile che i dati siano cambiati (ad esempio se ho appena modificato la informazioni personali)
-            //if (viewModel == null)
-            //{
-                AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
-                UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
+            AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
+            UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
 
-                viewModel = userInfo;
-                BindingContext = viewModel;
+            viewModel = userInfo;
+            BindingContext = viewModel;
 
 
-                if (viewModel.FotoProfilo != null)
-                {
-                    imgFotoUtente.Source = ImageSource.FromStream(() => { return new MemoryStream(userInfo.FotoProfilo); });
-                }
-                else if (viewModel.PhotoUrl != null)
-                {
-                    imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
-                }
-
-            //}
+            if (viewModel.FotoProfilo != null)
+            {
+                imgFotoUtente.Source = ImageSource.FromStream(() => { return new MemoryStream(userInfo.FotoProfilo); });
+            }
+            else if (viewModel.PhotoUrl != null)
+            {
+                imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
+            }
         }
 
 
-        private async void BtnLogOut_Clicked(object sender, EventArgs e)
+        private async Task LogOut()
         {
             try
             {
@@ -110,39 +120,5 @@ namespace AppAppartamenti.Views.Account
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
-
-        //async void OnPickPhotoButtonClicked(object sender, EventArgs e)
-        //{
-        //    (sender as Button).IsEnabled = false;
-
-        //    Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-        //    if (stream != null)
-        //    {
-        //        imgFotoUtente.Source = ImageSource.FromStream(() => stream);
-        //    }
-
-        //    (sender as Button).IsEnabled = true;
-        //}
-
-        //private void ent_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        //Controllo che username e password siano valorizzati.
-        //        //if (!(String.IsNullOrEmpty(entNome.Text)) && !(String.IsNullOrEmpty(entCognome.Text))
-        //        //    && !(String.IsNullOrEmpty(entPassword.Text)) && !(String.IsNullOrEmpty(entConfermaPassword.Text)) && !(String.IsNullOrEmpty(entEmail.Text)))
-        //        //{
-        //        //    btnRegistrati.IsEnabled = true;
-        //        //}
-        //        //else
-        //        //{
-        //        //    btnRegistrati.IsEnabled = false;
-        //        //}
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-        //}
     }
 }
