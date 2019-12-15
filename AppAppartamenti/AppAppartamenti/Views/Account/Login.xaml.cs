@@ -22,18 +22,31 @@ namespace AppAppartamenti.Views.Login
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            //Application.Current.MainPage = new MainPage();
-
-            //Se ho il token allora vado direttamente alla home
-            if (ApiHelper.GetToken() != null)
+            try
             {
-                Application.Current.MainPage = new MainPage();
+                //Application.Current.MainPage = new MainPage();
+
+                //Se ho il token allora vado direttamente alla home
+                if (ApiHelper.GetToken() != null)
+                {
+                    ApiHelper.GetUserInfo();
+                    Application.Current.MainPage = new MainPage();
+                }
+                else
+                {
+                    stkLogin.IsVisible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("errore", "errore", "cancel");
             }
         }
+
 
         private async void btnAccedi_ClickedAsync(object sender, EventArgs e)
         {
@@ -88,7 +101,7 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
-                await Navigation.PushModalAsync(new NavigationPage(new  Registrazione()));
+                await Navigation.PushModalAsync(new NavigationPage(new Registrazione()));
             }
             catch (Exception ex)
             {
@@ -101,8 +114,11 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
-                await Navigation.PushAsync(new Account.FacebookLogin());
-                //Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value, true))
+                bool answer = await DisplayAlert("Liberacasa.it vuole utilizzare Facebook.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
+                if (answer)
+                {
+                    await Navigation.PushAsync(new NavigationPage(new Account.FacebookLogin()));
+                }
             }
             catch (Exception ex)
             {
@@ -115,7 +131,11 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
-                await Navigation.PushAsync(new NavigationPage(new Account.GoogleLogin()));
+                bool answer = await DisplayAlert("Liberacasa.it vuole utilizzare Google.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
+                if (answer)
+                {
+                    await Navigation.PushAsync(new NavigationPage(new Account.GoogleLogin()));
+                }
             }
             catch (Exception ex)
             {

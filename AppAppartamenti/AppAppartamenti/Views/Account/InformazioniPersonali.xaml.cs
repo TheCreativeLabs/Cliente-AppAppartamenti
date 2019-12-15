@@ -1,6 +1,8 @@
 ﻿using AppAppartamenti.Api;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,13 +28,11 @@ namespace AppAppartamenti.Views.Account
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-                
-            AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
-            UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
 
+            UserInfoDto userInfo = await ApiHelper.GetUserInfo();
             viewModel = userInfo;
-            BindingContext = viewModel;
 
+            BindingContext = viewModel;
 
             if (viewModel.FotoProfilo != null)
             {
@@ -80,17 +80,29 @@ namespace AppAppartamenti.Views.Account
         {
             (sender as Button).IsEnabled = false;
 
-            var stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (stream != null)
-            {
-                MemoryStream i = new MemoryStream();
-                stream.CopyTo(i);
-                viewModel.FotoProfilo = i.ToArray();
-                imgFotoUtente.Source = ImageSource.FromStream(() => new MemoryStream(viewModel.FotoProfilo));
-            }
+            PickPhoto();
 
             (sender as Button).IsEnabled = true;
         }
 
+        async void PickPhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            MediaFile foto = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small
+            });
+
+            if (foto == null)
+                return;
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                foto.GetStream().CopyTo(memoryStream);
+                viewModel.FotoProfilo = memoryStream.ToArray();
+                imgFotoUtente.Source = ImageSource.FromStream(() => { return new MemoryStream(viewModel.FotoProfilo); });
+            }
+        }
     }
 }

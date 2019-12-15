@@ -13,16 +13,27 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Ricerca : ContentPage
     {
+        List<TipologiaAnnuncio> listTipologiaAnnuncio = new List<TipologiaAnnuncio>();
+
         public Ricerca()
         {
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             entRicerca.Focus();
+
+            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            if (listTipologiaAnnuncio == null || listTipologiaAnnuncio.Count == 0)
+            {
+                listTipologiaAnnuncio = (await annunciClient.GetListaTipologiaAnnunciAsync()).ToList();
+            }
+            pckTipologiaVendita.ItemsSource = listTipologiaAnnuncio;
+
+            //pckRiscaldamento.SelectedItem = listTipologiaRiscaldamento.Where(x => x.Descrizione == dtoToModify.Item.TipologiaRiscaldamento).FirstOrDefault();
         }
 
         private async void btnCancel_Clicked(object sender, EventArgs e)

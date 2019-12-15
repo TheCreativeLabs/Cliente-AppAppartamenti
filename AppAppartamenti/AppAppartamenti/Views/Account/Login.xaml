@@ -11,7 +11,7 @@
              BackgroundColor="White"
              >
     <ContentPage.Content>
-        <StackLayout Padding="20">
+        <StackLayout Padding="20" x:Name="stkLogin" IsVisible="False" >
 
             <StackLayout VerticalOptions="CenterAndExpand">
 

@@ -10,6 +10,7 @@
     <Compile Remove="Views\NuovoAnnuncio\NuovoAnnuncio.xaml.cs" />
     <Compile Remove="Utility\CustomNavigationPage.cs" />
     <Compile Remove="Views\NuovoAnnuncio\MyView.xaml.cs" />
+    <Compile Remove="Views\DettaglioAnnuncio\DettaglioAnnuncio %28copy%29.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,17 +45,27 @@
     <Compile Update="Views\NuovoAnnuncio\SelezionePlanimetria.xaml.cs">
       <DependentUpon>SelezionePlanimetria.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\DettaglioAnnuncio\DettaglioAnnuncio.xaml.cs">
+      <DependentUpon>DettaglioAnnuncio.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\DettaglioAnnuncio\DettaglioAnnuncio %28copy%29.xaml.cs">
+      <DependentUpon>NuovoAppuntamento.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\DettaglioAnnuncio\NuovoAppuntamento.xaml.cs">
+      <DependentUpon>NuovoAppuntamento.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\AnnunciPreferiti.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\DettaglioAnnuncio.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContentViews\" />
+    <Folder Include="Views\DettaglioAnnuncio\" />
   </ItemGroup>
 </Project>

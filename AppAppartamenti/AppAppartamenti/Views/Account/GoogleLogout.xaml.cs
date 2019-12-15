@@ -22,18 +22,36 @@ namespace AppAppartamenti.Views.Account
         {
             InitializeComponent();
 
-            var apiRequest =
-                $"https://www.facebook.com/dialog/oauth?client_id={AppSetting.ClientId}&display=popup&response_type=token&redirect_uri={AppSetting.ApiEndpoint}";
+            //var apiRequest =
+            //    $"https://www.facebook.com/dialog/oauth?client_id={AppSetting.ClientId}&display=popup&response_type=token&redirect_uri={AppSetting.ApiEndpoint}";
 
-            var webView = new WebView
-            {
-                Source = apiRequest,
-                HeightRequest = 1
-            };
+            //var webView = new WebView
+            //{
+            //    Source = apiRequest,
+            //    HeightRequest = 1
+            //};
 
-            webView.Navigated += WebViewOnNavigated;
+            //webView.Navigated += WebViewOnNavigated;
 
-            Content = webView;
+            //Content = webView;
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+
+            //Rimuovo il token
+            //Api.ApiHelper.DeleteToken();
+            //Api.ApiHelper.RemoveProvider();
+            Api.ApiHelper.RemoveSettings();
+            //Api.ApiHelper.RemoveProvider();
+            //eseguo il logout.
+            await accountClient.LogoutAsync();
+
+            //torno alla pagina di login.
+            Application.Current.MainPage = new NavigationPage(new Login.Login());
         }
 
         private async void WebViewOnNavigated(object sender, WebNavigatedEventArgs e)

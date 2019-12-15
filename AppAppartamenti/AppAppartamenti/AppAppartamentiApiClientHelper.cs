@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AppAppartamenti.Api
@@ -20,6 +21,8 @@ namespace AppAppartamenti.Api
 
         public const string AccessTokenKey = "Access_Token";
         public const string ProviderKey = "Provider_Key";
+        public const string UserInfoKey = "UserInfo_Key";
+
 
         public class BearerToken
         {
@@ -71,7 +74,7 @@ namespace AppAppartamenti.Api
                     string jsonResponse = response.Content.ReadAsStringAsync().Result;
                     BearerToken token = JsonConvert.DeserializeObject<BearerToken>(jsonResponse);
 
-                    Application.Current.Properties[AccessTokenKey] = token.AccessToken;
+                    SetToken(token.AccessToken);
                 }
                 else
                 {
@@ -81,17 +84,17 @@ namespace AppAppartamenti.Api
             }
         }
 
+        public static void SetToken(string AccessToken)
+        {
+            Preferences.Set(AccessTokenKey, AccessToken);
+        }
+
         // Ottiene il Token
         public static string GetToken()
         {
             string accessToken = null;
 
-            if (Application.Current.Properties.ContainsKey(AccessTokenKey))
-            {
-                accessToken = Application.Current.Properties[AccessTokenKey].ToString();
-
-                //TODO: controllare la validità del token.
-            }
+            accessToken = Preferences.Get(AccessTokenKey,null);
 
             return accessToken;
         }
@@ -100,27 +103,19 @@ namespace AppAppartamenti.Api
         /// Rimuove il token.
         /// </summary>
         /// <returns></returns>
-        public static string DeleteToken()
+        public static async void DeleteToken()
         {
-            string accessToken = null;
-
-            if (Application.Current.Properties.ContainsKey(AccessTokenKey))
-            {
-
-
-                Application.Current.Properties.Remove(AccessTokenKey);
-            }
-
-            return accessToken;
+            Preferences.Remove(AccessTokenKey);
         }
 
         /// <summary>
         /// Salva nella cache se l'utente si è loggato con facebook, google o email.
         /// </summary>
         /// <param name="Provider"></param>
-        public static void SetProvider(LoginProvider Provider)
+        public static async void SetProvider(LoginProvider Provider)
         {
-            Application.Current.Properties[ProviderKey] = Provider;
+            Preferences.Set(ProviderKey, Provider.ToString());
+
         }
 
         /// <summary>
@@ -131,9 +126,9 @@ namespace AppAppartamenti.Api
         {
             LoginProvider provider = LoginProvider.Email;
 
-            if (Application.Current.Properties.ContainsKey(ProviderKey))
+            if (Preferences.Get(ProviderKey, null) != null)
             {
-                provider = (LoginProvider)Application.Current.Properties[ProviderKey];
+                Enum.TryParse(Preferences.Get(ProviderKey, null), out provider);
             }
 
             return provider;
@@ -145,23 +140,19 @@ namespace AppAppartamenti.Api
         /// Rimuove il provider.
         /// </summary>
         /// <returns></returns>
-        public static string RemoveProvider()
+        public static async void RemoveProvider()
         {
-            string accessToken = null;
 
-            if (Application.Current.Properties.ContainsKey(ProviderKey))
-            {
-                Application.Current.Properties.Remove(ProviderKey);
+                Preferences.Remove(ProviderKey);
+
             }
 
-            return accessToken;
-        }
 
-        /// <summary>
-        /// Restituisce il Client da usare per le chiamate all'api
-        /// </summary>
-        /// <returns></returns>
-        public static HttpClient GetApiClient()
+            /// <summary>
+            /// Restituisce il Client da usare per le chiamate all'api
+            /// </summary>
+            /// <returns></returns>
+            public static HttpClient GetApiClient()
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.ApiHelper.GetToken());
@@ -187,7 +178,6 @@ namespace AppAppartamenti.Api
                     Email = Email,
                     Password = Password,
                     ConfirmPassword = ConfermaPassword
-
                 };
 
                 try
@@ -199,6 +189,40 @@ namespace AppAppartamenti.Api
                     throw new Exception("Si è verificato un errore" + ex.StatusCode);
                 }
             }
+        }
+
+
+        public static async Task<UserInfoDto> GetUserInfo()
+        {
+            UserInfoDto userInfo = null;
+
+            if(Preferences.Get(UserInfoKey, null) != null)
+            {
+                userInfo = JsonConvert.DeserializeObject<UserInfoDto>(Preferences.Get(UserInfoKey, null));
+            }
+
+            if (userInfo == null)
+            {
+                AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
+                userInfo = await amiciClient.GetCurrentUserInfoAsync();
+                Preferences.Set(UserInfoKey, JsonConvert.SerializeObject(userInfo));
+            }
+
+            return userInfo;
+        }
+
+        public static void RemoveUserInfo()
+        {
+            Preferences.Remove(UserInfoKey);
+
+        }
+
+        /// <summary>
+        /// Rimuove tutte le setting
+        /// </summary>
+        public static void RemoveSettings()
+        {
+            Preferences.Clear();
         }
     }
 

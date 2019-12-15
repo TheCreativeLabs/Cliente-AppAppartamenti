@@ -10,7 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,6 +18,7 @@ namespace AppAppartamenti.Views.Account
 {
     public class MenuItem
     {
+        public int Id { get; set; }
         public Page  RedirectPage { get; set; }
         public string DisplayName { get; set; }
         public string Icona { get; set; }
@@ -33,12 +34,13 @@ namespace AppAppartamenti.Views.Account
             InitializeComponent();
 
             ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
-            items.Add(new MenuItem() { DisplayName = "Informazioni personali", Icona = "\uf007", RedirectPage =new InformazioniPersonali() });
-            items.Add(new MenuItem() { DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
-            items.Add(new MenuItem() { DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
-            items.Add(new MenuItem() { DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = null });
-            items.Add(new MenuItem() { DisplayName = "Privacy", Icona = "\uf505", RedirectPage = null });
-            items.Add(new MenuItem() { DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
+            items.Add(new MenuItem() { Id=0, DisplayName = "Informazioni personali", Icona = "\uf007", RedirectPage =new InformazioniPersonali() });
+            items.Add(new MenuItem() { Id=1, DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
+            items.Add(new MenuItem() { Id=2, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
+            items.Add(new MenuItem() { Id=3, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
+            items.Add(new MenuItem() { Id=4, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = null });
+            items.Add(new MenuItem() { Id=5, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = null });
+            items.Add(new MenuItem() { Id=6, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
 
             listView.ItemsSource = items;
         }
@@ -52,7 +54,7 @@ namespace AppAppartamenti.Views.Account
 
             listView.SelectedItem = null;
 
-            if(item.RedirectPage == null)
+            if(item.Id == 6)
             {
                 string action = await DisplayActionSheet("Continuare?","Cancel", "Log out");
 
@@ -60,6 +62,13 @@ namespace AppAppartamenti.Views.Account
                 {
                     await LogOut();
                 }
+            }else if (item.Id == 3)
+            {
+                await ShareUri("Ciao");
+            }
+            else if (item.Id == 2)
+            {
+                await ContactUs();
             }
             else
             {
@@ -71,12 +80,10 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
-            UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
-
+            UserInfoDto userInfo = await ApiHelper.GetUserInfo();
             viewModel = userInfo;
-            BindingContext = viewModel;
 
+            BindingContext = viewModel;
 
             if (viewModel.FotoProfilo != null)
             {
@@ -88,6 +95,40 @@ namespace AppAppartamenti.Views.Account
             }
         }
 
+        public async Task ShareUri(string uri)
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = AppSetting.SiteApp,
+                Title = "Condividi il link"
+            });
+        }
+
+        public async Task ContactUs()
+        {
+            try
+            {
+                var to = new List<string>();
+                to.Add(AppSetting.EmailApp);
+                var message = new EmailMessage
+                {
+                    Subject = "",
+                    Body = "",
+                    To = to,
+                    //Cc = ccRecipients,
+                    //Bcc = bccRecipients
+                };
+                await Email.ComposeAsync(message);
+            }
+            catch (FeatureNotSupportedException fbsEx)
+            {
+                // Email is not supported on this device
+            }
+            catch (Exception ex)
+            {
+                // Some other exception occurred
+            }
+        }
 
         private async Task LogOut()
         {
@@ -110,8 +151,10 @@ namespace AppAppartamenti.Views.Account
                     await accountClient.LogoutAsync();
 
                     //Rimuovo il token e navigo alla home
-                    Api.ApiHelper.DeleteToken();
-                    Application.Current.MainPage = new Login.Login();
+                    Api.ApiHelper.RemoveSettings();
+                    //Api.ApiHelper.DeleteToken();
+                    //Api.ApiHelper.RemoveProvider();
+                    Application.Current.MainPage = new NavigationPage(new Login.Login());
                 }
             }
             catch (Exception ex)

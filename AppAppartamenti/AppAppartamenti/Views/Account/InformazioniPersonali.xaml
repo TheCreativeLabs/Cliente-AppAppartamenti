@@ -18,8 +18,8 @@
                 <Label Style="{x:StaticResource Title}" Margin="0,0,10,20" Text="{translator:Translate InformazionePersonali.Title}"></Label>
 
                 <Frame CornerRadius="50"
-                           HeightRequest="60"
-                           WidthRequest="60"
+                           HeightRequest="50"
+                           WidthRequest="50"
                            IsClippedToBounds="True"
                            HasShadow="False"
                            HorizontalOptions="Center"
@@ -28,8 +28,8 @@
                     <Image x:Name="imgFotoUtente"
                             Aspect="AspectFill"
                              Margin="-20"
-                             HeightRequest="100"
-                             WidthRequest="100"></Image>
+                             HeightRequest="80"
+                             WidthRequest="80"></Image>
 
 
                 </Frame>
@@ -43,7 +43,7 @@
                 <Entry x:Name="entCognome" Text="{Binding Cognome}" Placeholder="{translator:Translate InformazionePersonali.Surname}"></Entry>
 
                 <!--<Label Text="{translator:Translate InformazionePersonali.Email}"></Label>-->
-                <Entry x:Name="entMail" Text="{Binding Email}" Placeholder="{translator:Translate InformazionePersonali.Email}"></Entry>
+                <Entry x:Name="entMail" IsVisible="False" Text="{Binding Email}" Placeholder="{translator:Translate InformazionePersonali.Email}"></Entry>
 
                 <!--<Label Text="{translator:Translate InformazionePersonali.DateOfBirth}"></Label>-->
                 <Entry x:Name="entDataNascita" Focused="entDataNascita_Focused" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></Entry>

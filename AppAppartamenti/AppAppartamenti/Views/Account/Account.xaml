@@ -13,19 +13,20 @@
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                 <StackLayout Orientation="Horizontal">
-                     <Frame
-                           CornerRadius="50"
-                           HeightRequest="60"
-                           WidthRequest="60"
+                    <Frame CornerRadius="40"
+                           HeightRequest="50"
+                           WidthRequest="50"
                            IsClippedToBounds="True"
-                           HasShadow="True"
+                           HasShadow="False"
                            HorizontalOptions="Center"
                            VerticalOptions="Center">
-                      <Image x:Name="imgFotoUtente" 
-                             Aspect="AspectFill"
+
+                    <Image x:Name="imgFotoUtente"
+                            Aspect="AspectFill"
                              Margin="-20"
-                             HeightRequest="100"
-                             WidthRequest="100" />
+                             HeightRequest="80"
+                             WidthRequest="80"></Image>
+
                     </Frame>
 
                     <Grid VerticalOptions="Center">
