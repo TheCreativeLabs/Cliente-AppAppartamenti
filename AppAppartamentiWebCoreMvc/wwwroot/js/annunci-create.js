@@ -144,10 +144,22 @@ async function GetImmagini(input,listname,inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><button onclick="RemoveFile(this)" class="btn-remove btn btn-light rounded-circle position-fixed border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' +inputname+'['+numImage+']" value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image appartamento-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'appartamento-image\'' + ',\'' + inputname+'\')" class="btn-remove btn btn-light rounded-circle position-absolute border"><i class="fas fa-trash-alt"></i></button><input style="display:none"  value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    refreshNames(listname, 'appartamento-image', inputname);
 
-    numImage += 1;
+    //name = "' +inputname+'['+numImage+']"
+    //numImage += 1;
 }
+
+function refreshNames(listname, childrensName, inputname) {
+    var idListName = "#" + listname;
+    var classChildrens = "." + childrensName;
+    $(idListName).find(classChildrens).each(function (i) {
+        $(this).find("input").attr('name', inputname+'[' + i + ']');
+        //$(this).find("label").attr('input', 'SubModels[' + i + '].SomeProperty');
+    });
+}
+
 
 async function GetPlanimetrie(input, listname, inputname) {
     const file = input.files[0];
@@ -164,9 +176,10 @@ async function GetPlanimetrie(input, listname, inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><button onclick="RemoveFile(this)" class="btn-remove btn btn-light rounded-circle position-fixed border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image planimetria-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'planimetria-image\'' + ',\'' + inputname +'\')" class="btn-remove btn btn-light rounded-circle position-absolute border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    refreshNames(listname, 'planimetria-image', inputname);
 
-    numPlanimetria += 1;
+    //numPlanimetria += 1;
 }
 
 function setMap() {
@@ -258,7 +271,8 @@ function EnableCitySearch(searchTextbox) {
     }
 }
 
-function RemoveFile(button) {
+function RemoveFile(button, listname, childrensName, inputname) {
     $(button).parent().remove();
+    refreshNames(listname, childrensName, inputname);
 }
 

@@ -22,7 +22,7 @@
 
         @foreach (var item in Model)
         {
-            string detailUrl = @Url.Action("Edit", "AnnunciPersonali", new { Id = item.Id });
+            string detailUrl = @Url.Action("Create", "AnnunciPersonali", new { Id = item.Id });
 
             <div class="card card-annuncio mb-3 shadow-sm" onclick="NavigateToDetail('@detailUrl')">
                 <div class="row no-gutters">
@@ -44,7 +44,7 @@
                                    <i class="fas fa-trash"></i>
                                 </button>
 
-                                <button type="button" title="Modifica" data-id="@item.Id" onclick="AddPreferred(this,'@Url.Action("Edit", "AnnunciPersonali")','@item.Id')" class="btn mr-1">
+                                <button type="button" title="Modifica" data-id="@item.Id" onclick="NavigateToDetail('@detailUrl')" class="btn mr-1">
                                    <i class="fas fa-edit"></i>
                                 </button>
                             </div>
