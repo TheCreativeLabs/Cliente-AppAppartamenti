@@ -22,6 +22,9 @@ namespace AppAppartamenti.Api
         public const string AccessTokenKey = "Access_Token";
         public const string ProviderKey = "Provider_Key";
         public const string UserInfoKey = "UserInfo_Key";
+        public const string ListaTipologiaAnnuncioKey = "ListaTipologiaAnnuncio_Key";
+        public const string ListaTipologiaProprietaKey = "ListaTipologiaProprieta_Key";
+
 
 
         public class BearerToken
@@ -223,6 +226,45 @@ namespace AppAppartamenti.Api
         public static void RemoveSettings()
         {
             Preferences.Clear();
+        }
+
+
+        public static async Task<List<TipologiaAnnuncio>> GetListaTipologiaAnnuncio()
+        {
+            List<TipologiaAnnuncio> listTipologiaAnnuncio = new List<TipologiaAnnuncio>();
+
+            if (Preferences.Get(ListaTipologiaAnnuncioKey, null) != null)
+            {
+                listTipologiaAnnuncio = JsonConvert.DeserializeObject<List<TipologiaAnnuncio>>(Preferences.Get(ListaTipologiaAnnuncioKey, null));
+            }
+
+            if (listTipologiaAnnuncio.Any() == false)
+            {
+                AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
+                listTipologiaAnnuncio = (await annunciClient.GetListaTipologiaAnnunciAsync()).ToList();
+                Preferences.Set(ListaTipologiaAnnuncioKey, JsonConvert.SerializeObject(listTipologiaAnnuncio));
+            }
+
+            return listTipologiaAnnuncio;
+        }
+
+        public static async Task<List<TipologiaProprieta>> GetListaTipologiaProprieta()
+        {
+            List<TipologiaProprieta> listTipologiaProprieta = new List<TipologiaProprieta>();
+
+            if (Preferences.Get(ListaTipologiaProprietaKey, null) != null)
+            {
+                listTipologiaProprieta = JsonConvert.DeserializeObject<List<TipologiaProprieta>>(Preferences.Get(ListaTipologiaProprietaKey, null));
+            }
+
+            if (listTipologiaProprieta.Any() == false)
+            {
+                AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
+                listTipologiaProprieta = (await annunciClient.GetListaTipologiaProprietaAsync()).ToList();
+                Preferences.Set(ListaTipologiaProprietaKey, JsonConvert.SerializeObject(listTipologiaProprieta));
+            }
+
+            return listTipologiaProprieta;
         }
     }
 

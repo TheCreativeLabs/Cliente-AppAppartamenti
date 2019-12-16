@@ -245,9 +245,10 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
 
-            <Style TargetType="appappartamenti:MyEntry">
-                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
-                <Setter Property="HeightRequest" Value="40"></Setter>
+            <Style TargetType="BoxView" x:Key="BoxViewSeparator">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="Color" Value="LightGray" />
+                <Setter Property="Margin" Value="0,15,0,15" />
             </Style>
 
         </ResourceDictionary>

@@ -14,8 +14,8 @@
         <StackLayout Style="{x:StaticResource StackContainer}">
                 <StackLayout Orientation="Horizontal">
                     <Frame CornerRadius="40"
-                           HeightRequest="50"
-                           WidthRequest="50"
+                           HeightRequest="40"
+                           WidthRequest="40"
                            IsClippedToBounds="True"
                            HasShadow="False"
                            HorizontalOptions="Center"
@@ -23,9 +23,7 @@
 
                     <Image x:Name="imgFotoUtente"
                             Aspect="AspectFill"
-                             Margin="-20"
-                             HeightRequest="80"
-                             WidthRequest="80"></Image>
+                             Margin="-20"></Image>
 
                     </Frame>
 

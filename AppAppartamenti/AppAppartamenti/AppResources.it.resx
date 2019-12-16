@@ -361,14 +361,28 @@
   <data name="Ricerca.ParkingSpaces" xml:space="preserve">
     <value>Posti auto</value>
   </data>
+      <data name="Ricerca.Garages" xml:space="preserve">
+    <value>Garages</value>
+  </data>
+     <data name="Ricerca.kitchens" xml:space="preserve">
+    <value>Cucine</value>
+  </data>
   <data name="Ricerca.Price" xml:space="preserve">
     <value>Prezzo</value>
+  </data>
+      <data name="Ricerca.Badrooms" xml:space="preserve">
+    <value>Camere da letto</value>
+  </data>
+    
+ 
+      <data name="Ricerca.Other" xml:space="preserve">
+    <value>Altre informazioni</value>
   </data>
   <data name="Ricerca.Rent" xml:space="preserve">
     <value>Affitto</value>
   </data>
   <data name="Ricerca.Rooms" xml:space="preserve">
-    <value>Stanze</value>
+    <value>Altre stanze</value>
   </data>
   <data name="Ricerca.RoomsSection" xml:space="preserve">
     <value>Camere</value>
@@ -381,6 +395,9 @@
   </data>
   <data name="Ricerca.Search" xml:space="preserve">
     <value>Cerca</value>
+  </data>
+    <data name="Ricerca.PropertyType" xml:space="preserve">
+    <value>Tipo proprietà</value>
   </data>
   <data name="Ricerca.SearchPlaceholder" xml:space="preserve">
     <value>Ricerca per città o provincia</value>
