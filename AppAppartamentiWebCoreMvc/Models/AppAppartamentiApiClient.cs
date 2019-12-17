@@ -2984,6 +2984,36 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("CoordinateGeografiche", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CoordinateGeografiche { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("DisponibilitaOraria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DisponibilitaOrariaDto DisponibilitaOraria { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class DisponibilitaOrariaDto
+    {
+        [Newtonsoft.Json.JsonProperty("fasceOrarieLunedi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieLunedi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fasceOrarieMartedi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieMartedi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fasceOrarieMercoledi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieMercoledi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fasceOrarieGiovedi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieGiovedi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fasceOrarieVenerdi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieVenerdi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fasceOrarieSabato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieSabato { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fasceOrarieDomenica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FasceOrarieDomenica { get; set; }
+
 
     }
 
@@ -3096,34 +3126,7 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
         public string CoordinateGeografiche { get; set; }
 
         [Newtonsoft.Json.JsonProperty("DisponibilitaOraria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DisponibilitaOrariaDtoInput DisponibilitaOraria { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class DisponibilitaOrariaDtoInput
-    {
-        [Newtonsoft.Json.JsonProperty("fasceOrarieLunedi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieLunedi { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fasceOrarieMartedi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieMartedi { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fasceOrarieMercoledi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieMercoledi { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fasceOrarieGiovedi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieGiovedi { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fasceOrarieVenerdi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieVenerdi { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fasceOrarieSabato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieSabato { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fasceOrarieDomenica", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FasceOrarieDomenica { get; set; }
+        public DisponibilitaOrariaDto DisponibilitaOraria { get; set; }
 
 
     }

@@ -83,7 +83,13 @@ function ComponiFasceOrarie(input) {
 
 
 function RemoveSlot(button) {
+    var superParent = $(button).parent().parent();
+    var fasciaSorella = $(superParent).children(".input-time-slot").first();
+    if (fasciaSorella != null) { //devo ricalcolare la stringa delle fasce, perchè va rimossa quella che sto eliminando
+        var input = $(fasciaSorella).children('input[name="fasciaOrariaFrom"]');
+    }
     $(button).parent().remove();
+    ComponiFasceOrarie($(input));
 }
 
 function ToggleSlot(button) {
@@ -183,33 +189,59 @@ async function GetPlanimetrie(input, listname, inputname) {
 }
 
 function setMap() {
-    var comune = $("#input-comune").val();
-    var indirizzo = $("#Indirizzo").val();
-    
-    if ((comune != null && comune.length > 0) && (indirizzo != null && indirizzo.length > 0)) {
-        var address = indirizzo + "," + comune;
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status == 'OK') {
-                var mapProp = {
-                    zoom: 10,
-                    mapTypeControl: false,
-                    streetViewControl: false,
-                };
-                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-                map.setCenter(results[0].geometry.location);
 
-                $("#CoordinateGeografiche").val(results[0].geometry.location.lat() + ";" + results[0].geometry.location.lng());
-
-                $("#googleMap").show();
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
+    var coordinates = $("#googleMap").data("latlng");
+    if (coordinates != null && coordinates != "") { //significa che sono appena entrato in MODIFICA, setto la mappa con lat e lng lette dal db
+        var splittedCoordinates = coordinates.split(";");
+        var lat = splittedCoordinates[0];
+        var lng = splittedCoordinates[1];
+        var mapProp = {
+            zoom: 10,
+            mapTypeControl: false,
+            streetViewControl: false,
+        };
+        var LatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        map.setCenter(LatLng);
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map
         });
+         //dopo aver posizionato la mappa, tolgo le coordinate prese dal db: così se viene cambiato l'indirizzo si entra nell'else e si posiziona sulle nuove coordinate
+        $("#googleMap").data("latlng", null);
+        $("#googleMap").show();
+    }
+    else {//quando viene inserito/modificato l'indirizzo, entro nell'else e chiedo a google lat e lng sapendo l'indirizzo
+        var comune = $("#input-comune").val();
+        var indirizzo = $("#Indirizzo").val();
+
+        if ((comune != null && comune.length > 0) && (indirizzo != null && indirizzo.length > 0)) {
+            var address = indirizzo + "," + comune;
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == 'OK') {
+                    var mapProp = {
+                        zoom: 10,
+                        mapTypeControl: false,
+                        streetViewControl: false,
+                    };
+                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    map.setCenter(results[0].geometry.location);
+
+                    $("#CoordinateGeografiche").val(results[0].geometry.location.lat() + ";" + results[0].geometry.location.lng());
+
+                    $("#googleMap").show();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+    
     }
 }
 
