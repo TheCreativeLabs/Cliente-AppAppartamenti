@@ -11,10 +11,12 @@
     <Compile Remove="Utility\CustomNavigationPage.cs" />
     <Compile Remove="Views\NuovoAnnuncio\MyView.xaml.cs" />
     <Compile Remove="Views\DettaglioAnnuncio\DettaglioAnnuncio %28copy%29.xaml.cs" />
+    <Compile Remove="Views\NuovoAnnuncio.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Views\MenuPage.xaml" />
+    <EmbeddedResource Remove="Views\NuovoAnnuncio.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +32,8 @@
     <PackageReference Include="Xam.Plugin.Media" Version="4.4.6-beta" />
     <PackageReference Include="Xamarin.Forms.RangeSlider" Version="1.0.2" />
     <PackageReference Include="Plugin.Google" Version="1.0.1" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.34" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.3.0.34" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,9 +45,6 @@
     </Compile>
     <Compile Update="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\NuovoAnnuncio\SelezionePlanimetria.xaml.cs">
-      <DependentUpon>SelezionePlanimetria.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\DettaglioAnnuncio\DettaglioAnnuncio.xaml.cs">
       <DependentUpon>DettaglioAnnuncio.xaml</DependentUpon>
@@ -57,6 +58,9 @@
       <DependentUpon>NuovoAppuntamento.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NuovoAnnuncio\ValidazioneMappa2.xaml.cs">
+      <DependentUpon>ValidazioneMappa2.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -67,5 +71,10 @@
   <ItemGroup>
     <Folder Include="ContentViews\" />
     <Folder Include="Views\DettaglioAnnuncio\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\13.2.0.42\lib\mono\Xamarin.iOS\Xamarin.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

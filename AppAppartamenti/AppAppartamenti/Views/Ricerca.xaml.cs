@@ -91,6 +91,8 @@ namespace AppAppartamenti.Views
 
         private async void btnCancel_Clicked(object sender, EventArgs e)
         {
+            MessagingCenter.Send(this, "Ricerca", "");
+
             await Navigation.PopModalAsync();
         }
 
@@ -120,7 +122,7 @@ namespace AppAppartamenti.Views
                     Terrazzo = chkTerrazzo.IsChecked
                 };
 
-                MessagingCenter.Send<Ricerca, string>(this, "Ricerca", JsonConvert.SerializeObject(ricercaModel));
+                MessagingCenter.Send(this, "Ricerca", JsonConvert.SerializeObject(ricercaModel));
                 await  Navigation.PopModalAsync();
             }
             else
@@ -138,7 +140,6 @@ namespace AppAppartamenti.Views
 
             stkRicercaAggiuntiva.IsVisible = false;
             lvComuni.IsVisible = true;
-            btnRicerca.IsVisible = false;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -153,9 +154,7 @@ namespace AppAppartamenti.Views
 
             lvComuni.IsVisible = false;
             stkRicercaAggiuntiva.IsVisible = true;
-            btnRicerca.IsVisible = true;
         }
-        
 
         void StpCamereLetto_ValueChanged(object sender, ValueChangedEventArgs e)
         {

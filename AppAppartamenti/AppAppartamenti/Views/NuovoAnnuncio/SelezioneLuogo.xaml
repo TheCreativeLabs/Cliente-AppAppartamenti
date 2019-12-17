@@ -10,36 +10,17 @@
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.SelezioneLuogo"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              ios:Page.UseSafeArea="true"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             >
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <!--<NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" x:Name="slBody" IsVisible="False">
-            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand">
-                <Label Style="{x:StaticResource BackButton}"></Label>
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                    </TapGestureRecognizer>
-                </Frame.GestureRecognizers>
-            </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezioneLuogo.NuovoAnnuncio}"></Label>
-            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                    </TapGestureRecognizer>
-                </Frame.GestureRecognizers>
-            </Frame>
-        </StackLayout>
-    </NavigationPage.TitleView>-->
 
 <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
@@ -58,7 +39,8 @@
 
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneLuogo.WhereQuestion}"></Label>
-            <ProgressBar Progress="0.3" Margin="0,0,0,20"/>
+            <controls:StepMenu CurrentId="3"/>
+
 
             <Label Text="{translator:Translate SelezioneLuogo.Locality}"></Label>
             <Entry  x:Name="entCercaComune" Placeholder="{translator:Translate SelezioneLuogo.LocalityPlaceholder}" TextChanged="EntCercaComune_TextChanged"></Entry>
@@ -85,17 +67,17 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
-
             <Label x:Name="lblIndirizzo" Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,0,20,0"></Label>
             <Entry x:Name="entIndirizzo"
                                         Unfocused="EntIndirizzo_Unfocused"
                                         Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></Entry>
 
-            <maps:Map x:Name="map" IsVisible="False" HeightRequest="200" Margin="0"/>
-
+            
             <Button x:Name="btnIndirizzoProcedi" IsEnabled="False" Text="{translator:Translate SelezioneLuogo.Continue}" 
                     Clicked="BtnIndirizzoProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
+      
+          
+            
         </StackLayout>
     </ContentPage.Content>
 

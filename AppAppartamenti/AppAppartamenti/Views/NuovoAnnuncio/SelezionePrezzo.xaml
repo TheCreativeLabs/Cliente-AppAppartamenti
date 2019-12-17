@@ -9,7 +9,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePrezzo"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              ios:Page.UseSafeArea="true"
              NavigationPage.HasNavigationBar="False">
 
@@ -36,7 +36,8 @@
 
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePrezzo.Costs}"></Label>
-            <ProgressBar Progress="0.5" Margin="0,0,0,20"/>
+                        <controls:StepMenu CurrentId="5"/>
+
 
             <Label Text="{translator:Translate SelezionePrezzo.EnterPrice}"></Label>
             <Entry  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>

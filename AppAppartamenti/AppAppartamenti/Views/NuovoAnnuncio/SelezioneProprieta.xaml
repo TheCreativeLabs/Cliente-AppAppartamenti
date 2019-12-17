@@ -13,33 +13,24 @@
              ios:Page.UseSafeArea="true"
              NavigationPage.HasNavigationBar="False"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" >
-
-    
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
 
-
-                  <Button BackgroundColor="Transparent"
-                            Text="&#xf00d;" HorizontalOptions="End" Style="{x:StaticResource NavBackButton}" 
-                            Clicked="BtnCancel_Clicked">
-                  </Button>
-          
+            <Button BackgroundColor="Transparent"
+                    Text="&#xf00d;" HorizontalOptions="End" Style="{x:StaticResource NavBackButton}" 
+                    Clicked="BtnCancel_Clicked">
+            </Button>
 
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneProprieta.PropertyType}"></Label>
-            <ProgressBar Progress="0.1"/>
 
-
-             
-
-            <controls:StepMenu CardTitle="Slavko Vlasic"/>
+            <controls:StepMenu CurrentId="1"/>
 
             <!--<NavigationPage.TitleView>
                     <StackLayout Orientation="Horizontal">

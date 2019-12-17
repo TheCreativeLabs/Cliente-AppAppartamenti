@@ -20,7 +20,7 @@ namespace AppAppartamenti.Views
         AnnuncioDetailViewModel viewModel;
         Guid IdAnnuncio;
 
-        public NuovoAppuntamento(Guid Id,bool IsEditable)
+        public NuovoAppuntamento(Guid Id)
         {
             InitializeComponent();
 
@@ -30,53 +30,11 @@ namespace AppAppartamenti.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
-            BindingContext = viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
-
-            scrollView.IsVisible = true;
         }
 
-        async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
+        private async void Cancel_Clicked(object sender, EventArgs e)
         {
-            if (e.ScrollY > 20)
-            {
-                stkHeader.IsVisible = false;
-                NavigationPage.SetHasNavigationBar(this, true);
-            }
-            else
-            {
-                NavigationPage.SetHasNavigationBar(this, false);
-                stkHeader.IsVisible = true;
-            }
-        }
-
-        private async void BtnBack_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                await Navigation.PopAsync();
-            }
-            catch (Exception Ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
-
-        private async void BtnModifica_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                //await Navigation.PopAsync();
-                //await Navigation.PushAsync(new ModificaAnnuncio(viewModel.Item.Id.Value));
-                
-                await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(viewModel)));
-            }
-            catch (Exception Ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
+            await Navigation.PopModalAsync();
         }
     }
 }

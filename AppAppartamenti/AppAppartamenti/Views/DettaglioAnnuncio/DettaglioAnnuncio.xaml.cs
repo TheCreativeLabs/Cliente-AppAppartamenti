@@ -69,6 +69,19 @@ namespace AppAppartamenti.Views
             }
         }
 
+        private async void BtnAppuntamento_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new NuovoAppuntamento(IdAnnuncio));
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
         private async void BtnModifica_Clicked(object sender, EventArgs e)
         {
             try

@@ -14,6 +14,7 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Home : ContentPage
     {
+        RicercaModel RicercaModel;
         public Home()
         {
             InitializeComponent();
@@ -27,15 +28,19 @@ namespace AppAppartamenti.Views
 
             MessagingCenter.Subscribe<Ricerca, string>(this, "Ricerca", async (sender, arg) =>
             {
-                if (!isBusy)
+                RicercaModel = null;
+                if (!string.IsNullOrEmpty(arg))
                 {
-                    isBusy = true;
-
-                    await Navigation.PushAsync(new ListaAnnunci(JsonConvert.DeserializeObject<RicercaModel>(arg)));
-
-                    isBusy = false;
+                    RicercaModel = JsonConvert.DeserializeObject<RicercaModel>(arg);
                 }
             });
+
+            if(RicercaModel != null)
+            {
+                RicercaModel = null;
+                await Navigation.PushAsync(new ListaAnnunci(RicercaModel));
+
+            }
         }
 
         private async void entRicerca_Focused(object sender, EventArgs e)
