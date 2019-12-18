@@ -782,31 +782,101 @@
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["AgendaTitle"]&nbsp;<small class="text-muted">@_localizer["AgendaSubtitle"]</small></h5>
 
                             <div class="btn-group-toggle text-center mt-3" data-toggle="buttons">
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divMonday">
+                                @{
+                                    var activeLun = "";
+                                    var ariaPressedLun = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieLunedi != null)
+                                    {
+                                        activeLun = "active";
+                                        ariaPressedLun = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeLun" @ariaPressedLun data-target="#divMonday">
                                     <input type="checkbox"> @_localizer["Monday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divTuesday">
+                                @{
+                                    var activeMar = "";
+                                    var ariaPressedMar = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieMartedi != null)
+                                    {
+                                        activeMar = "active";
+                                        ariaPressedMar = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeMar" @ariaPressedMar data-target="#divTuesday">
                                     <input type="checkbox"> @_localizer["Tuesday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divWednesday">
+                                @{
+                                    var activeMer = "";
+                                    var ariaPressedMer = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieMercoledi != null)
+                                    {
+                                        activeMer = "active";
+                                        ariaPressedMer = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeMer" @ariaPressedMer data-target="#divWednesday">
                                     <input type="checkbox"> @_localizer["Wednesday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divThursday">
+                                @{
+                                    var activeGio = "";
+                                    var ariaPressedGio = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieGiovedi != null)
+                                    {
+                                        activeGio = "active";
+                                        ariaPressedGio = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeGio" @ariaPressedGio data-target="#divThursday">
                                     <input type="checkbox"> @_localizer["Thursday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divFriday">
+                                @{
+                                    var activeVen = "";
+                                    var ariaPressedVen = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieVenerdi != null)
+                                    {
+                                        activeVen = "active";
+                                        ariaPressedVen = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeVen" @ariaPressedVen data-target="#divFriday">
                                     <input type="checkbox"> @_localizer["Friday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divSaturday">
+                                @{
+                                    var activeSab = "";
+                                    var ariaPressedSab = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieSabato != null)
+                                    {
+                                        activeSab = "active";
+                                        ariaPressedSab = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeSab" @ariaPressedSab data-target="#divSaturday">
                                     <input type="checkbox"> @_localizer["Saturday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divSunday">
+                                @{
+                                    var activeDom = "";
+                                    var ariaPressedDom = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieDomenica != null)
+                                    {
+                                        activeDom = "active";
+                                        ariaPressedDom = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeDom" @ariaPressedDom data-target="#divSunday">
                                     <input type="checkbox"> @_localizer["Sunday"]
                                 </label>
                             </div>
@@ -833,7 +903,7 @@
                                     }
                                 }
                             }
-                            <div id="divMonday" class="mt-5 " style="@displayMonday" data-for="#DisponibilitaOraria_FasceOrarieLunedi">
+                            <div id="divMonday" class="mt-5 " style="@displayMonday" data-for="#DisponibilitaOraria_FasceOrarieLunedi" data-id-items="#slot-time-monday">
                                 <label class="h6">
                                     @_localizer["Monday"]
                                 </label>
@@ -910,7 +980,7 @@
                                     }
                                 }
                             }
-                            <div id="divTuesday" class="mt-5" style="@displayTuesday" data-for="#DisponibilitaOraria_FasceOrarieMartedi">
+                            <div id="divTuesday" class="mt-5" style="@displayTuesday" data-for="#DisponibilitaOraria_FasceOrarieMartedi" data-id-items="#slot-time-tuesday">
                                 <label class="h6">
                                     @_localizer["Tuesday"]
 
@@ -944,7 +1014,7 @@
                                             }
                                             var from = fascia.Split("-")[0];
                                             var to = fascia.Split("-")[1];
-                                            <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                            <div id="slot-time-tuesday" data-index="0" class="input-group mb-3 input-time-slot">
                                                 <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
                                                     <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                 </div>
@@ -986,7 +1056,7 @@
                                     }
                                 }
                             }
-                            <div id="divWednesday" class="mt-5" style="@displayWednesday" data-for="#DisponibilitaOraria_FasceOrarieMercoledi">
+                            <div id="divWednesday" class="mt-5" style="@displayWednesday" data-for="#DisponibilitaOraria_FasceOrarieMercoledi" data-id-items="#slot-time-wednesday">
                                 <label class="h6">
                                     @_localizer["Wednesday"]
 
@@ -1021,7 +1091,7 @@
                                             }
                                             var from = fascia.Split("-")[0];
                                             var to = fascia.Split("-")[1];
-                                            <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                            <div id="slot-time-wednesday" data-index="0" class="input-group mb-3 input-time-slot">
                                                 <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
                                                     <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                 </div>
@@ -1064,7 +1134,7 @@
                                     }
                                 }
                             }
-                            <div id="divThursday" class="mt-5" style="@displayThursday" data-for="#DisponibilitaOraria_FasceOrarieGiovedi">
+                            <div id="divThursday" class="mt-5" style="@displayThursday" data-for="#DisponibilitaOraria_FasceOrarieGiovedi" data-id-items="#slot-time-thursday">
                                 <label class="h6">
                                     @_localizer["Thursday"]
 
@@ -1098,7 +1168,7 @@
                                             }
                                             var from = fascia.Split("-")[0];
                                             var to = fascia.Split("-")[1];
-                                            <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                            <div id="slot-time-thursday" data-index="0" class="input-group mb-3 input-time-slot">
                                                 <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
                                                     <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                 </div>
@@ -1141,7 +1211,7 @@
                                     }
                                 }
                             }
-                            <div id="divFriday" class="mt-5" style="@displayFriday" data-for="#DisponibilitaOraria_FasceOrarieVenerdi">
+                            <div id="divFriday" class="mt-5" style="@displayFriday" data-for="#DisponibilitaOraria_FasceOrarieVenerdi" data-id-items="#slot-time-friday">
                                 <label class="h6">
                                     @_localizer["Friday"]
 
@@ -1175,7 +1245,7 @@
                                             }
                                             var from = fascia.Split("-")[0];
                                             var to = fascia.Split("-")[1];
-                                            <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                            <div id="slot-time-friday" data-index="0" class="input-group mb-3 input-time-slot">
                                                 <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
                                                     <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                 </div>
@@ -1218,7 +1288,7 @@
                                     }
                                 }
                             }
-                            <div id="divSaturday" class="mt-5" style="@displaySaturday" data-for="#DisponibilitaOraria_FasceOrarieSabato">
+                            <div id="divSaturday" class="mt-5" style="@displaySaturday" data-for="#DisponibilitaOraria_FasceOrarieSabato" data-id-items="#slot-time-saturday">
                                 <label class="h6">
                                     @_localizer["Saturday"]
                                 </label>
@@ -1251,7 +1321,7 @@
                                             }
                                             var from = fascia.Split("-")[0];
                                             var to = fascia.Split("-")[1];
-                                            <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                            <div id="slot-time-saturday" data-index="0" class="input-group mb-3 input-time-slot">
                                                 <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
                                                     <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                 </div>
@@ -1293,7 +1363,7 @@
                                     }
                                 }
                             }
-                        <div id="divSunday" class="mt-5" style="@displaySunday" data-for="#DisponibilitaOraria_FasceOrarieDomenica">
+                        <div id="divSunday" class="mt-5" style="@displaySunday" data-for="#DisponibilitaOraria_FasceOrarieDomenica" data-id-items="#slot-time-sunday">
                             <label class="h6">
                                 @_localizer["Sunday"]
 
@@ -1327,7 +1397,7 @@
                                         }
                                         var from = fascia.Split("-")[0];
                                         var to = fascia.Split("-")[1];
-                                        <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                        <div id="slot-time-sunday" data-index="0" class="input-group mb-3 input-time-slot">
                                             <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
                                                 <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                             </div>

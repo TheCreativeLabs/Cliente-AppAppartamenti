@@ -66,10 +66,12 @@ function ComponiFasceOrarie(input) {
         fasce = "";
         $(superParent).children(".input-time-slot").each(
             function (j) {
-                fasce += $(this).children('input[name="fasciaOrariaFrom"]').val();
-                fasce += "-";
-                fasce += $(this).children('input[name="fasciaOrariaTo"]').val();
-                fasce += ";";
+                if ($(this).children('input[name="fasciaOrariaFrom"]').val() != null && $(this).children('input[name="fasciaOrariaTo"]').val() != null) {
+                    fasce += $(this).children('input[name="fasciaOrariaFrom"]').val();
+                    fasce += "-";
+                    fasce += $(this).children('input[name="fasciaOrariaTo"]').val();
+                    fasce += ";";
+                }
             }
         );
     }
@@ -94,11 +96,28 @@ function RemoveSlot(button) {
 
 function ToggleSlot(button) {
     var target = $(button).data("target");
+    var idItems = $(target).data("id-items");
 
     if ($(target).css("display") == "none") {
         $(target).show();
         
     } else {
+        var inputPrimo;
+        //$(target).children("#slot-time-monday").each(function (i) {
+        $(target).children(idItems).each(function (i) {
+            if ($(this).children(".btn-remove-slot").length > 0 && $(this).children(".btn-remove-slot").css("display") != "none") {
+                $(this).remove();
+            } else {
+                $(this).children("input").each(function (j) {
+                    $(this).val(null);
+                    inputPrimo = $(this);
+                });
+                
+            }
+        });
+        if (inputPrimo != null) {
+            ComponiFasceOrarie(inputPrimo);
+        }
         $(target).hide();
     }
 }
