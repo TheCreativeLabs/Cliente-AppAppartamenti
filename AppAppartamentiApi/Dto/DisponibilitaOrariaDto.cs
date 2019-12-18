@@ -4,7 +4,7 @@ namespace AppAppartamentiApi
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class DisponibilitaOrariaDtoInput
+    public partial class DisponibilitaOrariaDto
     {
         public string fasceOrarieLunedi { get; set; }
         public string fasceOrarieMartedi { get; set; }

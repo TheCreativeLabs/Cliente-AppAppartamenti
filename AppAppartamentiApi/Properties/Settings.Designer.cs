@@ -31,5 +31,12 @@ namespace AppAppartamentiApi.Properties {
                 return ((string)(this["SendGridApiKey"]));
             }
         }
+        public string MinutiDurataAppuntamento
+        {
+            get
+            {
+                return ((string)(this["MinutiDurataAppuntamento"]));
+            }
+        }
     }
 }

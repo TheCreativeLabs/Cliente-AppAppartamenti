@@ -82,7 +82,7 @@ namespace AppAppartamentiApi.Controllers
                                                        bool? pool = null,
                                                        bool? elevator = null,
                                                        AnnunciOrder? orderBy = null)
-        {
+        { //FIXME CONDIZIONATORI + ALTRE STANZE
 
             Guid idCurrent = new Guid(User.Identity.GetUserId());
 
@@ -223,6 +223,7 @@ namespace AppAppartamentiApi.Controllers
                                         .Include(x => x.TipologiaRiscaldamento)
                                         .Include(x => x.ClasseEnergetica)
                                         .Include(x => x.ImmaginiPlanimetria)
+                                        .Include(x => x.FasceOrarie)
                                         .SingleOrDefaultAsync(x => x.Id == Id);
 
             var idCurrentUser = new Guid(User.Identity.GetUserId());
@@ -278,7 +279,7 @@ namespace AppAppartamentiApi.Controllers
             return annunci;
         }
 
-        // GET api/Annunci/AnnuncioById/?id=1
+        // GET api/Annunci/AggiungiPreferito/?id=1
         [HttpPost]
         [Route("AggiungiPreferito")]
         public async Task<IHttpActionResult> AggiungiPreferito(Guid IdAnnuncio)
@@ -465,6 +466,7 @@ namespace AppAppartamentiApi.Controllers
                                         .Include(x => x.ImmagineAnnuncio)
                                         .Include(x => x.ImmaginiPlanimetria)
                                         .Include(x => x.Video)
+                                        .Include(x => x.Comuni)
                                         .Where(x => x.Id == IdAnnuncio).FirstOrDefaultAsync();
             if (annuncio == null)
             {
@@ -479,7 +481,7 @@ namespace AppAppartamentiApi.Controllers
             annuncio.Completato = Annuncio.Completato;
             annuncio.ComuneCodice = Annuncio.CodiceComune;
             annuncio.Condizionatori = Annuncio.Condizionatori;
-            annuncio.DataModifica = new DateTime();
+            annuncio.DataModifica = DateTime.Now;
             annuncio.Descrizione = Annuncio.Descrizione;
             annuncio.Disponibile = Annuncio.Disponibile;
             annuncio.Giardino = Annuncio.Giardino;
@@ -502,6 +504,7 @@ namespace AppAppartamentiApi.Controllers
             annuncio.Superficie = Annuncio.Superficie;
             annuncio.UltimoPiano = Annuncio.UltimoPiano;
             annuncio.IdClasseEnergetica = Annuncio.IdClasseEnergetica;
+            annuncio.CoordinateGeografiche = Annuncio.CoordinateGeografiche;
 
             //fixme gestione veloce, elimino e ricreo le immagini
             dbDataContext.ImmagineAnnuncio.RemoveRange(annuncio.ImmagineAnnuncio);
@@ -543,17 +546,40 @@ namespace AppAppartamentiApi.Controllers
                 }
             }
 
-            //fixme gestione veloce (todo)
-            dbDataContext.Video.RemoveRange(annuncio.Video);
 
             if (Annuncio.Video != null)
             {
+                //fixme gestione veloce
+                dbDataContext.Video.RemoveRange(annuncio.Video);
                 Video vid = new Video();
-                vid.Id = new Guid();
+                vid.Id = Guid.NewGuid();
                 vid.IdAnnuncio = annuncio.Id;
                 vid.VideoBytes = Annuncio.Video;
                 dbDataContext.Video.Add(vid);
             }
+
+            if (Annuncio.DisponibilitaOraria != null)
+            {
+                FasceOrarie fasce;
+                fasce = await dbDataContext.FasceOrarie.Where(x => x.IdAnnuncio == annuncio.Id).FirstOrDefaultAsync();
+                if(fasce == null)
+                {
+                    fasce = new FasceOrarie()
+                    {
+                        Id = Guid.NewGuid(),
+                        IdAnnuncio = annuncio.Id
+                    };
+                }
+                fasce.Monday = Annuncio.DisponibilitaOraria.fasceOrarieLunedi ?? null;
+                fasce.Tuesday = Annuncio.DisponibilitaOraria.fasceOrarieMartedi ?? null;
+                fasce.Wednesday = Annuncio.DisponibilitaOraria.fasceOrarieMercoledi ?? null;
+                fasce.Thursday = Annuncio.DisponibilitaOraria.fasceOrarieGiovedi ?? null;
+                fasce.Friday = Annuncio.DisponibilitaOraria.fasceOrarieVenerdi ?? null;
+                fasce.Saturday = Annuncio.DisponibilitaOraria.fasceOrarieSabato ?? null;
+                fasce.Sunday = Annuncio.DisponibilitaOraria.fasceOrarieDomenica ?? null;
+
+            }
+
 
             try
             {
