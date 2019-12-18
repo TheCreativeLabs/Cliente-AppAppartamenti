@@ -12,10 +12,16 @@
         <ResourceDictionary>
             <!-- Colors-->
             <Color x:Key="SfondoColor">#fff</Color>
-            <Color x:Key="SecodaryColor">#17a2b8</Color>
-            <Color x:Key="PrimaryColor">#ff6b6b</Color>
+            <Color x:Key="SecodaryColor">#343a40</Color>
+            <Color x:Key="PrimaryColor">#17a2b8</Color>
             <Color x:Key="DarkColor">#343a40</Color>
             <Color x:Key="GrayColor">#868e96</Color>
+            <Color x:Key="SuccessColor">#20c997</Color>
+            <Color x:Key="DangerColor">#dc3545</Color>
+            <Color x:Key="LightColor">#f8f9fa</Color>
+
+            
+
             
             <!--    Font Awesome     -->
             <Style TargetType="NavigationPage">
@@ -24,7 +30,11 @@
             </Style>
 
             <Style TargetType="ProgressBar">
-                <Setter Property="ProgressColor" Value="#ff6b6b"></Setter>
+                <Setter Property="ProgressColor" Value="{x:StaticResource PrimaryColor}"></Setter>
+            </Style>
+
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="White"></Setter>
             </Style>
 
             <!--    Font Awesome     -->
@@ -51,16 +61,48 @@
             <OnPlatform x:Key="PrimaryButtonCornerRadius" x:TypeArguments="x:Double" iOS="20" Android="50"></OnPlatform>
 
             <Style TargetType="Button" x:Key="primaryButton">
-                <Setter Property="BackgroundColor" Value="#ff6b6b"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="CornerRadius" Value="{StaticResource PrimaryButtonCornerRadius}"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="DayButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="BorderColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="WidthRequest" Value="45"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="BorderWidth" Value="1"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="TimeSlotTitle">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}"></Setter>
+            </Style>
+
+            <Style TargetType="Button" x:Key="AddTimeSlotButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="WidthRequest" Value="90"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="35"/>
+                <Setter Property="FontFamily" Value="BodyFont"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="LinkButton">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
             </Style>
 
             <Style TargetType="Button" x:Key="NavBackButton">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="TextColor" Value="{StaticResource SecodaryColor}"/>
                 <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
-                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="FontSize" Value="28"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="WidthRequest" Value="40"></Setter>
+                <Setter Property="Margin" Value="-10,0,-10,0"></Setter>
             </Style>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
@@ -70,7 +112,7 @@
 
             <Style TargetType="Label" x:Key="Title">
                 <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
-                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="FontSize" Value="28"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
@@ -81,28 +123,47 @@
 
             <Style TargetType="Label" x:Key="Subtitle">
                 <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
-                <Setter Property="FontSize" Value="Subtitle"></Setter>
+                <Setter Property="FontSize" Value="22"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource GrayColor}"></Setter>
                 <Setter Property="Margin" Value="0,0,0,20"></Setter>
             </Style>
 
-            <!--<OnPlatform x:TypeArguments="x:String" x:Key="BodyFont">
-                <On Platform="Android" Value="MyriadPro-Regular.otf#MyriadPro Regular" />
-                <On Platform="iOS" Value="MyriadPro-Regular" />
-            </OnPlatform>-->
+            <Style TargetType="Label" x:Key="AdTitle">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontSize" Value="17"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="AdSubtitle">
+                <Setter Property="FontFamily" Value="{StaticResource Subtitle}" />
+                <Setter Property="FontSize" Value="17"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="HelperLabel">
+                <Setter Property="FontFamily" Value="{StaticResource Subtitle}" />
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
 
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
             </Style>
 
             <Style TargetType="Editor">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
             </Style>
 
             <Style TargetType="Label">
+                <Setter Property="FontSize" Value="17"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
             </Style>
@@ -213,9 +274,10 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
 
-            <Style TargetType="appappartamenti:MyEntry">
-                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
-                <Setter Property="HeightRequest" Value="40"></Setter>
+            <Style TargetType="BoxView" x:Key="BoxViewSeparator">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="Color" Value="LightGray" />
+                <Setter Property="Margin" Value="0,15,0,15" />
             </Style>
 
         </ResourceDictionary>

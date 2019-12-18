@@ -13,6 +13,8 @@ namespace AppAppartamenti
         public App()
         {
             InitializeComponent();
+            //Register Syncfusion license
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTgyMTA5QDMxMzcyZTMzMmUzME9QcS9ocHo4K29nbnpOUGc5OTRVMVNhOTZ1Y2pJS0ZTSXh2emxyTmJCM009");
 
             //DependencyService.Register<MockDataStore>();            //DependencyService.Register<MockDataStore>();
             MainPage = new NavigationPage(new Login());

@@ -23,7 +23,7 @@ using Color = Xamarin.Forms.Color;
 
 // this line directly ubleow usings, before namespace declaration
 [assembly: ExportRenderer(typeof(WebView), typeof(DesktopWebViewRenderer))]
-[assembly: ExportRenderer(typeof(MyEntry), typeof(MyEntryRenderer))]
+[assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(SearchEntryRenderer))]
 namespace CustomRenderer
 {
@@ -54,7 +54,6 @@ namespace CustomRenderer
             }
         }
     }
-
 
     class SearchEntryRenderer : EntryRenderer
     {

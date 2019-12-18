@@ -9,9 +9,9 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePrezzo"
-             NavigationPage.HasNavigationBar="True"
-             NavigationPage.HasBackButton="False">
-
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             ios:Page.UseSafeArea="true"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,65 +19,62 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <!-- Bottoni -->
-        <StackLayout Orientation="Horizontal" x:Name="spBody" IsVisible="False">
-            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand" Margin="-20,0,0,0">
-                <Label Style="{x:StaticResource BackButton}"></Label>
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                    </TapGestureRecognizer>
-                </Frame.GestureRecognizers>
-            </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezionePrezzo.NuovoAnnuncio}"></Label>
-            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                    </TapGestureRecognizer>
-                </Frame.GestureRecognizers>
-            </Frame>
-        </StackLayout>
-    </NavigationPage.TitleView>
-
     <ContentPage.Content>
-            <StackLayout Padding="20">
-                    <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,10" Padding="20">
-                <Label Text="{translator:Translate SelezionePrezzo.Costs}" HorizontalTextAlignment="Center" ></Label>
-                     <ProgressBar Progress="0.5"/>
-                </StackLayout>
+        <StackLayout Style="{x:StaticResource StackContainer}">
+
+         <StackLayout Orientation="Horizontal">
+                  <Button BackgroundColor="Transparent"
+                        Text="&#xf053;" HorizontalOptions="StartAndExpand" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
+                        Clicked="BtnBack_Clicked">
+                  </Button>
+
+                  <Button BackgroundColor="Transparent"
+                            Text="&#xf00d;" HorizontalOptions="End" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
+                            Clicked="BtnCancel_Clicked">
+                  </Button>
+            </StackLayout>
+
+            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
+            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePrezzo.Costs}"></Label>
+                        <controls:StepMenu CurrentId="5"/>
 
 
             <Label Text="{translator:Translate SelezionePrezzo.EnterPrice}"></Label>
-            <appappartamenti:MyEntry  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></appappartamenti:MyEntry>
+            <Entry  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
+
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
 
             <Label VerticalTextAlignment="Center"  Margin="0,10,0,0" Text="{translator:Translate SelezionePrezzo.CondominiumFees}"></Label>
-            <appappartamenti:MyEntry x:Name="entSpeseCondominiali" Placeholder="{translator:Translate SelezionePrezzo.FeesExample}" Keyboard="Numeric"></appappartamenti:MyEntry>
+            <Entry x:Name="entSpeseCondominiali" Placeholder="{translator:Translate SelezionePrezzo.FeesExample}" Keyboard="Numeric"></Entry>
+
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
 
             <Label Text="{translator:Translate SelezionePrezzo.Heat}" Margin="0,10,0,0"></Label>
                     <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                <appappartamenti:MyEntry x:Name="entRiscaldamento" IsEnabled="False" Placeholder="{translator:Translate SelezionePrezzo.HeatSelect}">
-                            </appappartamenti:MyEntry>
+                <Entry x:Name="entRiscaldamento" IsEnabled="False" Placeholder="{translator:Translate SelezionePrezzo.HeatSelect}">
+                            </Entry>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="EntTipoRiscaldamento_Focused"></TapGestureRecognizer>
                         </Frame.GestureRecognizers>
                     </Frame>
             <Picker x:Name="pckRiscaldamento" IsVisible="False" SelectedIndexChanged="PckRiscaldamento_SelectedIndexChanged" ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
 
+
+                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+
             <Label Text="{translator:Translate SelezionePrezzo.EnergyClass}" Margin="0,10,0,0"></Label>
                     <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                <appappartamenti:MyEntry  IsEnabled="False"  Grid.Column="0" x:Name="entClasseEnergetica" Placeholder="{translator:Translate SelezionePrezzo.Select}">
-                        </appappartamenti:MyEntry>
+                <Entry  IsEnabled="False"  Grid.Column="0" x:Name="entClasseEnergetica" Placeholder="{translator:Translate SelezionePrezzo.Select}">
+                        </Entry>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="EntClasseEnergetica_Focused"></TapGestureRecognizer>
                         </Frame.GestureRecognizers>
                     </Frame>
             <Picker x:Name="pckClasseEnergetica" SelectedIndexChanged="PckClasseEnergetica_SelectedIndexChanged" IsVisible="False" ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
 
-            <Button Text="{translator:Translate SelezionePrezzo.Continue}"  x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+            <Button Text="{translator:Translate SelezionePrezzo.Continue}"  x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
 
-                </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

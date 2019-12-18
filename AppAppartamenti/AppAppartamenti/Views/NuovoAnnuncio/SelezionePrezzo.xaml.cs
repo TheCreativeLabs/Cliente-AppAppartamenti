@@ -87,7 +87,6 @@ namespace AppAppartamenti.Views
 
             //}
 
-            spBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

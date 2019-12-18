@@ -57,8 +57,6 @@ namespace AppAppartamenti.Views
             //{
 
             //}
-
-            staBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

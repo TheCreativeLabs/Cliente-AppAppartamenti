@@ -36,7 +36,8 @@ namespace AppAppartamenti.Droid
             Plugin.InputKit.Platforms.Droid.Config.Init(this, savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
-           
+            Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
+
             LoadApplication(new App());
         }
 

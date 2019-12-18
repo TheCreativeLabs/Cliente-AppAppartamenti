@@ -1,5 +1,4 @@
-﻿
-using AppAppartamentiApiClient;
+﻿using AppAppartamentiApiClient;
 using AppAppartamenti.Api;
 using AppAppartamenti.ViewModels;
 using System;
@@ -59,8 +58,9 @@ namespace AppAppartamenti.Views.Account
                     HttpResponseMessage httpResponseMessage = await httpFacebookClient.DeleteAsync(requestUrl);
 
                     //Rimuovo il token 
-                    Api.ApiHelper.DeleteToken();
-                    Api.ApiHelper.RemoveProvider();
+                    Api.ApiHelper.RemoveSettings();
+                     //Api.ApiHelper.DeleteToken();
+                     //Api.ApiHelper.RemoveProvider();
 
                     if (httpResponseMessage != null && httpResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
                     {

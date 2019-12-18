@@ -14,12 +14,17 @@ namespace AppAppartamenti.Views
     public partial class ListaAnnunci : ContentPage
     {
         AnnunciViewModel viewModel;
+        RicercaModel FiltriRicerca;
 
-        public ListaAnnunci()
+        public ListaAnnunci(RicercaModel FiltriRicercaParam)
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.Tutti);
+            FiltriRicerca = FiltriRicercaParam;
+
+            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.Tutti, FiltriRicerca);
+
+            entRicerca.Text = FiltriRicerca.Comune.NomeComune;
         }
 
         protected override void OnAppearing()
@@ -30,9 +35,10 @@ namespace AppAppartamenti.Views
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
-        private async void entRicerca_Focused(object sender, EventArgs e)
+
+        async void OnTapGestureRecognizerTapped(object sender, EventArgs args)
         {
-            await Navigation.PopAsync();
+            await Navigation.PushModalAsync(new Ricerca(FiltriRicerca));
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -50,7 +56,6 @@ namespace AppAppartamenti.Views
                 await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,false));
             }
         }
-
 
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {

@@ -28,7 +28,7 @@
                 <Label HorizontalTextAlignment="Start" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.MyListing}"></Label>
 
                 <Button BackgroundColor="Transparent"
-                    Text="&#xf055;" HorizontalOptions="EndAndExpand" FontSize="Title" Padding="20,20,20,0"  VerticalOptions="CenterAndExpand" Style="{x:StaticResource NavBackButton}" 
+                    Text="&#xf055;" HorizontalOptions="EndAndExpand" TextColor="{x:StaticResource PrimaryColor}" WidthRequest="80" FontSize="Title" Padding="20,20,20,0"  VerticalOptions="CenterAndExpand" Style="{x:StaticResource NavBackButton}" 
                     Clicked="BtnAdd_Clicked">
                 </Button>
             </StackLayout>
@@ -52,16 +52,15 @@
                                     <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
 
                                     <StackLayout Orientation="Horizontal" Margin="0,-150,0,0" Padding="10,0,0,0">
-                                        <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource Title}"  FontSize="Header"></Label>
-                                        <Label Text="{Binding Prezzo}"  Style="{x:StaticResource Title}"  FontSize="Header"/>
-
-                                        <Label VerticalTextAlignment="Center" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                        <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource Title}" FontSize="Body"></Label>
+                                        <Label Text="{Binding Prezzo}"  Style="{x:StaticResource Title}" FontSize="Body"/>
+                                        <Label VerticalTextAlignment="Center" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}" FontSize="Body"></Label>
                                     </StackLayout>
 
                                      <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                        <Label Text="{Binding NomeComune}" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
-                                        <Label Text="-" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
-                                        <Label Text="{Binding Indirizzo}" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
+                                        <Label Text="{Binding NomeComune}" Style="{x:StaticResource Subtitle}" FontSize="Body" ></Label>
+                                        <Label Text="-" Style="{x:StaticResource Subtitle}" FontSize="Body" ></Label>
+                                        <Label Text="{Binding Indirizzo}" Style="{x:StaticResource Subtitle}" FontSize="Body" ></Label>
                                      </StackLayout>
                                 </StackLayout>
                             </Frame>
