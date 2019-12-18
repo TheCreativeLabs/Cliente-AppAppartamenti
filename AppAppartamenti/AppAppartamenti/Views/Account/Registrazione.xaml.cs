@@ -1,6 +1,5 @@
 ﻿using AppAppartamenti.Api;
 using AppAppartamenti.Utility;
-using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 using System;
 using System.Collections.Generic;
@@ -17,6 +16,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using AppAppartamentiApiClient;
 
 namespace AppAppartamenti.Views.Login
 {

@@ -23,7 +23,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-                <Label Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
+        <Label Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
            
         <ListView x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
@@ -44,16 +44,16 @@
                                  <Image  Aspect="AspectFill" HeightRequest="200" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
 
                                 <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                    <Label Style="{x:StaticResource Title}" Text="{Binding TipologiaProprieta}" FontSize="Header"></Label>
-                                    <Label Text="{Binding Prezzo}" Style="{x:StaticResource Title}" FontSize="Header" />
+                                    <Label Style="{x:StaticResource Title}" Text="{Binding TipologiaProprieta}" FontSize="Body"></Label>
+                                    <Label Text="{Binding Prezzo}" Style="{x:StaticResource Title}" FontSize="Body" />
 
-                                    <Label VerticalTextAlignment="Center" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                    <Label VerticalTextAlignment="Center" FontSize="Body" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}"></Label>
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                    <Label Text="{Binding NomeComune}" Style="{x:StaticResource Subtitle}" FontSize="Default"></Label>
-                                    <Label Text="-" TextColor="Gray" Style="{x:StaticResource Subtitle}" FontSize="Default" ></Label>
-                                    <Label Text="{Binding Indirizzo}" Style="{x:StaticResource Subtitle}" FontSize="Default"></Label>
+                                    <Label Text="{Binding NomeComune}" Style="{x:StaticResource Subtitle}" FontSize="Body"></Label>
+                                    <Label Text="-" TextColor="Gray" Style="{x:StaticResource Subtitle}" FontSize="Body"></Label>
+                                    <Label Text="{Binding Indirizzo}" Style="{x:StaticResource Subtitle}" FontSize="Body"></Label>
                                 </StackLayout>
                             </StackLayout>
                         </Frame>

@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using AppAppartamenti.ViewModels;
+using AppAppartamenti.Views.NuovoAnnuncio;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 using RestSharp.Extensions;
@@ -46,10 +48,9 @@ namespace AppAppartamenti.Views
                     entIndirizzo.Text = dtoToModify.Item.Indirizzo;
                     await setMapLocation();
                 }
+
                 btnIndirizzoProcedi.IsEnabled = true;
             }
-
-            slBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -74,34 +75,14 @@ namespace AppAppartamenti.Views
         {
             annuncio.Indirizzo = entIndirizzo.Text;
 
-            await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio, dtoToModify));
-        }
+            await Navigation.PushModalAsync(new ValidazioneMappa(entCercaComune.Text, entIndirizzo.Text),true);
 
+            //await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio, dtoToModify));
+        }
 
         private async Task setMapLocation()
         {
-            //ottengo la posizione dell'indirizzo.
-            List<Position> postionList = new List<Position>();
-
-            try
-            {
-                postionList = (await (new Geocoder()).GetPositionsForAddressAsync($"{entIndirizzo.Text} , {entCercaComune.Text}")).ToList();
-            }
-            catch (Exception ex)
-            {
-            }
-
-            if (postionList.Count != 0)
-            {
-                //Se la mappa ha già dei Pin presenti li cancello.
-                if (map.Pins.Count > 0) map.Pins.RemoveAt(0);
-
-                //Ottengo la posizione e la mostro nella mappa.
-                var position = postionList.FirstOrDefault<Position>();
-                map.Pins.Add(new Pin() { Position = position, Label = "Indirizzo" });
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(0.1)));
-                map.IsVisible = true;
-            }
+            
 
             //btnIndirizzoProcedi.IsVisible = true;
         }
@@ -114,6 +95,8 @@ namespace AppAppartamenti.Views
             lvComuni.ItemsSource = listaComuni.Items;
             lvComuni.IsVisible = true;
             entIndirizzo.IsVisible = false;
+            lblIndirizzo.IsVisible = false;
+            btnIndirizzoProcedi.IsVisible = false;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)
@@ -133,11 +116,12 @@ namespace AppAppartamenti.Views
             lvComuni.IsVisible = false;
 
             entIndirizzo.IsVisible = true;
+            lblIndirizzo.IsVisible = true;
+            btnIndirizzoProcedi.IsVisible = true;
 
             // Manually deselect item.
             lvComuni.SelectedItem = null;
         }
-
 
         private async void EntIndirizzo_Unfocused(object sender, FocusEventArgs e)
         {

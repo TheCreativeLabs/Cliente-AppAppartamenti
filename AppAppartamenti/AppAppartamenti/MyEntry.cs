@@ -27,4 +27,8 @@ namespace AppAppartamenti
     public class SearchEntry : Entry
     {
     }
+
+    public class ShadowFrame : Frame
+    {
+    }
 }

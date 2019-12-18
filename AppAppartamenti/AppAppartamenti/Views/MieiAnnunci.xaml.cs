@@ -20,7 +20,7 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.MieiAnnunci);
+            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.MieiAnnunci, null);
         }
 
         protected override void OnAppearing()

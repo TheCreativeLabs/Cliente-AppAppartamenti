@@ -327,7 +327,7 @@
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Search history</value>
   </data>
-    <data name="Home.Shartcut" xml:space="preserve">
+    <data name="Home.Shortcut" xml:space="preserve">
     <value>Shartcut</value>
   </data>
   <data name="Home.StartSearch" xml:space="preserve">
@@ -363,6 +363,12 @@
   <data name="Ricerca.ParkingSpaces" xml:space="preserve">
     <value>Parking spaces</value>
   </data>
+    <data name="Ricerca.Garages" xml:space="preserve">
+    <value>Garages</value>
+  </data>
+     <data name="Ricerca.kitchens" xml:space="preserve">
+    <value>kitchens</value>
+  </data>
   <data name="Ricerca.Price" xml:space="preserve">
     <value>Price</value>
   </data>
@@ -370,10 +376,16 @@
     <value>Rent</value>
   </data>
   <data name="Ricerca.Rooms" xml:space="preserve">
-    <value>Rooms</value>
+    <value>OtherRooms</value>
   </data>
   <data name="Ricerca.RoomsSection" xml:space="preserve">
     <value>Rooms</value>
+  </data>
+     <data name="Ricerca.Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+          <data name="Ricerca.Badrooms" xml:space="preserve">
+    <value>Badrooms</value>
   </data>
   <data name="Ricerca.Sale" xml:space="preserve">
     <value>Sale</value>
@@ -382,7 +394,10 @@
     <value>Sale or rent</value>
   </data>
   <data name="Ricerca.Search" xml:space="preserve">
-    <value>SEARCH</value>
+    <value>Search</value>
+  </data>
+      <data name="Ricerca.PropertyType" xml:space="preserve">
+    <value>Property Type</value>
   </data>
   <data name="Ricerca.SearchPlaceholder" xml:space="preserve">
     <value>Search locality</value>
@@ -698,5 +713,12 @@
   </data>
   <data name="Login.Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+    <data name="NuovoAppuntamento.Title" xml:space="preserve">
+    <value>take new appointment</value>
+  </data>
+    
+  <data name="SelezioneFasceOrarie.Subtitle" xml:space="preserve">
+    <value>Seleziona i giorni e le fasce orarie in cui sei disponibile per ricevere appuntamenti</value>
   </data>
 </root>

@@ -27,7 +27,7 @@ namespace AppAppartamenti.Views.Account
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
             ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/", true).Result.First();
-            string apiRequest = $"{AppSetting.ApiEndpoint.Replace(".com/",".com")}{externalLoginViewModel.Url}";
+            string apiRequest = $"{AppSetting.ApiEndpoint.Replace(".com/", ".com")}{externalLoginViewModel.Url}";
             apiRequest = apiRequest.Replace("www.", "");
             ApiRequest = apiRequest;
             //mostro l'url nella pagina
@@ -47,7 +47,7 @@ namespace AppAppartamenti.Views.Account
         private async void WebViewOnNavigated(object sender, WebNavigatedEventArgs e)
         {
             var accessToken = ExtractAccessTokenFromUrl(e.Url);
-            
+
             if (accessToken != "")
             {
                 //Salva il token nelle properties
@@ -103,11 +103,13 @@ namespace AppAppartamenti.Views.Account
                     string alertTitle = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.Warning", translate.ci);
                     string alertContent = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertMailAlreadySigned", translate.ci);
                     string alertOk = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertOk", translate.ci);
-                    
+
                     await DisplayAlert(alertTitle,
                         alertContent,
                         alertOk);
-                    Api.ApiHelper.DeleteToken();
+                    //Api.ApiHelper.DeleteToken();
+                    Api.ApiHelper.RemoveSettings();
+
                     Application.Current.MainPage = new Login.Login();
 
                 }

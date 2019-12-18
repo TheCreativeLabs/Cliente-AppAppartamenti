@@ -1,6 +1,8 @@
 ﻿using AppAppartamenti.Api;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,19 +20,19 @@ namespace AppAppartamenti.Views.Account
             InitializeComponent();
         }
 
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            stkContainer.IsVisible = false;
-            indLoading.IsVisible = true;
-            indLoading.IsRunning = true;
-                
-            AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
-            UserInfoDto userInfo = await amiciClient.GetCurrentUserInfoAsync();
 
+            UserInfoDto userInfo = await ApiHelper.GetUserInfo();
             viewModel = userInfo;
-            BindingContext = viewModel;
 
+            BindingContext = viewModel;
 
             if (viewModel.FotoProfilo != null)
             {
@@ -41,10 +43,6 @@ namespace AppAppartamenti.Views.Account
                 imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
             }
             entDataNascita.Text = viewModel.DataDiNascita.Value.ToString("dd/MM/yyyy", new CultureInfo("en")); //FIXME CULTURE INFO, LANGUAGE, LOCALE
-
-            stkContainer.IsVisible = true;
-            indLoading.IsVisible = false;
-            indLoading.IsRunning = false;
         }
 
         private async void BtnSave_Clicked(object sender, EventArgs e)
@@ -82,17 +80,29 @@ namespace AppAppartamenti.Views.Account
         {
             (sender as Button).IsEnabled = false;
 
-            var stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (stream != null)
-            {
-                MemoryStream i = new MemoryStream();
-                stream.CopyTo(i);
-                viewModel.FotoProfilo = i.ToArray();
-                imgFotoUtente.Source = ImageSource.FromStream(() => new MemoryStream(viewModel.FotoProfilo));
-            }
+            PickPhoto();
 
             (sender as Button).IsEnabled = true;
         }
 
+        async void PickPhoto()
+        {
+            await CrossMedia.Current.Initialize();
+
+            MediaFile foto = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+            {
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small
+            });
+
+            if (foto == null)
+                return;
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                foto.GetStream().CopyTo(memoryStream);
+                viewModel.FotoProfilo = memoryStream.ToArray();
+                imgFotoUtente.Source = ImageSource.FromStream(() => { return new MemoryStream(viewModel.FotoProfilo); });
+            }
+        }
     }
 }

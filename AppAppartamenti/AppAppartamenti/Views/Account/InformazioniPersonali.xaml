@@ -5,109 +5,52 @@
              x:Class="AppAppartamenti.Views.Account.InformazioniPersonali"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="{translator:Translate InformazionePersonali.Title}"
-             BackgroundColor="{StaticResource SfondoColor}">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout  Margin="20">
-            <!--<Entry FontSize="Medium"  VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="Black" PlaceholderColor="Black" Text="{Binding Nome}" Placeholder="{Binding Nome}" HorizontalOptions="Start" Visual="Material"></Entry>-->
+        <StackLayout Style="{x:StaticResource StackContainer}">
+                <Button BackgroundColor="Transparent"
+                        Text="&#xf053;" HorizontalOptions="Start" Style="{x:StaticResource NavBackButton}" 
+                        Clicked="Cancel_Clicked">
+                </Button>
 
-            <!--Opzione design 1 - INIZIO-->
-            <!--<StackLayout Orientation="Horizontal" Margin="-20,-20,-20,20">
-                <StackLayout.Padding>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="iOS" Value="20,50,20,20"></On>
-                        <On Platform="Android" Value="20"></On>
-                    </OnPlatform>
-                </StackLayout.Padding>
-                
-                <Frame
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           Padding="0"
+                <Label Style="{x:StaticResource Title}" Margin="0,0,10,20" Text="{translator:Translate InformazionePersonali.Title}"></Label>
+
+                <Frame CornerRadius="50"
+                           HeightRequest="50"
+                           WidthRequest="50"
                            IsClippedToBounds="True"
-                                   HasShadow="True" Visual="Material">
-                    <Frame.CornerRadius>
-                        <OnPlatform x:TypeArguments="x:Single">
-                            <On Platform="iOS" Value="50"/>
-                            <On Platform="Android" Value="100"/>
-                        </OnPlatform>
-                    </Frame.CornerRadius>
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
 
-                    <Image x:Name="imgFotoUtente"  HorizontalOptions="Center" Aspect="Fill"
-                           VerticalOptions="Center"></Image>
+                    <Image x:Name="imgFotoUtente"
+                            Aspect="AspectFill"
+                             Margin="-20"
+                             HeightRequest="80"
+                             WidthRequest="80"></Image>
+
+
                 </Frame>
 
+                <Button Text="{translator:Translate InformazionePersonali.ChangePhoto}" Style="{x:StaticResource LinkButton}" HorizontalOptions="CenterAndExpand" Clicked="OnPickPhotoButtonClicked"></Button>
 
+                <!--<Label Text="{translator:Translate InformazionePersonali.Name}"></Label>-->
+                <Entry  x:Name="entName" Text="{Binding Nome}" Placeholder="{translator:Translate InformazionePersonali.Name}"></Entry>
 
-                <Grid VerticalOptions="Center" IsVisible="False" x:Name="GridNomeCognome">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
+                <!--<Label Text="{translator:Translate InformazionePersonali.Surname}"></Label>-->
+                <Entry x:Name="entCognome" Text="{Binding Cognome}" Placeholder="{translator:Translate InformazionePersonali.Surname}"></Entry>
 
-                    </Grid.RowDefinitions>
+                <!--<Label Text="{translator:Translate InformazionePersonali.Email}"></Label>-->
+                <Entry x:Name="entMail" IsVisible="False" Text="{Binding Email}" Placeholder="{translator:Translate InformazionePersonali.Email}"></Entry>
 
-                    <StackLayout Grid.Row="0" Orientation="Horizontal">
-                        <appappartamenti:MyEntry x:Name="entName" Text="{Binding Nome}"></appappartamenti:MyEntry>
-                        <appappartamenti:MyEntry x:Name="entCognome" Text="{Binding Cognome}"></appappartamenti:MyEntry>
-                    </StackLayout>
-                    
-                    <appappartamenti:MyEntry Grid.Row="1" x:Name="entMail" Text="{Binding Email}"></appappartamenti:MyEntry>
-
-
-                </Grid>
-
-            </StackLayout>-->
-            <!--Opzione design 1 - FINE-->
-
-
-
-            <!--Opzione design 2 - INIZIO-->
-            <ActivityIndicator x:Name="indLoading" IsRunning="False" IsVisible="False"/>
-
-            <StackLayout x:Name="stkContainer" IsVisible="False">
-                <Frame
-                    HorizontalOptions="Center"
-                           HeightRequest="120"
-                           WidthRequest="120"
-                           Padding="0"
-                           IsClippedToBounds="True"
-                                   HasShadow="True" Visual="Material">
-                    <Frame.CornerRadius>
-                        <OnPlatform x:TypeArguments="x:Single">
-                            <On Platform="iOS" Value="50"/>
-                            <On Platform="Android" Value="100"/>
-                        </OnPlatform>
-                    </Frame.CornerRadius>
-
-                    <Image x:Name="imgFotoUtente"  HorizontalOptions="Center" Aspect="Fill"
-                           VerticalOptions="Center"></Image>
-                </Frame>
-
-
-                <!--<Button HeightRequest="55" CornerRadius="15" FontSize="Small" Visual="Material" WidthRequest="55"  TextColor="Black" BackgroundColor="#ff6b6b" Text="&#xf044;" Margin="0,-55,-65,40" FontFamily="{StaticResource FA-Solid}"  HorizontalOptions="Center" Clicked="OnPickPhotoButtonClicked">
-                </Button>-->
-
-                <Button Text="{translator:Translate InformazionePersonali.ChangePhoto}" Visual="Material" Style="{x:StaticResource primaryButton}" HorizontalOptions="CenterAndExpand" Clicked="OnPickPhotoButtonClicked"></Button>
-
-                <Label Text="{translator:Translate InformazionePersonali.Name}"></Label>
-                <appappartamenti:MyEntry x:Name="entName" Text="{Binding Nome}"></appappartamenti:MyEntry>
-
-                <Label Text="{translator:Translate InformazionePersonali.Surname}"></Label>
-                <appappartamenti:MyEntry x:Name="entCognome" Text="{Binding Cognome}"></appappartamenti:MyEntry>
-
-                <Label Text="{translator:Translate InformazionePersonali.Email}"></Label>
-                <appappartamenti:MyEntry x:Name="entMail" Text="{Binding Email}"></appappartamenti:MyEntry>
-
-                <Label Text="{translator:Translate InformazionePersonali.DateOfBirth}"></Label>
-                <appappartamenti:MyEntry x:Name="entDataNascita" Focused="entDataNascita_Focused" ></appappartamenti:MyEntry>
+                <!--<Label Text="{translator:Translate InformazionePersonali.DateOfBirth}"></Label>-->
+                <Entry x:Name="entDataNascita" Focused="entDataNascita_Focused" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></Entry>
 
                 <DatePicker x:Name="dpDataNascita" IsVisible="False"  Visual="Material" DateSelected="dpDataNascita_DateSelected" ></DatePicker>
 
-                <Button Text="{translator:Translate InformazionePersonali.Save}" VerticalOptions="EndAndExpand" Clicked="BtnSave_Clicked" TextColor="White" BackgroundColor="#ff6b6b" ></Button>
-
-
-
-            </StackLayout>
-            <!--Opzione design 2 - FINE-->
+                <Button Text="{translator:Translate InformazionePersonali.Save}" Style="{x:StaticResource primaryButton}" Clicked="BtnSave_Clicked" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

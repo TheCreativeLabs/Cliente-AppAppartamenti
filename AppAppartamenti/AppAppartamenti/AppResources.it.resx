@@ -324,7 +324,7 @@
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Ricerche recenti</value>
   </data>
-     <data name="Home.Shartcut" xml:space="preserve">
+     <data name="Home.Shortcut" xml:space="preserve">
     <value>Scorciatoie</value>
   </data>
    
@@ -361,14 +361,28 @@
   <data name="Ricerca.ParkingSpaces" xml:space="preserve">
     <value>Posti auto</value>
   </data>
+      <data name="Ricerca.Garages" xml:space="preserve">
+    <value>Garages</value>
+  </data>
+     <data name="Ricerca.kitchens" xml:space="preserve">
+    <value>Cucine</value>
+  </data>
   <data name="Ricerca.Price" xml:space="preserve">
     <value>Prezzo</value>
+  </data>
+      <data name="Ricerca.Badrooms" xml:space="preserve">
+    <value>Camere da letto</value>
+  </data>
+    
+ 
+      <data name="Ricerca.Other" xml:space="preserve">
+    <value>Altre informazioni</value>
   </data>
   <data name="Ricerca.Rent" xml:space="preserve">
     <value>Affitto</value>
   </data>
   <data name="Ricerca.Rooms" xml:space="preserve">
-    <value>Stanze</value>
+    <value>Altre stanze</value>
   </data>
   <data name="Ricerca.RoomsSection" xml:space="preserve">
     <value>Camere</value>
@@ -380,7 +394,10 @@
     <value>Vendita o affitto</value>
   </data>
   <data name="Ricerca.Search" xml:space="preserve">
-    <value>CERCA</value>
+    <value>Cerca</value>
+  </data>
+    <data name="Ricerca.PropertyType" xml:space="preserve">
+    <value>Tipo proprietà</value>
   </data>
   <data name="Ricerca.SearchPlaceholder" xml:space="preserve">
     <value>Ricerca per città o provincia</value>
@@ -706,4 +723,11 @@
   <data name="Login.Warning" xml:space="preserve">
     <value>Attenzione</value>
   </data>
+     <data name="NuovoAppuntamento.Title" xml:space="preserve">
+    <value>Prenota un appuntamento</value>
+  </data>
+  <data name="SelezioneFasceOrarie.Subtitle" xml:space="preserve">
+    <value>Seleziona i giorni e le fasce orarie in cui sei disponibile per ricevere appuntamenti</value>
+  </data>
+    
 </root>

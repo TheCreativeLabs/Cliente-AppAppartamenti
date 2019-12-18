@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Syncfusion.SfCalendar.XForms.iOS;
 using UIKit;
 using Xamarin.Forms;
 
@@ -40,8 +41,9 @@ namespace AppAppartamenti.iOS
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
             Plugin.InputKit.Platforms.iOS.Config.Init();
-           
             Xamarin.FormsMaps.Init();
+            SfCalendarRenderer.Init();
+            Syncfusion.XForms.iOS.PopupLayout.SfPopupLayoutRenderer.Init();
 
             LoadApplication(new App());
 

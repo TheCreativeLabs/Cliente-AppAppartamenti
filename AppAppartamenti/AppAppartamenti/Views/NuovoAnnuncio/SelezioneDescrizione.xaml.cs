@@ -32,7 +32,7 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (edtDescrizione.Text == null || dtoToModify != null && dtoToModify.Item != null)
+            if (edtDescrizione.Text == null && dtoToModify != null && dtoToModify.Item != null)
             {
                 edtDescrizione.Text = dtoToModify.Item.Descrizione;
             }
@@ -103,18 +103,7 @@ namespace AppAppartamenti.Views
                 }
             }
 
-
-            //TODO TRY CATCH
-            AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
-            if (dtoToModify == null) // caso inserimento
-            {
-                await annunciClient.InsertAnnuncioAsync(annuncio);
-            } else if(dtoToModify.Item.Id != null)
-            {
-                await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
-            }
-
-            await Navigation.PopModalAsync();
+            await Navigation.PushAsync(new SelezioneFasceOrarie(annuncio, dtoToModify));
         }
     }
 }

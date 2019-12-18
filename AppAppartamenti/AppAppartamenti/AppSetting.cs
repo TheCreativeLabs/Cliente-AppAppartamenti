@@ -8,6 +8,10 @@ namespace AppAppartamenti
     {
         public const string ApiEndpoint = "https://appappartamentiapi.appregaliapitest.com/";
         public const string ClientId = "971997736480952";
+        public const string EmailApp = "LiberaCasa.it";
+        public const string SiteApp = "http://Appappartamentiweb.appregaliapitest.com";
+
+
 
     }
 }

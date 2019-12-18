@@ -99,8 +99,6 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            sigBody.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

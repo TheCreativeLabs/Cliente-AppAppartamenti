@@ -11,40 +11,45 @@
              BackgroundColor="White"
              >
     <ContentPage.Content>
-        <StackLayout Padding="20">
+        <StackLayout Padding="20" x:Name="stkLogin" IsVisible="False" >
 
             <StackLayout VerticalOptions="CenterAndExpand">
 
-                <Label FontSize="90" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="#ff6b6b" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf7ae;"></Label>
+                <Label FontSize="90" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource PrimaryColor}" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf7ae;"></Label>
 
                 <Label Text="{translator:Translate Login.ErroreLogin}" FontSize="Medium"  FontAttributes="Bold" TextColor="Red" IsVisible="False" x:Name="lblValidazioneLogin"></Label>
 
-                <appappartamenti:MyEntry
+                <Entry
                         Placeholder="{translator:Translate Login.Email}"
                         x:Name="entUsername"
                         Keyboard="Email"
                         TextChanged="ent_TextChanged"
-                        />
+                        ></Entry>
 
-                <appappartamenti:MyEntry
+                <Entry
                         Placeholder="{translator:Translate Login.Password}"
                         x:Name="entPassword"
                         IsPassword="True"
                         TextChanged="ent_TextChanged"
-                        />
+                      ></Entry>
 
-                <Button Style="{x:StaticResource primaryButton}" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" IsEnabled="False" Clicked="btnAccedi_ClickedAsync">
+                <Button Style="{x:StaticResource primaryButton}" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" Clicked="btnAccedi_ClickedAsync">
                 </Button>
           
-                <Label Text="{translator:Translate Login.ForgotPassword}" HorizontalTextAlignment="Center" TextColor="black">
+                <Label Text="{translator:Translate Login.ForgotPassword}" HorizontalTextAlignment="Center" Style="{x:StaticResource HelperLabel}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Label Text="{translator:Translate Login.Or}" HorizontalOptions="Center" WidthRequest="100" HorizontalTextAlignment="Center" TextColor="Gray" Margin="0,15,0,10"></Label>
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,20">
+                <BoxView BackgroundColor="{x:StaticResource GrayColor}" HeightRequest="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{translator:Translate Login.Or}" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="{x:StaticResource GrayColor}"></Label>
 
-                <Frame HorizontalOptions="Center" WidthRequest="200" HeightRequest="30" HasShadow="False" BackgroundColor="#1e73be" Padding="5">
+                <BoxView BackgroundColor="{x:StaticResource GrayColor}" HeightRequest="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+                <Frame HorizontalOptions="FillAndExpand" HeightRequest="30" HasShadow="False" BackgroundColor="#1e73be" Padding="5">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
                         <Label FontFamily="{x:StaticResource FA-Brands}" TextColor="White"  Text="&#xf39e;"></Label>
                         <Label Text="{translator:Translate Login.FacebookSignIn}" TextColor="White"></Label>
@@ -61,7 +66,7 @@
                     </Frame.Style>
                 </Frame>
 
-              <Frame HorizontalOptions="Center" WidthRequest="200" HeightRequest="30" BorderColor="#DB4437" HasShadow="False" Padding="5">
+                <Frame HorizontalOptions="FillAndExpand"  HeightRequest="30" BorderColor="#DB4437" HasShadow="False" Padding="5">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
                         <Label FontFamily="{x:StaticResource FA-Brands}" TextColor="#DB4437"  Text="&#xf1a0;"></Label>
                         <Label Text="{translator:Translate Login.GoogleSignIn}" TextColor="#DB4437"></Label>
@@ -78,7 +83,7 @@
                     </Frame.Style>
                 </Frame>
 
-                <Label x:Name="lblRegistrati" Text="{translator:Translate Login.RegisterIfNoAccount}" HorizontalTextAlignment="Center" Margin="0,10,0,0" TextColor="black">
+                <Label x:Name="lblRegistrati" Text="{translator:Translate Login.RegisterIfNoAccount}" Margin="0,10,0,0" HorizontalTextAlignment="Center" Style="{x:StaticResource HelperLabel}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_lblRegistrati"/>
                     </Label.GestureRecognizers>

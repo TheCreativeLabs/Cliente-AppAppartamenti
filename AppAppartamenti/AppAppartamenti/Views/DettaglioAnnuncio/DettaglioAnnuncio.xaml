@@ -9,39 +9,27 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
-             BackgroundColor="{StaticResource SfondoColor}"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
              >
 
-    <NavigationPage.TitleView>
-        <StackLayout  Orientation="Horizontal">
+    <NavigationPage.TitleView >
+        <StackLayout Orientation="Horizontal" Padding="0">
+            <Button Style="{x:StaticResource NavBackButton}" x:Name="btnBackNavBar"  Pressed="BtnBack_Clicked" Text="&#xf053;" 
+                   FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="StartAndExpand">
+            </Button>
 
-            <Label x:Name="btnBackNavBar" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Large" Text="&#xf053;"  Padding="10,0,10,0"
-                   FontFamily="{x:StaticResource FA-Solid}" TextColor="White">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnBack_Clicked"></TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
+            <Button Style="{x:StaticResource NavBackButton}" x:Name="btnShareNavBar"  Pressed="BtnBack_Clicked" Text="&#xf1e0;"
+                   FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
+            </Button>
 
-            <Label x:Name="btnShareNavBar" BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf1e0;" Padding="10,0,10,0"
-                   FontFamily="{x:StaticResource FA-Solid}" TextColor="White" HorizontalOptions="EndAndExpand">
-                <!--<Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
-                </Label.GestureRecognizers>-->
-            </Label>
+            <Button Style="{x:StaticResource NavBackButton}"  x:Name="btnPreferitoNavBar"  Text="&#xf004;"
+                   FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
+            </Button>
 
-            <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf004;" Padding="10,0,10,0"
-                   FontFamily="{x:StaticResource FA-Solid}" TextColor="White" x:Name="btnPreferitoNavBar" HorizontalOptions="End" >
-                <!--<Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnShare_Clicked"></TapGestureRecognizer>
-                </Label.GestureRecognizers>-->
-            </Label>
-
-            <Label  BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="&#xf044;" Padding="10,0,10,0"
-                   FontFamily="{x:StaticResource FA-Solid}" TextColor="White" x:Name="btnModificaNavBar" HorizontalOptions="End" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnModifica_Clicked"></TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
+            <Button  x:Name="btnModificaNavBar" Style="{x:StaticResource NavBackButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
+                   FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" WidthRequest="50">
+            </Button>
         </StackLayout>
     </NavigationPage.TitleView>
 
@@ -56,8 +44,7 @@
     
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-
-        <Grid VerticalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
                         <RowDefinition Height="*" />
@@ -66,7 +53,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-            <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,-50,0,0" >
+                <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,-50,0,0" >
                 <StackLayout>
                     <StackLayout HeightRequest="300" Margin="0,-20,0,0">
                         <CarouselView ItemsSource="{Binding Immagini}" x:Name="Carousel">
@@ -318,16 +305,10 @@
                     </Label>
                 </StackLayout> <!--WidthRequest="50"-->
 
-
-
-
-                <StackLayout x:Name="stkPulsanti" Orientation="Horizontal" Padding="20" BackgroundColor="Transparent" IsVisible="false" VerticalOptions="EndAndExpand"  Grid.Row="1" Grid.Column="0">
-
-                    <!--<Button Visual="Material" Text="Aiuto" HorizontalOptions="Start"></Button>-->
-                    <Button Visual="Material" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="CenterAndExpand"></Button>
-                    <!--<Button Visual="Material" Text="Messaggio" HorizontalOptions="End"></Button>-->
+                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="10" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                    <Button Clicked="BtnAppuntamento_Clicked" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="FillAndExpand"></Button>
                 </StackLayout>
             </Grid>
-            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

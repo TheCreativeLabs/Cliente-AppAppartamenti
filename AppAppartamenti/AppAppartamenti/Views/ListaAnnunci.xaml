@@ -8,9 +8,9 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.ListaAnnunci"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="#F8F8F8"
              xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
-             >
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
    
      <ContentPage.Resources>
         <ResourceDictionary>
@@ -21,42 +21,29 @@
 
     <ContentPage.Content>
             <StackLayout>
-                <StackLayout BackgroundColor="#ff6b6b" Padding="20">
-                    <Frame HasShadow="False" Padding="10" Margin="0,25,0,0">
+                 <Label Margin="20,20,0,0" Style="{x:StaticResource Title}" Text="Annunci"></Label>
+
+                    <appappartamenti:ShadowFrame HasShadow="True" Padding="15" Margin="20,0,20,0">
                         <StackLayout Orientation="Horizontal">
-                               <Button BackgroundColor="Transparent" VerticalOptions="Center" FontAttributes="Bold"
-                       FontSize="Large" Text="&#xf053;" FontFamily="{x:StaticResource FA-Solid}"
-                       TextColor="Black" WidthRequest="30" HeightRequest="30" Clicked="BtnBack_Clicked">
-                </Button>
+                            <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
-
-                            <!--<Label FontSize="Large" TextColor="Black"  VerticalTextAlignment="Center"
-                                   FontFamily="{x:StaticResource FA-Solid}" Text="&#xf053;"></Label>-->
-
-                            <BoxView HeightRequest="30" Color="Gray" WidthRequest="1" Margin="10,-5,0,-5" ></BoxView>
-
-                            <appappartamenti:SearchEntry
-                                VerticalOptions="Center"
-                                Visual="Material"
-                                Text="{translator:Translate ListaAnnunci.Locality}"
-                                x:Name="entRicerca" IsEnabled="False"/>
+                            <Label x:Name="entRicerca"></Label>
                         </StackLayout>
-                   
+
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="entRicerca_Focused"></TapGestureRecognizer>
+                            <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"></TapGestureRecognizer>
                         </Frame.GestureRecognizers>
-                    </Frame>
-                </StackLayout>
-                           <ListView x:Name="AnnunciiListView"
+                    </appappartamenti:ShadowFrame>
+
+                    <ListView x:Name="AnnunciiListView"
                                 ItemsSource="{Binding Items}"
                                 VerticalOptions="FillAndExpand"
                                 HasUnevenRows="true"
                                 RefreshCommand="{Binding LoadItemsCommand}"
                                 IsPullToRefreshEnabled="true"
-                                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                IsRefreshing="{Binding IsBusy, Mode=OneTime}"
                                 CachingStrategy="RecycleElement"
                                 ItemSelected="OnItemSelected"
-                                BackgroundColor="#F8F8F8"
                                 SeparatorVisibility="None">
                             <ListView.Behaviors>
                                 <b:InfiniteScroll LoadMoreCommand="{Binding LoadMore}" />
@@ -64,25 +51,29 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <Frame HasShadow="True" Visual="Material" Padding="0" HeightRequest="260" Margin="15"  CornerRadius="2" IsClippedToBounds="True">
-                                            <StackLayout>
-                                                <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
-
-                                                <StackLayout Orientation="Horizontal" Margin="0,-150,0,0" Padding="10,0,0,0">
-                                                    <Label Text="{Binding TipologiaProprieta}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" ></Label>
-                                                    <Label Text="{Binding Prezzo}"
-                                                           FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
-
-                                                    <Label VerticalTextAlignment="Center" Text="&#xf153;" TextColor="Black" FontFamily="{x:StaticResource FA-Solid}"></Label>
-
-                                                    <Label TextColor="White" Margin="0,-360,-10,0" HorizontalOptions="EndAndExpand" WidthRequest="45"  VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                       <Frame HasShadow="True" Padding="0" Margin="19" Visual="Material" HeightRequest="260" CornerRadius="2" IsClippedToBounds="True">
+                                           <StackLayout>
+                                               <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="200"/>
+                                                    </Grid.RowDefinitions>
+                                
+                                                    <Image Grid.RowSpan="2"  Aspect="AspectFill" HeightRequest="200" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                                    <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
+                                                        <Label TextColor="White" HorizontalOptions="EndAndExpand" WidthRequest="45"  VerticalTextAlignment="Center" Text="&#xf004;" FontSize="Title" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                                                    </AbsoluteLayout>
+                                                </Grid>
+                                                <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                                                    <Label Style="{x:StaticResource AdTitle}" Text="{Binding TipologiaProprieta}"></Label>
+                                                    <Label Text="{Binding Prezzo}" Style="{x:StaticResource AdTitle}"/>
+                                                    <Label VerticalTextAlignment="Center" Style="{x:StaticResource AdTitle}" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}"></Label>
                                                 </StackLayout>
 
-                                                 <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                                    <Label Text="{Binding NomeComune}" TextColor="Gray"  ></Label>
-                                                    <Label Text="-" TextColor="Gray" ></Label>
-                                                    <Label Text="{Binding Indirizzo}" TextColor="Gray" ></Label>
-                                                 </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                                                    <Label Text="{Binding NomeComune}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                                    <Label Text="-" TextColor="Gray" Style="{x:StaticResource AdSubtitle}"></Label>
+                                                    <Label Text="{Binding Indirizzo}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                                </StackLayout>
                                             </StackLayout>
                                         </Frame>
                                     </ViewCell>
