@@ -22,6 +22,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         
 
         private readonly ILogger<HomeController> _logger;
+        private readonly int pageSize = 5;
+        //ICollection<AnnunciDtoOutput> listaAnnunci;
 
         public AnnunciController(ILogger<HomeController> logger)
         {
@@ -35,6 +37,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
         public async Task<ActionResult> RefreshListAsync(int ListPage, int? Order)
         {
+
             OrderBy? orderBy = null;
             if(Order != null)
             {
@@ -48,14 +51,39 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
             var FilterModel = HttpContext.Session.GetObject<FilterModalViewModel>(Constants.FilterModalKey);
 
-            var annunci = await annunciClient.GetAnnunciAsync(ListPage,10,FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
+            var annunci = await annunciClient.GetAnnunciAsync(ListPage, pageSize, FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
                 FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
                 FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage,FilterModel.Giardino,null,FilterModel.Cantina,
                 FilterModel.Piscina,FilterModel.Ascensore, null);
 
-            ViewData["ListPage"] = ListPage;
+            ICollection<AnnunciDtoOutput> listaAnnunci;
+            if (ListPage == 1)
+            {
+                listaAnnunci = annunci;
+            } else
+            {
+                listaAnnunci = HttpContext.Session.GetObject<ICollection<AnnunciDtoOutput>>(Constants.ListaAnnunciKey);
+                foreach (AnnunciDtoOutput a in annunci)
+                {
+                    listaAnnunci.Add(a);
+                }
+            }
+            HttpContext.Session.SetObject(Constants.ListaAnnunciKey, listaAnnunci);
 
-            return PartialView("_AnnunciPartial", annunci);
+            //if(listaAnnunci == null)
+            //{
+            //    listaAnnunci = annunci;
+            //} else
+            //{
+            //    foreach(AnnunciDtoOutput a in annunci)
+            //    {
+            //        listaAnnunci.Add(a);
+            //    }
+            //}
+
+            ViewData["CurrentListPage"] = ListPage;
+
+            return PartialView("_AnnunciPartial", listaAnnunci);
         }
 
         public async Task<IActionResult> DetailAsync(Guid Id, bool Preferiti)

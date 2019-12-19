@@ -291,9 +291,9 @@
                         </div>
                         <div class="card-body">
                             @Model.Indirizzo, @Model.NomeComune
+                            @*data-address="@Model.Indirizzo,@Model.NomeComune"*@
+                            <div id="googleMap" data-latlng="@Model.CoordinateGeografiche" class="map w-100" style="height:400px;"></div>
 
-                            <div id="googleMap" data-address="@Model.Indirizzo,@Model.NomeComune" class="map w-100" style="height:400px;"></div>
-                           
                         </div>
                     </div>
                 </div>

@@ -65,6 +65,27 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
+            if(Model.Immagini != null)
+            {
+                Collection<byte[]> immagini = new Collection<byte[]>();
+                foreach (var item in Model.Immagini)
+                {
+                    immagini.Add(Utility.Utility.Compress(item));
+                }
+
+                Model.Immagini = immagini;
+            }
+
+            if(Model.ImmaginePlanimetria != null) { 
+                Collection<byte[]> planimetrie = new Collection<byte[]>();
+                foreach (var item in Model.ImmaginePlanimetria)
+                {
+                    planimetrie.Add(Utility.Utility.Compress(item));
+                }
+
+                Model.ImmaginePlanimetria = planimetrie;
+            }
+
             AnnunciClient annunciClient = new AnnunciClient(httpClient);
             var annuncio = await annunciClient.UpdateAnnuncioAsync(Id, Model);
 
@@ -72,13 +93,20 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> CreateAsync(Guid? Id)
         {
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
             AnnunciClient annunciClient = new AnnunciClient(httpClient);
+            //-- integrazione per modifica annuncio
+            if (Id != null)
+            {//caso modifica
+                var annuncio = await annunciClient.GetAnnuncioByIdAsync((Guid) Id);
+                ViewData["Annuncio"] = annuncio;
+            }
+            //--fine integrazione
 
             var classiEnergetiche = await annunciClient.GetListaClasseEnergeticaAsync();
             var tipologieProprieta = await annunciClient.GetListaTipologiaProprietaAsync();

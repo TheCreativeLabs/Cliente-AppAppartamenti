@@ -66,10 +66,12 @@ function ComponiFasceOrarie(input) {
         fasce = "";
         $(superParent).children(".input-time-slot").each(
             function (j) {
-                fasce += $(this).children('input[name="fasciaOrariaFrom"]').val();
-                fasce += "-";
-                fasce += $(this).children('input[name="fasciaOrariaTo"]').val();
-                fasce += ";";
+                if ($(this).children('input[name="fasciaOrariaFrom"]').val() != null && $(this).children('input[name="fasciaOrariaTo"]').val() != null) {
+                    fasce += $(this).children('input[name="fasciaOrariaFrom"]').val();
+                    fasce += "-";
+                    fasce += $(this).children('input[name="fasciaOrariaTo"]').val();
+                    fasce += ";";
+                }
             }
         );
     }
@@ -83,16 +85,39 @@ function ComponiFasceOrarie(input) {
 
 
 function RemoveSlot(button) {
+    var superParent = $(button).parent().parent();
+    var fasciaSorella = $(superParent).children(".input-time-slot").first();
+    if (fasciaSorella != null) { //devo ricalcolare la stringa delle fasce, perchè va rimossa quella che sto eliminando
+        var input = $(fasciaSorella).children('input[name="fasciaOrariaFrom"]');
+    }
     $(button).parent().remove();
+    ComponiFasceOrarie($(input));
 }
 
 function ToggleSlot(button) {
     var target = $(button).data("target");
+    var idItems = $(target).data("id-items");
 
     if ($(target).css("display") == "none") {
         $(target).show();
         
     } else {
+        var inputPrimo;
+        //$(target).children("#slot-time-monday").each(function (i) {
+        $(target).children(idItems).each(function (i) {
+            if ($(this).children(".btn-remove-slot").length > 0 && $(this).children(".btn-remove-slot").css("display") != "none") {
+                $(this).remove();
+            } else {
+                $(this).children("input").each(function (j) {
+                    $(this).val(null);
+                    inputPrimo = $(this);
+                });
+                
+            }
+        });
+        if (inputPrimo != null) {
+            ComponiFasceOrarie(inputPrimo);
+        }
         $(target).hide();
     }
 }
@@ -115,7 +140,7 @@ function CreateNewTimeSlot(timeslotButton) {
         ComponiFasceOrarie(this);
     });
     newTo.val(null);
-    newElement.appendTo($(timeslotButton).parent().parent());
+    newElement.appendTo($(timeslotButton).parent());
 }
 
 function changeScroll() {
@@ -144,10 +169,22 @@ async function GetImmagini(input,listname,inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><button onclick="RemoveFile(this)" class="btn-remove btn btn-light rounded-circle position-fixed border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' +inputname+'['+numImage+']" value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image appartamento-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'appartamento-image\'' + ',\'' + inputname+'\')" class="btn-remove btn btn-light rounded-circle position-absolute border"><i class="fas fa-trash-alt"></i></button><input style="display:none"  value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    refreshNames(listname, 'appartamento-image', inputname);
 
-    numImage += 1;
+    //name = "' +inputname+'['+numImage+']"
+    //numImage += 1;
 }
+
+function refreshNames(listname, childrensName, inputname) {
+    var idListName = "#" + listname;
+    var classChildrens = "." + childrensName;
+    $(idListName).find(classChildrens).each(function (i) {
+        $(this).find("input").attr('name', inputname+'[' + i + ']');
+        //$(this).find("label").attr('input', 'SubModels[' + i + '].SomeProperty');
+    });
+}
+
 
 async function GetPlanimetrie(input, listname, inputname) {
     const file = input.files[0];
@@ -164,39 +201,66 @@ async function GetPlanimetrie(input, listname, inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image"><button onclick="RemoveFile(this)" class="btn-remove btn btn-light rounded-circle position-fixed border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image planimetria-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'planimetria-image\'' + ',\'' + inputname +'\')" class="btn-remove btn btn-light rounded-circle position-absolute border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    refreshNames(listname, 'planimetria-image', inputname);
 
-    numPlanimetria += 1;
+    //numPlanimetria += 1;
 }
 
 function setMap() {
-    var comune = $("#input-comune").val();
-    var indirizzo = $("#Indirizzo").val();
-    
-    if ((comune != null && comune.length > 0) && (indirizzo != null && indirizzo.length > 0)) {
-        var address = indirizzo + "," + comune;
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status == 'OK') {
-                var mapProp = {
-                    zoom: 10,
-                    mapTypeControl: false,
-                    streetViewControl: false,
-                };
-                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-                map.setCenter(results[0].geometry.location);
 
-                $("#CoordinateGeografiche").val(results[0].geometry.location.lat() + ";" + results[0].geometry.location.lng());
-
-                $("#googleMap").show();
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
+    var coordinates = $("#googleMap").data("latlng");
+    if (coordinates != null && coordinates != "") { //significa che sono appena entrato in MODIFICA, setto la mappa con lat e lng lette dal db
+        var splittedCoordinates = coordinates.split(";");
+        var lat = splittedCoordinates[0];
+        var lng = splittedCoordinates[1];
+        var mapProp = {
+            zoom: 10,
+            mapTypeControl: false,
+            streetViewControl: false,
+        };
+        var LatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        map.setCenter(LatLng);
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map
         });
+         //dopo aver posizionato la mappa, tolgo le coordinate prese dal db: così se viene cambiato l'indirizzo si entra nell'else e si posiziona sulle nuove coordinate
+        $("#googleMap").data("latlng", null);
+        $("#googleMap").show();
+    }
+    else {//quando viene inserito/modificato l'indirizzo, entro nell'else e chiedo a google lat e lng sapendo l'indirizzo
+        var comune = $("#input-comune").val();
+        var indirizzo = $("#Indirizzo").val();
+
+        if ((comune != null && comune.length > 0) && (indirizzo != null && indirizzo.length > 0)) {
+            var address = indirizzo + "," + comune;
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == 'OK') {
+                    var mapProp = {
+                        zoom: 10,
+                        mapTypeControl: false,
+                        streetViewControl: false,
+                    };
+                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    map.setCenter(results[0].geometry.location);
+
+                    $("#CoordinateGeografiche").val(results[0].geometry.location.lat() + ";" + results[0].geometry.location.lng());
+
+                    $("#googleMap").show();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+    
     }
 }
 
@@ -258,7 +322,8 @@ function EnableCitySearch(searchTextbox) {
     }
 }
 
-function RemoveFile(button) {
+function RemoveFile(button, listname, childrensName, inputname) {
     $(button).parent().remove();
+    refreshNames(listname, childrensName, inputname);
 }
 

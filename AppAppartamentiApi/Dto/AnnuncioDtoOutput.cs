@@ -43,7 +43,7 @@ namespace AppAppartamentiApi.Dto
                 Cancellato = annuncio.Cancellato,
                 UltimoPiano = annuncio.UltimoPiano,
                 Piano = annuncio.Piano,
-                NumeroCameraLetto = annuncio.
+                NumeroCameraLetto = annuncio.NumeroCameraLetto,
                 NumeroAltreStanze = annuncio.NumeroAltreStanze,
                 NumeroBagni = annuncio.NumeroBagni,
                 NumeroCucine = annuncio.NumeroCucine,
@@ -59,7 +59,7 @@ namespace AppAppartamentiApi.Dto
                 Condizionatori = annuncio.Condizionatori,
                 FlagPreferito = preferito,
                 CoordinateGeografiche = annuncio.CoordinateGeografiche
-    };
+            };
 
             if (annuncio.TipologiaAnnuncio != null)
             {
@@ -100,6 +100,21 @@ namespace AppAppartamentiApi.Dto
             {
                 Video video = annuncio.Video.OfType<Video>().FirstOrDefault();
                 if (video != null) dto.Video = video.VideoBytes;
+            }
+
+
+            if (annuncio.FasceOrarie != null && annuncio.FasceOrarie.Any())
+            {
+                FasceOrarie fasceOrarie = annuncio.FasceOrarie.FirstOrDefault();
+                DisponibilitaOrariaDto disponibilitaOrariaDto = new DisponibilitaOrariaDto();
+                disponibilitaOrariaDto.fasceOrarieLunedi = fasceOrarie.Monday;
+                disponibilitaOrariaDto.fasceOrarieMartedi = fasceOrarie.Tuesday;
+                disponibilitaOrariaDto.fasceOrarieMercoledi = fasceOrarie.Wednesday;
+                disponibilitaOrariaDto.fasceOrarieGiovedi = fasceOrarie.Thursday;
+                disponibilitaOrariaDto.fasceOrarieVenerdi = fasceOrarie.Friday;
+                disponibilitaOrariaDto.fasceOrarieSabato = fasceOrarie.Saturday;
+                disponibilitaOrariaDto.fasceOrarieDomenica = fasceOrarie.Sunday;
+                dto.DisponibilitaOraria = disponibilitaOrariaDto;
             }
 
             return dto;
@@ -182,5 +197,7 @@ namespace AppAppartamentiApi.Dto
         public bool FlagPreferito { get; set; }
 
         public string CoordinateGeografiche { get; set; }
+
+        public DisponibilitaOrariaDto DisponibilitaOraria { get; set; }
     }
 }

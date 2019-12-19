@@ -1,19 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _localizer
-
 @model AnnuncioDtoInput
 
 @{
     ViewData["Title"] = @_localizer["Title"];
 }
 
+@{
+    AnnuncioDtoOutput annuncio = (AnnuncioDtoOutput)ViewData["Annuncio"];
+}
+
 <div class="container container-custom">
     <div class="row">
         <div class="col-sm-11">
             <h2>@_localizer["Title"]</h2>
-              <!--<div class="progress" style="height: 8px;">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>-->
         </div>
         <div class="col-sm-1 text-right">
             @{await Html.RenderPartialAsync("_VirtualAgentSell");}
@@ -36,7 +36,19 @@
             </div>
         </div>
         <div class="col-sm-9 mt-4">
-            <form asp-action="Create" id="form-create">
+            @{ 
+                string formAction = "";
+                string formAspRouteId = "";
+                if (@annuncio != null)
+                {
+                    formAction = "Edit";
+                    formAspRouteId = annuncio.Id.ToString();
+                } else
+                {
+                    formAction = "Create";
+                }
+            }
+            <form asp-action="@formAction" id="form-create" asp-route-Id="@formAspRouteId">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="tipologia-proprieta" role="tabpanel" aria-labelledby="tipologia-proprieta-tab">
@@ -50,7 +62,15 @@
                                     IEnumerable<TipologiaProprieta> tipologiaProprieta2 = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologieProprieta"];
                                     @foreach (var proprieta in tipologiaProprieta2)
                                     {
-                                        <input data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
+                                        @*<input data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />*@
+                                    if (annuncio != null && annuncio.TipologiaProprieta.ToUpper() == proprieta.Descrizione.ToUpper())
+                                    {
+                                            <input class="mr-2" type="radio" checked asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
+                                    }
+                                    else
+                                    {
+                                            <input class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
+                                        }
                                     }
                                     <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
                                 }
@@ -68,7 +88,14 @@
                                     IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologieAnnunci"];
                                     @foreach (var tipologiaAnnuncio in listaTipologiaAnnuncio)
                                     {
-                                        <input data-val-required="@_localizer["Required"]"  class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
+                                        if (annuncio != null && annuncio.TipologiaAnnuncio.ToUpper() == tipologiaAnnuncio.Descrizione.ToUpper())
+                                        {
+                                            <input checked data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
+                                        }
+                                        else
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaAnnuncio" value="@tipologiaAnnuncio.Id" id="@tipologiaAnnuncio.Id" />@tipologiaAnnuncio.Descrizione<br />
+                                        }
                                     }
                                     <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
                                 }
@@ -84,7 +111,16 @@
                             <div class="form-group form-group-sm">
                                 <label asp-for="CodiceComune" class="control-label"></label>
                                 <div class="input-group  mb-3">
-                                    <input id="input-comune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input id="input-comune" value="@annuncio.NomeComune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                        }
+                                        else
+                                        {
+                                            <input id="input-comune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                        }
+                                    }
                                     <div class="input-group-append">
                                         <div id="city-spinner" class="spinner-border spinner-border-sm text-secondary mt-2" role="status" style="display:none;margin-left:-2rem;z-index:1050 !important">
                                             <span class="sr-only">Loading...</span>
@@ -93,28 +129,65 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <input data-val-required="@_localizer["Required"]" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                @{
+                                    if (annuncio != null)
+                                    {
+                                        <input data-val-required="@_localizer["Required"]" value="@annuncio.CodiceComune" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                    }
+                                    else
+                                    {
+                                        <input data-val-required="@_localizer["Required"]" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                    }
+                                }
                                 <span asp-validation-for="CodiceComune" class="text-danger"></span>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label data-val-required="@_localizer["Required"]" asp-for="Indirizzo" class="control-label "></label>
-                                <input asp-for="Indirizzo" class="form-control" disabled/>
+                                @{
+                                    if (annuncio != null)
+                                    {
+                                        <input asp-for="Indirizzo" class="form-control" value="@annuncio.Indirizzo" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Indirizzo" class="form-control" disabled />
+                                    }
+
+                                }
                                 <span asp-validation-for="Indirizzo" class="text-danger"></span>
                             </div>
 
                             <div class="form-group form-group-sm">
-                                <input asp-for="CoordinateGeografiche" class="form-control d-none" />
-                                <span asp-validation-for="CoordinateGeografiche" class="text-danger"></span>
+                                @{
+                                    if (annuncio != null)
+                                    {
+                                        <input asp-for="CoordinateGeografiche" value="@annuncio.CoordinateGeografiche" class="form-control d-none" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="CoordinateGeografiche" class="form-control d-none" />
+                                    }
+                                }
                             </div>
 
-                            <div id="googleMap" class="map w-100" style="height:400px;display:none">
-                            </div>
+                            @{
+                                if (annuncio != null)
+                                {
+                                    <div id="googleMap" data-latlng="@annuncio.CoordinateGeografiche" class="map w-100" style="height:400px;display:none">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div id="googleMap" class="map w-100" style="height:400px;display:none">
+                                    </div>
+                                }
+                            }
+
                         </div>
                     </div>
                     <div id="prezzo" class="tab-pane fade" role="tabpanel" aria-labelledby="prezzo-tab">
                         <div class="shadow-sm p-3">
-                            <h5 class="mb-2 p-3 bg-light border-bottom" style="
-    margin: -1rem;">
+                            <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">
                                 @_localizer["PriceAndCost"]
                             </h5>
                             <div class="form-group form-group-sm">
@@ -122,7 +195,16 @@
                                     @_localizer["Price"]
                                 </label>
                                 <div class="input-group">
-                                    <input data-val-required="@_localizer["Required"]"  asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.Prezzo" asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                        }
+                                        else
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                        }
+                                    }
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
                                     </div>
@@ -135,7 +217,16 @@
                                     @_localizer["MonthlyCosts"]
                                 </label>
                                 <div class="input-group">
-                                    <input data-val-required="@_localizer["Required"]"  asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.SpesaMensileCondominio" asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                        }
+                                        else
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                        }
+                                    }
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="inputGroup-SpesaMensileCondominio-sm">€/Mese</span>
                                     </div>
@@ -145,30 +236,60 @@
 
                             <div class="form-group form-group-sm">
                                 @{
-                                    IEnumerable<TipologiaRiscaldamento> tipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
+                                    IEnumerable<TipologiaRiscaldamento> TipologiaRiscaldamento = (IEnumerable<TipologiaRiscaldamento>)ViewData["ListaTipologieRiscaldamento"];
+                                    TipologiaRiscaldamento selectedRiscaldamento = null;
+                                    if (annuncio != null) {
+                                        selectedRiscaldamento = TipologiaRiscaldamento.Where(x => x.Descrizione.ToUpper() == annuncio.TipologiaRiscaldamento.ToUpper()).FirstOrDefault();
+
+                                    }
                                 }
                                 <label class="control-label">
                                     @_localizer["HeatingType"]
                                 </label>
                                 <br />
-                                @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
-                                                             new SelectList(tipologiaRiscaldamento, "Id", "Descrizione"),
-                                                             "Tipologia riscaldamento", new { @class = "custom-select" })
+                                @{
+                                    if (annuncio != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
+                                              new SelectList(TipologiaRiscaldamento, "Id", "Descrizione", selectedRiscaldamento.Id),
+                                              "Seleziona...", new { @class = "custom-select" });
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m.IdTipologiaRiscaldamento,
+                                           new SelectList(TipologiaRiscaldamento, "Id", "Descrizione"),
+                                           "Tipologia riscaldamento", new { @class = "custom-select" });
+                                    }
+
+                                }
+
                             </div>
 
                             <div class="form-group form-group-sm">
-                                @{
-                                    IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
-                                }
                                 <label class="control-label">
                                     @_localizer["EnergeticClass"]
 
-                                    </label>
+                                </label>
+                                @{
+                                    IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
+
+                                    if (annuncio != null)
+                                    {
+                                        var selectedClasseEnergetica = classeEnergetica.Where(x => x.Descrizione.ToUpper() == annuncio.ClasseEnergetica.ToUpper()).FirstOrDefault();
+                                        @Html.DropDownListFor(m => m.IdClasseEnergetica,
+          new SelectList(classeEnergetica, "Id", "Descrizione", selectedClasseEnergetica.Id),
+          "Seleziona...", new { @class = "custom-select" });
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m.IdClasseEnergetica,
+                          new SelectList(classeEnergetica, "Id", "Descrizione"),
+                          "Classe energetica", new { @class = "custom-select" })
+
+                                    }
+                                }
                                 <br />
 
-                                @Html.DropDownListFor(m => m.IdClasseEnergetica,
-                                                             new SelectList(classeEnergetica, "Id", "Descrizione"),
-                                                             "Classe energetica", new { @class = "custom-select" })
 
                             </div>
                         </div>
@@ -178,7 +299,7 @@
                         <div class="shadow-sm p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="
     margin: -1rem;">
-                            @_localizer["Features"]
+                                @_localizer["Features"]
 
                             </h5>
 
@@ -187,7 +308,16 @@
                                     @_localizer["Surface"]
                                 </label>
                                 <div class="input-group">
-                                    <input  data-val-required="@_localizer["Required"]"  asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm" />
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.Superficie" asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm" />
+                                        }
+                                        else
+                                        {
+                                            <input data-val-required="@_localizer["Required"]" asp-for="Superficie" class="form-control" aria-label="Superficie" aria-describedby="inputGroup-Superficie-sm" />
+                                        }
+                                    }
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="inputGroup-Superficie-sm">m²</span>
                                     </div>
@@ -206,7 +336,16 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" value="0" asp-for="NumeroCameraLetto">
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input value="@annuncio.NumeroCameraLetto" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" asp-for="NumeroCameraLetto">
+                                        }
+                                        else
+                                        {
+                                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCameraLetto" value="0" asp-for="NumeroCameraLetto">
+                                        }
+                                    }
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCameraLetto">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -227,7 +366,16 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" value="0" asp-for="NumeroAltreStanze">
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input value="@annuncio.NumeroAltreStanze" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" asp-for="NumeroAltreStanze">
+                                        }
+                                        else
+                                        {
+                                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroAltreStanze" value="0" asp-for="NumeroAltreStanze">
+                                        }
+                                    }
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -248,7 +396,16 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" value="0" asp-for="NumeroBagni">
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input value="@annuncio.NumeroBagni" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" asp-for="NumeroBagni">
+                                        }
+                                        else
+                                        {
+                                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroBagni" value="0" asp-for="NumeroBagni">
+                                        }
+                                    }
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -269,7 +426,16 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" value="0" asp-for="NumeroCucine">
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input value="@annuncio.NumeroCucine" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" asp-for="NumeroCucine">
+                                        }
+                                        else
+                                        {
+                                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroCucine" value="0" asp-for="NumeroCucine">
+                                        }
+                                    }
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -290,7 +456,17 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" value="0" asp-for="NumeroGarage">
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input value="@annuncio.NumeroGarage" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" asp-for="NumeroGarage">
+                                        }
+                                        else
+                                        {
+                                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroGarage" value="0" asp-for="NumeroGarage">
+                                        }
+
+                                    }
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -311,7 +487,17 @@
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" value="0" asp-for="NumeroPostiAuto">
+                                    @{
+                                        if (annuncio != null)
+                                        {
+                                            <input value="@annuncio.NumeroPostiAuto" class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" asp-for="NumeroPostiAuto">
+                                        }
+                                        else
+                                        {
+                                            <input class="input-group-field form-control form-control-sm rounded ml-2 mr-2" type="number" name="NumeroPostiAuto" value="0" asp-for="NumeroPostiAuto">
+                                        }
+
+                                    }
                                     <div class="input-group-button">
                                         <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -327,12 +513,32 @@
                                 <label asp-for="Piano" class="control-label">
                                     @_localizer["Floor"]
                                 </label>
-                                <input data-val-required="@_localizer["Required"]" asp-for="Piano" class="form-control" />
+                                @{
+                                    if (annuncio != null)
+                                    {
+                                        <input value="@annuncio.Piano" data-val-required="@_localizer["Required"]" asp-for="Piano" class="form-control" />
+                                    }
+                                    else
+                                    {
+                                        <input data-val-required="@_localizer["Required"]" asp-for="Piano" class="form-control" />
+                                    }
+                                }
                                 <span asp-validation-for="Piano" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="UltimoPiano" />
+                                @{
+                                    if (annuncio!=null && annuncio.UltimoPiano.HasValue && annuncio.UltimoPiano.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="UltimoPiano" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="UltimoPiano" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="UltimoPiano">
                                     @_localizer["TopFloor"]
                                 </label>
@@ -340,7 +546,17 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Giardino" />
+                                @{ if (annuncio!=null && annuncio.Giardino.HasValue && annuncio.Giardino.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Giardino" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Giardino" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Giardino">
                                     @_localizer["Garden"]
                                 </label>
@@ -348,7 +564,17 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Ascensore" /> <!---->
+                                @{ if (annuncio!=null && annuncio.Ascensore.HasValue && annuncio.Ascensore.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Ascensore" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Ascensore" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Ascensore">
                                     @_localizer["Lift"]
                                 </label>
@@ -356,31 +582,71 @@
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Balcone"/> <!--asp-for="Balcone"-->
+                                @{ if (annuncio!=null && annuncio.Balcone.HasValue && annuncio.Balcone.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Balcone" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Balcone" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Balcone">
-                                     @_localizer["Balcony"]
+                                    @_localizer["Balcony"]
                                 </label>
                                 <span asp-validation-for="Balcone" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Piscina" /> <!--asp-for="Piscina"-->
+                                @{ if (annuncio!=null && annuncio.Piscina.HasValue && annuncio.Piscina.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Piscina" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Piscina" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Piscina">
-                                     @_localizer["Pool"]
+                                    @_localizer["Pool"]
                                 </label>
                                 <span asp-validation-for="Piscina" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Cantina" /> <!---->
+                                @{ if (annuncio!=null && annuncio.Cantina.HasValue && annuncio.Cantina.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Cantina" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Cantina" />
+
+                                    }
+                                }
                                 <label class="form-check-label" asp-for="Cantina">
-                                     @_localizer["Cellar"]
+                                    @_localizer["Cellar"]
                                 </label>
                                 <span asp-validation-for="Cantina" class="text-danger"></span>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" asp-for="Condizionatori" /> <!---->
+                                @{ if (annuncio!=null && annuncio.Condizionatori.HasValue && annuncio.Condizionatori.Value == true)
+                                    {
+                                        <input class="form-check-input" type="checkbox" checked asp-for="Condizionatori" />
+
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" asp-for="Condizionatori" />
+
+                                    }
+                                }    
                                 <label class="form-check-label" asp-for="Condizionatori">
                                     @_localizer["Conditioners"]
                                 </label>
@@ -393,7 +659,18 @@
                         <div class="shadow-sm p-3">
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["Description"]</h5>
                             <div class="form-group">
-                                <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
+                                @{
+                                    if (annuncio != null)
+                                    {
+                                        @Html.TextArea("Descrizione", @annuncio.Descrizione, new { @rows = "10", @class = "form-control" })
+
+                                    }
+                                    else
+                                    {
+                                        <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
+                                    }
+
+                                }
                                 <span asp-validation-for="Descrizione" class="text-danger"></span>
                             </div>
                         </div>
@@ -411,6 +688,30 @@
 
                             <div>
                                 <div class="row" id="containerImmagini">
+                                    @{
+                                                if (annuncio != null && annuncio.ImmaginiAnnuncio.Any())
+                                                {
+                                                    int i = 0;
+                                                    foreach (byte[] imm in annuncio.ImmaginiAnnuncio)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(imm);
+                                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                        var inputName = "Immagini[" + i + "]";
+
+                                                <div class="col-xs-12 col-sm-4 p-0 ad-create-image appartamento-image">
+                                                    <button onclick="RemoveFile(this,'containerImmagini','appartamento-image','Immagini')" class="btn-remove btn btn-light rounded-circle position-absolute border">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                    <input style="display:none" value="@base64" name="@inputName" />
+                                                    <div class="border p-2 m-2">
+                                                        <img id="ad-image" src="@imgSrc" alt="image" class="d-block w-100 " />
+                                                    </div>
+                                                </div>
+
+                                                i++;
+                                            }
+                                    }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -429,6 +730,30 @@
 
                             <div>
                                 <div class="row" id="containerPlanimetria">
+                                    @{
+                                        if (annuncio != null && annuncio.ImmaginiPlanimetria.Any())
+                                        {
+                                            var j = 0;
+                                            foreach (byte[] imm in annuncio.ImmaginiPlanimetria)
+                                            {
+                                                var base64 = Convert.ToBase64String(imm);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                var inputName = "ImmaginePlanimetria[" + j + "]";
+
+                                                <div class="col-xs-12 col-sm-4 p-0 ad-create-image planimetria-image">
+                                                    <button onclick="RemoveFile(this,'containerPlanimetria','planimetria-image','ImmaginePlanimetria')" class="btn-remove btn btn-light rounded-circle position-absolute border">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                    <input style="display:none" value="@base64"  name="@inputName" />
+                                                    <div class="border p-2 m-2">
+                                                        <img id="ad-image" src="@imgSrc" alt="image" class="d-block w-100 " />
+                                                    </div>
+                                                </div>
+
+                                                j++;
+                                            }
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -457,38 +782,128 @@
                             <h5 class="mb-2 p-3 bg-light border-bottom" style="margin: -1rem;">@_localizer["AgendaTitle"]&nbsp;<small class="text-muted">@_localizer["AgendaSubtitle"]</small></h5>
 
                             <div class="btn-group-toggle text-center mt-3" data-toggle="buttons">
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divMonday">
+                                @{
+                                    var activeLun = "";
+                                    var ariaPressedLun = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieLunedi != null)
+                                    {
+                                        activeLun = "active";
+                                        ariaPressedLun = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeLun" @ariaPressedLun data-target="#divMonday">
                                     <input type="checkbox"> @_localizer["Monday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divTuesday">
+                                @{
+                                    var activeMar = "";
+                                    var ariaPressedMar = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieMartedi != null)
+                                    {
+                                        activeMar = "active";
+                                        ariaPressedMar = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeMar" @ariaPressedMar data-target="#divTuesday">
                                     <input type="checkbox"> @_localizer["Tuesday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divWednesday">
+                                @{
+                                    var activeMer = "";
+                                    var ariaPressedMer = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieMercoledi != null)
+                                    {
+                                        activeMer = "active";
+                                        ariaPressedMer = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeMer" @ariaPressedMer data-target="#divWednesday">
                                     <input type="checkbox"> @_localizer["Wednesday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divThursday">
+                                @{
+                                    var activeGio = "";
+                                    var ariaPressedGio = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieGiovedi != null)
+                                    {
+                                        activeGio = "active";
+                                        ariaPressedGio = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeGio" @ariaPressedGio data-target="#divThursday">
                                     <input type="checkbox"> @_localizer["Thursday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divFriday">
+                                @{
+                                    var activeVen = "";
+                                    var ariaPressedVen = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieVenerdi != null)
+                                    {
+                                        activeVen = "active";
+                                        ariaPressedVen = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeVen" @ariaPressedVen data-target="#divFriday">
                                     <input type="checkbox"> @_localizer["Friday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divSaturday">
+                                @{
+                                    var activeSab = "";
+                                    var ariaPressedSab = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieSabato != null)
+                                    {
+                                        activeSab = "active";
+                                        ariaPressedSab = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeSab" @ariaPressedSab data-target="#divSaturday">
                                     <input type="checkbox"> @_localizer["Saturday"]
                                 </label>
 
-                                <label class="btn-toggle-slot btn btn-light" data-target="#divSunday">
+                                @{
+                                    var activeDom = "";
+                                    var ariaPressedDom = "";
+                                    if (annuncio != null && annuncio.DisponibilitaOraria != null && annuncio.DisponibilitaOraria.FasceOrarieDomenica != null)
+                                    {
+                                        activeDom = "active";
+                                        ariaPressedDom = "aria-pressed=\"true\"";
+                                    }
+
+                                }
+                                <label class="btn-toggle-slot btn btn-light @activeDom" @ariaPressedDom data-target="#divSunday">
                                     <input type="checkbox"> @_localizer["Sunday"]
                                 </label>
                             </div>
 
                             <hr />
 
-                            <div id="divMonday" class="mt-5 " style="display:none" data-for="#DisponibilitaOraria_FasceOrarieLunedi">
+                            @{
+                                var fasceLun = new string[0];
+                                var stringDisponibilitaLun = "";
+                                var fasceLunPrimoFrom = "";
+                                var fasceLunPrimoTo = "";
+                                var displayMonday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieLunedi != null && annuncio.DisponibilitaOraria.FasceOrarieLunedi != "")
+                                    {
+                                        stringDisponibilitaLun = annuncio.DisponibilitaOraria.FasceOrarieLunedi;
+                                        displayMonday = "";
+                                        fasceLun = stringDisponibilitaLun.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceLun = fasceLun.Take(fasceLun.Count() - 1).ToArray();
+                                        fasceLunPrimoFrom = fasceLun[0].Split("-")[0];
+                                        fasceLunPrimoTo = fasceLun[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                            <div id="divMonday" class="mt-5 " style="@displayMonday" data-for="#DisponibilitaOraria_FasceOrarieLunedi" data-id-items="#slot-time-monday">
                                 <label class="h6">
                                     @_localizer["Monday"]
                                 </label>
@@ -501,17 +916,71 @@
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text rounded-left">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@fasceLunPrimoFrom" name="fasciaOrariaFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@fasceLunPrimoTo" name="fasciaOrariaTo">
                                 </div>
 
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieLunedi" style="display:none;" />
+                                @{
+                                    if (fasceLun != null)
+                                    {
+                                        var nLun = 0;
+                                        @foreach (var fascia in fasceLun)
+                                        {
+                                            if (nLun == 0)
+                                            {
+                                                nLun++;
+                                                continue;
+                                            }
+                                            var from = fascia.Split("-")[0];
+                                            var to = fascia.Split("-")[1];
+                                            <div id="slot-time-monday" data-index="0" class="input-group mb-3 input-time-slot">
+                                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                    @*style="display:none;"*@
+                                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">@_localizer["To"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                            </div>
+
+                                            nLun++;
+                                        }
+                                    }
+                                }
+
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieLunedi" style="display:none;" value="@stringDisponibilitaLun" />
                             </div>
 
-                            <div id="divTuesday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieMartedi">
+                            @{
+                                var fasceMar = new string[0];
+                                var stringDisponibilitaMar = "";
+                                var fasceMarPrimoFrom = "";
+                                var fasceMarPrimoTo = "";
+                                var displayTuesday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieMartedi != null && annuncio.DisponibilitaOraria.FasceOrarieMartedi != "")
+                                    {
+                                        stringDisponibilitaMar = annuncio.DisponibilitaOraria.FasceOrarieMartedi;
+                                        displayTuesday = "";
+                                        fasceMar = stringDisponibilitaMar.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceMar = fasceMar.Take(fasceMar.Count() - 1).ToArray();
+                                        fasceMarPrimoFrom = fasceMar[0].Split("-")[0];
+                                        fasceMarPrimoTo = fasceMar[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                            <div id="divTuesday" class="mt-5" style="@displayTuesday" data-for="#DisponibilitaOraria_FasceOrarieMartedi" data-id-items="#slot-time-tuesday">
                                 <label class="h6">
                                     @_localizer["Tuesday"]
 
@@ -525,18 +994,69 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceMarPrimoFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceMarPrimoTo">
                                 </div>
 
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieMartedi" style="display:none;" />
+                                @{
+                                    if (fasceMar != null)
+                                    {
+                                        var nMar = 0;
+                                        @foreach (var fascia in fasceMar)
+                                        {
+                                            if (nMar == 0)
+                                            {
+                                                nMar++;
+                                                continue;
+                                            }
+                                            var from = fascia.Split("-")[0];
+                                            var to = fascia.Split("-")[1];
+                                            <div id="slot-time-tuesday" data-index="0" class="input-group mb-3 input-time-slot">
+                                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">@_localizer["To"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                            </div>
+
+                                            nMar++;
+                                        }
+                                    }
+                                }
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieMartedi" style="display:none;" value="@stringDisponibilitaMar" />
 
                             </div>
-
-                            <div id="divWednesday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieMercoledi">
+                            @{
+                                var fasceMer = new string[0];
+                                var stringDisponibilitaMer = "";
+                                var fasceMerPrimoFrom = "";
+                                var fasceMerPrimoTo = "";
+                                var displayWednesday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieMercoledi != null && annuncio.DisponibilitaOraria.FasceOrarieMercoledi != "")
+                                    {
+                                        stringDisponibilitaMer = annuncio.DisponibilitaOraria.FasceOrarieMercoledi;
+                                        displayWednesday = "";
+                                        fasceMer = stringDisponibilitaMer.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceMer = fasceMer.Take(fasceMer.Count() - 1).ToArray();
+                                        fasceMerPrimoFrom = fasceMer[0].Split("-")[0];
+                                        fasceMerPrimoTo = fasceMer[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                            <div id="divWednesday" class="mt-5" style="@displayWednesday" data-for="#DisponibilitaOraria_FasceOrarieMercoledi" data-id-items="#slot-time-wednesday">
                                 <label class="h6">
                                     @_localizer["Wednesday"]
 
@@ -551,18 +1071,70 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceMerPrimoFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceMerPrimoTo">
                                 </div>
 
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieMercoledi" style="display:none;" />
+                                @{
+                                    if (fasceMer != null)
+                                    {
+                                        var nMer = 0;
+                                        @foreach (var fascia in fasceMer)
+                                        {
+                                            if (nMer == 0)
+                                            {
+                                                nMer++;
+                                                continue;
+                                            }
+                                            var from = fascia.Split("-")[0];
+                                            var to = fascia.Split("-")[1];
+                                            <div id="slot-time-wednesday" data-index="0" class="input-group mb-3 input-time-slot">
+                                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">@_localizer["To"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                            </div>
+
+                                            nMer++;
+                                        }
+                                    }
+                                }
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieMercoledi" style=" display:none;" value="@stringDisponibilitaMer"/>
 
                             </div>
 
-                            <div id="divThursday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieGiovedi">
+                            @{
+                                var fasceGio = new string[0];
+                                var stringDisponibilitaGio = "";
+                                var fasceGioPrimoFrom = "";
+                                var fasceGioPrimoTo = "";
+                                var displayThursday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieGiovedi != null && annuncio.DisponibilitaOraria.FasceOrarieGiovedi != "")
+                                    {
+                                        stringDisponibilitaGio = annuncio.DisponibilitaOraria.FasceOrarieGiovedi;
+                                        displayThursday = "";
+                                        fasceGio = stringDisponibilitaGio.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceGio = fasceGio.Take(fasceGio.Count() - 1).ToArray();
+                                        fasceGioPrimoFrom = fasceGio[0].Split("-")[0];
+                                        fasceGioPrimoTo = fasceGio[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                            <div id="divThursday" class="mt-5" style="@displayThursday" data-for="#DisponibilitaOraria_FasceOrarieGiovedi" data-id-items="#slot-time-thursday">
                                 <label class="h6">
                                     @_localizer["Thursday"]
 
@@ -576,18 +1148,70 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceGioPrimoFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceGioPrimoTo">
                                 </div>
 
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieGiovedi" style="display:none;" />
+                                @{
+                                    if (fasceGio != null)
+                                    {
+                                        var nGio = 0;
+                                        @foreach (var fascia in fasceGio)
+                                        {
+                                            if (nGio == 0)
+                                            {
+                                                nGio++;
+                                                continue;
+                                            }
+                                            var from = fascia.Split("-")[0];
+                                            var to = fascia.Split("-")[1];
+                                            <div id="slot-time-thursday" data-index="0" class="input-group mb-3 input-time-slot">
+                                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">@_localizer["To"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                            </div>
+
+                                            nGio++;
+                                        }
+                                    }
+                                }
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieGiovedi" style="display:none;" value="@stringDisponibilitaGio" />
 
                             </div>
 
-                            <div id="divFriday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieVenerdi">
+                            @{
+                                var fasceVen = new string[0];
+                                var stringDisponibilitaVen = "";
+                                var fasceVenPrimoFrom = "";
+                                var fasceVenPrimoTo = "";
+                                var displayFriday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieVenerdi != null && annuncio.DisponibilitaOraria.FasceOrarieVenerdi != "")
+                                    {
+                                        stringDisponibilitaVen = annuncio.DisponibilitaOraria.FasceOrarieVenerdi;
+                                        displayFriday = "";
+                                        fasceVen = stringDisponibilitaVen.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceVen = fasceVen.Take(fasceVen.Count() - 1).ToArray();
+                                        fasceVenPrimoFrom = fasceVen[0].Split("-")[0];
+                                        fasceVenPrimoTo = fasceVen[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                            <div id="divFriday" class="mt-5" style="@displayFriday" data-for="#DisponibilitaOraria_FasceOrarieVenerdi" data-id-items="#slot-time-friday">
                                 <label class="h6">
                                     @_localizer["Friday"]
 
@@ -601,18 +1225,70 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceVenPrimoFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceVenPrimoTo">
                                 </div>
 
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieVenerdi" style="display:none;" />
+                                @{
+                                    if (fasceVen != null)
+                                    {
+                                        var nVen = 0;
+                                        @foreach (var fascia in fasceVen)
+                                        {
+                                            if (nVen == 0)
+                                            {
+                                                nVen++;
+                                                continue;
+                                            }
+                                            var from = fascia.Split("-")[0];
+                                            var to = fascia.Split("-")[1];
+                                            <div id="slot-time-friday" data-index="0" class="input-group mb-3 input-time-slot">
+                                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">@_localizer["To"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                            </div>
+
+                                            nVen++;
+                                        }
+                                    }
+                                }
+
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieVenerdi" style="display:none;" value="@stringDisponibilitaVen"/>
 
                             </div>
 
-                            <div id="divSaturday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieSabato">
+                            @{
+                                var fasceSab = new string[0];
+                                var stringDisponibilitaSab = "";
+                                var fasceSabPrimoFrom = "";
+                                var fasceSabPrimoTo = "";
+                                var displaySaturday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieSabato != null && annuncio.DisponibilitaOraria.FasceOrarieSabato != "")
+                                    {
+                                        stringDisponibilitaSab = annuncio.DisponibilitaOraria.FasceOrarieSabato;
+                                        displaySaturday = "";
+                                        fasceSab = stringDisponibilitaSab.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceSab = fasceSab.Take(fasceSab.Count() - 1).ToArray();
+                                        fasceSabPrimoFrom = fasceSab[0].Split("-")[0];
+                                        fasceSabPrimoTo = fasceSab[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                            <div id="divSaturday" class="mt-5" style="@displaySaturday" data-for="#DisponibilitaOraria_FasceOrarieSabato" data-id-items="#slot-time-saturday">
                                 <label class="h6">
                                     @_localizer["Saturday"]
                                 </label>
@@ -625,41 +1301,124 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">@_localizer["From"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceSabPrimoFrom">
                                     <div class="input-group-append">
                                         <span class="input-group-text">@_localizer["To"]</span>
                                     </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceSabPrimoTo">
                                 </div>
 
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieSabato" style="display:none;" />
+                                @{
+                                    if (fasceSab != null)
+                                    {
+                                        var nSab = 0;
+                                        @foreach (var fascia in fasceSab)
+                                        {
+                                            if (nSab == 0)
+                                            {
+                                                nSab++;
+                                                continue;
+                                            }
+                                            var from = fascia.Split("-")[0];
+                                            var to = fascia.Split("-")[1];
+                                            <div id="slot-time-saturday" data-index="0" class="input-group mb-3 input-time-slot">
+                                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                                </div>
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">@_localizer["To"]</span>
+                                                </div>
+                                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                            </div>
+
+                                            nSab++;
+                                        }
+                                    }
+                                }
+                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieSabato" style="display:none;" value="@stringDisponibilitaSab" />
 
                             </div>
 
-                            <div id="divSunday" class="mt-5" style="display:none" data-for="#DisponibilitaOraria_FasceOrarieDomenica">
-                                <label class="h6">
-                                    @_localizer["Sunday"]
+                            @{
+                                var fasceDom = new string[0];
+                                var stringDisponibilitaDom = "";
+                                var fasceDomPrimoFrom = "";
+                                var fasceDomPrimoTo = "";
+                                var displaySunday = "display:none";
+                                if (annuncio != null && annuncio.DisponibilitaOraria != null)
+                                {
+                                    if (annuncio.DisponibilitaOraria.FasceOrarieDomenica != null && annuncio.DisponibilitaOraria.FasceOrarieDomenica != "")
+                                    {
+                                        stringDisponibilitaDom = annuncio.DisponibilitaOraria.FasceOrarieDomenica;
+                                        displaySunday = "";
+                                        fasceDom = stringDisponibilitaDom.Split(";");
+                                        //rimuovo l'ultimo elemento perchè è una stringa vuota, infatti il formato è 10:00-12:00;14:00-15:30;
+                                        fasceDom = fasceDom.Take(fasceDom.Count() - 1).ToArray();
+                                        fasceDomPrimoFrom = fasceDom[0].Split("-")[0];
+                                        fasceDomPrimoTo = fasceDom[0].Split("-")[1];
+                                    }
+                                }
+                            }
+                        <div id="divSunday" class="mt-5" style="@displaySunday" data-for="#DisponibilitaOraria_FasceOrarieDomenica" data-id-items="#slot-time-sunday">
+                            <label class="h6">
+                                @_localizer["Sunday"]
 
-                                </label>
-                                <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-sunday">@_localizer["AddTimeSlot"]</a>
+                            </label>
+                            <a class="btn-time-slot btn btn-sm rounded-pill btn-light float-right mb-3" data-target="#slot-time-sunday">@_localizer["AddTimeSlot"]</a>
 
-                                <div id="slot-time-sunday" class="input-group mb-3 input-time-slot">
-                                    <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
-                                        <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">@_localizer["From"]</span>
-                                    </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">@_localizer["To"]</span>
-                                    </div>
-                                    <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo">
+                            <div id="slot-time-sunday" class="input-group mb-3 input-time-slot">
+                                <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot" style="display:none;">
+                                    <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                 </div>
-
-                                <input type="text" asp-for="DisponibilitaOraria.FasceOrarieDomenica" style="display:none;" />
-
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@_localizer["From"]</span>
+                                </div>
+                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceDomPrimoFrom">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">@_localizer["To"]</span>
+                                </div>
+                                <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceDomPrimoTo">
                             </div>
+
+                            @{
+                                if (fasceDom != null)
+                                {
+                                    var nDom = 0;
+                                    @foreach (var fascia in fasceDom)
+                                    {
+                                        if (nDom == 0)
+                                        {
+                                            nDom++;
+                                            continue;
+                                        }
+                                        var from = fascia.Split("-")[0];
+                                        var to = fascia.Split("-")[1];
+                                        <div id="slot-time-sunday" data-index="0" class="input-group mb-3 input-time-slot">
+                                            <div onclick="RemoveSlot(this);" class="input-group-prepend border-0 mr-2 btn-remove-slot">
+                                                <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
+                                            </div>
+                                            <div class="input-group-prepend ">
+                                                <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                            </div>
+                                            <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">@_localizer["To"]</span>
+                                            </div>
+                                            <input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">
+                                        </div>
+
+                                        nDom++;
+                                    }
+                                }
+                            }
+
+                            <input type="text" asp-for="DisponibilitaOraria.FasceOrarieDomenica" style="display:none;" value="@stringDisponibilitaDom" />
+
+                        </div>
                         </div>
                     </div>
                 </div>
