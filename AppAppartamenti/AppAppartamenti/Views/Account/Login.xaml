@@ -4,11 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Login.Login"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="White"
              >
     <ContentPage.Content>
         <StackLayout Padding="20" x:Name="stkLogin" IsVisible="False" >
@@ -16,21 +15,16 @@
             <StackLayout VerticalOptions="CenterAndExpand">
 
                 <Label FontSize="90" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource PrimaryColor}" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf7ae;"></Label>
-
+                <Label Style="{x:StaticResource Title}"  Text="Promuovocasa.it" HorizontalTextAlignment="Center"></Label>
                 <Label Text="{translator:Translate Login.ErroreLogin}" FontSize="Medium"  FontAttributes="Bold" TextColor="Red" IsVisible="False" x:Name="lblValidazioneLogin"></Label>
 
-                <Entry
-                        Placeholder="{translator:Translate Login.Email}"
+                <Entry Placeholder="{translator:Translate Login.Email}"
                         x:Name="entUsername"
-                        Keyboard="Email"
-                        TextChanged="ent_TextChanged"
-                        ></Entry>
+                        Keyboard="Email"></Entry>
 
-                <Entry
-                        Placeholder="{translator:Translate Login.Password}"
+                <Entry Placeholder="{translator:Translate Login.Password}"
                         x:Name="entPassword"
                         IsPassword="True"
-                        TextChanged="ent_TextChanged"
                       ></Entry>
 
                 <Button Style="{x:StaticResource primaryButton}" Text="{translator:Translate Login.SignIn}" x:Name="btnAccedi" Clicked="btnAccedi_ClickedAsync">
@@ -42,57 +36,20 @@
                     </Label.GestureRecognizers>
                 </Label>
 
-                <StackLayout Orientation="Horizontal" Margin="0,20,0,20">
-                <BoxView BackgroundColor="{x:StaticResource GrayColor}" HeightRequest="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand"/>
-                                <Label Text="{translator:Translate Login.Or}" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="{x:StaticResource GrayColor}"></Label>
+                <controls:Separator/>
+              
+                <controls:FacebookButton/>
 
-                <BoxView BackgroundColor="{x:StaticResource GrayColor}" HeightRequest="1" VerticalOptions="Center"  HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
-
-                <Frame HorizontalOptions="FillAndExpand" HeightRequest="30" HasShadow="False" BackgroundColor="#1e73be" Padding="5">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
-                        <Label FontFamily="{x:StaticResource FA-Brands}" TextColor="White"  Text="&#xf39e;"></Label>
-                        <Label Text="{translator:Translate Login.FacebookSignIn}" TextColor="White"></Label>
-                    </StackLayout>
-
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="btnAccediFacebook_Clicked"></TapGestureRecognizer>
-                    </Frame.GestureRecognizers>
-                    <Frame.Style>
-                        <OnPlatform x:TypeArguments="Style">
-                            <On Platform="iOS" Value="{x:StaticResource IosFrameRadius2}"/>
-                            <On Platform="Android" Value="{x:StaticResource AndroidFrameRadius2}"/>
-                        </OnPlatform>
-                    </Frame.Style>
-                </Frame>
-
-                <Frame HorizontalOptions="FillAndExpand"  HeightRequest="30" BorderColor="#DB4437" HasShadow="False" Padding="5">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
-                        <Label FontFamily="{x:StaticResource FA-Brands}" TextColor="#DB4437"  Text="&#xf1a0;"></Label>
-                        <Label Text="{translator:Translate Login.GoogleSignIn}" TextColor="#DB4437"></Label>
-                    </StackLayout>
-
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="BtnGoogleAuth_Clicked"></TapGestureRecognizer>
-                    </Frame.GestureRecognizers>
-                    <Frame.Style>
-                            <OnPlatform x:TypeArguments="Style">
-                                <On Platform="iOS" Value="{x:StaticResource IosFrameRadius2}"/>
-                                <On Platform="Android" Value="{x:StaticResource AndroidFrameRadius2}"/>
-                            </OnPlatform>
-                    </Frame.Style>
-                </Frame>
+                <controls:GoogleButton/>
 
                 <Label x:Name="lblRegistrati" Text="{translator:Translate Login.RegisterIfNoAccount}" Margin="0,10,0,0" HorizontalTextAlignment="Center" Style="{x:StaticResource HelperLabel}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_lblRegistrati"/>
                     </Label.GestureRecognizers>
                 </Label>
-
             </StackLayout>
 
             <Image Source="test.jpg" Margin="-20" IsVisible="false" VerticalOptions="EndAndExpand" HeightRequest="100"></Image>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

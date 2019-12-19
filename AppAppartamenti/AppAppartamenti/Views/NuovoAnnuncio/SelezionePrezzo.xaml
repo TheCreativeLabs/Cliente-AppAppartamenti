@@ -23,14 +23,9 @@
         <StackLayout Style="{x:StaticResource StackContainer}">
 
          <StackLayout Orientation="Horizontal">
-                  <Button BackgroundColor="Transparent"
-                        Text="&#xf053;" HorizontalOptions="StartAndExpand" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
-                        Clicked="BtnBack_Clicked">
-                  </Button>
+                  <controls:BackButton/>
 
-                  <Button BackgroundColor="Transparent"
-                            Text="&#xf00d;" HorizontalOptions="End" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
-                            Clicked="BtnCancel_Clicked">
+                 <Button Style="{x:StaticResource NavCancelButton}"  Clicked="BtnCancel_Clicked">
                   </Button>
             </StackLayout>
 

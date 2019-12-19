@@ -12,6 +12,7 @@
     <Compile Remove="Views\NuovoAnnuncio\MyView.xaml.cs" />
     <Compile Remove="Views\DettaglioAnnuncio\DettaglioAnnuncio %28copy%29.xaml.cs" />
     <Compile Remove="Views\NuovoAnnuncio.xaml.cs" />
+    <Compile Remove="ContentViews\BackButton %28copy%29.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>

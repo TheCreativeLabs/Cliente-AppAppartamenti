@@ -28,12 +28,12 @@ namespace AppAppartamenti.Views.Login
 
             try
             {
-                //Application.Current.MainPage = new MainPage();
-
                 //Se ho il token allora vado direttamente alla home
                 if (ApiHelper.GetToken() != null)
                 {
                     ApiHelper.GetUserInfo();
+                    ApiHelper.GetListaTipologiaProprieta();
+                    ApiHelper.GetListaTipologiaAnnuncio();
                     Application.Current.MainPage = new MainPage();
                 }
                 else
@@ -70,6 +70,10 @@ namespace AppAppartamenti.Views.Login
                 {
                     await ApiHelper.SetTokenAsync(entUsername.Text, entPassword.Text);
                     Application.Current.MainPage = new MainPage();
+                }
+                else
+                {
+                    await DisplayAlert("Attenzione", "Compilare tutti i campi", "OK");
                 }
             }
             catch (ApplicationException Ex)
@@ -109,59 +113,6 @@ namespace AppAppartamenti.Views.Login
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
-
-        private async void btnAccediFacebook_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                bool answer = await DisplayAlert("Liberacasa.it vuole utilizzare Facebook.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
-                if (answer)
-                {
-                    await Navigation.PushAsync(new NavigationPage(new Account.FacebookLogin()));
-                }
-            }
-            catch (Exception ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
-
-        private async void BtnGoogleAuth_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                bool answer = await DisplayAlert("Liberacasa.it vuole utilizzare Google.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
-                if (answer)
-                {
-                    await Navigation.PushAsync(new NavigationPage(new Account.GoogleLogin()));
-                }
-            }
-            catch (Exception ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
-
-
-        private async void ent_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                btnAccedi.IsEnabled = false;
-
-                //Controllo che username e password siano valorizzati, se lo sono abilito il pulsante.
-                if (!(String.IsNullOrEmpty(entUsername.Text)) && !(String.IsNullOrEmpty(entPassword.Text)))
-                {
-                    btnAccedi.IsEnabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
+       
     }
 }

@@ -53,6 +53,10 @@ namespace AppAppartamenti.ViewModels
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command LoadMore { get; set; }
+        public Command AddPreferito { get; set; }
+        public Command RimuoviPreferito { get; set; }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private TipiRicerca TipoRicerca { get; set; }
@@ -69,6 +73,8 @@ namespace AppAppartamenti.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             OnpropertyChanged("Items");
             this.LoadMore = new Command(async () => await LoadMoreCommand());
+            this.AddPreferito = new Command<AnnunciDtoOutput>(async item => await AddPreferitoCommand(item));
+            this.RimuoviPreferito = new Command<AnnunciDtoOutput>(async item => await RemovePreferitoCommand(item));
         }
 
         void OnpropertyChanged([CallerMemberName] string propertyName = null)
@@ -144,6 +150,30 @@ namespace AppAppartamenti.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        async Task AddPreferitoCommand(AnnunciDtoOutput annuncio)
+        {
+            var position=  Items.IndexOf(annuncio);
+            var ann = Items[position];
+            Items.RemoveAt(position);
+            ann.FlagPreferito = false;
+            Items.Insert(position,ann);
+            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            await annunciClient.AggiungiPreferitoAsync(ann.Id.Value);
+            OnpropertyChanged("Items");
+        }
+
+        async Task RemovePreferitoCommand(AnnunciDtoOutput annuncio)
+        {
+            var position = Items.IndexOf(annuncio);
+            var ann = Items[position];
+            Items.RemoveAt(position);
+            ann.FlagPreferito = true;
+            Items.Insert(position, ann);
+            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            await annunciClient.RimuoviPreferitoAsync(ann.Id.Value);
+            OnpropertyChanged("Items");
         }
 
         private Task<string> DisplayActionSheet(string v1, string v2, object p, string v3, string v4)

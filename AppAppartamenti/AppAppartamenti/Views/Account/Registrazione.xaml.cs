@@ -23,7 +23,7 @@ namespace AppAppartamenti.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Registrazione : ContentPage
     {
-        byte[] img;
+        byte[] img = null;
         static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
         public Registrazione()
@@ -46,38 +46,38 @@ namespace AppAppartamenti.Views.Login
                 if (String.IsNullOrEmpty(entNome.Text))
                 {
                     formIsValid = false;
-                    lblValidatorEntNome.IsVisible = true;
+                    //lblValidatorEntNome.IsVisible = true;
                 }
 
                 //Controllo validità del cognome.
                 if (String.IsNullOrEmpty(entCognome.Text))
                 {
                     formIsValid = false;
-                    lblValidatorEntCognome.IsVisible = true;
+                    //lblValidatorEntCognome.IsVisible = true;
                 }
 
                 //Controllo validità della mail.
                 if (String.IsNullOrEmpty(entEmail.Text) || !Regex.IsMatch(entEmail.Text, Utility.Utility.EmailRegex))
                 {
                     formIsValid = false;
-                    entEmail.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntEmail.IsVisible = true;
+                    //entEmail.BackgroundColor = Color.FromRgb(255, 175, 173);
+                    //lblValidatorEntEmail.IsVisible = true;
                 }
 
                 //Controllo validità della password.
                 if (String.IsNullOrEmpty(entPassword.Text) ||  !Regex.IsMatch(entPassword.Text, Utility.Utility.PasswordRegex))
                 {
                     formIsValid = false;
-                    entPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntPassword.IsVisible = true;
+                    //entPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
+                    //lblValidatorEntPassword.IsVisible = true;
                 }
 
                 //Controllo che le due password siano uguali.
                 if (String.IsNullOrEmpty(entConfermaPassword.Text) || !(entPassword.Text == entConfermaPassword.Text))
                 {
                     formIsValid = false;
-                    entConfermaPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntConfermaPassword.IsVisible = true;
+                    //entConfermaPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
+                    //lblValidatorEntConfermaPassword.IsVisible = true;
                 }
 
                 //Se la form è valida proseguo con la registrazione.
@@ -93,7 +93,7 @@ namespace AppAppartamenti.Views.Login
                         Surname = entCognome.Text,
                         BirthName = entNome.Text,
                         ImmagineProfilo = img,
-                        DataNascita = null,
+                        DataNascita = dpDataNascita.Date,
                         Email = entEmail.Text,
                         Password = entPassword.Text,
                         ConfirmPassword = entConfermaPassword.Text
@@ -102,6 +102,10 @@ namespace AppAppartamenti.Views.Login
                     //TODO: gestire la data di nascita
 
                     var response = await accountClient.RegisterAsync(registerBindingModel);
+                }
+                else
+                {
+                    await DisplayAlert("Attenzione", "Compilare tutti i campi", "OK");
                 }
             }
             catch (Exception ex)
@@ -270,6 +274,40 @@ namespace AppAppartamenti.Views.Login
             imgFotoUtente.Source = ImageSource.FromStream(() => file.GetStream());
             imgFotoUtente.IsVisible = true;
             //lblFoto.IsVisible = false;
+        }
+
+        private async void btnAccediFacebook_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                bool answer = await DisplayAlert("Liberacasa.it vuole utilizzare Facebook.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
+                if (answer)
+                {
+                    await Navigation.PushAsync(new NavigationPage(new Account.FacebookLogin()));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private async void BtnGoogleAuth_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                bool answer = await DisplayAlert("Liberacasa.it vuole utilizzare Google.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
+                if (answer)
+                {
+                    await Navigation.PushAsync(new NavigationPage(new Account.GoogleLogin()));
+                }
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
     }
 }

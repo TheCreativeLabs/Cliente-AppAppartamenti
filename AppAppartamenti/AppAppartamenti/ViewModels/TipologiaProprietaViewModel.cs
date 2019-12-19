@@ -9,6 +9,7 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -41,20 +42,14 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                ICollection<TipologiaProprieta> tipologiaProprietas = await ApiHelper.GetListaTipologiaProprieta();
 
-                ICollection<TipologiaProprieta> tipologiaProprietas = await annunciClient.GetListaTipologiaProprietaAsync();
-                //listaProprieta = (List<TipologiaProprieta>)tipologiaProprietas;
                 foreach (var tipo in tipologiaProprietas)
                 {
                     string translation = Helpers.TranslateExtension.ResMgr.Value.GetString(tipo.Codice, translate.ci);
                     translationsMap.Add(translation, tipo); //aggiungo alla mappa il codice associato alla traduzione
                     Items.Add(translation); //a fe si mostra la traduzione
-                    //Items.Add(tipo.Codice);
-
                 }
-
-
             }
             catch (Exception ex)
             {

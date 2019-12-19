@@ -23,12 +23,25 @@ namespace AppAppartamenti.iOS
         }
     }
 
+    public class EntryFocusEffect : EntryRenderer
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        {
+            base.OnElementChanged(e);
 
-        /// <summary>
-        /// Renderer to update all frames with better shadows matching material design standards
-        /// </summary>
+            if (Control == null)
+                return;
 
-        public class ShadowFrameRenderer : FrameRenderer
+            Control.BorderStyle = UITextBorderStyle.None;
+        }
+    }
+
+
+    /// <summary>
+    /// Renderer to update all frames with better shadows matching material design standards
+    /// </summary>
+
+    public class ShadowFrameRenderer : FrameRenderer
         {
             public override void Draw(CGRect rect)
             {

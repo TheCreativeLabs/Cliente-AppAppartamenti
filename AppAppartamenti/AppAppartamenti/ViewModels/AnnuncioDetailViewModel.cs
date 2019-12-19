@@ -26,7 +26,6 @@ namespace AppAppartamenti.ViewModels
             Item = new AnnuncioDtoOutput();
             Immagini = new List<Immagine>();
             ImmaginiPlanimetria = new List<Immagine>();
-
         }
 
        public static async Task<AnnuncioDetailViewModel> ExecuteLoadItemsCommandAsync(Guid Id)

@@ -7,47 +7,42 @@
              x:Class="AppAppartamenti.Views.Account.Account"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="Account"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout Style="{x:StaticResource StackContainer}">
-                <StackLayout Orientation="Horizontal">
+        <StackLayout Margin="0,-40,0,0">
+            <appappartamenti:ShadowFrame CornerRadius="0" HeightRequest="120" HasShadow="True" Padding="15" Visual="Material">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Frame CornerRadius="40"
-                           HeightRequest="40"
-                           WidthRequest="40"
+                           HeightRequest="80"
+                           WidthRequest="80"
                            IsClippedToBounds="True"
                            HasShadow="False"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center">
-
-                    <Image x:Name="imgFotoUtente"
-                            Aspect="AspectFill"
-                             Margin="-20"></Image>
-
+                           VerticalOptions="Center"
+                           Padding="0">
+                        <Image x:Name="imgFotoUtente"
+                                Aspect="AspectFill"></Image>
                     </Frame>
 
-                    <Grid VerticalOptions="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0"></RowDefinition>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <StackLayout Orientation="Horizontal" Grid.Row="1">
-                            <Label VerticalTextAlignment="Center" Style="{x:StaticResource Title}" Text="{Binding Nome}"></Label>
-                            <Label VerticalTextAlignment="Center" Style="{x:StaticResource Title}" Text="{Binding Cognome}"></Label>
+                    <StackLayout VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource Subtitle}" Text="{Binding Nome}"></Label>
+                            <Label Style="{x:StaticResource Subtitle}" Text="{Binding Cognome}"></Label>
                         </StackLayout>
-                        <Label Grid.Row="2" VerticalTextAlignment="Center" FontSize="Medium" Style="{x:StaticResource Subtitle}"  Text="{Binding Email}"></Label>
-                    </Grid>
+                        <Label Style="{x:StaticResource Subtitle}" FontSize="17"  Text="{Binding Email}"></Label>
+                   </StackLayout>
                 </StackLayout>
 
-            <BoxView HeightRequest="3" HorizontalOptions="FillAndExpand" Margin="-20,0,-20,10" Color="#F0F0F0"></BoxView>
+            </appappartamenti:ShadowFrame>
 
             <ListView  x:Name="listView" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10">
+                        <Grid Padding="20,10,20,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="90*" />
                                 <ColumnDefinition Width="10*" />
@@ -66,13 +61,6 @@
           <Label />
         </ListView.Footer>
         </ListView>
-
-        <!--<Label x:Name="lblLogOut" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="Medium" Text="{translator:Translate Menu.Logout}">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="BtnLogOut_Clicked"></TapGestureRecognizer>
-            </Label.GestureRecognizers>
-        </Label>-->
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

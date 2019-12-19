@@ -64,7 +64,7 @@ namespace AppAppartamenti.Views.Account
                 }
             }else if (item.Id == 3)
             {
-                await ShareUri("Ciao");
+                await ShareUri();
             }
             else if (item.Id == 2)
             {
@@ -95,7 +95,7 @@ namespace AppAppartamenti.Views.Account
             }
         }
 
-        public async Task ShareUri(string uri)
+        public async Task ShareUri()
         {
             await Share.RequestAsync(new ShareTextRequest
             {

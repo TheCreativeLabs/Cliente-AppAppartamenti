@@ -37,9 +37,8 @@ namespace AppAppartamenti.Views
 
             if(RicercaModel != null)
             {
-                RicercaModel = null;
                 await Navigation.PushAsync(new ListaAnnunci(RicercaModel));
-
+                RicercaModel = null;
             }
         }
 

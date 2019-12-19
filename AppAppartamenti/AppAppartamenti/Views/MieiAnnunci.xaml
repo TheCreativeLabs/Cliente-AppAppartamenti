@@ -35,7 +35,6 @@
 
             <ListView x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
-                    VerticalOptions="CenterAndExpand"
                     HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
                     IsPullToRefreshEnabled="true"
@@ -47,23 +46,26 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame HasShadow="True" Visual="Material" HeightRequest="260" Padding="0" Margin="15"  CornerRadius="2" IsClippedToBounds="True">
-                                <StackLayout>
-                                    <Image Aspect="AspectFill" HeightRequest="190" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}" Margin="0,0,0,150"></Image>
+                                <StackLayout Padding="20">
+                                    <Frame HasShadow="False" Visual="Material" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
+                                        <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                    </Frame>
 
-                                    <StackLayout Orientation="Horizontal" Margin="0,-150,0,0" Padding="10,0,0,0">
-                                        <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource Title}" FontSize="Body"></Label>
-                                        <Label Text="{Binding Prezzo}"  Style="{x:StaticResource Title}" FontSize="Body"/>
-                                        <Label VerticalTextAlignment="Center" Text="&#xf153;" FontFamily="{x:StaticResource FA-Solid}" FontSize="Body"></Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
+                                        <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
+                                        <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
                                     </StackLayout>
 
-                                     <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
-                                        <Label Text="{Binding NomeComune}" Style="{x:StaticResource Subtitle}" FontSize="Body" ></Label>
-                                        <Label Text="-" Style="{x:StaticResource Subtitle}" FontSize="Body" ></Label>
-                                        <Label Text="{Binding Indirizzo}" Style="{x:StaticResource Subtitle}" FontSize="Body" ></Label>
+                                     <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding NomeComune, StringFormat='{0},'}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                        <Label Text="{Binding Indirizzo}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                     </StackLayout>
+
+                                     <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
                                      </StackLayout>
                                 </StackLayout>
-                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

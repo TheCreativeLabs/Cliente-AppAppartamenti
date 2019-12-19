@@ -10,50 +10,33 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" 
              x:Class="AppAppartamenti.Views.SelezioneDescrizione"
-             NavigationPage.HasNavigationBar="True"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             ios:Page.UseSafeArea="true">
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <!-- Bottoni -->
-        <StackLayout Orientation="Horizontal" x:Name="spBody" IsVisible="False">
-            <Frame BorderColor="Transparent" x:Name="btnBack" Style="{x:StaticResource FrameBackButton}" HorizontalOptions="StartAndExpand" Margin="-20,0,0,0">
-                <Label Style="{x:StaticResource BackButton}"></Label>
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnBack_Clicked">
-                    </TapGestureRecognizer>
-                </Frame.GestureRecognizers>
-            </Frame>
-            <Label Style="{x:StaticResource LabelNuovoAnnuncioTitle}" HorizontalTextAlignment="Center" Text="{translator:Translate SelezionePrezzo.NuovoAnnuncio}"></Label>
-            <Frame BorderColor="Transparent" HorizontalOptions="EndAndExpand" Style="{x:StaticResource FrameBackButton}">
-                <Label Style="{x:StaticResource CancelButton}"></Label>
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BtnCancel_Clicked">
-                    </TapGestureRecognizer>
-                </Frame.GestureRecognizers>
-            </Frame>
-        </StackLayout>
-    </NavigationPage.TitleView>
-
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <StackLayout BackgroundColor="#F8F8F8" Margin="-20,-20,-20,10" Padding="20">
-                <Label Text="{translator:Translate SelezioneDescrizione.Descrizione}" HorizontalTextAlignment="Center" ></Label>
-                <ProgressBar Progress="0.9"/>
+        <StackLayout Style="{x:StaticResource StackContainer}">
+
+            <StackLayout Orientation="Horizontal">
+                 <controls:BackButton/>
+
+                  <Button Style="{x:StaticResource NavCancelButton}" 
+                            Clicked="BtnCancel_Clicked">
+                  </Button>
             </StackLayout>
 
+            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
+            <controls:StepMenu CurrentId="9"/>
 
-            <Label Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
-            <appappartamenti:MyEntry  x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></appappartamenti:MyEntry>
+            <Entry x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></Entry>
 
-            <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
-
+            <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

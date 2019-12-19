@@ -74,5 +74,53 @@ namespace AppAppartamenti.Views
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
+
+        private async void BtnAddPreferito_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                var item = btn.CommandParameter as AnnunciDtoOutput;
+
+                item.FlagPreferito = true;
+
+                var annuncio =  viewModel.Items.Where(x => x.Id.Value == item.Id.Value).First();
+                annuncio.FlagPreferito = true;
+
+                OnPropertyChanged("Items");
+
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                await annunciClient.AggiungiPreferitoAsync(item.Id.Value);
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private async void BtnRemovePreferito_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                var item = btn.CommandParameter as AnnunciDtoOutput;
+
+                item.FlagPreferito = false;
+
+                OnPropertyChanged("Items");
+
+                var annuncio = viewModel.Items.Where(x => x.Id.Value == item.Id.Value).First();
+                annuncio.FlagPreferito = false;
+
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                await annunciClient.RimuoviPreferitoAsync(item.Id.Value);
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
     }
 }

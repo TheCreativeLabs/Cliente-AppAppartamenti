@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
@@ -19,17 +19,18 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDetailViewModel viewModel;
         Guid IdAnnuncio;
+        bool IsEditable;
 
-        public DettaglioAnnuncio(Guid Id,bool IsEditable)
+        public DettaglioAnnuncio(Guid Id,bool IsEditableParam)
         {
             InitializeComponent();
+            IsEditable = IsEditableParam;
 
             IdAnnuncio = Id;
 
             btnModifica.IsVisible = IsEditable;
             btnModificaNavBar.IsVisible = IsEditable;
-            btnPreferiti.IsVisible = !IsEditable;
-            btnPreferitoNavBar.IsVisible = !IsEditable;
+
             stkPulsanti.IsVisible = !IsEditable;
         }
 
@@ -40,6 +41,14 @@ namespace AppAppartamenti.Views
             BindingContext = viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
 
             scrollView.IsVisible = true;
+
+            if (!IsEditable)
+            {
+                btnAddPreferito.IsVisible = !viewModel.Item.FlagPreferito.Value;
+                btnRemovePreferito.IsVisible = viewModel.Item.FlagPreferito.Value;
+                btnAddPreferitoNav.IsVisible = !viewModel.Item.FlagPreferito.Value;
+                btnRemovePreferitoNav.IsVisible = viewModel.Item.FlagPreferito.Value;
+            }
         }
 
         async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
@@ -69,6 +78,43 @@ namespace AppAppartamenti.Views
             }
         }
 
+
+        private async void BtnAddPreferito_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                btnRemovePreferito.IsVisible = true;
+                btnAddPreferito.IsVisible = false;
+                btnRemovePreferitoNav.IsVisible = true;
+                btnAddPreferitoNav.IsVisible = false;
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                await annunciClient.AggiungiPreferitoAsync(viewModel.Item.Id.Value);
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private async void BtnRemovePreferito_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                btnRemovePreferito.IsVisible = false;
+                btnAddPreferito.IsVisible = true;
+                btnAddPreferitoNav.IsVisible = false;
+                btnRemovePreferitoNav.IsVisible = true;
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                await annunciClient.RimuoviPreferitoAsync(viewModel.Item.Id.Value);
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
         private async void BtnAppuntamento_Clicked(object sender, EventArgs e)
         {
             try
@@ -86,9 +132,6 @@ namespace AppAppartamenti.Views
         {
             try
             {
-                //await Navigation.PopAsync();
-                //await Navigation.PushAsync(new ModificaAnnuncio(viewModel.Item.Id.Value));
-                
                 await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(viewModel)));
             }
             catch (Exception Ex)
@@ -96,6 +139,15 @@ namespace AppAppartamenti.Views
                 //Navigo alla pagina d'errore.
                 await Navigation.PushAsync(new ErrorPage());
             }
+        }
+
+        private async void BtnShare_Clicked(object sender, EventArgs e)
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = $"{AppSetting.SiteApp}/Annunci/Detail/{viewModel.Item.Id}",
+                Title = "Condividi il link"
+            });
         }
     }
 }
