@@ -21,7 +21,6 @@ namespace AppAppartamenti.Views
         public int Id { get; set; }
         public string DisplayName { get; set; }
         public Color BackgroundColor { get; set; }
-
     }
 
     public class TimeSlot
@@ -30,7 +29,6 @@ namespace AppAppartamenti.Views
         public TimeSpan Alle { get; set; }
         public bool DeleteEnabled { get; set; }
     }
-
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SelezioneFasceOrarie : ContentPage
@@ -51,8 +49,6 @@ namespace AppAppartamenti.Views
         bool Sabato;
         bool Domenica;
 
-
-
         AnnuncioDtoInput annuncio = new AnnuncioDtoInput();
         AnnuncioDetailViewModel dtoToModify;
 
@@ -61,51 +57,85 @@ namespace AppAppartamenti.Views
             this.dtoToModify = dtoToModify;
             InitializeComponent();
 
-            listTimeSlotLunedi.Add(new TimeSlot() { DeleteEnabled=false});
-            listViewMonday.ItemsSource = listTimeSlotLunedi;
-            listViewMonday.HeightRequest = 60;
-
-            listTimeSlotMartedi.Add(new TimeSlot() { DeleteEnabled = false });
-            listViewMartedi.ItemsSource = listTimeSlotMartedi;
-            listViewMartedi.HeightRequest = 60;
-
-
-            listTimeSlotMercoledi.Add(new TimeSlot() { DeleteEnabled = false });
-            listViewMercoledi.ItemsSource = listTimeSlotMercoledi;
-            listViewMercoledi.HeightRequest = 60;
-
-
-            listTimeSlotGiovedi.Add(new TimeSlot() { DeleteEnabled = false });
-            listViewGiovedi.ItemsSource = listTimeSlotGiovedi;
-            listViewGiovedi.HeightRequest = 60;
-
-
-            listTimeSlotVenerdi.Add(new TimeSlot() { DeleteEnabled = false });
-            listViewVenerdi.ItemsSource = listTimeSlotVenerdi;
-            listViewVenerdi.HeightRequest = 60;
-
-
-            listTimeSlotSabato.Add(new TimeSlot() { DeleteEnabled = false });
-            listViewSabato.ItemsSource = listTimeSlotSabato;
-            listViewSabato.HeightRequest = 60;
-
-
-            listTimeSlotDomenica.Add(new TimeSlot() { DeleteEnabled = false });
-            listViewDomenica.ItemsSource = listTimeSlotDomenica;
-            listViewDomenica.HeightRequest = 60;
+            InitializeFasceOrarie();
 
 
             annuncio = Annuncio;
         }
 
+
+        private void InitializeFasceOrarie()
+        {
+            if (dtoToModify != null)
+            {
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieLunedi, ref listTimeSlotLunedi);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMartedi, ref listTimeSlotMartedi);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMercoledi, ref listTimeSlotMercoledi);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieGiovedi, ref listTimeSlotGiovedi);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieVenerdi, ref listTimeSlotVenerdi);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieSabato, ref listTimeSlotSabato);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieDomenica, ref listTimeSlotDomenica);
+            }
+            else
+            {
+                listTimeSlotLunedi.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotMartedi.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotMercoledi.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotGiovedi.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotVenerdi.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotSabato.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotDomenica.Add(new TimeSlot() { DeleteEnabled = false });
+            }
+
+            listViewMonday.ItemsSource = listTimeSlotLunedi;
+            listViewMonday.HeightRequest = listTimeSlotLunedi.Count * 60 ;
+
+            listViewMartedi.ItemsSource = listTimeSlotMartedi;
+            listViewMartedi.HeightRequest = listTimeSlotMartedi.Count *60;
+
+            listViewMercoledi.ItemsSource = listTimeSlotMercoledi;
+            listViewMercoledi.HeightRequest = listTimeSlotMartedi.Count * 60;
+
+            listViewGiovedi.ItemsSource = listTimeSlotGiovedi;
+            listViewGiovedi.HeightRequest = listTimeSlotGiovedi.Count * 60;
+
+            listViewVenerdi.ItemsSource = listTimeSlotVenerdi;
+            listViewVenerdi.HeightRequest = listTimeSlotVenerdi.Count * 60;
+
+            listViewSabato.ItemsSource = listTimeSlotSabato;
+            listViewSabato.HeightRequest = listTimeSlotSabato.Count * 60;
+
+            listViewDomenica.ItemsSource = listTimeSlotDomenica;
+            listViewDomenica.HeightRequest = listTimeSlotDomenica.Count * 60;
+        }
+
+        private void CreateTimeSlotInput(string FasceOrarieToModify, ref ObservableCollection<TimeSlot> ListToModify)
+        {
+            if (!string.IsNullOrEmpty(FasceOrarieToModify))
+            {
+                var fasceorarie = FasceOrarieToModify.Split(';');
+
+                for (int i = 0; i < fasceorarie.Length - 1; i++)
+                {
+                    if (!string.IsNullOrEmpty(fasceorarie[i]))
+                    {
+                        var orari = fasceorarie[i].Split('-');
+                        var dalleOre = new TimeSpan(int.Parse(orari[0].Split(':')[0]), int.Parse(orari[0].Split(':')[1]),0);
+                        var alleOre = new TimeSpan(int.Parse(orari[1].Split(':')[0]), int.Parse(orari[1].Split(':')[1]), 0);
+
+                        ListToModify.Add(new TimeSlot() { Dalle = dalleOre, Alle =alleOre, DeleteEnabled = false });
+                    }
+                }
+            }
+            else
+            {
+                ListToModify.Add(new TimeSlot() { DeleteEnabled = false });
+            }
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            //if (edtDescrizione.Text == null && dtoToModify != null && dtoToModify.Item != null)
-            //{
-            //    edtDescrizione.Text = dtoToModify.Item.Descrizione;
-            //}
         }
 
         private async void ShowStackDay(object sender, EventArgs e)

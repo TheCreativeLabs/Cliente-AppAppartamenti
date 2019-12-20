@@ -17,13 +17,14 @@ using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using AppAppartamentiApiClient;
+using AppAppartamenti.Views.GeneralCondition;
 
 namespace AppAppartamenti.Views.Login
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Registrazione : ContentPage
     {
-        byte[] img;
+        byte[] img = null;
         static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
         public Registrazione()
@@ -46,62 +47,59 @@ namespace AppAppartamenti.Views.Login
                 if (String.IsNullOrEmpty(entNome.Text))
                 {
                     formIsValid = false;
-                    lblValidatorEntNome.IsVisible = true;
                 }
 
-                //Controllo validità del cognome.
                 if (String.IsNullOrEmpty(entCognome.Text))
                 {
                     formIsValid = false;
-                    lblValidatorEntCognome.IsVisible = true;
                 }
 
-                //Controllo validità della mail.
                 if (String.IsNullOrEmpty(entEmail.Text) || !Regex.IsMatch(entEmail.Text, Utility.Utility.EmailRegex))
                 {
                     formIsValid = false;
-                    entEmail.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntEmail.IsVisible = true;
                 }
 
-                //Controllo validità della password.
                 if (String.IsNullOrEmpty(entPassword.Text) ||  !Regex.IsMatch(entPassword.Text, Utility.Utility.PasswordRegex))
                 {
                     formIsValid = false;
-                    entPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntPassword.IsVisible = true;
                 }
 
-                //Controllo che le due password siano uguali.
                 if (String.IsNullOrEmpty(entConfermaPassword.Text) || !(entPassword.Text == entConfermaPassword.Text))
                 {
                     formIsValid = false;
-                    entConfermaPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntConfermaPassword.IsVisible = true;
                 }
 
-                //Se la form è valida proseguo con la registrazione.
                 if (formIsValid)
                 {
+                    if (!chkCondition.IsChecked)
+                    {
+                        await DisplayAlert("Attenzione", "E' necessario accettare le condizioni di utilizzo.", "OK");
+                        return;
+                    }
+
                     HttpClient httpClient = new HttpClient();
                     AccountClient accountClient = new AccountClient(httpClient);
 
-                    //Creo il modello dei dati per la registrazione
                     RegisterUserBindingModel registerBindingModel = new RegisterUserBindingModel()
                     {
                         Name = entNome.Text,
                         Surname = entCognome.Text,
                         BirthName = entNome.Text,
                         ImmagineProfilo = img,
-                        DataNascita = null,
+                        DataNascita = dpDataNascita.Date,
                         Email = entEmail.Text,
                         Password = entPassword.Text,
                         ConfirmPassword = entConfermaPassword.Text
                     };
 
-                    //TODO: gestire la data di nascita
-
                     var response = await accountClient.RegisterAsync(registerBindingModel);
+
+                    await DisplayAlert("Registrazione avvenuta!", "Ti verrà inviata una email per confermare il tuo account.", "OK");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Attenzione", "Compilare tutti i campi", "OK");
                 }
             }
             catch (Exception ex)
@@ -203,12 +201,6 @@ namespace AppAppartamenti.Views.Login
                 return;
             }
 
-            //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-            //{
-            //    Directory = "Sample",
-            //    Name = "test.jpg"
-            //});
-
             var listaImmagini = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
             {
                 PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
@@ -217,11 +209,9 @@ namespace AppAppartamenti.Views.Login
             if (listaImmagini == null)
                 return;
 
-
             imgFotoUtente.Source = ImageSource.FromStream(() => listaImmagini.GetStream());
             imgFotoUtente.IsVisible = true;
             lblFoto.IsVisible = false;
-
         }
 
         async void TakePhoto()
@@ -230,7 +220,6 @@ namespace AppAppartamenti.Views.Login
 
             var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>();
             var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
-
 
             if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
             {
@@ -243,11 +232,6 @@ namespace AppAppartamenti.Views.Login
                 DisplayAlert("No Camera", ":( No camera available.", "OK");
                 return;
             }
-
-            //var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
-            //{
-            //    PhotoSize = PhotoSize.Medium
-            //});
 
             MediaFile file = null;
 
@@ -265,11 +249,34 @@ namespace AppAppartamenti.Views.Login
             if (file == null)
                 return;
 
-            //cvImmagini.ItemsSource = mediaFileImages;
-
             imgFotoUtente.Source = ImageSource.FromStream(() => file.GetStream());
             imgFotoUtente.IsVisible = true;
-            //lblFoto.IsVisible = false;
+        }
+
+        private async void TapGestureRecognizer_lblCondizioniGenerali(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new GeneralCondition.GeneralCondition());
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private async void TapGestureRecognizer_lblPrivacyPolici(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new PrivacyPolicy());
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
     }
 }

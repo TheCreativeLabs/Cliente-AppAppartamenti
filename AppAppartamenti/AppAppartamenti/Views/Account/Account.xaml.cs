@@ -1,7 +1,9 @@
 ﻿using AppAppartamenti.Api;
+using AppAppartamenti.Notify;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
+using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,7 +66,7 @@ namespace AppAppartamenti.Views.Account
                 }
             }else if (item.Id == 3)
             {
-                await ShareUri("Ciao");
+                await ShareUri();
             }
             else if (item.Id == 2)
             {
@@ -95,7 +97,7 @@ namespace AppAppartamenti.Views.Account
             }
         }
 
-        public async Task ShareUri(string uri)
+        public async Task ShareUri()
         {
             await Share.RequestAsync(new ShareTextRequest
             {
@@ -134,20 +136,22 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
-                if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Facebook)
-                {
-                    //Vado alla pagina di logout di facebook
-                    Application.Current.MainPage = new NavigationPage(new FacebookLogout());
-                }
-                else if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Google)
-                {
-                    //Vado alla pagina di logout di facebook
-                    Application.Current.MainPage = new NavigationPage(new GoogleLogout());
-                }
-                else
-                {
-                    //Eseguo il logout
-                    AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+                DependencyService.Get<IClearCookies>().ClearAllCookies();
+
+                //if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Facebook)
+                //{
+                //    //Vado alla pagina di logout di facebook
+                //    Application.Current.MainPage = new NavigationPage(new FacebookLogout());
+                //}
+                //else if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Google)
+                //{
+                //    //Vado alla pagina di logout di facebook
+                //    Application.Current.MainPage = new NavigationPage(new GoogleLogout());
+                //}
+                //else
+                //{
+                //Eseguo il logout
+                AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
                     await accountClient.LogoutAsync();
 
                     //Rimuovo il token e navigo alla home
@@ -155,7 +159,7 @@ namespace AppAppartamenti.Views.Account
                     //Api.ApiHelper.DeleteToken();
                     //Api.ApiHelper.RemoveProvider();
                     Application.Current.MainPage = new NavigationPage(new Login.Login());
-                }
+                //}
             }
             catch (Exception ex)
             {

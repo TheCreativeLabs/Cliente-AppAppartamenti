@@ -95,7 +95,7 @@ namespace AppAppartamenti.Views.Account
                     else if(userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "FACEBOOK") //utente già registrato con FB: accede
                     {
                         //Application.Current.MainPage = new NavigationPage( new MainPage());
-                        Application.Current.MainPage = new MainPage();
+                        Application.Current.MainPage = new EnableNotification();
                     }
                     else //l'utente è già registrato ma NON con facebook: è registrato con Google o con la mail, quindi non può accedere
                     {

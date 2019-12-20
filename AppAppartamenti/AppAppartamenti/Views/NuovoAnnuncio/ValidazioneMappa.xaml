@@ -10,8 +10,10 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" 
              x:Class="AppAppartamenti.Views.NuovoAnnuncio.ValidazioneMappa"
-             NavigationPage.HasNavigationBar="True"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
@@ -22,10 +24,12 @@
         <StackLayout Style="{x:StaticResource StackContainer}">
             <Label Style="{x:StaticResource Title}" Text="La posiziione è corretta?"></Label>
 
-            <maps:Map x:Name="map" HeightRequest="200" Margin="0"/>
+            <maps:Map x:Name="map" Margin="0"/>
 
-            <Button Text="No"  x:Name="btnCancel" Clicked="BtnBack_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
-            <Button Text="Si"  x:Name="btnDescrizioneProcedi" Clicked="BtnProcedi_Clicked" TextColor="White" VerticalOptions="EndAndExpand" BackgroundColor="#ff6b6b" ></Button>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                <Button Text="No"  x:Name="btnCancel" Clicked="BtnBack_Clicked" HorizontalOptions="FillAndExpand" ></Button>
+                <Button Text="Si" Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"   x:Name="btnDescrizioneProcedi" Clicked="BtnProcedi_Clicked" ></Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

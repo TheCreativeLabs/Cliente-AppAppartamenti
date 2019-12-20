@@ -286,16 +286,22 @@ namespace AppAppartamentiApi.Controllers
         {
             var id = new Guid(User.Identity.GetUserId());
 
-            AnnunciPreferiti preferito = new AnnunciPreferiti()
+            AnnunciPreferiti preferito = dbDataContext.AnnunciPreferiti.Where(x => x.IdUser == id && x.IdAnnuncio == IdAnnuncio).FirstOrDefault();
+
+            if (preferito == null)
             {
-                Id = Guid.NewGuid(),
-                IdAnnuncio = IdAnnuncio,
-                IdUser = id
-            };
+                preferito = new AnnunciPreferiti()
+                {
+                    Id = Guid.NewGuid(),
+                    IdAnnuncio = IdAnnuncio,
+                    IdUser = id
+                };
 
-            dbDataContext.AnnunciPreferiti.Add(preferito);
+                dbDataContext.AnnunciPreferiti.Add(preferito);
 
-            await dbDataContext.SaveChangesAsync();
+                await dbDataContext.SaveChangesAsync();
+            }
+
             return Ok(preferito);
         }
 
@@ -307,9 +313,11 @@ namespace AppAppartamentiApi.Controllers
             var id = new Guid(User.Identity.GetUserId());
             
             var annuncio= dbDataContext.AnnunciPreferiti.Where(x => x.IdAnnuncio == IdAnnuncio & x.IdUser == id).FirstOrDefault();
-            dbDataContext.AnnunciPreferiti.Remove(annuncio);
+            if (annuncio != null) { 
+                dbDataContext.AnnunciPreferiti.Remove(annuncio);
 
-            await dbDataContext.SaveChangesAsync();
+                await dbDataContext.SaveChangesAsync();
+            }
 
             return Ok();
         }

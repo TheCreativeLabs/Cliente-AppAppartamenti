@@ -283,9 +283,9 @@
     <Compile Include="Dto\AnnuncioDtoOutput.cs" />
     <Compile Include="Dto\AnnunciDtoOutput.cs" />
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
+    <Compile Include="Dto\AppuntamentoDto.cs" />
     <Compile Include="Dto\ComuneDto.cs" />
     <Compile Include="Dto\DisponibilitaOrariaDto.cs" />
-    <Compile Include="Dto\AppuntamentoDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="FacebookBackChannelHandler.cs" />
@@ -332,6 +332,7 @@
     </Compile>
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,23 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Ricerca"
              NavigationPage.HasNavigationBar="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}">
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                     <Button x:Name="btnCancel" Text="{translator:Translate Ricerca.Cancel}"  Style="{x:StaticResource LinkButton}"
                             HorizontalOptions="End" Clicked="btnCancel_Clicked">
                     </Button>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" Padding="15" Visual="Material">
-                        <StackLayout Orientation="Horizontal">
-                            <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
+                    <appappartamenti:ShadowFrame HasShadow="True" Padding="10">
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource GrayColor}" Text="&#xf002;"></Label>
 
                             <appappartamenti:SearchEntry
                                 Placeholder="{translator:Translate Ricerca.SearchPlaceholder}"

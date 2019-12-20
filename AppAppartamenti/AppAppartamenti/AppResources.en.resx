@@ -721,4 +721,13 @@
   <data name="SelezioneFasceOrarie.Subtitle" xml:space="preserve">
     <value>Seleziona i giorni e le fasce orarie in cui sei disponibile per ricevere appuntamenti</value>
   </data>
+     <data name="Registrazione.DataNascita" xml:space="preserve">
+    <value>Birth date</value>
+  </data>
+      <data name="MainPage.Agenda" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+     <data name="Agenda.Title" xml:space="preserve">
+    <value>La mia agenda</value>
+  </data>
 </root>

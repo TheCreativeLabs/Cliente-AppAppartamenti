@@ -14,8 +14,6 @@ namespace AppAppartamenti.ContentViews
         public Color BackgroundColor { get; set; }
         public Color BorderColor { get; set; }
         public bool IsCompleted { get; set; }
-
-
     }
 
     partial class StepMenu : ContentView
@@ -29,20 +27,10 @@ namespace AppAppartamenti.ContentViews
         propertyChanged: DescriptionTextChangedAsync
         );     
 
-
         public int CurrentId
         {
             get => (int)GetValue(StepMenu.CurrentIdProperty);
             set => SetValue(StepMenu.CurrentIdProperty, value);
-        }
-
-        // <summary>
-        // On MyText changed
-        // </summary>
-        // <param name = "oldValue" > Old Value</param>
-        // <param name = "newValue" > New Value</param>
-        protected virtual void OnMyTextChanged(object oldValue, object newValue)
-        {
         }
 
         private static async void DescriptionTextChangedAsync(BindableObject bindable, object oldValue, object newValue)
@@ -51,10 +39,10 @@ namespace AppAppartamenti.ContentViews
 
             ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
             items.Add(new MenuItem() { Id = 1, DisplayName = "Tipologia proprietà", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 2, DisplayName = "Tipoogia annuncio", Icona = null, RedirectPage = null });
+            items.Add(new MenuItem() { Id = 2, DisplayName = "Tipologia annuncio", Icona = null, RedirectPage = null });
             items.Add(new MenuItem() { Id = 3, DisplayName = "Posizione", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 4, DisplayName = "Prezzo", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 5, DisplayName = "Informazioni generali", Icona = null, RedirectPage = null });
+            items.Add(new MenuItem() { Id = 4, DisplayName = "Informazioni generali", Icona = null, RedirectPage = null });
+            items.Add(new MenuItem() { Id = 5, DisplayName = "Prezzo", Icona = null, RedirectPage = null });
             items.Add(new MenuItem() { Id = 6, DisplayName = "Immagini", Icona = null, RedirectPage = null });
             items.Add(new MenuItem() { Id = 7, DisplayName = "Planimetria", Icona = null, RedirectPage = null });
             //items.Add(new MenuItem() { Id = 8, DisplayName = "Video", Icona = null, RedirectPage = null });

@@ -31,10 +31,12 @@ namespace AppAppartamentiApi.Properties {
                 return ((string)(this["SendGridApiKey"]));
             }
         }
-        public string MinutiDurataAppuntamento
-        {
-            get
-            {
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public string MinutiDurataAppuntamento {
+            get {
                 return ((string)(this["MinutiDurataAppuntamento"]));
             }
         }

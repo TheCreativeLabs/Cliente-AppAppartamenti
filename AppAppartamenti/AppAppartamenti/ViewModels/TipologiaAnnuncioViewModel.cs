@@ -9,6 +9,7 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -40,9 +41,7 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                ICollection<TipologiaAnnuncio> tipologiaAnnuncios = await annunciClient.GetListaTipologiaAnnunciAsync();
-                //listaAnnunci = (List<TipologiaAnnuncio>)tipologiaAnnuncios;
+                ICollection<TipologiaAnnuncio> tipologiaAnnuncios =  await ApiHelper.GetListaTipologiaAnnuncio();
 
                 foreach (var tipo in tipologiaAnnuncios)
                 {

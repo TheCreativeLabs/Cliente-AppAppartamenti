@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppAppartamenti.ContentViews.GoogleButton"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers">
+    <ContentView.Content>
+          <Frame HorizontalOptions="FillAndExpand" Padding="0"  HeightRequest="40" BorderColor="{x:StaticResource DarkColor}" HasShadow="False">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" VerticalOptions="Center">
+                        <Image Source="Gicon.png" HeightRequest="25"></Image>
+
+                        <Label Text="{translator:Translate Login.GoogleSignIn}"
+                               VerticalTextAlignment="Center" FontAttributes="Bold"
+                               TextColor="{x:StaticResource DarkColor}"
+                               FontFamily="{x:StaticResource SubtitleFont}"></Label>
+                    </StackLayout>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BtnGoogleAuth_Clicked"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
+    </ContentView.Content>
+</ContentView>

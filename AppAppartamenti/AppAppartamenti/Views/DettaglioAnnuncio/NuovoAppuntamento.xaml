@@ -13,8 +13,10 @@
              ios:Page.UseSafeArea="true"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
+             BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
@@ -29,7 +31,6 @@
             </syncTheme:SyncfusionThemeDictionary.MergedDictionaries>
         </syncTheme:SyncfusionThemeDictionary>
     </ContentPage.Resources>
-    
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                 <Button BackgroundColor="Transparent"
