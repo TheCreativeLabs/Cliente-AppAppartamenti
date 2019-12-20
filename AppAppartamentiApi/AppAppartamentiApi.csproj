@@ -283,8 +283,9 @@
     <Compile Include="Dto\AnnuncioDtoOutput.cs" />
     <Compile Include="Dto\AnnunciDtoOutput.cs" />
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
+    <Compile Include="Dto\AppuntamentoDto.cs" />
     <Compile Include="Dto\ComuneDto.cs" />
-    <Compile Include="Dto\DisponibilitaOrariaDtoInput.cs" />
+    <Compile Include="Dto\DisponibilitaOrariaDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="FacebookBackChannelHandler.cs" />

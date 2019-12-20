@@ -173,6 +173,84 @@ namespace AppAppartamentiApi.Controllers
 
         }
 
+        [HttpGet]
+        [Route("AgendaCurrentByGiorno")]
+        [ResponseType(typeof(List<AppuntamentoDto>))]
+        public async Task<List<string>> GetAgendaCurrentByGiorno(DateTime Giorno)
+        {
+            if (Giorno == null)
+            {
+                //fixme return BadRequest(ModelState);
+            }
+
+            //FasceOrarie fasceAnnuncio = await dbDataContext.FasceOrarie.Where(x => x.IdAnnuncio == IdAnnuncio).FirstOrDefaultAsync();
+            //TimeSpan startTime = new TimeSpan(0, 1, 0);
+            //DateTime GiornoInizio = new DateTime(Giorno.Year, Giorno.Month, Giorno.Day);
+            //GiornoInizio = GiornoInizio.Date + startTime; //giorno alle 00:01
+
+            //TimeSpan endTime = new TimeSpan(23, 59, 0);
+            //DateTime GiornoFine = new DateTime(Giorno.Year, Giorno.Month, Giorno.Day);
+            //GiornoFine = GiornoFine.Date + endTime;
+
+            //ICollection<Appuntamento> appuntamentiEsistenti = await dbDataContext.Appuntamento
+            //                     .Where(x => x.IdAnnuncio == IdAnnuncio && x.Data >= GiornoInizio && x.Data <= GiornoFine).ToListAsync();
+
+            //DayOfWeek dayOfWeek = Giorno.DayOfWeek;
+            //string fasceOfDay = getFasciaByDayOfWeek(fasceAnnuncio, dayOfWeek);
+
+            //string durataAppuntamentoMin = Properties.Settings.Default.MinutiDurataAppuntamento;
+
+            //string[] fasce = fasceOfDay.Split(';');
+            //fasce = fasce.Take(fasce.Count() - 1).ToArray();
+            //List<string> orariDisponibili = new List<string>();
+
+            //foreach (string fascia in fasce)
+            //{
+            //    //la divido in intervalli di durataAppuntamentoMin
+            //    List<string> singoliIntervalli = new List<string>();
+            //    string orarioStart = fascia.Split('-')[0];
+            //    string orarioEnd = fascia.Split('-')[1];
+            //    //FIXME gestire eccezione o usare try parse
+            //    TimeSpan start = new TimeSpan(Int32.Parse(orarioStart.Split(':')[0]), Int32.Parse(orarioStart.Split(':')[1]), 0);
+            //    TimeSpan end = new TimeSpan(Int32.Parse(orarioEnd.Split(':')[0]), Int32.Parse(orarioEnd.Split(':')[1]), 0);
+            //    TimeSpan incremento = new TimeSpan(0, Int32.Parse(durataAppuntamentoMin), 0);
+
+
+            //    TimeSpan inizioAppuntamento = start;
+            //    TimeSpan fineAppuntamento = start + incremento;
+            //    //List<string> ore = new List<string>();
+            //    while (inizioAppuntamento != end)
+            //    {
+
+            //        //se  l'intervallo non è già impegnato , lo aggiungo agli orari disponibili
+            //        //passo all'intervallo successivo
+            //        Appuntamento appuntamento = appuntamentiEsistenti.Where(x => x.Data.Hour == inizioAppuntamento.Hours && x.Data.Minute == inizioAppuntamento.Minutes).FirstOrDefault();
+            //        if (appuntamento == null)
+            //        {
+            //            orariDisponibili.Add(
+            //                                    new DateTime(inizioAppuntamento.Ticks).ToString("HH:mm")
+            //                                    + "-" +
+            //                                    new DateTime(fineAppuntamento.Ticks).ToString("HH:mm")
+            //                                );
+            //        }
+            //        inizioAppuntamento = inizioAppuntamento + incremento;
+            //        fineAppuntamento = fineAppuntamento + incremento;
+
+
+            //        //    i = i.Add(incremento);
+            //        //    //string ora = i.Hours + ":" + i.Minutes;
+            //        //    string ora = new DateTime(i.Ticks).ToString("HH:mm");
+            //        //    ore.Add(ora);
+            //    }
+
+            //}
+
+            //return orariDisponibili;
+            return null;
+
+        }
+
+
         private string getFasciaByDayOfWeek(FasceOrarie fasce, DayOfWeek dayOfWeek)
         {
             string fascia = null;
