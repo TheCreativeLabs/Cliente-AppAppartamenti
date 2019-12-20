@@ -38,6 +38,9 @@ namespace AppAppartamenti.Droid
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
 
+            //Window.AddFlags(WindowManagerFlags.Fullscreen);
+            //Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
+
             LoadApplication(new App());
         }
 

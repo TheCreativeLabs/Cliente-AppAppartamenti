@@ -11,16 +11,17 @@
              x:Class="AppAppartamenti.Views.Ricerca"
              NavigationPage.HasNavigationBar="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}">
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                     <Button x:Name="btnCancel" Text="{translator:Translate Ricerca.Cancel}"  Style="{x:StaticResource LinkButton}"
                             HorizontalOptions="End" Clicked="btnCancel_Clicked">
                     </Button>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" Padding="15" Visual="Material">
+                    <appappartamenti:ShadowFrame HasShadow="True" Padding="10">
                         <StackLayout Orientation="Horizontal">
-                            <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
+                            <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource GrayColor}" Text="&#xf002;"></Label>
 
                             <appappartamenti:SearchEntry
                                 Placeholder="{translator:Translate Ricerca.SearchPlaceholder}"

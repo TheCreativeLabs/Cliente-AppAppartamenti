@@ -11,7 +11,8 @@
              NavigationPage.HasNavigationBar="False"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}">
 
 
    <ContentPage.Resources>

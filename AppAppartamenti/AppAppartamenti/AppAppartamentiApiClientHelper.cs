@@ -24,6 +24,7 @@ namespace AppAppartamenti.Api
         public const string UserInfoKey = "UserInfo_Key";
         public const string ListaTipologiaAnnuncioKey = "ListaTipologiaAnnuncio_Key";
         public const string ListaTipologiaProprietaKey = "ListaTipologiaProprieta_Key";
+        public const string NotificationStatusKey = "NotificationStatus_Key";
 
 
 
@@ -218,6 +219,30 @@ namespace AppAppartamenti.Api
         {
             Preferences.Remove(UserInfoKey);
 
+        }
+
+        public static void SetNotificationStatus(bool IsEnabled)
+        {
+           Preferences.Set(NotificationStatusKey, IsEnabled.ToString());
+        }
+
+        public static async Task<bool> GetNotificationStatus()
+        {
+            bool notificationStatus = false;
+
+            var notification = Preferences.Get(NotificationStatusKey, null);
+
+            if(notification != null)
+            {
+                notificationStatus = bool.Parse(notification);
+            }
+
+            return notificationStatus;
+        }
+
+        public static void RemoveNotificationStatus()
+        {
+            Preferences.Remove(NotificationStatusKey);
         }
 
         /// <summary>

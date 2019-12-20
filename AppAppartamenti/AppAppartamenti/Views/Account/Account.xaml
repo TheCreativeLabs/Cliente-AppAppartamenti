@@ -10,10 +10,11 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="Account"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             >
     <ContentPage.Content>
-        <StackLayout Margin="0,-40,0,0">
-            <appappartamenti:ShadowFrame CornerRadius="0" HeightRequest="120" HasShadow="True" Padding="15" Visual="Material">
+        <StackLayout>
+            <appappartamenti:ShadowFrame CornerRadius="0" HeightRequest="120" HasShadow="True" Padding="15"
+                                        VerticalOptions="End">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Frame CornerRadius="40"
                            HeightRequest="80"
@@ -35,7 +36,6 @@
                         <Label Style="{x:StaticResource Subtitle}" FontSize="17"  Text="{Binding Email}"></Label>
                    </StackLayout>
                 </StackLayout>
-
             </appappartamenti:ShadowFrame>
 
             <ListView  x:Name="listView" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">

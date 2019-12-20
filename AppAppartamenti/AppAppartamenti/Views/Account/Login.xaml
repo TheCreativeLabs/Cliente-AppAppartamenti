@@ -8,6 +8,7 @@
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Login.Login"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{x:StaticResource SfondoColor}"
              >
     <ContentPage.Content>
         <StackLayout Padding="20" x:Name="stkLogin" IsVisible="False" >
@@ -15,7 +16,6 @@
             <StackLayout VerticalOptions="CenterAndExpand">
 
                 <Label FontSize="90" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource PrimaryColor}" FontAttributes="Bold" Margin="0,0,0,10" Text="&#xf7ae;"></Label>
-                <Label Style="{x:StaticResource Title}"  Text="Promuovocasa.it" HorizontalTextAlignment="Center"></Label>
                 <Label Text="{translator:Translate Login.ErroreLogin}" FontSize="Medium"  FontAttributes="Bold" TextColor="Red" IsVisible="False" x:Name="lblValidazioneLogin"></Label>
 
                 <Entry Placeholder="{translator:Translate Login.Email}"

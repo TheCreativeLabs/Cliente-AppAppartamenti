@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter.Push;
 using Syncfusion.SfCalendar.XForms.iOS;
 using UIKit;
+using UserNotifications;
 using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.ExportRenderer(typeof(Xamarin.RangeSlider.Forms.RangeSlider), typeof(Xamarin.RangeSlider.Forms.RangeSliderRenderer))]
@@ -33,8 +35,8 @@ namespace AppAppartamenti.iOS
             //NSDictionary dictionary = NSDictionary.FromObjectAndKey(NSObject.FromObject(userAgent), NSObject.FromObject("UserAgent"));
             //NSUserDefaults.StandardUserDefaults.RegisterDefaults(dictionary);
 
-            NSUserDefaults.StandardUserDefaults.RegisterDefaults(new NSDictionary("UserAgent",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"));
+            //NSUserDefaults.StandardUserDefaults.RegisterDefaults(new NSDictionary("UserAgent",
+            //"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"));
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
@@ -45,9 +47,43 @@ namespace AppAppartamenti.iOS
             SfCalendarRenderer.Init();
             Syncfusion.XForms.iOS.PopupLayout.SfPopupLayoutRenderer.Init();
 
+
+            ////after iOS 10
+            //if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            //{
+            //    UNUserNotificationCenter center = UNUserNotificationCenter.Current;
+
+            //    center.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge, (bool arg1, NSError arg2) =>
+            //    {
+            //    });
+            //}
+
+            //else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            //{
+
+            //    var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, new NSSet());
+
+            //    UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+            //}
+
+            UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            if (result)
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+            }
+            else
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+            }
         }
 
     }

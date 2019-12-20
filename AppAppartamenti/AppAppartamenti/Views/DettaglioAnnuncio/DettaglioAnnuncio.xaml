@@ -232,7 +232,7 @@
                     </Button>
 
                     <Button x:Name="btnAddPreferito" IsVisible="false" Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
-                            FontAttributes="Bold" Text="&#xf004;" Margin="0,0,15,0" HorizontalOptions="End"
+                            FontAttributes="Bold" Text="&#xf004;" Padding="0,0,15,0" HorizontalOptions="End"
                             FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="40">
                     </Button>
 

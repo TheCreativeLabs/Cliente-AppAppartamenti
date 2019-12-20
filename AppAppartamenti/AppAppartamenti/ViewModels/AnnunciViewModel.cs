@@ -156,9 +156,7 @@ namespace AppAppartamenti.ViewModels
         {
             var position=  Items.IndexOf(annuncio);
             var ann = Items[position];
-            Items.RemoveAt(position);
-            ann.FlagPreferito = false;
-            Items.Insert(position,ann);
+            ann.FlagPreferito = true;
             AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
             await annunciClient.AggiungiPreferitoAsync(ann.Id.Value);
             OnpropertyChanged("Items");
@@ -168,9 +166,7 @@ namespace AppAppartamenti.ViewModels
         {
             var position = Items.IndexOf(annuncio);
             var ann = Items[position];
-            Items.RemoveAt(position);
-            ann.FlagPreferito = true;
-            Items.Insert(position, ann);
+            ann.FlagPreferito = false;
             AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
             await annunciClient.RimuoviPreferitoAsync(ann.Id.Value);
             OnpropertyChanged("Items");

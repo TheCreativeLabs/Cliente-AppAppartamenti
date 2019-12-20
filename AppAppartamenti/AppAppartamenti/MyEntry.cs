@@ -31,4 +31,8 @@ namespace AppAppartamenti
     public class ShadowFrame : Frame
     {
     }
+
+    public class WebViewUserAgent : WebView
+    {
+    }
 }

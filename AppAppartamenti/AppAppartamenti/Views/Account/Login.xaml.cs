@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace AppAppartamenti.Views.Login
 {
@@ -47,7 +48,6 @@ namespace AppAppartamenti.Views.Login
             }
         }
 
-
         private async void btnAccedi_ClickedAsync(object sender, EventArgs e)
         {
             try
@@ -69,7 +69,7 @@ namespace AppAppartamenti.Views.Login
                 if (formIsValid)
                 {
                     await ApiHelper.SetTokenAsync(entUsername.Text, entPassword.Text);
-                    Application.Current.MainPage = new MainPage();
+                    Application.Current.MainPage = new EnableNotification();
                 }
                 else
                 {
@@ -113,6 +113,5 @@ namespace AppAppartamenti.Views.Login
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
-       
     }
 }

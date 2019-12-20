@@ -6,7 +6,9 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              NavigationPage.HasNavigationBar="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}"
+             >
 
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
@@ -54,15 +56,31 @@
                 <Entry x:Name="entConfermaPassword"  IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneConfermaPassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntConfermaPassword"></Label>
 
-                <StackLayout Orientation="Horizontal">
-                    <CheckBox IsChecked="False" VerticalOptions="Center"></CheckBox>
-                    <Label Text="{translator:Translate Registrazione.AccettoTermini}" VerticalTextAlignment="Center"></Label>
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,20">
+                    <CheckBox x:Name="chkCondition" IsChecked="False" VerticalOptions="Center"></CheckBox>
+                    <Label LineBreakMode="WordWrap">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Ho più di 18 anni e accetto le "/>
+                                <Span Text="Condizioni Generali" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_lblCondizioniGenerali"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                <Span Text=" e la " />
+                                <Span Text="Politica sulla privacy" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}" >
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_lblPrivacyPolici"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
 
                 <Button Style="{x:StaticResource primaryButton}"
                         Text="{translator:Translate Registrazione.Bottone}"
                         x:Name="btnRegistrati" Clicked="btnRegistrati_Clicked"></Button>
-
                 <controls:Separator/>
               
                 <controls:FacebookButton/>
