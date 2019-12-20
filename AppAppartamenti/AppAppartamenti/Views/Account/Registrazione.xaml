@@ -11,6 +11,7 @@
              >
 
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Style="{x:StaticResource StackContainer}">
                 <Button  Style="{x:StaticResource NavCancelButton}" 
                         Clicked="Cancel_Clicked">
@@ -88,5 +89,6 @@
                 <controls:GoogleButton/>
 
         </StackLayout>
+            </ScrollView>
     </ContentPage.Content>
 </ContentPage>
