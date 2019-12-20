@@ -11,6 +11,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Http;
 using AppAppartamentiWebCoreMvc.AppAppartamentiApiClient;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
@@ -117,6 +118,13 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             ViewData["ListaClassiEnergetiche"] = classiEnergetiche.AsEnumerable();
             ViewData["ListaTipologieRiscaldamento"] = tipologiaRiscaldamento.AsEnumerable();
 
+
+            
+            IEnumerable<string> ore = (new List<string>() { "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22" }).AsEnumerable();
+            ViewData["ListaOre"] = ore.AsEnumerable();
+            IEnumerable<string> minuti = (new List<string>() { "00", "30" }).AsEnumerable();
+            ViewData["ListaMinuti"] = minuti.AsEnumerable();
+
             return View();
         }
 
@@ -153,6 +161,76 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             await annunciClient.InsertAnnuncioAsync(Model);
 
             return View("../Home/Index");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<string> AppuntamentiDisponibili(string IdAnnuncio, string Giorno)
+        {
+            ICollection<string> orariDisponibili = new List<string>();
+
+            if (!string.IsNullOrEmpty(IdAnnuncio) && !string.IsNullOrEmpty(Giorno))
+            {
+                //Creo il client e setto il Baerer Token
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                //Ottengo la lista degli orari disponibili
+                AgendaClient agendaClient = new AgendaClient(httpClient);
+                int day = Int32.Parse(Giorno.Split("-")[2]);
+                int month = Int32.Parse(Giorno.Split("-")[1]);
+                int year = Int32.Parse(Giorno.Split("-")[0]);
+                DateTime gg = new DateTime(year, month, day, 0, 0, 0);
+                int i = 1;
+                i++;
+                orariDisponibili = await agendaClient.GetFasceDisponibiliAnnuncioByGiornoAsync(new Guid(IdAnnuncio), new DateTimeOffset(gg));
+            }
+
+            return JsonConvert.SerializeObject(orariDisponibili);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<string> PrenotaAppuntamento(string IdAnnuncio, string Giorno, string Ora)
+        {
+            ICollection<string> orariDisponibili = new List<string>();
+
+            if (!string.IsNullOrEmpty(IdAnnuncio) && !string.IsNullOrEmpty(Giorno))
+            {
+                //Creo il client e setto il Baerer Token
+                HttpClient httpClient = new HttpClient();
+                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                //Ottengo la lista degli orari disponibili
+                AgendaClient agendaClient = new AgendaClient(httpClient);
+                int day = Int32.Parse(Giorno.Split("-")[2]);
+                int month = Int32.Parse(Giorno.Split("-")[1]);
+                int year = Int32.Parse(Giorno.Split("-")[0]);
+                //DateTime gg = new DateTime(year, month, day, Int32.Parse(Ora.Split(':')[0]), Int32.Parse(Ora.Split(':')[1]), 0);
+                DateTimeOffset giornoEOra = new DateTimeOffset(year, month, day, Int32.Parse(Ora.Split(':')[0]), Int32.Parse(Ora.Split(':')[1]), 0, new TimeSpan(0, 0, 0));
+                //DateTimeOffset dtOffsetGg = new DateTimeOffset(gg);
+
+                //TimeZoneInfo utcInfo = TimeZoneInfo.Utc;
+
+                //DateTimeOffset utcTime = TimeZoneInfo.ConvertTime(dtOffsetGg, utcInfo);
+                //DateTimeOffset ggUtc = dtOffsetGg
+                //    .Subtract(utcTime.Offset)
+                //    .ToOffset(utcTime.Offset);
+
+                AppuntamentoDto dto = new AppuntamentoDto()
+                {
+                    Data = giornoEOra,
+                    IdAnnuncio = new Guid(IdAnnuncio)
+                };
+
+                await agendaClient.InsertAnnuncioAsync(dto);
+            }
+
+            return "";
+
+            //return JsonConvert.SerializeObject("");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

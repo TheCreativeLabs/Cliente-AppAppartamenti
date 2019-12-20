@@ -6,6 +6,7 @@
 
 @section SubHeader {
     <div id="secondnav" class="d-none sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
+        <input value="@Model.Id" id="id-annuncio" style="display:none"/>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
@@ -321,7 +322,7 @@
 
                 <h6 class="text-center mx-auto mb-3">@userInfo.Nome @userInfo.Cognome</h6>
 
-                <button class="btn btn-primary btn-sm btn-block" href="#" data-toggle="modal" data-target="#appointmentModal"><i class="fas fa-calendar-day"></i>&nbsp;Prenota una visita</button>
+                <button class="btn btn-primary btn-sm btn-block btn-modal-prenota" href="#" data-toggle="modal" data-target="#appointmentModal"><i class="fas fa-calendar-day"></i>&nbsp;Prenota una visita</button>
 
                 <button class="btn btn-success btn-sm btn-block"><i class="fas fa-comments"></i>&nbsp;Manda un messaggio</button>
             </div>
@@ -341,9 +342,21 @@
                 </button>
             </div>
             <div class="modal-body pt-5">
+                <input id="giorno-selected" style="display:none"/> @*contenitore del giorno selezionato per l'appuntamento*@
                 <div class="row">
-                    <div class="cl-sm-6">
+                    <div class="cl-sm-6 col-7">
                         <div id="appointment-caledar"></div>
+                    </div>
+                    <div class="col-5">
+                        <h2 >Orari disponibili</h2>
+                        <div id="appointment-available" class="btn-group-toggle text-center mt-3" data-toggle="buttons">
+
+                        </div>
+                        <div class="col-6 mx-auto">
+                            <button class="btn btn-primary btn-sm btn-block btn-prenota-appuntamento" >
+                                Prenota
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -355,8 +368,10 @@
     <script src="~/js/annunci-details.min.js" asp-append-version="true"></script>
     <script src="~/js/share-modal.min.js" asp-append-version="true"></script>
     <script type="text/javascript">
+
         $(document).ready(function () {
             var calendarEl2 = document.getElementById('appointment-caledar');
+            var idAnnuncio = document.getElementById('id-annuncio').value;
 
             var calendar2 = new FullCalendar.Calendar(calendarEl2, {
                 plugins: ['dayGrid', 'timeGrid', 'interaction'],
@@ -373,8 +388,20 @@
                     right: ''
                 },
                 dateClick: function(info) {
-                    alert('Clicked on: ' + info.dateStr);
-                }
+                    var now = new Date();
+                    if ((now.getFullYear())+'-'+(now.getMonth() + 1)+'-'+(now.getDate()) == info.dateStr || info.date > (now)) {
+                        // This allows today and future date
+                        $('#giorno-selected').val(info.dateStr);
+                        //alert('Clicked on: ' + info.dateStr);
+                        //$(info.dayEl).addClass('fc-state-highlight');
+                        $('.fc-today').css('blackground', 'transparent !important'); //not working
+                        GetAndShowAppuntamentiDisponibili(idAnnuncio, info.dateStr); //+'T00:00:00'
+                    } else {
+                        // Else part is for past dates: do nothing
+                    }
+                },
+                selectable: true
+                
             });
 
             calendar2.render();

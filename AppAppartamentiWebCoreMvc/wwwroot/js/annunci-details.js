@@ -2,7 +2,20 @@
     $("#secondnav").hide();
 
     window.onscroll = function () { changeScroll() };
-});
+
+    $(".btn-modal-prenota").click(function(){
+        var now = new Date();
+        var idAnnuncio = document.getElementById('id-annuncio').value;
+        GetAndShowAppuntamentiDisponibili(idAnnuncio, (now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()));
+    });
+
+    $(".btn-prenota-appuntamento").click(function () {
+        //todo prenotare appuntamento
+        PrenotaAppuntamento();
+    });
+
+    
+}); 
 
 function changeScroll() {
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -53,5 +66,76 @@ function setMap() {
     //        }
     //    });
     //}
+}
+
+function GetAndShowAppuntamentiDisponibili(idAnnuncio, giorno) {
+    var containerOrari = document.getElementById('appointment-available');
+    containerOrari.innerHTML = '';
+    $.when(GetAppuntamentiDisponibiliAjax(idAnnuncio, giorno)).done(function (orari) {
+        //var containerOrari = $('#appointment-available');
+        
+        if (orari != null) {
+
+            orari.forEach(function (orario, index) {
+                containerOrari.innerHTML += '<label class="btn btn-light btn-orario-appuntamento" "aria-pressed=\"true\""  style="margin:0.5rem">' +
+                    '<input type="checkbox">' + orario +
+                    '</label>';
+            });
+
+        }
+
+        $('.btn-orario-appuntamento').click(function () {
+            var cliccato = $(this);
+            //deseleziono gli altri
+            $('.btn-orario-appuntamento').each(function () {
+                //se current != this, tolgo active
+                if ($(this) != cliccato) {
+                    $(this).removeClass('active');
+                }
+            });
+        });
+    });
+
+}
+
+function GetAppuntamentiDisponibiliAjax(idAnnuncio, giorno) {
+    return $.ajax({
+        type: "GET",
+        url: '/AnnunciPersonali/AppuntamentiDisponibili',
+        data: { IdAnnuncio: idAnnuncio, Giorno: giorno },
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    });
+
+}
+
+function PrenotaAppuntamento() {
+    var ora = $('.btn-orario-appuntamento.active').text();
+    var idAnnuncio = document.getElementById('id-annuncio').value;
+    var giorno = $('#giorno-selected').val();
+    var ora = ora.split('-')[0];
+    $.when(PrenotaAppuntamentoAjax(idAnnuncio, giorno, ora)).done(function (result) {
+        //popup success, chiudere modale
+        alert('appuntamento done');
+    });
+}
+
+function PrenotaAppuntamentoAjax(idAnnuncio, giorno, ora) {
+    return $.ajax({
+        type: "GET",
+        url: '/AnnunciPersonali/PrenotaAppuntamento',
+        data: { IdAnnuncio: idAnnuncio, Giorno: giorno, Ora: ora },
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (result, status, xhr) {
+            //FIXME GESTIRE SUCCESS
+            //alert('Appuntamento success');
+        },
+        error: function (xhr, status, error) {
+            //alert('Appuntamento fail');  
+            $('#appointmentModal').modal('toggle');
+        }
+    });
+
 }
 

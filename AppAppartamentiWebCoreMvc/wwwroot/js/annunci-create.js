@@ -46,14 +46,9 @@ $(document).ready(function () {
         }
     });
 
-    $('input[name="fasciaOrariaFrom"]').change(function () {
+    $('.select-orario').change(function () {
         ComponiFasceOrarie(this);
     });
-
-    $('input[name="fasciaOrariaTo"]').change(function () {
-        ComponiFasceOrarie(this);
-    });
-
 });
 
 function ComponiFasceOrarie(input) {
@@ -66,10 +61,17 @@ function ComponiFasceOrarie(input) {
         fasce = "";
         $(superParent).children(".input-time-slot").each(
             function (j) {
-                if ($(this).children('input[name="fasciaOrariaFrom"]').val() != null && $(this).children('input[name="fasciaOrariaTo"]').val() != null) {
-                    fasce += $(this).children('input[name="fasciaOrariaFrom"]').val();
+                if ($(this).children("#oreFasciaOrariaFrom").val() != null && $(this).children("#oreFasciaOrariaFrom").val() != "" &&
+                    $(this).children("#minutiFasciaOrariaFrom").val() != null && $(this).children("#minutiFasciaOrariaFrom").val() != "" &&
+                    $(this).children("#oreFasciaOrariaTo").val() != null && $(this).children("#oreFasciaOrariaTo").val() != "" &&
+                    $(this).children("#minutiFasciaOrariaTo").val() != null && $(this).children("#minutiFasciaOrariaTo").val() != "" ) {
+                    fasce += $(this).children("#oreFasciaOrariaFrom").val();
+                    fasce += ":";
+                    fasce += $(this).children("#minutiFasciaOrariaFrom").val();
                     fasce += "-";
-                    fasce += $(this).children('input[name="fasciaOrariaTo"]').val();
+                    fasce += $(this).children("#oreFasciaOrariaTo").val();
+                    fasce += ":";
+                    fasce += $(this).children("#minutiFasciaOrariaTo").val();
                     fasce += ";";
                 }
             }
@@ -88,7 +90,7 @@ function RemoveSlot(button) {
     var superParent = $(button).parent().parent();
     var fasciaSorella = $(superParent).children(".input-time-slot").first();
     if (fasciaSorella != null) { //devo ricalcolare la stringa delle fasce, perchè va rimossa quella che sto eliminando
-        var input = $(fasciaSorella).children('input[name="fasciaOrariaFrom"]');
+        var input = $(fasciaSorella).children(".select-orario");
     }
     $(button).parent().remove();
     ComponiFasceOrarie($(input));
@@ -104,11 +106,12 @@ function ToggleSlot(button) {
     } else {
         var inputPrimo;
         //$(target).children("#slot-time-monday").each(function (i) {
-        $(target).children(idItems).each(function (i) {
+        //$(target).children(idItems).each(function (i) {
+        $(target).children(".input-time-slot").each(function (i) {
             if ($(this).children(".btn-remove-slot").length > 0 && $(this).children(".btn-remove-slot").css("display") != "none") {
                 $(this).remove();
             } else {
-                $(this).children("input").each(function (j) {
+                $(this).children(".select-orario").each(function (j) {
                     $(this).val(null);
                     inputPrimo = $(this);
                 });
@@ -130,16 +133,10 @@ function CreateNewTimeSlot(timeslotButton) {
     newElement.removeAttr("id");
     newElement.children(".btn-remove-slot").show();
     newElement.removeAttr("data-index");
-    var newFrom = newElement.children('input[name="fasciaOrariaFrom"]');
-    newFrom.change(function () {
+    newElement.children(".select-orario").change(function () {
         ComponiFasceOrarie(this);
     });
-    newFrom.val(null);
-    var newTo = newElement.children('input[name="fasciaOrariaTo"]');
-    newTo.change(function () {
-        ComponiFasceOrarie(this);
-    });
-    newTo.val(null);
+    newElement.children(".select-orario").val(null);
     newElement.appendTo($(timeslotButton).parent());
 }
 
