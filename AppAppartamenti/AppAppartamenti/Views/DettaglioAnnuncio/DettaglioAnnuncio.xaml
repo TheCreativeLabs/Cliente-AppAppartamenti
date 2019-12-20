@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
@@ -11,6 +12,7 @@
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
              ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
     <NavigationPage.TitleView >
@@ -222,28 +224,29 @@
 
                 <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="0,0,0,0" >
                      <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnBack_Clicked" VerticalOptions="Center"
-                            FontAttributes="Bold" Text="&#xf053;" Padding="20,0,10,0" HorizontalOptions="StartAndExpand"
+                            FontAttributes="Bold" Text="&#xf053;" HorizontalOptions="StartAndExpand"
                         FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
                     </Button>
 
-                    <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked" VerticalOptions="Center"
+                    <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked"
+                            VerticalOptions="Center"
                              Text="&#xf1e0;" HorizontalOptions="End"
-                        FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="40">
+                        FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
                     </Button>
 
                     <Button x:Name="btnAddPreferito" IsVisible="false" Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
-                            FontAttributes="Bold" Text="&#xf004;" Padding="0,0,15,0" HorizontalOptions="End"
-                            FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="40">
+                            FontAttributes="Bold" Text="&#xf004;"  HorizontalOptions="End"
+                            FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
                     </Button>
 
                     <Button x:Name="btnRemovePreferito" IsVisible="false" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" VerticalOptions="Center"
-                            Text="&#xf004;" Padding="0,0,15,0" HorizontalOptions="End"
-                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="40">
+                            Text="&#xf004;"  HorizontalOptions="End"
+                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
                     </Button>
 
                     <Button x:Name="btnModifica" Style="{x:StaticResource NavCancelButton}" Clicked="BtnModifica_Clicked" VerticalOptions="Center"
-                            Text="&#xf044;" Margin="0,0,15,0" HorizontalOptions="End"
-                            FontFamily="{x:StaticResource FA-Solid}" TextColor="White" WidthRequest="40">
+                            Text="&#xf044;" HorizontalOptions="End"
+                            FontFamily="{x:StaticResource FA-Solid}" TextColor="White" WidthRequest="50">
                     </Button>
                 </StackLayout>
 

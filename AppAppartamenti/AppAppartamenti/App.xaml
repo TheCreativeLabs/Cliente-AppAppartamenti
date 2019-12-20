@@ -199,12 +199,15 @@
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="HeightRequest" Value="40"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="FontSize" Value="17"></Setter>
+
             </Style>
 
             <Style TargetType="Editor">
                 <Setter Property="PlaceholderColor" Value="Gray"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="FontSize" Value="17"></Setter>
             </Style>
 
             <Style TargetType="Label">
@@ -215,7 +218,7 @@
 
             <Style TargetType="Button">
                 <Setter Property="FontFamily" Value="{StaticResource SubtitleFont}" />
-                <Setter Property="FontSize" Value="Default" />
+                <Setter Property="FontSize" Value="17" />
             </Style>
 
             <Style TargetType="Label" x:Key="LabelValidatore">

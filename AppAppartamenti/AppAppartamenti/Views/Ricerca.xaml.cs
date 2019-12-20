@@ -122,6 +122,8 @@ namespace AppAppartamenti.Views
                     Terrazzo = chkTerrazzo.IsChecked
                 };
 
+                //TODO: capire qual'è l'ultima pagina:
+                //Se è ListaAnnunci allora mando un messaggio alla listaannunci, altrimenti allla home
                 MessagingCenter.Send(this, "Ricerca", JsonConvert.SerializeObject(ricercaModel));
                 await  Navigation.PopModalAsync();
             }

@@ -1,4 +1,5 @@
 ﻿using AppAppartamenti.Api;
+using AppAppartamenti.Notify;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
@@ -135,12 +136,7 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
-                NSHttpCookieStorage CookieStorage = NSHttpCookieStorage.SharedStorage;
-
-                foreach (var cookie in CookieStorage.Cookies)
-                {
-                    CookieStorage.DeleteCookie(cookie);
-                }
+                DependencyService.Get<IClearCookies>().ClearAllCookies();
 
                 //if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Facebook)
                 //{
@@ -154,8 +150,8 @@ namespace AppAppartamenti.Views.Account
                 //}
                 //else
                 //{
-                    //Eseguo il logout
-                    AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+                //Eseguo il logout
+                AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
                     await accountClient.LogoutAsync();
 
                     //Rimuovo il token e navigo alla home

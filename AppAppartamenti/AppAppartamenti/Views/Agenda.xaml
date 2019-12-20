@@ -14,14 +14,13 @@
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
-
-   <ContentPage.Resources>
-        <syncTheme:SyncfusionThemeDictionary x:Key="Theme">
-            <syncTheme:SyncfusionThemeDictionary.MergedDictionaries>
-                <syncTheme:LightTheme x:Name="LightTheme" />
-            </syncTheme:SyncfusionThemeDictionary.MergedDictionaries>
-        </syncTheme:SyncfusionThemeDictionary>
-    </ContentPage.Resources>
+    <ContentPage.Resources>
+                    <syncTheme:SyncfusionThemeDictionary x:Key="Theme">
+                        <syncTheme:SyncfusionThemeDictionary.MergedDictionaries>
+                            <syncTheme:LightTheme x:Name="LightTheme" />
+                        </syncTheme:SyncfusionThemeDictionary.MergedDictionaries>
+                    </syncTheme:SyncfusionThemeDictionary>
+                </ContentPage.Resources>
 
             <ContentPage.Content>
                 <StackLayout Style="{x:StaticResource StackContainer}">

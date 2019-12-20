@@ -10,6 +10,7 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="Account"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             BackgroundColor="{x:StaticResource SfondoColor}"
              >
     <ContentPage.Content>
         <StackLayout>
@@ -38,7 +39,7 @@
                 </StackLayout>
             </appappartamenti:ShadowFrame>
 
-            <ListView  x:Name="listView" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
+            <ListView  x:Name="listView" BackgroundColor="{x:StaticResource SfondoColor}" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

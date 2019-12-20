@@ -13,6 +13,7 @@
              ios:Page.UseSafeArea="true"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
+             BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
     
