@@ -13,28 +13,30 @@
             <!-- Colors-->
             <Color x:Key="SfondoColor">#fff</Color>
             <Color x:Key="SecodaryColor">#343a40</Color>
-            <Color x:Key="PrimaryColor">#17a2b8</Color>
+            <Color x:Key="PrimaryColor">#1188e6</Color>
             <Color x:Key="DarkColor">#343a40</Color>
             <Color x:Key="GrayColor">#868e96</Color>
             <Color x:Key="SuccessColor">#20c997</Color>
             <Color x:Key="DangerColor">#dc3545</Color>
             <Color x:Key="LightColor">#f8f9fa</Color>
 
-            
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#fff"></Setter>
+            </Style>
 
             
-            <!--    Font Awesome     -->
+            <Style TargetType="TabbedPage">
+                <Setter Property="BackgroundColor" Value="#fff"></Setter>
+            </Style>
+
+            <!--Font Awesome-->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#fff"></Setter>
-                <Setter Property="BarTextColor" Value="Black"></Setter>
+                <Setter Property="BarTextColor" Value="{x:StaticResource DarkColor}"></Setter>
             </Style>
 
             <Style TargetType="ProgressBar">
                 <Setter Property="ProgressColor" Value="{x:StaticResource PrimaryColor}"></Setter>
-            </Style>
-
-            <Style TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="White"></Setter>
             </Style>
 
             <!--    Font Awesome     -->
@@ -53,6 +55,11 @@
                 <On Platform="iOS" Value="Roboto-Regular" />
             </OnPlatform>
 
+             <OnPlatform x:TypeArguments="x:String" x:Key="SubtitleFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Roboto Medium" />
+                <On Platform="iOS" Value="Roboto-Medium" />
+            </OnPlatform>
+
             <OnPlatform x:TypeArguments="x:String" x:Key="TitleFont">
                 <On Platform="Android" Value="Roboto-Bold.ttf#Roboto Bold" />
                 <On Platform="iOS" Value="Roboto-Bold" />
@@ -64,6 +71,14 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="CornerRadius" Value="{StaticResource PrimaryButtonCornerRadius}"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="SecondaryButton">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="TextColor" Value="{x:StaticResource DarkColor}"/>
+                <Setter Property="CornerRadius" Value="{StaticResource PrimaryButtonCornerRadius}"/>
+                <Setter Property="BorderColor" Value="{x:StaticResource DarkColor}"/>
+                <Setter Property="BorderWidth" Value="2"></Setter>
             </Style>
 
             <Style TargetType="Button" x:Key="DayButton">
@@ -90,6 +105,13 @@
                 <Setter Property="FontFamily" Value="BodyFont"/>
             </Style>
 
+            <Style TargetType="Button" x:Key="TimeSlotDeleteButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"/>
+                <Setter Property="Text" Value="&#xf2ed;"></Setter>
+            </Style>
+
             <Style TargetType="Button" x:Key="LinkButton">
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
@@ -97,24 +119,31 @@
 
             <Style TargetType="Button" x:Key="NavBackButton">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="TextColor" Value="{StaticResource SecodaryColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
                 <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
                 <Setter Property="FontSize" Value="28"></Setter>
-                <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="WidthRequest" Value="40"></Setter>
                 <Setter Property="Margin" Value="-10,0,-10,0"></Setter>
+                <Setter Property="Text" Value="&#xf053;"></Setter>
             </Style>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
-                <On Platform="Android" Value="Montserrat-Light.ttf#Montserrat Light" />
-                <On Platform="iOS" Value="Montserrat-Light" />
-            </OnPlatform>
+            <Style TargetType="Button" x:Key="NavCancelButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="{StaticResource SecodaryColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
+                <Setter Property="FontSize" Value="24"></Setter>
+                <Setter Property="WidthRequest" Value="{x:OnPlatform Android=50, iOS=45}"></Setter>
+                <Setter Property="Margin" Value="-10,0,-10,0"></Setter>
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"></Setter>
+                <Setter Property="Text" Value="&#xf00d;"></Setter>
+
+            </Style>
 
             <Style TargetType="Label" x:Key="Title">
-                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
-                <Setter Property="FontSize" Value="28"></Setter>
+                <Setter Property="FontSize" Value="26"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
             </Style>
 
             <Style TargetType="StackLayout" x:Key="StackContainer">
@@ -122,24 +151,28 @@
             </Style>
 
             <Style TargetType="Label" x:Key="Subtitle">
-                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontFamily" Value="{StaticResource SubtitleFont}" />
                 <Setter Property="FontSize" Value="22"></Setter>
-                <Setter Property="TextColor" Value="{StaticResource GrayColor}"></Setter>
-                <Setter Property="Margin" Value="0,0,0,20"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="SectionTitle">
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontSize" Value="19"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+                <Setter Property="Margin" Value="0,20,0,10"></Setter>
             </Style>
 
             <Style TargetType="Label" x:Key="AdTitle">
                 <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
-                <Setter Property="FontSize" Value="17"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
-                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
 
             <Style TargetType="Label" x:Key="AdSubtitle">
-                <Setter Property="FontFamily" Value="{StaticResource Subtitle}" />
-                <Setter Property="FontSize" Value="17"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource SubtitleFont}" />
+                <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
-                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
 
             <Style TargetType="Label" x:Key="HelperLabel">
@@ -149,8 +182,20 @@
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
 
+             <Style TargetType="DatePicker">
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+            </Style>
+
+            <Style TargetType="Picker">
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
+            </Style>
+
             <Style TargetType="Entry">
-                <Setter Property="PlaceholderColor" Value="Gray"></Setter>
+                <Setter Property="PlaceholderColor" Value="{x:StaticResource DarkColor}"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="HeightRequest" Value="40"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
@@ -163,13 +208,13 @@
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="FontSize" Value="17"></Setter>
+                <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
             </Style>
 
             <Style TargetType="Button">
-                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontFamily" Value="{StaticResource SubtitleFont}" />
                 <Setter Property="FontSize" Value="Default" />
             </Style>
 
@@ -279,7 +324,6 @@
                 <Setter Property="Color" Value="LightGray" />
                 <Setter Property="Margin" Value="0,15,0,15" />
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
     

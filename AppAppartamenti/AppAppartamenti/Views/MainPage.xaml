@@ -5,19 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:views="clr-namespace:AppAppartamenti.Views"
             mc:Ignorable="d"
-             x:Class="AppAppartamenti.Views.MainPage"
+            x:Class="AppAppartamenti.Views.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
-             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+            xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            BarBackgroundColor="White"
             SelectedTabColor="{x:StaticResource DarkColor}"
+            UnselectedTabColor="{x:StaticResource GrayColor}"
             NavigationPage.HasNavigationBar="False">
-
     <TabbedPage.Children>
         <NavigationPage Title="{translator:Translate MainPage.Search}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf689;"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf689;" Size="25"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views:Home Title="{translator:Translate MainPage.Search}">
@@ -25,39 +24,42 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="{translator:Translate MainPage.MyListing}">
-            <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf08d;"/>
-            </NavigationPage.IconImageSource>
-            <x:Arguments>
-                <views:MieiAnnunci>
-                </views:MieiAnnunci>
-            </x:Arguments>
-        </NavigationPage>
-
         <NavigationPage Title="{translator:Translate MainPage.Saved}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf004;"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf004;" Size="25"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views:AnnunciPreferiti>
                 </views:AnnunciPreferiti>
             </x:Arguments>
         </NavigationPage>
+       
 
-        <NavigationPage Title="{translator:Translate MainPage.Messages}">
+        <NavigationPage Title="{translator:Translate MainPage.Agenda}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf073;" Size="25"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views:Messaggi>
-                </views:Messaggi>
+                <views:Agenda>
+                </views:Agenda>
             </x:Arguments>
         </NavigationPage>
 
+        
+         <NavigationPage Title="{translator:Translate MainPage.MyListing}">
+            <NavigationPage.IconImageSource>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf08d;" Size="25"/>
+            </NavigationPage.IconImageSource>
+            <x:Arguments>
+                <views:MieiAnnunci>
+                </views:MieiAnnunci>
+            </x:Arguments>
+        </NavigationPage>
+        
+
         <NavigationPage Title="{translator:Translate MainPage.Account}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;" Size="25"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views11:Account>

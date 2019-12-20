@@ -12,6 +12,7 @@
     <Compile Remove="Views\NuovoAnnuncio\MyView.xaml.cs" />
     <Compile Remove="Views\DettaglioAnnuncio\DettaglioAnnuncio %28copy%29.xaml.cs" />
     <Compile Remove="Views\NuovoAnnuncio.xaml.cs" />
+    <Compile Remove="ContentViews\BackButton %28copy%29.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,8 @@
     <PackageReference Include="Plugin.Google" Version="1.0.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.34" />
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.3.0.34" />
+    <PackageReference Include="Microsoft.AppCenter" Version="2.6.4" />
+    <PackageReference Include="Microsoft.AppCenter.Push" Version="2.6.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,6 +74,8 @@
   <ItemGroup>
     <Folder Include="ContentViews\" />
     <Folder Include="Views\DettaglioAnnuncio\" />
+    <Folder Include="Notify\" />
+    <Folder Include="Views\GeneralCondition\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">

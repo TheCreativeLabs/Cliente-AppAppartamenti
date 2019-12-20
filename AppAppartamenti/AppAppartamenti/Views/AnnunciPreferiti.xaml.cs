@@ -37,22 +37,50 @@ namespace AppAppartamenti.Views
             if (item == null || item.Id == null)
                 return;
 
-            //EventoClient eventoClient = new EventoClient(ApiHelper.GetApiClient());
-            //EventoDtoOutput dettaglioEvento = await eventoClient.GetEventoByIdAsync(new Guid(item.Id));
+            //await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
+            if (item.Id != null && item.Id != Guid.Empty)
+            {
+                // Manually deselect item.
+                AnnunciiListView.SelectedItem = null;
 
+                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value, false));
+            }
+        }
 
-            ////await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
-           // if (item.Id != null && item.Id != Guid.Empty)
-           // {
-           //     AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-           //     AnnuncioDtoOutput annuncioDetail = await annunciClient.GetAnnuncioByIdAsync((Guid)item.Id);
+        private async void BtnAddPreferito_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                var item = Guid.Parse(btn.CommandParameter.ToString());
 
-           //     // Manually deselect item.
-           //     AnnunciiListView.SelectedItem = null;
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                await annunciClient.AggiungiPreferitoAsync(item);
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
 
-           //     await Navigation.PushAsync(new DettaglioAnnuncio(annuncioDetail));
-           //}
+        private async void BtnRemovePreferito_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                var item = btn.CommandParameter as AnnunciDtoOutput;
 
+                viewModel.Items.Remove(item);
+
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                await annunciClient.RimuoviPreferitoAsync(item.Id.Value);
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
     }
 }

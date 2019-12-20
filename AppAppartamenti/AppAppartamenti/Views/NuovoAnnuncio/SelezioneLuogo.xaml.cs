@@ -21,6 +21,7 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDtoInput annuncio; 
         AnnuncioDetailViewModel dtoToModify;
+        bool IsMappaValid;
 
         public SelezioneLuogo(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
@@ -28,28 +29,41 @@ namespace AppAppartamenti.Views
             InitializeComponent();
 
             annuncio = Annuncio;
+
+            if (dtoToModify != null)
+            {
+                if (lvComuni.SelectedItem == null)
+                {
+                    lvComuni.SelectedItem = new ComuneDto()
+                    {
+                        NomeComune = dtoToModify.Item.NomeComune,
+                        CodiceComune = dtoToModify.Item.CodiceComune
+                    };
+                }
+                if (entIndirizzo.Text == null && !String.IsNullOrEmpty(dtoToModify.Item.Indirizzo))
+                {
+                    entIndirizzo.Text = dtoToModify.Item.Indirizzo;
+                }
+            }
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            if ( dtoToModify != null)
+            MessagingCenter.Subscribe<ValidazioneMappa, string>(this, "Valida", async (sender, arg) =>
             {
-                if(lvComuni.SelectedItem == null) { 
-                    lvComuni.SelectedItem = new ComuneDto()
-                        {
-                            NomeComune = dtoToModify.Item.NomeComune,
-                            CodiceComune = dtoToModify.Item.CodiceComune
-                        };
-                }
-                if (entIndirizzo.Text == null && !String.IsNullOrEmpty(dtoToModify.Item.Indirizzo))
+                IsMappaValid = false;
+                if (!string.IsNullOrEmpty(arg))
                 {
-                    entIndirizzo.Text = dtoToModify.Item.Indirizzo;
-                    await setMapLocation();
+                    IsMappaValid = true;
                 }
+            });
 
-                btnIndirizzoProcedi.IsEnabled = true;
+            if (IsMappaValid)
+            {
+                IsMappaValid = false;
+                await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio, dtoToModify));
             }
         }
 
@@ -73,27 +87,25 @@ namespace AppAppartamenti.Views
 
         private async void BtnIndirizzoProcedi_Clicked(object sender, EventArgs e)
         {
-            annuncio.Indirizzo = entIndirizzo.Text;
+            if(string.IsNullOrEmpty(entIndirizzo.Text) || string.IsNullOrEmpty(entCercaComune.Text))
+            {
+                await DisplayAlert("Attenzione", "Valorizzare il comune e l'indirizzo", "OK");
+            }
+            else
+            {
+                annuncio.Indirizzo = entIndirizzo.Text;
 
-            await Navigation.PushModalAsync(new ValidazioneMappa(entCercaComune.Text, entIndirizzo.Text),true);
-
-            //await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio, dtoToModify));
-        }
-
-        private async Task setMapLocation()
-        {
-            
-
-            //btnIndirizzoProcedi.IsVisible = true;
+                await Navigation.PushModalAsync(new ValidazioneMappa(entCercaComune.Text, entIndirizzo.Text), true);
+            }
         }
 
         private void EntCercaComune_TextChanged(object sender, TextChangedEventArgs e)
         {
             //refresh della lista dei comuni
             var listaComuni = new ListaComuniViewModel(entCercaComune.Text);
+            lvComuni.IsVisible = true;
             listaComuni.LoadItemsCommand.Execute(null);
             lvComuni.ItemsSource = listaComuni.Items;
-            lvComuni.IsVisible = true;
             entIndirizzo.IsVisible = false;
             lblIndirizzo.IsVisible = false;
             btnIndirizzoProcedi.IsVisible = false;
@@ -121,13 +133,6 @@ namespace AppAppartamenti.Views
 
             // Manually deselect item.
             lvComuni.SelectedItem = null;
-        }
-
-        private async void EntIndirizzo_Unfocused(object sender, FocusEventArgs e)
-        {
-            await setMapLocation();
-
-            btnIndirizzoProcedi.IsEnabled = true;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace AppAppartamenti.Views.Account
             apiRequest = apiRequest.Replace("www.", "");
             ApiRequest = apiRequest;
             //mostro l'url nella pagina
-            var webView = new WebView
+            var webView = new WebViewUserAgent
             {
                 Source = apiRequest,
                 HeightRequest = 1
@@ -73,7 +73,7 @@ namespace AppAppartamenti.Views.Account
                     //TODO mostrare pagina di errore
                     throw new ApplicationException();
                 }
-                if (userInfoViewModel.HasRegistered.HasValue && userInfoViewModel.HasRegistered.Value == false)
+                else if (userInfoViewModel.HasRegistered.HasValue)
                 {
                     RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
                     {
@@ -96,7 +96,7 @@ namespace AppAppartamenti.Views.Account
                 else if (userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "GOOGLE") //utente già registrato con GOOGLE: accede
                 {
                     //Application.Current.MainPage = new NavigationPage( new MainPage());
-                    Application.Current.MainPage = new MainPage();
+                    Application.Current.MainPage = new EnableNotification();
                 }
                 else //l'utente è già registrato ma NON con facebook: è registrato con Facebook o con la mail, quindi non può accedere
                 {

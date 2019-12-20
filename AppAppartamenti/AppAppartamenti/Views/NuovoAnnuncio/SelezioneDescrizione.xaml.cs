@@ -36,21 +36,6 @@ namespace AppAppartamenti.Views
             {
                 edtDescrizione.Text = dtoToModify.Item.Descrizione;
             }
-
-            //try
-            //{
-            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-            //    NavigationPage.SetHasNavigationBar(this, true);
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
-
-            spBody.IsVisible = true;
-
-
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -71,7 +56,6 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-
         private async void BtnDescrizioneProcedi_Clicked(object sender, EventArgs e)
         {
             annuncio.Descrizione = edtDescrizione.Text;
@@ -89,10 +73,6 @@ namespace AppAppartamenti.Views
                 {
                     annuncio.Disponibile = (bool)dtoToModify.Item.Disponibile;
                 }
-                //if (dtoToModify.Item.IdStatoProprieta!= null)
-                //{
-                //    annuncio.IdStatoProprieta = dtoToModify.Item.IdStatoProprieta;
-                //}
                 if (dtoToModify.Item.Piano != null)
                 {
                     annuncio.Piano = (int)dtoToModify.Item.Piano;

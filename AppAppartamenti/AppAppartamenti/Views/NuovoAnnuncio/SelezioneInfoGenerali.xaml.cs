@@ -32,40 +32,25 @@ namespace AppAppartamenti.Views
                     entSuperficie.Text = dtoToModify.Item.Superficie.ToString();
                 }
 
-                if(lblCamereLettoCount.Text == null)
-                {
                     stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroCameraLetto);
                     lblCamereLettoCount.Text = dtoToModify.Item.NumeroCameraLetto.ToString();
-                }
 
-                if (lblStanzeCount.Text == null)
-                {
+                
                     stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroAltreStanze);
                     lblStanzeCount.Text = dtoToModify.Item.NumeroAltreStanze.ToString();
-                }
 
-                if (lblBagniCount.Text == null)
-                {
+                
                     stpBagni.Value = Convert.ToDouble(dtoToModify.Item.NumeroBagni);
                     lblBagniCount.Text = dtoToModify.Item.NumeroBagni.ToString();
-                }
 
-                if(lblCucineCount.Text == null) { 
                     stpCucine.Value = Convert.ToDouble(dtoToModify.Item.NumeroCucine);
                     lblCucineCount.Text = dtoToModify.Item.NumeroCucine.ToString();
-                }
 
-                if (lblGarageCount.Text==null)
-                {
                     stpGarage.Value = Convert.ToDouble(dtoToModify.Item.NumeroGarage);
                     lblGarageCount.Text = dtoToModify.Item.NumeroGarage.ToString();
-                }
 
-                if(lblParkingSpacesCount.Text == null)
-                {
                     stpParkingSpaces.Value = Convert.ToDouble(dtoToModify.Item.NumeroPostiAuto);
                     lblParkingSpacesCount.Text = dtoToModify.Item.NumeroPostiAuto.ToString();
-                }
 
                 //if(annuncio.Cantina == null)
                 //{
@@ -93,7 +78,7 @@ namespace AppAppartamenti.Views
                 //}
             }
 
-                annuncio = Annuncio;
+            annuncio = Annuncio;
         }
 
         protected override void OnAppearing()

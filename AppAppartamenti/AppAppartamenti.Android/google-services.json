@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "211045302909",
+    "firebase_url": "https://promuovocasaandroid.firebaseio.com",
+    "project_id": "promuovocasaandroid",
+    "storage_bucket": "promuovocasaandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211045302909:android:3473ad7cd96f11c6006714",
+        "android_client_info": {
+          "package_name": "com.companyname.appappartamenti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211045302909-aqma0vjog7gbe2u91p1tsdrjau0oisoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1WEpYK9L7vOnVNewhwYsQ7quPkKQ0-Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211045302909-aqma0vjog7gbe2u91p1tsdrjau0oisoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

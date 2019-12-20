@@ -10,10 +10,9 @@
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.SelezioneLuogo"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
-             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              ios:Page.UseSafeArea="true"
              NavigationPage.HasNavigationBar="False"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              >
 
     <ContentPage.Resources>
@@ -26,26 +25,25 @@
         <StackLayout Style="{x:StaticResource StackContainer}">
 
             <StackLayout Orientation="Horizontal">
-                  <Button BackgroundColor="Transparent"
-                        Text="&#xf053;" HorizontalOptions="StartAndExpand" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
-                        Clicked="BtnBack_Clicked">
-                  </Button>
+                 <controls:BackButton/>
 
-                  <Button BackgroundColor="Transparent"
-                            Text="&#xf00d;" HorizontalOptions="End" FontSize="Subtitle" Style="{x:StaticResource NavBackButton}" 
-                            Clicked="BtnCancel_Clicked">
+                  <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnCancel_Clicked">
                   </Button>
             </StackLayout>
 
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneLuogo.WhereQuestion}"></Label>
-            <controls:StepMenu CurrentId="3"/>
-
+            <controls:StepMenu CurrentId="10"/>
 
             <Label Text="{translator:Translate SelezioneLuogo.Locality}"></Label>
             <Entry  x:Name="entCercaComune" Placeholder="{translator:Translate SelezioneLuogo.LocalityPlaceholder}" TextChanged="EntCercaComune_TextChanged"></Entry>
 
-            <ListView x:Name="lvComuni" IsVisible="False" ItemSelected="LvComuni_Selected" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
+            <ListView x:Name="lvComuni"
+                      IsVisible="False"
+                      ItemSelected="LvComuni_Selected"
+                      ios:ListView.SeparatorStyle="FullWidth"
+                      SeparatorColor="LightGray"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}">
                 <ListView.Footer>
                     <DataTemplate>
                         <ContentView />
@@ -68,16 +66,10 @@
             </ListView>
 
             <Label x:Name="lblIndirizzo" Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,0,20,0"></Label>
-            <Entry x:Name="entIndirizzo"
-                                        Unfocused="EntIndirizzo_Unfocused"
-                                        Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></Entry>
+            <Entry x:Name="entIndirizzo" Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></Entry>
 
-            
-            <Button x:Name="btnIndirizzoProcedi" IsEnabled="False" Text="{translator:Translate SelezioneLuogo.Continue}" 
-                    Clicked="BtnIndirizzoProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
-      
-          
-            
+            <Button x:Name="btnIndirizzoProcedi" IsEnabled="True" Text="{translator:Translate SelezioneLuogo.Continue}" 
+            Clicked="BtnIndirizzoProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
         </StackLayout>
     </ContentPage.Content>
 

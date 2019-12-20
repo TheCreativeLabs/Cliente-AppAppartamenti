@@ -66,7 +66,8 @@ namespace AppAppartamenti.Views.NuovoAnnuncio
 
         private async void BtnProcedi_Clicked(object sender, EventArgs e)
         {
-
+            MessagingCenter.Send(this, "Valida", "Mappa validata");
+            await Navigation.PopModalAsync();
         }
     }
 }

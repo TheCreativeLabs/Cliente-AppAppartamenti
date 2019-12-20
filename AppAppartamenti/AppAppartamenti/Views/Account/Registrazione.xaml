@@ -5,18 +5,20 @@
              x:Class="AppAppartamenti.Views.Login.Registrazione" xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              NavigationPage.HasNavigationBar="False"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true">
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}"
+             >
 
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
-                <Button BackgroundColor="Transparent"
-                        Text="&#xf00d;" HorizontalOptions="Start" Style="{x:StaticResource NavBackButton}" 
+                <Button  Style="{x:StaticResource NavCancelButton}" 
                         Clicked="Cancel_Clicked">
                 </Button>
-                <Label Style="{x:StaticResource Title}" Text="{translator:Translate Registrazione.Bottone}"></Label>
 
-                <Frame HeightRequest="90" WidthRequest="90" HorizontalOptions="Center" HasShadow="True"
+                <Label Margin="0,0,0,20" Style="{x:StaticResource Title}" Text="{translator:Translate Registrazione.Bottone}"></Label>
+
+                <Frame IsVisible="False" HeightRequest="90" WidthRequest="90" HorizontalOptions="Center" HasShadow="True"
                        Padding="0" IsClippedToBounds="True" BorderColor="LightGray">
                         <Image x:Name="imgFotoUtente" Aspect="Fill" HorizontalOptions="Center"  IsVisible="false" VerticalOptions="Center"></Image>
                     <Frame.GestureRecognizers>
@@ -30,38 +32,61 @@
                     </Frame.Style>
                 </Frame>
 
-                <Label x:Name="lblFoto" Text="Aggiungi una foto" Margin="0,0,10,0" HorizontalOptions="Center"></Label>
+                <Label IsVisible="False" x:Name="lblFoto" Text="Aggiungi una foto" Margin="0,0,10,0" HorizontalOptions="Center"></Label>
 
-                <appappartamenti:MyEntry x:Name="entNome"
+                <Entry x:Name="entNome"
                        Placeholder="{translator:Translate Registrazione.Nome}"
-                       TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
+                       TextChanged="ent_TextChanged"></Entry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntNome"></Label>
 
-                <appappartamenti:MyEntry  x:Name="entCognome"
+                <Entry  x:Name="entCognome"
                        Placeholder="{translator:Translate Registrazione.Cognome}"
-                    TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
+                    TextChanged="ent_TextChanged"></Entry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}"
                        Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntCognome"></Label>
 
-                <appappartamenti:MyEntry  x:Name="entEmail" Placeholder="{translator:Translate Login.Email}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
+                <Entry x:Name="entEmail" Placeholder="{translator:Translate Login.Email}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneEmail}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntEmail"></Label>
 
-                <appappartamenti:MyEntry x:Name="entPassword" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
+                <DatePicker x:Name="dpDataNascita" VerticalOptions="Center"></DatePicker>
+                    
+                <Entry x:Name="entPassword" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
                 <Label Text="{translator:Translate Login.MessaggioValidazionePassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntPassword"></Label>
 
-                <appappartamenti:MyEntry  x:Name="entConfermaPassword"  IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></appappartamenti:MyEntry>
+                <Entry x:Name="entConfermaPassword"  IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" TextChanged="ent_TextChanged"></Entry>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneConfermaPassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntConfermaPassword"></Label>
 
-                <StackLayout Orientation="Horizontal">
-                    <CheckBox IsChecked="true" VerticalOptions="Center" Color="#ff6b6b"></CheckBox>
-                    <Label Text="{translator:Translate Registrazione.AccettoTermini}" VerticalTextAlignment="Center"></Label>
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,20">
+                    <CheckBox x:Name="chkCondition" IsChecked="False" VerticalOptions="Center"></CheckBox>
+                    <Label LineBreakMode="WordWrap">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Ho più di 18 anni e accetto le "/>
+                                <Span Text="Condizioni Generali" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_lblCondizioniGenerali"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                <Span Text=" e la " />
+                                <Span Text="Politica sulla privacy" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}" >
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_lblPrivacyPolici"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
 
                 <Button Style="{x:StaticResource primaryButton}"
                         Text="{translator:Translate Registrazione.Bottone}"
                         x:Name="btnRegistrati" Clicked="btnRegistrati_Clicked"></Button>
+                <controls:Separator/>
+              
+                <controls:FacebookButton/>
 
-            <Image Source="test.jpg" Margin="-20" IsVisible="False" VerticalOptions="EndAndExpand" ></Image>
+                <controls:GoogleButton/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

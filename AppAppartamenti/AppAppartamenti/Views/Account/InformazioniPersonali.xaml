@@ -6,33 +6,24 @@
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="{translator:Translate InformazionePersonali.Title}"
              NavigationPage.HasNavigationBar="False"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
-                <Button BackgroundColor="Transparent"
-                        Text="&#xf053;" HorizontalOptions="Start" Style="{x:StaticResource NavBackButton}" 
-                        Clicked="Cancel_Clicked">
-                </Button>
-
+                <controls:BackButton/>
                 <Label Style="{x:StaticResource Title}" Margin="0,0,10,20" Text="{translator:Translate InformazionePersonali.Title}"></Label>
 
-                <Frame CornerRadius="50"
-                           HeightRequest="50"
-                           WidthRequest="50"
+                <Frame CornerRadius="40"
+                           HeightRequest="80"
+                           WidthRequest="80"
                            IsClippedToBounds="True"
                            HasShadow="False"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center">
-
-                    <Image x:Name="imgFotoUtente"
-                            Aspect="AspectFill"
-                             Margin="-20"
-                             HeightRequest="80"
-                             WidthRequest="80"></Image>
-
-
-                </Frame>
+                           VerticalOptions="Center"
+                           Padding="0">
+                        <Image x:Name="imgFotoUtente"
+                                Aspect="AspectFill"></Image>
+                    </Frame>
 
                 <Button Text="{translator:Translate InformazionePersonali.ChangePhoto}" Style="{x:StaticResource LinkButton}" HorizontalOptions="CenterAndExpand" Clicked="OnPickPhotoButtonClicked"></Button>
 
