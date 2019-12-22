@@ -55,8 +55,9 @@ namespace AppAppartamenti.Views
             {
                 TipologiaProprieta tipologiaProprieta =  viewModel.translationsMap[(string) rbList.SelectedItem];
                 annuncio.IdTipologiaProprieta =(Guid) tipologiaProprieta.Id;
-                await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio, dtoToModify));
-                
+                //await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio, dtoToModify));
+                await Navigation.PushAsync(new SelezioneFasceOrarie(annuncio, dtoToModify));
+
             }
         }
     }

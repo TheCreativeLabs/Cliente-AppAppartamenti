@@ -40,12 +40,12 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if ((bytesImages == null || bytesImages.Count == 0 ) && this.dtoToModify != null && this.dtoToModify.Immagini != null && this.dtoToModify.Immagini.Count != 0)
+            if ((bytesImages == null || bytesImages.Count == 0 ) && this.dtoToModify != null && this.dtoToModify.Item.ImmaginiPlanimetria != null && this.dtoToModify.Item.ImmaginiPlanimetria.Count != 0)
             {
-                foreach (var item in dtoToModify.ImmaginiPlanimetria)
+                foreach (var item in dtoToModify.Item.ImmaginiPlanimetria)
                 {
                     int id = bytesImages.Count + 1;
-                    ImageWithId imm = new ImageWithId() { Id = id, Image = item.Value };
+                    ImageWithId imm = new ImageWithId() { Id = id, Image = item };
                     bytesImages.Add(imm);
                 }
                 cvImmagini.ItemsSource = bytesImages.ToArray();

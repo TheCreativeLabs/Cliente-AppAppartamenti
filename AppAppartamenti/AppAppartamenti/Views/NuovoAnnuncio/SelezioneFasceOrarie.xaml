@@ -7,7 +7,7 @@
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" xmlns:syncfusion1="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms"
              mc:Ignorable="d" 
              x:Class="AppAppartamenti.Views.SelezioneFasceOrarie"
              NavigationPage.HasNavigationBar="False"
@@ -56,11 +56,17 @@
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
+
+                                                <Label Text="dalle">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Label.GestureRecognizers>
                                                 </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
+                                                 
+                                                 <Label Text="Alle" VerticalTextAlignment="Center">
+                                                 </Label>
+
+                                                 <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                        Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
                                             </StackLayout>
                                         </ViewCell>
@@ -71,6 +77,35 @@
                                 </ListView.Footer>
                           </ListView>
                     </StackLayout>
+
+                    <syncfusion1:SfPicker
+                        x:Name="pickerDalle"
+                        PickerMode="Dialog"
+                        IsVisible="true"
+                        HeightRequest="350"
+                        PickerHeight="250"
+                        ShowColumnHeader="True"
+                        WidthRequest="280"
+                        HeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                        ShowHeader="False"
+                        HeaderTextColor="White"
+                        HeaderText="Seleziona un orario"
+                        ColumnHeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                        ColumnHeaderTextColor="White"
+                        SelectionChanged="picker_SelectionChanged"
+                        ColumnHeaderHeight="40"
+                        ShowFooter="False"
+                        />
+
+                    <syncfusion1:SfPicker
+                        x:Name="pickerAlle"
+                        IsVisible="true"
+                        HeaderText="Select your Area"
+                        HeightRequest="350"
+                        PickerHeight="250"
+                        PickerMode="Dialog"
+                        ShowColumnHeader="True"
+                        WidthRequest="280" />
 
                     <StackLayout x:Name="stkMartedi"  IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">

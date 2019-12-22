@@ -57,7 +57,7 @@ namespace AppAppartamenti.Views
             var item = btn.CommandParameter as AnnunciDtoOutput;
 
             AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-            bool answer = await DisplayAlert("Cancellare l'annuncio", "Procedendo, l'annuncio verrà elimninato definitavamente.", "Si", "No");
+            bool answer = await DisplayAlert("Cancellare l'annuncio?", "Procedendo, l'annuncio verrà elimninato definitavamente.", "Si", "No");
 
             if (answer)
             {

@@ -59,17 +59,17 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-             <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Margin="0,-50,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
+                <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Margin="0,-50,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
                 <StackLayout>
                     <StackLayout HeightRequest="300">
-                        <CarouselView ItemsSource="{Binding Immagini}" x:Name="Carousel">
+                        <CarouselView ItemsSource="{Binding Item.ImmaginiAnnuncio}" x:Name="Carousel">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Value, Converter={StaticResource ByteArrayToImage}}"/>
+                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}"/>
                                     </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
@@ -198,14 +198,14 @@
                             <Label Text="{translator:Translate DettaglioAnnuncio.Planimetria}" Style="{x:StaticResource SectionTitle}"></Label>
 
                             <StackLayout HeightRequest="300">
-                                <CarouselView ItemsSource="{Binding ImmaginiPlanimetria}" x:Name="CarouselPlanimetria">
+                                <CarouselView ItemsSource="{Binding Item.ImmaginiPlanimetria}" x:Name="CarouselPlanimetria">
                                     <CarouselView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
                                                 </Grid.RowDefinitions>
-                                                <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Value, Converter={StaticResource ByteArrayToImage}}"/>
+                                                <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}"/>
                                             </Grid>
                                         </DataTemplate>
                                     </CarouselView.ItemTemplate>

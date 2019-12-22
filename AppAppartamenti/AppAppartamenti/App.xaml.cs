@@ -17,7 +17,10 @@ namespace AppAppartamenti
         {
             InitializeComponent();
             //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTgyMTA5QDMxMzcyZTMzMmUzME9QcS9ocHo4K29nbnpOUGc5OTRVMVNhOTZ1Y2pJS0ZTSXh2emxyTmJCM009");
+            
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTgyMTA5QDMxMzcyZTMzMmUzME9QcS9ocHo4K29nbnpOUGc5OTRVMVNhOTZ1Y2pJS0ZTSXh2emxyTmJCM009");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTg2MTU3QDMxMzcyZTM0MmUzMEhjUEJsQW5VeG56QUlSUTBEcU8rcG5Ld2hTQ3lPcTk4MUpubnNWRnNIbDg9");
+
 
             //DependencyService.Register<MockDataStore>();            //DependencyService.Register<MockDataStore>();
             MainPage = new NavigationPage(new Login());

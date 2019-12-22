@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 //using Microsoft.AppCenter.Push;
 using Syncfusion.SfCalendar.XForms.iOS;
+using Syncfusion.SfPicker.XForms.iOS;
 using UIKit;
 using UserNotifications;
 using Xamarin.Forms;
@@ -44,8 +45,9 @@ namespace AppAppartamenti.iOS
             global::Xamarin.Forms.FormsMaterial.Init();
             Plugin.InputKit.Platforms.iOS.Config.Init();
             Xamarin.FormsMaps.Init();
-            SfCalendarRenderer.Init();
             Syncfusion.XForms.iOS.PopupLayout.SfPopupLayoutRenderer.Init();
+            SfCalendarRenderer.Init();
+            SfPickerRenderer.Init();
 
 
             ////after iOS 10

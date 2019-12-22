@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
@@ -49,6 +50,30 @@ namespace AppAppartamenti.Views
                 btnAddPreferitoNav.IsVisible = !viewModel.Item.FlagPreferito.Value;
                 btnRemovePreferitoNav.IsVisible = viewModel.Item.FlagPreferito.Value;
             }
+
+            if(!string.IsNullOrEmpty(viewModel.Item.CoordinateGeografiche)){
+                var pos = viewModel.Item.CoordinateGeografiche.Split(';');
+                var lat = pos[0];
+                var lon = pos[1];
+
+                Pin pin = new Pin
+                {
+                    Label = viewModel.Item.Indirizzo,
+                    Address = $"{viewModel.Item.Indirizzo},{viewModel.Item.NomeComune}",
+                    Type = PinType.Generic,
+                    Position = new Position(Double.Parse(lat), Double.Parse(lon))
+                };
+
+                map.Pins.Add(pin);
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.1)));
+            }
+            else
+            {
+                map.IsVisible = false;
+            }
+
+
+         
         }
 
         async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)

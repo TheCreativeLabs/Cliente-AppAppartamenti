@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms" xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Agenda"
              Title="Messaggi"
              x:Name="BrowseItemsPage"
              NavigationPage.HasNavigationBar="False"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:syncfusion1="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
@@ -26,8 +27,22 @@
                 <StackLayout Style="{x:StaticResource StackContainer}">
                         <Label Style="{x:StaticResource Title}" Text="{translator:Translate Agenda.Title}"></Label>
 
-                        <syncfusion:SfCalendar x:Name="calendar" />
+                        <syncfusion:SfCalendar x:Name="calendar"  EnableDatesInPast="False">
+                            <syncfusion:SfCalendar.MonthViewSettings>
+                                <syncfusion:MonthViewSettings SelectedDayTextColor="{x:StaticResource PrimaryColor}">
+                                </syncfusion:MonthViewSettings>
+                            </syncfusion:SfCalendar.MonthViewSettings>
+                        </syncfusion:SfCalendar>
+
+                    <StackLayout BackgroundColor="Red" HeightRequest="300">
+
+                  
+
+                  
+
+
                 </StackLayout>
+                      </StackLayout>
 
             </ContentPage.Content>
 </ContentPage>
