@@ -18,7 +18,7 @@ namespace AppAppartamenti.Views
         List<TipologiaAnnuncio> listTipologiaAnnuncio = new List<TipologiaAnnuncio>();
         List<TipologiaProprieta> listTipologiaProprieta = new List<TipologiaProprieta>();
         RicercaModel FiltriRicerca;
-
+        bool IsRicaricamento;
         public Ricerca()
         {
             InitializeComponent();
@@ -28,6 +28,7 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
             FiltriRicerca = FiltriRicercaParam;
+            IsRicaricamento = true;
         }
 
         protected override async void OnAppearing()
@@ -69,8 +70,18 @@ namespace AppAppartamenti.Views
                 chkCondizionatori.IsChecked = FiltriRicerca.Condizionatori.Value;
                 chkGiardino.IsChecked = FiltriRicerca.Giardino.Value;
                 chkPiscina.IsChecked = FiltriRicerca.Piscina.Value;
-                RangeSlider.LowerValue = FiltriRicerca.MinPrice;
-                RangeSlider.UpperValue = FiltriRicerca.MaxPrice;
+
+                if (pckTipologiaVendita.SelectedIndex == 0)
+                {
+                    RangeSliderVendita.LowerValue = FiltriRicerca.MinPrice;
+                    RangeSliderVendita.UpperValue = FiltriRicerca.MaxPrice;
+                }
+                else
+                {
+                    RangeSliderAffitto.LowerValue = FiltriRicerca.MinPrice;
+                    RangeSliderAffitto.UpperValue = FiltriRicerca.MaxPrice;
+                }
+
                 RangeSlider2.LowerValue = FiltriRicerca.MinSurface;
                 RangeSlider2.UpperValue = FiltriRicerca.MaxSurface;
                 lvComuni.SelectedItem = FiltriRicerca.Comune;
@@ -100,11 +111,24 @@ namespace AppAppartamenti.Views
         {
             if(lvComuni.SelectedItem != null)
             {
+                var prezzoMin = 0;
+                var prezzoMax = 0;
+                if(pckTipologiaVendita.SelectedIndex == 0)
+                {
+                    prezzoMin = (int)RangeSliderVendita.LowerValue;
+                    prezzoMax = (int)RangeSliderVendita.UpperValue;
+                }
+                else
+                {
+                    prezzoMin = (int)RangeSliderAffitto.LowerValue;
+                    prezzoMax = (int)RangeSliderAffitto.UpperValue;
+                }
+
                 RicercaModel ricercaModel = new RicercaModel()
                 {
                     Comune = lvComuni.SelectedItem as ComuneDto,
-                    MinPrice = (int)RangeSlider.LowerValue,
-                    MaxPrice = (int)RangeSlider.UpperValue,
+                    MinPrice = prezzoMin,
+                    MaxPrice = prezzoMax,
                     TipologiaAnnuncio = ((TipologiaAnnuncio)pckTipologiaVendita.SelectedItem).Id,
                     TipologiaProprieta = ((TipologiaProprieta)pckTipologiaProprieta.SelectedItem).Id,
                     MinSurface = (int)RangeSlider2.LowerValue,
@@ -122,9 +146,19 @@ namespace AppAppartamenti.Views
                     Terrazzo = chkTerrazzo.IsChecked
                 };
 
+
+                if (IsRicaricamento)
+                {
+                    //Se è ListaAnnunci allora mando un messaggio alla listaannunci, altrimenti allla home
+                    MessagingCenter.Send(this, "Ricarica", JsonConvert.SerializeObject(ricercaModel));
+                }
+                else
+                {
+                    //Se è ListaAnnunci allora mando un messaggio alla listaannunci, altrimenti allla home
+                    MessagingCenter.Send(this, "Ricerca", JsonConvert.SerializeObject(ricercaModel));
+                }
+
                 //TODO: capire qual'è l'ultima pagina:
-                //Se è ListaAnnunci allora mando un messaggio alla listaannunci, altrimenti allla home
-                MessagingCenter.Send(this, "Ricerca", JsonConvert.SerializeObject(ricercaModel));
                 await  Navigation.PopModalAsync();
             }
             else
@@ -133,15 +167,33 @@ namespace AppAppartamenti.Views
             }
         }
 
+        public void TipologiaVenditaSelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Method call every time when picker selection changed.
+            var picker = (Picker)sender;
+
+            if(picker.SelectedIndex == 0) {
+                stkPrezzoVendita.IsVisible = true;
+                stkPrezzoAffitto.IsVisible = false;
+            }
+            else
+            {
+                stkPrezzoVendita.IsVisible = false;
+                stkPrezzoAffitto.IsVisible = true;
+            }
+        } 
+
         private void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
         {
+            stkRicercaAggiuntiva.IsVisible = false;
+            lvComuni.IsVisible = true;
+
             //refresh della lista dei comuni
             var listaComuni = new ListaComuniViewModel(entRicerca.Text);
             listaComuni.LoadItemsCommand.Execute(null);
             lvComuni.ItemsSource = listaComuni.Items;
-
-            stkRicercaAggiuntiva.IsVisible = false;
-            lvComuni.IsVisible = true;
+            
+            lvComuni.IsRefreshing = false;
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)

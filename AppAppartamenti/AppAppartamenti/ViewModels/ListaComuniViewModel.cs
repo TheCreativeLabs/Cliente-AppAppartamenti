@@ -9,6 +9,7 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -16,6 +17,7 @@ namespace AppAppartamenti.ViewModels
     {
         public ObservableCollection<ComuneDto> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public bool IsLoading { get; set; }
 
         public ListaComuniViewModel(string NomeComune)
         {
@@ -29,13 +31,13 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
-
+            IsLoading = true;
             try
             {
                 Items.Clear();
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                ICollection<ComuneDto> listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
+                //AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                ICollection<ComuneDto> listaComuni = await ApiHelper.GetListaComuni(NomeComune);// annunciClient.GetListaComuniAsync(NomeComune);
 
                 foreach (var evento in listaComuni)
                 {
@@ -49,6 +51,7 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+                IsLoading = false;
             }
         }
     }

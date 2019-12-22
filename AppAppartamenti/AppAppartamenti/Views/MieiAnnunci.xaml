@@ -48,9 +48,28 @@
                     <DataTemplate>
                         <ViewCell>
                                 <StackLayout Padding="20">
-                                    <Frame HasShadow="False" Visual="Material" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
-                                        <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
-                                    </Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="200"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Frame HasShadow="False" Visual="Material" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
+                                            <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                        </Frame>
+
+                                        <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Button Style="{x:StaticResource NavCancelButton}"
+                                                        VerticalOptions="Center"
+                                                        Clicked="BtnDeleteAd_Clicked"
+                                                        CommandParameter="{Binding .}"
+                                                        Text="&#xf2ed;" Margin="0,0,10,0" HorizontalOptions="End"
+                                                        FontFamily="{x:StaticResource FA-Solid}"
+                                                        TextColor="{x:StaticResource DangerColor}">
+                                                </Button>
+                                            </StackLayout>
+                                        </AbsoluteLayout>
+                                    </Grid>
 
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>

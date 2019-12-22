@@ -152,13 +152,13 @@ namespace AppAppartamenti.Views.Account
                 //{
                 //Eseguo il logout
                 AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
-                    await accountClient.LogoutAsync();
+                await accountClient.LogoutAsync();
 
-                    //Rimuovo il token e navigo alla home
-                    Api.ApiHelper.RemoveSettings();
-                    //Api.ApiHelper.DeleteToken();
-                    //Api.ApiHelper.RemoveProvider();
-                    Application.Current.MainPage = new NavigationPage(new Login.Login());
+                //Rimuovo il token e navigo alla home
+                Api.ApiHelper.RemoveSettings();
+                //Api.ApiHelper.DeleteToken();
+                //Api.ApiHelper.RemoveProvider();
+                Application.Current.MainPage = new NavigationPage(new Login.Login());
                 //}
             }
             catch (Exception ex)

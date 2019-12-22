@@ -34,8 +34,6 @@
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.34" />
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.3.0.34" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
-    <PackageReference Include="Microsoft.AppCenter" Version="2.6.4" />
-    <PackageReference Include="Microsoft.AppCenter.Push" Version="2.6.4" />
   </ItemGroup>
 
   <ItemGroup>

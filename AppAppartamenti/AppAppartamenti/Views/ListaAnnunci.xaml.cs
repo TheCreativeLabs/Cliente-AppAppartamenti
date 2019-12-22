@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,16 +25,26 @@ namespace AppAppartamenti.Views
             FiltriRicerca = FiltriRicercaParam;
 
             BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.Tutti, FiltriRicerca);
-
-            entRicerca.Text = FiltriRicerca.Comune.NomeComune;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
+            MessagingCenter.Subscribe<Ricerca, string>(this, "Ricarica", async (sender, arg) =>
+            {
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    FiltriRicerca = JsonConvert.DeserializeObject<RicercaModel>(arg);
+                }
+
+                viewModel = new AnnunciViewModel(TipiRicerca.Tutti, FiltriRicerca);
+            });
+
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
+
+            entRicerca.Text = FiltriRicerca.Comune.NomeComune;
         }
 
 

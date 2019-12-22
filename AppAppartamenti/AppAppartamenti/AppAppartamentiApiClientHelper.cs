@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace AppAppartamenti.Api
         public const string ListaTipologiaAnnuncioKey = "ListaTipologiaAnnuncio_Key";
         public const string ListaTipologiaProprietaKey = "ListaTipologiaProprieta_Key";
         public const string NotificationStatusKey = "NotificationStatus_Key";
+        public const string ListaComuniKey = "ListaComuni_Key";
 
 
 
@@ -195,7 +197,6 @@ namespace AppAppartamenti.Api
             }
         }
 
-
         public static async Task<UserInfoDto> GetUserInfo()
         {
             UserInfoDto userInfo = null;
@@ -290,6 +291,40 @@ namespace AppAppartamenti.Api
             }
 
             return listTipologiaProprieta;
+        }
+
+        public static async Task<ICollection<ComuneDto>> GetListaComuni(string ComuneDesc)
+        {
+            ICollection<ComuneDto> listaComuni = new Collection<ComuneDto>();
+
+            if (!String.IsNullOrEmpty(ComuneDesc))
+            {
+                if (ComuneDesc.Length < 3)
+                {
+                    Preferences.Remove(ListaComuniKey);
+                }
+                else if(ComuneDesc.Length == 3)
+                {
+                    AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                    listaComuni = await annunciClient.GetListaComuniAsync(ComuneDesc);
+                    if (listaComuni.Any())
+                    {
+                        Preferences.Set(ListaComuniKey, JsonConvert.SerializeObject(listaComuni));
+
+                    }
+                }
+                else
+                {
+                  if( Preferences.Get(ListaComuniKey, null) != null)
+                    {
+                        var comuni = JsonConvert.DeserializeObject<ICollection<ComuneDto>>(Preferences.Get(ListaComuniKey, null));
+
+                        listaComuni = comuni.Where(x => x.NomeComune.ToUpper().StartsWith(ComuneDesc.ToUpper())).ToList();
+                    }
+                }
+            }
+
+            return listaComuni;
         }
     }
 

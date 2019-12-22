@@ -27,8 +27,6 @@ namespace AppAppartamenti.Droid
             base.OnCreate(savedInstanceState);
             Instance = this;
 
-            
-
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

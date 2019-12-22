@@ -41,7 +41,6 @@ namespace AppAppartamenti.Views
             //EventoClient eventoClient = new EventoClient(ApiHelper.GetApiClient());
             //EventoDtoOutput dettaglioEvento = await eventoClient.GetEventoByIdAsync(new Guid(item.Id));
 
-
             //await Navigation.PushAsync(new EventoModifica(new EventoDetailViewModel(dettaglioEvento)));
             if (item.Id != null && item.Id != Guid.Empty)
             {
@@ -52,6 +51,20 @@ namespace AppAppartamenti.Views
             }
         }
 
+        async void BtnDeleteAd_Clicked(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            var item = btn.CommandParameter as AnnunciDtoOutput;
+
+            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            bool answer = await DisplayAlert("Cancellare l'annuncio", "Procedendo, l'annuncio verrà elimninato definitavamente.", "Si", "No");
+
+            if (answer)
+            {
+                //await annunciClient.DeleteAnnuncio(item.Id.Value);
+                viewModel.Items.Remove(item);
+            }
+        }
 
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
