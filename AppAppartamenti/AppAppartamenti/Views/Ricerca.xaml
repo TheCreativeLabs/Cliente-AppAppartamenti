@@ -31,7 +31,11 @@
                         </StackLayout>
                     </appappartamenti:ShadowFrame>
                     
-                    <ListView x:Name="lvComuni" IsVisible="false" ItemSelected="LvComuni_Selected" SelectionMode="Single" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
+                    <ListView x:Name="lvComuni" IsVisible="false"
+                              ItemSelected="LvComuni_Selected" SelectionMode="Single"
+                              ios:ListView.SeparatorStyle="FullWidth"
+                              SeparatorColor="LightGray"
+                             >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -49,7 +53,7 @@
 
                             <Label Text="{translator:Translate Ricerca.SaleRent}"></Label>
 
-                            <Picker x:Name="pckTipologiaVendita" ItemDisplayBinding="{Binding Descrizione}">
+                            <Picker x:Name="pckTipologiaVendita" SelectedIndexChanged="TipologiaVenditaSelectedIndexChanged" ItemDisplayBinding="{Binding Descrizione}">
                             </Picker>
 
                             <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
@@ -61,41 +65,41 @@
 
                             <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
 
-                            <Label Text="{translator:Translate Ricerca.Price}"></Label>
+                            <StackLayout x:Name="stkPrezzoVendita">
+                                <Label Text="{translator:Translate Ricerca.Price}"></Label>
 
-                            <Grid HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
+                                <!--FIXME internazionalizzazione/mostrare nel format corretto i numeri-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="30.000 €" TextColor="Gray" ></Label>
 
-                            <!--FIXME internazionalizzazione/mostrare nel format corretto i numeri-->
-                            <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="30000" TextColor="Gray" ></Label>
+                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500.000+ €" TextColor="Gray"></Label>
+                                </StackLayout>
 
-                                <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500.000+" TextColor="Gray"></Label>
+                                <forms:RangeSlider x:Name="RangeSliderVendita" MinimumValue="30000" MaximumValue="500000" LowerValue="50000" UpperValue="300000" StepValue="10000" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
                             </StackLayout>
 
-                            <forms:RangeSlider x:Name="RangeSlider" MinimumValue="30000" MaximumValue="500000" LowerValue="50000" UpperValue="300000" StepValue="10000" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
-                                
+
+                            <StackLayout x:Name="stkPrezzoAffitto">
+                                <Label Text="{translator:Translate Ricerca.Price}"></Label>
+
+                                    <!--FIXME internazionalizzazione/mostrare nel format corretto i numeri-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="100 €/mese" TextColor="Gray" ></Label>
+
+                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="5000+ €/mese" TextColor="Gray"></Label>
+                                </StackLayout>
+
+                                <forms:RangeSlider x:Name="RangeSliderAffitto" MinimumValue="100" MaximumValue="5000" LowerValue="400" UpperValue="1000" StepValue="100" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
+                            </StackLayout>
 
                             <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
-                            
                            
                             <Label Text="{translator:Translate Ricerca.HouseSize}"></Label>
 
-                            <Grid HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-
                             <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="50" TextColor="Gray" ></Label>
+                                <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="50 m²" TextColor="Gray" ></Label>
 
-                                <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500+" TextColor="Gray"></Label>
+                                <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500+ m²" TextColor="Gray"></Label>
                             </StackLayout>
 
                             <forms:RangeSlider x:Name="RangeSlider2" MinimumValue="50" MaximumValue="500" LowerValue="80" UpperValue="250" StepValue="10" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />

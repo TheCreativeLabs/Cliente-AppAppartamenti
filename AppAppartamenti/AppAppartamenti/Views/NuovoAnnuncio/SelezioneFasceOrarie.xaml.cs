@@ -25,8 +25,8 @@ namespace AppAppartamenti.Views
 
     public class TimeSlot
     {
-        public TimeSpan Dalle { get; set; }
-        public TimeSpan Alle { get; set; }
+        public ObservableCollection<object> Dalle { get; set; }
+        public ObservableCollection<object> Alle { get; set; }
         public bool DeleteEnabled { get; set; }
     }
 
@@ -56,13 +56,9 @@ namespace AppAppartamenti.Views
         {
             this.dtoToModify = dtoToModify;
             InitializeComponent();
-
             InitializeFasceOrarie();
-
-
             annuncio = Annuncio;
         }
-
 
         private void InitializeFasceOrarie()
         {
@@ -120,8 +116,8 @@ namespace AppAppartamenti.Views
                     if (!string.IsNullOrEmpty(fasceorarie[i]))
                     {
                         var orari = fasceorarie[i].Split('-');
-                        var dalleOre = new TimeSpan(int.Parse(orari[0].Split(':')[0]), int.Parse(orari[0].Split(':')[1]),0);
-                        var alleOre = new TimeSpan(int.Parse(orari[1].Split(':')[0]), int.Parse(orari[1].Split(':')[1]), 0);
+                        var dalleOre = new ObservableCollection<object>() { orari[0].Split(':')[0], orari[0].Split(':')[1] };
+                        var alleOre = new ObservableCollection<object>() { orari[1].Split(':')[0], orari[1].Split(':')[1] };
 
                         ListToModify.Add(new TimeSlot() { Dalle = dalleOre, Alle =alleOre, DeleteEnabled = false });
                     }
@@ -325,48 +321,75 @@ namespace AppAppartamenti.Views
             }
         }
 
+        TimeSlot timeSlot;
+
+        private async void PickerDalle_LblClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var i = (TimeSlot)((TappedEventArgs)e).Parameter;
+                timeSlot = i;
+                TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
+                pickerDalle.ItemsSource = timeSlotViewModel.Time;
+                pickerDalle.ColumnHeaderText = timeSlotViewModel.Header;
+                pickerDalle.IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private void picker_SelectionChanged(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
+
+        {
+
+           var i =  pickerDalle.SelectedItem;
+            var l = "";
+        }
         private async void BtnProcedi_Clicked(object sender, EventArgs e)
         {
             var fasceOrarieLunedi = string.Empty;
             foreach (var item in listTimeSlotLunedi)
             {
-                fasceOrarieLunedi = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieLunedi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             var fasceOrarieMartedi = string.Empty;
             foreach (var item in listTimeSlotMartedi)
             {
-                fasceOrarieMartedi = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieMartedi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             var fasceOrarieMercoledi = string.Empty;
             foreach (var item in listTimeSlotMercoledi)
             {
-                fasceOrarieMercoledi = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieMercoledi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             var fasceOrarieGiovedi = string.Empty;
             foreach (var item in listTimeSlotGiovedi)
             {
-                fasceOrarieGiovedi = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieGiovedi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             var fasceOrarieVenerdi = string.Empty;
             foreach (var item in listTimeSlotVenerdi)
             {
-                fasceOrarieVenerdi = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieVenerdi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             var fasceOrarieSabato = string.Empty;
             foreach (var item in listTimeSlotSabato)
             {
-                fasceOrarieSabato = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieSabato = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             var fasceOrarieDomenica = string.Empty;
             foreach (var item in listTimeSlotDomenica)
             {
-                fasceOrarieDomenica = $"{item.Dalle.Hours.ToString()}:{item.Dalle.Minutes.ToString()}-{item.Alle.Hours.ToString()}:{item.Alle.Minutes.ToString()};";
+                fasceOrarieDomenica = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
             }
 
             annuncio.DisponibilitaOraria.FasceOrarieLunedi = fasceOrarieLunedi;

@@ -22,6 +22,24 @@ namespace AppAppartamenti.Views
         public Agenda()
         {
             InitializeComponent();
+
+
+            //TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
+            //picker.ItemsSource = timeSlotViewModel.Time;
+            //picker.ColumnHeaderText = timeSlotViewModel.Header;
+        }
+
+        private async void BtnBack_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                //picker.IsOpen = true;
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
     }
 }

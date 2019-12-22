@@ -28,6 +28,7 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Simone Bitti (S4S5R973KD)</CodesignKey>
+    <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -217,8 +218,8 @@
     <PackageReference Include="Xamarin.Forms.RangeSlider">
       <Version>1.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Plugin.Google">
-      <Version>1.0.1</Version>
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker">
+      <Version>17.4.0.39</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
