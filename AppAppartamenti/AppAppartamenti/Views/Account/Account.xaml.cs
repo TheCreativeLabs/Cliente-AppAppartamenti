@@ -3,7 +3,7 @@ using AppAppartamenti.Notify;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
-using Foundation;
+//using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

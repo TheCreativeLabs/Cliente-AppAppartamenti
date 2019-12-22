@@ -51,7 +51,7 @@ namespace AppAppartamenti.Views.Account
             if (accessToken != "")
             {
                 //Salva il token nelle properties
-                Application.Current.Properties[Api.ApiHelper.AccessTokenKey] = accessToken;
+                Api.ApiHelper.SetToken(accessToken);
 
                 //Salvo il nelle properties che l'utente ha fatto accesso con Facebook
                 Api.ApiHelper.SetProvider(ApiHelper.LoginProvider.Google);

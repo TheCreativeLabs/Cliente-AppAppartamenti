@@ -272,26 +272,28 @@
     <script type="text/javascript" src="https://unpkg.com/@@fullcalendar/core@4.3.1/locales/en-gb.js"></script>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
             var calendarEl = document.getElementById('nav-calendar');
+            if (calendarEl != null) {
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    plugins: ['dayGrid', 'timeGrid'],
+                    locale: selectedLanguage,
+                    themeSystem: 'bootstrap',
+                    header: {
+                        left: 'title',
+                        center: '',
+                        right: ''
+                    },
+                    footer: {
+                        left: '',
+                        center: '',
+                        right: ''
+                    }
+                });
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid', 'timeGrid'],
-                locale:selectedLanguage,
-                themeSystem: 'bootstrap',
-                header: {
-                    left: 'title',
-                    center: '',
-                    right: ''
-                },
-                footer: {
-                    left: '',
-                    center: '',
-                    right: ''
-                }
-            });
-
-            calendar.render();
+                calendar.render();
+            }
         });
     </script>
 
