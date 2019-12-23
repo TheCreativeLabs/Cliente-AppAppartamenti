@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter.Push;
 //using Microsoft.AppCenter.Push;
 using Syncfusion.SfCalendar.XForms.iOS;
 using Syncfusion.SfPicker.XForms.iOS;
@@ -68,25 +69,12 @@ namespace AppAppartamenti.iOS
             //    UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
             //}
 
-            UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
+            //NUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
 
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
-
-        //public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
-        //{
-        //    var result = Push.DidReceiveRemoteNotification(userInfo);
-        //    if (result)
-        //    {
-        //        completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
-        //    }
-        //    else
-        //    {
-        //        completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
-        //    }
-        //}
 
     }
 }

@@ -35,6 +35,8 @@
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.4.0.39" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.4.0.39" />
+    <PackageReference Include="Microsoft.AppCenter" Version="2.6.4" />
+    <PackageReference Include="Microsoft.AppCenter.Push" Version="2.6.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +76,7 @@
     <Folder Include="Views\DettaglioAnnuncio\" />
     <Folder Include="Notify\" />
     <Folder Include="Views\GeneralCondition\" />
+    <Folder Include="Views\Agenda\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">

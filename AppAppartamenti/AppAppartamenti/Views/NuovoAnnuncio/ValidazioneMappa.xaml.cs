@@ -10,10 +10,11 @@ namespace AppAppartamenti.Views.NuovoAnnuncio
     {
         string indirizzo;
         string comune;
-        public ValidazioneMappa(string Comune, string Indirizzo)
+        Position Position;
+        public ValidazioneMappa(Position position,string Comune, string Indirizzo)
         {
             InitializeComponent();
-
+            Position = position;
             comune = Comune;
             indirizzo = Indirizzo;
         }
@@ -27,7 +28,7 @@ namespace AppAppartamenti.Views.NuovoAnnuncio
 
             try
             {
-                postionList = (await (new Geocoder()).GetPositionsForAddressAsync($"{indirizzo} , {comune}")).ToList();
+                postionList.Add(Position);
             }
             catch (Exception ex)
             {

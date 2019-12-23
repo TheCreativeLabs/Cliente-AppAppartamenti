@@ -95,7 +95,10 @@ namespace AppAppartamenti.Views
             {
                 annuncio.Indirizzo = entIndirizzo.Text;
 
-                await Navigation.PushModalAsync(new ValidazioneMappa(entCercaComune.Text, entIndirizzo.Text), true);
+                Position position = (await (new Geocoder()).GetPositionsForAddressAsync($"{entIndirizzo.Text} , {entCercaComune.Text}")).FirstOrDefault();
+
+                annuncio.CoordinateGeografiche = $"{position.Latitude.ToString()};{position.Longitude.ToString()}";
+                await Navigation.PushModalAsync(new ValidazioneMappa(position,entCercaComune.Text, entIndirizzo.Text), true);
             }
         }
 
