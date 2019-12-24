@@ -57,7 +57,7 @@
                             <li class="nav-item">
                                 <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-info p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List">@_localizer["FavoritesLabel"]</a>
                             </li>
@@ -81,7 +81,7 @@
                                                     <div id="nav-calendar"></div>
                                                 </div>
                                                 <div class="col-5">
-                                                    <a asp-controller="Agenda" asp-action="Detail"  class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
+                                                    <a asp-controller="Agenda" asp-action="Detail" class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
                                                     <ul class="list-group list-group-flush mt-5">
                                                         <li class="list-group-item">Appuntamento 1</li>
                                                         <li class="list-group-item">Appuntamento 2</li>
@@ -110,18 +110,18 @@
                                     <a class="dropdown-item" asp-controller="Setting" asp-action="Detail">@_localizer["SettingsLabel"]</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-share">
-                                            <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+                                        <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)" id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
 
-                                            @{
-                                                if (requestCulture.RequestCulture.UICulture.Name == "en-US")
-                                                {
-                                                    @:English
-                                                }
-                                                else
-                                                {
-                                                    @:Italiano
-                                                }
+                                        @{
+                                            if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                                            {
+                                                @:English
                                             }
+                                            else
+                                            {
+                                                @:Italiano
+                                            }
+                                        }
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" asp-controller="Login" asp-action="LogOut">@_localizer["LogoutLabel"]</a>
@@ -138,18 +138,18 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link text-dark" data-toggle="modal" data-target="#modal-share">
-                                        <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)"id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
+                                    <img src="@string.Format("/images/{0}.png", @requestCulture.RequestCulture.UICulture.Name)" id="profileImage" class="rounded-circle" width="20" height="20" style="margin-top: -5px" />
 
-                                        @{
-                                            if (requestCulture.RequestCulture.UICulture.Name == "en-US")
-                                            {
-                                                @:English
-                                            }
-                                            else
-                                            {
-                                                @:Italiano
-                                            }
+                                    @{
+                                        if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                                        {
+                                            @:English
                                         }
+                                        else
+                                        {
+                                            @:Italiano
+                                        }
+                                    }
                                 </a>
                             </li>
                         }
@@ -161,7 +161,7 @@
 
     @RenderSection("SubHeader", required: false)
 
-     @{await Html.RenderPartialAsync("_ErrorPartial");}
+    @{await Html.RenderPartialAsync("_ErrorPartial");}
 
     <partial name="_CookieConsentPartial" />
 
@@ -173,20 +173,22 @@
     </div>
 
     <div class="modal fade" id="modal-provider-error" tabindex="-1" role="dialog" aria-labelledby="modal-provider-error" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
-                <div class="modal-content ">
-                    <div class="modal-body p-5">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="mt-5">Questa email è associata ad un altro account.<br />
-                        <small class="text-muted">Prova ad accedere con un altro provider</small></h4>
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal" role="document">
+            <div class="modal-content ">
+                <div class="modal-body p-5">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="mt-5">
+                        Questa email è associata ad un altro account.<br />
+                        <small class="text-muted">Prova ad accedere con un altro provider</small>
+                    </h4>
 
-                        <button class="btn btn-primary btn block" onclick="$('#modal-provider-error').modal('hide');$('#modalLogin').modal('show')">Accedi</button>
-                    </div>
+                    <button class="btn btn-primary btn block" onclick="$('#modal-provider-error').modal('hide');$('#modalLogin').modal('show')">Accedi</button>
                 </div>
             </div>
         </div>
+    </div>
 
     <footer class="footer pt-5 bg-dark text-white position-relative">
         <div class="container">
@@ -274,10 +276,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var calendarEl = document.getElementById('nav-calendar');
-            if(calendarEl!=null){
+            if (calendarEl != null) {
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     plugins: ['dayGrid', 'timeGrid'],
-                    locale:selectedLanguage,
+                    locale: selectedLanguage,
                     themeSystem: 'bootstrap',
                     header: {
                         left: 'title',

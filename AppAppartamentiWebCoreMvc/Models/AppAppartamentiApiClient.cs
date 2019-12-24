@@ -17,7 +17,7 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class AccountClient
     {
-        private string _baseUrl = "https://localhost:44305";
+        private string _baseUrl = "https://appappartamentiapi.appregaliapitest.com";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
@@ -1281,7 +1281,7 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class AgendaClient
     {
-        private string _baseUrl = "https://localhost:44305";
+        private string _baseUrl = "https://appappartamentiapi.appregaliapitest.com";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
@@ -1624,7 +1624,7 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class AnnunciClient
     {
-        private string _baseUrl = "https://localhost:44305";
+        private string _baseUrl = "https://appappartamentiapi.appregaliapitest.com";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
@@ -2888,7 +2888,7 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class NotificheClient
     {
-        private string _baseUrl = "https://localhost:44305";
+        private string _baseUrl = "https://appappartamentiapi.appregaliapitest.com";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
@@ -3083,7 +3083,7 @@ namespace AppAppartamentiWebCoreMvc.AppAppartamentiApiClient
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class ValuesClient
     {
-        private string _baseUrl = "https://localhost:44305";
+        private string _baseUrl = "https://appappartamentiapi.appregaliapitest.com";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
