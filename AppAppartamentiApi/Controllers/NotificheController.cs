@@ -21,6 +21,7 @@ using System.Web.Http.Description;
 using System.Data.Entity;
 using System.Web.Http.Results;
 using System.Net;
+using System.Data.Entity.Infrastructure;
 
 namespace AppAppartamentiApi.Controllers
 {
@@ -59,5 +60,44 @@ namespace AppAppartamentiApi.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
+        // PUT: api/Evento/EventoUpdate/1
+        [HttpPut]
+        [Route("UpdateInfoNotification")]
+        [ResponseType(typeof(NotificationInfoDto))]
+        public async Task<IHttpActionResult> UpdateInfoNotification([FromBody]NotificationInfoDto NotificationInfoDto)
+        {
+            //Controllo che i parametri siano valorizzati
+            if (NotificationInfoDto == null || !ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Guid idCurrent = new Guid(User.Identity.GetUserId());
+
+
+
+            //Cerco l'annuncio
+            UserInfo userInfo = await dbDataContext.UserInfo
+                                        .Where(x => x.IdAspNetUser == idCurrent).FirstOrDefaultAsync();
+            if (userInfo == null)
+            {
+                return NotFound();
+            }
+
+            userInfo.OsVersion = NotificationInfoDto.OsVersion;
+            userInfo.InstallationId = NotificationInfoDto.InstallationId;
+
+            try
+            {
+                //Salvo le modifiche sul DB.
+                await dbDataContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return Ok(NotificationInfoDto);
+        }
     }
 }

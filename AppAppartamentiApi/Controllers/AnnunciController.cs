@@ -106,6 +106,7 @@ namespace AppAppartamentiApi.Controllers
                                                 & (cellar == null || cellar == false || x.Cantina == cellar)
                                                 & (pool == null || pool == false || x.Piscina == pool)
                                                 & (elevator == null || elevator == false || x.Ascensore == elevator)
+                                                & x.IdUtente != idCurrent
                                         );
 
             if (orderBy == null || AnnunciOrder.CREATION_DATE_ASC == orderBy)

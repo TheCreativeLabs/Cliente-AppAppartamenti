@@ -24,5 +24,13 @@ namespace AppAppartamentiApi.Models
         public Guid IdAspNetUser { get; set; }
 
         public string PhotoUrl { get; set; }
+
+        public Guid? InstallationId { get; set; }
+
+        [StringLength(16)]
+        public string OsVersion { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RicercheRecenti> RicercheRecenti { get; set; }
     }
 }

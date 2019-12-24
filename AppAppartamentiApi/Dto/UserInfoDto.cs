@@ -22,5 +22,10 @@ namespace AppAppartamentiApi
         public string Email { get; set; }
 
         public string PhotoUrl { get; set; }
+
+        public Guid? InstallationId { get; set; }
+
+        [StringLength(16)]
+        public string OsVersion { get; set; }
     }
 }

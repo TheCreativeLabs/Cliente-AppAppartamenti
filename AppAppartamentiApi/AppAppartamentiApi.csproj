@@ -286,6 +286,7 @@
     <Compile Include="Dto\AnnunciDtoOutput.cs" />
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
     <Compile Include="Dto\AppuntamentoDto.cs" />
+    <Compile Include="Dto\NotificationInfoDto.cs" />
     <Compile Include="Dto\ComuneDto.cs" />
     <Compile Include="Dto\DisponibilitaOrariaDto.cs" />
     <Compile Include="Dto\UserInfoDto.cs" />
@@ -320,6 +321,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImmagineAnnuncio.cs" />
     <Compile Include="Models\ImmaginePlanimetria.cs" />
+    <Compile Include="Models\RicercheRecenti.cs" />
     <Compile Include="Models\StatoProprieta.cs" />
     <Compile Include="Models\TipologiaAnnuncio.cs" />
     <Compile Include="Models\TipologiaProprieta.cs" />
