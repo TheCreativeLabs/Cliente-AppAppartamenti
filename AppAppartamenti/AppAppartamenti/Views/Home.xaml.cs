@@ -20,16 +20,13 @@ namespace AppAppartamenti.Views
         //int notificationNumber = 0;
 
         RicercaModel RicercaModel;
+        AnnunciPersonaliViewModel viewModel;
+
         public Home()
         {
             InitializeComponent();
 
-            //notificationManager = DependencyService.Get<INotificationManager>();
-            //notificationManager.NotificationReceived += (sender, eventArgs) =>
-            //{
-            //    var evtData = (NotificationEventArgs)eventArgs;
-            //    ShowNotification(evtData.Title, evtData.Message);
-            //};
+            BindingContext = viewModel = new AnnunciPersonaliViewModel();
         }
 
         protected override async void OnAppearing()
@@ -52,6 +49,9 @@ namespace AppAppartamenti.Views
                 await Navigation.PushAsync(new ListaAnnunci(RicercaModel));
                 RicercaModel = null;
             }
+
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
         }
 
         private async void entRicerca_Focused(object sender, EventArgs e)

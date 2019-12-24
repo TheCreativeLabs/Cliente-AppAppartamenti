@@ -50,6 +50,7 @@
     
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
+
             <Grid VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*" />
@@ -61,6 +62,7 @@
 
                 <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Margin="0,-50,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
                 <StackLayout>
+
                     <StackLayout HeightRequest="300">
                         <CarouselView ItemsSource="{Binding Item.ImmaginiAnnuncio}" x:Name="Carousel">
                             <CarouselView.ItemTemplate>
@@ -75,9 +77,13 @@
                             </CarouselView.ItemTemplate>
                         </CarouselView>
                     </StackLayout>
+
+
               
                     <Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
                            TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>
+
+
 
                     <StackLayout Padding="20">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -223,7 +229,7 @@
              </ScrollView>
 
                 <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="0,0,0,0" >
-                     <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnBack_Clicked" VerticalOptions="Center"
+                    <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnBack_Clicked" VerticalOptions="Center"
                             FontAttributes="Bold" Text="&#xf053;" HorizontalOptions="StartAndExpand"
                         FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
                     </Button>

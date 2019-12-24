@@ -14,13 +14,13 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MieiAnnunci : ContentPage
     {
-        AnnunciViewModel viewModel;
+        AnnunciPersonaliViewModel viewModel;
 
         public MieiAnnunci()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.MieiAnnunci, null);
+            BindingContext = viewModel = new AnnunciPersonaliViewModel();
         }
 
         protected override void OnAppearing()
@@ -56,8 +56,8 @@ namespace AppAppartamenti.Views
             Button btn = (Button)sender;
             var item = btn.CommandParameter as AnnunciDtoOutput;
 
-            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
             bool answer = await DisplayAlert("Cancellare l'annuncio?", "Procedendo, l'annuncio verrà elimninato definitavamente.", "Si", "No");
+            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
             if (answer)
             {

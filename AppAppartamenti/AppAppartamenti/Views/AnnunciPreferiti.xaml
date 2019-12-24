@@ -31,10 +31,10 @@
                     HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
                     IsPullToRefreshEnabled="true"
-                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                     CachingStrategy="RecycleElement"
                     ItemSelected="OnItemSelected"
                     VerticalScrollBarVisibility="Never"
+                    IsRefreshing="{Binding IsBusy}"
                     SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -25,24 +25,30 @@
 
             <ContentPage.Content>
                 <StackLayout Style="{x:StaticResource StackContainer}">
-                        <Label Style="{x:StaticResource Title}" Text="{translator:Translate Agenda.Title}"></Label>
+                    <Label Style="{x:StaticResource Title}"
+                           Text="{translator:Translate Agenda.Title}"></Label>
 
-                        <syncfusion:SfCalendar x:Name="calendar"  EnableDatesInPast="False">
-                            <syncfusion:SfCalendar.MonthViewSettings>
-                                <syncfusion:MonthViewSettings SelectedDayTextColor="{x:StaticResource PrimaryColor}">
-                                </syncfusion:MonthViewSettings>
-                            </syncfusion:SfCalendar.MonthViewSettings>
-                        </syncfusion:SfCalendar>
+                    <syncfusion:SfCalendar x:Name="calendar"
+                                           EnableDatesInPast="False" 
+                                       ShowLeadingAndTrailingDays="False"
+                                       ShowNavigationButtons="True">
+                        <syncfusion:SfCalendar.MonthViewSettings>
+                            <syncfusion:MonthViewSettings TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
+                            </syncfusion:MonthViewSettings>
+                        </syncfusion:SfCalendar.MonthViewSettings>
+                    </syncfusion:SfCalendar>
 
-                        <StackLayout BackgroundColor="Red" HeightRequest="300">
+                    <Label Text="Appuntamenti" Style="{x:StaticResource AdTitle}" Margin="0,-40,0,0"></Label>
 
-                  
+                    <ListView x:Name="lwAppuntamenti" SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
 
-                  
-
-
-                        </StackLayout>
-                      </StackLayout>
-
+                                    </ViewCell>
+                                </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
             </ContentPage.Content>
 </ContentPage>

@@ -50,24 +50,22 @@ namespace AppAppartamenti.ViewModels
 
     public class AnnunciViewModel : BaseViewModel, INotifyPropertyChanged
     {
+        private int CurrentPage = 1;
+        private int PageSize = 5;
+
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command LoadMore { get; set; }
         public Command AddPreferito { get; set; }
         public Command RimuoviPreferito { get; set; }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private TipiRicerca TipoRicerca { get; set; }
-        private int CurrentPage = 1;
-        private int PageSize = 5;
+      
         RicercaModel FiltriRicerca { get; set; }
 
-        public AnnunciViewModel(TipiRicerca tipoRicerca, RicercaModel FiltriRicercaParam)
+        public AnnunciViewModel(RicercaModel FiltriRicercaParam)
         {
             FiltriRicerca = FiltriRicercaParam;
-            TipoRicerca = tipoRicerca;
 
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -115,11 +113,7 @@ namespace AppAppartamenti.ViewModels
             }
             finally
             {
-                //In questo modo capisco se ci sono ancora record da caricare
-                //if(news != null && news.Count == PageSize )
-                //{
-                    IsBusy = false;
-                //}
+                IsBusy = false;
             }
         }
 
@@ -172,25 +166,14 @@ namespace AppAppartamenti.ViewModels
             OnpropertyChanged("Items");
         }
 
-        private Task<string> DisplayActionSheet(string v1, string v2, object p, string v3, string v4)
-        {
-            throw new NotImplementedException();
-        }
 
         private async Task<ICollection<AnnunciDtoOutput>> GetAnnunci()
         {
             AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
             ICollection<AnnunciDtoOutput> listaAnnunci = null;
-
-            if (TipoRicerca == TipiRicerca.MieiAnnunci)
-            {
-                listaAnnunci = await annunciClient.GetAnnunciByUserAsync(CurrentPage, PageSize); //quando ricarico prendo la prima pagina
-            }
-            else if (TipoRicerca == TipiRicerca.Tutti)
-            {
-                listaAnnunci = await annunciClient.GetAnnunciAsync(CurrentPage, PageSize, FiltriRicerca.TipologiaAnnuncio, FiltriRicerca.TipologiaProprieta, FiltriRicerca.Comune.CodiceComune, FiltriRicerca.MinPrice, FiltriRicerca.MaxPrice,FiltriRicerca.MinSurface, FiltriRicerca.MaxSurface, FiltriRicerca.NumCamereLetto, FiltriRicerca.NumBagni, FiltriRicerca.NumCucine, FiltriRicerca.NumPostiAuto, FiltriRicerca.NumGarage,FiltriRicerca.Giardino, FiltriRicerca.Terrazzo, FiltriRicerca.Cantina, FiltriRicerca.Piscina, FiltriRicerca.Ascensore,null);
-            }
+            
+             listaAnnunci = await annunciClient.GetAnnunciAsync(CurrentPage, PageSize, FiltriRicerca.TipologiaAnnuncio, FiltriRicerca.TipologiaProprieta, FiltriRicerca.Comune.CodiceComune, FiltriRicerca.MinPrice, FiltriRicerca.MaxPrice,FiltriRicerca.MinSurface, FiltriRicerca.MaxSurface, FiltriRicerca.NumCamereLetto, FiltriRicerca.NumBagni, FiltriRicerca.NumCucine, FiltriRicerca.NumPostiAuto, FiltriRicerca.NumGarage,FiltriRicerca.Giardino, FiltriRicerca.Terrazzo, FiltriRicerca.Cantina, FiltriRicerca.Piscina, FiltriRicerca.Ascensore,null);
 
             return listaAnnunci;
         }
