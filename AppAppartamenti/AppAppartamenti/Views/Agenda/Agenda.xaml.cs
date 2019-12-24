@@ -13,16 +13,19 @@ using AppAppartamenti.ViewModels;
 
 namespace AppAppartamenti.Views
 {
+
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class Agenda : ContentPage
     {
+        AppuntamentiViewModel viewModel;
 
         public Agenda()
         {
             InitializeComponent();
 
+           BindingContext = viewModel = new AppuntamentiViewModel(DateTime.Now);
 
             //TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
             //picker.ItemsSource = timeSlotViewModel.Time;

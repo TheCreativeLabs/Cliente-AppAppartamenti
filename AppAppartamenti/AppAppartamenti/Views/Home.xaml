@@ -40,7 +40,7 @@
                     </appappartamenti:ShadowFrame>
 
                     <StackLayout Orientation="Vertical" Margin="0,20,0,0">
-                        <Label Style="{x:StaticResource Title}" Text="Aggiunti di recente"></Label>
+                        <Label Style="{x:StaticResource Subtitle}" Text="Aggiunti di recente"></Label>
 
                         <StackLayout HeightRequest="300"
                                      Orientation="Horizontal"
@@ -79,7 +79,7 @@
                             </StackLayout>
                     </StackLayout>
 
-                    <Label Style="{x:StaticResource Title}" Margin="0,30,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
+                    <Label Style="{x:StaticResource Subtitle}" Margin="0,30,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
                     <Button Text="Pubblica un annuncio" Style="{x:StaticResource primaryButton}"></Button>
                 </StackLayout>
             </ScrollView>
