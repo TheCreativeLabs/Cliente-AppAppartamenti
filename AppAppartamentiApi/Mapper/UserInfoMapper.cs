@@ -19,6 +19,8 @@ namespace AppAppartamentiApi.Models
             userInfoDto.IdAspNetUser = userInfo.IdAspNetUser;
             userInfoDto.Email = email;
             userInfoDto.PhotoUrl = userInfo.PhotoUrl;
+            userInfoDto.InstallationId = userInfo.InstallationId;
+            userInfoDto.OsVersion = userInfo.OsVersion;
             return userInfoDto;
         }
     }
