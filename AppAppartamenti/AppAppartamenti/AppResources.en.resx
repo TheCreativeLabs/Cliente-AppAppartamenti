@@ -205,7 +205,7 @@
     <value>Surname</value>
   </data>
   <data name="Registrazione.DataNascita" xml:space="preserve">
-    <value>Date of birth</value>
+    <value>Birth date</value>
   </data>
   <data name="Registrazione.MessaggioCampoObbligatorio" xml:space="preserve">
     <value>Required field</value>
@@ -234,7 +234,7 @@
   <data name="Restore.Titolo" xml:space="preserve">
     <value>Recover your password</value>
   </data>
-     <data name="Restore.Subtitle" xml:space="preserve">
+  <data name="Restore.Subtitle" xml:space="preserve">
     <value>Enter the email address associated with your account and we'll send you a new password.</value>
   </data>
   <data name="Account.InformazioniPersonali" xml:space="preserve">
@@ -327,7 +327,7 @@
   <data name="Home.RecentSearch" xml:space="preserve">
     <value>Search history</value>
   </data>
-    <data name="Home.Shortcut" xml:space="preserve">
+  <data name="Home.Shortcut" xml:space="preserve">
     <value>Shartcut</value>
   </data>
   <data name="Home.StartSearch" xml:space="preserve">
@@ -363,10 +363,10 @@
   <data name="Ricerca.ParkingSpaces" xml:space="preserve">
     <value>Parking spaces</value>
   </data>
-    <data name="Ricerca.Garages" xml:space="preserve">
+  <data name="Ricerca.Garages" xml:space="preserve">
     <value>Garages</value>
   </data>
-     <data name="Ricerca.kitchens" xml:space="preserve">
+  <data name="Ricerca.kitchens" xml:space="preserve">
     <value>kitchens</value>
   </data>
   <data name="Ricerca.Price" xml:space="preserve">
@@ -381,10 +381,10 @@
   <data name="Ricerca.RoomsSection" xml:space="preserve">
     <value>Rooms</value>
   </data>
-     <data name="Ricerca.Other" xml:space="preserve">
+  <data name="Ricerca.Other" xml:space="preserve">
     <value>Other</value>
   </data>
-          <data name="Ricerca.Badrooms" xml:space="preserve">
+  <data name="Ricerca.Badrooms" xml:space="preserve">
     <value>Badrooms</value>
   </data>
   <data name="Ricerca.Sale" xml:space="preserve">
@@ -396,7 +396,7 @@
   <data name="Ricerca.Search" xml:space="preserve">
     <value>Search</value>
   </data>
-      <data name="Ricerca.PropertyType" xml:space="preserve">
+  <data name="Ricerca.PropertyType" xml:space="preserve">
     <value>Property Type</value>
   </data>
   <data name="Ricerca.SearchPlaceholder" xml:space="preserve">
@@ -714,20 +714,43 @@
   <data name="Login.Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
-    <data name="NuovoAppuntamento.Title" xml:space="preserve">
+  <data name="NuovoAppuntamento.Title" xml:space="preserve">
     <value>take new appointment</value>
   </data>
-    
   <data name="SelezioneFasceOrarie.Subtitle" xml:space="preserve">
     <value>Seleziona i giorni e le fasce orarie in cui sei disponibile per ricevere appuntamenti</value>
   </data>
-     <data name="Registrazione.DataNascita" xml:space="preserve">
-    <value>Birth date</value>
-  </data>
-      <data name="MainPage.Agenda" xml:space="preserve">
+  <data name="MainPage.Agenda" xml:space="preserve">
     <value>Agenda</value>
   </data>
-     <data name="Agenda.Title" xml:space="preserve">
+  <data name="Agenda.Title" xml:space="preserve">
     <value>La mia agenda</value>
+  </data>
+  <data name="NuovoAppuntamento.ConfirmNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NuovoAppuntamento.ConfirmText1" xml:space="preserve">
+    <value>Do you want to confirm the appointment on </value>
+  </data>
+  <data name="NuovoAppuntamento.ConfirmText2" xml:space="preserve">
+    <value> at </value>
+  </data>
+  <data name="NuovoAppuntamento.ConfirmText3" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="NuovoAppuntamento.ConfirmTitle" xml:space="preserve">
+    <value>Confirm appointment</value>
+  </data>
+  <data name="NuovoAppuntamento.ConfirmYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="NuovoAppuntamento.SuccessOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="NuovoAppuntamento.SuccessText" xml:space="preserve">
+    <value>Your appointment request has been sent</value>
+  </data>
+  <data name="NuovoAppuntamento.SuccessTitle" xml:space="preserve">
+    <value>Request sent</value>
   </data>
 </root>

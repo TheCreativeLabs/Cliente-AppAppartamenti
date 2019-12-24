@@ -61,7 +61,7 @@ namespace AppAppartamenti.Views
 
             if (answer)
             {
-                //await annunciClient.DeleteAnnuncio(item.Id.Value);
+                await annunciClient.DeleteAnnuncioAsync(item.Id.Value);
                 viewModel.Items.Remove(item);
             }
         }
