@@ -11,17 +11,12 @@ namespace AppAppartamenti.Views
         public EnableNotification()
         {
             InitializeComponent();
-
-
         }
 
         private async void btnEnable_ClickedAsync(object sender, EventArgs e)
         {
-            getId();
-
             ApiHelper.SetNotificationStatus(true);
             Application.Current.MainPage = new MainPage();
-
         }
 
         private async void getId()
