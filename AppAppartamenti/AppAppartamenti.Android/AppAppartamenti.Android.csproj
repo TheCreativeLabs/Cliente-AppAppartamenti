@@ -88,6 +88,12 @@
     <PackageReference Include="Syncfusion.Xamarin.SfPicker">
       <Version>17.4.0.39</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter">
+      <Version>2.6.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Push">
+      <Version>2.6.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryCustomRenderer.cs" />

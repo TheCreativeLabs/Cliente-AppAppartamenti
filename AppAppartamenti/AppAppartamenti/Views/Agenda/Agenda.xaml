@@ -34,14 +34,14 @@
                             </syncfusion:SfCalendar.MonthViewSettings>
                         </syncfusion:SfCalendar>
 
-                    <StackLayout BackgroundColor="Red" HeightRequest="300">
+                        <StackLayout BackgroundColor="Red" HeightRequest="300">
 
                   
 
                   
 
 
-                </StackLayout>
+                        </StackLayout>
                       </StackLayout>
 
             </ContentPage.Content>
