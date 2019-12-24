@@ -2,24 +2,14 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
 using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
-
 namespace AppAppartamenti.ViewModels
 {
-    public class appuntamento
-	{
-        public DateTime DataAppuntamento { get; set; }
-		public string Luogo { get; set; }
-		public string Partecipante { get; set; }
-	}
-
-	public class AppuntamentiViewModel : BaseViewModel
+    public class AppuntamentiViewModel : BaseViewModel
     {
         private DateTime SelectedDate { get; set; }
         public ObservableCollection<appuntamento> Items { get; set; }
@@ -27,7 +17,7 @@ namespace AppAppartamenti.ViewModels
 
         public AppuntamentiViewModel(DateTime SelectedDay)
         {
-			SelectedDate = SelectedDay;
+            SelectedDate = SelectedDay;
             Items = new ObservableCollection<appuntamento>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
@@ -45,12 +35,12 @@ namespace AppAppartamenti.ViewModels
 
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
-				//listaAnnunci = await annunciClient.GetAnnunciByUserAsync(1,1000);
+                //listaAnnunci = await annunciClient.GetAnnunciByUserAsync(1,1000);
 
-				for (int i = 0; i < 4; i++)
-				{
-					items.Add(new appuntamento() { DataAppuntamento = DateTime.Now(), Luogo = "Bologna", "Matteo" });
-				}
+                for (int i = 0; i < 4; i++)
+                {
+                    Items.Add(new appuntamento() { DataAppuntamento = DateTime.Now, Luogo = "Bologna",Partecipante= "Matteo" });
+                }
             }
             catch (Exception ex)
             {
@@ -66,5 +56,12 @@ namespace AppAppartamenti.ViewModels
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class appuntamento
+    {
+        public DateTime DataAppuntamento { get; set; }
+        public string Luogo { get; set; }
+        public string Partecipante { get; set; }
     }
 }

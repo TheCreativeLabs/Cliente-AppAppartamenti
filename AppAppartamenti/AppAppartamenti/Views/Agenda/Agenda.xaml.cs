@@ -19,15 +19,13 @@ namespace AppAppartamenti.Views
     [DesignTimeVisible(false)]
     public partial class Agenda : ContentPage
     {
-        //AppuntamentiViewModel viewModel;
+        AppuntamentiViewModel viewModel;
 
         public Agenda()
         {
             InitializeComponent();
 
-           // BindingContext = viewModel = new AppuntamentiVieModel(DateTime.Now());
-            
-
+           BindingContext = viewModel = new AppuntamentiViewModel(DateTime.Now);
 
             //TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
             //picker.ItemsSource = timeSlotViewModel.Time;

@@ -40,11 +40,13 @@
 
                     <Label Text="Appuntamenti" Style="{x:StaticResource AdTitle}" Margin="0,-40,0,0"></Label>
 
-                    <ListView x:Name="lwAppuntamenti" SeparatorVisibility="None">
+                    <ListView x:Name="lwAppuntamenti" SeparatorVisibility="None" ItemsSource="{Binding Items}">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-
+                                        <Frame>
+                                            <Label Text="PorcoDio"></Label>
+                                        </Frame>
                                     </ViewCell>
                                 </DataTemplate>
                         </ListView.ItemTemplate>
