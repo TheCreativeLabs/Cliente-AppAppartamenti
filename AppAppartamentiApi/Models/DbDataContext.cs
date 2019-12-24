@@ -28,6 +28,8 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<Video> Video { get; set; }
         public virtual DbSet<Appuntamento> Appuntamento { get; set; }
         public virtual DbSet<FasceOrarie> FasceOrarie { get; set; }
+        public virtual DbSet<RicercheRecenti> RicercheRecenti { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -75,6 +77,12 @@ namespace AppAppartamentiApi.Models
                 .WithOptional(e => e.Comuni)
                 .HasForeignKey(e => e.ComuneCodice);
 
+            modelBuilder.Entity<Comuni>()
+                .HasMany(e => e.RicercheRecenti)
+                .WithRequired(e => e.Comune)
+                .HasForeignKey(e => e.CodiceComune)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<StatoProprieta>()
                 .HasMany(e => e.Annuncio)
                 .WithOptional(e => e.StatoProprieta)
@@ -108,6 +116,14 @@ namespace AppAppartamentiApi.Models
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserInfo>()
+                .HasMany(e => e.RicercheRecenti)
+                .WithRequired(e => e.UserInfo)
+                .HasForeignKey(e => e.IdAspNetUser)
+                .WillCascadeOnDelete(false);
+
+
         }
     }
 }
