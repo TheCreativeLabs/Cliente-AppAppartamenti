@@ -53,8 +53,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             var annunci = await annunciClient.GetAnnunciAsync(ListPage, pageSize, FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
                 FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
-                FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage,FilterModel.Giardino,null,FilterModel.Cantina,
-                FilterModel.Piscina,FilterModel.Ascensore, null);
+                FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage, FilterModel.NumeroAltreStanze, FilterModel.Giardino,null,FilterModel.Cantina,
+                FilterModel.Piscina,FilterModel.Ascensore, FilterModel.Condizionatori, null); //todo penultimo parametro condizionatori
 
             ICollection<AnnunciDtoOutput> listaAnnunci;
             if (ListPage == 1)
