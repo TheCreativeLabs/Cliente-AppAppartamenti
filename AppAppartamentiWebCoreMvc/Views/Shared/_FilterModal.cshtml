@@ -24,24 +24,24 @@
 
 
                                 @Html.DropDownListFor(m => m.IdTipologiaProprieta,
-                                            new SelectList(listaTipologiaAnnuncio,"Id","Descrizione",Model?.IdTipologiaAnnuncio),
-                                            null,new {@id="selectTipologiaAnnuncio", @class = "custom-select" })
-                              
+                                            new SelectList(listaTipologiaAnnuncio, "Id", "Descrizione", Model?.IdTipologiaAnnuncio),
+                                            null, new { @id = "selectTipologiaAnnuncio", @class = "custom-select" })
+
                             }
                         </div>
 
                         <div class="col-12 mb-4">
                             <label class="h6">@_localizer["PropertyType"]</label>
 
-                            @{ 
+                            @{
 
-                                    IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
+                                IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
 
-                                          @Html.DropDownListFor(m => m.IdTipologiaProprieta,
-                                            new SelectList(tipologiaProprieta,"Id","Descrizione",Model?.IdTipologiaProprieta),
-                                             "Tutti",new {@id="selectTipologiaProprieta", @class = "custom-select" })
+                                @Html.DropDownListFor(m => m.IdTipologiaProprieta,
+                                  new SelectList(tipologiaProprieta, "Id", "Descrizione", Model?.IdTipologiaProprieta),
+                                   "Tutti", new { @id = "selectTipologiaProprieta", @class = "custom-select" })
 
-                          }
+                            }
 
                         </div>
 
@@ -69,7 +69,7 @@
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled  id="NumeroBagni" name="NumeroBagni" value="@Model?.NumeroBagni">
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroBagni" name="NumeroBagni" value="@Model?.NumeroBagni">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -79,8 +79,8 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-4 mb-4">
-                           <label class="h6">@_localizer["BedroomNumber"]</label>
-                            
+                            <label class="h6">@_localizer["BedroomNumber"]</label>
+
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCamereLetto">
@@ -141,7 +141,7 @@
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroGarage"  name="NumeroGarage" value="@Model?.NumeroGarage">
+                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroGarage" name="NumeroGarage" value="@Model?.NumeroGarage">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -195,6 +195,14 @@
                                 <label class="custom-control-label" for="customSwitchGiardino">@_localizer["Gardens"]</label>
                             </div>
                         </div>
+
+                        <div class="col-12 mb-4">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitchGiardino" checked="@Model?.Condizionatori">
+                                <label class="custom-control-label" for="customSwitchGiardino">@_localizer["AirConditioners"]</label>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -39,5 +39,7 @@ namespace AppAppartamentiWebCoreMvc.Models
         public bool Giardino { get; set; }
 
         public bool Piscina { get; set; }
+
+        public bool Condizionatori { get; set; }
     }
 }
