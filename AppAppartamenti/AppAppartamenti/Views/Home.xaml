@@ -70,7 +70,7 @@
                     </StackLayout>
 
                     <Label Style="{x:StaticResource Title}" Margin="0,20,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
-                    <Button Text="Pubblica un annuncio" Style="{x:StaticResource SecondaryButton}"></Button>
+                <Button Text="Pubblica un annuncio" x:Name="btnNuovoAnnuncio" Style="{x:StaticResource SecondaryButton}" Clicked="btnNuovoAnnuncio_Clicked"></Button>
                 </StackLayout>
             </ScrollView>
     </ContentPage.Content>

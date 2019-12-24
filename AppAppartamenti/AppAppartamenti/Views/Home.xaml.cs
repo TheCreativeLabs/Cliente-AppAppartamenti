@@ -59,28 +59,33 @@ namespace AppAppartamenti.Views
             await Navigation.PushModalAsync(new Ricerca());
         }
 
-        //async void BtnAdd_Clicked(object sender, EventArgs e)
-        //{
-        //    notificationNumber++;
-        //    string title = $"Local Notification #{notificationNumber}";
-        //    string message = $"You have now received {notificationNumber} notifications!";
-        //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
-        //}
+        private async void btnNuovoAnnuncio_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(null))); //è un nuovo annuncio, non devo passare l'annuncio da modificare
+        }
 
-        //async void OnScheduleClick(object sender, EventArgs e)
-        //{
-        //    notificationNumber++;
-        //    string title = $"Local Notification #{notificationNumber}";
-        //    string message = $"You have now received {notificationNumber} notifications!";
-        //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
-        //}
+            //async void BtnAdd_Clicked(object sender, EventArgs e)
+            //{
+            //    notificationNumber++;
+            //    string title = $"Local Notification #{notificationNumber}";
+            //    string message = $"You have now received {notificationNumber} notifications!";
+            //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
+            //}
 
-        //void ShowNotification(string title, string message)
-        //{
-        //    Device.BeginInvokeOnMainThread(async () =>
-        //    {
-        //           await DisplayAlert("Notifica",$"Notification Received:\nTitle: {title}\nMessage: {message}","OK");
-        //    });
-        //}
-    }
+            //async void OnScheduleClick(object sender, EventArgs e)
+            //{
+            //    notificationNumber++;
+            //    string title = $"Local Notification #{notificationNumber}";
+            //    string message = $"You have now received {notificationNumber} notifications!";
+            //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
+            //}
+
+            //void ShowNotification(string title, string message)
+            //{
+            //    Device.BeginInvokeOnMainThread(async () =>
+            //    {
+            //           await DisplayAlert("Notifica",$"Notification Received:\nTitle: {title}\nMessage: {message}","OK");
+            //    });
+            //}
+        }
 }
