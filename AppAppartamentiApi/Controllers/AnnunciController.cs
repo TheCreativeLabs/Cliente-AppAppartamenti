@@ -21,6 +21,8 @@ namespace AppAppartamentiApi.Controllers
     {
         private DbDataContext dbDataContext = new DbDataContext();
 
+        private int recentiSize = 5;
+
         public enum AnnunciOrder
         {
             PRICE_ASC = 0,
@@ -63,7 +65,7 @@ namespace AppAppartamentiApi.Controllers
         [HttpGet]
         [Route("Annunci")]
         [ResponseType(typeof(List<AnnunciDtoOutput>))]
-        public List<AnnunciDtoOutput> GetAnnunci(int pageNumber, int pageSize,
+        public async Task<List<AnnunciDtoOutput>> GetAnnunci(int pageNumber, int pageSize,
                                                        Guid? idTipologiaAnnuncio = null,
                                                        Guid? idTipologiaProprieta = null,
                                                        int? comuneCodice = null,
@@ -76,11 +78,13 @@ namespace AppAppartamentiApi.Controllers
                                                        int? kitchens = null,
                                                        int? parkingSpaces = null,
                                                        int? garages = null,
+                                                       int? otherRooms = null,
                                                        bool? backyard = null,
                                                        bool? terrace = null,
                                                        bool? cellar = null,
                                                        bool? pool = null,
                                                        bool? elevator = null,
+                                                       bool? airConditioners = null,
                                                        AnnunciOrder? orderBy = null)
         { //FIXME CONDIZIONATORI + ALTRE STANZE
 
@@ -101,11 +105,13 @@ namespace AppAppartamentiApi.Controllers
                                                 & (kitchens == null || x.NumeroCucine >= kitchens)
                                                 & (parkingSpaces == null || x.NumeroPostiAuto >= parkingSpaces)
                                                 & (garages == null || x.NumeroGarage >= garages)
+                                                & (otherRooms == null || x.NumeroAltreStanze >= otherRooms)
                                                 & (backyard == null || backyard == false || x.Giardino == backyard)
                                                 & (terrace == null || terrace  == false || x.Balcone == terrace)
                                                 & (cellar == null || cellar == false || x.Cantina == cellar)
                                                 & (pool == null || pool == false || x.Piscina == pool)
                                                 & (elevator == null || elevator == false || x.Ascensore == elevator)
+                                                & (airConditioners == null || airConditioners == false || x.Condizionatori == airConditioners)
                                                 & x.IdUtente != idCurrent
                                         );
 
@@ -167,6 +173,22 @@ namespace AppAppartamentiApi.Controllers
             {
                 x.ImmaginePrincipale = dbDataContext.ImmagineAnnuncio.Where(i => i.IdAnnuncio == x.Id).Select(i => i.Immagine).FirstOrDefault();
             });
+
+            //salvo l'ultima ricerca dell'utente
+            if(comuneCodice != null) { 
+                RicercheRecenti ricercheRecenti = await dbDataContext.RicercheRecenti.Where(x => x.IdAspNetUser == idCurrent).FirstOrDefaultAsync();
+                if (ricercheRecenti == null)
+                {
+                    ricercheRecenti = new RicercheRecenti()
+                    {
+                        Id = Guid.NewGuid(),
+                        IdAspNetUser = idCurrent
+                    };
+                }
+                ricercheRecenti.CodiceComune = (int) comuneCodice;
+                await dbDataContext.SaveChangesAsync();
+            }
+
             return annunci;
         }
 
@@ -278,6 +300,43 @@ namespace AppAppartamentiApi.Controllers
             });
 
             return annunci;
+        }
+
+        [HttpGet]
+        [Route("RicercheRecentiCurrent")]
+        [ResponseType(typeof(List<AnnunciDtoOutput>))]
+        public async Task<List<AnnunciDtoOutput>> GetRicercheRecentiCurrentAsync()
+        {
+            var idCurrent = new Guid(User.Identity.GetUserId());
+
+            int codiceComuneLast = await dbDataContext.RicercheRecenti.Where(x => x.IdAspNetUser == idCurrent).Select(x => x.CodiceComune).FirstOrDefaultAsync();
+
+            List<AnnunciDtoOutput> annunci = dbDataContext.Annuncio
+                                                .Include(x => x.Comuni)
+                                                .Include(x => x.ImmagineAnnuncio)
+                                                .Where(x => x.ComuneCodice == codiceComuneLast && x.IdUtente != idCurrent)
+                                                .OrderBy(x => x.DataCreazione)
+                                                .Take(recentiSize)
+                                             .Select(annuncio => new AnnunciDtoOutput()
+                                             {
+                                                 Id = annuncio.Id,
+                                                 IdUtente = annuncio.IdUtente,
+                                                 DataCreazione = annuncio.DataCreazione,
+                                                 DataModifica = annuncio.DataModifica,
+                                                 CodiceComune = annuncio.ComuneCodice,
+                                                 NomeComune = annuncio.Comuni.NomeComune,
+                                                 Indirizzo = annuncio.Indirizzo,
+                                                 Prezzo = annuncio.Prezzo,
+                                                 Superficie = annuncio.Superficie,
+                                                 Descrizione = annuncio.Descrizione,
+                                                 TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
+                                                 TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
+                                                 Completato = annuncio.Completato,
+                                                 Cancellato = annuncio.Cancellato,
+                                                 ImmaginePrincipale = annuncio.ImmagineAnnuncio != null ? annuncio.ImmagineAnnuncio.First().Immagine : null
+                                             }).ToList();
+
+           return annunci;
         }
 
         // GET api/Annunci/AggiungiPreferito/?id=1
