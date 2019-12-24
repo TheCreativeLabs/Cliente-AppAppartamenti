@@ -26,22 +26,24 @@ namespace AppAppartamenti.Views
             InitializeComponent();
 
            BindingContext = viewModel = new AppuntamentiViewModel(DateTime.Now);
-
-            //TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
-            //picker.ItemsSource = timeSlotViewModel.Time;
-            //picker.ColumnHeaderText = timeSlotViewModel.Header;
         }
 
-        private async void BtnBack_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            try
-            {
-                //picker.IsOpen = true;
-            }
-            catch (Exception Ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
+            base.OnAppearing();
+
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        public void OnDataCalendarSelected(object sender, SelectionChangedEventArgs e)
+        {
+            Syncfusion.SfCalendar.XForms.SfCalendar cal = (Syncfusion.SfCalendar.XForms.SfCalendar)sender;
+            DateTime? currentDate = cal.SelectedDate;
+
+            if (currentDate.HasValue) { 
+                viewModel = new AppuntamentiViewModel(currentDate.Value);
+                viewModel.LoadItemsCommand.Execute(null);
             }
         }
     }
