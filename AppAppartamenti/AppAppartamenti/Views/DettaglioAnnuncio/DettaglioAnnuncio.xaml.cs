@@ -71,9 +71,6 @@ namespace AppAppartamenti.Views
             {
                 map.IsVisible = false;
             }
-
-
-         
         }
 
         async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)

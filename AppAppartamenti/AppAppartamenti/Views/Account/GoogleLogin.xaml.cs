@@ -26,7 +26,7 @@ namespace AppAppartamenti.Views.Account
 
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
-            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/", true).Result.First();
+            ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/GoogleLoading", true).Result.First();
             string apiRequest = $"{AppSetting.ApiEndpoint.Replace(".com/", ".com")}{externalLoginViewModel.Url}";
             apiRequest = apiRequest.Replace("www.", "");
             ApiRequest = apiRequest;

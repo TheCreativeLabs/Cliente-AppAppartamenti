@@ -24,7 +24,7 @@ namespace AppAppartamenti.Views
 
             FiltriRicerca = FiltriRicercaParam;
 
-            BindingContext = viewModel = new AnnunciViewModel(TipiRicerca.Tutti, FiltriRicerca);
+            BindingContext = viewModel = new AnnunciViewModel(FiltriRicerca);
         }
 
         protected override void OnAppearing()
@@ -38,7 +38,7 @@ namespace AppAppartamenti.Views
                     FiltriRicerca = JsonConvert.DeserializeObject<RicercaModel>(arg);
                 }
 
-                viewModel = new AnnunciViewModel(TipiRicerca.Tutti, FiltriRicerca);
+                viewModel = new AnnunciViewModel(FiltriRicerca);
             });
 
             if (viewModel.Items.Count == 0)

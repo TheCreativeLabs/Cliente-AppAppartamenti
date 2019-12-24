@@ -9,8 +9,18 @@
              x:Class="AppAppartamenti.Views.Home"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{x:StaticResource SfondoColor}"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              ios:Page.UseSafeArea="true">
+
+      <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+            <conv:PrezzoConverter x:Key="PrezzoConverter" />
+            <conv:BooleanConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
     <ContentPage.Content>
         <ScrollView>
                 <StackLayout Style="{x:StaticResource StackContainer}">
@@ -30,47 +40,47 @@
                     </appappartamenti:ShadowFrame>
 
                     <StackLayout Orientation="Vertical" Margin="0,20,0,0">
-                        <Label Style="{x:StaticResource Title}" Text="{translator:Translate Home.RecentSearch}"></Label>
+                        <Label Style="{x:StaticResource Title}" Text="Aggiunti di recente"></Label>
 
-                        <StackLayout Orientation="Horizontal" HeightRequest="150">
-                                <CollectionView>
+                        <StackLayout HeightRequest="300"
+                                     Orientation="Horizontal"
+                                 >
+                                     
+                                <CollectionView ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" />
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid Padding="5">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="130"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="130" />
-                                                </Grid.ColumnDefinitions>
-                                                <Frame HeightRequest="120" Padding="0" WidthRequest="120" HasShadow="True" Visual="Material" CornerRadius="20"  BackgroundColor="White">
-                                                    <StackLayout>
-                                                       <Label Text="Bologna" Margin="10" ></Label>
-                                                    </StackLayout>
-                                                </Frame>
-                                            </Grid>
+                                            <StackLayout WidthRequest="300" Padding="5">
+                                
+                                <Frame HasShadow="False" Visual="Material" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
+                                    <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                </Frame>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
+                                <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
+                                <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
+                            </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding NomeComune, StringFormat='{0},'}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                <Label Text="{Binding Indirizzo}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
+                                </StackLayout>
+                        </StackLayout>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
-                                    <CollectionView.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Baboon</x:String>
-                                            <x:String>Capuchin Monkey</x:String>
-                                            <x:String>Blue Monkey</x:String>
-                                            <x:String>Squirrel Monkey</x:String>
-                                            <x:String>Golden Lion Tamarin</x:String>
-                                            <x:String>Howler Monkey</x:String>
-                                            <x:String>Japanese Macaque</x:String>
-                                        </x:Array>
-                                    </CollectionView.ItemsSource>
                                 </CollectionView>
                             </StackLayout>
                     </StackLayout>
 
-                    <Label Style="{x:StaticResource Title}" Margin="0,20,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
-                <Button Text="Pubblica un annuncio" x:Name="btnNuovoAnnuncio" Style="{x:StaticResource SecondaryButton}" Clicked="btnNuovoAnnuncio_Clicked"></Button>
+                    <Label Style="{x:StaticResource Title}" Margin="0,30,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
+                    <Button Text="Pubblica un annuncio" Style="{x:StaticResource primaryButton}"></Button>
                 </StackLayout>
             </ScrollView>
     </ContentPage.Content>
