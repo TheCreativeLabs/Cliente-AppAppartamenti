@@ -602,47 +602,55 @@ namespace AppAppartamentiApi.Controllers
             return Ok(AnnuncioDtoOutput.MapperAnnuncio(annuncio, false)); //l'annuncio  è dell'utente corrente quindi non ha senso che sia tra suoi preferiti: passo sempre preferito = false
         }
 
-        // DELETE: api/Evento/AnnuncioDelete/5
-        //[HttpDelete]
-        //[Route("AnnuncioDelete/{id}")]
-        //[ResponseType(typeof(AnnuncioDtoOutput))]
-        //public async Task<IHttpActionResult> DeleteAnnuncio(Guid Id)
-        //{
-        //    Annuncio annuncio = await dbDataContext.Annuncio
-        //                                        .Include(x => x.Regalo)
-        //                                        .Include(x => x.Regalo.Select(y => y.ImmagineRegalo))
-        //                                        .Include(x => x.ImmagineAnnuncio)
-        //                                        .FirstOrDefaultAsync(x => x.Id == Id);
-        //    if (annuncio == null)
-        //    {
-        //        return NotFound();
-        //    }
+        //DELETE: api/Evento/AnnuncioDelete/5
+        [HttpDelete]
+        [Route("AnnuncioDelete/{id}")]
+        [ResponseType(typeof(AnnuncioDtoOutput))]
+        public async Task<IHttpActionResult> DeleteAnnuncio(Guid Id)
+        {
+            Annuncio annuncio = await dbDataContext.Annuncio
+                                                .Include(x => x.ImmagineAnnuncio)
+                                                .Include(x => x.ImmaginiPlanimetria)
+                                                .Include(x => x.Appuntamenti)
+                                                .Include(x => x.Video)
+                                                .Include(x => x.AnnuncioMessaggi)
+                                                .FirstOrDefaultAsync(x => x.Id == Id);
+            if (annuncio == null)
+            {
+                return NotFound();
+            }
 
-        //    if (annuncio.ImmagineAnnuncio != null)
-        //    {
-        //        dbDataContext.ImmagineAnnuncio.Remove(annuncio.ImmagineAnnuncio);
-        //    }
+            if (annuncio.ImmagineAnnuncio != null)
+            {
+                dbDataContext.ImmagineAnnuncio.RemoveRange(annuncio.ImmagineAnnuncio);
+            }
 
-        //    if (annuncio.Regalo != null)
-        //    {
-        //        List<Guid> guidRegali = new List<Guid>();
-        //        foreach (Regalo reg in evento.Regalo)
-        //        {
-        //            //guidRegali.Add(reg.Id);
-        //            if (reg.ImmagineRegalo != null)
-        //            {
-        //                dbDataContext.ImmagineRegalo.Remove(reg.ImmagineRegalo);
-        //            }
-        //        }
+            if (annuncio.ImmaginiPlanimetria != null)
+            {
+                dbDataContext.ImmaginePlanimetria.RemoveRange(annuncio.ImmaginiPlanimetria);
+            }
 
-        //        dbDataContext.Regalo.RemoveRange(evento.Regalo);
-        //    }
+            if (annuncio.Appuntamenti != null)
+            {
+                dbDataContext.Appuntamento.RemoveRange(annuncio.Appuntamenti);
+            }
 
-        //    dbDataContext.annuncio.Remove(annuncio);
-        //    dbDataContext.SaveChanges();
+            if (annuncio.Video != null)
+            {
+                dbDataContext.Video.RemoveRange(annuncio.Video);
+            }
 
-        //    return Ok();
-        //}
+            if (annuncio.AnnuncioMessaggi != null)
+            {
+                dbDataContext.AnnuncioMessaggi.RemoveRange(annuncio.AnnuncioMessaggi);
+            }
+
+
+            dbDataContext.Annuncio.Remove(annuncio);
+            dbDataContext.SaveChanges();
+
+            return Ok();
+        }
 
         // GET api/values
         [HttpGet]
