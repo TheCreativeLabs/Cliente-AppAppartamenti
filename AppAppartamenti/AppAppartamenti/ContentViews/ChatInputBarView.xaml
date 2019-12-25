@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             x:Class="AppAppartamenti.ContentViews.ChatInputBarView">
+    <ContentView.Content>
+        <Grid RowSpacing="0" 
+               ColumnSpacing="0">
+                   <Grid.RowDefinitions>
+                         <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+            <appappartamenti:ExtendedEditorControl x:Name="chatTextInput" 
+                     Text="{Binding TextToSend}" 
+                     TextColor="Black" 
+                     Keyboard="Chat"  
+                     IsExpandable="true"
+                     HorizontalOptions="FillAndExpand" 
+                     PlaceholderColor="LightGray"
+                     Placeholder="Type your message here"
+                     Grid.Row="0" 
+                     Grid.Column="0" Margin="10,0,0,0" />
+            <Label Text="Send" Margin="0,0,10,0"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center">
+                <Label.GestureRecognizers> 
+                    <TapGestureRecognizer
+                          Command="{Binding OnSendCommand}"
+                          Tapped="Handle_Completed"/>
+               </Label.GestureRecognizers>
+           </Label>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

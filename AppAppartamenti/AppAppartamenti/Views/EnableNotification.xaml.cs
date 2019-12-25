@@ -58,7 +58,7 @@ namespace AppAppartamenti.Views
                 InstallationId = installationId.Value,
                 OsVersion = os
             };
-            await notificheClient.UpdateAnnuncioAsync(notificationInfoDto);
+            await notificheClient.UpdateInfoNotificationAsync(notificationInfoDto);
         }
 
     }
