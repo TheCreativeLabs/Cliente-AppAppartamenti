@@ -36,7 +36,7 @@
                             <Label Style="{x:StaticResource AdTitle}" Text="Mario"></Label>
                             <Label Style="{x:StaticResource AdTitle}" Text="Rossi"></Label>
                         </StackLayout>
-                        <Button Style="{x:StaticResource primaryButton}" Text="Manda un messaggio" Padding="10,0,10,0" HeightRequest="40"></Button>
+                        <Button Style="{x:StaticResource primaryButton}" Clicked="BtnMessaggio_Clicked" Text="Manda un messaggio" Padding="10,0,10,0" HeightRequest="40"></Button>
                    </StackLayout>
                 </StackLayout>
 

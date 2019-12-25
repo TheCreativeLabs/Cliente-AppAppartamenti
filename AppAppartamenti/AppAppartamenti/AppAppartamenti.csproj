@@ -77,6 +77,7 @@
     <Folder Include="Notify\" />
     <Folder Include="Views\GeneralCondition\" />
     <Folder Include="Views\Agenda\" />
+    <Folder Include="Views\Messaggi\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">
