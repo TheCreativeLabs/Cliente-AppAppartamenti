@@ -75,6 +75,8 @@ namespace AppAppartamentiApi.Controllers
 
             //FIXME VERIFICARE CHE L'EVENTO NON ESISTA già
 
+            Guid idCurrent = new Guid(User.Identity.GetUserId());
+
             var id = Guid.NewGuid();
             var idDestinatario = AppuntamentoDto.IdDestinatario;
             if(idDestinatario == null)
@@ -86,7 +88,7 @@ namespace AppAppartamentiApi.Controllers
             Appuntamento appuntamento = new Appuntamento()
             {
                 Id = id,
-                IdRichiedente = new Guid(User.Identity.GetUserId()),
+                IdRichiedente = idCurrent,
                 IdDestinatario = (Guid) idDestinatario,
                 IdAnnuncio = AppuntamentoDto.IdAnnuncio,
                 Data = AppuntamentoDto.Data,
@@ -94,6 +96,17 @@ namespace AppAppartamentiApi.Controllers
             };
 
             dbDataContext.Appuntamento.Add(appuntamento);
+
+            CodaNotifiche notifica = new CodaNotifiche() { 
+                Id = Guid.NewGuid(),
+                IdDestinatario = (Guid)idDestinatario,
+                IdRichiedente = idCurrent,
+                Sent = false,
+                Title = "Richiesta di appuntamento",
+                Message = "Hai una richiesta per un nuovo appuntamento. Entra nell'app per accettare!"
+            };
+
+            dbDataContext.CodaNotifiche.Add(notifica);
 
             await dbDataContext.SaveChangesAsync();
             
@@ -334,7 +347,7 @@ namespace AppAppartamentiApi.Controllers
         }
 
         [HttpPut]
-        [Route("AppuntamentoUpdate/{IdAppuntamento:Guid}")]
+        [Route("AppuntamentoConferma/{IdAppuntamento:Guid}")]
         [ResponseType(typeof(Appuntamento))]
         public async Task<IHttpActionResult> ConfermaAppuntamento([FromUri]Guid IdAppuntamento)
         {
@@ -354,7 +367,21 @@ namespace AppAppartamentiApi.Controllers
 
             //Modifico l'appuntamento
             appuntamento.Confermato = true;
-            
+
+
+
+            CodaNotifiche notifica = new CodaNotifiche()
+            {
+                Id = Guid.NewGuid(),
+                IdDestinatario = appuntamento.IdRichiedente, //devo dire al richiedente dell'appuntamento che è stato accettato: il richiedente appuntamento è il destinatario della notifica
+                IdRichiedente = appuntamento.IdDestinatario,
+                Sent = false,
+                Title = "Conferma di appuntamento",
+                Message = "Il tuo appuntamento è stato confermato! Entra nell'app per visualizzare i dettagli."
+            };
+
+            dbDataContext.CodaNotifiche.Add(notifica);
+
 
             try
             {
@@ -381,12 +408,30 @@ namespace AppAppartamentiApi.Controllers
                 return NotFound();
             }
 
+            Guid destinatarioAppuntamento = appuntamento.IdDestinatario;
+            Guid richiedenteAppuntamento = appuntamento.IdRichiedente;
             dbDataContext.Appuntamento.Remove(appuntamento);
 
             try
             {
                 //Salvo le modifiche sul DB.
                 await dbDataContext.SaveChangesAsync();
+
+                Guid idCurrent = new Guid(User.Identity.GetUserId());
+
+                //deve ricevere la notifica chi SUBISCE l'eliminazione, il richiedente della notifica è il current
+                Guid destinatarioNotifica = (idCurrent == destinatarioAppuntamento) ? richiedenteAppuntamento : destinatarioAppuntamento;
+                CodaNotifiche notifica = new CodaNotifiche()
+                {
+                    Id = Guid.NewGuid(),
+                    IdDestinatario = appuntamento.IdRichiedente, //devo dire al richiedente dell'appuntamento che è stato accettato: il richiedente appuntamento è il destinatario della notifica
+                    IdRichiedente = idCurrent,
+                    Sent = false,
+                    Title = "Appuntamento eliminato",
+                    Message = "Il tuo appuntamento è stato eliminato. Entra nell'app per visualizzare i dettagli."
+                };
+
+                dbDataContext.CodaNotifiche.Add(notifica);
             }
             catch (DbUpdateConcurrencyException)
             {
