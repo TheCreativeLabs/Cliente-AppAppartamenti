@@ -86,7 +86,7 @@ namespace AppAppartamentiApi.Controllers
                                                        bool? elevator = null,
                                                        bool? airConditioners = null,
                                                        AnnunciOrder? orderBy = null)
-        { //FIXME CONDIZIONATORI + ALTRE STANZE
+        { 
 
             Guid idCurrent = new Guid(User.Identity.GetUserId());
 
