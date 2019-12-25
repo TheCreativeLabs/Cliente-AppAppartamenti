@@ -19,6 +19,8 @@ namespace AppAppartamentiApi.Models
 
         public DateTime Data { get; set; }
 
+        public bool Confermato { get; set; }
+
         public virtual Annuncio Annuncio { get; set; }
 }
 }
