@@ -20,13 +20,13 @@ namespace AppAppartamenti.Views
         //int notificationNumber = 0;
 
         RicercaModel RicercaModel;
-        AnnunciPersonaliViewModel viewModel;
+        AnnunciRecentiViewModel viewModel;
 
         public Home()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciPersonaliViewModel();
+            BindingContext = viewModel = new AnnunciRecentiViewModel();
         }
 
         protected override async void OnAppearing()

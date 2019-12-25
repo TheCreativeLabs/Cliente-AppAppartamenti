@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamenti.ViewModels;
+using AppAppartamentiApiClient;
 
 namespace AppAppartamenti.Views
 {
@@ -25,7 +26,7 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
 
-           BindingContext = viewModel = new AppuntamentiViewModel(DateTime.Now);
+           BindingContext = viewModel = new AppuntamentiViewModel();
         }
 
         protected override void OnAppearing()
@@ -33,12 +34,20 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             if (viewModel.Items.Count == 0)
+                viewModel.SelectedDate = DateTime.Now;
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            await Navigation.PushAsync(new DettaglioAppuntamento());
+            var item = args.SelectedItem as AppuntamentoDtoOutput;
+
+            if (item == null)
+                return;
+
+            await Navigation.PushAsync(new DettaglioAppuntamento(item));
+
+            lvAppuntamenti.SelectedItem = null;
         }
 
         public void OnDataCalendarSelected(object sender, SelectionChangedEventArgs e)
@@ -46,9 +55,10 @@ namespace AppAppartamenti.Views
             Syncfusion.SfCalendar.XForms.SfCalendar cal = (Syncfusion.SfCalendar.XForms.SfCalendar)sender;
             DateTime? currentDate = cal.SelectedDate;
 
-            if (currentDate.HasValue) { 
-                viewModel = new AppuntamentiViewModel(currentDate.Value);
+            if (currentDate.HasValue) {
+                viewModel.SelectedDate = currentDate.Value;
                 viewModel.LoadItemsCommand.Execute(null);
+                BindingContext = viewModel;
             }
         }
     }

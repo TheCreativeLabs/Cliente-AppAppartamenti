@@ -10,10 +10,24 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
              >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <conv:BooleanConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
 
     <NavigationPage.TitleView >
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
@@ -23,12 +37,12 @@
                    FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
             </Button>
 
-            <Button x:Name="btnAddPreferitoNav" IsVisible="false" Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
+            <Button x:Name="btnAddPreferitoNav"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
                     Text="&#xf004;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50">
+                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
             </Button>
 
-            <Button x:Name="btnRemovePreferitoNav" IsVisible="false" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
+            <Button x:Name="btnRemovePreferitoNav"  Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
                     Text="&#xf004;" HorizontalOptions="End"
                     FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
             </Button>
@@ -39,14 +53,6 @@
         </StackLayout>
     </NavigationPage.TitleView>
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
-        </ResourceDictionary>
-        <ResourceDictionary>
-            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
@@ -63,8 +69,8 @@
                 <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Margin="0,-50,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
                 <StackLayout>
 
-                    <StackLayout HeightRequest="300">
-                        <CarouselView ItemsSource="{Binding Item.ImmaginiAnnuncio}" x:Name="Carousel">
+                    <StackLayout  HeightRequest="300">
+                        <CarouselView x:Name="Carousel" ItemsSource="{Binding viewModelImmagini.Items}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -87,32 +93,32 @@
 
                     <StackLayout Padding="20">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            <Label Text="{Binding Item.TipologiaProprieta,StringFormat='{0} in'}" Style="{x:StaticResource Subtitle}"></Label> <!--, Converter={StaticResource TranslateConverter}-->
-                            <Label Text="{Binding Item.TipologiaAnnuncio}" Style="{x:StaticResource Subtitle}"></Label>
-                            <Label Style="{x:StaticResource Subtitle}" Text="{Binding Item.Prezzo, StringFormat='a {0} €'}" HorizontalTextAlignment="Center"></Label>
+                            <Label Text="{Binding viewModel.Item.TipologiaProprieta,StringFormat='{0} in'}" Style="{x:StaticResource Subtitle}"></Label> <!--, Converter={StaticResource TranslateConverter}-->
+                            <Label Text="{Binding viewModel.Item.TipologiaAnnuncio}" Style="{x:StaticResource Subtitle}"></Label>
+                            <Label Style="{x:StaticResource Subtitle}" Text="{Binding viewModel.Item.Prezzo, StringFormat='a {0} €'}" HorizontalTextAlignment="Center"></Label>
                         </StackLayout >
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            <Label Text="{Binding Item.Indirizzo,StringFormat='{0},'}"></Label>
-                            <Label Text="{Binding Item.NomeComune}"></Label>
+                            <Label Text="{Binding viewModel.Item.Indirizzo,StringFormat='{0},'}"></Label>
+                            <Label Text="{Binding viewModel.Item.NomeComune}"></Label>
                         </StackLayout>
 
 
                         <Label Text="{translator:Translate DettaglioAnnuncio.Description}" Style="{x:StaticResource SectionTitle}"></Label>
-                        <Label Text="{Binding Item.Descrizione}"></Label>
+                        <Label Text="{Binding viewModel.Item.Descrizione}"></Label>
 
 
                         <Label Text="{translator:Translate DettaglioAnnuncio.GeneralInfo}"  Style="{x:StaticResource SectionTitle}"></Label>
 
                         <StackLayout Orientation="Horizontal">
                             <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.HouseSize}"></Label>
-                            <Label Text="{Binding Item.Superficie, StringFormat='{0} m²'}"></Label>
+                            <Label Text="{Binding viewModel.Item.Superficie, StringFormat='{0} m²'}"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                             <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Bedrooms}"></Label>
-                            <Label Text="{Binding Item.NumeroCameraLetto}"  VerticalTextAlignment="Center"></Label>
+                            <Label Text="{Binding viewModel.Item.NumeroCameraLetto}"  VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
@@ -124,46 +130,46 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf2cc;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                                 <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Bathrooms}"></Label>
-                                <Label x:Name="lblBagniCount" Text="{Binding Item.NumeroBagni}" VerticalTextAlignment="Center"  ></Label>
+                                <Label x:Name="lblBagniCount" Text="{Binding viewModel.Item.NumeroBagni}" VerticalTextAlignment="Center"  ></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf2e7;" FontSize="Medium" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                                 <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Kitchens}"></Label>
-                                <Label x:Name="lblCucineCount" Text="{Binding Item.NumeroCucine}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblCucineCount" Text="{Binding viewModel.Item.NumeroCucine}" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf1b9;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                             <Label VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.ParkingSpaces}"></Label>
-                                <Label x:Name="lblPostiAutoCount" Text="{Binding Item.NumeroPostiAuto}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblPostiAutoCount" Text="{Binding viewModel.Item.NumeroPostiAuto}" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf494;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                             <Label VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Garages}"></Label>
-                            <Label x:Name="lblGarageCount" Text="{Binding Item.NumeroGarage}" VerticalTextAlignment="Center"></Label>
+                            <Label x:Name="lblGarageCount" Text="{Binding viewModel.Item.NumeroGarage}" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <Label Text="{translator:Translate DettaglioAnnuncio.Other}" Style="{x:StaticResource SectionTitle}"></Label>
 
                         <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">
-                            <Frame IsVisible="{Binding Item.Giardino}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                            <Frame IsVisible="{Binding viewModel.Item.Giardino}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                 <Label Text="{translator:Translate DettaglioAnnuncio.Backyard}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
                             </Frame>
-                            <Frame IsVisible="{Binding Item.Balcone}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                            <Frame IsVisible="{Binding viewModel.Item.Balcone}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                 <Label Text="{translator:Translate DettaglioAnnuncio.Terrace}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
                             </Frame>
-                            <Frame IsVisible="{Binding Item.Cantina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                            <Frame IsVisible="{Binding viewModel.Item.Cantina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                 <Label Text="{translator:Translate DettaglioAnnuncio.Cellar}" LineBreakMode="NoWrap"></Label>
                             </Frame>
-                            <Frame IsVisible="{Binding Item.Piscina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                            <Frame IsVisible="{Binding viewModel.Item.Piscina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                 <Label Text="{translator:Translate DettaglioAnnuncio.Pool}" LineBreakMode="NoWrap"></Label>
                             </Frame>
-                            <Frame IsVisible="{Binding Item.Ascensore}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                            <Frame IsVisible="{Binding viewModel.Item.Ascensore}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                 <Label Text="{translator:Translate DettaglioAnnuncio.Elevator}" LineBreakMode="NoWrap"></Label>
                             </Frame>
-                            <Frame IsVisible="{Binding Item.Condizionatori}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                            <Frame IsVisible="{Binding viewModel.Item.Condizionatori}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                 <Label Text="{translator:Translate DettaglioAnnuncio.AirConditioners}" LineBreakMode="NoWrap"></Label>
                             </Frame>
                         </FlexLayout>
@@ -173,7 +179,7 @@
                 
                             <StackLayout Orientation="Horizontal" >
                                 <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.CondominiumFees}"></Label>
-                                <Label x:Name="lblSpeseCondominiali" Text="{Binding Item.SpesaMensileCondominio}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblSpeseCondominiali" Text="{Binding viewModel.Item.SpesaMensileCondominio}" VerticalTextAlignment="Center"></Label>
                                 <Label Text="€/mese"></Label>
                             </StackLayout>
 
@@ -182,29 +188,30 @@
                             <Label Text="Energia"></Label>
                             <StackLayout Orientation="Horizontal" >
                                 <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Heat}"></Label>
-                                <Label x:Name="lblRiscaldamento" Text="{Binding Item.TipologiaRiscaldamento}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblRiscaldamento" Text="{Binding viewModel.Item.TipologiaRiscaldamento}" VerticalTextAlignment="Center"></Label>
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" >
                                 <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.EnergyClass}"></Label>
-                                <Label x:Name="lblClasseEnergetica" Text="{Binding Item.ClasseEnergetica}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblClasseEnergetica" Text="{Binding viewModel.Item.ClasseEnergetica}" VerticalTextAlignment="Center"></Label>
                             </StackLayout>
 
                                  
                             <Label Text="{translator:Translate DettaglioAnnuncio.Location}" Style="{x:StaticResource SectionTitle}"></Label>
                         
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                <Label Text="{Binding Item.Indirizzo, StringFormat='{0},'}" ></Label>
-                                <Label Text="{Binding Item.NomeComune}" ></Label>
+                                <Label Text="{Binding viewModel.Item.Indirizzo, StringFormat='{0},'}" ></Label>
+                                <Label Text="{Binding viewModel.Item.NomeComune}" ></Label>
                             </StackLayout>
                         
                             <maps:Map x:Name="map" IsVisible="True" HeightRequest="250"/>
 
+                            <!--<ContentView Content="{Binding viewModel.Item.Map}"/>-->
 
                             <Label Text="{translator:Translate DettaglioAnnuncio.Planimetria}" Style="{x:StaticResource SectionTitle}"></Label>
 
                             <StackLayout HeightRequest="300">
-                                <CarouselView ItemsSource="{Binding Item.ImmaginiPlanimetria}" x:Name="CarouselPlanimetria">
+                                <CarouselView ItemsSource="{Binding viewModel.Item.ImmaginiPlanimetria}" x:Name="CarouselPlanimetria">
                                     <CarouselView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>

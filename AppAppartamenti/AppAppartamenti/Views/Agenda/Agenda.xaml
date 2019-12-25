@@ -42,20 +42,22 @@
 
                     <Label Text="Appuntamenti" Style="{x:StaticResource AdTitle}" Margin="0,-40,0,0"></Label>
 
-                    <ListView x:Name="lwAppuntamenti" SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None"
+                    <ListView x:Name="lvAppuntamenti" SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None"
                               ItemSelected="OnItemSelected"
-                              ItemsSource="{Binding Items}">
+                              ItemsSource="{Binding Items}"
+                              RefreshCommand="{Binding LoadItemsCommand}"
+                               IsRefreshing="{Binding IsBusy}">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                         <StackLayout Padding="10">
                                             <appappartamenti:ShadowFrame>
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding DataAppuntamento, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>
+                                                    <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding Data, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>
 
                                                     <StackLayout HorizontalOptions="CenterAndExpand">
-                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding Partecipante, StringFormat='appuntamento con {0}'}"/>
-                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding Luogo, StringFormat='posizione: {0}'}"/>
+                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding NameAndSurnamePersonToMeet, StringFormat='appuntamento con {0}'}"/>
+                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding Indirizzo, StringFormat='posizione: {0}'}"/>
                                                     </StackLayout>
                                                 </StackLayout>
                                            </appappartamenti:ShadowFrame>

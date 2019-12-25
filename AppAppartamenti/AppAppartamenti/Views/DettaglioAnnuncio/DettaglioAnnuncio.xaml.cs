@@ -18,48 +18,65 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DettaglioAnnuncio : ContentPage
     {
-        AnnuncioDetailViewModel viewModel;
+
+        public  class BindingModel
+        {
+            public AnnuncioDetailViewModel viewModel { get; set; }
+            public AnnuncioimmaginiViewModel viewModelImmagini { get; set; }
+        }
+
+
+        BindingModel bindingModel;
         Guid IdAnnuncio;
         bool IsEditable;
-
-        public DettaglioAnnuncio(Guid Id,bool IsEditableParam)
+        public DettaglioAnnuncio(AnnunciDtoOutput annuncio,bool IsEditableParam)
         {
             InitializeComponent();
             IsEditable = IsEditableParam;
 
-            IdAnnuncio = Id;
+            IdAnnuncio = annuncio.Id.Value;
 
             btnModifica.IsVisible = IsEditable;
             btnModificaNavBar.IsVisible = IsEditable;
 
             stkPulsanti.IsVisible = !IsEditable;
+
+            bindingModel = new BindingModel();
+            bindingModel.viewModelImmagini = new AnnuncioimmaginiViewModel();
+            bindingModel.viewModel = new AnnuncioDetailViewModel();
+            bindingModel.viewModelImmagini.Items.Add(annuncio.ImmaginePrincipale);
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            BindingContext = viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
+            bindingModel.viewModelImmagini.IdAnnuncio = IdAnnuncio;
 
+            bindingModel.viewModelImmagini.LoadItemsCommand.Execute(null);
+            bindingModel.viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
+
+            BindingContext = bindingModel;
             scrollView.IsVisible = true;
 
             if (!IsEditable)
             {
-                btnAddPreferito.IsVisible = !viewModel.Item.FlagPreferito.Value;
-                btnRemovePreferito.IsVisible = viewModel.Item.FlagPreferito.Value;
-                btnAddPreferitoNav.IsVisible = !viewModel.Item.FlagPreferito.Value;
-                btnRemovePreferitoNav.IsVisible = viewModel.Item.FlagPreferito.Value;
-            }
+                btnAddPreferito.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
+            btnRemovePreferito.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
+            btnAddPreferitoNav.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
+            btnRemovePreferitoNav.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
+        }
 
-            if(!string.IsNullOrEmpty(viewModel.Item.CoordinateGeografiche)){
-                var pos = viewModel.Item.CoordinateGeografiche.Split(';');
+            if (!string.IsNullOrEmpty(bindingModel.viewModel.Item.CoordinateGeografiche))
+            {
+                var pos = bindingModel.viewModel.Item.CoordinateGeografiche.Split(';');
                 var lat = pos[0];
                 var lon = pos[1];
 
                 Pin pin = new Pin
                 {
-                    Label = viewModel.Item.Indirizzo,
-                    Address = $"{viewModel.Item.Indirizzo},{viewModel.Item.NomeComune}",
+                    Label = bindingModel.viewModel.Item.Indirizzo,
+                    Address = $"{bindingModel.viewModel.Item.Indirizzo},{bindingModel.viewModel.Item.NomeComune}",
                     Type = PinType.Generic,
                     Position = new Position(Double.Parse(lat), Double.Parse(lon))
                 };
@@ -110,7 +127,7 @@ namespace AppAppartamenti.Views
                 btnRemovePreferitoNav.IsVisible = true;
                 btnAddPreferitoNav.IsVisible = false;
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                await annunciClient.AggiungiPreferitoAsync(viewModel.Item.Id.Value);
+                await annunciClient.AggiungiPreferitoAsync(bindingModel.viewModel.Item.Id.Value);
             }
             catch (Exception Ex)
             {
@@ -128,7 +145,7 @@ namespace AppAppartamenti.Views
                 btnAddPreferitoNav.IsVisible = false;
                 btnRemovePreferitoNav.IsVisible = true;
                 AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                await annunciClient.RimuoviPreferitoAsync(viewModel.Item.Id.Value);
+                await annunciClient.RimuoviPreferitoAsync(bindingModel.viewModel.Item.Id.Value);
             }
             catch (Exception Ex)
             {
@@ -154,7 +171,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
-                await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(viewModel)));
+                await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(bindingModel.viewModel)));
             }
             catch (Exception Ex)
             {
@@ -167,7 +184,7 @@ namespace AppAppartamenti.Views
         {
             await Share.RequestAsync(new ShareTextRequest
             {
-                Uri = $"{AppSetting.SiteApp}/Annunci/Detail/{viewModel.Item.Id}",
+                Uri = $"{AppSetting.SiteApp}/Annunci/Detail/{bindingModel.viewModel.Item.Id}",
                 Title = "Condividi il link"
             });
         }

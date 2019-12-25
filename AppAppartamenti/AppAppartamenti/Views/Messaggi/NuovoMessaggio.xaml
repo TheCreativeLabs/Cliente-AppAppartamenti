@@ -5,26 +5,30 @@
              NavigationPage.HasBackButton="True" Title="Nuovo Messaggio" >
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand">
-            <StackLayout VerticalOptions="Start" BackgroundColor="Green">
-                <ListView HasUnevenRows="True" SeparatorVisibility="None">
+   <Grid RowSpacing="0" 
+           ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+            <appappartamenti:ExtendedListView Grid.Row="0"  
+                          Margin="0"
+                 Rotation="180" 
+                 FlowDirection="RightToLeft"
+                 HasUnevenRows="True" x:Name="ChatList"
+                 VerticalOptions="FillAndExpand" 
+                 SeparatorColor="Transparent">
+            </appappartamenti:ExtendedListView>
 
-                </ListView>
-            </StackLayout>
+       <BoxView HorizontalOptions="FillAndExpand"
+                 HeightRequest="1"
+                 BackgroundColor="LightGray"
+                 Grid.Row="1"/>
 
-            <StackLayout VerticalOptions="End">
-                <BoxView HeightRequest="1" Color="LightGray"></BoxView>
-
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10">
-                    <StackLayout HorizontalOptions="FillAndExpand">
-                         <Editor Placeholder="Testo" AutoSize="TextChanges" HorizontalOptions="FillAndExpand">
-                         </Editor>
-                    </StackLayout>
-                    <StackLayout>
-                    <Button VerticalOptions="StartAndExpand" Style="{x:StaticResource primaryButton}" Text="Invia" HeightRequest="40" WidthRequest="60"></Button>
-                    </StackLayout>
-                </StackLayout>
-            </StackLayout>
-        </StackLayout>
+            <controls:ChatInputBarView Grid.Row="2"
+                                   Margin="0,0,10,0"
+                                   x:Name="chatInput"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

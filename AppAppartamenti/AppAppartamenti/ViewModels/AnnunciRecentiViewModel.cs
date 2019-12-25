@@ -2,27 +2,26 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
+
 using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AppuntamentiViewModel : BaseViewModel
+    public class AnnunciRecentiViewModel : BaseViewModel
     {
-        public DateTime SelectedDate { get; set; }
-        public ObservableCollection<AppuntamentoDtoOutput> Items { get; set; }
+        public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-
-        public AppuntamentiViewModel()
+        public AnnunciRecentiViewModel()
         {
-            Items = new ObservableCollection<AppuntamentoDtoOutput>();
+            Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+          
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -36,12 +35,15 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
-                var lista =await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
 
-                foreach (var item in lista)
+                ICollection<AnnunciDtoOutput> listaAnnunci;
+
+                listaAnnunci = await annunciClient.GetRicercheRecentiCurrentAsync();
+
+                foreach (var evento in listaAnnunci)
                 {
-                    Items.Add(item);
+                    Items.Add(evento);
                 }
             }
             catch (Exception ex)
