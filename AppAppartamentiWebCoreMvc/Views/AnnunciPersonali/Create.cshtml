@@ -9,6 +9,7 @@
 
 @{
     AnnuncioDtoOutput annuncio = (AnnuncioDtoOutput)ViewData["Annuncio"];
+    List<byte[]> immaginiAnnuncio = (List<byte[]>)ViewData["ImmaginiAnnuncio"];
 }
 
 <div class="container container-custom">
@@ -694,10 +695,10 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                             <div>
                                 <div class="row" id="containerImmagini">
                                     @{
-                                        if (annuncio != null && annuncio.ImmaginiAnnuncio.Any())
+                                        if (annuncio != null && immaginiAnnuncio != null &&  immaginiAnnuncio.Any())
                                         {
                                             int i = 0;
-                                            foreach (byte[] imm in annuncio.ImmaginiAnnuncio)
+                                            foreach (byte[] imm in immaginiAnnuncio)
                                             {
                                                 var base64 = Convert.ToBase64String(imm);
                                                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64);

@@ -278,6 +278,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\MessaggiController.cs" />
     <Compile Include="Controllers\NotificheController.cs" />
     <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\AnnunciController.cs" />
@@ -287,6 +288,7 @@
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
     <Compile Include="Dto\AppuntamentoDtoOutput.cs" />
     <Compile Include="Dto\AppuntamentoDto.cs" />
+    <Compile Include="Dto\MessaggioDto.cs" />
     <Compile Include="Dto\NotificationInfoDto.cs" />
     <Compile Include="Dto\ComuneDto.cs" />
     <Compile Include="Dto\DisponibilitaOrariaDto.cs" />
@@ -315,8 +317,10 @@
     <Compile Include="Models\Annuncio.cs" />
     <Compile Include="Models\AnnunciPreferiti.cs" />
     <Compile Include="Models\Appuntamento.cs" />
+    <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\ClasseEnergetica.cs" />
     <Compile Include="Models\AnnuncioMessaggi.cs" />
+    <Compile Include="Models\CodaNotifiche.cs" />
     <Compile Include="Models\Comuni.cs" />
     <Compile Include="Models\DbDataContext.cs" />
     <Compile Include="Models\FasceOrarie.cs" />

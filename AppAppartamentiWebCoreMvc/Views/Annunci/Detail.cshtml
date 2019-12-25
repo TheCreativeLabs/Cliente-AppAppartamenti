@@ -1,12 +1,14 @@
 ﻿@model AnnuncioDtoOutput
+@using System.Net.Http
 
 @{
     ViewData["Title"] = "Dettaglio annuncio";
+    List<byte[]> ImmaginiAnnuncio = (List<byte[]>)ViewData["ImmaginiAnnuncio"];
 }
 
 @section SubHeader {
     <div id="secondnav" class="d-none sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
-        <input value="@Model.Id" id="id-annuncio" style="display:none"/>
+        <input value="@Model.Id" id="id-annuncio" style="display:none" />
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
@@ -21,7 +23,7 @@
                 <div class="col-3 text-right">
                     <button class="btn btn-light btn-sm"><i class="fas fa-exclamation-triangle"></i></button>
 
-                    <button class="btn btn-light btn-sm" onclick="event.stopPropagation();$('#shareModal').modal('show');" ><i class="fas fa-share-alt"></i></button>
+                    <button class="btn btn-light btn-sm" onclick="event.stopPropagation();$('#shareModal').modal('show');"><i class="fas fa-share-alt"></i></button>
 
                     @{
                         string cssClass = "";
@@ -41,12 +43,12 @@
             </div>
         </div>
     </div>
-} 
+}
 
 <div class="container container-custom">
     <div class="row">
         <div class="col-sm-12 p-3">
-            <a href='javascript:history.go(-1)'class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
+            <a href='javascript:history.go(-1)' class="btn btn-sm btn-light"><i class="fas fa-arrow-left"></i>&nbsp;Torna alla lista</a>
 
             @{
                 string cssClass = "";
@@ -78,54 +80,66 @@
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             @{
-                                bool isLiActiveInserted = false;
-                                @for (int i = 0; i < Model.ImmaginiAnnuncio.Count(); i++)
+                                if (ImmaginiAnnuncio != null)
                                 {
-                                    if (!isLiActiveInserted)
+                                    bool isLiActiveInserted = false;
+                                    @for (int i = 0; i < ImmaginiAnnuncio.Count(); i++)
                                     {
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
+                                        if (!isLiActiveInserted)
+                                        {
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
 
-                                        isLiActiveInserted = true;
-                                    }
-                                    else
-                                    {
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                                            isLiActiveInserted = true;
+                                        }
+                                        else
+                                        {
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                                        }
                                     }
                                 }
                             }
                         </ol>
                         <div class="carousel-inner">
-                            @{
-                                bool isActiveInserted = false;
+                            @*@{ if(Model.Id != null) { 
+                                    bool isActiveInserted = false;
 
-                                foreach (var item in Model.ImmaginiAnnuncio)
-                                {
-                                    if (!isActiveInserted)
+                                    HttpClient httpClient = new HttpClient();
+                                    var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+                                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+
+                                    AppAppartamentiWebCoreMvc.AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiWebCoreMvc.AppAppartamentiApiClient.AnnunciClient(httpClient);
+                                    List<byte[]> images = (await annunciClient.GetImmaginiByIdAnnuncioAsync((Guid)Model.Id)).ToList();
+
+                                    foreach (var item in images)
                                     {
-                                        <div class="carousel-item active" style="height: 500px">
-                                            @{
-                                                var base64 = Convert.ToBase64String(item);
-                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                            }
+                                        if (!isActiveInserted)
+                                        {
+                                            <div class="carousel-item active" style="height: 500px">
+                                                @{
+                                                    var base64 = Convert.ToBase64String(item);
+                                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                }
 
-                                            <img src="@imgSrc" class="w-100 h-100" alt="image" />
-                                        </div>
+                                                <img src="@imgSrc" class="w-100 h-100" alt="image" />
+                                            </div>
 
-                                        isActiveInserted = true;
-                                    }
-                                    else
-                                    {
-                                        <div class="carousel-item" style="max-height: 500px">
-                                            @{
-                                                var base64 = Convert.ToBase64String(item);
-                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                            }
+                                            isActiveInserted = true;
+                                        }
+                                        else
+                                        {
+                                            <div class="carousel-item" style="max-height: 500px">
+                                                @{
+                                                    var base64 = Convert.ToBase64String(item);
+                                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                }
 
-                                            <img src="@imgSrc" class="d-block w-100" alt="image" />
-                                        </div>
+                                                <img src="@imgSrc" class="d-block w-100" alt="image" />
+                                            </div>
+                                        }
                                     }
                                 }
-                            }
+                            }*@
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -224,10 +238,11 @@
                         <div class="card-body">
                             @{
                                 string prezzo = string.Format("{0}{1}", Model.Prezzo, "€");
-                                if (Model.TipologiaAnnuncio == "Affitto") {
+                                if (Model.TipologiaAnnuncio == "Affitto")
+                                {
                                     prezzo = string.Format("{0}{1}", Model.Prezzo, "€/Mese");
-                                     
-                                } 
+
+                                }
                             }
                             <label asp-for="Prezzo" class="control-label col-form-label-sm"></label>
                             @prezzo
@@ -271,10 +286,10 @@
                             <h5 class="mb-0 p-1">Planimetria</h5>
                         </div>
                         <div class="card-body">
-                             <div style="height:400px">
+                            <div style="height:400px">
                                 @{
                                     var srcPlanimetria = string.Empty;
-                                    if (Model.ImmaginiPlanimetria != null && Model.ImmaginiPlanimetria.Any() )
+                                    if (Model.ImmaginiPlanimetria != null && Model.ImmaginiPlanimetria.Any())
                                     {
                                         var base64Planimetria = Convert.ToBase64String(Model.ImmaginiPlanimetria.First());
                                         srcPlanimetria = String.Format("data:image/gif;base64,{0}", base64Planimetria);
@@ -301,15 +316,15 @@
             </div>
         </div>
         <div class="col-sm-3">
-             @{
-                 UserInfoDto userInfo = (UserInfoDto)ViewData["UserInfo"];
-             }
+            @{
+                UserInfoDto userInfo = (UserInfoDto)ViewData["UserInfo"];
+            }
 
             <div class="border rounded p-3 mt-1">
                 @{
                     var imgUserProfile = userInfo.PhotoUrl;
 
-                    if(userInfo.FotoProfilo != null)
+                    if (userInfo.FotoProfilo != null)
                     {
                         var base64User = Convert.ToBase64String(userInfo.FotoProfilo);
                         imgUserProfile = String.Format("data:image/gif;base64,{0}", base64User);
@@ -342,18 +357,18 @@
                 </button>
             </div>
             <div class="modal-body pt-5">
-                <input id="giorno-selected" style="display:none"/> @*contenitore del giorno selezionato per l'appuntamento*@
+                <input id="giorno-selected" style="display:none" /> @*contenitore del giorno selezionato per l'appuntamento*@
                 <div class="row">
                     <div class="cl-sm-6 col-7">
                         <div id="appointment-caledar"></div>
                     </div>
                     <div class="col-5">
-                        <h2 >Orari disponibili</h2>
+                        <h2>Orari disponibili</h2>
                         <div id="appointment-available" class="btn-group-toggle text-center mt-3" data-toggle="buttons">
 
                         </div>
                         <div class="col-6 mx-auto">
-                            <button class="btn btn-primary btn-sm btn-block btn-prenota-appuntamento" >
+                            <button class="btn btn-primary btn-sm btn-block btn-prenota-appuntamento">
                                 Prenota
                             </button>
                         </div>
@@ -373,6 +388,8 @@
             var calendarEl2 = document.getElementById('appointment-caledar');
             var idAnnuncio = document.getElementById('id-annuncio').value;
 
+            var immagini = GetImmaginiAnnuncioAjax(idAnnuncio);
+
             var calendar2 = new FullCalendar.Calendar(calendarEl2, {
                 plugins: ['dayGrid', 'timeGrid', 'interaction'],
                 locale: selectedLanguage,
@@ -387,9 +404,9 @@
                     center: '',
                     right: ''
                 },
-                dateClick: function(info) {
+                dateClick: function (info) {
                     var now = new Date();
-                    if ((now.getFullYear())+'-'+(now.getMonth() + 1)+'-'+(now.getDate()) == info.dateStr || info.date > (now)) {
+                    if ((now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()) == info.dateStr || info.date > (now)) {
                         // This allows today and future date
                         $('#giorno-selected').val(info.dateStr);
                         //alert('Clicked on: ' + info.dateStr);
@@ -401,7 +418,7 @@
                     }
                 },
                 selectable: true
-                
+
             });
 
             calendar2.render();

@@ -139,3 +139,41 @@ function PrenotaAppuntamentoAjax(idAnnuncio, giorno, ora) {
 
 }
 
+
+
+function GetImmaginiAnnuncioAjax(idAnnuncio) {
+    return $.ajax({
+        type: "GET",
+        url: '/Annunci/ImmaginiAnnuncio',
+        data: { IdAnnuncio: idAnnuncio },
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (result, status, xhr) {
+            alert('Caricamento immagini  success');
+            var isActiveInserted = false;
+
+            var innerHTML = "";
+
+            for(var k in result)
+            {
+                if (!isActiveInserted) {
+                    innerHTML += '<div class="carousel-item active" style="height: 500px"><img src="' + result[k]+ '" class="w-100 h-100" alt="image" /></div>';
+
+                    isActiveInserted = true;
+                }
+                else {
+                    innerHTML += '<div class="carousel-item" style="max-height: 500px"><img src="' + result[k] + '" class="d-block w-100" alt="image" /></div>';
+                }
+            }
+
+            $('.carousel-inner').html(innerHTML);
+
+        },
+        error: function (xhr, status, error) {
+            alert('Caricamento immagini fail');  
+            
+        }
+    });
+
+}
+

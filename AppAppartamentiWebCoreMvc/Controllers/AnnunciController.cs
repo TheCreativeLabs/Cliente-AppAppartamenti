@@ -88,6 +88,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
         public async Task<IActionResult> DetailAsync(Guid Id, bool Preferiti)
         {
+
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
@@ -98,11 +99,31 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var classiEnergetiche = await annunciClient.GetListaClasseEnergeticaAsync();
             ViewData["ListaClassiEnergetiche"] = classiEnergetiche.AsEnumerable();
 
+
             AccountClient accountClient = new AccountClient(httpClient);
             UserInfoDto userInfo = await accountClient.GetUserInfoAsync(annuncio.IdUtente.Value);
             ViewData["UserInfo"] = userInfo;
             ViewData["Preferiti"] = Preferiti;
             return View(annuncio);
+        }
+
+        public async Task<List<string>> ImmaginiAnnuncioAsync(Guid IdAnnuncio) {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            AppAppartamentiApiClient.AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+            List<byte[]> immaginiAnnuncio = (await annunciClient.GetImmaginiByIdAnnuncioAsync(IdAnnuncio)).ToList();
+
+            List<string> imagesSrc = new List<string>();
+            foreach(var imm in immaginiAnnuncio)
+            {
+                var base64 = Convert.ToBase64String(imm);
+                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                imagesSrc.Add(imgSrc);
+            }
+
+            return imagesSrc;
         }
 
     }

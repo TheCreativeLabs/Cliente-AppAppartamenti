@@ -34,6 +34,11 @@ namespace AppAppartamentiApi.Models
         public DateTime DataLettura { get; set; }
 
         public virtual Annuncio Annuncio { get; set; }
+
+        [Required]
+        public Guid IdChat { get; set; }
+
+        public virtual Chat Chat { get; set; }
     }
 }
 

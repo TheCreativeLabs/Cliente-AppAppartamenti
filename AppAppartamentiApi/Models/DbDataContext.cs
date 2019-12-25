@@ -29,6 +29,8 @@ namespace AppAppartamentiApi.Models
         public virtual DbSet<Appuntamento> Appuntamento { get; set; }
         public virtual DbSet<FasceOrarie> FasceOrarie { get; set; }
         public virtual DbSet<RicercheRecenti> RicercheRecenti { get; set; }
+        public virtual DbSet<Chat> Chat { get; set; }
+        public virtual DbSet<CodaNotifiche> CodaNotifiche { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -121,6 +123,24 @@ namespace AppAppartamentiApi.Models
                 .HasMany(e => e.RicercheRecenti)
                 .WithRequired(e => e.UserInfo)
                 .HasForeignKey(e => e.IdAspNetUser)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserInfo>()
+                .HasMany(e => e.ChatDestinatario)
+                .WithRequired(e => e.UserInfoDestinatario)
+                .HasForeignKey(e => e.IdUserDestinatario)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserInfo>()
+                .HasMany(e => e.ChatMittente)
+                .WithRequired(e => e.UserInfoMittente)
+                .HasForeignKey(e => e.IdUserMittente)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Chat>()
+                .HasMany(e => e.AnnuncioMessaggi)
+                .WithRequired(e => e.Chat)
+                .HasForeignKey(e => e.IdChat)
                 .WillCascadeOnDelete(false);
 
 
