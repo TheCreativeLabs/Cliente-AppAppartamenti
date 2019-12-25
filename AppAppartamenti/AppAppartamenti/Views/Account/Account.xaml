@@ -14,9 +14,9 @@
              >
     <ContentPage.Content>
         <StackLayout>
-            <appappartamenti:ShadowFrame CornerRadius="0" HeightRequest="160" HasShadow="True" Padding="15"
+            <appappartamenti:ShadowFrame  CornerRadius="0" HeightRequest="100" HasShadow="True" Padding="15" VerticalOptions="Center"
                                         >
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
                     <Frame CornerRadius="40"
                            HeightRequest="80"
                            WidthRequest="80"
@@ -40,27 +40,26 @@
             </appappartamenti:ShadowFrame>
 
             <ListView  x:Name="listView" BackgroundColor="{x:StaticResource SfondoColor}" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="20,10,20,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="90*" />
-                                <ColumnDefinition Width="10*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0"
-                                   Text="{Binding DisplayName}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                            <Label FontFamily="{x:StaticResource FA-Solid}"
-                                   Grid.Column="1"
-                                   Text="{Binding Icona}" FontSize="Large" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-
-            </ListView.ItemTemplate>
-                   <ListView.Footer>
-          <Label />
-        </ListView.Footer>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="20,10,20,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90*" />
+                                        <ColumnDefinition Width="10*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                           Text="{Binding DisplayName}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                    <Label FontFamily="{x:StaticResource FA-Solid}"
+                                           Grid.Column="1"
+                                           Text="{Binding Icona}" FontSize="Large" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Label />
+                </ListView.Footer>
         </ListView>
         </StackLayout>
     </ContentPage.Content>
