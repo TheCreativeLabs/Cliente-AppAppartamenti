@@ -27,7 +27,7 @@ using Color = Xamarin.Forms.Color;
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(SearchEntryRenderer))]
 [assembly: ExportRenderer(typeof(CustomDatePickerRenderer), typeof(DatePickerRenderer))]
 [assembly: ExportRenderer(typeof(CustomPickerRenderer), typeof(PickerRenderer))]
-
+[assembly: ExportRenderer(typeof(DatePickerRenderer), typeof(DatePickerCtrlRenderer))]
 namespace CustomRenderer
 {
     class MyEntryRenderer : EntryRenderer
@@ -137,6 +137,41 @@ namespace CustomRenderer
             }
         }
     }
+
+    public class DatePickerCtrlRenderer : DatePickerRenderer
+        {
+        public DatePickerCtrlRenderer(Context context) : base(context)
+        {
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.DatePicker> e)
+            {
+                base.OnElementChanged(e);
+
+             this.Control.SetTextColor(Android.Graphics.Color.LightGray);
+                this.Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                this.Control.SetPadding(20, 0, 0, 0);
+                GradientDrawable gd = new GradientDrawable();
+                gd.SetCornerRadius(25); //increase or decrease to changes the corner look
+                gd.SetColor(Android.Graphics.Color.Transparent);
+                gd.SetStroke(3, Android.Graphics.Color.LightGray);             
+                this.Control.SetBackgroundDrawable(gd);
+
+                DatePickerCtrl element = Element as DatePickerCtrl;
+
+                if (!string.IsNullOrWhiteSpace(element.Placeholder))
+                {
+                    Control.Text = element.Placeholder;
+                }
+                this.Control.TextChanged += (sender, arg) => {
+                    var selectedDate = arg.Text.ToString();
+                    if (selectedDate == element.Placeholder)
+                    {
+                        Control.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    }
+                };
+            }
+        }
 
     // this in your namespace
     public class DesktopWebViewRenderer : WebViewRenderer

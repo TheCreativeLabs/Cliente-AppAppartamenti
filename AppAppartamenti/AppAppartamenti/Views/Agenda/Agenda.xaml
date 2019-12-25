@@ -7,12 +7,13 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Agenda"
-             Title="Messaggi"
+             Title="Agenda"
              x:Name="BrowseItemsPage"
              NavigationPage.HasNavigationBar="False"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:syncfusion1="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:syncfusion1="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
@@ -34,14 +35,16 @@
                                        ShowLeadingAndTrailingDays="False"
                                        ShowNavigationButtons="True" SelectionChanged="OnDataCalendarSelected">
                         <syncfusion:SfCalendar.MonthViewSettings>
-                            <syncfusion:MonthViewSettings TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
+                            <syncfusion:MonthViewSettings DayHeight="20" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
                             </syncfusion:MonthViewSettings>
                         </syncfusion:SfCalendar.MonthViewSettings>
                     </syncfusion:SfCalendar>
 
                     <Label Text="Appuntamenti" Style="{x:StaticResource AdTitle}" Margin="0,-40,0,0"></Label>
 
-                    <ListView x:Name="lwAppuntamenti" SeparatorVisibility="None" SelectionMode="None" HasUnevenRows="True" ItemsSource="{Binding Items}">
+                    <ListView x:Name="lwAppuntamenti" SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None"
+                              ItemSelected="OnItemSelected"
+                              ItemsSource="{Binding Items}">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
