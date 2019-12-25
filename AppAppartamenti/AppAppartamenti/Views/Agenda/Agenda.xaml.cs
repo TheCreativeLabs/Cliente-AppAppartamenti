@@ -36,6 +36,11 @@ namespace AppAppartamenti.Views
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            await Navigation.PushAsync(new DettaglioAppuntamento());
+        }
+
         public void OnDataCalendarSelected(object sender, SelectionChangedEventArgs e)
         {
             Syncfusion.SfCalendar.XForms.SfCalendar cal = (Syncfusion.SfCalendar.XForms.SfCalendar)sender;

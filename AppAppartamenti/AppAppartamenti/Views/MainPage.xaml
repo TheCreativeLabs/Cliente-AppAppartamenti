@@ -33,7 +33,6 @@
                 </views:AnnunciPreferiti>
             </x:Arguments>
         </NavigationPage>
-       
 
         <NavigationPage Title="{translator:Translate MainPage.Agenda}">
             <NavigationPage.IconImageSource>
@@ -45,7 +44,6 @@
             </x:Arguments>
         </NavigationPage>
 
-        
          <NavigationPage Title="{translator:Translate MainPage.MyListing}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf08d;" Size="25"/>
