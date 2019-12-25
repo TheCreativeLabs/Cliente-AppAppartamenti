@@ -149,7 +149,7 @@ function GetImmaginiAnnuncioAjax(idAnnuncio) {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (result, status, xhr) {
-            alert('Caricamento immagini  success');
+            //alert('Caricamento immagini  success');
             var isActiveInserted = false;
 
             var innerHTML = "";
@@ -170,7 +170,7 @@ function GetImmaginiAnnuncioAjax(idAnnuncio) {
 
         },
         error: function (xhr, status, error) {
-            alert('Caricamento immagini fail');  
+            //alert('Caricamento immagini fail');  
             
         }
     });
