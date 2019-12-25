@@ -333,7 +333,7 @@ namespace AppAppartamentiApi.Controllers
                                                  TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
                                                  Completato = annuncio.Completato,
                                                  Cancellato = annuncio.Cancellato,
-                                                 ImmaginePrincipale = annuncio.ImmagineAnnuncio != null ? annuncio.ImmagineAnnuncio.First().Immagine : null
+                                                 ImmaginePrincipale = annuncio.ImmagineAnnuncio.Count > 0 ? annuncio.ImmagineAnnuncio.FirstOrDefault().Immagine : null
                                              }).ToList();
 
            return annunci;
