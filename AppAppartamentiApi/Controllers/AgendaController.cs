@@ -95,6 +95,7 @@ namespace AppAppartamentiApi.Controllers
 
             dbDataContext.Appuntamento.Add(appuntamento);
 
+
             await dbDataContext.SaveChangesAsync();
             
             return Ok(appuntamento);
@@ -235,6 +236,12 @@ namespace AppAppartamentiApi.Controllers
 
         }
 
+        private class BaseInfoUser
+        {
+            public string NomeCognome { get; set; }
+            public byte[] Immagine  { get; set; }
+        }
+
         //GET /api/Agenda/AppuntamentoById?IdAppuntamento=7
         [HttpGet]
         [Route("AppuntamentoById")]
@@ -323,12 +330,19 @@ namespace AppAppartamentiApi.Controllers
             {
                 idPersonToMeet = appuntamento.IdDestinatario;
             }
-            appuntamento.NameAndSurnamePersonToMeet = await dbDataContext.UserInfo
+            BaseInfoUser infoUser = await dbDataContext.UserInfo
                                                     .Where(x => x.IdAspNetUser == idPersonToMeet)
-                                                    .Select(x => x.Nome + " " + x.Cognome).FirstOrDefaultAsync();
+                                                    .Select(x => new BaseInfoUser() { 
+                                                        NomeCognome = x.Nome + " " + x.Cognome,
+                                                        Immagine = x.FotoProfilo
+                                                    }).FirstOrDefaultAsync();
+
+            appuntamento.NameAndSurnamePersonToMeet = infoUser.NomeCognome;
+            appuntamento.ImagePersonToMeet= infoUser.Immagine;
 
 
-            
+
+
             return Ok(appuntamento);
 
         }

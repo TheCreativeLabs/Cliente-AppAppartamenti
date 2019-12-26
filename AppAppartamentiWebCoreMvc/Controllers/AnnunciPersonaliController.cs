@@ -104,8 +104,10 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             //-- integrazione per modifica annuncio
             if (Id != null)
             {//caso modifica
-                var annuncio = await annunciClient.GetAnnuncioByIdAsync((Guid) Id);
+                AnnuncioDtoOutput annuncio = await annunciClient.GetAnnuncioByIdAsync((Guid) Id);
                 ViewData["Annuncio"] = annuncio;
+                List<byte[]> immagini = (await annunciClient.GetImmaginiByIdAnnuncioAsync((Guid)Id)).ToList();
+                ViewData["ImmaginiAnnuncio"] = annuncio;
             }
             //--fine integrazione
 
@@ -225,7 +227,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                     IdAnnuncio = new Guid(IdAnnuncio)
                 };
 
-                await agendaClient.InsertAnnuncioAsync(dto);
+                await agendaClient.InsertAppuntamentoAsync(dto);
             }
 
             return "";
