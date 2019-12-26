@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppAppartamenti.Views.GeneralCondition.PrivacyPolicy"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
 
          <StackLayout Style="{x:StaticResource StackContainer}">
-                <Button  Style="{x:StaticResource NavCancelButton}" 
+                <Button IsVisible="false"  Style="{x:StaticResource NavCancelButton}" 
                         Clicked="Cancel_Clicked">
                 </Button>
         <Label Style="{x:StaticResource Title}" Text="Privacy Policy"></Label>

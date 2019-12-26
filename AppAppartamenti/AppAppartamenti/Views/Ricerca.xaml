@@ -12,7 +12,15 @@
              NavigationPage.HasNavigationBar="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              BackgroundColor="{x:StaticResource SfondoColor}">
+
+      <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:BooleanConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                     <Button x:Name="btnCancel" Text="{translator:Translate Ricerca.Cancel}"  Style="{x:StaticResource LinkButton}"
@@ -35,6 +43,9 @@
                               ItemSelected="LvComuni_Selected" SelectionMode="Single"
                               ios:ListView.SeparatorStyle="FullWidth"
                               SeparatorColor="LightGray"
+                              ItemsSource="{Binding Items}"
+                              IsRefreshing="{Binding IsBusy}"
+
                              >
                         <ListView.ItemTemplate>
                             <DataTemplate>

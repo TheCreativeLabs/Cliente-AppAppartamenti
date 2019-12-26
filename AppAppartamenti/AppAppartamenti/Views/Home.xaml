@@ -46,7 +46,7 @@
                                      Orientation="Horizontal"
                                  >
                                      
-                                <CollectionView x:Name="cvRecenti" SelectionChanged="OnItemSelected" ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
+                                <CollectionView x:Name="cvRecenti" SelectionChanged="OnCollectionViewSelectionChanged"  ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" />
                                     </CollectionView.ItemsLayout>

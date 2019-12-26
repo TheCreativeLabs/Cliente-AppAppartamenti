@@ -24,7 +24,8 @@ namespace AppAppartamenti.Views
 
             FiltriRicerca = FiltriRicercaParam;
 
-            BindingContext = viewModel = new AnnunciViewModel(FiltriRicerca);
+            BindingContext = viewModel = new AnnunciViewModel();
+            viewModel.FiltriRicerca = FiltriRicerca;
         }
 
         protected override void OnAppearing()
@@ -38,11 +39,12 @@ namespace AppAppartamenti.Views
                     FiltriRicerca = JsonConvert.DeserializeObject<RicercaModel>(arg);
                 }
 
-                viewModel = new AnnunciViewModel(FiltriRicerca);
+                viewModel.FiltriRicerca = FiltriRicerca;
+                //viewModel.Items = new System.Collections.ObjectModel.ObservableCollection<AnnunciDtoOutput>();
             });
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+
+            viewModel.LoadItemsCommand.Execute(null);
 
             entRicerca.Text = FiltriRicerca.Comune.NomeComune;
         }

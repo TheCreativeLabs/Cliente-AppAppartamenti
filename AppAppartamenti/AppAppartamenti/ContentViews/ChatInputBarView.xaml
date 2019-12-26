@@ -13,9 +13,8 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-            <Editor x:Name="chatTextInput" 
-                     Margin="1"  
-                     TextColor="Black" Keyboard="Chat" 
+                   <Editor x:Name="chatTextInput"
+                     TextColor="Black" Keyboard="Chat"  IsTextPredictionEnabled="False"
                      HorizontalOptions="FillAndExpand" 
                      PlaceholderColor="LightGray"
                      Placeholder="Type your message here"

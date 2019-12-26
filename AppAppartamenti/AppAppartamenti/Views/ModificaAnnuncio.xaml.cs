@@ -99,7 +99,8 @@ namespace AppAppartamenti.Views
         private void EntCercaComune_TextChanged(object sender, TextChangedEventArgs e)
         {
             //refresh della lista dei comuni
-            var listaComuni = new ListaComuniViewModel(entCercaComune.Text);
+            var listaComuni = new ListaComuniViewModel();
+            listaComuni.NomeComune = entCercaComune.Text;
             listaComuni.LoadItemsCommand.Execute(null);
             lvComuni.ItemsSource = listaComuni.Items;
             lvComuni.IsVisible = true;

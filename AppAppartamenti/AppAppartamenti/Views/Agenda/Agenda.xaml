@@ -46,7 +46,8 @@
                               ItemSelected="OnItemSelected"
                               ItemsSource="{Binding Items}"
                               RefreshCommand="{Binding LoadItemsCommand}"
-                               IsRefreshing="{Binding IsBusy}">
+                               IsRefreshing="{Binding IsBusy}"
+                              HasUnevenRows="True">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

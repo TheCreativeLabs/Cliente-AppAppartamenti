@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppAppartamenti.Views.Notification.NotificationSetting"
+             Title="Notifiche">
+    <ContentPage.Content>
+        <TableView Intent="Settings" BackgroundColor="{x:StaticResource SfondoColor}">
+            <TableRoot>
+                <TableSection Title="Promemoria">
+                    <SwitchCell x:Name="PromNotifiche" Text="Notifiche push" On="true"/>
+                    <SwitchCell x:Name="PromEmail" Text="Email" On="true"/>
+                </TableSection>
+
+                <TableSection Title="Aggiornamenti da Promuovocasa.it">
+                    <SwitchCell x:Name="PromNotifichew" Text="Notifiche push" On="true"/>
+                    <SwitchCell x:Name="PromEmailw" Text="Email" On="true"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

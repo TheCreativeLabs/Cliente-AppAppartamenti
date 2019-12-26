@@ -93,7 +93,7 @@
 
 
                     <StackLayout Padding="20">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal">
                             <Label LineBreakMode="WordWrap">
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -104,14 +104,9 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-
-
-                            <Label ></Label> <!--, Converter={StaticResource TranslateConverter}-->
-                            <Label ></Label>
-                            <Label  HorizontalTextAlignment="Center"></Label>
                         </StackLayout >
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding viewModel.Item.Indirizzo,StringFormat='{0},'}"></Label>
                             <Label Text="{Binding viewModel.Item.NomeComune}"></Label>
                         </StackLayout>
@@ -193,7 +188,6 @@
                                 <Label Text="€/mese"></Label>
                             </StackLayout>
 
-                            <Label Text="Energia"></Label>
                             <StackLayout Orientation="Horizontal" >
                                 <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Heat}"></Label>
                                 <Label x:Name="lblRiscaldamento" Text="{Binding viewModel.Item.TipologiaRiscaldamento}" VerticalTextAlignment="Center"></Label>

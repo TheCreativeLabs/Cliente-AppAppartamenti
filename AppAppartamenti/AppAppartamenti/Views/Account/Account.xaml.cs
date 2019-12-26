@@ -40,8 +40,8 @@ namespace AppAppartamenti.Views.Account
             items.Add(new MenuItem() { Id=1, DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
             items.Add(new MenuItem() { Id=2, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
             items.Add(new MenuItem() { Id=3, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
-            items.Add(new MenuItem() { Id=4, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = null });
-            items.Add(new MenuItem() { Id=5, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = null });
+            items.Add(new MenuItem() { Id=4, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });
+            items.Add(new MenuItem() { Id=5, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = new GeneralCondition.PrivacyPolicy() });
             items.Add(new MenuItem() { Id=6, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
 
             listView.ItemsSource = items;

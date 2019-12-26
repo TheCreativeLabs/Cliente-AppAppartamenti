@@ -27,8 +27,8 @@ using Color = Xamarin.Forms.Color;
 [assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(SearchEntryRenderer))]
 [assembly: ExportRenderer(typeof(CustomDatePickerRenderer), typeof(DatePickerRenderer))]
-[assembly: ExportRenderer(typeof(CustomPickerRenderer), typeof(PickerRenderer))]
-[assembly: ExportRenderer(typeof(DatePickerRenderer), typeof(DatePickerCtrlRenderer))]
+[assembly: ExportRenderer(typeof(Picker), typeof(CustomPickerRenderer))]
+[assembly: ExportRenderer(typeof(DatePickerCtrl), typeof(DatePickerCtrlRenderer))]
 
 namespace CustomRenderer
 {
@@ -68,6 +68,8 @@ namespace CustomRenderer
 
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.DatePicker> e)
         {
+            base.OnElementChanged(e);
+
             if (Control != null)
             {
                 //var nativeEditText = (global::Android.Widget.EditText)Control;
@@ -92,22 +94,34 @@ namespace CustomRenderer
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Picker> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
+
+            base.OnElementChanged(e);
             if (Control != null)
             {
-                //var nativeEditText = (global::Android.Widget.)Control;
 
-                RoundRectShape i = new RoundRectShape(
-                         new float[] { 15, 15, 15, 15, 15, 15, 15, 15 },
-                         null,
-                         new float[] { 15, 15, 15, 15, 15, 15, 15, 15 });
+                //var nativeEditText = (global::Android.Widget.EditText)Control;
 
-                var shape = new ShapeDrawable(i);
-                shape.Paint.Color = Xamarin.Forms.Color.FromRgb(184, 184, 184).ToAndroid();
-                shape.Paint.SetStyle(Paint.Style.Stroke);
-                Control.Background = shape;
-                Control.SetPadding(25, 25, 25, 25);
+                //RoundRectShape i = new RoundRectShape(
+                //        new float[] { 15, 15, 15, 15, 15, 15, 15, 15 },
+                //        null,
+                //        new float[] { 15, 15, 15, 15, 15, 15, 15, 15 });
+
+                //var shape = new ShapeDrawable(i);
+                //shape.Paint.Color = Xamarin.Forms.Color.FromRgb(184, 184, 184).ToAndroid();
+                //shape.Paint.SetStyle(Paint.Style.Stroke);
+                //Control.Background = shape;
+                //Control.SetPadding(25, 25, 25, 25);
+
+                //this.Control.SetTextColor(Android.Graphics.Color.LightGray);
+                this.Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                this.Control.SetPadding(20, 0, 0, 0);
+                GradientDrawable gd = new GradientDrawable();
+                gd.SetCornerRadius(10); //increase or decrease to changes the corner look
+                gd.SetColor(Android.Graphics.Color.Transparent);
+                gd.SetStroke(1, Xamarin.Forms.Color.FromRgb(211, 211, 211).ToAndroid());
+                this.Control.SetBackgroundDrawable(gd);
             }
         }
     }
@@ -150,13 +164,13 @@ namespace CustomRenderer
             {
                 base.OnElementChanged(e);
 
-             this.Control.SetTextColor(Android.Graphics.Color.LightGray);
+                //this.Control.SetTextColor(Android.Graphics.Color.LightGray);
                 this.Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
                 this.Control.SetPadding(20, 0, 0, 0);
                 GradientDrawable gd = new GradientDrawable();
-                gd.SetCornerRadius(25); //increase or decrease to changes the corner look
+                gd.SetCornerRadius(10); //increase or decrease to changes the corner look
                 gd.SetColor(Android.Graphics.Color.Transparent);
-                gd.SetStroke(3, Android.Graphics.Color.LightGray);             
+                gd.SetStroke(1, Xamarin.Forms.Color.FromRgb(211, 211, 211).ToAndroid());             
                 this.Control.SetBackgroundDrawable(gd);
 
                 DatePickerCtrl element = Element as DatePickerCtrl;

@@ -42,7 +42,9 @@ namespace AppAppartamenti.Views.Account
             {
                 imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
             }
-            entDataNascita.Text = viewModel.DataDiNascita.Value.ToString("dd/MM/yyyy", new CultureInfo("en")); //FIXME CULTURE INFO, LANGUAGE, LOCALE
+
+            if (userInfo.DataDiNascita.HasValue)
+                dpDataNascita.Date = userInfo.DataDiNascita.Value.Date;
         }
 
         private async void BtnSave_Clicked(object sender, EventArgs e)
@@ -58,22 +60,6 @@ namespace AppAppartamenti.Views.Account
 
             AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
             await accountClient.UpdateUserAsync(updateUserModel);
-            
-        }
-
-        private void entDataNascita_Focused(object sender, FocusEventArgs e)
-        {
-            entDataNascita.Unfocus();
-            dpDataNascita.Focus();
-        }
-
-        private void dpDataNascita_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            if (dpDataNascita.Date != null)
-            {
-                entDataNascita.Text = dpDataNascita.Date.ToString("dd/MM/yyyy");
-                viewModel.DataDiNascita = dpDataNascita.Date;
-            }
         }
 
         async void OnPickPhotoButtonClicked(object sender, EventArgs e)

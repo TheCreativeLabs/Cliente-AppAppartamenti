@@ -192,7 +192,7 @@
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
 
-             <Style TargetType="DatePicker">
+             <Style TargetType="appappartamenti:DatePickerCtrl">
                 <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="HeightRequest" Value="40"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>

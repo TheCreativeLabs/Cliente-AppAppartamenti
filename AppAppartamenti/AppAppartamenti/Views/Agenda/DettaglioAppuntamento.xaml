@@ -25,10 +25,11 @@
                 </StackLayout>
 
                 <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
-             <Button x:Name="btnAddPreferitoNav" VerticalOptions="Center" Margin="0,0,0,15"
-                Text="Elimina appuntamento" 
-                BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White" WidthRequest="50">
-            </Button>
+
+                    <Button x:Name="btnAddPreferitoNav" Margin="0,0,0,10"
+                    Text="Elimina appuntamento" 
+                    BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White">
+                </Button>
 
             <Label Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
 
@@ -63,7 +64,7 @@
 
                 <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
 
-                <appappartamenti:ShadowFrame Padding="0" IsClippedToBounds="True">
+                <appappartamenti:ShadowFrame Padding="0" IsClippedToBounds="True" HasShadow="True">
                     <StackLayout Orientation="Horizontal">
                         <Image HeightRequest="100" WidthRequest="100" Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                         <StackLayout VerticalOptions="CenterAndExpand">
@@ -81,8 +82,6 @@
                
         </StackLayout>
             </StackLayout>
-        
-
 
             </ScrollView>
     </ContentPage.Content>

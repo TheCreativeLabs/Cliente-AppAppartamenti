@@ -58,15 +58,12 @@ namespace AppAppartamenti.ViewModels
         public Command LoadMore { get; set; }
         public Command AddPreferito { get; set; }
         public Command RimuoviPreferito { get; set; }
-
+        public RicercaModel FiltriRicerca { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
       
-        RicercaModel FiltriRicerca { get; set; }
 
-        public AnnunciViewModel(RicercaModel FiltriRicercaParam)
+        public AnnunciViewModel()
         {
-            FiltriRicerca = FiltriRicercaParam;
-
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             OnpropertyChanged("Items");

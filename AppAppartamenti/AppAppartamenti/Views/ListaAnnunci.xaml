@@ -42,9 +42,8 @@
                                 ItemsSource="{Binding Items}"
                                 HasUnevenRows="true"
                                 RefreshCommand="{Binding LoadItemsCommand}"
-                                IsPullToRefreshEnabled="true"
+                                IsPullToRefreshEnabled="True"
                                 IsRefreshing="{Binding IsBusy}"
-                                CachingStrategy="RecycleElement"
                                 ItemSelected="OnItemSelected"
                                 SeparatorVisibility="None">
                             <ListView.Behaviors>
@@ -68,7 +67,8 @@
                                                                     Clicked="BtnShare_Clicked"
                                                                     CommandParameter="{Binding .}"
                                                                     VerticalOptions="Center"
-                                                                    Text="&#xf14d;" Margin="0,0,10,0" HorizontalOptions="End"
+                                                                    Text="&#xf1e0;"
+                                                                    HorizontalOptions="End"
                                                                     FontFamily="{x:StaticResource FA-Solid}"
                                                                     TextColor="White">
                                                             </Button>

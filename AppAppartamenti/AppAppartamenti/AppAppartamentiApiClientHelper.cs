@@ -306,25 +306,35 @@ namespace AppAppartamenti.Api
                 else if(ComuneDesc.Length == 3)
                 {
                     AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                    listaComuni = await annunciClient.GetListaComuniAsync(ComuneDesc);
-                    if (listaComuni.Any())
+                    var lista = await annunciClient.GetListaComuniAsync(ComuneDesc);
+                    if (lista.Any())
                     {
-                        Preferences.Set(ListaComuniKey, JsonConvert.SerializeObject(listaComuni));
-
+                        Preferences.Set(ListaComuniKey, JsonConvert.SerializeObject(lista));
                     }
                 }
                 else
                 {
                   if( Preferences.Get(ListaComuniKey, null) != null)
                     {
-                        var comuni = JsonConvert.DeserializeObject<ICollection<ComuneDto>>(Preferences.Get(ListaComuniKey, null));
 
-                        listaComuni = comuni.Where(x => x.NomeComune.ToUpper().StartsWith(ComuneDesc.ToUpper())).ToList();
+                        listaComuni = await FiltraLista(ComuneDesc);
                     }
                 }
             }
+            else{
+                Preferences.Remove(ListaComuniKey);
+            }
 
             return listaComuni;
+        }
+
+        private static Task<List<ComuneDto>> FiltraLista(string ComuneDesc)
+        {
+            var comuni = JsonConvert.DeserializeObject<ICollection<ComuneDto>>(Preferences.Get(ListaComuniKey, null));
+
+            var list = comuni.Where(x => x.NomeComune.ToUpper().StartsWith(ComuneDesc.ToUpper())).ToList();
+            
+            return Task.FromResult<List<ComuneDto>>(list);
         }
     }
 
