@@ -29,7 +29,6 @@ using Color = Xamarin.Forms.Color;
 [assembly: ExportRenderer(typeof(CustomDatePickerRenderer), typeof(DatePickerRenderer))]
 [assembly: ExportRenderer(typeof(CustomPickerRenderer), typeof(PickerRenderer))]
 [assembly: ExportRenderer(typeof(DatePickerRenderer), typeof(DatePickerCtrlRenderer))]
-[assembly: ExportRenderer(typeof(ExtendedEditorControl), typeof(CustomEditorRenderer))]
 
 namespace CustomRenderer
 {
@@ -186,85 +185,4 @@ namespace CustomRenderer
             Control.Settings.UserAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
         }
     }
-
-    public class CustomEditorRenderer : EditorRenderer
-        {
-            bool initial = true;
-            Drawable originalBackground;
-
-            public CustomEditorRenderer(Context context) : base(context)
-            {
-            }
-
-            protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Editor> e)
-            {
-                base.OnElementChanged(e);
-
-                if (Control != null)
-                {
-                    if (initial)
-                    {
-                        originalBackground = Control.Background;
-                        initial = false;
-                    }
-                    Control.SetMaxLines(5);
-
-                }
-
-                if (e.NewElement != null)
-                {
-                    var customControl = (ExtendedEditorControl)Element;
-                    if (customControl.HasRoundedCorner)
-                    {
-                        ApplyBorder();
-                    }
-
-                    if (!string.IsNullOrEmpty(customControl.Placeholder))
-                    {
-                        Control.Hint = customControl.Placeholder;
-                        Control.SetHintTextColor(customControl.PlaceholderColor.ToAndroid());
-
-                    }
-                }
-            }
-
-            protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-            {
-                base.OnElementPropertyChanged(sender, e);
-
-                var customControl = (ExtendedEditorControl)Element;
-
-                if (ExtendedEditorControl.PlaceholderProperty.PropertyName == e.PropertyName)
-                {
-                    Control.Hint = customControl.Placeholder;
-
-                }
-                else if (ExtendedEditorControl.PlaceholderColorProperty.PropertyName == e.PropertyName)
-                {
-
-                    Control.SetHintTextColor(customControl.PlaceholderColor.ToAndroid());
-
-                }
-                else if (ExtendedEditorControl.HasRoundedCornerProperty.PropertyName == e.PropertyName)
-                {
-                    if (customControl.HasRoundedCorner)
-                    {
-                        ApplyBorder();
-
-                    }
-                    else
-                    {
-                        this.Control.Background = originalBackground;
-                    }
-                }
-            }
-
-            void ApplyBorder()
-            {
-                GradientDrawable gd = new GradientDrawable();
-                gd.SetCornerRadius(10);
-                gd.SetStroke(2, Color.Black.ToAndroid());
-                this.Control.Background = gd;
-            }
-        }
 }
