@@ -125,11 +125,11 @@ namespace AppAppartamenti.Views.Account
         {
             if (url.Contains("access_token") && url.Contains("&expires_in="))
             {
-                var at = url.Replace($"{AppSetting.ApiEndpoint}#access_token=", "");
+                var at = url.Replace($"{AppSetting.ApiEndpoint}GoogleLoading#access_token=", "");
 
                 if (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows)
                 {
-                    at = url.Replace($"{AppSetting.ApiEndpoint}#access_token=", "");
+                    at = url.Replace($"{AppSetting.ApiEndpoint}GoogleLoading#access_token=", "");
                 }
 
                 var accessToken = at.Remove(at.IndexOf("&token_type=bearer&expires_in="));
