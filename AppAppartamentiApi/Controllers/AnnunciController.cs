@@ -240,7 +240,6 @@ namespace AppAppartamentiApi.Controllers
         {
             Annuncio annuncio = await dbDataContext.Annuncio
                                         .Include(x => x.Comuni)
-                                        .Include(x => x.ImmagineAnnuncio)
                                         .Include(x => x.TipologiaAnnuncio)
                                         .Include(x => x.TipologiaProprieta)
                                         .Include(x => x.TipologiaRiscaldamento)
@@ -259,6 +258,20 @@ namespace AppAppartamentiApi.Controllers
             AnnuncioDtoOutput dto = AnnuncioDtoOutput.MapperAnnuncio(annuncio, preferito);
 
             return dto;
+        }
+
+        // GET api/Annunci/ImmaginiByIdAnnuncio/?id=1
+        [HttpGet]
+        [Route("ImmaginiByIdAnnuncio")]
+        [ResponseType(typeof(List<byte[]>))]
+        public async Task<List<byte[]>> GetImmaginiByIdAnnuncio(Guid Id)
+        {
+            List<byte[]> images = await dbDataContext.Annuncio
+                                        .Include(x => x.ImmagineAnnuncio)
+                                       .Where (x => x.Id == Id).SelectMany(f => f.ImmagineAnnuncio)
+    .                                   Select(fi => fi.Immagine).ToListAsync();
+
+            return images;
         }
 
         // GET api/Annunci/Annunci
@@ -333,7 +346,7 @@ namespace AppAppartamentiApi.Controllers
                                                  TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
                                                  Completato = annuncio.Completato,
                                                  Cancellato = annuncio.Cancellato,
-                                                 ImmaginePrincipale = annuncio.ImmagineAnnuncio != null ? annuncio.ImmagineAnnuncio.First().Immagine : null
+                                                 ImmaginePrincipale = annuncio.ImmagineAnnuncio.Count > 0 ? annuncio.ImmagineAnnuncio.FirstOrDefault().Immagine : null
                                              }).ToList();
 
            return annunci;

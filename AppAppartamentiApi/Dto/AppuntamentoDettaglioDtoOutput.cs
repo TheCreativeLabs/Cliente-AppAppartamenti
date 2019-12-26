@@ -23,6 +23,8 @@ namespace AppAppartamentiApi
         [Required]
         public string NameAndSurnamePersonToMeet { get; set; }
 
+        public byte[] ImagePersonToMeet { get; set; }
+
         public bool Confermato { get; set; }
 
         public AnnunciDtoOutput InfoAnnuncio { get; set; }

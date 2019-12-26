@@ -22,7 +22,7 @@ namespace AppAppartamentiApi.Dto
         
 
         public AnnuncioDtoOutput(){
-            ImmaginiAnnuncio = new List<byte[]>();
+            //ImmaginiAnnuncio = new List<byte[]>();
             ImmaginiPlanimetria = new List<byte[]>();
         }
 
@@ -82,11 +82,12 @@ namespace AppAppartamentiApi.Dto
                 dto.ClasseEnergetica = annuncio.ClasseEnergetica.Codice;
             }
 
-            foreach (var imm in annuncio.ImmagineAnnuncio)
-            {
-                dto.ImmaginiAnnuncio.Add(imm.Immagine);
+            //le carichiamo in modo asincrono
+            //foreach (var imm in annuncio.ImmagineAnnuncio)
+            //{
+            //    dto.ImmaginiAnnuncio.Add(imm.Immagine);
                 
-            }
+            //}
 
             if(annuncio.ImmaginiPlanimetria != null) { 
                 foreach (var imm in annuncio.ImmaginiPlanimetria)
