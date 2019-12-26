@@ -17,7 +17,7 @@ namespace AppAppartamenti.Views
 
         private async void btnEnable_ClickedAsync(object sender, EventArgs e)
         {
-           var button = (Button)sender;
+            var button = (Button)sender;
             button.IsEnabled = false;
 
             Application.Current.MainPage = new MainPage();
@@ -25,7 +25,6 @@ namespace AppAppartamenti.Views
             SetDeviceInfo();
 
             button.IsEnabled = true;
-
         }
 
 
@@ -39,7 +38,6 @@ namespace AppAppartamenti.Views
             SetDeviceInfo();
 
             button.IsEnabled = true;
-
         }
 
         async void SetDeviceInfo()

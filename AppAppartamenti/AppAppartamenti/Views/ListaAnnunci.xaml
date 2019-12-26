@@ -38,6 +38,10 @@
                         </Frame.GestureRecognizers>
                     </appappartamenti:ShadowFrame>
 
+                    <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
+                        <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non abbiamo trovato appartamenti"></Label>
+                    </StackLayout>
+
                     <ListView x:Name="AnnunciiListView"
                                 ItemsSource="{Binding Items}"
                                 HasUnevenRows="true"

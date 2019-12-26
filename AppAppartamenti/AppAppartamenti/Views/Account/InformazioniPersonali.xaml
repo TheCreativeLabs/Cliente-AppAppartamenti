@@ -38,7 +38,7 @@
                 <!--<Label Text="{translator:Translate InformazionePersonali.Email}"></Label>-->
                 <Entry x:Name="entMail" IsVisible="False" Text="{Binding Email}" Placeholder="{translator:Translate InformazionePersonali.Email}"></Entry>
 
-                <appappartamenti:DatePickerCtrl  x:Name="dpDataNascita"  HeightRequest="40" TextColor="{x:StaticResource DarkColor}" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></appappartamenti:DatePickerCtrl>
+                <appappartamenti:DatePickerCtrl Format="dd/MM/yyyy" x:Name="dpDataNascita"  HeightRequest="40" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></appappartamenti:DatePickerCtrl>
 
                 <Button Text="{translator:Translate InformazionePersonali.Save}" Style="{x:StaticResource primaryButton}" Clicked="BtnSave_Clicked" ></Button>
         </StackLayout>

@@ -60,13 +60,13 @@ namespace AppAppartamenti.ViewModels
         public Command RimuoviPreferito { get; set; }
         public RicercaModel FiltriRicerca { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-      
-
+        public bool IsEmpty { get; set; }
         public AnnunciViewModel()
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             OnpropertyChanged("Items");
+
             this.LoadMore = new Command(async () => await LoadMoreCommand());
             this.AddPreferito = new Command<AnnunciDtoOutput>(async item => await AddPreferitoCommand(item));
             this.RimuoviPreferito = new Command<AnnunciDtoOutput>(async item => await RemovePreferitoCommand(item));
@@ -87,7 +87,6 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
-
             ICollection<AnnunciDtoOutput> news = null;
             try
             {
@@ -120,6 +119,10 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
+            OnpropertyChanged("IsBusy");
+
+            IsEmpty = false;
+            OnpropertyChanged("IsEmpty");
 
             try
             {
@@ -127,10 +130,15 @@ namespace AppAppartamenti.ViewModels
                 Items.Clear();
 
                 ICollection<AnnunciDtoOutput> listaAnnunci = await GetAnnunci();
-                
+
                 foreach (var evento in listaAnnunci)
                 {
                     Items.Add(evento);
+                }
+
+                if (Items.Count == 0) { 
+                    IsEmpty = true;
+                    OnpropertyChanged("IsEmpty");
                 }
             }
             catch (Exception ex)
@@ -140,6 +148,7 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+                OnpropertyChanged("IsBusy");
             }
         }
 

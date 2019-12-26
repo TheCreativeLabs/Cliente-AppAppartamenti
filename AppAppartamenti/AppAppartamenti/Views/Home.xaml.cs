@@ -50,8 +50,8 @@ namespace AppAppartamenti.Views
                 RicercaModel = null;
             }
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+
+            viewModel.LoadItemsCommand.Execute(null);
         }
 
         private async void entRicerca_Focused(object sender, EventArgs e)

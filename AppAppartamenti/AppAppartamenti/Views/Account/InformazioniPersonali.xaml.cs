@@ -34,6 +34,9 @@ namespace AppAppartamenti.Views.Account
 
             BindingContext = viewModel;
 
+            if (userInfo.DataDiNascita.HasValue)
+                dpDataNascita.Date = userInfo.DataDiNascita.Value.Date;
+
             if (viewModel.FotoProfilo != null)
             {
                 imgFotoUtente.Source = ImageSource.FromStream(() => { return new MemoryStream(userInfo.FotoProfilo); });
@@ -42,9 +45,6 @@ namespace AppAppartamenti.Views.Account
             {
                 imgFotoUtente.Source = ImageSource.FromUri(new Uri(viewModel.PhotoUrl));
             }
-
-            if (userInfo.DataDiNascita.HasValue)
-                dpDataNascita.Date = userInfo.DataDiNascita.Value.Date;
         }
 
         private async void BtnSave_Clicked(object sender, EventArgs e)

@@ -43,10 +43,14 @@
                         <Label Style="{x:StaticResource Subtitle}" Text="Aggiunti di recente"></Label>
 
                         <StackLayout HeightRequest="300"
-                                     Orientation="Horizontal"
-                                 >
+                                     Orientation="Horizontal">
+
+                                <ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="Center" IsRunning="True"></ActivityIndicator>
                                      
-                                <CollectionView x:Name="cvRecenti" SelectionChanged="OnCollectionViewSelectionChanged"  ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
+                                <CollectionView x:Name="cvRecenti" SelectionChanged="OnCollectionViewSelectionChanged"
+                                                ItemsSource="{Binding Items}"
+                                                HorizontalScrollBarVisibility="Always"
+                                                >
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" />
                                     </CollectionView.ItemsLayout>
