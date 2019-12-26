@@ -52,10 +52,13 @@
             </Button>
         </StackLayout>
     </NavigationPage.TitleView>
-
     
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout>
+        <StackLayout x:Name="StackLoader" VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsVisible="true" IsRunning="True"></ActivityIndicator>
+        </StackLayout>
+        <StackLayout x:Name="StackPage" IsVisible="false" VerticalOptions="FillAndExpand">
 
             <Grid VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
@@ -84,18 +87,28 @@
                         </CarouselView>
                     </StackLayout>
 
-
               
                     <Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
                            TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>
 
 
-
                     <StackLayout Padding="20">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            <Label Text="{Binding viewModel.Item.TipologiaProprieta,StringFormat='{0} in'}" Style="{x:StaticResource Subtitle}"></Label> <!--, Converter={StaticResource TranslateConverter}-->
-                            <Label Text="{Binding viewModel.Item.TipologiaAnnuncio}" Style="{x:StaticResource Subtitle}"></Label>
-                            <Label Style="{x:StaticResource Subtitle}" Text="{Binding viewModel.Item.Prezzo, StringFormat='a {0} €'}" HorizontalTextAlignment="Center"></Label>
+                            <Label LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding viewModel.Item.TipologiaProprieta}" Style="{x:StaticResource Subtitle}" />
+                                        <Span Text=" in " Style="{x:StaticResource Subtitle}" ></Span>
+                                        <Span Text="{Binding viewModel.Item.TipologiaAnnuncio}" Style="{x:StaticResource Subtitle}" />
+                                        <Span Style="{x:StaticResource Subtitle}" Text="{Binding viewModel.Item.Prezzo, StringFormat=' a {0} €'}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+
+                            <Label ></Label> <!--, Converter={StaticResource TranslateConverter}-->
+                            <Label ></Label>
+                            <Label  HorizontalTextAlignment="Center"></Label>
                         </StackLayout >
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -103,10 +116,8 @@
                             <Label Text="{Binding viewModel.Item.NomeComune}"></Label>
                         </StackLayout>
 
-
                         <Label Text="{translator:Translate DettaglioAnnuncio.Description}" Style="{x:StaticResource SectionTitle}"></Label>
                         <Label Text="{Binding viewModel.Item.Descrizione}"></Label>
-
 
                         <Label Text="{translator:Translate DettaglioAnnuncio.GeneralInfo}"  Style="{x:StaticResource SectionTitle}"></Label>
 
@@ -174,7 +185,6 @@
                             </Frame>
                         </FlexLayout>
 
-
                             <Label Text="{translator:Translate DettaglioAnnuncio.Costs}" Style="{x:StaticResource SectionTitle}"></Label>
                 
                             <StackLayout Orientation="Horizontal" >
@@ -182,8 +192,6 @@
                                 <Label x:Name="lblSpeseCondominiali" Text="{Binding viewModel.Item.SpesaMensileCondominio}" VerticalTextAlignment="Center"></Label>
                                 <Label Text="€/mese"></Label>
                             </StackLayout>
-
-
 
                             <Label Text="Energia"></Label>
                             <StackLayout Orientation="Horizontal" >
@@ -205,8 +213,6 @@
                             </StackLayout>
                         
                             <maps:Map x:Name="map" IsVisible="True" HeightRequest="250"/>
-
-                            <!--<ContentView Content="{Binding viewModel.Item.Map}"/>-->
 
                             <Label Text="{translator:Translate DettaglioAnnuncio.Planimetria}" Style="{x:StaticResource SectionTitle}"></Label>
 
@@ -268,5 +274,7 @@
                 </StackLayout>
             </Grid>
         </StackLayout>
+
+            </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -139,6 +139,16 @@
 
             </Style>
 
+            <Style TargetType="Button" x:Key="MessageSendButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
+                <Setter Property="WidthRequest" Value="{x:OnPlatform Android=50, iOS=45}"></Setter>
+                <Setter Property="HeightRequest" Value="{x:OnPlatform Android=50, iOS=45}"></Setter>
+                <Setter Property="CornerRadius" Value="{x:OnPlatform Android=25, iOS=22}"></Setter>
+                <Setter Property="Text" Value="&#xf1d8;"></Setter>
+            </Style>
+
             <Style TargetType="Label" x:Key="Title">
                 <Setter Property="FontSize" Value="26"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>

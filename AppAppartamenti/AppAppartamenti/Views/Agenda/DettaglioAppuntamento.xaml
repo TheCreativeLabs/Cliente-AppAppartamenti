@@ -6,7 +6,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
-             Title="{Binding NameAndSurnamePersonToMeet, StringFormat='Appuntamento con {0}'}">
+             Title="Riepilogo appuntamento">
 
      <ContentPage.Resources>
         <ResourceDictionary>
@@ -17,10 +17,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
     <ContentPage.Content>
         <ScrollView>
-        <StackLayout Style="{x:StaticResource StackContainer}">
+            <StackLayout>
+                <StackLayout x:Name="StackLoader" VerticalOptions="CenterAndExpand" IsVisible="True">
+                    <ActivityIndicator IsRunning="True"></ActivityIndicator>
+                </StackLayout>
+
+                <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
              <Button x:Name="btnAddPreferitoNav" VerticalOptions="Center" Margin="0,0,0,15"
                 Text="Elimina appuntamento" 
                 BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White" WidthRequest="50">
@@ -59,11 +63,9 @@
 
                 <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
 
-                <appappartamenti:ShadowFrame Padding="0">
+                <appappartamenti:ShadowFrame Padding="0" IsClippedToBounds="True">
                     <StackLayout Orientation="Horizontal">
-                        <Frame Padding="0" CornerRadius="0" IsClippedToBounds="True" HeightRequest="100" WidthRequest="100">
-                             <Image Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
-                        </Frame>
+                        <Image HeightRequest="100" WidthRequest="100" Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                         <StackLayout VerticalOptions="CenterAndExpand">
                              <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding InfoAnnuncio.TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
@@ -78,6 +80,8 @@
                 </appappartamenti:ShadowFrame>
                
         </StackLayout>
+            </StackLayout>
+        
 
 
             </ScrollView>

@@ -33,9 +33,12 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.SelectedDate = DateTime.Now;
-                viewModel.LoadItemsCommand.Execute(null);
+            if (calendar.SelectedDate.HasValue) {
+                if(viewModel.Items.Count == 0) { 
+                    viewModel.SelectedDate = calendar.SelectedDate.Value;
+                    viewModel.LoadItemsCommand.Execute(null);
+                }
+            }
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

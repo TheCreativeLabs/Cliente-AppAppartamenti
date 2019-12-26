@@ -88,6 +88,9 @@ namespace AppAppartamenti.Views
             {
                 map.IsVisible = false;
             }
+
+            StackLoader.IsVisible = false;
+            StackPage.IsVisible = true;
         }
 
         async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
@@ -188,5 +191,7 @@ namespace AppAppartamenti.Views
                 Title = "Condividi il link"
             });
         }
+
+       
     }
 }
