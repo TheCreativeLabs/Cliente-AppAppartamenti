@@ -18,7 +18,6 @@ namespace AppAppartamenti.Views
             InitializeComponent();
 
             IdAppuntamento = appuntamento.IdAppuntamento;
-
         }
 
         protected async override void OnAppearing()
@@ -49,6 +48,9 @@ namespace AppAppartamenti.Views
                 map.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.1)));
             }
 
+
+            StackLoader.IsVisible = false;
+            StackPage.IsVisible = true;
         }
 
 

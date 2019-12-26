@@ -30,19 +30,19 @@
                     <Label Style="{x:StaticResource Title}"
                            Text="{translator:Translate Agenda.Title}"></Label>
 
-                    <syncfusion:SfCalendar x:Name="calendar"
+                    <syncfusion:SfCalendar x:Name="calendar" HeightRequest="300" Margin="0,20,0,20"
                                            EnableDatesInPast="False" 
                                        ShowLeadingAndTrailingDays="False"
                                        ShowNavigationButtons="True" SelectionChanged="OnDataCalendarSelected">
                         <syncfusion:SfCalendar.MonthViewSettings>
-                            <syncfusion:MonthViewSettings DayHeight="20" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
+                            <syncfusion:MonthViewSettings DayHeight="30" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
                             </syncfusion:MonthViewSettings>
                         </syncfusion:SfCalendar.MonthViewSettings>
                     </syncfusion:SfCalendar>
 
                     <Label Text="Appuntamenti" Style="{x:StaticResource AdTitle}" Margin="0,-40,0,0"></Label>
 
-                    <ListView x:Name="lvAppuntamenti" SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None"
+                    <ListView x:Name="lvAppuntamenti" SelectionMode="Single" SeparatorVisibility="None"
                               ItemSelected="OnItemSelected"
                               ItemsSource="{Binding Items}"
                               RefreshCommand="{Binding LoadItemsCommand}"
@@ -50,14 +50,14 @@
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <StackLayout Padding="10">
-                                            <appappartamenti:ShadowFrame>
+                                        <StackLayout Padding="5">
+                                            <appappartamenti:ShadowFrame Padding="10" HasShadow="True">
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding Data, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>
+                                                    <Label WidthRequest="70" Style="{x:StaticResource AdSubtitle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Data, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>
 
-                                                    <StackLayout HorizontalOptions="CenterAndExpand">
-                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding NameAndSurnamePersonToMeet, StringFormat='appuntamento con {0}'}"/>
-                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding Indirizzo, StringFormat='posizione: {0}'}"/>
+                                                    <StackLayout HorizontalOptions="StartAndExpand">
+                                                            <Label Text="{Binding NameAndSurnamePersonToMeet, StringFormat='Appuntamento con {0}'}"/>
+                                                            <Label Text="{Binding Indirizzo, StringFormat='Posizione: {0}'}"/>
                                                     </StackLayout>
                                                 </StackLayout>
                                            </appappartamenti:ShadowFrame>

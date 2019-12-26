@@ -5,30 +5,22 @@
              NavigationPage.HasBackButton="True" Title="Nuovo Messaggio" >
 
     <ContentPage.Content>
-   <Grid RowSpacing="0" 
-           ColumnSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="1" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-            <appappartamenti:ExtendedListView Grid.Row="0"  
-                          Margin="0"
-                 Rotation="180" 
-                 FlowDirection="RightToLeft"
-                 HasUnevenRows="True" x:Name="ChatList"
-                 VerticalOptions="FillAndExpand" 
-                 SeparatorColor="Transparent">
-            </appappartamenti:ExtendedListView>
+        <StackLayout>
+             <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="1"></RowDefinition>
 
-       <BoxView HorizontalOptions="FillAndExpand"
-                 HeightRequest="1"
-                 BackgroundColor="LightGray"
-                 Grid.Row="1"/>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <controls:ChatInputBarView Grid.Row="2"
-                                   Margin="0,0,10,0"
-                                   x:Name="chatInput"/>
+            <ListView Grid.Row="0" HasUnevenRows="False" SeparatorVisibility="None">
+            </ListView>
+
+             <BoxView Grid.Row="1" Color="LightGray"></BoxView>
+
+             <controls:ChatInputBarView Grid.Row="2"></controls:ChatInputBarView>
         </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

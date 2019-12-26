@@ -46,7 +46,7 @@
                                      Orientation="Horizontal"
                                  >
                                      
-                                <CollectionView ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
+                                <CollectionView x:Name="cvRecenti" SelectionChanged="OnItemSelected" ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" />
                                     </CollectionView.ItemsLayout>
@@ -80,7 +80,7 @@
                     </StackLayout>
 
                     <Label Style="{x:StaticResource Subtitle}" Margin="0,30,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
-                    <Button Text="Pubblica un annuncio" Style="{x:StaticResource primaryButton}"></Button>
+                    <Button Text="Pubblica un annuncio" Clicked="btnNuovoAnnuncio_Clicked" Style="{x:StaticResource primaryButton}"></Button>
                 </StackLayout>
             </ScrollView>
     </ContentPage.Content>
