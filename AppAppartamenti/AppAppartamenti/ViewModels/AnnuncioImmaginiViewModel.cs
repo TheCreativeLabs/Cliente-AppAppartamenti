@@ -2,30 +2,29 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
+
 using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AppuntamentiViewModel : BaseViewModel
+    public class AnnuncioimmaginiViewModel : BaseViewModel
     {
-        public DateTime SelectedDate { get; set; }
-        public ObservableCollection<AppuntamentoDtoOutput> Items { get; set; }
+        public Guid IdAnnuncio { get; set; }
+        public ObservableCollection<Byte[]> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-
-        public AppuntamentiViewModel()
+        public AnnuncioimmaginiViewModel()
         {
-            Items = new ObservableCollection<AppuntamentoDtoOutput>();
+            Items = new ObservableCollection<Byte[]>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        async Task ExecuteLoadItemsCommand()
+        public  async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -34,14 +33,16 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
+
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+
+                ICollection<byte[]> immagini = await annunciClient.GetImmaginiByIdAnnuncioAsync(IdAnnuncio);
+
                 Items.Clear();
 
-                AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
-                var lista =await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
-
-                foreach (var item in lista)
+                foreach (var img in immagini)
                 {
-                    Items.Add(item);
+                    Items.Add(img);
                 }
             }
             catch (Exception ex)

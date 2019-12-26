@@ -101,7 +101,7 @@ namespace AppAppartamenti.Views
                     };
 
                     AgendaClient agendaClient = new AgendaClient(ApiHelper.GetApiClient());
-                    await agendaClient.InsertAnnuncioAsync(appuntamento);
+                    await agendaClient.InsertAppuntamentoAsync(appuntamento);
                     await App.Current.MainPage.DisplayAlert(Helpers.TranslateExtension.ResMgr.Value.GetString("NuovoAppuntamento.SuccessTitle", translate.ci),
                                                             Helpers.TranslateExtension.ResMgr.Value.GetString("NuovoAppuntamento.SuccessText", translate.ci),
                                                             Helpers.TranslateExtension.ResMgr.Value.GetString("NuovoAppuntamento.SuccessOk", translate.ci)

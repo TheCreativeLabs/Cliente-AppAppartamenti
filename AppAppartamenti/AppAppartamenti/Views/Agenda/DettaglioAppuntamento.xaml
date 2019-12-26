@@ -2,68 +2,88 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              x:Class="AppAppartamenti.Views.DettaglioAppuntamento"
-             NavigationPage.HasNavigationBar="False"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             NavigationPage.HasNavigationBar="True"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              ios:Page.UseSafeArea="true"
-             BackgroundColor="{x:StaticResource SfondoColor}">
+             BackgroundColor="{x:StaticResource SfondoColor}"
+             Title="Riepilogo appuntamento">
+
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+            <conv:PrezzoConverter x:Key="PrezzoConverter" />
+            <conv:BooleanConverter x:Key="BoolConverter" />
+            <conv:ColorConverter x:Key="ColConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <ScrollView>
-        <StackLayout Style="{x:StaticResource StackContainer}">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <controls:BackButton HorizontalOptions="StartAndExpand" />
+            <StackLayout>
+                <StackLayout x:Name="StackLoader" VerticalOptions="CenterAndExpand" IsVisible="True">
+                    <ActivityIndicator IsRunning="True"></ActivityIndicator>
+                </StackLayout>
 
-                <Button x:Name="btnAddPreferitoNav" Style="{x:StaticResource NavCancelButton}" VerticalOptions="Center"
-                    Text="&#xf2ed;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource DangerColor}" WidthRequest="50">
-                </Button>
-            </StackLayout>
+                <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
+             <Button x:Name="btnAddPreferitoNav" VerticalOptions="Center" Margin="0,0,0,15"
+                Text="Elimina appuntamento" 
+                BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White" WidthRequest="50">
+            </Button>
 
             <Label Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
 
-            <StackLayout Orientation="Horizontal">
-                    <Frame CornerRadius="40"
-                           HeightRequest="80"
-                           WidthRequest="80"
-                           IsClippedToBounds="True"
-                           HasShadow="False"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           Padding="0" BackgroundColor="Blue">
-                    </Frame>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Frame CornerRadius="30"
+                        HeightRequest="60"
+                        WidthRequest="60"
+                        IsClippedToBounds="True"
+                        HasShadow="False"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Padding="0" BackgroundColor="Blue">
+                </Frame>
 
-                    <StackLayout VerticalOptions="Center">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Style="{x:StaticResource AdTitle}" Text="Mario"></Label>
-                            <Label Style="{x:StaticResource AdTitle}" Text="Rossi"></Label>
-                        </StackLayout>
-                        <Button Style="{x:StaticResource primaryButton}" Clicked="BtnMessaggio_Clicked" Text="Manda un messaggio" Padding="10,0,10,0" HeightRequest="40"></Button>
-                   </StackLayout>
+                <StackLayout VerticalOptions="Center">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding NameAndSurnamePersonToMeet}"></Label>
+                    </StackLayout>
+                    <Button Style="{x:StaticResource primaryButton}" Clicked="BtnMessaggio_Clicked" Text="Manda un messaggio" Padding="10,0,10,0" HeightRequest="30"></Button>
                 </StackLayout>
+            </StackLayout>
 
             <Label Style="{x:StaticResource SectionTitle}" Text="Data"></Label>
-                <Label Text="Martedì 22 dicembre alle 10:30"></Label>
+                <Label Text="{Binding Data, StringFormat='{0: dd/MM/yyyy HH:mm}'}"></Label>
 
 
-                <Label Style="{x:StaticResource SectionTitle}" Text="Posizione"></Label>
+                <Label Style="{x:StaticResource SectionTitle}" Text="Dove"></Label>
                 <Label Text="via boccherini 10, Bologna"></Label>
                 <StackLayout>
-                    <maps:Map x:Name="map" IsVisible="True" HeightRequest="300"/>
+                    <maps:Map x:Name="map" IsVisible="True" HeightRequest="250"/>
                 </StackLayout>
 
                 <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
 
-                <appappartamenti:ShadowFrame Padding="0">
+                <appappartamenti:ShadowFrame Padding="0" IsClippedToBounds="True">
                     <StackLayout Orientation="Horizontal">
-                        <Frame CornerRadius="0" IsClippedToBounds="True" HeightRequest="60" WidthRequest="60" BackgroundColor="Blue">
-
-                        </Frame>
+                        <Image HeightRequest="100" WidthRequest="100" Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                         <StackLayout VerticalOptions="CenterAndExpand">
-                             <Label Style="{x:StaticResource AdSubtitle}" Text="Appartamento in vendita a 250000"></Label>
-                            <Label Style="{x:StaticResource AdSubtitle}" Text="250 m2"></Label>
+                             <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding InfoAnnuncio.TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
+                                <Label Text="{Binding InfoAnnuncio.TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
+                                <Label Text="{Binding InfoAnnuncio.Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding InfoAnnuncio.Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </appappartamenti:ShadowFrame>
+               
         </StackLayout>
+            </StackLayout>
+        
+
+
             </ScrollView>
     </ContentPage.Content>
 </ContentPage>

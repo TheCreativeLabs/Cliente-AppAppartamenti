@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AppAppartamenti.Api;
 using AppAppartamenti.Notify;
 using AppAppartamenti.ViewModels;
+using AppAppartamentiApiClient;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Xamarin.Forms;
@@ -20,13 +21,13 @@ namespace AppAppartamenti.Views
         //int notificationNumber = 0;
 
         RicercaModel RicercaModel;
-        AnnunciPersonaliViewModel viewModel;
+        AnnunciRecentiViewModel viewModel;
 
         public Home()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AnnunciPersonaliViewModel();
+            BindingContext = viewModel = new AnnunciRecentiViewModel();
         }
 
         protected override async void OnAppearing()
@@ -64,28 +65,45 @@ namespace AppAppartamenti.Views
             await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(null))); //è un nuovo annuncio, non devo passare l'annuncio da modificare
         }
 
-            //async void BtnAdd_Clicked(object sender, EventArgs e)
-            //{
-            //    notificationNumber++;
-            //    string title = $"Local Notification #{notificationNumber}";
-            //    string message = $"You have now received {notificationNumber} notifications!";
-            //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
-            //}
 
-            //async void OnScheduleClick(object sender, EventArgs e)
-            //{
-            //    notificationNumber++;
-            //    string title = $"Local Notification #{notificationNumber}";
-            //    string message = $"You have now received {notificationNumber} notifications!";
-            //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
-            //}
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem as AnnunciDtoOutput;
 
-            //void ShowNotification(string title, string message)
-            //{
-            //    Device.BeginInvokeOnMainThread(async () =>
-            //    {
-            //           await DisplayAlert("Notifica",$"Notification Received:\nTitle: {title}\nMessage: {message}","OK");
-            //    });
-            //}
+            if (item == null || item.Id == null)
+                return;
+
+            if (item.Id != null && item.Id != Guid.Empty)
+            {
+                // Manually deselect item.
+                cvRecenti.SelectedItem = null;
+
+                await Navigation.PushAsync(new DettaglioAnnuncio(item, false));
+            }
         }
+
+        //async void BtnAdd_Clicked(object sender, EventArgs e)
+        //{
+        //    notificationNumber++;
+        //    string title = $"Local Notification #{notificationNumber}";
+        //    string message = $"You have now received {notificationNumber} notifications!";
+        //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
+        //}
+
+        //async void OnScheduleClick(object sender, EventArgs e)
+        //{
+        //    notificationNumber++;
+        //    string title = $"Local Notification #{notificationNumber}";
+        //    string message = $"You have now received {notificationNumber} notifications!";
+        //    notificationManager.ScheduleNotification(title, message, await ApiHelper.GetNotificationStatus());
+        //}
+
+        //void ShowNotification(string title, string message)
+        //{
+        //    Device.BeginInvokeOnMainThread(async () =>
+        //    {
+        //           await DisplayAlert("Notifica",$"Notification Received:\nTitle: {title}\nMessage: {message}","OK");
+        //    });
+        //}
+    }
 }

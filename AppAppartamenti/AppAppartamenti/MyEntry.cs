@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using Plugin.InputKit.Shared.Controls;
 using Xamarin.Forms;
 
@@ -20,6 +22,7 @@ namespace AppAppartamenti
     public class MyEntry : Entry
     {
     }
+
 
 
     public class CustomEntry : AdvancedEntry
@@ -46,4 +49,14 @@ namespace AppAppartamenti
     public class WebViewUserAgent : WebView
     {
     }
+
+    public class CustomContentView : ContentView
+    {
+    }
+
+    public class CustomEditor : Editor
+    {
+    }
+
+    
 }

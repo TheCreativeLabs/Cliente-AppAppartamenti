@@ -14,12 +14,11 @@
              >
     <ContentPage.Content>
         <StackLayout>
-            <appappartamenti:ShadowFrame  CornerRadius="0" HeightRequest="100" HasShadow="True" Padding="15" VerticalOptions="Center"
-                                        >
+            <appappartamenti:ShadowFrame  CornerRadius="0" HeightRequest="100" HasShadow="True" Padding="15" VerticalOptions="Center">
                 <StackLayout Orientation="Horizontal" Margin="0,20,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                    <Frame CornerRadius="40"
-                           HeightRequest="80"
-                           WidthRequest="80"
+                    <Frame CornerRadius="35"
+                           HeightRequest="70"
+                           WidthRequest="70"
                            IsClippedToBounds="True"
                            HasShadow="False"
                            HorizontalOptions="Center"

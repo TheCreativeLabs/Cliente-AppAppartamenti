@@ -5,23 +5,43 @@ using System.Threading.Tasks;
 using AppAppartamenti.Models;
 using AppAppartamentiApiClient;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace AppAppartamenti.ViewModels
 {
     public class AnnuncioDetailViewModel : BaseViewModel
     {
-        public class Immagine
-        {
-            public byte[] Value { get; set; }
-        }
 
+        public Guid IdAnnuncio { get; set; }
         public AnnuncioDtoOutput Item { get; set; }
+        public Command LoadItemsCommand { get; set; }
 
-        ////public Command LoadItemsCommand { get; set; }
-        //public Guid idAnnuncio { get; set; }
         public AnnuncioDetailViewModel()
         {
             Item = new AnnuncioDtoOutput();
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+        }
+
+        async Task ExecuteLoadItemsCommand()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                Item = await annunciClient.GetAnnuncioByIdAsync(IdAnnuncio);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         public static async Task<AnnuncioDetailViewModel> ExecuteLoadItemsCommandAsync(Guid Id)

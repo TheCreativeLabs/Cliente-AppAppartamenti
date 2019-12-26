@@ -9,19 +9,20 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using Xamarin.Forms.Maps;
 
 namespace AppAppartamenti.ViewModels
 {
     public class AnnunciPreferitiViewModel : BaseViewModel
     {
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
+
         public Command LoadItemsCommand { get; set; }
 
         public AnnunciPreferitiViewModel()
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-          
         }
 
         async Task ExecuteLoadItemsCommand()

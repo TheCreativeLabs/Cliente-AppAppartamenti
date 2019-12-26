@@ -47,7 +47,7 @@ namespace AppAppartamenti.Views
                 // Manually deselect item.
                 AnnunciiListView.SelectedItem = null;
 
-                await Navigation.PushAsync(new DettaglioAnnuncio(item.Id.Value,true));
+                await Navigation.PushAsync(new DettaglioAnnuncio(item,true));
             }
         }
 
