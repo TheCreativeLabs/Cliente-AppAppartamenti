@@ -41,6 +41,19 @@ namespace AppAppartamenti.Views
             }
         }
 
+        private async void BtnApprovazione_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushAsync(new ApprovazioneAppuntamenti());
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var item = args.SelectedItem as AppuntamentoDtoOutput;

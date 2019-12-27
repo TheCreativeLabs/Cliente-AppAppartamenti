@@ -104,14 +104,17 @@ namespace AppAppartamenti.Views
 
         private void EntCercaComune_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //refresh della lista dei comuni
-            var listaComuni = new ListaComuniViewModel(entCercaComune.Text);
-            lvComuni.IsVisible = true;
-            listaComuni.LoadItemsCommand.Execute(null);
-            lvComuni.ItemsSource = listaComuni.Items;
-            entIndirizzo.IsVisible = false;
-            lblIndirizzo.IsVisible = false;
-            btnIndirizzoProcedi.IsVisible = false;
+            if(entCercaComune.Text.Length >= 3) { 
+                //refresh della lista dei comuni
+                var listaComuni = new ListaComuniViewModel();
+                listaComuni.NomeComune = entCercaComune.Text;
+                lvComuni.IsVisible = true;
+                listaComuni.LoadItemsCommand.Execute(null);
+                lvComuni.ItemsSource = listaComuni.Items;
+                entIndirizzo.IsVisible = false;
+                lblIndirizzo.IsVisible = false;
+                btnIndirizzoProcedi.IsVisible = false;
+            }
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)

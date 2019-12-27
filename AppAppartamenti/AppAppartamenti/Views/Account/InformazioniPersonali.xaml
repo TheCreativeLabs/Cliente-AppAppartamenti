@@ -5,26 +5,27 @@
              x:Class="AppAppartamenti.Views.Account.InformazioniPersonali"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="{translator:Translate InformazionePersonali.Title}"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
-                <controls:BackButton/>
-                <Label Style="{x:StaticResource Title}" Margin="0,0,10,20" Text="{translator:Translate InformazionePersonali.Title}"></Label>
+                <controls:BackButton IsVisible="false"/>
+                <Label IsVisible="false" Style="{x:StaticResource Title}" Margin="0,0,10,20" Text="{translator:Translate InformazionePersonali.Title}"></Label>
 
                 <Frame CornerRadius="40"
-                           HeightRequest="80"
-                           WidthRequest="80"
-                           IsClippedToBounds="True"
-                           HasShadow="False"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           Padding="0">
-                        <Image x:Name="imgFotoUtente"
-                                Aspect="AspectFill"></Image>
-                    </Frame>
+                        HeightRequest="80"
+                        WidthRequest="80"
+                        IsClippedToBounds="True"
+                        HasShadow="False"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Padding="0">
+                    <Image x:Name="imgFotoUtente"
+                            Aspect="AspectFill"></Image>
+                </Frame>
 
                 <Button Text="{translator:Translate InformazionePersonali.ChangePhoto}" Style="{x:StaticResource LinkButton}" HorizontalOptions="CenterAndExpand" Clicked="OnPickPhotoButtonClicked"></Button>
 
@@ -37,10 +38,7 @@
                 <!--<Label Text="{translator:Translate InformazionePersonali.Email}"></Label>-->
                 <Entry x:Name="entMail" IsVisible="False" Text="{Binding Email}" Placeholder="{translator:Translate InformazionePersonali.Email}"></Entry>
 
-                <!--<Label Text="{translator:Translate InformazionePersonali.DateOfBirth}"></Label>-->
-                <Entry x:Name="entDataNascita" Focused="entDataNascita_Focused" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></Entry>
-
-                <DatePicker x:Name="dpDataNascita" IsVisible="False"  Visual="Material" DateSelected="dpDataNascita_DateSelected" ></DatePicker>
+                <appappartamenti:DatePickerCtrl Format="dd/MM/yyyy" x:Name="dpDataNascita"  HeightRequest="40" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></appappartamenti:DatePickerCtrl>
 
                 <Button Text="{translator:Translate InformazionePersonali.Save}" Style="{x:StaticResource primaryButton}" Clicked="BtnSave_Clicked" ></Button>
         </StackLayout>

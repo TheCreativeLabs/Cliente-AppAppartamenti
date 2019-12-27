@@ -30,7 +30,7 @@
                     <Label Style="{x:StaticResource Title}"
                            Text="{translator:Translate Agenda.Title}"></Label>
 
-                    <syncfusion:SfCalendar x:Name="calendar" HeightRequest="300" Margin="0,20,0,20"
+                    <syncfusion:SfCalendar x:Name="calendar" HeightRequest="300" Margin="0,20,0,10"
                                            EnableDatesInPast="False" 
                                        ShowLeadingAndTrailingDays="False"
                                        ShowNavigationButtons="True" SelectionChanged="OnDataCalendarSelected">
@@ -40,13 +40,12 @@
                         </syncfusion:SfCalendar.MonthViewSettings>
                     </syncfusion:SfCalendar>
 
-                    <Label Text="Appuntamenti" Style="{x:StaticResource AdTitle}" Margin="0,-40,0,0"></Label>
-
                     <ListView x:Name="lvAppuntamenti" SelectionMode="Single" SeparatorVisibility="None"
                               ItemSelected="OnItemSelected"
                               ItemsSource="{Binding Items}"
                               RefreshCommand="{Binding LoadItemsCommand}"
-                               IsRefreshing="{Binding IsBusy}">
+                               IsRefreshing="{Binding IsBusy}"
+                              HasUnevenRows="True">
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

@@ -2,25 +2,26 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              x:Class="AppAppartamenti.Views.Messaggi.NuovoMessaggio"
-             NavigationPage.HasBackButton="True" Title="Nuovo Messaggio" >
-
+             NavigationPage.HasBackButton="True" Title="Nuovo Messaggio"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:Application.WindowSoftInputModeAdjust="Resize">
     <ContentPage.Content>
         <StackLayout>
              <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="1"></RowDefinition>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
 
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <ListView Grid.Row="0" HasUnevenRows="False" SeparatorVisibility="None">
-            </ListView>
+                <ListView Grid.Row="0" HasUnevenRows="False" SeparatorVisibility="None">
+                </ListView>
 
-             <BoxView Grid.Row="1" Color="LightGray"></BoxView>
+                <BoxView Grid.Row="1" Color="LightGray"></BoxView>
 
-             <controls:ChatInputBarView Grid.Row="2"></controls:ChatInputBarView>
-        </Grid>
+                <controls:ChatInputBarView Grid.Row="2"></controls:ChatInputBarView>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

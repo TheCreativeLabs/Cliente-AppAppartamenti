@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using AppAppartamenti.Api;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,9 +21,12 @@ namespace AppAppartamenti.Views
         List<TipologiaProprieta> listTipologiaProprieta = new List<TipologiaProprieta>();
         RicercaModel FiltriRicerca;
         bool IsRicaricamento;
+        ListaComuniViewModel viewModel;
+
         public Ricerca()
         {
             InitializeComponent();
+
         }
 
         public Ricerca(RicercaModel FiltriRicercaParam)
@@ -29,11 +34,14 @@ namespace AppAppartamenti.Views
             InitializeComponent();
             FiltriRicerca = FiltriRicercaParam;
             IsRicaricamento = true;
+
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            BindingContext = viewModel = new ListaComuniViewModel();
 
             entRicerca.Focus();
 
@@ -181,19 +189,21 @@ namespace AppAppartamenti.Views
                 stkPrezzoVendita.IsVisible = false;
                 stkPrezzoAffitto.IsVisible = true;
             }
-        } 
+        }
 
-        private void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
+        private async void EntRicerca_TextChanged(object sender, TextChangedEventArgs e)
         {
-            stkRicercaAggiuntiva.IsVisible = false;
-            lvComuni.IsVisible = true;
-
-            //refresh della lista dei comuni
-            var listaComuni = new ListaComuniViewModel(entRicerca.Text);
-            listaComuni.LoadItemsCommand.Execute(null);
-            lvComuni.ItemsSource = listaComuni.Items;
-            
-            lvComuni.IsRefreshing = false;
+            if(entRicerca.Text.Length > 3)
+            {
+                stkRicercaAggiuntiva.IsVisible = false;
+                lvComuni.IsVisible = true;
+                viewModel.NomeComune = entRicerca.Text;
+                viewModel.LoadItemsCommand.Execute(null);
+            }
+            else
+            {
+                lvComuni.IsVisible = false;
+            }
         }
 
         async void LvComuni_Selected(object sender, SelectedItemChangedEventArgs args)

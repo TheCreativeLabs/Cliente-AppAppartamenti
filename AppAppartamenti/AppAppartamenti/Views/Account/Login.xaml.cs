@@ -52,6 +52,9 @@ namespace AppAppartamenti.Views.Login
         {
             try
             {
+                var btn =  (Button)sender;
+                btn.IsEnabled = false;
+
                 bool formIsValid = true;
 
                 //Controllo che username e password siano valorizzati.
@@ -75,6 +78,9 @@ namespace AppAppartamenti.Views.Login
                 {
                     await DisplayAlert("Attenzione", "Compilare tutti i campi", "OK");
                 }
+
+                btn.IsEnabled = true;
+
             }
             catch (ApplicationException Ex)
             {

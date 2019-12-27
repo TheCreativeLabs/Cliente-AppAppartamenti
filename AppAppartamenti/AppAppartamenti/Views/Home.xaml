@@ -27,7 +27,7 @@
                     <Label FontSize="60" Margin="20" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}"
                             TextColor="{x:StaticResource PrimaryColor}" Text="&#xf7ae;"></Label>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" HeightRequest="45" CornerRadius="5" Padding="5">
+                    <appappartamenti:ShadowFrame HasShadow="True" HeightRequest="40" CornerRadius="5" Padding="5">
                         <StackLayout Orientation="Horizontal">
                             <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
@@ -42,11 +42,14 @@
                     <StackLayout Orientation="Vertical" Margin="0,20,0,0">
                         <Label Style="{x:StaticResource Subtitle}" Text="Aggiunti di recente"></Label>
 
+                        <ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" IsRunning="True"></ActivityIndicator>
+
                         <StackLayout HeightRequest="300"
-                                     Orientation="Horizontal"
-                                 >
-                                     
-                                <CollectionView x:Name="cvRecenti" SelectionChanged="OnItemSelected" ItemsSource="{Binding Items}" HorizontalScrollBarVisibility="Always">
+                                     Orientation="Horizontal">
+                                    <CollectionView x:Name="cvRecenti" SelectionChanged="OnCollectionViewSelectionChanged"
+                                                    ItemsSource="{Binding Items}"
+                                                    HorizontalScrollBarVisibility="Always"
+                                                    >
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" />
                                     </CollectionView.ItemsLayout>
@@ -58,11 +61,11 @@
                                     <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                                 </Frame>
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
-                                <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
-                                <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
-                            </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
+                                    <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
+                                    <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
+                                </StackLayout>
 
                                 <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding NomeComune, StringFormat='{0},'}" Style="{x:StaticResource AdSubtitle}"></Label>

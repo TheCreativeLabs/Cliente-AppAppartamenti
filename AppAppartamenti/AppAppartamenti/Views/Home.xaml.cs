@@ -50,8 +50,8 @@ namespace AppAppartamenti.Views
                 RicercaModel = null;
             }
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+
+            viewModel.LoadItemsCommand.Execute(null);
         }
 
         private async void entRicerca_Focused(object sender, EventArgs e)
@@ -65,9 +65,9 @@ namespace AppAppartamenti.Views
         }
 
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        async void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = args.SelectedItem as AnnunciDtoOutput;
+            var item = e.CurrentSelection as AnnunciDtoOutput;
 
             if (item == null || item.Id == null)
                 return;

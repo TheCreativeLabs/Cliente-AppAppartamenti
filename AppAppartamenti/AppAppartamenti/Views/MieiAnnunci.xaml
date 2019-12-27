@@ -36,14 +36,14 @@
 
             <ListView x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
-                    HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
                     IsPullToRefreshEnabled="true"
                     CachingStrategy="RecycleElement"
                     ItemSelected="OnItemSelected"
                     VerticalScrollBarVisibility="Never"
-                  IsRefreshing="{Binding IsBusy}"
-                    SeparatorVisibility="None">
+                    IsRefreshing="{Binding IsBusy}"
+                    SeparatorVisibility="None"
+                      HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

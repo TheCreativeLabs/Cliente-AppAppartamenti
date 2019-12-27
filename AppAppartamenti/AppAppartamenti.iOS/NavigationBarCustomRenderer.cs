@@ -53,10 +53,10 @@ namespace iOS.Renderers
                 }
                 Control.BorderStyle = UITextBorderStyle.RoundedRect;
                 Control.Layer.BorderColor = UIColor.FromRGB(211, 211, 211).CGColor;
-                //Control.Layer.CornerRadius = 10;
+                Control.Layer.CornerRadius = 5;
                 Control.Layer.BorderWidth = 1f;
                 Control.AdjustsFontSizeToFitWidth = true;
-                Control.TextColor = UIColor.FromRGB(211, 211, 211);
+                //Control.TextColor = UIColor.FromRGB(211, 211, 211);
 
             Control.ShouldEndEditing += (textField) => {
                var seletedDate = (UITextField)textField;
