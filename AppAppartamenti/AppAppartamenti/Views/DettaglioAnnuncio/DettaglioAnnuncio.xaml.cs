@@ -62,10 +62,10 @@ namespace AppAppartamenti.Views
             if (!IsEditable)
             {
                 btnAddPreferito.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
-            btnRemovePreferito.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
-            btnAddPreferitoNav.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
-            btnRemovePreferitoNav.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
-        }
+                btnRemovePreferito.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
+                btnAddPreferitoNav.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
+                btnRemovePreferitoNav.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
+            }
 
             if (!string.IsNullOrEmpty(bindingModel.viewModel.Item.CoordinateGeografiche))
             {

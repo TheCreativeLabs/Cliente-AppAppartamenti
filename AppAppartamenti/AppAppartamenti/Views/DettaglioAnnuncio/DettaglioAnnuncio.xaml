@@ -33,34 +33,32 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
             <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
-            <Button Style="{x:StaticResource NavCancelButton}" x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
+            <Button Style="{x:StaticResource NavCancelButton}" IsVisible="False"  x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
                    FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
             </Button>
 
-            <Button x:Name="btnAddPreferitoNav"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
+            <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
                     Text="&#xf004;" HorizontalOptions="End"
                     FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
             </Button>
 
-            <Button x:Name="btnRemovePreferitoNav"  Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
+            <Button x:Name="btnRemovePreferitoNav" IsVisible="False"   Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
                     Text="&#xf004;" HorizontalOptions="End"
                     FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
             </Button>
 
-            <Button  x:Name="btnModificaNavBar" Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
+            <Button  x:Name="btnModificaNavBar" IsVisible="False" Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" WidthRequest="50">
             </Button>
         </StackLayout>
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout>
-        <StackLayout x:Name="StackLoader" VerticalOptions="CenterAndExpand">
-            <ActivityIndicator IsVisible="true" IsRunning="True"></ActivityIndicator>
-        </StackLayout>
-        <StackLayout x:Name="StackPage" IsVisible="false" VerticalOptions="FillAndExpand">
-
-            <Grid VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="StackLoader"  VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsVisible="true" IsRunning="True"></ActivityIndicator>
+            </StackLayout>
+            <Grid VerticalOptions="FillAndExpand" x:Name="StackPage" IsVisible="false" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*" />
                     <RowDefinition Height="*" />
@@ -268,7 +266,5 @@
                 </StackLayout>
             </Grid>
         </StackLayout>
-
-            </StackLayout>
     </ContentPage.Content>
 </ContentPage>

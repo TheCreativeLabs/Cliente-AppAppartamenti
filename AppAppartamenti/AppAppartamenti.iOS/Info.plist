@@ -28,8 +28,6 @@
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>CFBundleName</key>
-	<string>AppAppartamenti</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
@@ -62,5 +60,7 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>CFBundleName</key>
+	<string>Promuovocasa.it</string>
 </dict>
 </plist>

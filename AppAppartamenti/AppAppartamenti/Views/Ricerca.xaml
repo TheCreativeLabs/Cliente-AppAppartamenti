@@ -27,7 +27,7 @@
                             HorizontalOptions="End" Clicked="btnCancel_Clicked">
                     </Button>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" Padding="10">
+                    <appappartamenti:ShadowFrame HasShadow="True" Padding="5" HeightRequest="40">
                         <StackLayout Orientation="Horizontal" Padding="0">
                             <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource GrayColor}" Text="&#xf002;"></Label>
 
