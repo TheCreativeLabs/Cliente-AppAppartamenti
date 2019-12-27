@@ -42,7 +42,7 @@ namespace AppAppartamenti.Views
 
         async void SetDeviceInfo()
         {
-            NotificheClient notificheClient = new NotificheClient(Api.ApiHelper.GetApiClient());
+            NotificheClient notificheClient = new NotificheClient(await Api.ApiHelper.GetApiClient());
             var installationId = await AppCenter.GetInstallIdAsync();
 
             var os = "ANDROID";

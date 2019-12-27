@@ -42,7 +42,7 @@ namespace AppAppartamenti.ViewModels
                 if(NomeComune.Length > 3) { 
                 //AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
                 ICollection<ComuneDto> listaComuni; // = await ApiHelper.GetListaComuni(NomeComune);// annunciClient.GetListaComuniAsync(NomeComune);
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
                     Items.Clear();
                     foreach (var evento in listaComuni)

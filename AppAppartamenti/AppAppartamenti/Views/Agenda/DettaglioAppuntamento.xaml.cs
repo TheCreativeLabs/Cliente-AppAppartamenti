@@ -25,10 +25,9 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             
-            AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
+            AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
             var appuntamento =  await agendaClient.GetAppuntamentoByIdAsync(IdAppuntamento);
-            BindingContext = viewModel = viewModel = appuntamento;
-
+            BindingContext = viewModel = appuntamento;
 
             if (!String.IsNullOrEmpty(viewModel.CoordinateGeograficheAnnuncio))
             {
@@ -51,6 +50,7 @@ namespace AppAppartamenti.Views
 
             StackLoader.IsVisible = false;
             StackPage.IsVisible = true;
+            StackFooter.IsVisible = true;
         }
 
 
@@ -64,17 +64,32 @@ namespace AppAppartamenti.Views
             var btn = sender as Button;
             btn.IsEnabled = false;
 
-
             bool answer = await DisplayAlert("Annullare l'appuntamento", "Procedendo l'appuntamento verrà cancellato definitamente.", "Si", "No");
             if (answer)
             {
-                AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
+                AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 await agendaClient.DeleteAppuntamentoAsync(IdAppuntamento);
                 await Navigation.PopAsync();
             }
 
             btn.IsEnabled = true;
+        }
 
+        private async void BtnAccept_Clicked(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            btn.IsEnabled = false;
+
+            AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
+            await agendaClient.ConfermaAppuntamentoAsync(IdAppuntamento);
+
+            BtnDelete.IsVisible = true;
+            BtnAccept.IsVisible = false;
+            BtnDeny.IsVisible = false;
+
+            await DisplayAlert("Confermato", "L'appuntamento è stato confermato correttamente.", "OK");
+
+            btn.IsEnabled = true;
         }
     }
 }

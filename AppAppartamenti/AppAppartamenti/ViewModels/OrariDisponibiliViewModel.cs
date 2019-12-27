@@ -43,7 +43,7 @@ namespace AppAppartamenti.ViewModels
             {
                 Orari.Clear();
 
-                AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
+                AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 ICollection<string> listaOrari = await agendaClient.GetFasceDisponibiliAnnuncioByGiornoAsync(IdAnnuncio, Giorno); //fixme creare offset con gg
 
                 foreach (var orario in listaOrari)

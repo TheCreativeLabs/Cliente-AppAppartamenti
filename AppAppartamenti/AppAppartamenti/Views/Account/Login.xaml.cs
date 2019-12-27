@@ -30,7 +30,7 @@ namespace AppAppartamenti.Views.Login
             try
             {
                 //Se ho il token allora vado direttamente alla home
-                if (ApiHelper.GetToken() != null)
+                if (await ApiHelper.GetToken() != null)
                 {
                     ApiHelper.GetUserInfo();
                     ApiHelper.GetListaTipologiaProprieta();

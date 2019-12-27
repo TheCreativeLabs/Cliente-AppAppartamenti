@@ -36,7 +36,7 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
+                AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 var lista =await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
 
                 foreach (var item in lista)

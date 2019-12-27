@@ -51,7 +51,7 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
 
-            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
             if (listClasseEnergetica == null || listClasseEnergetica.Count ==0)
             {

@@ -33,14 +33,16 @@ namespace AppAppartamenti.Views.Login
                 if (String.IsNullOrEmpty(entVecchiaPassword.Text))
                 {
                     formIsValid = false;
+
+                    await DisplayAlert("Attenzione", "La vecchia password è obbligatoria", "OK");
                 }
 
                 //Controllo validità della nuova password.
                 if (String.IsNullOrEmpty(entNuovaPassword.Text) || !Regex.IsMatch(entNuovaPassword.Text, Utility.Utility.PasswordRegex))
                 {
                     formIsValid = false;
-                    lblValidatorEntPassword.IsVisible = true;
-                    entNuovaPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
+
+                    await DisplayAlert("Attenzione", "Le nuova password deve avere almeno una lettera maiuscola, un numero e un carattere speciale.", "OK");
 
                 }
 
@@ -48,15 +50,17 @@ namespace AppAppartamenti.Views.Login
                 if (String.IsNullOrEmpty(entConfermaPassword.Text) || !(entNuovaPassword.Text == entConfermaPassword.Text))
                 {
                     formIsValid = false;
-                    lblValidatorEntConfermaPassword.IsVisible = true;
-                    entConfermaPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
+
+                    await DisplayAlert("Attenzione", "Le due password non corrispondono", "OK");
+                    //lblValidatorEntConfermaPassword.IsVisible = true;
+                    //entConfermaPassword.BackgroundColor = Color.FromRgb(255, 175, 173);
                 }
 
                 //Se la form è valida proseguo con la registrazione.
                 if (formIsValid)
                 {
                     HttpClient httpClient = new HttpClient();
-                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", ApiHelper.GetToken());
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await ApiHelper.GetToken());
                     AccountClient accountClient = new AccountClient(httpClient);
 
                     ChangePasswordBindingModel changePasswordBindingModel = new ChangePasswordBindingModel()

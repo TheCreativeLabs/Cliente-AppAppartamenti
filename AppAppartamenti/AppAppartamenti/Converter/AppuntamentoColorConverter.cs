@@ -7,17 +7,17 @@ using Xamarin.Forms;
 
 namespace AppAppartamenti.Converter
 {
-    public class AppuntamentoColorConverter : IValueConverter { 
+    public class ColorConverter : IValueConverter { 
         
         public object Convert (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if ((bool)value)
             {
-                return Color.White;
+                return Color.Coral;
             }
             else
             {
-                return (Color)App.Current.Resources["DangerColor"];
+                return Color.White;
             }
         }
         public object ConvertBack (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
