@@ -37,7 +37,7 @@
 
             <Entry x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></Entry>
 
-            <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
+            <Button Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -35,13 +35,13 @@
                     <controls:StepMenu CurrentId="10"/>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="1" Text="Lun"></Button>
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="2" Text="Mar"></Button>
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="3" Text="Mer"></Button>
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="4" Text="Gio"></Button>
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="5" Text="Ven"></Button>
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="6" Text="Sab"></Button>
-                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="7" Text="Dom"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="1" Text="L" x:Name="btn_ToggleLun"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="2" Text="M" x:Name="btn_ToggleMar"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="3" Text="M" x:Name="btn_ToggleMer"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="4" Text="G" x:Name="btn_ToggleGio"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="5" Text="V" x:Name="btn_ToggleVen"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="6" Text="S" x:Name="btn_ToggleSab"></Button>
+                        <Button Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="7" Text="D" x:Name="btn_ToggleDom"></Button>
                     </StackLayout>
 
                     <StackLayout x:Name="stkLunedi" IsVisible="False" Margin="0,10,0,0">
@@ -55,19 +55,30 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
 
-                                                <Label Text="dalle">
-                                                    <Label.GestureRecognizers>
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
-                                                    </Label.GestureRecognizers>
-                                                </Label>
-                                                 
-                                                 <Label Text="Alle" VerticalTextAlignment="Center">
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
                                                  </Label>
 
-                                                 <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                       Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
@@ -92,20 +103,28 @@
                         HeaderText="Seleziona un orario"
                         ColumnHeaderBackgroundColor="{x:StaticResource PrimaryColor}"
                         ColumnHeaderTextColor="White"
-                        SelectionChanged="picker_SelectionChanged"
+                        SelectionChanged="pickerDalle_SelectionChanged"
                         ColumnHeaderHeight="40"
                         ShowFooter="False"
                         />
 
                     <syncfusion1:SfPicker
                         x:Name="pickerAlle"
+                        PickerMode="Dialog"
                         IsVisible="true"
-                        HeaderText="Select your Area"
                         HeightRequest="350"
                         PickerHeight="250"
-                        PickerMode="Dialog"
                         ShowColumnHeader="True"
-                        WidthRequest="280" />
+                        WidthRequest="280"
+                        HeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                        ShowHeader="False"
+                        HeaderTextColor="White"
+                        HeaderText="Seleziona un orario"
+                        ColumnHeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                        ColumnHeaderTextColor="White"
+                        SelectionChanged="pickerAlle_SelectionChanged"
+                        ColumnHeaderHeight="40"
+                        ShowFooter="False" />
 
                     <StackLayout x:Name="stkMartedi"  IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
@@ -117,16 +136,33 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
-                                                </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteMartediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
-                                            </StackLayout>
-                                        </ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
+
+                                        <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                            <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                            </Entry>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+
+                                        <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
+                                        </Label>
+
+                                        <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                            <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                            </Entry>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+
+                                        <Button Clicked="DeleteMartediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                       Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
+                                    </StackLayout>
+                                </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                                 <ListView.Footer>
@@ -146,14 +182,31 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                           <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
                                                 </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteMercolediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Button Clicked="DeleteMercolediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                                       Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
@@ -173,14 +226,31 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                           <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
                                                 </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteGiovediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Button Clicked="DeleteGiovediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                                   Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
@@ -201,14 +271,31 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
                                                 </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteVenerdiElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Button Clicked="DeleteVenerdiElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                                   Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
@@ -229,16 +316,33 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                              <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
                                                 </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteSabatoElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Button Clicked="DeleteSabatoElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                               Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
                                             </StackLayout>
-                                        </ViewCell>
+                                </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                                 <ListView.Footer>
@@ -260,13 +364,30 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="Dalle" VerticalTextAlignment="Center"></Label>
-                                                <TimePicker Time="{Binding Dalle}"></TimePicker>
-                                                <Label Text="Alle" VerticalTextAlignment="Center">
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
                                                 </Label>
-                                                <TimePicker Time="{Binding Alle}"></TimePicker>
-                                                <Button Clicked="DeleteDomenicaElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}"></Button>
+
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    </Entry>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <Button Clicked="DeleteDomenicaElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                               Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
@@ -277,7 +398,7 @@
                           </ListView>
                     </StackLayout>
 
-                    <Button Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
+                <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
                 </StackLayout>
         </ScrollView>
     </ContentPage.Content>

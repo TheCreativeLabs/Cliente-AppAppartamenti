@@ -753,4 +753,13 @@
   <data name="NuovoAppuntamento.SuccessTitle" xml:space="preserve">
     <value>Request sent</value>
   </data>
+  <data name="SelezioneFasceOrarie.EnterTime" xml:space="preserve">
+    <value>Enter time</value>
+  </data>
+  <data name="SelezioneFasceOrarie.From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="SelezioneFasceOrarie.To" xml:space="preserve">
+    <value>To</value>
+  </data>
 </root>

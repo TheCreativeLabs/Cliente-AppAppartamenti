@@ -25,9 +25,12 @@ namespace AppAppartamenti.Views
 
     public class TimeSlot
     {
-        public ObservableCollection<object> Dalle { get; set; }
-        public ObservableCollection<object> Alle { get; set; }
+        //public ObservableCollection<string> Dalle { get; set; }
+        //public ObservableCollection<string> Alle { get; set; }
+        public string Dalle { get; set; }
+        public string Alle { get; set; }
         public bool DeleteEnabled { get; set; }
+        public int GiornoRiferimento { get; set; }
     }
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -64,23 +67,23 @@ namespace AppAppartamenti.Views
         {
             if (dtoToModify != null)
             {
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieLunedi, ref listTimeSlotLunedi);
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMartedi, ref listTimeSlotMartedi);
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMercoledi, ref listTimeSlotMercoledi);
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieGiovedi, ref listTimeSlotGiovedi);
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieVenerdi, ref listTimeSlotVenerdi);
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieSabato, ref listTimeSlotSabato);
-                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieDomenica, ref listTimeSlotDomenica);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieLunedi, ref listTimeSlotLunedi, 1);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMartedi, ref listTimeSlotMartedi, 2);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMercoledi, ref listTimeSlotMercoledi, 3);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieGiovedi, ref listTimeSlotGiovedi, 4);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieVenerdi, ref listTimeSlotVenerdi, 5);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieSabato, ref listTimeSlotSabato, 6);
+                CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieDomenica, ref listTimeSlotDomenica, 7);
             }
             else
             {
-                listTimeSlotLunedi.Add(new TimeSlot() { DeleteEnabled = false });
-                listTimeSlotMartedi.Add(new TimeSlot() { DeleteEnabled = false });
-                listTimeSlotMercoledi.Add(new TimeSlot() { DeleteEnabled = false });
-                listTimeSlotGiovedi.Add(new TimeSlot() { DeleteEnabled = false });
-                listTimeSlotVenerdi.Add(new TimeSlot() { DeleteEnabled = false });
-                listTimeSlotSabato.Add(new TimeSlot() { DeleteEnabled = false });
-                listTimeSlotDomenica.Add(new TimeSlot() { DeleteEnabled = false });
+                listTimeSlotLunedi.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 1 });
+                listTimeSlotMartedi.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 2 });
+                listTimeSlotMercoledi.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 3 });
+                listTimeSlotGiovedi.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 4 });
+                listTimeSlotVenerdi.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 5 });
+                listTimeSlotSabato.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 6 });
+                listTimeSlotDomenica.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = 7 });
             }
 
             listViewMonday.ItemsSource = listTimeSlotLunedi;
@@ -105,7 +108,7 @@ namespace AppAppartamenti.Views
             listViewDomenica.HeightRequest = listTimeSlotDomenica.Count * 60;
         }
 
-        private void CreateTimeSlotInput(string FasceOrarieToModify, ref ObservableCollection<TimeSlot> ListToModify)
+        private void CreateTimeSlotInput(string FasceOrarieToModify, ref ObservableCollection<TimeSlot> ListToModify, int GiornoRiferimento)
         {
             if (!string.IsNullOrEmpty(FasceOrarieToModify))
             {
@@ -116,16 +119,59 @@ namespace AppAppartamenti.Views
                     if (!string.IsNullOrEmpty(fasceorarie[i]))
                     {
                         var orari = fasceorarie[i].Split('-');
-                        var dalleOre = new ObservableCollection<object>() { orari[0].Split(':')[0], orari[0].Split(':')[1] };
-                        var alleOre = new ObservableCollection<object>() { orari[1].Split(':')[0], orari[1].Split(':')[1] };
+                        //var dalleOre = new ObservableCollection<string>() { orari[0].Split(':')[0], orari[0].Split(':')[1] };
+                        //var alleOre = new ObservableCollection<string>() { orari[1].Split(':')[0], orari[1].Split(':')[1] };
 
-                        ListToModify.Add(new TimeSlot() { Dalle = dalleOre, Alle =alleOre, DeleteEnabled = false });
+                        var dalleOre = orari[0];
+                        var alleOre = orari[1];
+
+                        ListToModify.Add(new TimeSlot() { Dalle = dalleOre, Alle =alleOre, DeleteEnabled = false, GiornoRiferimento = GiornoRiferimento });
                     }
                 }
+
+                switch (GiornoRiferimento)
+                {
+                    case 1:
+                        Lunedi = true;
+                        stkLunedi.IsVisible = true;
+                        btn_ToggleLun.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                    case 2:
+                        Martedi = true;
+                        stkMartedi.IsVisible = true;
+                        btn_ToggleMar.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                    case 3:
+                        Mercoledi = true;
+                        stkMercoledi.IsVisible = true;
+                        btn_ToggleMer.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                    case 4:
+                        Giovedi = true;
+                        stkGiovedi.IsVisible = true;
+                        btn_ToggleGio.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                    case 5:
+                        Venerdi = true;
+                        stkVenerdi.IsVisible = true;
+                        btn_ToggleVen.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                    case 6:
+                        Sabato = true;
+                        stkSabato.IsVisible = true;
+                        btn_ToggleSab.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                    case 7:
+                        Domenica = true;
+                        stkDomenica.IsVisible = true;
+                        btn_ToggleDom.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        break;
+                }
+
             }
             else
             {
-                ListToModify.Add(new TimeSlot() { DeleteEnabled = false });
+                ListToModify.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = GiornoRiferimento });
             }
         }
 
@@ -198,6 +244,7 @@ namespace AppAppartamenti.Views
             }
             else
             {
+                updateListView(item, new List<TimeSlot>());
                 btn.BackgroundColor = Color.White;
 
             }
@@ -227,6 +274,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotLunedi.Remove(item);
             listViewMonday.HeightRequest = listTimeSlotLunedi.Count * 60;
+            List<TimeSlot> copy = listTimeSlotLunedi.ToList();
+            listViewMonday.ItemsSource = copy;
 
 
         }
@@ -235,6 +284,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotMartedi.Remove(item);
             listViewMartedi.HeightRequest = listTimeSlotMartedi.Count * 60;
+            List<TimeSlot> copy = listTimeSlotMartedi.ToList();
+            listViewMartedi.ItemsSource = copy;
 
         }
         private async void DeleteMercolediElement(object sender, EventArgs e)
@@ -242,6 +293,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotMercoledi.Remove(item);
             listViewMercoledi.HeightRequest = listTimeSlotMercoledi.Count * 60;
+            List<TimeSlot> copy = listTimeSlotMercoledi.ToList();
+            listViewMercoledi.ItemsSource = copy;
 
         }
         private async void DeleteGiovediElement(object sender, EventArgs e)
@@ -249,6 +302,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotGiovedi.Remove(item);
             listViewGiovedi.HeightRequest = listTimeSlotGiovedi.Count * 60;
+            List<TimeSlot> copy = listTimeSlotGiovedi.ToList();
+            listViewGiovedi.ItemsSource = copy;
 
         }
         private async void DeleteSabatoElement(object sender, EventArgs e)
@@ -256,6 +311,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotSabato.Remove(item);
             listViewVenerdi.HeightRequest = listTimeSlotSabato.Count * 60;
+            List<TimeSlot> copy = listTimeSlotSabato.ToList();
+            listViewSabato.ItemsSource = copy;
 
         }
         private async void DeleteDomenicaElement(object sender, EventArgs e)
@@ -263,6 +320,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotDomenica.Remove(item);
             listViewDomenica.HeightRequest = listTimeSlotDomenica.Count * 60;
+            List<TimeSlot> copy = listTimeSlotDomenica.ToList();
+            listViewDomenica.ItemsSource = copy;
 
         }
         private async void DeleteVenerdiElement(object sender, EventArgs e)
@@ -270,6 +329,8 @@ namespace AppAppartamenti.Views
             var item = ((Button)sender).CommandParameter as TimeSlot;
             listTimeSlotVenerdi.Remove(item);
             listViewVenerdi.HeightRequest = listTimeSlotVenerdi.Count * 60;
+            List<TimeSlot> copy = listTimeSlotVenerdi.ToList();
+            listViewVenerdi.ItemsSource = copy;
 
         }
 
@@ -281,39 +342,52 @@ namespace AppAppartamenti.Views
             switch (id)
             {
                 case 1:
-                    listTimeSlotLunedi.Add(new TimeSlot() { DeleteEnabled = true });
+                    listTimeSlotLunedi.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 1 });
                     listViewMonday.HeightRequest = listTimeSlotLunedi.Count * 60;
-
+                    List<TimeSlot> copyLun = listTimeSlotLunedi.ToList();
+                    listViewMonday.ItemsSource = copyLun;
                     break;
 
                 case 2:
-                    listTimeSlotMartedi.Add(new TimeSlot() { DeleteEnabled = true });
+                    listTimeSlotMartedi.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 2 });
                     listViewMartedi.HeightRequest = listTimeSlotMartedi.Count * 60;
+                    List<TimeSlot> copyMar = listTimeSlotMartedi.ToList();
+                    listViewMartedi.ItemsSource = copyMar;
 
                     break;
                 case 3:
-                    listTimeSlotMercoledi.Add(new TimeSlot() { DeleteEnabled = true });
+                    listTimeSlotMercoledi.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 3 });
                     listViewMercoledi.HeightRequest = listTimeSlotMercoledi.Count * 60;
+                    List<TimeSlot> copyMer = listTimeSlotMercoledi.ToList();
+                    listViewMercoledi.ItemsSource = copyMer;
 
                     break;
                 case 4:
-                    listTimeSlotGiovedi.Add(new TimeSlot() { DeleteEnabled = true });
+                    listTimeSlotGiovedi.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 4 });
                     listViewGiovedi.HeightRequest = listTimeSlotGiovedi.Count * 60;
+                    List<TimeSlot> copyGio = listTimeSlotGiovedi.ToList();
+                    listViewGiovedi.ItemsSource = copyGio;
 
                     break;
                 case 5:
-                    listTimeSlotVenerdi.Add(new TimeSlot() { DeleteEnabled = true });
+                    listTimeSlotVenerdi.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 5 });
                     listViewVenerdi.HeightRequest = listTimeSlotVenerdi.Count * 60;
+                    List<TimeSlot> copyVen = listTimeSlotVenerdi.ToList();
+                    listViewVenerdi.ItemsSource = copyVen;
 
                     break;
                 case 6:
-                    listTimeSlotSabato.Add(new TimeSlot() { DeleteEnabled = true });
-                    listViewVenerdi.HeightRequest = listTimeSlotSabato.Count * 60;
+                    listTimeSlotSabato.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 6 });
+                    listViewSabato.HeightRequest = listTimeSlotSabato.Count * 60;
+                    List<TimeSlot> copySab = listTimeSlotSabato.ToList();
+                    listViewSabato.ItemsSource = copySab;
 
                     break;
                 case 7:
-                    listTimeSlotDomenica.Add(new TimeSlot() { DeleteEnabled = true });
+                    listTimeSlotDomenica.Add(new TimeSlot() { DeleteEnabled = true, GiornoRiferimento = 7 });
                     listViewDomenica.HeightRequest = listTimeSlotDomenica.Count * 60;
+                    List<TimeSlot> copyDom = listTimeSlotDomenica.ToList();
+                    listViewDomenica.ItemsSource = copyDom;
 
                     break;
                 default:
@@ -321,14 +395,55 @@ namespace AppAppartamenti.Views
             }
         }
 
-        TimeSlot timeSlot;
+        //TimeSlot timeSlot;
+        int posizioneTimeSlotCorrente;
+        ObservableCollection<TimeSlot> listaRiferimentoCorrente;
+        int GiornoCorrente;
 
         private async void PickerDalle_LblClicked(object sender, EventArgs e)
         {
             try
             {
-                var i = (TimeSlot)((TappedEventArgs)e).Parameter;
-                timeSlot = i;
+                var timeSlotSelezionato = (TimeSlot)((TappedEventArgs)e).Parameter;
+                var GiornoRiferimento = timeSlotSelezionato.GiornoRiferimento;
+                int posizioneTimeSlot = 0;
+                ObservableCollection<TimeSlot> listaRiferimento = null;
+                GiornoCorrente = GiornoRiferimento;
+                switch (GiornoRiferimento)
+                {
+                    case 1:
+                        listaRiferimento = listTimeSlotLunedi;
+                        posizioneTimeSlot = listTimeSlotLunedi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 2:
+                        listaRiferimento = listTimeSlotMartedi;
+                        posizioneTimeSlot = listTimeSlotMartedi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 3:
+                        listaRiferimento = listTimeSlotMercoledi;
+                        posizioneTimeSlot = listTimeSlotMercoledi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 4:
+                        listaRiferimento = listTimeSlotGiovedi;
+                        posizioneTimeSlot = listTimeSlotGiovedi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 5:
+                        listaRiferimento = listTimeSlotVenerdi;
+                        posizioneTimeSlot = listTimeSlotVenerdi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 6:
+                        listaRiferimento = listTimeSlotSabato;
+                        posizioneTimeSlot = listTimeSlotSabato.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 7:
+                        listaRiferimento = listTimeSlotDomenica;
+                        posizioneTimeSlot = listTimeSlotDomenica.IndexOf(timeSlotSelezionato);
+                        break;
+                }
+                posizioneTimeSlotCorrente = posizioneTimeSlot;
+                listaRiferimentoCorrente = listaRiferimento;
+
+
                 TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
                 pickerDalle.ItemsSource = timeSlotViewModel.Time;
                 pickerDalle.ColumnHeaderText = timeSlotViewModel.Header;
@@ -341,57 +456,203 @@ namespace AppAppartamenti.Views
             }
         }
 
-        private void picker_SelectionChanged(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
+        private void pickerDalle_SelectionChanged(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e){
+            ObservableCollection<object> i = (ObservableCollection<object>) pickerDalle.SelectedItem;
 
-        {
+            listaRiferimentoCorrente[posizioneTimeSlotCorrente].Dalle = "";
+            foreach (object el in i)
+            {
+                if(listaRiferimentoCorrente[posizioneTimeSlotCorrente].Dalle != "")
+                {
+                    listaRiferimentoCorrente[posizioneTimeSlotCorrente].Dalle += ":";
+                }
+                listaRiferimentoCorrente[posizioneTimeSlotCorrente].Dalle += el.ToString();
 
-           var i =  pickerDalle.SelectedItem;
-            var l = "";
+            }
+
+            List<TimeSlot> copy = listaRiferimentoCorrente.ToList();
+            updateListView(GiornoCorrente, copy);
         }
+
+        private void updateListView(int GiornoCorrente, List<TimeSlot> newList)
+        {
+            switch (GiornoCorrente)
+            {
+                case 1:
+                    listTimeSlotLunedi = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewMonday.ItemsSource = newList;
+                    break;
+                case 2:
+                    listTimeSlotMartedi = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewMartedi.ItemsSource = newList;
+                    break;
+                case 3:
+                    listTimeSlotMercoledi = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewMercoledi.ItemsSource = newList;
+                    break;
+                case 4:
+                    listTimeSlotGiovedi = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewGiovedi.ItemsSource = newList;
+                    break;
+                case 5:
+                    listTimeSlotVenerdi = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewVenerdi.ItemsSource = newList;
+                    break;
+                case 6:
+                    listTimeSlotSabato = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewSabato.ItemsSource = newList;
+                    break;
+                case 7:
+                    listTimeSlotDomenica = new ObservableCollection<TimeSlot>(newList); //serve solo per il metodo ShowStackDay
+                    listViewDomenica.ItemsSource = newList;
+                    break;
+            }
+        }
+
+        private async void PickerAlle_LblClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var timeSlotSelezionato = (TimeSlot)((TappedEventArgs)e).Parameter;
+                var GiornoRiferimento = timeSlotSelezionato.GiornoRiferimento;
+                int posizioneTimeSlot = 0;
+                ObservableCollection<TimeSlot> listaRiferimento = null;
+                GiornoCorrente = GiornoRiferimento;
+                switch (GiornoRiferimento)
+                {
+                    case 1:
+                        listaRiferimento = listTimeSlotLunedi;
+                        posizioneTimeSlot = listTimeSlotLunedi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 2:
+                        listaRiferimento = listTimeSlotMartedi;
+                        posizioneTimeSlot = listTimeSlotMartedi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 3:
+                        listaRiferimento = listTimeSlotMercoledi;
+                        posizioneTimeSlot = listTimeSlotMercoledi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 4:
+                        listaRiferimento = listTimeSlotGiovedi;
+                        posizioneTimeSlot = listTimeSlotGiovedi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 5:
+                        listaRiferimento = listTimeSlotVenerdi;
+                        posizioneTimeSlot = listTimeSlotVenerdi.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 6:
+                        listaRiferimento = listTimeSlotSabato;
+                        posizioneTimeSlot = listTimeSlotSabato.IndexOf(timeSlotSelezionato);
+                        break;
+                    case 7:
+                        listaRiferimento = listTimeSlotDomenica;
+                        posizioneTimeSlot = listTimeSlotDomenica.IndexOf(timeSlotSelezionato);
+                        break;
+                }
+                posizioneTimeSlotCorrente = posizioneTimeSlot;
+                listaRiferimentoCorrente = listaRiferimento;
+
+
+                TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
+                pickerAlle.ItemsSource = timeSlotViewModel.Time;
+                pickerAlle.ColumnHeaderText = timeSlotViewModel.Header;
+                pickerAlle.IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        private void pickerAlle_SelectionChanged(object sender, Syncfusion.SfPicker.XForms.SelectionChangedEventArgs e)
+        {
+            ObservableCollection<object> i = (ObservableCollection<object>)pickerAlle.SelectedItem;
+
+            listaRiferimentoCorrente[posizioneTimeSlotCorrente].Alle = "";
+            foreach (object el in i)
+            {
+                if (listaRiferimentoCorrente[posizioneTimeSlotCorrente].Alle != "")
+                {
+                    listaRiferimentoCorrente[posizioneTimeSlotCorrente].Alle += ":";
+                }
+                listaRiferimentoCorrente[posizioneTimeSlotCorrente].Alle += el.ToString();
+
+            }
+
+            List<TimeSlot> copy = listaRiferimentoCorrente.ToList();
+            updateListView(GiornoCorrente, copy);
+        }
+
         private async void BtnProcedi_Clicked(object sender, EventArgs e)
         {
             var fasceOrarieLunedi = string.Empty;
             foreach (var item in listTimeSlotLunedi)
             {
-                fasceOrarieLunedi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieLunedi += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
             var fasceOrarieMartedi = string.Empty;
             foreach (var item in listTimeSlotMartedi)
             {
-                fasceOrarieMartedi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieMartedi += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
             var fasceOrarieMercoledi = string.Empty;
             foreach (var item in listTimeSlotMercoledi)
             {
-                fasceOrarieMercoledi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieMercoledi += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
             var fasceOrarieGiovedi = string.Empty;
             foreach (var item in listTimeSlotGiovedi)
             {
-                fasceOrarieGiovedi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieGiovedi += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
             var fasceOrarieVenerdi = string.Empty;
             foreach (var item in listTimeSlotVenerdi)
             {
-                fasceOrarieVenerdi = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieVenerdi += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
             var fasceOrarieSabato = string.Empty;
             foreach (var item in listTimeSlotSabato)
             {
-                fasceOrarieSabato = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieSabato += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
             var fasceOrarieDomenica = string.Empty;
             foreach (var item in listTimeSlotDomenica)
             {
-                fasceOrarieDomenica = $"{item.Dalle[0].ToString()}:{item.Dalle[1].ToString()}-{item.Alle[0].ToString()}:{item.Alle[1].ToString()};";
+                if (item.Dalle != null && item.Alle != null)
+                {
+                    fasceOrarieDomenica += $"{item.Dalle}-{item.Alle};";
+                }
             }
 
+            if (annuncio.DisponibilitaOraria == null)
+            {
+                annuncio.DisponibilitaOraria = new DisponibilitaOrariaDto();
+            }
             annuncio.DisponibilitaOraria.FasceOrarieLunedi = fasceOrarieLunedi;
             annuncio.DisponibilitaOraria.FasceOrarieMartedi = fasceOrarieMartedi;
             annuncio.DisponibilitaOraria.FasceOrarieMercoledi = fasceOrarieMercoledi;
@@ -401,16 +662,23 @@ namespace AppAppartamenti.Views
             annuncio.DisponibilitaOraria.FasceOrarieDomenica = fasceOrarieDomenica;
 
             //TODO TRY CATCH
-            AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
-            if (dtoToModify == null) // caso inserimento
-            {
-                await annunciClient.InsertAnnuncioAsync(annuncio);
-            } else if(dtoToModify.Item.Id != null)
-            {
-                await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
-            }
+            try { 
+                AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
+                if (dtoToModify == null) // caso inserimento
+                {
+                    await annunciClient.InsertAnnuncioAsync(annuncio);
+                }
+                else if (dtoToModify.Item.Id != null)
+                {
+                    await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
+                }
 
-            await Navigation.PopModalAsync();
+                await Navigation.PopModalAsync();
+            }
+            catch
+            {
+                await Navigation.PushAsync(new ErrorPage());
+            }
         }
     }
 }

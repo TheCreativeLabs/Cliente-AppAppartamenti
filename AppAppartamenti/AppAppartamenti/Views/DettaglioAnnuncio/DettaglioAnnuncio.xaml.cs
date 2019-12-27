@@ -174,6 +174,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
+                bindingModel.viewModel.Item.ImmaginiAnnuncio = bindingModel.viewModelImmagini.Items;
                 await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(bindingModel.viewModel)));
             }
             catch (Exception Ex)
