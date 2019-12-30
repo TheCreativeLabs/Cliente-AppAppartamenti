@@ -663,7 +663,7 @@ namespace AppAppartamenti.Views
 
             //TODO TRY CATCH
             try { 
-                AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await ApiHelper.GetApiClient());
                 if (dtoToModify == null) // caso inserimento
                 {
                     await annunciClient.InsertAnnuncioAsync(annuncio);
