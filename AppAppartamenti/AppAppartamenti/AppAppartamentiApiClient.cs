@@ -3353,15 +3353,15 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ChatDtoOutput> GetChatAsync(System.Guid? idChat, System.Guid? idAnnuncio)
+        public System.Threading.Tasks.Task<ChatDtoOutput> GetChatAsync(System.Guid? idChat, System.Guid? idAnnuncio, System.Guid? idUser)
         {
-            return GetChatAsync(idChat, idAnnuncio, System.Threading.CancellationToken.None);
+            return GetChatAsync(idChat, idAnnuncio, idUser, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ChatDtoOutput> GetChatAsync(System.Guid? idChat, System.Guid? idAnnuncio, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ChatDtoOutput> GetChatAsync(System.Guid? idChat, System.Guid? idAnnuncio, System.Guid? idUser, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Messaggi/ChatOttieni?");
@@ -3372,6 +3372,10 @@ namespace AppAppartamentiApiClient
             if (idAnnuncio != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("IdAnnuncio") + "=").Append(System.Uri.EscapeDataString(ConvertToString(idAnnuncio, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (idUser != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("IdUser") + "=").Append(System.Uri.EscapeDataString(ConvertToString(idUser, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -4838,6 +4842,9 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("ImagePersonToMeet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] ImagePersonToMeet { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("IdPersonToMeet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdPersonToMeet { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Confermato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Confermato { get; set; }
 
@@ -5220,6 +5227,9 @@ namespace AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("IdAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdAnnuncio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("IdUser", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? IdUser { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Messaggi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<MessaggioDto> Messaggi { get; set; }

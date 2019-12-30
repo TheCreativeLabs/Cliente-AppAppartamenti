@@ -15,7 +15,6 @@ namespace AppAppartamenti.Views.Messaggi
             InitializeComponent();
 
             BindingContext = viewModel = new ChatListViewModel();
-
         }
 
         protected override void OnAppearing()
@@ -32,7 +31,6 @@ namespace AppAppartamenti.Views.Messaggi
 
             if (item == null)
                 return;
-
           
            await Navigation.PushAsync(new NuovoMessaggio(item));
 
