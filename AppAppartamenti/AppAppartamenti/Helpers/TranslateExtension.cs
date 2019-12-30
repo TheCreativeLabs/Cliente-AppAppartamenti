@@ -36,13 +36,13 @@ namespace AppAppartamenti.Helpers
 
             if (translation == null)
             {
-                #if DEBUG
+#if DEBUG
                 throw new ArgumentException(
                     String.Format("Key '{0}' was not found in resources '{1}' for culture '{2}'.", Text, ResourceId, ci.Name),
                     "Text");
-                #else
+#else
                 translation = Text; // returns the key, which GETS DISPLAYED TO THE USER
-                #endif
+#endif
             }
             return translation;
         }
