@@ -103,7 +103,7 @@ namespace AppAppartamenti.Views
 
                 OnPropertyChanged("Items");
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.AggiungiPreferitoAsync(item.Id.Value);
             }
             catch (Exception Ex)
@@ -146,12 +146,12 @@ namespace AppAppartamenti.Views
 
                 if (isPreferito)
                 {
-                    AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                    AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                     await annunciClient.RimuoviPreferitoAsync(item.Id.Value);
                 }
                 else
                 {
-                    AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                    AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                     await annunciClient.AggiungiPreferitoAsync(item.Id.Value);
                 }
                
@@ -177,7 +177,7 @@ namespace AppAppartamenti.Views
                 var annuncio = viewModel.Items.Where(x => x.Id.Value == item.Id.Value).First();
                 annuncio.FlagPreferito = false;
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.RimuoviPreferitoAsync(item.Id.Value);
             }
             catch (Exception Ex)

@@ -12,19 +12,21 @@ using System.Collections.Generic;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AnnuncioimmaginiViewModel : BaseViewModel
+    public class MessaggiViewModel : BaseViewModel
     {
-        public Guid IdAnnuncio { get; set; }
-        public ObservableCollection<Byte[]> Items { get; set; }
+        public ObservableCollection<MessaggioDto> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public AnnuncioimmaginiViewModel()
+        public Guid? IdChatParam { get; set; }
+        public Guid? IdAnnuncioParam { get; set; }
+
+        public MessaggiViewModel()
         {
-            Items = new ObservableCollection<Byte[]>();
+            Items = new ObservableCollection<MessaggioDto>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        public  async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -33,16 +35,17 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-
-                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
-
-                ICollection<byte[]> immagini = await annunciClient.GetImmaginiByIdAnnuncioAsync(IdAnnuncio);
-
                 Items.Clear();
 
-                foreach (var img in immagini)
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                var chatInfo = await messaggiClient.GetChatAsync(IdChatParam,IdAnnuncioParam);
+
+                if(chatInfo != null)
                 {
-                    Items.Add(img);
+                    foreach (var msg in chatInfo.Messaggi)
+                    {
+                        Items.Add(msg);
+                    }
                 }
             }
             catch (Exception ex)

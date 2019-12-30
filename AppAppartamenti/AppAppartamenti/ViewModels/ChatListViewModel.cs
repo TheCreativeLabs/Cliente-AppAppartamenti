@@ -12,19 +12,19 @@ using System.Collections.Generic;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AnnuncioimmaginiViewModel : BaseViewModel
+    public class ChatListViewModel : BaseViewModel
     {
-        public Guid IdAnnuncio { get; set; }
-        public ObservableCollection<Byte[]> Items { get; set; }
+        public ObservableCollection<ChatListDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public AnnuncioimmaginiViewModel()
+        public ChatListViewModel()
         {
-            Items = new ObservableCollection<Byte[]>();
+            Items = new ObservableCollection<ChatListDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+          
         }
 
-        public  async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -33,16 +33,15 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-
-                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
-
-                ICollection<byte[]> immagini = await annunciClient.GetImmaginiByIdAnnuncioAsync(IdAnnuncio);
-
                 Items.Clear();
 
-                foreach (var img in immagini)
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+
+                ICollection<ChatListDtoOutput> listaChat;
+                listaChat = await messaggiClient.GetChatListAsync();
+                foreach (var msg in listaChat)
                 {
-                    Items.Add(img);
+                    Items.Add(msg);
                 }
             }
             catch (Exception ex)

@@ -31,7 +31,7 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 Item = await annunciClient.GetAnnuncioByIdAsync(IdAnnuncio);
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 annuncioDetailViewModel.Item = await annunciClient.GetAnnuncioByIdAsync(Id);
             }
             catch (Exception ex)

@@ -58,7 +58,7 @@ namespace AppAppartamenti.Views.Account
              Email = viewModel.Email //FIXME, IL BE NON AGGIORNA LA MAIL: LO FACCIAMO??
             };
 
-            AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+            AccountClient accountClient = new AccountClient( await ApiHelper.GetApiClient());
             await accountClient.UpdateUserAsync(updateUserModel);
         }
 

@@ -1,6 +1,7 @@
 ﻿using AppAppartamenti.Api;
 using AppAppartamenti.Notify;
 using AppAppartamenti.ViewModels;
+using AppAppartamenti.Views.Messaggi;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 //using Foundation;
@@ -38,11 +39,13 @@ namespace AppAppartamenti.Views.Account
             ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
             items.Add(new MenuItem() { Id=0, DisplayName = "Informazioni personali", Icona = "\uf007", RedirectPage =new InformazioniPersonali() });
             items.Add(new MenuItem() { Id=1, DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
-            items.Add(new MenuItem() { Id=2, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
-            items.Add(new MenuItem() { Id=3, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
-            items.Add(new MenuItem() { Id=4, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });
-            items.Add(new MenuItem() { Id=5, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = new GeneralCondition.PrivacyPolicy() });
-            items.Add(new MenuItem() { Id=6, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
+            items.Add(new MenuItem() { Id = 2, DisplayName = "Messaggi", Icona = "\uf27a", RedirectPage = new MessaggiLista() });
+            items.Add(new MenuItem() { Id=3, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
+            items.Add(new MenuItem() { Id=4, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
+            items.Add(new MenuItem() { Id=5, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });
+            items.Add(new MenuItem() { Id=6, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = new GeneralCondition.PrivacyPolicy() });
+            items.Add(new MenuItem() { Id=7, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
+
 
             listView.ItemsSource = items;
         }
@@ -56,7 +59,7 @@ namespace AppAppartamenti.Views.Account
 
             listView.SelectedItem = null;
 
-            if(item.Id == 6)
+            if(item.Id == 7)
             {
                 string action = await DisplayActionSheet("Continuare?","Cancel", "Log out");
 
@@ -64,11 +67,11 @@ namespace AppAppartamenti.Views.Account
                 {
                     await LogOut();
                 }
-            }else if (item.Id == 3)
+            }else if (item.Id == 4)
             {
                 await ShareUri();
             }
-            else if (item.Id == 2)
+            else if (item.Id == 3)
             {
                 await ContactUs();
             }
@@ -151,7 +154,7 @@ namespace AppAppartamenti.Views.Account
                 //else
                 //{
                 //Eseguo il logout
-                AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+                AccountClient accountClient = new AccountClient(await ApiHelper.GetApiClient());
                 await accountClient.LogoutAsync();
 
                 //Rimuovo il token e navigo alla home

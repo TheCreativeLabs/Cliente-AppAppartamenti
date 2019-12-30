@@ -129,7 +129,7 @@ namespace AppAppartamenti.Views
                 btnAddPreferito.IsVisible = false;
                 btnRemovePreferitoNav.IsVisible = true;
                 btnAddPreferitoNav.IsVisible = false;
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.AggiungiPreferitoAsync(bindingModel.viewModel.Item.Id.Value);
             }
             catch (Exception Ex)
@@ -147,7 +147,7 @@ namespace AppAppartamenti.Views
                 btnAddPreferito.IsVisible = true;
                 btnAddPreferitoNav.IsVisible = false;
                 btnRemovePreferitoNav.IsVisible = true;
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.RimuoviPreferitoAsync(bindingModel.viewModel.Item.Id.Value);
             }
             catch (Exception Ex)

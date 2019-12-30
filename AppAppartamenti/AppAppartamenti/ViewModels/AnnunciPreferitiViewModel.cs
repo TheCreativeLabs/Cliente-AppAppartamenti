@@ -36,7 +36,7 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
                 ICollection<AnnunciDtoOutput> listaAnnunci;
 

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             x:Class="AppAppartamenti.Views.Messaggi.MessaggiLista"
+             Title="Messaggi"
+             BackgroundColor="{x:StaticResource SfondoColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="LvChat"
+                        ItemsSource="{Binding Items}"
+                        HasUnevenRows="true"
+                        RefreshCommand="{Binding LoadItemsCommand}"
+                        IsPullToRefreshEnabled="true"
+                        CachingStrategy="RecycleElement"
+                        VerticalScrollBarVisibility="Never"
+                        IsRefreshing="{Binding IsBusy}"
+                        SeparatorVisibility="None"
+                      ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="20" >
+                                <Frame IsClippedToBounds="True" Padding="0" HeightRequest="60" WidthRequest="60" CornerRadius="30">
+                                   <Image Aspect="AspectFill" Source="{Binding FotoProfilo, Converter={StaticResource ByteArrayToImage}}"></Image> 
+                                </Frame>
+
+                                <StackLayout VerticalOptions="CenterAndExpand">
+                                    <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Nome}" Style="{x:StaticResource AdTitle}"/>
+                                                <Span Text=" " />
+                                                <Span Text="{Binding Cognome}" Style="{x:StaticResource AdTitle}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="13" Text="{Binding DataCreazione, StringFormat='{0:dd/mm/yyyy hh:mm}'}" ></Label>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
