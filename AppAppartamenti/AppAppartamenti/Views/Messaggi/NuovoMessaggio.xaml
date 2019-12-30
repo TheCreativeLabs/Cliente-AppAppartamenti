@@ -49,8 +49,27 @@
 
                 <BoxView Grid.Row="1" Color="LightGray"></BoxView>
 
-                <controls:ChatInputBarView Grid.Row="2" Margin="0,0,0,20"></controls:ChatInputBarView>
-            </Grid>
+                 <Grid RowSpacing="0" Grid.Row="2" Margin="0,0,0,20"
+               ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <appappartamenti:ChatEntry x:Name="chatTextInput"
+                TextColor="Black" Keyboard="Chat"
+                IsTextPredictionEnabled="true"
+                HorizontalOptions="FillAndExpand" 
+                PlaceholderColor="LightGray"
+                Placeholder="Type your message here"
+                Grid.Row="0" VerticalOptions="Center"
+                Grid.Column="0" AutoSize="TextChanges"/>
+
+            <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
+        </Grid>
+             </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

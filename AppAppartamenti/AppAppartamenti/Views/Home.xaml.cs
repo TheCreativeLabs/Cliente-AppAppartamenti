@@ -34,7 +34,6 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
-
             MessagingCenter.Subscribe<Ricerca, string>(this, "Ricerca", async (sender, arg) =>
             {
                 RicercaModel = null;

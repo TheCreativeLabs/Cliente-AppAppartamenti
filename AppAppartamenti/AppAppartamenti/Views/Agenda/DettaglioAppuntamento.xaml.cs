@@ -56,7 +56,7 @@ namespace AppAppartamenti.Views
 
         private async void BtnMessaggio_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NuovoMessaggio(viewModel.IdAnnuncio));
+            await Navigation.PushAsync(new NuovoMessaggio(viewModel.IdAnnuncio,viewModel.IdPersonToMeet.Value));
         }
 
         private async void BtnDelete_Clicked(object sender, EventArgs e)
