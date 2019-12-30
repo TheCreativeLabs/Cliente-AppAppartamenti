@@ -140,22 +140,31 @@ namespace AppAppartamenti.Api
 
             var bearerToken = Preferences.Get(AccessTokenKey,null);
 
-            if(bearerToken != null && !string.IsNullOrEmpty(bearerToken))
-            {
-                BearerToken token = JsonConvert.DeserializeObject<BearerToken>(bearerToken);
+            LoginProvider provider = GetProvider();
 
-                var expireDate = DateTime.Parse(token.Expires);
+            if (Api.ApiHelper.LoginProvider.Facebook.Equals(provider) || Api.ApiHelper.LoginProvider.Google.Equals(provider)) //provider facebook o google: non serve fare refresh token. ho direttamente il token in bearerToken
+            {
+                accessToken = bearerToken;
+            }
+            else
+            { //registrazione con mail: se necessario si fa refreshToken
+                if (bearerToken != null && !string.IsNullOrEmpty(bearerToken))
+                {
+                    BearerToken token = JsonConvert.DeserializeObject<BearerToken>(bearerToken);
+
+                    var expireDate = DateTime.Parse(token.Expires);
                     //DateTime.ParseExact(
                     //            token.Expires,
                     //            "ddd MMM dd yyyy HH:mm:ss 'GMT'",
                     //            CultureInfo.InvariantCulture);
-                if (expireDate < DateTime.Now)
-                {
-                    accessToken = await GetRefreshToken(token.RefreshToken);
-                }
-                else
-                {
-                    accessToken = token.AccessToken;
+                    if (expireDate < DateTime.Now)
+                    {
+                        accessToken = await GetRefreshToken(token.RefreshToken);
+                    }
+                    else
+                    {
+                        accessToken = token.AccessToken;
+                    }
                 }
             }
 
