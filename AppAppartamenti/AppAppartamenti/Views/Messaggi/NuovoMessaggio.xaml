@@ -2,9 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              x:Class="AppAppartamenti.Views.Messaggi.NuovoMessaggio"
-             NavigationPage.HasBackButton="True" Title="Nuovo Messaggio"
+             NavigationPage.HasBackButton="True"
+             Title="Nuovo Messaggio"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              android:Application.WindowSoftInputModeAdjust="Resize">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:MessageColorConverter x:Key="MsgColorConverter"></conv:MessageColorConverter>
+            <conv:MessageMarginConverter x:Key="MsgMarginConverter"></conv:MessageMarginConverter>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
              <Grid>
@@ -15,12 +26,30 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0" HasUnevenRows="False" SeparatorVisibility="None">
+                <ListView ItemsSource="{Binding Items}"
+                          HasUnevenRows="true"
+                            RefreshCommand="{Binding LoadItemsCommand}"
+                            IsPullToRefreshEnabled="true"
+                            CachingStrategy="RecycleElement"
+                            VerticalScrollBarVisibility="Never"
+                            IsRefreshing="{Binding IsBusy}"
+                            SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Frame Padding="10" CornerRadius="10" BackgroundColor="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand" Margin="{Binding FromMe, Converter={StaticResource MsgMarginConverter}}">
+                                        <Label Text="{Binding Messaggio}" TextColor="White"></Label>
+                                    </Frame>
+                                 </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
 
                 <BoxView Grid.Row="1" Color="LightGray"></BoxView>
 
-                <controls:ChatInputBarView Grid.Row="2"></controls:ChatInputBarView>
+                <controls:ChatInputBarView Grid.Row="2" Margin="0,0,0,20"></controls:ChatInputBarView>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

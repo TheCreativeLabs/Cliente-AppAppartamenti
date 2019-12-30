@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Editor x:Name="chatTextInput"
+            <appappartamenti:ChatEntry x:Name="chatTextInput"
                 TextColor="Black" Keyboard="Chat"
                 IsTextPredictionEnabled="true"
                 HorizontalOptions="FillAndExpand" 
@@ -22,7 +22,7 @@
                 Grid.Row="0" VerticalOptions="Center"
                 Grid.Column="0" AutoSize="TextChanges"/>
 
-            <Button Style="{x:StaticResource MessageSendButton}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
+            <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
         </Grid>
     </ContentView.Content>
 </ContentView>

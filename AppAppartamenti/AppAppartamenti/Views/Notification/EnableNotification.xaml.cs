@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AppAppartamenti.Api;
 using AppAppartamentiApiClient;
 using Microsoft.AppCenter;
@@ -20,9 +21,11 @@ namespace AppAppartamenti.Views
             var button = (Button)sender;
             button.IsEnabled = false;
 
-            Application.Current.MainPage = new MainPage();
             await AppCenter.SetEnabledAsync(true);
-            SetDeviceInfo();
+            await SetDeviceInfo();
+
+            Application.Current.MainPage = new MainPage();
+
 
             button.IsEnabled = true;
         }
@@ -33,14 +36,16 @@ namespace AppAppartamenti.Views
             var button = (Button)sender;
             button.IsEnabled = false;
 
+            await AppCenter.SetEnabledAsync(false);
+            await SetDeviceInfo();
+
             Application.Current.MainPage = new MainPage();
-            await AppCenter.SetEnabledAsync(true);
-            SetDeviceInfo();
+
 
             button.IsEnabled = true;
         }
 
-        async void SetDeviceInfo()
+        async Task SetDeviceInfo()
         {
             NotificheClient notificheClient = new NotificheClient(await Api.ApiHelper.GetApiClient());
             var installationId = await AppCenter.GetInstallIdAsync();

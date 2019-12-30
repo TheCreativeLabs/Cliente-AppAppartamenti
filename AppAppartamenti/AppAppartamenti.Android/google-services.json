@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:211045302909:android:3473ad7cd96f11c6006714",
+        "mobilesdk_app_id": "1:211045302909:android:1b1b524aee75ac4d006714",
         "android_client_info": {
-          "package_name": "com.companyname.appappartamenti"
+          "package_name": "promuovocasa.it"
         }
       },
       "oauth_client": [

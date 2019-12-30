@@ -58,5 +58,7 @@ namespace AppAppartamenti
     {
     }
 
-    
+    public class ChatEntry : Editor
+    {
+    }
 }
