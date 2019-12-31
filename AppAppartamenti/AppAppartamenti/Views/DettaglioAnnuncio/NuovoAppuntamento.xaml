@@ -13,7 +13,7 @@
              ios:Page.UseSafeArea="true"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
@@ -36,10 +36,7 @@
         <ScrollView x:Name="ScrollViewAppuntamento">
 
             <StackLayout Style="{x:StaticResource StackContainer}">
-                <Button BackgroundColor="Transparent"
-                        Text="&#xf053;" HorizontalOptions="Start" Style="{x:StaticResource NavBackButton}" 
-                        Clicked="Cancel_Clicked">
-                </Button>
+                <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
                 <Label Style="{x:StaticResource Title}" Text="{translator:Translate NuovoAppuntamento.Title}"></Label>
                 <Label Style="{x:StaticResource AdSubtitle}" Margin="0,0,10,20" Text="Seleziona il giorno che preferisci e controlla le fasce orare disponibili"></Label>
@@ -48,7 +45,16 @@
                                        SelectionChanged="OnDataCalendarSelected" 
                                        EnableDatesInPast="False" 
                                        ShowLeadingAndTrailingDays="False"
-                                       ShowNavigationButtons="True"/>
+                                       ShowNavigationButtons="True"
+                                       HeightRequest="300" Margin="0,20,0,10">
+
+                     <syncfusion:SfCalendar.MonthViewSettings>
+                            <syncfusion:MonthViewSettings DayHeight="30" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
+                            </syncfusion:MonthViewSettings>
+                        </syncfusion:SfCalendar.MonthViewSettings>
+                </syncfusion:SfCalendar>
+
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
 
                 <StackLayout x:Name="containerOrariDisponibili" Orientation="Vertical" IsVisible="False" >
                 <!--<FlexLayout x:Name="containerOrariDisponibili" Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">-->
@@ -64,15 +70,24 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout Padding="1">
-                                    <Frame  HasShadow="True" HeightRequest="40" CornerRadius="30" Padding="0"  VerticalOptions="Center" >
-                                        <Label Text="{Binding Orario}" Style="{x:StaticResource AdTitle}" LineBreakMode="NoWrap" Margin="0" Padding="5" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                <StackLayout Padding="5">
+                                      <!--ios:VisualElement.IsShadowEnabled="true"
+                                            ios:VisualElement.ShadowColor="Gray"
+                                            ios:VisualElement.ShadowOpacity="0.5"
+                                            ios:VisualElement.ShadowRadius="3"-->
+                                    <appappartamenti:ShadowFrame
+                                            HasShadow="True"
+                                            HeightRequest="50"
+                                            CornerRadius="25"
+                                            VerticalOptions="Center"
+                                            Padding="0" >
+                                        <Label Text="{Binding Orario}" LineBreakMode="NoWrap" Margin="0" Padding="5" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                                         <!--CommandParameter="{Binding .}"-->
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="OnOrarioSelected" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                             </Label.GestureRecognizers>
                                         </Label>
-                                    </Frame>
+                                    </appappartamenti:ShadowFrame>
                                 </StackLayout>
                                 <!--<Grid Padding="15">
                                     <Grid.RowDefinitions>
@@ -104,7 +119,6 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                <!--</FlexLayout>-->
                 </StackLayout>
             </StackLayout>
         </ScrollView>

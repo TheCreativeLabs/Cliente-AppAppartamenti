@@ -26,6 +26,14 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
+            MessagingCenter.Subscribe<ListaAnnunci, string>(this, "RefreshPreferiti", async (sender, arg) =>
+            {
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    viewModel.Items.Clear();
+                }
+            });
+
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }

@@ -67,18 +67,19 @@ namespace AppAppartamenti.Views
 
         async void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = e.CurrentSelection as AnnunciDtoOutput;
 
-            if (item == null || item.Id == null)
+            if (!e.CurrentSelection.Any())
                 return;
+
+            var item = e.CurrentSelection.First() as AnnunciDtoOutput;
 
             if (item.Id != null && item.Id != Guid.Empty)
             {
-                // Manually deselect item.
-                cvRecenti.SelectedItem = null;
-
                 await Navigation.PushAsync(new DettaglioAnnuncio(item, false));
             }
+
+            // Manually deselect item.
+            cvRecenti.SelectedItem = null;
         }
 
         //async void BtnAdd_Clicked(object sender, EventArgs e)

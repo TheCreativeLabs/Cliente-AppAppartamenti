@@ -10,13 +10,14 @@ using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
 using Xamarin.Forms.Maps;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AppAppartamenti.ViewModels
 {
     public class AnnunciPreferitiViewModel : BaseViewModel
     {
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
-
         public Command LoadItemsCommand { get; set; }
 
         public AnnunciPreferitiViewModel()

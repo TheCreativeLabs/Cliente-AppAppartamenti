@@ -49,9 +49,9 @@
                                     <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                                 </Frame>
                                 <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
-                                    <Button  x:Name="btnRemovePreferito" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" CommandParameter="{Binding .}" VerticalOptions="Center"
-                                            Text="&#xf004;" Margin="10,0,15,0" HorizontalOptions="End"
-                                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50" >
+                                    <Button  x:Name="btnRemovePreferito" Style="{x:StaticResource AdButton}"  Clicked="BtnRemovePreferito_Clicked" CommandParameter="{Binding .}" VerticalOptions="Center"
+                                            Text="&#xf004;" HorizontalOptions="End"
+                                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral">
                                     </Button>
                                 </AbsoluteLayout>
                             </Grid>

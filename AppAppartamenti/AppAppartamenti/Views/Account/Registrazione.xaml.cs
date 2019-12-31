@@ -131,26 +131,26 @@ namespace AppAppartamenti.Views.Login
             await Navigation.PopModalAsync();
         }
 
-        private void ent_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                //Controllo che username e password siano valorizzati.
-                if (!(String.IsNullOrEmpty(entNome.Text)) && !(String.IsNullOrEmpty(entCognome.Text))
-                    && !(String.IsNullOrEmpty(entPassword.Text)) && !(String.IsNullOrEmpty(entConfermaPassword.Text)) && !(String.IsNullOrEmpty(entEmail.Text)))
-                {
-                    btnRegistrati.IsEnabled = true;
-                }
-                else
-                {
-                    btnRegistrati.IsEnabled = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+        //private void ent_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //Controllo che username e password siano valorizzati.
+        //        if (!(String.IsNullOrEmpty(entNome.Text)) && !(String.IsNullOrEmpty(entCognome.Text))
+        //            && !(String.IsNullOrEmpty(entPassword.Text)) && !(String.IsNullOrEmpty(entConfermaPassword.Text)) && !(String.IsNullOrEmpty(entEmail.Text)))
+        //        {
+        //            btnRegistrati.IsEnabled = true;
+        //        }
+        //        else
+        //        {
+        //            btnRegistrati.IsEnabled = false;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         async void OnPickPhotoButtonClicked(object sender, EventArgs e)
         {

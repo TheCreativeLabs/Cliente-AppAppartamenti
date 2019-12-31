@@ -7,6 +7,7 @@ using System.Timers;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using Xamarin.Forms;
+using AppAppartamenti.Behaviors;
 
 namespace AppAppartamenti.Views.Messaggi
 {
@@ -54,19 +55,25 @@ namespace AppAppartamenti.Views.Messaggi
 
         private void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            viewModel.ReloadItemsCommand.Execute(null);
+            ((InverseScroll)lvMessages.Behaviors[0]).loadComplete = false;
+
+            viewModel.LoadItemsCommand.Execute(null);
         }
 
         private async void Send_Clicked(object sender, EventArgs e)
         {
+
             if (!string.IsNullOrEmpty(chatTextInput.Text))
             {
-                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
-                await messaggiClient.InsertMessaggioAsync(viewModel.IdChat, viewModel.IdUser, chatTextInput.Text);
-
-                viewModel.LoadItemsCommand.Execute(null);
-
+                var msg = chatTextInput.Text;
                 chatTextInput.Text = "";
+
+                viewModel.AddNewMessage.Execute(msg);
+
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                await messaggiClient.InsertMessaggioAsync(viewModel.IdChat, viewModel.IdUser, msg);
+
+                lvMessages.ScrollTo(viewModel.Items[viewModel.Items.Count - 1], ScrollToPosition.End, false);
             }
         }
     }

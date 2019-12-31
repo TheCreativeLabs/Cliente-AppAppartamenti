@@ -12,14 +12,13 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              ios:Page.UseSafeArea="true">
 
-      <ContentPage.Resources>
+    <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
             <conv:PrezzoConverter x:Key="PrezzoConverter" />
             <conv:BooleanConverter x:Key="BoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
 
     <ContentPage.Content>
         <ScrollView>
@@ -46,9 +45,11 @@
 
                         <StackLayout HeightRequest="300"
                                      Orientation="Horizontal">
-                                    <CollectionView x:Name="cvRecenti" SelectionChanged="OnCollectionViewSelectionChanged"
+                                    <CollectionView x:Name="cvRecenti"
+                                                    SelectionChanged="OnCollectionViewSelectionChanged"
                                                     ItemsSource="{Binding Items}"
                                                     HorizontalScrollBarVisibility="Always"
+                                                    SelectionMode="Single"
                                                     >
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Horizontal" />

@@ -22,6 +22,7 @@ namespace AppAppartamenti.ViewModels
 
         public Command LoadItemsCommand { get; set; }
         public Command ReloadItemsCommand { get; set; }
+        public Command AddNewMessage { get; set; }
 
 
         public Guid? IdChatParam { get; set; }
@@ -35,6 +36,7 @@ namespace AppAppartamenti.ViewModels
             Items = new ObservableCollection<MessaggioDto>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ReloadItemsCommand = new Command(async () => await ExecuteReloadItemsCommand());
+            AddNewMessage = new Command(async (object Message) => await AddMessage((string)Message));
 
             OnpropertyChanged("Items");
         }
@@ -57,8 +59,6 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-                Items.Clear();
-
                 MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
                 var chatInfo = await messaggiClient.GetChatAsync(IdChatParam,IdAnnuncioParam,IdUserToChat);
 
@@ -66,9 +66,16 @@ namespace AppAppartamenti.ViewModels
                 {
                     IdUser = chatInfo.IdUser.Value;
                     IdChat = chatInfo.IdChat.Value;
-                    foreach (var msg in chatInfo.Messaggi)
+
+                    if (Items.Count != chatInfo.Messaggi.Count)
                     {
-                        Items.Add(msg);
+                        Items.Clear();
+
+                        foreach (var msg in chatInfo.Messaggi)
+                        {
+                            Items.Add(msg);
+                        }
+                        OnpropertyChanged("Items");
                     }
                 }
             }
@@ -121,6 +128,29 @@ namespace AppAppartamenti.ViewModels
                 IsBusy = false;
             }
         }
+
+        async Task AddMessage(string Message)
+        {
+            try
+            {
+
+                MessaggioDto messaggioDto = new MessaggioDto()
+                {
+                    DataInserimento = DateTime.Now,
+                    DataLettura = null,
+                    FromMe = true,
+                    Messaggio = Message
+                };
+
+                Items.Add(messaggioDto);
+                OnpropertyChanged("Items");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
 
         private Task<string> DisplayActionSheet(string v1, string v2, object p, string v3, string v4)
         {

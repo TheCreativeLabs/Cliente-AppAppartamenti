@@ -4914,6 +4914,9 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Confermato", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Confermato { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("FromMe", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? FromMe { get; set; }
+
         [Newtonsoft.Json.JsonProperty("InfoAnnuncio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public AnnunciDtoOutput InfoAnnuncio { get; set; }
 

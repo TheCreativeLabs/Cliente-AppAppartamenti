@@ -23,12 +23,14 @@
 
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
+            <StackLayout HeightRequest="100">
+
                     <Button x:Name="btnCancel" Text="{translator:Translate Ricerca.Cancel}"  Style="{x:StaticResource LinkButton}"
                             HorizontalOptions="End" Clicked="btnCancel_Clicked">
                     </Button>
 
                     <appappartamenti:ShadowFrame HasShadow="True" Padding="5" HeightRequest="40">
-                        <StackLayout Orientation="Horizontal" Padding="0">
+                        <StackLayout Orientation="Horizontal">
                             <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource GrayColor}" Text="&#xf002;"></Label>
 
                             <appappartamenti:SearchEntry
@@ -38,15 +40,18 @@
                                 Visual="Default"/>
                         </StackLayout>
                     </appappartamenti:ShadowFrame>
+
+            </StackLayout>
+
                     
                     <ListView x:Name="lvComuni" IsVisible="false"
-                              ItemSelected="LvComuni_Selected" SelectionMode="Single"
+                              ItemSelected="LvComuni_Selected"
+                              SelectionMode="Single"
                               ios:ListView.SeparatorStyle="FullWidth"
                               SeparatorColor="LightGray"
                               ItemsSource="{Binding Items}"
                               IsRefreshing="{Binding IsBusy}"
-
-                             >
+                              HasUnevenRows="False" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
