@@ -7,20 +7,20 @@ using Xamarin.Forms;
 
 namespace AppAppartamenti.Converter
 {
-    public class MessageColorConverter : IValueConverter { 
+    public class MessageListBadge : IValueConverter { 
         
         public object Convert (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
-                return (Style)App.Current.Resources["MessageFromMe"];
+                return false;
 
-            if ((bool)value)
+            if ((int)value > 0)
             {
-                return (Style)App.Current.Resources["MessageFromMe"];
+                return true;
             }
             else
             {
-                return (Style)App.Current.Resources["MessageToMe"];
+                return false;
             }
         }
         public object ConvertBack (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

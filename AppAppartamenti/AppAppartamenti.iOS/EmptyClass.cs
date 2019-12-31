@@ -7,11 +7,13 @@ using CoreGraphics;
 using Foundation;
 using System.ComponentModel;
 using AppAppartamenti.ContentViews;
+using Plugin.Badge.iOS;
 
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(EntryCustomBorderRenderer))]
 [assembly: ExportRenderer(typeof(ShadowFrame), typeof(ShadowFrameRenderer))]
 [assembly: ExportRenderer(typeof(WebViewUserAgent), typeof(CustomWebView))]
 [assembly: ExportRenderer(typeof(ChatInputBarView), typeof(ChatEntryRenderer))]
+[assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
 namespace AppAppartamenti.iOS
 {
     public class EntryCustomBorderRenderer : EntryRenderer

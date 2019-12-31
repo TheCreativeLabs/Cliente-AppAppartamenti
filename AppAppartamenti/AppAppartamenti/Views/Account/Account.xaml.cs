@@ -39,7 +39,7 @@ namespace AppAppartamenti.Views.Account
             ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
             items.Add(new MenuItem() { Id=0, DisplayName = "Informazioni personali", Icona = "\uf007", RedirectPage =new InformazioniPersonali() });
             items.Add(new MenuItem() { Id=1, DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
-            items.Add(new MenuItem() { Id = 2, DisplayName = "Messaggi", Icona = "\uf27a", RedirectPage = new MessaggiLista() });
+            items.Add(new MenuItem() { Id = 2, DisplayName = "I miei annunci", Icona = "\uf08d", RedirectPage = new MieiAnnunci() });
             items.Add(new MenuItem() { Id=3, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
             items.Add(new MenuItem() { Id=4, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
             items.Add(new MenuItem() { Id=5, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });

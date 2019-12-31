@@ -18,10 +18,11 @@ using Android.Views;
 using Android.Widget;
 using AppAppartamenti;
 using CustomRenderer;
+using Plugin.Badge.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Color = Xamarin.Forms.Color;
 
+[assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
 // this line directly ubleow usings, before namespace declaration
 [assembly: ExportRenderer(typeof(WebViewUserAgent), typeof(DesktopWebViewRenderer))]
 [assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]

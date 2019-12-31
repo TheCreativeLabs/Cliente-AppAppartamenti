@@ -21,6 +21,8 @@ namespace AppAppartamenti.ViewModels
         public Guid IdChat { get; set; }
 
         public Command LoadItemsCommand { get; set; }
+        public Command ReloadItemsCommand { get; set; }
+
 
         public Guid? IdChatParam { get; set; }
         public Guid? IdAnnuncioParam { get; set; }
@@ -32,6 +34,8 @@ namespace AppAppartamenti.ViewModels
         {
             Items = new ObservableCollection<MessaggioDto>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            ReloadItemsCommand = new Command(async () => await ExecuteReloadItemsCommand());
+
             OnpropertyChanged("Items");
         }
 
@@ -65,6 +69,46 @@ namespace AppAppartamenti.ViewModels
                     foreach (var msg in chatInfo.Messaggi)
                     {
                         Items.Add(msg);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        async Task ExecuteReloadItemsCommand()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                var chatInfo = await messaggiClient.GetChatAsync(IdChatParam, IdAnnuncioParam, IdUserToChat);
+
+                if (chatInfo != null)
+                {
+                    IdUser = chatInfo.IdUser.Value;
+                    IdChat = chatInfo.IdChat.Value;
+
+                    if(Items.Count != chatInfo.Messaggi.Count)
+                    {
+                        Items.Clear();
+
+                        foreach (var msg in chatInfo.Messaggi)
+                        {
+                            Items.Add(msg);
+                        }
+                        OnpropertyChanged("Items");
                     }
                 }
             }

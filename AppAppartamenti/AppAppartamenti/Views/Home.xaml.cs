@@ -51,6 +51,8 @@ namespace AppAppartamenti.Views
 
             if(!viewModel.Items.Any())
                 viewModel.LoadItemsCommand.Execute(null);
+
+            ((MainPage)this.Parent.Parent).viewModel.ReloadItemsCommand.Execute(null);
         }
 
         private async void entRicerca_Focused(object sender, EventArgs e)
@@ -62,7 +64,6 @@ namespace AppAppartamenti.Views
         {
             await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(null))); //è un nuovo annuncio, non devo passare l'annuncio da modificare
         }
-
 
         async void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {

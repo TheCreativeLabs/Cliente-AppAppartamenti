@@ -12,15 +12,15 @@ namespace AppAppartamenti.Converter
         public object Convert (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
-                return new Thickness(10, 10, 40, 10);
+                return new Thickness(40, 10, 10, 10);
 
             if ((bool)value)
             {
-                return new Thickness(10, 10, 40, 10);
+                return new Thickness(40, 10, 10, 10);
             }
             else
             {
-                return new Thickness(40, 10, 10, 10);
+                return new Thickness(10, 10, 40, 10);
             }
         }
         public object ConvertBack (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

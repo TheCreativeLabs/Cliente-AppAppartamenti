@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <conv:MessageColorConverter x:Key="MsgColorConverter"></conv:MessageColorConverter>
             <conv:MessageMarginConverter x:Key="MsgMarginConverter"></conv:MessageMarginConverter>
-
+            <conv:MessageTextColorConverter x:Key="MsgTextColorConverter"></conv:MessageTextColorConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -33,13 +33,14 @@
                             CachingStrategy="RecycleElement"
                             VerticalScrollBarVisibility="Never"
                             IsRefreshing="{Binding IsBusy}"
-                            SeparatorVisibility="None">
+                            SeparatorVisibility="None"
+                          FlowDirection="RightToLeft" Rotation="180">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout>
-                                    <Frame Padding="10" CornerRadius="10" BackgroundColor="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand" Margin="{Binding FromMe, Converter={StaticResource MsgMarginConverter}}">
-                                        <Label Text="{Binding Messaggio}" TextColor="White"></Label>
+                                <StackLayout FlowDirection="LeftToRight" Rotation="180" >
+                                    <Frame HasShadow="False" Padding="10" CornerRadius="10" Style="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Messaggio}" TextColor="{Binding FromMe, Converter={StaticResource MsgTextColorConverter}}"></Label>
                                     </Frame>
                                  </StackLayout>
                             </ViewCell>
@@ -47,28 +48,30 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <BoxView Grid.Row="1" Color="LightGray"></BoxView>
+                 <BoxView Grid.Row="1" Color="LightGray"></BoxView>
 
-                 <Grid RowSpacing="0" Grid.Row="2" Margin="0,0,0,20"
-               ColumnSpacing="0">
-            <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <appappartamenti:ChatEntry x:Name="chatTextInput"
-                TextColor="Black" Keyboard="Chat"
-                IsTextPredictionEnabled="true"
-                HorizontalOptions="FillAndExpand" 
-                PlaceholderColor="LightGray"
-                Placeholder="Type your message here"
-                Grid.Row="0" VerticalOptions="Center"
-                Grid.Column="0" AutoSize="TextChanges"/>
+                 <controls:ChatInputBarView Grid.Row="2">
+                      <Grid RowSpacing="0"  Margin="0,0,0,20"
+                           ColumnSpacing="0">
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <appappartamenti:ChatEntry x:Name="chatTextInput"
+                            TextColor="Black" Keyboard="Chat"
+                            IsTextPredictionEnabled="true"
+                            HorizontalOptions="FillAndExpand" 
+                            PlaceholderColor="LightGray"
+                            Placeholder="Type your message here"
+                            Grid.Row="0" VerticalOptions="Center"
+                            Grid.Column="0" AutoSize="TextChanges"/>
 
-            <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
-        </Grid>
+                        <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
+                    </Grid>
+                </controls:ChatInputBarView>
              </Grid>
         </StackLayout>
     </ContentPage.Content>

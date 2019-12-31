@@ -32,7 +32,7 @@ namespace AppAppartamenti.Views.Messaggi
             if (item == null)
                 return;
           
-           await Navigation.PushAsync(new NuovoMessaggio(item));
+            await Navigation.PushAsync(new NuovoMessaggio(item));
 
             // Manually deselect item.
             LvChat.SelectedItem = null;

@@ -23,7 +23,7 @@
 
     <ContentPage.Content>
         <ScrollView>
-                <StackLayout Style="{x:StaticResource StackContainer}">
+                <StackLayout Style="{x:StaticResource StackContainer}" CompressedLayout.IsHeadless="true">
                     <Label FontSize="60" Margin="20" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}"
                             TextColor="{x:StaticResource PrimaryColor}" Text="&#xf7ae;"></Label>
 

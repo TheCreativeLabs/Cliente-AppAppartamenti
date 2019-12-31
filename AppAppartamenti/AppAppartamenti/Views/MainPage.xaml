@@ -9,12 +9,15 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+            xmlns:plugin= "clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+            xmlns:views1="clr-namespace:AppAppartamenti.Views.Messaggi"
             android:TabbedPage.ToolbarPlacement="Bottom"
             SelectedTabColor="{x:StaticResource DarkColor}"
             UnselectedTabColor="{x:StaticResource GrayColor}"
-            NavigationPage.HasNavigationBar="False">
+            NavigationPage.HasNavigationBar="False"
+            BackgroundColor="{OnPlatform Android=White, iOS=White}">
     <TabbedPage.Children>
-        <NavigationPage Title="{translator:Translate MainPage.Search}">
+        <NavigationPage x:Name="Test" Title="{translator:Translate MainPage.Search}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf689;" Size="25"/>
             </NavigationPage.IconImageSource>
@@ -44,18 +47,17 @@
             </x:Arguments>
         </NavigationPage>
 
-         <NavigationPage Title="{translator:Translate MainPage.MyListing}">
+        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="{Binding NewMessages}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf08d;" Size="25"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf27a;" Size="25" />
             </NavigationPage.IconImageSource>
             <x:Arguments>
-                <views:MieiAnnunci>
-                </views:MieiAnnunci>
+                <views1:MessaggiLista>
+                </views1:MessaggiLista>
             </x:Arguments>
         </NavigationPage>
         
-
-        <NavigationPage Title="{translator:Translate MainPage.Account}">
+        <NavigationPage x:Name="tabAccount" Title="{translator:Translate MainPage.Account}">
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;" Size="25"/>
             </NavigationPage.IconImageSource>
@@ -64,7 +66,5 @@
                 </views11:Account>
             </x:Arguments>
         </NavigationPage>
-
     </TabbedPage.Children>
-    
 </TabbedPage>
