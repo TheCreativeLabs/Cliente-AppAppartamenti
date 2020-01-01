@@ -23,13 +23,13 @@
 
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
-            <StackLayout HeightRequest="100">
+            <StackLayout HeightRequest="140">
 
                     <Button x:Name="btnCancel" Text="{translator:Translate Ricerca.Cancel}"  Style="{x:StaticResource LinkButton}"
                             HorizontalOptions="End" Clicked="btnCancel_Clicked">
                     </Button>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" Padding="5" HeightRequest="40">
+                    <appappartamenti:ShadowFrame HasShadow="True" Padding="10,5,5,5" HeightRequest="40">
                         <StackLayout Orientation="Horizontal">
                             <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="{x:StaticResource GrayColor}" Text="&#xf002;"></Label>
 
@@ -64,7 +64,7 @@
                         </ListView.Footer>
                     </ListView>
 
-                <ScrollView VerticalScrollBarVisibility="Always" x:Name="stkRicercaAggiuntiva" Margin="-20,20,-20,20">
+                <ScrollView VerticalScrollBarVisibility="Always" x:Name="stkRicercaAggiuntiva" Margin="-20,0,-20,20">
                         <StackLayout Padding="19">
 
                             <Label Text="{translator:Translate Ricerca.SaleRent}"></Label>

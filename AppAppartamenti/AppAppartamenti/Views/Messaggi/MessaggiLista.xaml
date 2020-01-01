@@ -17,10 +17,18 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Style="{x:StaticResource StackContainer}">
-            <Label Style="{x:StaticResource Title}" Text="Messaggi"></Label>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto">
+                </RowDefinition>
 
-            <ListView x:Name="LvChat"
+                <RowDefinition Height="*">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Style="{x:StaticResource Title}" Text="Messaggi"></Label>
+
+            <ListView Grid.Row="1" x:Name="LvChat"
                         ItemsSource="{Binding Items}"
                         HasUnevenRows="true"
                         RefreshCommand="{Binding LoadItemsCommand}"
@@ -62,7 +70,6 @@
                     <Label></Label>
                 </ListView.Footer>
             </ListView>
-
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -618,6 +618,9 @@
   <data name="INDEPENDENT" xml:space="preserve">
     <value>Independent</value>
   </data>
+      <data name="EMPTY" xml:space="preserve">
+    <value>Select..</value>
+  </data>
   <data name="ListaAnnunci.Locality" xml:space="preserve">
     <value>Locality</value>
   </data>

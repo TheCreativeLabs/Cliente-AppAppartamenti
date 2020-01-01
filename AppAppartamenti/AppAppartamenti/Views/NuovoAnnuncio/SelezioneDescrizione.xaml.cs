@@ -27,6 +27,8 @@ namespace AppAppartamenti.Views
             InitializeComponent();
 
             annuncio = Annuncio;
+
+            edtDescrizione.Focus();
         }
 
         protected override void OnAppearing()

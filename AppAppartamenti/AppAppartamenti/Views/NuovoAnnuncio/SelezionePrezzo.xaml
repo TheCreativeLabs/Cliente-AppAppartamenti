@@ -20,6 +20,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Style="{x:StaticResource StackContainer}">
 
          <StackLayout Orientation="Horizontal">
@@ -33,43 +34,40 @@
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePrezzo.Costs}"></Label>
                         <controls:StepMenu CurrentId="5"/>
 
-
             <Label Text="{translator:Translate SelezionePrezzo.EnterPrice}"></Label>
-            <Entry  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
 
-                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            <Entry Grid.Row="0" Grid.Column="0"  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
+                <Label Grid.Row="0" x:Name="lblPrezzo" Grid.Column="0" Text="€" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+            </Grid>
 
+            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
 
             <Label VerticalTextAlignment="Center"  Margin="0,10,0,0" Text="{translator:Translate SelezionePrezzo.CondominiumFees}"></Label>
-            <Entry x:Name="entSpeseCondominiali" Placeholder="{translator:Translate SelezionePrezzo.FeesExample}" Keyboard="Numeric"></Entry>
 
-                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Row="0" Grid.Column="0"  x:Name="entSpeseCondominiali" Placeholder="{translator:Translate SelezionePrezzo.FeesExample}" Keyboard="Numeric"></Entry>
+                <Label Grid.Row="0" Grid.Column="0" Text="€/Mese" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+            </Grid>
+            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
 
             <Label Text="{translator:Translate SelezionePrezzo.Heat}" Margin="0,10,0,0"></Label>
-                    <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                <Entry x:Name="entRiscaldamento" IsEnabled="False" Placeholder="{translator:Translate SelezionePrezzo.HeatSelect}">
-                            </Entry>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="EntTipoRiscaldamento_Focused"></TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-            <Picker x:Name="pckRiscaldamento" IsVisible="False" SelectedIndexChanged="PckRiscaldamento_SelectedIndexChanged" ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
+            <Picker x:Name="pckRiscaldamento"  ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
 
-
-                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
 
             <Label Text="{translator:Translate SelezionePrezzo.EnergyClass}" Margin="0,10,0,0"></Label>
-                    <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                <Entry  IsEnabled="False"  Grid.Column="0" x:Name="entClasseEnergetica" Placeholder="{translator:Translate SelezionePrezzo.Select}">
-                        </Entry>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="EntClasseEnergetica_Focused"></TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </Frame>
-            <Picker x:Name="pckClasseEnergetica" SelectedIndexChanged="PckClasseEnergetica_SelectedIndexChanged" IsVisible="False" ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
+            <Picker x:Name="pckClasseEnergetica"  ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
 
             <Button Text="{translator:Translate SelezionePrezzo.Continue}"  x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
 
         </StackLayout>
+            </ScrollView>
     </ContentPage.Content>
 </ContentPage>

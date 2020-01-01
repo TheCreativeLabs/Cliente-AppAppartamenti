@@ -35,9 +35,9 @@
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
             <controls:StepMenu CurrentId="9"/>
 
-            <Entry x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></Entry>
+            <appappartamenti:ChatEntry AutoSize="TextChanges" x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></appappartamenti:ChatEntry>
 
-            <Button Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
+            <Button Margin="0,50,0,0" Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

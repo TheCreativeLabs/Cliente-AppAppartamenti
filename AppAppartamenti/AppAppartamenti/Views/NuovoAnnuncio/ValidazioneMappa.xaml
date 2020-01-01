@@ -22,7 +22,7 @@
 
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
-            <Label Style="{x:StaticResource Title}" Text="La posiziione è corretta?"></Label>
+            <Label Style="{x:StaticResource Title}" Text="La posizione è corretta?"></Label>
 
             <maps:Map x:Name="map" Margin="0"/>
 

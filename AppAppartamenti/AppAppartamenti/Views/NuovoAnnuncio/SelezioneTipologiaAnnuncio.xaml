@@ -31,7 +31,7 @@
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneTipologiaAnnuncio.SaleRent}"></Label>
             <controls:StepMenu CurrentId="2"/>
 
-            <input:SelectionView ItemsSource="{Binding Items}"
+            <input:SelectionView ItemsSource="{Binding Items}" Color="{x:StaticResource DarkColor}"
                  RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1">
             </input:SelectionView>
 
