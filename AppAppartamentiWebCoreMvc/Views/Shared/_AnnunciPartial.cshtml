@@ -23,7 +23,6 @@
                             var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
                             <img src="@imgSrc" class="card-img card-img-annuncio" alt="image" />
-
                         }
                     }
                 </div>
@@ -35,7 +34,7 @@
 
                                 if (item.FlagPreferito.HasValue && item.FlagPreferito.Value == true)
                                 {
-                                    cssClass = "text-primary";
+                                    cssClass = "text-preferred";
                                 }
 
                                 <button type="button" class="btn bg-light @cssClass" data-preferred="@item.FlagPreferito" onclick="AddOrRemovePreferred(this,'@item.Id')"><i class="fas fa-heart"></i></button>
@@ -52,7 +51,7 @@
                                 <br />
                                 <small class="text-muted">@item.Indirizzo, @item.NomeComune</small>
                                 <br />
-                                <strong>@item.Prezzo €</strong>
+                                <strong>@string.Format("{0:N0}€", item.Prezzo)</strong>
                             </h6>
 
                                 <hr />

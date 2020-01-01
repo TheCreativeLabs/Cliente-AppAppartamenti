@@ -36,5 +36,29 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         {
             return View();
         }
+
+        public async Task<ActionResult> GetAppointmentList(DateTime SelectedDate)
+        {
+            HttpClient httpClient = new HttpClient();
+            AgendaClient agendaClient = new AgendaClient(httpClient);
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            var listaAppuntamenti =  await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
+
+            return PartialView("_AppuntamentiPartial", listaAppuntamenti.ToList());
+        }
+
+        public async Task<ActionResult> GetAppointmentDetail(Guid SelectedAppointment)
+        {
+            HttpClient httpClient = new HttpClient();
+            AgendaClient agendaClient = new AgendaClient(httpClient);
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            var appuntamento = await agendaClient.GetAppuntamentoByIdAsync(SelectedAppointment);
+
+            return PartialView("_AppuntamentiDetailPartial", appuntamento);
+        }
     }
 }

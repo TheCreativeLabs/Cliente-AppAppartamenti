@@ -9,41 +9,39 @@
             <div id="calendar2"></div>
         </div>
         <div class="col-sm-5">
-            <ul class="list-group list-group-flush mt-5">
-                <li class="list-group-item">Appuntamento 1</li>
-                <li class="list-group-item">Appuntamento 2</li>
-                <li class="list-group-item">Appuntamento 3</li>
-                <li class="list-group-item">Appuntamento 4</li>
-            </ul>
+            <div id="ListAppointment">
+            </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="appointmentDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Riepilogo appuntamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="AppointmentDetail">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @section Scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            var calendarEl2 = document.getElementById('calendar2');
-
-            var calendar2 = new FullCalendar.Calendar(calendarEl2, {
-                plugins: ['dayGrid', 'timeGrid', 'interaction'],
-                locale: selectedLanguage,
-                themeSystem: 'bootstrap',
-                header: {
-                    left: 'title',
-                    center: '',
-                    right: 'prev,next'
-                },
-                footer: {
-                    left: '',
-                    center: '',
-                    right: ''
-                },
-                dateClick: function(info) {
-                    alert('Clicked on: ' + info.dateStr);
-                }
-            });
-
-            calendar2.render();
-        });
+        var ListAppointmentUrl = "@Url.Action("GetAppointmentList", "Agenda")";
+        var DetailAppointmentUrl =  "@Url.Action("GetAppointmentDetail", "Agenda")";
     </script>
+    <script src="~/js/agenda-list.js" asp-append-version="true"></script>
 }
+

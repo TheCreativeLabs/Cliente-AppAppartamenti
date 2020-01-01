@@ -1,6 +1,6 @@
 ﻿:root{
-    --color-primary:#ff6b6b;
-    --color-secondary: var(--cyan);
+    --color-primary:#1188e6;
+    --color-secondary:#1188e6; /* var(--cyan);*/
 }
 
 
@@ -80,7 +80,7 @@ html {
 }
 
 .navbar-brand{
-    color: #ff6b6b !important;
+    color: var(--color-primary) !important;
 }
 
 .navbar-transparent{
@@ -98,6 +98,10 @@ html {
 
 #divRicercaAggiuntiva{
     height:300px;
+}
+
+.btn{
+  border-radius:.25rem;
 }
 
 .btn-social{
@@ -652,4 +656,14 @@ select:focus{
 
 footer a, footer h5{
     color:var(--light) !important;
+}
+
+.text-preferred{
+    color:coral !important;
+}
+
+.section-title{
+    margin-top:10px;
+    font-weight:100 !important;
+    font-family:"Medium" !important;
 }
