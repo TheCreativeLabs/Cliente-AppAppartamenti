@@ -47,10 +47,12 @@ namespace iOS.Renderers
                 if (this.Control == null)
                     return;
                 var element = e.NewElement as DatePickerCtrl;
-                if (!string.IsNullOrWhiteSpace(element.Placeholder))
+
+                if (!element.PlaceholderHidden && !string.IsNullOrWhiteSpace(element.Placeholder))
                 {
                     Control.Text = element.Placeholder;
                 }
+
                 Control.BorderStyle = UITextBorderStyle.RoundedRect;
                 Control.Layer.BorderColor = UIColor.FromRGB(211, 211, 211).CGColor;
                 Control.Layer.CornerRadius = 5;
@@ -58,15 +60,16 @@ namespace iOS.Renderers
                 Control.AdjustsFontSizeToFitWidth = true;
                 //Control.TextColor = UIColor.FromRGB(211, 211, 211);
 
-            Control.ShouldEndEditing += (textField) => {
-               var seletedDate = (UITextField)textField;
-               var text = seletedDate.Text;
-               if (text == element.Placeholder)
-               {
+                Control.ShouldEndEditing += (textField) => {
+                var seletedDate = (UITextField)textField;
+                var text = seletedDate.Text;
+                if (text == element.Placeholder)
+                {
                    Control.Text = DateTime.Now.ToString("dd/MM/yyyy");
-               }
-               return true;
+                }
+                return true;
            };
+         
             }
             private void OnCanceled(object sender, EventArgs e)
             {
@@ -80,21 +83,21 @@ namespace iOS.Renderers
 
 
         public class ShadowNavigationBarRenderer : NavigationRenderer
-    {
-        protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
-            base.OnElementChanged(e);
+            protected override void OnElementChanged(VisualElementChangedEventArgs e)
+            {
+                base.OnElementChanged(e);
 
-            if (this.Element == null) return;
+                if (this.Element == null) return;
 
-            NavigationBar.Layer.ShadowColor = UIColor.LightGray.CGColor;
-            NavigationBar.Layer.ShadowOffset = new CGSize(0, 0);
-            NavigationBar.Layer.ShadowOpacity = 1;
+                NavigationBar.Layer.ShadowColor = UIColor.LightGray.CGColor;
+                NavigationBar.Layer.ShadowOffset = new CGSize(0, 0);
+                NavigationBar.Layer.ShadowOpacity = 1;
 
-            // remove lower border and shadow of the navigation bar
-            NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
-            NavigationBar.ShadowImage = new UIImage();
+                // remove lower border and shadow of the navigation bar
+                NavigationBar.SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
+                NavigationBar.ShadowImage = new UIImage();
+            }
         }
-    }
 
 }

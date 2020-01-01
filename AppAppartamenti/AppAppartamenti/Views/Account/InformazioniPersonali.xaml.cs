@@ -36,6 +36,7 @@ namespace AppAppartamenti.Views.Account
 
             if (userInfo.DataDiNascita.HasValue)
                 dpDataNascita.Date = userInfo.DataDiNascita.Value.Date;
+                dpDataNascita.PlaceholderHidden = true;
 
             if (viewModel.FotoProfilo != null)
             {

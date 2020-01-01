@@ -17,6 +17,13 @@ namespace AppAppartamenti
             get;
             set;
         }
+
+        public static readonly BindableProperty PlaceholderVisibleTextProperty = BindableProperty.Create(propertyName: "PlaceholderVisible", returnType: typeof(bool), declaringType: typeof(DatePickerCtrl), defaultValue: false);
+        public bool PlaceholderHidden
+        {
+            get;
+            set;
+        }
     }
 
     public class MyEntry : Entry

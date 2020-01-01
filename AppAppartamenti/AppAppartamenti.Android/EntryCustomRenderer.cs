@@ -177,7 +177,7 @@ namespace CustomRenderer
 
                 DatePickerCtrl element = Element as DatePickerCtrl;
 
-                if (!string.IsNullOrWhiteSpace(element.Placeholder))
+                if (!element.PlaceholderHidden && !string.IsNullOrWhiteSpace(element.Placeholder))
                 {
                     Control.Text = element.Placeholder;
                 }

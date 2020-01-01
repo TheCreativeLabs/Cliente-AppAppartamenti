@@ -131,7 +131,7 @@
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="TextColor" Value="{StaticResource SecondaryColor}"/>
                 <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"></Setter>
-                <Setter Property="FontSize" Value="24"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
                 <Setter Property="WidthRequest" Value="{x:OnPlatform Android=50, iOS=45}"></Setter>
                 <Setter Property="Margin" Value="-10,0,-10,0"></Setter>
                 <Setter Property="HorizontalOptions" Value="EndAndExpand"></Setter>

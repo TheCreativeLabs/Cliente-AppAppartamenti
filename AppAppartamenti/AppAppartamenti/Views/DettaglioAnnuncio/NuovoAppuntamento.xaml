@@ -46,7 +46,7 @@
                                        EnableDatesInPast="False" 
                                        ShowLeadingAndTrailingDays="False"
                                        ShowNavigationButtons="True"
-                                       HeightRequest="300" Margin="0,20,0,10">
+                                       HeightRequest="300">
 
                      <syncfusion:SfCalendar.MonthViewSettings>
                             <syncfusion:MonthViewSettings DayHeight="30" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
