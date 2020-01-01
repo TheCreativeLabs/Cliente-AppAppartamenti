@@ -32,11 +32,15 @@ function LoadAppointmentDetail(IdAppuntamento) {
     let url = DetailAppointmentUrl + "?SelectedAppointment=" + IdAppuntamento;
 
     $("#AppointmentDetail").load(url, function () {
-        isLoading = false;
-        HideLoader()
     });
 
     $("#appointmentDetailModal").modal("show");
+}
+
+function AcceptAppointment(IdAppuntamento) {
+}
+
+function DeleteAppointment(IdAppuntamento) {
 }
 
 function setMap() {

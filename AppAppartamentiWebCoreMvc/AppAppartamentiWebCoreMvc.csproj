@@ -33,6 +33,8 @@
     <Content Remove="Views\Account %28copy%29\Edit.cshtml" />
     <Content Remove="Views\Account %28copy%29\EditPassword.cshtml" />
     <Content Remove="wwwroot\js\annunci-list %28copy%29.min.js" />
+    <Content Remove="wwwroot\js\site.min.js" />
+    <Content Remove="wwwroot\js\account-edit.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Index.cshtml.cs" />
@@ -54,6 +56,7 @@
     <Folder Include="Views\Agenda\" />
     <Folder Include="Resources\Views\Account\" />
     <Folder Include="Views\Setting\" />
+    <Folder Include="Views\Messaggi\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />

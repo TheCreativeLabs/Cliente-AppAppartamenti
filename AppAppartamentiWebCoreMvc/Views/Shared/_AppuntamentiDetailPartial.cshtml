@@ -1,6 +1,14 @@
 ﻿@model AppuntamentoDettaglioDtoOutput
 
-<div class="container-fluid">
+ <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Riepilogo appuntamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <h6 class="section-title">Appuntamento con</h6>
@@ -64,9 +72,20 @@
                 </div>
             </div>
         </div>
+      </div>
+      <div class="modal-footer">
+
+        @if(Model.Confermato.HasValue && Model.Confermato.Value)
+        {
+            <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger" data-dismiss="modal">Annulla appuntamento</button>
+        }
+        else
+        {
+            <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger">Rifiuta</button>
+            <button onclick="AcceptAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-success">Accetta</button>
+        }
+
+      </div>
+    </div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUDWKfs6tGF891vL-VwXYubP_IKuG8exg&callback=setMap"></script>
-
-
-
-
