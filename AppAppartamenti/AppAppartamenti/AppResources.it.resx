@@ -505,7 +505,7 @@
     <value>Classe energetica</value>
   </data>
   <data name="SelezionePrezzo.EnterPrice" xml:space="preserve">
-    <value>€ - Inserisci il prezzo</value>
+    <value>Prezzo</value>
   </data>
   <data name="SelezionePrezzo.FeesExample" xml:space="preserve">
     <value>Esempio: 80</value>
@@ -617,6 +617,9 @@
   </data>
   <data name="INDEPENDENT" xml:space="preserve">
     <value>Autonomo</value>
+  </data>
+     <data name="EMPTY" xml:space="preserve">
+    <value>Seleziona..</value>
   </data>
   <data name="ListaAnnunci.Locality" xml:space="preserve">
     <value>Comune o provincia</value>

@@ -6,6 +6,8 @@ using AppAppartamenti.Views;
 using AppAppartamenti.Views.Login;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Push;
+using AppAppartamenti.Api;
+using System.Threading.Tasks;
 
 namespace AppAppartamenti
 {
@@ -21,12 +23,25 @@ namespace AppAppartamenti
             //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTgyMTA5QDMxMzcyZTMzMmUzME9QcS9ocHo4K29nbnpOUGc5OTRVMVNhOTZ1Y2pJS0ZTSXh2emxyTmJCM009");
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTg2MTU3QDMxMzcyZTM0MmUzMEhjUEJsQW5VeG56QUlSUTBEcU8rcG5Ld2hTQ3lPcTk4MUpubnNWRnNIbDg9");
 
+            SetMainPage();
 
-            //DependencyService.Register<MockDataStore>();            //DependencyService.Register<MockDataStore>();
-            MainPage = new NavigationPage(new Login());
-            //var mainPage = new Login();
-            //var rootPage = new NavigationPage(mainPage);
-            //Navigation
+
+        }
+
+        public async void SetMainPage()
+        {
+            if (await ApiHelper.GetToken() != null)
+            {
+                Task.Run(async () => { await ApiHelper.GetUserInfo(); });
+                Task.Run(async () => { await ApiHelper.GetListaTipologiaProprieta(); });
+                Task.Run(async () => { await ApiHelper.GetListaTipologiaAnnuncio(); });
+                
+                MainPage = new MainPage();
+            }
+            else
+            {
+                MainPage = new NavigationPage(new Login());
+            }
         }
 
         protected override void OnStart()

@@ -22,11 +22,18 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto">
+                </RowDefinition>
 
-        <Label Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
+                <RowDefinition Height="*">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
            
-        <ListView x:Name="AnnunciiListView"
+        <ListView Grid.Row="1" x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
                     HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
@@ -36,7 +43,10 @@
                     VerticalScrollBarVisibility="Never"
                     IsRefreshing="{Binding IsBusy}"
                     SeparatorVisibility="None">
+
             <ListView.ItemTemplate>
+
+
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="20">
@@ -49,9 +59,9 @@
                                     <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                                 </Frame>
                                 <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
-                                    <Button  x:Name="btnRemovePreferito" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" CommandParameter="{Binding .}" VerticalOptions="Center"
-                                            Text="&#xf004;" Margin="10,0,15,0" HorizontalOptions="End"
-                                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50" >
+                                    <Button  x:Name="btnRemovePreferito" Style="{x:StaticResource AdButton}"  Clicked="BtnRemovePreferito_Clicked" CommandParameter="{Binding .}" VerticalOptions="Center"
+                                            Text="&#xf004;" HorizontalOptions="End"
+                                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral">
                                     </Button>
                                 </AbsoluteLayout>
                             </Grid>
@@ -74,7 +84,8 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-            </StackLayout>
+
+            </ListView>
+            </Grid>
     </ContentPage.Content>
 </ContentPage>

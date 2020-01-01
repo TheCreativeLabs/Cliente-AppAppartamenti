@@ -34,8 +34,9 @@ namespace AppAppartamenti.Views
 
         protected async override void OnAppearing()
         {
-            BindingContext = orariDisponibiliViewModel = new OrariDisponibiliViewModel(IdAnnuncio);
             base.OnAppearing();
+            BindingContext = orariDisponibiliViewModel = new OrariDisponibiliViewModel(IdAnnuncio);
+            ShowTimeSlot(calendar.SelectedDate);
         }
 
         private async void Cancel_Clicked(object sender, EventArgs e)
@@ -43,25 +44,23 @@ namespace AppAppartamenti.Views
             await Navigation.PopModalAsync();
         }
 
-        public void OnDataCalendarSelected(object sender, SelectionChangedEventArgs e)//EventHandler<SelectionChangedEventArgs> e
+        public void OnDataCalendarSelected(object sender, SelectionChangedEventArgs e)
         {
             Syncfusion.SfCalendar.XForms.SfCalendar cal = (Syncfusion.SfCalendar.XForms.SfCalendar)sender;
-            DateTime? i = cal.SelectedDate;
 
-            //List<DateTime> dates = args.DateAdded;
-            //DateTime date = dates.FirstOrDefault();
-            if( i != null)
+            ShowTimeSlot(cal.SelectedDate);
+        }
+
+        private void ShowTimeSlot(DateTime? SelectedDate)
+        {
+            if (SelectedDate.HasValue)
             {
-                DateTime date = (DateTime) i;
+                DateTime date = SelectedDate.Value;
                 DateTimeOffset giorno = new DateTimeOffset(date.Year, date.Month, date.Day, 0, 0, 0, new TimeSpan(0, 0, 0));
                 orariDisponibiliViewModel.Giorno = giorno;
                 orariDisponibiliViewModel.LoadItemsCommand.Execute(null);
                 containerOrariDisponibili.IsVisible = true;
             }
-
-
-
-            //return null;
         }
 
         public async void OnOrarioSelected(object sender, EventArgs e)

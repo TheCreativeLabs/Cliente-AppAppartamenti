@@ -33,7 +33,7 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
             <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
-            <Button Style="{x:StaticResource NavCancelButton}" IsVisible="False"  x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
+            <Button Style="{x:StaticResource NavCancelButton}" x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
                    FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
             </Button>
 
@@ -42,7 +42,7 @@
                     FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
             </Button>
 
-            <Button x:Name="btnRemovePreferitoNav" IsVisible="False"   Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
+            <Button x:Name="btnRemovePreferitoNav" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
                     Text="&#xf004;" HorizontalOptions="End"
                     FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
             </Button>
@@ -71,7 +71,11 @@
                 <StackLayout>
 
                     <StackLayout  HeightRequest="300">
-                        <CarouselView x:Name="Carousel" ItemsSource="{Binding viewModelImmagini.Items}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                               <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <CarouselView Grid.Row="0" x:Name="Carousel" ItemsSource="{Binding viewModelImmagini.Items}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -83,11 +87,13 @@
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
+                         <Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
+                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        </Grid>
                     </StackLayout>
 
               
-                    <Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
-                           TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                   
 
 
                     <StackLayout Padding="20">
@@ -196,7 +202,6 @@
                                 <Label x:Name="lblClasseEnergetica" Text="{Binding viewModel.Item.ClasseEnergetica}" VerticalTextAlignment="Center"></Label>
                             </StackLayout>
 
-                                 
                             <Label Text="{translator:Translate DettaglioAnnuncio.Location}" Style="{x:StaticResource SectionTitle}"></Label>
                         
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -223,7 +228,7 @@
                                 </CarouselView>
                             </StackLayout>
 
-                            <Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                            <!--<Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>-->
 
                             <StackLayout BackgroundColor="Transparent" HeightRequest="60"></StackLayout> <!-- Spazio: altrimenti il bottone "nuovo appuntamento" nasconde l'ultimo pezzo dello scroll view-->
                         </StackLayout>
@@ -233,7 +238,7 @@
                 https://theconfuzedsourcecode.wordpress.com/2017/02/06/is-it-possible-to-add-a-text-shadow-in-button-with-xamarin-forms/ -->
              </ScrollView>
 
-                <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="0,0,0,0" >
+                <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="10,0,10,0" >
                     <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnBack_Clicked" VerticalOptions="Center"
                             FontAttributes="Bold" Text="&#xf053;" HorizontalOptions="StartAndExpand"
                         FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">

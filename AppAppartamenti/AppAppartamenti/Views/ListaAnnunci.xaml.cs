@@ -105,6 +105,9 @@ namespace AppAppartamenti.Views
 
                 AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.AggiungiPreferitoAsync(item.Id.Value);
+
+                MessagingCenter.Send(this, "RefreshPreferiti", "OK");
+
             }
             catch (Exception Ex)
             {
@@ -154,7 +157,8 @@ namespace AppAppartamenti.Views
                     AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                     await annunciClient.AggiungiPreferitoAsync(item.Id.Value);
                 }
-               
+
+                MessagingCenter.Send(this, "RefreshPreferiti", "OK");
             }
             catch (Exception Ex)
             {

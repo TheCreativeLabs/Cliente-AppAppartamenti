@@ -4,26 +4,42 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              x:Class="AppAppartamenti.Views.Messaggi.MessaggiLista"
              Title="Messaggi"
-             BackgroundColor="{x:StaticResource SfondoColor}">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{x:StaticResource SfondoColor}"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+            <conv:MessageListBadge x:Key="MsgListBadge" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="LvChat"
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto">
+                </RowDefinition>
+
+                <RowDefinition Height="*">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Style="{x:StaticResource Title}" Text="Messaggi"></Label>
+
+            <ListView Grid.Row="1" x:Name="LvChat"
                         ItemsSource="{Binding Items}"
                         HasUnevenRows="true"
                         RefreshCommand="{Binding LoadItemsCommand}"
-                        IsPullToRefreshEnabled="true"
+                        IsPullToRefreshEnabled="False"
                         CachingStrategy="RecycleElement"
                         VerticalScrollBarVisibility="Never"
                         IsRefreshing="{Binding IsBusy}"
-                        SeparatorVisibility="None"
-                      ItemSelected="OnItemSelected">
+                        SeparatorVisibility="Default"
+                        SeparatorColor="LightGray"
+                        ItemSelected="OnItemSelected"
+                        ios:ListView.SeparatorStyle="FullWidth">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -42,15 +58,18 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label FontSize="13" Text="{Binding DataCreazione, StringFormat='{0:dd/mm/yyyy hh:mm}'}" ></Label>
+                                    <Label FontSize="13" TextColor="{x:StaticResource SecondaryColor}" Text="{Binding DataCreazione, StringFormat='{0:dd/mm/yyyy}'}" ></Label>
                                 </StackLayout>
-                                
+
+                                <BoxView IsVisible="{Binding NumberMsgToRead, Converter={StaticResource MsgListBadge}}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HeightRequest="10" WidthRequest="10" CornerRadius="5" Color="Red"></BoxView>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Label></Label>
+                </ListView.Footer>
             </ListView>
-
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

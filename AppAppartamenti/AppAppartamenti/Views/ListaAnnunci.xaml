@@ -67,7 +67,7 @@
                                                     </Frame>
                                                     <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
                                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                                            <Button Style="{x:StaticResource NavCancelButton}"
+                                                            <Button Style="{x:StaticResource AdButton}"
                                                                     Clicked="BtnShare_Clicked"
                                                                     CommandParameter="{Binding .}"
                                                                     VerticalOptions="Center"
@@ -77,11 +77,11 @@
                                                                     TextColor="White">
                                                             </Button>
 
-                                                            <Button Style="{x:StaticResource NavCancelButton}"
+                                                            <Button Style="{x:StaticResource AdButton}"
                                                                     Clicked="BtnAddRemovePreferito_Clicked"
                                                                     CommandParameter="{Binding .}"
                                                                     VerticalOptions="Center"
-                                                                    Text="&#xf004;" Margin="0,0,10,0" HorizontalOptions="End"
+                                                                    Text="&#xf004;" HorizontalOptions="End"
                                                                     FontFamily="{x:StaticResource FA-Solid}"
                                                                     TextColor="{Binding FlagPreferito, Converter={StaticResource ColConverter}}">
                                                             </Button>

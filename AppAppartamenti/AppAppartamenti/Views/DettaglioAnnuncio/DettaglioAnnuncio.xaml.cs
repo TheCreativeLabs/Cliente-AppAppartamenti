@@ -161,7 +161,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
-                await Navigation.PushModalAsync(new NuovoAppuntamento(IdAnnuncio));
+                await Navigation.PushAsync(new NuovoAppuntamento(IdAnnuncio));
             }
             catch (Exception Ex)
             {

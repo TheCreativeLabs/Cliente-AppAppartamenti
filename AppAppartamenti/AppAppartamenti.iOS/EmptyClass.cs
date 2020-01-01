@@ -7,11 +7,15 @@ using CoreGraphics;
 using Foundation;
 using System.ComponentModel;
 using AppAppartamenti.ContentViews;
+using Plugin.Badge.iOS;
 
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(EntryCustomBorderRenderer))]
 [assembly: ExportRenderer(typeof(ShadowFrame), typeof(ShadowFrameRenderer))]
 [assembly: ExportRenderer(typeof(WebViewUserAgent), typeof(CustomWebView))]
 [assembly: ExportRenderer(typeof(ChatInputBarView), typeof(ChatEntryRenderer))]
+[assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
+[assembly: ExportRenderer(typeof(ChatEntry), typeof(CustomEditorRenderer))]
+
 namespace AppAppartamenti.iOS
 {
     public class EntryCustomBorderRenderer : EntryRenderer
@@ -66,11 +70,11 @@ namespace AppAppartamenti.iOS
                 base.Draw(rect);
 
                 // Update shadow to match better material design standards of elevation
-                Layer.ShadowRadius = 2.0f;
+                Layer.ShadowRadius = 3.0f;
                 Layer.ShadowColor = UIColor.Gray.CGColor;
-                Layer.ShadowOffset = new CGSize(2, 2);
-                Layer.ShadowOpacity = 0.40f;
-                Layer.ShadowPath = UIBezierPath.FromRect(Layer.Bounds).CGPath;
+                //Layer.ShadowOffset = new CGSize(2, 2);
+                Layer.ShadowOpacity = 0.5f;
+                //Layer.ShadowPath = UIBezierPath.FromRect(Layer.Bounds).CGPath;
                 Layer.MasksToBounds = false;
             }
     }
@@ -108,10 +112,10 @@ namespace AppAppartamenti.iOS
 
             NSValue result = (NSValue)args.Notification.UserInfo.ObjectForKey(new NSString(UIKeyboard.FrameEndUserInfoKey));
             CGSize keyboardSize = result.RectangleFValue.Size;
+
             if (Element != null)
             {
                 Element.Margin = new Thickness(0, 0, 0, keyboardSize.Height - 50); //push the entry up to keyboard height when keyboard is activated
-
             }
         }
 
@@ -121,9 +125,7 @@ namespace AppAppartamenti.iOS
             {
                 Element.Margin = new Thickness(0); //set the margins to zero when keyboard is dismissed
             }
-
         }
-
 
         void UnregisterForKeyboardNotifications()
         {
@@ -139,5 +141,18 @@ namespace AppAppartamenti.iOS
                 _keyboardHideObserver = null;
             }
         }
+    }
+
+
+    public class CustomEditorRenderer : EditorRenderer
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<Editor> e)
+        {
+            base.OnElementChanged(e);
+
+            if(Control != null)
+                this.Control.InputAccessoryView = null;
+        }
+        
     }
 }
