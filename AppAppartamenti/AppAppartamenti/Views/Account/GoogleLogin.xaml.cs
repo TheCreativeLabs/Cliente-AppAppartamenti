@@ -73,7 +73,7 @@ namespace AppAppartamenti.Views.Account
                     //TODO mostrare pagina di errore
                     throw new ApplicationException();
                 }
-                else if (userInfoViewModel.HasRegistered.HasValue)
+                else if (userInfoViewModel.HasRegistered.Value == false)
                 {
                     RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
                     {
