@@ -124,7 +124,7 @@ namespace NotificationService
                             var Url = $"https://appcenter.ms/api/v0.1/apps/{Properties.Settings.Default.AccountName}/{appName}/push/notifications";
                             var content2 = JsonConvert.SerializeObject(content);
                             StringContent sContent = new StringContent(content2, Encoding.UTF8, "application/json");
-                            var r = await httpClient.PostAsync("https://appcenter.ms/api/v0.1/apps/simone.bitti1996-gmail.com/PromuovoCasaIOS/push/notifications", sContent);
+                            var r = await httpClient.PostAsync(Url, sContent);
 
                             var ta = new CodaNotificheDataSetTableAdapters.NotificheCodaListTableAdapter();
                             ta.UpdateById(item.Id);

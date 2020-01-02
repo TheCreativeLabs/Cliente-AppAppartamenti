@@ -304,7 +304,8 @@ namespace AppAppartamentiApi.Controllers
                                                  TipologiaAnnuncio = annuncio.TipologiaAnnuncio.Descrizione,
                                                  TipologiaProprieta = annuncio.TipologiaProprieta.Descrizione,
                                                  Completato = annuncio.Completato,
-                                                 Cancellato = annuncio.Cancellato
+                                                 Cancellato = annuncio.Cancellato,
+                                                 FlagPreferito = true
                                              }).ToList();
 
             annunci.ForEach(x =>
@@ -686,7 +687,7 @@ namespace AppAppartamentiApi.Controllers
                                                 .Include(x => x.ImmaginiPlanimetria)
                                                 .Include(x => x.Appuntamenti)
                                                 .Include(x => x.Video)
-                                                .Include(x => x.AnnuncioMessaggi)
+                                                .Include(x => x.Chat)
                                                 .FirstOrDefaultAsync(x => x.Id == Id);
             if (annuncio == null)
             {
@@ -713,9 +714,9 @@ namespace AppAppartamentiApi.Controllers
                 dbDataContext.Video.RemoveRange(annuncio.Video);
             }
 
-            if (annuncio.AnnuncioMessaggi != null)
+            if (annuncio.Chat != null)
             {
-                dbDataContext.AnnuncioMessaggi.RemoveRange(annuncio.AnnuncioMessaggi);
+                dbDataContext.Chat.RemoveRange(annuncio.Chat);
             }
 
 
