@@ -1,0 +1,45 @@
+﻿@model ChatDtoOutput
+
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="shareModalLabel">Nuovo messaggio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body p-0" style="max-height:500px">
+        <div class="container-fluid">
+            <div class="row p-3">
+                    @{
+                        foreach (var msg in Model.Messaggi)
+                        {
+                            if (msg.FromMe.HasValue && msg.FromMe.Value)
+                            {
+                                <div class="offset-2 mt-2 mb-2 col-10 bg-primary rounded p-2">
+                                    <span style="color:white">@msg.Messaggio</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-10 mt-2 mb-2 bg-light rounded p-2">
+                                    <span>@msg.Messaggio</span>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+    </div>
+    <div class="modal-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-10">
+        <textarea class="form-control" placeholder="Manda un messaggio"></textarea>
+
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary rounded-circle" style="height:40px;width:40px"> <i class="fas fa-arrow-up"></i> </button>
+                </div>
+            </div>
+        </div>
+    </div>
