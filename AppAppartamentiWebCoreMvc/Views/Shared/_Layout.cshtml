@@ -36,16 +36,21 @@
 
                 <form id="navSearchBar" class="navbar-start">
                     <input id="codiceComune" type="number" value="" style="display: none;" />
-                    <div class="input-group" style="text-align: center;">
-                        <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-right-0 search-textbox" placeholder="@_localizer["SearchPlaceholder"]" aria-label="@_localizer["SearchPlaceholder"]" aria-describedby="buttonSearch">
+                    <div class="input-group rounded shadow" style="text-align: center;">
+                        <div class="input-group-prepend d-none d-sm-block border-0" style="background-color: white;">
+                            <span class="input-group-text mt-1" id="basic-addon1" style="background-color: white;border: none;">
+                                <i class="fas fa-search col-1"></i>
+                            </span>
+                        </div>
+                        <input id="searchbarInput" autocomplete="false" type="text" class="form-control border-0 search-textbox" placeholder="@_localizer["SearchPlaceholder"]" aria-label="@_localizer["SearchPlaceholder"]" aria-describedby="buttonSearch">
                         <div class="search-spinner spinner-border spinner-border-sm text-secondary mt-2" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                         <div class="input-group-append">
-                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark border border-left-0" href="#"><small>+ @_localizer["OtherFilterLabel"]</small></a>
+                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark border border-0" href="#"><small>+ @_localizer["OtherFilterLabel"]</small></a>
                         </div>
                         <div class="input-group-append">
-                            <a class="btn btn-primary disabled search-button" id="buttonSearch" asp-controller="Annunci" asp-action="List">@_localizer["Search"]</a>
+                            <a class="btn btn-primary disabled search-button border-0" id="buttonSearch" asp-controller="Annunci" asp-action="List">@_localizer["Search"]</a>
                         </div>
                     </div>
                 </form>
@@ -55,20 +60,13 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link nav-link btn btn-info p-1 m-1 text-white">@_localizer["PostAdLabel"]</a>
+                                <a asp-action="Create" asp-controller="AnnunciPersonali" class="nav-link text-dark">@_localizer["PostAdLabel"]</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List">@_localizer["FavoritesLabel"]</a>
                             </li>
-
-                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Messaggi" asp-action="List">Messaggi</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
-                            </li>
+                            
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark p-1 m-1 d-none d-sm-block" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Agenda
@@ -95,6 +93,11 @@
                                     </div>
                                 </div>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Messaggi" asp-action="List">Messaggi</a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark p-0 m-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img id="profileImage" class="rounded-circle" width="45" height="45" style="        margin-top: -5px" />
@@ -105,6 +108,8 @@
                                         </h6>
                                         <small id="lblEmail" class="text-muted"></small>
                                     </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Detail">@_localizer["ProfileLabel"]</a>
                                     <div class="dropdown-divider"></div>
@@ -199,57 +204,45 @@
                     <i class="fas fa-igloo h2"></i>
                 </div>
                 <div class="col-6 col-md">
-                    <h5>Features</h5>
+                    <h5>Scorciatoie</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a href="#">Cool stuff</a></li>
-                        <li><a href="#">Random feature</a></li>
-                        <li><a href="#">Team feature</a></li>
-                        <li><a href="#">Stuff for developers</a></li>
-                        <li><a href="#">Another one</a></li>
-                        <li><a href="#">Last time</a></li>
+                        <li><a href="#">Pubblica un annuncio</a></li>
+                        <li><a href="#">Ricerca un annuncio</a></li>
+                        <li><a href="#">Contattaci</a></li>
+                        <li><a href="#">Segnala un errore</a>
                     </ul>
                 </div>
                 <div class="col-6 col-md">
-                    <h5>Resources</h5>
+                    <h5>Informazioni</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a href="#">Resource</a></li>
-                        <li><a href="#">Resource name</a></li>
-                        <li><a href="#">Another resource</a></li>
-                        <li><a href="#">Final resource</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Resources</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a href="#">Business</a></li>
-                        <li><a href="#">Education</a></li>
-                        <li><a href="#">Government</a></li>
-                        <li><a href="#">Gaming</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>About</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Locations</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Condizioni generali</a></li>
                         <li><a href="#">Privacy</a></li>
                         <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md">
+                    <h5>@_localizer["FollowUsLabel"]</h5>
+                    <ul class="list-unstyled text-small">
+                        <li>
+                            <button type="button" class="btn btn-social text-white"><i class="fab fa-facebook-f"></i></button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-social text-white"><i class="fab fa-instagram"></i></button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-social text-white"><i class="fab fa-twitter"></i></button>
+                        </li>
                     </ul>
                 </div>
             </div>
 
             <hr />
 
-            <div class="row p-5">
+            <div class="row p-3">
                 <div class="col">
-                    &copy; 2019 - AppAppartamentiWebMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-
-                </div>
-                <div class="col text-right">
-                    @_localizer["FollowUsLabel"]
-                    <button type="button" class="btn btn-social text-white"><i class="fab fa-facebook-f"></i></button>
-                    <button type="button" class="btn btn-social text-white"><i class="fab fa-instagram"></i></button>
-                    <button type="button" class="btn btn-social text-white"><i class="fab fa-twitter"></i></button>
+                    &copy; 2019 - Promuovocasa.it - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
             </div>
         </div>
