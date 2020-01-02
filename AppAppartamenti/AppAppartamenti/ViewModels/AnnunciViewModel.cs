@@ -157,7 +157,7 @@ namespace AppAppartamenti.ViewModels
             var position=  Items.IndexOf(annuncio);
             var ann = Items[position];
             ann.FlagPreferito = true;
-            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
             await annunciClient.AggiungiPreferitoAsync(ann.Id.Value);
             OnpropertyChanged("Items");
         }
@@ -167,7 +167,7 @@ namespace AppAppartamenti.ViewModels
             var position = Items.IndexOf(annuncio);
             var ann = Items[position];
             ann.FlagPreferito = false;
-            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
             await annunciClient.RimuoviPreferitoAsync(ann.Id.Value);
             OnpropertyChanged("Items");
         }
@@ -175,7 +175,7 @@ namespace AppAppartamenti.ViewModels
 
         private async Task<ICollection<AnnunciDtoOutput>> GetAnnunci()
         {
-            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
             ICollection<AnnunciDtoOutput> listaAnnunci = null;
             

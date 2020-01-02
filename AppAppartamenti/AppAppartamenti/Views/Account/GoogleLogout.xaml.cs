@@ -40,7 +40,7 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+            AccountClient accountClient = new AccountClient(await ApiHelper.GetApiClient());
 
             //Rimuovo il token
             //Api.ApiHelper.DeleteToken();
@@ -60,7 +60,7 @@ namespace AppAppartamenti.Views.Account
 
             if (accessToken != "")
             {
-                AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+                AccountClient accountClient = new AccountClient(await ApiHelper.GetApiClient());
 
                 ManageInfoViewModel manageInfoViewModel = await accountClient.GetManageInfoAsync("/", true);
 

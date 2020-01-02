@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,8 +28,10 @@ namespace AppAppartamenti.Api
         public const string ListaTipologiaProprietaKey = "ListaTipologiaProprieta_Key";
         public const string NotificationStatusKey = "NotificationStatus_Key";
         public const string ListaComuniKey = "ListaComuni_Key";
+        public const string ListaAnnunciRecentiProprietaKey = "ListaAnnunciRecentiProprieta_Key";
 
 
+        
 
         public class BearerToken
         {
@@ -40,6 +43,9 @@ namespace AppAppartamenti.Api
 
             [JsonProperty("expires_in")]
             public string ExpiresIn { get; set; }
+
+            [JsonProperty("refresh_token")]
+            public string RefreshToken { get; set; }
 
             [JsonProperty("userName")]
             public string UserName { get; set; }
@@ -78,9 +84,8 @@ namespace AppAppartamenti.Api
                 if (response != null && response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     string jsonResponse = response.Content.ReadAsStringAsync().Result;
-                    BearerToken token = JsonConvert.DeserializeObject<BearerToken>(jsonResponse);
 
-                    SetToken(token.AccessToken);
+                    SetToken(jsonResponse);
                 }
                 else
                 {
@@ -90,17 +95,83 @@ namespace AppAppartamenti.Api
             }
         }
 
+
+        public static async Task<string> GetRefreshToken(string RefreshToken)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                Uri Endpoint = new Uri($"{AppSetting.ApiEndpoint}Token");
+
+                var tokenRequest =
+                    new List<KeyValuePair<string, string>>
+                        {
+                        new KeyValuePair<string, string>("grant_type", "refresh_token"),
+                        new KeyValuePair<string, string>("refresh_token", RefreshToken)
+                        };
+
+                HttpContent encodedRequest = new FormUrlEncodedContent(tokenRequest);
+
+                HttpResponseMessage response = await httpClient.PostAsync(Endpoint, encodedRequest);
+
+                if (response != null && response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    string jsonResponse = response.Content.ReadAsStringAsync().Result;
+
+                    SetToken(jsonResponse);
+
+                    BearerToken token = JsonConvert.DeserializeObject<BearerToken>(jsonResponse);
+
+                    return token.AccessToken;
+                }
+                else
+                {
+                    //Se arrivo qui allora email e password sono sbagliati.
+                    throw new ApplicationException("Password o Email errati.");
+                }
+            }
+        }
+
+
         public static void SetToken(string AccessToken)
         {
             Preferences.Set(AccessTokenKey, AccessToken);
         }
 
         // Ottiene il Token
-        public static string GetToken()
+        public async static Task<string> GetToken()
         {
             string accessToken = null;
 
-            accessToken = Preferences.Get(AccessTokenKey,null);
+            var bearerToken = Preferences.Get(AccessTokenKey,null);
+
+            LoginProvider provider = GetProvider();
+
+            if (Api.ApiHelper.LoginProvider.Facebook.Equals(provider) || Api.ApiHelper.LoginProvider.Google.Equals(provider)) //provider facebook o google: non serve fare refresh token. ho direttamente il token in bearerToken
+            {
+                accessToken = bearerToken;
+            }
+            else
+            { //registrazione con mail: se necessario si fa refreshToken
+                if (bearerToken != null && !string.IsNullOrEmpty(bearerToken))
+                {
+                    BearerToken token = JsonConvert.DeserializeObject<BearerToken>(bearerToken);
+
+                    var expireDate = DateTime.Parse(token.Expires);
+                    //DateTime.ParseExact(
+                    //            token.Expires,
+                    //            "ddd MMM dd yyyy HH:mm:ss 'GMT'",
+                    //            CultureInfo.InvariantCulture);
+                    if (expireDate < DateTime.Now)
+                    {
+                        accessToken = await GetRefreshToken(token.RefreshToken);
+                    }
+                    else
+                    {
+                        accessToken = token.AccessToken;
+                    }
+                }
+            }
+
 
             return accessToken;
         }
@@ -158,10 +229,10 @@ namespace AppAppartamenti.Api
             /// Restituisce il Client da usare per le chiamate all'api
             /// </summary>
             /// <returns></returns>
-            public static HttpClient GetApiClient()
+            public  static async Task<HttpClient> GetApiClient()
         {
             HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.ApiHelper.GetToken());
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await Api.ApiHelper.GetToken());
             return httpClient;
         }
 
@@ -208,7 +279,7 @@ namespace AppAppartamenti.Api
 
             if (userInfo == null)
             {
-                AccountClient amiciClient = new AccountClient(ApiHelper.GetApiClient());
+                AccountClient amiciClient = new AccountClient(await ApiHelper.GetApiClient());
                 userInfo = await amiciClient.GetCurrentUserInfoAsync();
                 Preferences.Set(UserInfoKey, JsonConvert.SerializeObject(userInfo));
             }
@@ -266,7 +337,7 @@ namespace AppAppartamenti.Api
 
             if (listTipologiaAnnuncio.Any() == false)
             {
-                AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await ApiHelper.GetApiClient());
                 listTipologiaAnnuncio = (await annunciClient.GetListaTipologiaAnnunciAsync()).ToList();
                 Preferences.Set(ListaTipologiaAnnuncioKey, JsonConvert.SerializeObject(listTipologiaAnnuncio));
             }
@@ -285,12 +356,32 @@ namespace AppAppartamenti.Api
 
             if (listTipologiaProprieta.Any() == false)
             {
-                AnnunciClient annunciClient = new AnnunciClient(ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await ApiHelper.GetApiClient());
                 listTipologiaProprieta = (await annunciClient.GetListaTipologiaProprietaAsync()).ToList();
                 Preferences.Set(ListaTipologiaProprietaKey, JsonConvert.SerializeObject(listTipologiaProprieta));
             }
 
             return listTipologiaProprieta;
+        }
+
+        public static async Task<List<AnnunciDtoOutput>> GetListaAnnunciRecenti(bool RefreshData)
+        {
+            List<AnnunciDtoOutput> listaAnnunci = new List<AnnunciDtoOutput>();
+
+
+            if (!RefreshData && Preferences.Get(ListaAnnunciRecentiProprietaKey, null) != null)
+            {
+                listaAnnunci = JsonConvert.DeserializeObject<List<AnnunciDtoOutput>>(Preferences.Get(ListaAnnunciRecentiProprietaKey, null));
+            }
+
+            if (listaAnnunci.Any() == false)
+            {
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
+                listaAnnunci = (await annunciClient.GetRicercheRecentiCurrentAsync()).ToList();
+                Preferences.Set(ListaAnnunciRecentiProprietaKey, JsonConvert.SerializeObject(listaAnnunci));
+            }
+
+            return listaAnnunci;
         }
 
         public static async Task<ICollection<ComuneDto>> GetListaComuni(string ComuneDesc)
@@ -305,7 +396,7 @@ namespace AppAppartamenti.Api
                 }
                 else if(ComuneDesc.Length == 3)
                 {
-                    AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                    AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                     var lista = await annunciClient.GetListaComuniAsync(ComuneDesc);
                     if (lista.Any())
                     {

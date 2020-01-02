@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace AppAppartamenti.ContentViews
@@ -14,10 +15,15 @@ namespace AppAppartamenti.ContentViews
         public Color BackgroundColor { get; set; }
         public Color BorderColor { get; set; }
         public bool IsCompleted { get; set; }
+        public bool IsVisible { get; set; }
     }
 
     partial class StepMenu : ContentView
     {
+
+        public ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
+
+
         public static readonly BindableProperty CurrentIdProperty = BindableProperty.Create(
         "CurrentId",        
         typeof(int),     
@@ -37,39 +43,37 @@ namespace AppAppartamenti.ContentViews
         {
             var control = (StepMenu)bindable;
 
-            ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
-            items.Add(new MenuItem() { Id = 1, DisplayName = "Tipologia proprietà", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 2, DisplayName = "Tipologia annuncio", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 3, DisplayName = "Posizione", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 4, DisplayName = "Informazioni generali", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 5, DisplayName = "Prezzo", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 6, DisplayName = "Immagini", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 7, DisplayName = "Planimetria", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 1, DisplayName = "Tipologia proprietà", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 2, DisplayName = "Tipologia annuncio", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 3, DisplayName = "Posizione", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 4, DisplayName = "Informazioni generali", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 5, DisplayName = "Prezzo", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 6, DisplayName = "Immagini", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 7, DisplayName = "Planimetria", Icona = null, RedirectPage = null });
             //items.Add(new MenuItem() { Id = 8, DisplayName = "Video", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 9, DisplayName = "Descrizione", Icona = null, RedirectPage = null });
-            items.Add(new MenuItem() { Id = 10, DisplayName = "Fasce orarie", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 9, DisplayName = "Descrizione", Icona = null, RedirectPage = null });
+            control.items.Add(new MenuItem() { Id = 10, DisplayName = "Fasce orarie", Icona = null, RedirectPage = null });
 
-            MenuItem menuItem = new MenuItem();
-
-            foreach (var item in items)
+            foreach (var item in control.items)
             {
+                item.IsVisible = true;
+
                 if (item.Id < (int)newValue)
                 {
                     item.BackgroundColor = (Color)App.Current.Resources["LightColor"];
                     item.BorderColor = (Color)App.Current.Resources["LightColor"];
                     item.IsCompleted = true;
+                    item.IsVisible = false;
 
                 }
                 else if (item.Id == (int)newValue)
                 {
-                    menuItem = item;
                     item.BackgroundColor = Color.White;
                     item.BorderColor = (Color)App.Current.Resources["PrimaryColor"];
                 }
             }
 
-            control.lvStepMenu.ItemsSource = items;
-            await control.scrollView.ScrollToAsync(250, 250, true);
+            control.lvStepMenu.ItemsSource = control.items;
             control.CurrentId =(int)newValue;
         }
 

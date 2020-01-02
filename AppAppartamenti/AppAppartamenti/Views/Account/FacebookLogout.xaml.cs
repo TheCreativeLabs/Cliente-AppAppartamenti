@@ -41,7 +41,7 @@ namespace AppAppartamenti.Views.Account
 
             if (accessToken != "")
             {
-                AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+                AccountClient accountClient = new AccountClient(await ApiHelper.GetApiClient());
 
                 ManageInfoViewModel manageInfoViewModel = await accountClient.GetManageInfoAsync("/", true);
 

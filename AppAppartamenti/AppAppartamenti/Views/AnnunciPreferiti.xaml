@@ -22,11 +22,18 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto">
+                </RowDefinition>
 
-        <Label Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
+                <RowDefinition Height="*">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
            
-        <ListView x:Name="AnnunciiListView"
+        <ListView Grid.Row="1" x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
                     HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
@@ -36,7 +43,10 @@
                     VerticalScrollBarVisibility="Never"
                     IsRefreshing="{Binding IsBusy}"
                     SeparatorVisibility="None">
+
             <ListView.ItemTemplate>
+
+
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="20">
@@ -49,32 +59,42 @@
                                     <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                                 </Frame>
                                 <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
-                                    <Button  x:Name="btnRemovePreferito" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" CommandParameter="{Binding .}" VerticalOptions="Center"
-                                            Text="&#xf004;" Margin="10,0,15,0" HorizontalOptions="End"
-                                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50" >
+                                    <Button  x:Name="btnRemovePreferito" Style="{x:StaticResource AdButton}"  Clicked="BtnRemovePreferito_Clicked" CommandParameter="{Binding .}" VerticalOptions="Center"
+                                            Text="&#xf004;" HorizontalOptions="End"
+                                            FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral">
                                     </Button>
                                 </AbsoluteLayout>
                             </Grid>
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
-                                <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
-                                <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
-                            </StackLayout>
+                            <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding TipologiaProprieta}" />
+                                        <Span Text=" in "/>
+                                        <Span  Text="{Binding TipologiaAnnuncio}" />
+                                        <Span Text=" a "/>
+                                        <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding NomeComune, StringFormat='{0},'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                <Label Text="{Binding Indirizzo}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                </StackLayout>
+                            <Label LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding NomeComune}" />
+                                        <Span Text=", "/>
+                                        <Span Text="{Binding Indirizzo}"  />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                </StackLayout>
+                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-            </StackLayout>
+
+            </ListView>
+            </Grid>
     </ContentPage.Content>
 </ContentPage>

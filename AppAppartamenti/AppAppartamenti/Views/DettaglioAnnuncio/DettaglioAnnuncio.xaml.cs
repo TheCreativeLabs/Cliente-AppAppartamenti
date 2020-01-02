@@ -1,7 +1,9 @@
 ﻿using AppAppartamenti.ViewModels;
+using AppAppartamenti.Views.Messaggi;
 using AppAppartamentiApiClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,26 +27,48 @@ namespace AppAppartamenti.Views
             public AnnuncioimmaginiViewModel viewModelImmagini { get; set; }
         }
 
-
         BindingModel bindingModel;
         Guid IdAnnuncio;
+        Guid IdUtente;
         bool IsEditable;
+
         public DettaglioAnnuncio(AnnunciDtoOutput annuncio,bool IsEditableParam)
         {
             InitializeComponent();
             IsEditable = IsEditableParam;
-
             IdAnnuncio = annuncio.Id.Value;
+            IdUtente = annuncio.IdUtente.Value;
 
             btnModifica.IsVisible = IsEditable;
             btnModificaNavBar.IsVisible = IsEditable;
-
+            btnMessageNav.IsVisible = !IsEditable;
+            btnMessage.IsVisible = !IsEditable;
+            BtnSegnalaNav.IsVisible = !IsEditable;
             stkPulsanti.IsVisible = !IsEditable;
 
             bindingModel = new BindingModel();
             bindingModel.viewModelImmagini = new AnnuncioimmaginiViewModel();
             bindingModel.viewModel = new AnnuncioDetailViewModel();
             bindingModel.viewModelImmagini.Items.Add(annuncio.ImmaginePrincipale);
+
+        }
+
+        private async void LoadUserInfo()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
+                var User = await accountClient.GetUserInfoAsync(IdUtente);
+
+                lblUserName.Text = User.Nome;
+                lblUserSurname.Text = User.Cognome;
+                if (User.FotoProfilo != null)
+                {
+                    imgUserImage.Source = ImageSource.FromStream(() => new MemoryStream(User.FotoProfilo));
+                }
+
+                stkUserInfo.IsVisible = true;
+            });
         }
 
         protected async override void OnAppearing()
@@ -52,12 +76,13 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             bindingModel.viewModelImmagini.IdAnnuncio = IdAnnuncio;
-
             bindingModel.viewModelImmagini.LoadItemsCommand.Execute(null);
             bindingModel.viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
 
             BindingContext = bindingModel;
             scrollView.IsVisible = true;
+
+            Task.Run(async () => { LoadUserInfo(); });
 
             if (!IsEditable)
             {
@@ -120,6 +145,33 @@ namespace AppAppartamenti.Views
             }
         }
 
+        private async void BtnSegnala_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+        
+
+
+        private async void BtnNewMessage_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushAsync(new NuovoMessaggio(IdAnnuncio, bindingModel.viewModel.Item.IdUtente.Value));
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
 
         private async void BtnAddPreferito_Clicked(object sender, EventArgs e)
         {
@@ -129,7 +181,7 @@ namespace AppAppartamenti.Views
                 btnAddPreferito.IsVisible = false;
                 btnRemovePreferitoNav.IsVisible = true;
                 btnAddPreferitoNav.IsVisible = false;
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.AggiungiPreferitoAsync(bindingModel.viewModel.Item.Id.Value);
             }
             catch (Exception Ex)
@@ -147,7 +199,7 @@ namespace AppAppartamenti.Views
                 btnAddPreferito.IsVisible = true;
                 btnAddPreferitoNav.IsVisible = false;
                 btnRemovePreferitoNav.IsVisible = true;
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.RimuoviPreferitoAsync(bindingModel.viewModel.Item.Id.Value);
             }
             catch (Exception Ex)
@@ -161,7 +213,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
-                await Navigation.PushModalAsync(new NuovoAppuntamento(IdAnnuncio));
+                await Navigation.PushAsync(new NuovoAppuntamento(IdAnnuncio));
             }
             catch (Exception Ex)
             {
@@ -174,6 +226,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
+                bindingModel.viewModel.Item.ImmaginiAnnuncio = bindingModel.viewModelImmagini.Items;
                 await Navigation.PushModalAsync(new NavigationPage(new SelezioneProprieta(bindingModel.viewModel)));
             }
             catch (Exception Ex)
@@ -191,7 +244,5 @@ namespace AppAppartamenti.Views
                 Title = "Condividi il link"
             });
         }
-
-       
     }
 }

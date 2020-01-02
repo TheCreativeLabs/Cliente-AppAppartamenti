@@ -12,6 +12,7 @@
              ios:Page.UseSafeArea="true"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{x:StaticResource SfondoColor}"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              >
 
    
@@ -19,22 +20,33 @@
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
             <conv:PrezzoConverter x:Key="PrezzoConverter" />
-
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
+         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto">
+                </RowDefinition>
+
+                <RowDefinition Height="*">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0">
+            <controls:BackButton Grid.Row="0" Padding="20,20,0,0" HorizontalOptions="StartAndExpand"/>
+
+                <StackLayout Orientation="Horizontal">
                 <Label HorizontalTextAlignment="Start" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.MyListing}"></Label>
 
                 <Button BackgroundColor="Transparent"
                     Text="&#xf055;" HorizontalOptions="EndAndExpand" TextColor="{x:StaticResource PrimaryColor}" WidthRequest="80" FontSize="Title" Padding="20,20,20,0"  VerticalOptions="CenterAndExpand" Style="{x:StaticResource NavBackButton}" 
                     Clicked="BtnAdd_Clicked">
                 </Button>
+                    </StackLayout>
             </StackLayout>
 
-            <ListView x:Name="AnnunciiListView"
+            <ListView Grid.Row="1" x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
                     RefreshCommand="{Binding LoadItemsCommand}"
                     IsPullToRefreshEnabled="true"
@@ -71,26 +83,36 @@
                                         </AbsoluteLayout>
                                     </Grid>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
-                                        <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
-                                        <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
-                                    </StackLayout>
+                                    <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding TipologiaProprieta}" />
+                                        <Span Text=" in "/>
+                                        <Span  Text="{Binding TipologiaAnnuncio}" />
+                                        <Span Text=" a "/>
+                                        <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding NomeComune, StringFormat='{0},'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                        <Label Text="{Binding Indirizzo}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                     </StackLayout>
+                            <Label LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding NomeComune}" />
+                                        <Span Text=", "/>
+                                        <Span Text="{Binding Indirizzo}"  />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                     </StackLayout>
+                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
+                       
                                 </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            </StackLayout>
+         </Grid>
 
     </ContentPage.Content>
 </ContentPage>

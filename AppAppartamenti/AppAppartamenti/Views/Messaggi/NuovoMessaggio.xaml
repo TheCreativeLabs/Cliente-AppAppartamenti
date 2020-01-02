@@ -2,26 +2,81 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              x:Class="AppAppartamenti.Views.Messaggi.NuovoMessaggio"
-             NavigationPage.HasBackButton="True" Title="Nuovo Messaggio"
+             NavigationPage.HasBackButton="True"
+             Title="Nuovo Messaggio"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             android:Application.WindowSoftInputModeAdjust="Resize">
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:MessageColorConverter x:Key="MsgColorConverter"></conv:MessageColorConverter>
+            <conv:MessageMarginConverter x:Key="MsgMarginConverter"></conv:MessageMarginConverter>
+            <conv:MessageTextColorConverter x:Key="MsgTextColorConverter"></conv:MessageTextColorConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
              <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="1"></RowDefinition>
-
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0" HasUnevenRows="False" SeparatorVisibility="None">
+                <ListView x:Name="lvMessages"
+                    ItemsSource="{Binding Items}"
+                          HasUnevenRows="true"
+                          RefreshCommand="{Binding LoadItemsCommand}"
+                          IsPullToRefreshEnabled="False"
+                          VerticalScrollBarVisibility="Never"
+                          SeparatorVisibility="None"
+                          SelectionMode="None">
+                    <ListView.Behaviors>
+                       <b:InverseScroll LoadItemsCommand="{Binding LoadItemsCommand}" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Frame HasShadow="False" Padding="10" CornerRadius="10" Style="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding Messaggio}" TextColor="{Binding FromMe, Converter={StaticResource MsgTextColorConverter}}"></Label>
+                                    </Frame>
+                                 </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Label></Label>
+                    </ListView.Footer>
                 </ListView>
 
-                <BoxView Grid.Row="1" Color="LightGray"></BoxView>
+                 <BoxView Grid.Row="1" Color="LightGray"></BoxView>
 
-                <controls:ChatInputBarView Grid.Row="2"></controls:ChatInputBarView>
-            </Grid>
-        </StackLayout>
+                 <controls:ChatInputBarView Grid.Row="2" VerticalOptions="End">
+                      <Grid RowSpacing="0"
+                           ColumnSpacing="0">
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <appappartamenti:ChatEntry x:Name="chatTextInput"
+                            TextColor="Black" Keyboard="Text"
+                            IsTextPredictionEnabled="true"
+                            HorizontalOptions="FillAndExpand" 
+                            PlaceholderColor="LightGray"
+                            Placeholder="Type your message here"
+                            Grid.Row="0" VerticalOptions="Center"
+                            Grid.Column="0" AutoSize="TextChanges"/>
+
+                           <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
+                    </Grid>
+                </controls:ChatInputBarView>
+             </Grid>
     </ContentPage.Content>
 </ContentPage>

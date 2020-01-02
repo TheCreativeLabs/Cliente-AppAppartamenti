@@ -51,16 +51,20 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
 
-            AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+            AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
             if (listClasseEnergetica == null || listClasseEnergetica.Count ==0)
             {
-                listClasseEnergetica = (await annunciClient.GetListaClasseEnergeticaAsync()).ToList();
+                var list= (await annunciClient.GetListaClasseEnergeticaAsync()).ToList();
+                list.Insert(0, new ClasseEnergetica() { Id = null, Codice = "EMPTY", Descrizione = "Seleziona..." });
+                listClasseEnergetica = list;
             }
 
             if (listTipologiaRiscaldamento == null || listTipologiaRiscaldamento.Count == 0)
             {
-                listTipologiaRiscaldamento = (await annunciClient.GetListaTipologiaRiscaldamentoAsync()).ToList();
+                var list = (await annunciClient.GetListaTipologiaRiscaldamentoAsync()).ToList();
+                list.Insert(0, new TipologiaRiscaldamento() { Id = null, Codice = "EMPTY", Descrizione = "Seleziona..." });
+                listTipologiaRiscaldamento = list;
             }
 
             pckClasseEnergetica.ItemsSource = listClasseEnergetica;
@@ -71,22 +75,18 @@ namespace AppAppartamenti.Views
                 //FIXME LE SEGUENTI DUE RIGHE FUNZIONANO SOLO X LINGUA ITALIANA, CAMBIARE GESTIONE E LAVORARE CON IL CODICE INVECE CHE CON LA DESCRIZIONE 
                 pckClasseEnergetica.SelectedItem = listClasseEnergetica.Where(x => x.Descrizione == dtoToModify.Item.ClasseEnergetica).FirstOrDefault();
             }
+            else
+            {
+                pckClasseEnergetica.SelectedIndex = 0;
+
+            }
             if (pckRiscaldamento.SelectedItem  == null && dtoToModify != null && dtoToModify.Item.TipologiaRiscaldamento!=null)
             {
                 pckRiscaldamento.SelectedItem = listTipologiaRiscaldamento.Where(x => x.Descrizione == dtoToModify.Item.TipologiaRiscaldamento).FirstOrDefault();
             }
-
-            //try
-            //{
-            //    ((NavigationPage)this.Parent).BarBackgroundColor = Color.White;
-            //    ((NavigationPage)this.Parent).BarTextColor = Color.Black;
-            //    NavigationPage.SetHasNavigationBar(this, true);
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
-
+            else {
+                pckRiscaldamento.SelectedIndex = 0;
+            }
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -99,6 +99,15 @@ namespace AppAppartamenti.Views
             {
                 //Navigo alla pagina d'errore.
                 await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+
+        private void Entprezzo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty( entPrezzo.Text))
+            {
+                entPrezzo.Text = string.Format("{0:N0}",Decimal.Parse(entPrezzo.Text));
             }
         }
 
@@ -115,29 +124,6 @@ namespace AppAppartamenti.Views
             annuncio.IdTipologiaRiscaldamento = (Guid) ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Id;
 
             await Navigation.PushAsync(new SelezioneImmagini(annuncio, dtoToModify));
-        }
-
-        private void EntClasseEnergetica_Focused(object sender, EventArgs e)
-        {
-            pckClasseEnergetica.Focus();
-        }
-
-        private void EntTipoRiscaldamento_Focused(object sender, EventArgs e)
-        {
-            pckRiscaldamento.Focus();
-        }
-
-        public void PckRiscaldamento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //entRiscaldamento.Text = ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Descrizione;
-            entRiscaldamento.Text = Helpers.TranslateExtension.ResMgr.Value.GetString(((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Codice, translate.ci);
-        }
-
-        public void PckClasseEnergetica_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //entClasseEnergetica.Text = ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Descrizione;
-            entClasseEnergetica.Text = Helpers.TranslateExtension.ResMgr.Value.GetString(((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Codice, translate.ci);
-
         }
     }
 }

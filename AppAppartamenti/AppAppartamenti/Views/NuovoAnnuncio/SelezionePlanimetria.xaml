@@ -10,7 +10,9 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePlanimetria"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasBackButton="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
 
     <ContentPage.Resources>
         <ResourceDictionary>

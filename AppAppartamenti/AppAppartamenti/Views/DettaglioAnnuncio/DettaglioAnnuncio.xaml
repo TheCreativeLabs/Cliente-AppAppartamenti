@@ -8,12 +8,13 @@
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False"
+             NavigationPage.HasBackButton="True"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
+             
              >
 
     <ContentPage.Resources>
@@ -31,10 +32,14 @@
 
     <NavigationPage.TitleView >
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
-            <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
-            <Button Style="{x:StaticResource NavCancelButton}" IsVisible="False"  x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
+            <Button Style="{x:StaticResource NavCancelButton}" x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
                    FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
+            </Button>
+
+            <Button x:Name="btnMessageNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
+                    Text="&#xf27a;" HorizontalOptions="End"
+                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
             </Button>
 
             <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
@@ -42,7 +47,7 @@
                     FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
             </Button>
 
-            <Button x:Name="btnRemovePreferitoNav" IsVisible="False"   Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
+            <Button x:Name="btnRemovePreferitoNav" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
                     Text="&#xf004;" HorizontalOptions="End"
                     FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
             </Button>
@@ -50,6 +55,13 @@
             <Button  x:Name="btnModificaNavBar" IsVisible="False" Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" WidthRequest="50">
             </Button>
+
+             <Button x:Name="BtnSegnalaNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}"
+                                    Clicked="BtnSegnala_Clicked" VerticalOptions="Center"
+                                    Text="&#xf071;" HorizontalOptions="End"
+                                    FontFamily="{x:StaticResource FA-Solid}">
+                                    </Button>
+           
         </StackLayout>
     </NavigationPage.TitleView>
     
@@ -71,7 +83,11 @@
                 <StackLayout>
 
                     <StackLayout  HeightRequest="300">
-                        <CarouselView x:Name="Carousel" ItemsSource="{Binding viewModelImmagini.Items}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                               <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <CarouselView Grid.Row="0" x:Name="Carousel" ItemsSource="{Binding viewModelImmagini.Items}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -83,31 +99,38 @@
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
+                         <Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
+                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                        </Grid>
                     </StackLayout>
 
               
-                    <Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
-                           TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                   
 
 
                     <StackLayout Padding="20">
-                        <StackLayout Orientation="Horizontal">
-                            <Label LineBreakMode="WordWrap">
+
+                            <Label LineBreakMode="NoWrap" Style="{x:StaticResource AdTitle}">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="{Binding viewModel.Item.TipologiaProprieta}" Style="{x:StaticResource Subtitle}" />
-                                        <Span Text=" in " Style="{x:StaticResource Subtitle}" ></Span>
-                                        <Span Text="{Binding viewModel.Item.TipologiaAnnuncio}" Style="{x:StaticResource Subtitle}" />
-                                        <Span Style="{x:StaticResource Subtitle}" Text="{Binding viewModel.Item.Prezzo, StringFormat=' a {0} €'}"></Span>
+                                        <Span Text="{Binding viewModel.Item.TipologiaProprieta}" />
+                                        <Span Text=" in "/>
+                                        <Span  Text="{Binding viewModel.Item.TipologiaAnnuncio}" />
+                                        <Span Text=" a "/>
+                                        <Span Text="{Binding viewModel.Item.Prezzo, StringFormat='{}{0:N}€'}" />
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                        </StackLayout >
 
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding viewModel.Item.Indirizzo,StringFormat='{0},'}"></Label>
-                            <Label Text="{Binding viewModel.Item.NomeComune}"></Label>
-                        </StackLayout>
+                        <Label LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding viewModel.Item.Indirizzo}"  />
+                                        <Span Text=", "/>
+                                        <Span Text="{Binding viewModel.Item.NomeComune}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
                         <Label Text="{translator:Translate DettaglioAnnuncio.Description}" Style="{x:StaticResource SectionTitle}"></Label>
                         <Label Text="{Binding viewModel.Item.Descrizione}"></Label>
@@ -196,7 +219,6 @@
                                 <Label x:Name="lblClasseEnergetica" Text="{Binding viewModel.Item.ClasseEnergetica}" VerticalTextAlignment="Center"></Label>
                             </StackLayout>
 
-                                 
                             <Label Text="{translator:Translate DettaglioAnnuncio.Location}" Style="{x:StaticResource SectionTitle}"></Label>
                         
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -223,8 +245,28 @@
                                 </CarouselView>
                             </StackLayout>
 
-                            <Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>
+                            <Label Text="Annunciatario" Style="{x:StaticResource SectionTitle}"></Label>
 
+                            <StackLayout x:Name="stkUserInfo" IsVisible="False" Orientation="Horizontal">
+                                <Frame IsClippedToBounds="True" Padding="0" HasShadow="False" CornerRadius="30" HeightRequest="60" WidthRequest="60">
+                                    <Image Aspect="AspectFill" x:Name="imgUserImage">
+                                    </Image>
+                                </Frame>
+
+                                <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span x:Name="lblUserName"/>
+                                            <Span Text=" "></Span>
+                                            <Span x:Name="lblUserSurname"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            
+
+                            <!--<Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>-->
                             <StackLayout BackgroundColor="Transparent" HeightRequest="60"></StackLayout> <!-- Spazio: altrimenti il bottone "nuovo appuntamento" nasconde l'ultimo pezzo dello scroll view-->
                         </StackLayout>
                 </StackLayout>
@@ -233,7 +275,7 @@
                 https://theconfuzedsourcecode.wordpress.com/2017/02/06/is-it-possible-to-add-a-text-shadow-in-button-with-xamarin-forms/ -->
              </ScrollView>
 
-                <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="0,0,0,0" >
+                <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="10,0,10,0" >
                     <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnBack_Clicked" VerticalOptions="Center"
                             FontAttributes="Bold" Text="&#xf053;" HorizontalOptions="StartAndExpand"
                         FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
@@ -242,7 +284,12 @@
                     <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked"
                             VerticalOptions="Center"
                              Text="&#xf1e0;" HorizontalOptions="End"
-                        FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
+                        FontFamily="{x:StaticResource FA-Solid}"  TextColor="White"  WidthRequest="50">
+                    </Button>
+
+                    <Button x:Name="btnMessage" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
+                        Text="&#xf27a;" HorizontalOptions="End"
+                        FontFamily="{x:StaticResource FA-Solid}" TextColor="White" WidthRequest="50" >
                     </Button>
 
                     <Button x:Name="btnAddPreferito" IsVisible="false" Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"

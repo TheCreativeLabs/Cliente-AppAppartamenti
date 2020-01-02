@@ -131,26 +131,56 @@ namespace AppAppartamenti.Views.Login
             await Navigation.PopModalAsync();
         }
 
-        private void ent_TextChanged(object sender, TextChangedEventArgs e)
+        private async void Password_Recognizer_Tapped(object sender, EventArgs e)
         {
-            try
+            if(entPassword.IsPassword)
             {
-                //Controllo che username e password siano valorizzati.
-                if (!(String.IsNullOrEmpty(entNome.Text)) && !(String.IsNullOrEmpty(entCognome.Text))
-                    && !(String.IsNullOrEmpty(entPassword.Text)) && !(String.IsNullOrEmpty(entConfermaPassword.Text)) && !(String.IsNullOrEmpty(entEmail.Text)))
-                {
-                    btnRegistrati.IsEnabled = true;
-                }
-                else
-                {
-                    btnRegistrati.IsEnabled = false;
-                }
+                entPassword.IsPassword = false;
+                lblPasswordShow.Style = (Style)App.Current.Resources["PasswordHideButton"];
             }
-            catch (Exception ex)
+            else
             {
-                throw;
+                entPassword.IsPassword = true;
+                lblPasswordShow.Style = (Style)App.Current.Resources["PasswordShowButton"];
+
             }
         }
+
+        private async void ConfirmPassword_Recognizer_Tapped(object sender, EventArgs e)
+        {
+            if (entConfermaPassword.IsPassword)
+            {
+                entConfermaPassword.IsPassword = false;
+                lblConfirmPasswordShow.Style = (Style)App.Current.Resources["PasswordHideButton"];
+            }
+            else
+            {
+                entConfermaPassword.IsPassword = true;
+                lblConfirmPasswordShow.Style = (Style)App.Current.Resources["PasswordShowButton"];
+
+            }
+        }
+
+        //private void ent_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //Controllo che username e password siano valorizzati.
+        //        if (!(String.IsNullOrEmpty(entNome.Text)) && !(String.IsNullOrEmpty(entCognome.Text))
+        //            && !(String.IsNullOrEmpty(entPassword.Text)) && !(String.IsNullOrEmpty(entConfermaPassword.Text)) && !(String.IsNullOrEmpty(entEmail.Text)))
+        //        {
+        //            btnRegistrati.IsEnabled = true;
+        //        }
+        //        else
+        //        {
+        //            btnRegistrati.IsEnabled = false;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         async void OnPickPhotoButtonClicked(object sender, EventArgs e)
         {

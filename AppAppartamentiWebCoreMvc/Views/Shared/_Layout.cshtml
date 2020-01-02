@@ -61,6 +61,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPreferiti" asp-action="List">@_localizer["FavoritesLabel"]</a>
                             </li>
+
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Messaggi" asp-action="List">Messaggi</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="AnnunciPersonali" asp-action="List">@_localizer["MyAdsLabel"]</a>
                             </li>
@@ -82,12 +87,8 @@
                                                 </div>
                                                 <div class="col-5">
                                                     <a asp-controller="Agenda" asp-action="Detail" class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
-                                                    <ul class="list-group list-group-flush mt-5">
-                                                        <li class="list-group-item">Appuntamento 1</li>
-                                                        <li class="list-group-item">Appuntamento 2</li>
-                                                        <li class="list-group-item">Appuntamento 3</li>
-                                                        <li class="list-group-item">Appuntamento 4</li>
-                                                    </ul>
+                                                    <div id="TodayAppointment">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,6 +191,7 @@
         </div>
     </div>
 
+
     <footer class="footer pt-5 bg-dark text-white position-relative">
         <div class="container">
             <div class="row">
@@ -262,6 +264,8 @@
         } else {
             selectedLanguage = "it";
         }
+
+        var UrlTodayAppointment = "@Url.Action("GetAppointmentList", "Agenda",new { SelectedDate = DateTime.Now})";
     </script>
 
     <script src="~/bundle/bundle.min.js" asp-append-version="true"></script>

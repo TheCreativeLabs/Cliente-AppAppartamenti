@@ -32,8 +32,9 @@ namespace AppAppartamenti.Views.Login
             {
                 if (string.IsNullOrEmpty(entEmail.Text) || !Regex.IsMatch(entEmail.Text, Utility.Utility.EmailRegex))
                 {
-                    entEmail.BackgroundColor = Color.FromRgb(255, 175, 173);
-                    lblValidatorEntEmail.IsVisible = true;
+                    //entEmail.BackgroundColor = Color.FromRgb(255, 175, 173);
+                    //lblValidatorEntEmail.IsVisible = true;
+                    await DisplayAlert("Attenzione", "Inserisci la tua email per recuperare la password", "OK");
                 }
                 else
                 {

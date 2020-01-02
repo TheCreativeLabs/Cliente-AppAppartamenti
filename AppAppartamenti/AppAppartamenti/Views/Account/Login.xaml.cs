@@ -30,11 +30,9 @@ namespace AppAppartamenti.Views.Login
             try
             {
                 //Se ho il token allora vado direttamente alla home
-                if (ApiHelper.GetToken() != null)
+                if (await ApiHelper.GetToken() != null)
                 {
-                    ApiHelper.GetUserInfo();
-                    ApiHelper.GetListaTipologiaProprieta();
-                    ApiHelper.GetListaTipologiaAnnuncio();
+                    
                     Application.Current.MainPage = new MainPage();
                 }
                 else
@@ -72,6 +70,9 @@ namespace AppAppartamenti.Views.Login
                 if (formIsValid)
                 {
                     await ApiHelper.SetTokenAsync(entUsername.Text, entPassword.Text);
+                    ApiHelper.GetUserInfo();
+                    ApiHelper.GetListaTipologiaProprieta();
+                    ApiHelper.GetListaTipologiaAnnuncio();
                     Application.Current.MainPage = new EnableNotification();
                 }
                 else

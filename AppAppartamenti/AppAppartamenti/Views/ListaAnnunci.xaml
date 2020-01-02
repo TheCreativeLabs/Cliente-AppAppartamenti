@@ -67,7 +67,7 @@
                                                     </Frame>
                                                     <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
                                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                                            <Button Style="{x:StaticResource NavCancelButton}"
+                                                            <Button Style="{x:StaticResource AdButton}"
                                                                     Clicked="BtnShare_Clicked"
                                                                     CommandParameter="{Binding .}"
                                                                     VerticalOptions="Center"
@@ -77,31 +77,41 @@
                                                                     TextColor="White">
                                                             </Button>
 
-                                                            <Button Style="{x:StaticResource NavCancelButton}"
+                                                            <Button Style="{x:StaticResource AdButton}"
                                                                     Clicked="BtnAddRemovePreferito_Clicked"
                                                                     CommandParameter="{Binding .}"
                                                                     VerticalOptions="Center"
-                                                                    Text="&#xf004;" Margin="0,0,10,0" HorizontalOptions="End"
+                                                                    Text="&#xf004;" HorizontalOptions="End"
                                                                     FontFamily="{x:StaticResource FA-Solid}"
                                                                     TextColor="{Binding FlagPreferito, Converter={StaticResource ColConverter}}">
                                                             </Button>
                                                           </StackLayout>
                                                     </AbsoluteLayout>
                                                 </Grid>
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
-                                                    <Label Text="{Binding TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
-                                                    <Label Text="{Binding Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
-                                                </StackLayout>
+                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding TipologiaProprieta}" />
+                                        <Span Text=" in "/>
+                                        <Span  Text="{Binding TipologiaAnnuncio}" />
+                                        <Span Text=" a "/>
+                                        <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding NomeComune, StringFormat='{0},'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                                    <Label Text="{Binding Indirizzo}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                                 </StackLayout>
+                            <Label LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding NomeComune}" />
+                                        <Span Text=", "/>
+                                        <Span Text="{Binding Indirizzo}"  />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                                 </StackLayout>
+                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
+                       
                                             </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>

@@ -451,7 +451,7 @@
     <value>Cucine:</value>
   </data>
   <data name="SelezioneInfoGenerali.Locality" xml:space="preserve">
-    <value>Inserisci il comune</value>
+    <value>Comune</value>
   </data>
   <data name="SelezioneInfoGenerali.LocalityPlaceholder" xml:space="preserve">
     <value>Comune</value>
@@ -481,7 +481,7 @@
     <value>Dove si trova?</value>
   </data>
   <data name="SelezioneLuogo.Address" xml:space="preserve">
-    <value>Inserisci l'indirizzo</value>
+    <value>Indirizzo</value>
   </data>
   <data name="SelezioneLuogo.AddressPlaceholder" xml:space="preserve">
     <value>Address</value>
@@ -505,7 +505,7 @@
     <value>Classe energetica</value>
   </data>
   <data name="SelezionePrezzo.EnterPrice" xml:space="preserve">
-    <value>€ - Inserisci il prezzo</value>
+    <value>Prezzo</value>
   </data>
   <data name="SelezionePrezzo.FeesExample" xml:space="preserve">
     <value>Esempio: 80</value>
@@ -617,6 +617,9 @@
   </data>
   <data name="INDEPENDENT" xml:space="preserve">
     <value>Autonomo</value>
+  </data>
+     <data name="EMPTY" xml:space="preserve">
+    <value>Seleziona..</value>
   </data>
   <data name="ListaAnnunci.Locality" xml:space="preserve">
     <value>Comune o provincia</value>
@@ -758,5 +761,14 @@
   </data>
   <data name="NuovoAppuntamento.SuccessTitle" xml:space="preserve">
     <value>Richiesta inviata</value>
+  </data>
+  <data name="SelezioneFasceOrarie.EnterTime" xml:space="preserve">
+    <value>Inserire orario</value>
+  </data>
+  <data name="SelezioneFasceOrarie.From" xml:space="preserve">
+    <value>Dalle</value>
+  </data>
+  <data name="SelezioneFasceOrarie.To" xml:space="preserve">
+    <value>Alle</value>
   </data>
 </root>

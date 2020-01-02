@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppAppartamenti.ContentViews.StepMenu">
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:b="clr-namespace:AppAppartamenti.Behaviors" x:Class="AppAppartamenti.ContentViews.StepMenu">
     <ContentView.Content>
-        <ScrollView x:Name="scrollView" Orientation="Horizontal" HeightRequest="65" Margin="0,0,-20,0">
-            <CollectionView x:Name="lvStepMenu">
+            <CollectionView x:Name="lvStepMenu"  HeightRequest="65" Margin="0,0,-20,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal" />
             </CollectionView.ItemsLayout>
@@ -15,16 +14,15 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Frame Padding="0" Margin="0,0,5,20" BackgroundColor="{Binding BackgroundColor}" BorderColor="{Binding BorderColor}" HasShadow="False" CornerRadius="20">
+                        <Frame IsVisible="{Binding IsVisible}" Padding="5" Margin="0,0,5,20" BackgroundColor="{Binding BackgroundColor}" BorderColor="{Binding BorderColor}" HasShadow="False" CornerRadius="20">
                             <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                                 <Label Text="&#xf00c;" IsVisible="{Binding IsCompleted}" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" FontSize="17" Margin="5,0,0,0" ></Label>
-                                <Label Text="{Binding DisplayName}" VerticalTextAlignment="Center" Style="{x:StaticResource Title}" Margin="5" FontSize="17" ></Label>
+                                <Label Text="{Binding DisplayName}" VerticalTextAlignment="Center" Style="{x:StaticResource AdSubtitle}" Margin="5"></Label>
                             </StackLayout>
                         </Frame>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        </ScrollView>
     </ContentView.Content>
 </ContentView>

@@ -36,6 +36,7 @@ namespace AppAppartamenti.Views.Account
 
             if (userInfo.DataDiNascita.HasValue)
                 dpDataNascita.Date = userInfo.DataDiNascita.Value.Date;
+                dpDataNascita.PlaceholderHidden = true;
 
             if (viewModel.FotoProfilo != null)
             {
@@ -58,7 +59,7 @@ namespace AppAppartamenti.Views.Account
              Email = viewModel.Email //FIXME, IL BE NON AGGIORNA LA MAIL: LO FACCIAMO??
             };
 
-            AccountClient accountClient = new AccountClient(ApiHelper.GetApiClient());
+            AccountClient accountClient = new AccountClient( await ApiHelper.GetApiClient());
             await accountClient.UpdateUserAsync(updateUserModel);
         }
 

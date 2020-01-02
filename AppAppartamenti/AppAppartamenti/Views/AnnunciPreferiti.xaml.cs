@@ -26,6 +26,14 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
+            MessagingCenter.Subscribe<ListaAnnunci, string>(this, "RefreshPreferiti", async (sender, arg) =>
+            {
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    viewModel.Items.Clear();
+                }
+            });
+
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
@@ -54,7 +62,7 @@ namespace AppAppartamenti.Views
                 Button btn = (Button)sender;
                 var item = Guid.Parse(btn.CommandParameter.ToString());
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.AggiungiPreferitoAsync(item);
             }
             catch (Exception Ex)
@@ -73,7 +81,7 @@ namespace AppAppartamenti.Views
 
                 viewModel.Items.Remove(item);
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
                 await annunciClient.RimuoviPreferitoAsync(item.Id.Value);
             }
             catch (Exception Ex)

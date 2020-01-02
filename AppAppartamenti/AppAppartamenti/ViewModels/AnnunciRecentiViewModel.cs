@@ -9,6 +9,7 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -35,11 +36,9 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                //AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
-                ICollection<AnnunciDtoOutput> listaAnnunci;
-
-                listaAnnunci = await annunciClient.GetRicercheRecentiCurrentAsync();
+                List<AnnunciDtoOutput> listaAnnunci = await ApiHelper.GetListaAnnunciRecenti(false);// await annunciClient.GetRicercheRecentiCurrentAsync();
 
                 foreach (var evento in listaAnnunci)
                 {

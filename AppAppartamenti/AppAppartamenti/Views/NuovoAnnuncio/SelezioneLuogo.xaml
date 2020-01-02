@@ -33,7 +33,7 @@
 
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneLuogo.WhereQuestion}"></Label>
-            <controls:StepMenu CurrentId="10"/>
+            <controls:StepMenu CurrentId="3"/>
 
             <Label Text="{translator:Translate SelezioneLuogo.Locality}"></Label>
             <Entry  x:Name="entCercaComune" Placeholder="{translator:Translate SelezioneLuogo.LocalityPlaceholder}" TextChanged="EntCercaComune_TextChanged"></Entry>
@@ -43,7 +43,9 @@
                       ItemSelected="LvComuni_Selected"
                       ios:ListView.SeparatorStyle="FullWidth"
                       SeparatorColor="LightGray"
-                      IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                      ItemsSource="{Binding Items}"
+                    IsRefreshing="{Binding IsBusy}"
+                      HeightRequest="200">
                 <ListView.Footer>
                     <DataTemplate>
                         <ContentView />
@@ -65,7 +67,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Label x:Name="lblIndirizzo" Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,0,20,0"></Label>
+            <Label x:Name="lblIndirizzo" Text="{translator:Translate SelezioneLuogo.Address}" Margin="0,20,0,0"></Label>
             <Entry x:Name="entIndirizzo" Placeholder="{translator:Translate SelezioneLuogo.AddressPlaceholder}"></Entry>
 
             <Button x:Name="btnIndirizzoProcedi" IsEnabled="True" Text="{translator:Translate SelezioneLuogo.Continue}" 

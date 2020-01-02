@@ -18,10 +18,11 @@ using Android.Views;
 using Android.Widget;
 using AppAppartamenti;
 using CustomRenderer;
+using Plugin.Badge.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Color = Xamarin.Forms.Color;
 
+[assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
 // this line directly ubleow usings, before namespace declaration
 [assembly: ExportRenderer(typeof(WebViewUserAgent), typeof(DesktopWebViewRenderer))]
 [assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
@@ -29,6 +30,7 @@ using Color = Xamarin.Forms.Color;
 [assembly: ExportRenderer(typeof(CustomDatePickerRenderer), typeof(DatePickerRenderer))]
 [assembly: ExportRenderer(typeof(Picker), typeof(CustomPickerRenderer))]
 [assembly: ExportRenderer(typeof(DatePickerCtrl), typeof(DatePickerCtrlRenderer))]
+[assembly: ExportRenderer(typeof(ChatEntry), typeof(ChatEditorRenderer))]
 
 namespace CustomRenderer
 {
@@ -175,7 +177,7 @@ namespace CustomRenderer
 
                 DatePickerCtrl element = Element as DatePickerCtrl;
 
-                if (!string.IsNullOrWhiteSpace(element.Placeholder))
+                if (!element.PlaceholderHidden && !string.IsNullOrWhiteSpace(element.Placeholder))
                 {
                     Control.Text = element.Placeholder;
                 }
@@ -197,6 +199,34 @@ namespace CustomRenderer
             base.OnElementChanged(e);
 
             Control.Settings.UserAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
+        }
+    }
+
+    class ChatEditorRenderer : EditorRenderer
+    {
+        public ChatEditorRenderer(Context context) : base(context)
+        {
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Editor> e)
+        {
+            base.OnElementChanged(e);
+
+            if (Control != null)
+            {
+                var nativeEditText = (global::Android.Widget.EditText)Control;
+
+                RoundRectShape i = new RoundRectShape(
+                         new float[] { 15, 15, 15, 15, 15, 15, 15, 15 },
+                         null,
+                         new float[] { 15, 15, 15, 15, 15, 15, 15, 15 });
+
+                var shape = new ShapeDrawable(i);
+                shape.Paint.Color = Xamarin.Forms.Color.White.ToAndroid();
+                shape.Paint.SetStyle(Paint.Style.Stroke);
+                nativeEditText.Background = shape;
+                nativeEditText.SetPadding(25, 25, 25, 25);
+            }
         }
     }
 }

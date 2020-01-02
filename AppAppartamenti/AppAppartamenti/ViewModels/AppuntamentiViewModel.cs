@@ -18,7 +18,6 @@ namespace AppAppartamenti.ViewModels
         public ObservableCollection<AppuntamentoDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-
         public AppuntamentiViewModel()
         {
             Items = new ObservableCollection<AppuntamentoDtoOutput>();
@@ -36,7 +35,7 @@ namespace AppAppartamenti.ViewModels
             {
                 Items.Clear();
 
-                AgendaClient agendaClient = new AgendaClient(Api.ApiHelper.GetApiClient());
+                AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 var lista =await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
 
                 foreach (var item in lista)

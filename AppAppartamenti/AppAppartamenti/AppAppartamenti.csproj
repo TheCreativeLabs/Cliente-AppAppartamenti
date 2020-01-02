@@ -37,6 +37,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.4.0.39" />
     <PackageReference Include="Microsoft.AppCenter" Version="2.6.4" />
     <PackageReference Include="Microsoft.AppCenter.Push" Version="2.6.4" />
+    <PackageReference Include="Plugin.Badge" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>

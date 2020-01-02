@@ -21,6 +21,8 @@ namespace AppAppartamenti.Views
     {
         AnnuncioDtoInput annuncio; 
         AnnuncioDetailViewModel dtoToModify;
+        ListaComuniViewModel viewModel;
+
         bool IsMappaValid;
 
         public SelezioneLuogo(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
@@ -65,6 +67,10 @@ namespace AppAppartamenti.Views
                 IsMappaValid = false;
                 await Navigation.PushAsync(new SelezioneInfoGenerali(annuncio, dtoToModify));
             }
+
+            BindingContext = viewModel = new ListaComuniViewModel();
+
+           
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -105,12 +111,9 @@ namespace AppAppartamenti.Views
         private void EntCercaComune_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(entCercaComune.Text.Length >= 3) { 
-                //refresh della lista dei comuni
-                var listaComuni = new ListaComuniViewModel();
-                listaComuni.NomeComune = entCercaComune.Text;
+                viewModel.NomeComune = entCercaComune.Text;
+                viewModel.LoadItemsCommand.Execute(null);
                 lvComuni.IsVisible = true;
-                listaComuni.LoadItemsCommand.Execute(null);
-                lvComuni.ItemsSource = listaComuni.Items;
                 entIndirizzo.IsVisible = false;
                 lblIndirizzo.IsVisible = false;
                 btnIndirizzoProcedi.IsVisible = false;
