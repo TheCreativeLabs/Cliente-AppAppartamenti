@@ -40,7 +40,7 @@
                        ></Entry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntNome"></Label>
 
-                <Entry  x:Name="entCognome"
+                <Entry x:Name="entCognome"
                        Placeholder="{translator:Translate Registrazione.Cognome}"
                     ></Entry>
                 <Label Text="{translator:Translate Registrazione.MessaggioCampoObbligatorio}"
@@ -51,10 +51,27 @@
 
                 <appappartamenti:DatePickerCtrl  x:Name="dpDataNascita" TextColor="{x:StaticResource DarkColor}" Placeholder="{translator:Translate InformazionePersonali.DateOfBirth}"></appappartamenti:DatePickerCtrl>
 
-                <Entry x:Name="entPassword" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" ></Entry>
+                <Grid>
+                    <Entry Grid.Row="0" x:Name="entPassword" IsPassword="True" Placeholder="{translator:Translate Login.Password}" VerticalOptions="Center" ></Entry>
+                    <Label x:Name="lblPasswordShow" Grid.Row="0" Style="{x:StaticResource PasswordShowButton}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Password_Recognizer_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </Grid>
                 <Label Text="{translator:Translate Login.MessaggioValidazionePassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntPassword"></Label>
 
-                <Entry x:Name="entConfermaPassword"  IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" ></Entry>
+                <Grid>
+                    <Entry Grid.Row="0" x:Name="entConfermaPassword"  IsPassword="True" Placeholder="{translator:Translate Login.ConfermaPassword}" VerticalOptions="Center" ></Entry>
+
+                    <Label x:Name="lblConfirmPasswordShow" Grid.Row="0" Style="{x:StaticResource PasswordShowButton}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ConfirmPassword_Recognizer_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </Grid>
                 <Label Text="{translator:Translate Login.MessaggioValidazioneConfermaPassword}" Style="{x:StaticResource LabelValidatore}" x:Name="lblValidatorEntConfermaPassword"></Label>
 
                 <StackLayout Orientation="Horizontal" Margin="0,20,0,20">

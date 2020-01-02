@@ -11,7 +11,7 @@ namespace AppAppartamenti.Behaviors
 {
     public class InverseScroll : Behavior<ListView>
     {
-        public bool loadComplete;
+     public bool loadComplete;
 
         public static readonly BindableProperty LoadItemsCommandProperty = BindableProperty.Create("LoadItemsCommand", typeof(ICommand), typeof(InverseScroll), null);
 
@@ -26,7 +26,7 @@ namespace AppAppartamenti.Behaviors
                 SetValue(LoadItemsCommandProperty, value);
             }
         }
-
+    
         public ListView AssociatedObject
         {
             get;

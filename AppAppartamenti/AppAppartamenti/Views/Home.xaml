@@ -61,7 +61,7 @@
                                                     <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
                                                 </Frame>
 
-                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
                                                     <Label.FormattedText>
                                                         <FormattedString>
                                                             <Span Text="{Binding TipologiaProprieta}" />

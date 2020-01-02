@@ -20,7 +20,12 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+             <ScrollView Grid.Row="0">
                 <StackLayout Style="{x:StaticResource StackContainer}">
                     <StackLayout Orientation="Horizontal">
                          <controls:BackButton/>
@@ -66,34 +71,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <StackLayout>
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
-                                                    <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                        <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    <Frame Padding="1" CornerRadius="5" HasShadow="False" WidthRequest="100">
+                                                        <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                                         </Entry>
                                                         <Frame.GestureRecognizers>
                                                             <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                         </Frame.GestureRecognizers>
                                                     </Frame>
-                                                </StackLayout>
-                                                <StackLayout>
 
-                                                     <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                                 </Label>
+                                                <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False" WidthRequest="100">
+                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                </StackLayout>
-                                               
-
-                                                <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" 
                                                        Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                             </StackLayout>
@@ -106,47 +102,7 @@
                           </ListView>
                     </StackLayout>
 
-                    <syncfusion1:SfPicker
-                        x:Name="pickerDalle"
-                        PickerMode="Dialog"
-                        IsVisible="true"
-                        HeightRequest="350"
-                        PickerHeight="250"
-                        ShowColumnHeader="True"
-                        WidthRequest="280"
-                        HeaderBackgroundColor="{x:StaticResource PrimaryColor}"
-                        ShowHeader="False"
-                        HeaderTextColor="White"
-                        HeaderText="Seleziona un orario"
-                        ColumnHeaderBackgroundColor="{x:StaticResource PrimaryColor}"
-                        ColumnHeaderTextColor="White"
-                        SelectionChanged="pickerDalle_SelectionChanged"
-                        ColumnHeaderHeight="40"
-                        ShowFooter="False"
-                        />
-
-
-                    <Grid Padding="50">
-                      <syncfusion1:SfPicker
-                        x:Name="pickerAlle"
-                        IsVisible="true"
-                        HeightRequest="350"
-                        PickerHeight="350"
-                        ShowColumnHeader="True"
-                        HeaderBackgroundColor="{x:StaticResource PrimaryColor}"
-                        ShowHeader="False"
-                        WidthRequest="200"
-                        PickerMode="Dialog"
-                        HeaderTextColor="White"
-                        HeaderText="Seleziona un orario"
-                        ColumnHeaderBackgroundColor="White"
-                        ColumnHeaderTextColor="{x:StaticResource DarkColor}"
-                        SelectionChanged="pickerAlle_SelectionChanged"
-                        ColumnHeaderHeight="40"
-                        ShowFooter="False"
-                        Margin="40,0,40,0"
-                        HeaderFontAttribute="Bold" HeaderFontSize="23"/>
-                    </Grid>
+                   
 
                     
 
@@ -161,28 +117,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
                                         <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                            <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                            <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                             </Entry>
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                             </Frame.GestureRecognizers>
                                         </Frame>
 
-                                        <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                        </Label>
+                                        <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
                                         <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                            <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                            <Entry  WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                             </Entry>
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                             </Frame.GestureRecognizers>
                                         </Frame>
 
-                                        <Button Clicked="DeleteMartediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                        <Button Clicked="DeleteMartediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                        Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                     </StackLayout>
@@ -193,7 +146,6 @@
                                     <Label/>
                                 </ListView.Footer>
                           </ListView>
-
                     </StackLayout>
 
                     <StackLayout x:Name="stkMercoledi" IsVisible="False" Margin="0,10,0,0">
@@ -207,28 +159,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                                </Label>
+                                                <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Button Clicked="DeleteMercolediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                <Button Clicked="DeleteMercolediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                                        Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                             </StackLayout>
@@ -251,28 +200,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                                </Label>
+                                                <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Button Clicked="DeleteGiovediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                <Button Clicked="DeleteGiovediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                                    Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                             </StackLayout>
@@ -296,28 +242,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                                </Label>
+                                                <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Button Clicked="DeleteVenerdiElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                <Button Clicked="DeleteVenerdiElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                                    Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                             </StackLayout>
@@ -341,28 +284,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                                </Label>
+                                                <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Button Clicked="DeleteSabatoElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                <Button Clicked="DeleteSabatoElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                                Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                             </StackLayout>
@@ -388,28 +328,25 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.From}" VerticalTextAlignment="Center"></Label>
-
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Dalle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Label Text="{translator:Translate SelezioneFasceOrarie.To}" VerticalTextAlignment="Center">
-                                                </Label>
+                                                <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
                                                 <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.EnterTime}" Text="{Binding Alle}" IsEnabled="False">
+                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
                                                     </Entry>
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
                                                 </Frame>
 
-                                                <Button Clicked="DeleteDomenicaElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" HeightRequest="35" WidthRequest="35"
+                                                <Button Clicked="DeleteDomenicaElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
                                                                Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
 
                                             </StackLayout>
@@ -424,6 +361,64 @@
 
                 <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
                 </StackLayout>
+
+
+
+
         </ScrollView>
+
+        <StackLayout x:Name="stkPicker" IsVisible="False" Grid.Row="0" Padding="20" VerticalOptions="CenterAndExpand">
+
+                <appappartamenti:ShadowFrame HasShadow="True" Padding="0" >
+                    <StackLayout>
+                         <syncfusion1:SfPicker
+                                        x:Name="pickerDalle"
+                                        PickerMode="Default"
+                                        IsVisible="false"
+                                        ShowColumnHeader="True"
+                                        HeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                                        ShowHeader="False"
+                                        HeaderTextColor="White"
+                                        HeaderText="Seleziona un orario"
+                                        ColumnHeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                                        ColumnHeaderTextColor="White"
+                                        SelectionChanged="pickerDalle_SelectionChanged"
+                                        ColumnHeaderHeight="40"
+                                        ShowFooter="true"
+                                        Margin="0"
+                        BorderColor="Transparent"
+
+                                        Closed="Picker_Closed"
+                                        />
+                                        </StackLayout>
+                    </appappartamenti:ShadowFrame>
+
+                 <appappartamenti:ShadowFrame HasShadow="True" Padding="0">
+                    <StackLayout>
+         <syncfusion1:SfPicker
+                        x:Name="pickerAlle"
+                        PickerMode="Default"
+                        IsVisible="false"
+                        ShowColumnHeader="True"
+                        HeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                        ShowHeader="False"
+                        HeaderTextColor="White"
+                        HeaderText="Seleziona un orario"
+                        ColumnHeaderBackgroundColor="{x:StaticResource PrimaryColor}"
+                        ColumnHeaderTextColor="White"
+                        SelectionChanged="pickerAlle_SelectionChanged"
+                        ColumnHeaderHeight="40"
+                        BorderColor="Transparent"
+                        ShowFooter="true"
+                        Margin="0"
+                        Closed="Picker_Closed"
+             />
+                          </StackLayout>
+                    </appappartamenti:ShadowFrame>
+            </StackLayout>
+        </Grid>
+
+       
+
     </ContentPage.Content>
 </ContentPage>

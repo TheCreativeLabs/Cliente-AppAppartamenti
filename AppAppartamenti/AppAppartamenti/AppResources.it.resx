@@ -451,7 +451,7 @@
     <value>Cucine:</value>
   </data>
   <data name="SelezioneInfoGenerali.Locality" xml:space="preserve">
-    <value>Inserisci il comune</value>
+    <value>Comune</value>
   </data>
   <data name="SelezioneInfoGenerali.LocalityPlaceholder" xml:space="preserve">
     <value>Comune</value>
@@ -481,7 +481,7 @@
     <value>Dove si trova?</value>
   </data>
   <data name="SelezioneLuogo.Address" xml:space="preserve">
-    <value>Inserisci l'indirizzo</value>
+    <value>Indirizzo</value>
   </data>
   <data name="SelezioneLuogo.AddressPlaceholder" xml:space="preserve">
     <value>Address</value>

@@ -131,6 +131,36 @@ namespace AppAppartamenti.Views.Login
             await Navigation.PopModalAsync();
         }
 
+        private async void Password_Recognizer_Tapped(object sender, EventArgs e)
+        {
+            if(entPassword.IsPassword)
+            {
+                entPassword.IsPassword = false;
+                lblPasswordShow.Style = (Style)App.Current.Resources["PasswordHideButton"];
+            }
+            else
+            {
+                entPassword.IsPassword = true;
+                lblPasswordShow.Style = (Style)App.Current.Resources["PasswordShowButton"];
+
+            }
+        }
+
+        private async void ConfirmPassword_Recognizer_Tapped(object sender, EventArgs e)
+        {
+            if (entConfermaPassword.IsPassword)
+            {
+                entConfermaPassword.IsPassword = false;
+                lblConfirmPasswordShow.Style = (Style)App.Current.Resources["PasswordHideButton"];
+            }
+            else
+            {
+                entConfermaPassword.IsPassword = true;
+                lblConfirmPasswordShow.Style = (Style)App.Current.Resources["PasswordShowButton"];
+
+            }
+        }
+
         //private void ent_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //    try

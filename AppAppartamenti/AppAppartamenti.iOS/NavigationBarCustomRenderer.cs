@@ -7,10 +7,14 @@ using iOS.Renderers;
 using AppAppartamenti.Utility;
 using CoreGraphics;
 using AppAppartamenti;
+using Syncfusion.SfPicker.XForms.iOS;
+using Syncfusion.SfPicker.XForms;
 
 [assembly: ExportRenderer(typeof(NavigationPage), typeof(ShadowNavigationBarRenderer))]
 [assembly: ExportRenderer(typeof(CustomNavigationPage), typeof(CustomNavigationRenderer))]
 [assembly: ExportRenderer(typeof(DatePickerCtrl), typeof(DatePickerCtrlRenderer))]
+[assembly: ExportRenderer(typeof(SfPicker), typeof(SfPickerCustomRenderer))]
+
 
 namespace iOS.Renderers
 {
@@ -99,5 +103,20 @@ namespace iOS.Renderers
                 NavigationBar.ShadowImage = new UIImage();
             }
         }
+
+    public class SfPickerCustomRenderer : SfPickerRenderer
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<SfPicker> e)
+        {
+            base.OnElementChanged(e);
+
+            if (Control != null)
+            {
+                var i = this.Control;
+
+            }
+        }
+    }
+
 
 }

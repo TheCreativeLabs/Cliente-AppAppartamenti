@@ -27,8 +27,6 @@
                 <StackLayout>
                     <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
 
-                            
-
                 <Label Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
@@ -66,14 +64,13 @@
 
                     <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
 
-                        <StackLayout Orientation="Horizontal">
-                            <appappartamenti:ShadowFrame HasShadow="False" Padding="0" HeightRequest="80" CornerRadius="10" WidthRequest="80">
-                                <Image  Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
-                            </appappartamenti:ShadowFrame>
+                            <appappartamenti:ShadowFrame IsClippedToBounds="True" HasShadow="True" Padding="0" HeightRequest="80" CornerRadius="10" WidthRequest="80">
 
+                    <StackLayout Orientation="Horizontal">
+                                <Image  Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
 
                             <StackLayout VerticalOptions="CenterAndExpand">
-                                     <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                     <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding InfoAnnuncio.TipologiaProprieta}" />
@@ -98,6 +95,7 @@
                             <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
                             </StackLayout>
                         </StackLayout>
+                            </appappartamenti:ShadowFrame>
                             
             </StackLayout>
                 </StackLayout>

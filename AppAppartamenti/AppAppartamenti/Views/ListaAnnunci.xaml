@@ -88,7 +88,7 @@
                                                           </StackLayout>
                                                     </AbsoluteLayout>
                                                 </Grid>
-                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding TipologiaProprieta}" />

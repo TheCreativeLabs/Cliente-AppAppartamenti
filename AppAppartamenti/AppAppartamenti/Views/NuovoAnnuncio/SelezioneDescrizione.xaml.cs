@@ -28,7 +28,6 @@ namespace AppAppartamenti.Views
 
             annuncio = Annuncio;
 
-            edtDescrizione.Focus();
         }
 
         protected override void OnAppearing()
@@ -38,6 +37,8 @@ namespace AppAppartamenti.Views
             {
                 edtDescrizione.Text = dtoToModify.Item.Descrizione;
             }
+
+            edtDescrizione.Focus();
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
