@@ -6,7 +6,11 @@
     $(".btn-modal-prenota").click(function(){
         var now = new Date();
         var idAnnuncio = document.getElementById('id-annuncio').value;
-        GetAndShowAppuntamentiDisponibili(idAnnuncio, (now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()));
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        GetAndShowAppuntamentiDisponibili(idAnnuncio, (yyyy) + '-' + (mm) + '-' + (dd));
     });
 
     $(".btn-prenota-appuntamento").click(function () {

@@ -76,6 +76,9 @@
      <data name="MyAdsLabel" xml:space="preserve">
     <value>I miei annunci</value>
   </data>
+  <data name="OrganizerLabel" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
          <data name="ProfileLabel" xml:space="preserve">
     <value>Profilo</value>
   </data>
