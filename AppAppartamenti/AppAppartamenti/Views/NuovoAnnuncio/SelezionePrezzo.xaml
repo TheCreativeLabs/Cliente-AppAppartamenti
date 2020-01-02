@@ -40,7 +40,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-            <Entry Grid.Row="0" Grid.Column="0"  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
+            <Entry TextChanged="Entprezzo_TextChanged" Grid.Row="0" Grid.Column="0"  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
                 <Label Grid.Row="0" x:Name="lblPrezzo" Grid.Column="0" Text="€" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
             </Grid>
 

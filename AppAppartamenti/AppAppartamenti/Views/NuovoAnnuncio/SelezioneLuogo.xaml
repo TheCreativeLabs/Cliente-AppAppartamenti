@@ -43,7 +43,9 @@
                       ItemSelected="LvComuni_Selected"
                       ios:ListView.SeparatorStyle="FullWidth"
                       SeparatorColor="LightGray"
-                      IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                      ItemsSource="{Binding Items}"
+                    IsRefreshing="{Binding IsBusy}"
+                      HeightRequest="200">
                 <ListView.Footer>
                     <DataTemplate>
                         <ContentView />

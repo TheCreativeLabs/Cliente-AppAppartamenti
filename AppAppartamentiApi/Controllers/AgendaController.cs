@@ -122,67 +122,75 @@ namespace AppAppartamentiApi.Controllers
             {
                 //fixme return BadRequest(ModelState);
             }
-
-            FasceOrarie fasceAnnuncio = await dbDataContext.FasceOrarie.Where(x => x.IdAnnuncio == IdAnnuncio).FirstOrDefaultAsync();
-            TimeSpan startTime = new TimeSpan(0, 1, 0);
-            DateTime GiornoInizio = new DateTime(Giorno.Year, Giorno.Month, Giorno.Day);
-            GiornoInizio = GiornoInizio.Date + startTime; //giorno alle 00:01
-
-            TimeSpan endTime = new TimeSpan(23, 59, 0);
-            DateTime GiornoFine = new DateTime(Giorno.Year, Giorno.Month, Giorno.Day);
-            GiornoFine = GiornoFine.Date + endTime; //giorno alle 23:59
-
-            ICollection <Appuntamento> appuntamentiEsistenti = await dbDataContext.Appuntamento
-                                 .Where(x => x.IdAnnuncio == IdAnnuncio && x.Data >= GiornoInizio && x.Data <= GiornoFine).ToListAsync();
-
-            DayOfWeek dayOfWeek = Giorno.DayOfWeek;
-            string fasceOfDay = getFasciaByDayOfWeek(fasceAnnuncio, dayOfWeek);
-
-            string durataAppuntamentoMin = Properties.Settings.Default.MinutiDurataAppuntamento;
-
-            string[] fasce = fasceOfDay.Split(';');
-            fasce = fasce.Take(fasce.Count() - 1).ToArray();
             List<string> orariDisponibili = new List<string>();
 
-            foreach(string fascia in fasce)
-            {
-                //la divido in intervalli di durataAppuntamentoMin
-                List<string> singoliIntervalli = new List<string>();
-                string orarioStart = fascia.Split('-')[0];
-                string orarioEnd = fascia.Split('-')[1];
-                //FIXME gestire eccezione o usare try parse
-                TimeSpan start = new TimeSpan(Int32.Parse(orarioStart.Split(':')[0]), Int32.Parse(orarioStart.Split(':')[1]), 0);
-                TimeSpan end = new TimeSpan(Int32.Parse(orarioEnd.Split(':')[0]), Int32.Parse(orarioEnd.Split(':')[1]), 0);
-                TimeSpan incremento = new TimeSpan(0, Int32.Parse(durataAppuntamentoMin), 0);
+            FasceOrarie fasceAnnuncio = await dbDataContext.FasceOrarie.Where(x => x.IdAnnuncio == IdAnnuncio).FirstOrDefaultAsync();
 
+            if (fasceAnnuncio != null) { 
+                TimeSpan startTime = new TimeSpan(0, 1, 0);
+                DateTime GiornoInizio = new DateTime(Giorno.Year, Giorno.Month, Giorno.Day);
+                GiornoInizio = GiornoInizio.Date + startTime; //giorno alle 00:01
 
-                TimeSpan inizioAppuntamento = start;
-                TimeSpan fineAppuntamento = start + incremento;
-                //List<string> ore = new List<string>();
-                while (inizioAppuntamento != end)
+                TimeSpan endTime = new TimeSpan(23, 59, 0);
+                DateTime GiornoFine = new DateTime(Giorno.Year, Giorno.Month, Giorno.Day);
+                GiornoFine = GiornoFine.Date + endTime; //giorno alle 23:59
+
+                ICollection <Appuntamento> appuntamentiEsistenti = await dbDataContext.Appuntamento
+                                     .Where(x => x.IdAnnuncio == IdAnnuncio && x.Data >= GiornoInizio && x.Data <= GiornoFine).ToListAsync();
+
+                DayOfWeek dayOfWeek = Giorno.DayOfWeek;
+                string fasceOfDay = getFasciaByDayOfWeek(fasceAnnuncio, dayOfWeek);
+
+                if (fasceOfDay == null)
                 {
-
-                    //se  l'intervallo non è già impegnato , lo aggiungo agli orari disponibili
-                    //passo all'intervallo successivo
-                    Appuntamento appuntamento = appuntamentiEsistenti.Where(x => x.Data.Hour == inizioAppuntamento.Hours && x.Data.Minute == inizioAppuntamento.Minutes).FirstOrDefault();
-                    if (appuntamento == null)
-                    {
-                        orariDisponibili.Add(
-                                                new DateTime(inizioAppuntamento.Ticks).ToString("HH:mm")
-                                                + "-" + 
-                                                new DateTime(fineAppuntamento.Ticks).ToString("HH:mm")
-                                            );
-                    }
-                    inizioAppuntamento = inizioAppuntamento + incremento;
-                    fineAppuntamento = fineAppuntamento + incremento;
-
-
-                    //    i = i.Add(incremento);
-                    //    //string ora = i.Hours + ":" + i.Minutes;
-                    //    string ora = new DateTime(i.Ticks).ToString("HH:mm");
-                    //    ore.Add(ora);
+                    return orariDisponibili;
                 }
 
+                string durataAppuntamentoMin = Properties.Settings.Default.MinutiDurataAppuntamento;
+
+                string[] fasce = fasceOfDay.Split(';');
+                fasce = fasce.Take(fasce.Count() - 1).ToArray();
+
+                foreach(string fascia in fasce)
+                {
+                    //la divido in intervalli di durataAppuntamentoMin
+                    List<string> singoliIntervalli = new List<string>();
+                    string orarioStart = fascia.Split('-')[0];
+                    string orarioEnd = fascia.Split('-')[1];
+                    //FIXME gestire eccezione o usare try parse
+                    TimeSpan start = new TimeSpan(Int32.Parse(orarioStart.Split(':')[0]), Int32.Parse(orarioStart.Split(':')[1]), 0);
+                    TimeSpan end = new TimeSpan(Int32.Parse(orarioEnd.Split(':')[0]), Int32.Parse(orarioEnd.Split(':')[1]), 0);
+                    TimeSpan incremento = new TimeSpan(0, Int32.Parse(durataAppuntamentoMin), 0);
+
+
+                    TimeSpan inizioAppuntamento = start;
+                    TimeSpan fineAppuntamento = start + incremento;
+                    //List<string> ore = new List<string>();
+                    while (inizioAppuntamento != end)
+                    {
+
+                        //se  l'intervallo non è già impegnato , lo aggiungo agli orari disponibili
+                        //passo all'intervallo successivo
+                        Appuntamento appuntamento = appuntamentiEsistenti.Where(x => x.Data.Hour == inizioAppuntamento.Hours && x.Data.Minute == inizioAppuntamento.Minutes).FirstOrDefault();
+                        if (appuntamento == null)
+                        {
+                            orariDisponibili.Add(
+                                                    new DateTime(inizioAppuntamento.Ticks).ToString("HH:mm")
+                                                    + "-" + 
+                                                    new DateTime(fineAppuntamento.Ticks).ToString("HH:mm")
+                                                );
+                        }
+                        inizioAppuntamento = inizioAppuntamento + incremento;
+                        fineAppuntamento = fineAppuntamento + incremento;
+
+
+                        //    i = i.Add(incremento);
+                        //    //string ora = i.Hours + ":" + i.Minutes;
+                        //    string ora = new DateTime(i.Ticks).ToString("HH:mm");
+                        //    ore.Add(ora);
+                    }
+
+                }
             }
 
             return orariDisponibili;
@@ -211,8 +219,7 @@ namespace AppAppartamentiApi.Controllers
 
             List<AppuntamentoDtoOutput> appuntamenti = await dbDataContext.Appuntamento
                                                 .Include(x => x.Annuncio)
-                                                .Where(x => (x.IdDestinatario == currentUserId || x.IdRichiedente == currentUserId)
-                                                                && x.Data >= GiornoInizio && x.Data <= GiornoFine)
+                                                .Where(x => x.Data >= GiornoInizio && x.Data <= GiornoFine && (x.IdDestinatario == currentUserId || ( x.IdRichiedente == currentUserId && x.Confermato == true)))
                                                 .Select(appuntamento => new AppuntamentoDtoOutput()
                                                 {
                                                     IdAppuntamento = appuntamento.Id,
@@ -250,6 +257,7 @@ namespace AppAppartamentiApi.Controllers
 
         private class BaseInfoUser
         {
+            public Guid IdUser { get; set; }
             public string NomeCognome { get; set; }
             public byte[] Immagine  { get; set; }
         }
@@ -275,7 +283,8 @@ namespace AppAppartamentiApi.Controllers
                                         IdDestinatario = app.IdDestinatario,
                                         IdRichiedente = app.IdRichiedente,
                                         Confermato = app.Confermato,
-                                        Data = app.Data
+                                        Data = app.Data,
+                                        FromMe = (app.IdRichiedente == currentUserId ? true : false)
                                         })
                                         .FirstOrDefaultAsync();
 
@@ -345,12 +354,15 @@ namespace AppAppartamentiApi.Controllers
             BaseInfoUser infoUser = await dbDataContext.UserInfo
                                                     .Where(x => x.IdAspNetUser == idPersonToMeet)
                                                     .Select(x => new BaseInfoUser() { 
+                                                        IdUser = idPersonToMeet,
                                                         NomeCognome = x.Nome + " " + x.Cognome,
                                                         Immagine = x.FotoProfilo
                                                     }).FirstOrDefaultAsync();
 
             appuntamento.NameAndSurnamePersonToMeet = infoUser.NomeCognome;
             appuntamento.ImagePersonToMeet= infoUser.Immagine;
+            appuntamento.IdPersonToMeet = infoUser.IdUser;
+
 
 
 
@@ -457,30 +469,32 @@ namespace AppAppartamentiApi.Controllers
         private string getFasciaByDayOfWeek(FasceOrarie fasce, DayOfWeek dayOfWeek)
         {
             string fascia = null;
-            switch (dayOfWeek)
-            {
-                case DayOfWeek.Monday:
-                    fascia = fasce.Monday;
-                    break;
-                case DayOfWeek.Tuesday:
-                    fascia = fasce.Tuesday;
-                    break;
-                case DayOfWeek.Wednesday:
-                    fascia = fasce.Wednesday;
-                    break;
-                case DayOfWeek.Thursday:
-                    fascia = fasce.Thursday;
-                    break;
-                case DayOfWeek.Friday:
-                    fascia = fasce.Friday;
-                    break;
-                case DayOfWeek.Saturday:
-                    fascia = fasce.Saturday;
-                    break;
-                case DayOfWeek.Sunday:
-                    fascia = fasce.Sunday;
-                    break;
-            };
+            if(fasce != null) { 
+                switch (dayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        fascia = fasce.Monday;
+                        break;
+                    case DayOfWeek.Tuesday:
+                        fascia = fasce.Tuesday;
+                        break;
+                    case DayOfWeek.Wednesday:
+                        fascia = fasce.Wednesday;
+                        break;
+                    case DayOfWeek.Thursday:
+                        fascia = fasce.Thursday;
+                        break;
+                    case DayOfWeek.Friday:
+                        fascia = fasce.Friday;
+                        break;
+                    case DayOfWeek.Saturday:
+                        fascia = fasce.Saturday;
+                        break;
+                    case DayOfWeek.Sunday:
+                        fascia = fasce.Sunday;
+                        break;
+                };
+            }
             return fascia;
         }
     }

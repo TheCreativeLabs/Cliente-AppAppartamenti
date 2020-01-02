@@ -8,12 +8,13 @@
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False"
+             NavigationPage.HasBackButton="True"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
+             
              >
 
     <ContentPage.Resources>
@@ -31,7 +32,6 @@
 
     <NavigationPage.TitleView >
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
-            <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
             <Button Style="{x:StaticResource NavCancelButton}" x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
                    FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
@@ -306,8 +306,6 @@
                             Text="&#xf044;" HorizontalOptions="End"
                             FontFamily="{x:StaticResource FA-Solid}" TextColor="White" WidthRequest="50">
                     </Button>
-
-                   
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="10" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >

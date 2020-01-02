@@ -12,6 +12,7 @@
              ios:Page.UseSafeArea="true"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{x:StaticResource SfondoColor}"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              >
 
    
@@ -19,12 +20,11 @@
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
             <conv:PrezzoConverter x:Key="PrezzoConverter" />
-
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-         <Grid Padding="20">
+         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto">
                 </RowDefinition>
@@ -33,13 +33,17 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0" Orientation="Horizontal">
+            <StackLayout Grid.Row="0">
+            <controls:BackButton Grid.Row="0" Padding="20,20,0,0" HorizontalOptions="StartAndExpand"/>
+
+                <StackLayout Orientation="Horizontal">
                 <Label HorizontalTextAlignment="Start" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.MyListing}"></Label>
 
                 <Button BackgroundColor="Transparent"
                     Text="&#xf055;" HorizontalOptions="EndAndExpand" TextColor="{x:StaticResource PrimaryColor}" WidthRequest="80" FontSize="Title" Padding="20,20,20,0"  VerticalOptions="CenterAndExpand" Style="{x:StaticResource NavBackButton}" 
                     Clicked="BtnAdd_Clicked">
                 </Button>
+                    </StackLayout>
             </StackLayout>
 
             <ListView Grid.Row="1" x:Name="AnnunciiListView"
@@ -79,7 +83,7 @@
                                         </AbsoluteLayout>
                                     </Grid>
 
-                                    <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                    <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding TipologiaProprieta}" />

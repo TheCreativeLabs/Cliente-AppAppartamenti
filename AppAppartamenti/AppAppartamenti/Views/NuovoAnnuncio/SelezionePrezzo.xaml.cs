@@ -68,18 +68,24 @@ namespace AppAppartamenti.Views
             }
 
             pckClasseEnergetica.ItemsSource = listClasseEnergetica;
-            pckClasseEnergetica.SelectedIndex=0;
             pckRiscaldamento.ItemsSource = listTipologiaRiscaldamento;
-            pckRiscaldamento.SelectedIndex=0;
 
             if (pckClasseEnergetica.SelectedItem ==null && dtoToModify != null && dtoToModify.Item.ClasseEnergetica != null)
             {
                 //FIXME LE SEGUENTI DUE RIGHE FUNZIONANO SOLO X LINGUA ITALIANA, CAMBIARE GESTIONE E LAVORARE CON IL CODICE INVECE CHE CON LA DESCRIZIONE 
                 pckClasseEnergetica.SelectedItem = listClasseEnergetica.Where(x => x.Descrizione == dtoToModify.Item.ClasseEnergetica).FirstOrDefault();
             }
+            else
+            {
+                pckClasseEnergetica.SelectedIndex = 0;
+
+            }
             if (pckRiscaldamento.SelectedItem  == null && dtoToModify != null && dtoToModify.Item.TipologiaRiscaldamento!=null)
             {
                 pckRiscaldamento.SelectedItem = listTipologiaRiscaldamento.Where(x => x.Descrizione == dtoToModify.Item.TipologiaRiscaldamento).FirstOrDefault();
+            }
+            else {
+                pckRiscaldamento.SelectedIndex = 0;
             }
         }
 
@@ -93,6 +99,15 @@ namespace AppAppartamenti.Views
             {
                 //Navigo alla pagina d'errore.
                 await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
+
+        private void Entprezzo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty( entPrezzo.Text))
+            {
+                entPrezzo.Text = string.Format("{0:N0}",Decimal.Parse(entPrezzo.Text));
             }
         }
 

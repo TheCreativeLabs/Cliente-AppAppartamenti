@@ -557,6 +557,11 @@ namespace AppAppartamentiApi.Controllers
                 var url = datiPicture.Substring(datiPicture.IndexOf("url\": \"") + 7);
                 url = url.Substring(0, url.IndexOf("\""));
                 userInfo.PhotoUrl = url;
+                using (var webClient = new WebClient())
+                {
+                    byte[] imageBytes = webClient.DownloadData(url);
+                    userInfo.FotoProfilo = imageBytes;
+                }
             }
 
 

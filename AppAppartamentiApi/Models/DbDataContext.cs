@@ -64,7 +64,7 @@ namespace AppAppartamentiApi.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Annuncio>()
-                .HasMany(e => e.AnnuncioMessaggi)
+                .HasMany(e => e.Chat)
                 .WithRequired(e => e.Annuncio)
                 .HasForeignKey(e => e.IdAnnuncio)
                 .WillCascadeOnDelete(false);

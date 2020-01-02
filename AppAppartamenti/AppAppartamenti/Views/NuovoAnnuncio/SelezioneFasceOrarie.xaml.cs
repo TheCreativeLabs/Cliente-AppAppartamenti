@@ -134,37 +134,37 @@ namespace AppAppartamenti.Views
                     case 1:
                         Lunedi = true;
                         stkLunedi.IsVisible = true;
-                        btn_ToggleLun.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleLun.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                     case 2:
                         Martedi = true;
                         stkMartedi.IsVisible = true;
-                        btn_ToggleMar.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleMar.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                     case 3:
                         Mercoledi = true;
                         stkMercoledi.IsVisible = true;
-                        btn_ToggleMer.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleMer.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                     case 4:
                         Giovedi = true;
                         stkGiovedi.IsVisible = true;
-                        btn_ToggleGio.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleGio.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                     case 5:
                         Venerdi = true;
                         stkVenerdi.IsVisible = true;
-                        btn_ToggleVen.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleVen.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                     case 6:
                         Sabato = true;
                         stkSabato.IsVisible = true;
-                        btn_ToggleSab.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleSab.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                     case 7:
                         Domenica = true;
                         stkDomenica.IsVisible = true;
-                        btn_ToggleDom.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                        btn_ToggleDom.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
                         break;
                 }
 
@@ -240,13 +240,16 @@ namespace AppAppartamenti.Views
 
             if (isStackVisible)
             {
-                btn.BackgroundColor = (Color)App.Current.Resources["LightColor"];
+                btn.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                btn.TextColor = Color.White;
             }
             else
             {
-                updateListView(item, new List<TimeSlot>());
+                var list = new List<TimeSlot>();
+                list.Add(new TimeSlot() { DeleteEnabled = false, GiornoRiferimento = item });
+                updateListView(item, list);
                 btn.BackgroundColor = Color.White;
-
+                btn.TextColor = (Color)App.Current.Resources["DarkColor"];
             }
         }
         
@@ -448,6 +451,8 @@ namespace AppAppartamenti.Views
                 pickerDalle.ItemsSource = timeSlotViewModel.Time;
                 pickerDalle.ColumnHeaderText = timeSlotViewModel.Header;
                 pickerDalle.IsOpen = true;
+                pickerDalle.IsVisible = true;
+                stkPicker.IsVisible = true;
             }
             catch (Exception ex)
             {
@@ -557,6 +562,8 @@ namespace AppAppartamenti.Views
                 pickerAlle.ItemsSource = timeSlotViewModel.Time;
                 pickerAlle.ColumnHeaderText = timeSlotViewModel.Header;
                 pickerAlle.IsOpen = true;
+                pickerAlle.IsVisible = true;
+                stkPicker.IsVisible = true;
             }
             catch (Exception ex)
             {
@@ -582,6 +589,14 @@ namespace AppAppartamenti.Views
 
             List<TimeSlot> copy = listaRiferimentoCorrente.ToList();
             updateListView(GiornoCorrente, copy);
+        }
+
+
+        private void Picker_Closed(object sender,EventArgs e)
+        {
+            stkPicker.IsVisible = false;
+            pickerAlle.IsVisible = false;
+            pickerDalle.IsVisible = false;
         }
 
         private async void BtnProcedi_Clicked(object sender, EventArgs e)
