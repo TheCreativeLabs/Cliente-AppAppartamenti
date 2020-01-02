@@ -25,11 +25,16 @@ namespace AppAppartamentiApi
 
         public byte[] ImagePersonToMeet { get; set; }
 
+        public Guid IdPersonToMeet { get; set; }
+
         public bool Confermato { get; set; }
+
+        public bool FromMe { get; set; }
 
         public AnnunciDtoOutput InfoAnnuncio { get; set; }
 
         public string CoordinateGeograficheAnnuncio { get; set; }
+
 
     }
 }

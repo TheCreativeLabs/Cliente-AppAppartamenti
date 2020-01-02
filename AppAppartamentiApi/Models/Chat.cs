@@ -25,5 +25,7 @@ namespace AppAppartamentiApi.Models
         public virtual UserInfo UserInfoMittente { get; set; }
 
         public virtual UserInfo UserInfoDestinatario { get; set; }
+
+        public virtual Annuncio Annuncio { get; set; }
     }
 }

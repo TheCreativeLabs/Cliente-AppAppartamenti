@@ -107,7 +107,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                 AnnuncioDtoOutput annuncio = await annunciClient.GetAnnuncioByIdAsync((Guid) Id);
                 ViewData["Annuncio"] = annuncio;
                 List<byte[]> immagini = (await annunciClient.GetImmaginiByIdAnnuncioAsync((Guid)Id)).ToList();
-                ViewData["ImmaginiAnnuncio"] = annuncio;
+                ViewData["ImmaginiAnnuncio"] = immagini;
             }
             //--fine integrazione
 

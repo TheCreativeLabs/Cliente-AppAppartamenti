@@ -288,6 +288,8 @@
     <Compile Include="Dto\AnnuncioDtoInput.cs" />
     <Compile Include="Dto\AppuntamentoDtoOutput.cs" />
     <Compile Include="Dto\AppuntamentoDto.cs" />
+    <Compile Include="Dto\ChatDtoOutput.cs" />
+    <Compile Include="Dto\ChatListDtoOutput.cs" />
     <Compile Include="Dto\MessaggioDto.cs" />
     <Compile Include="Dto\NotificationInfoDto.cs" />
     <Compile Include="Dto\ComuneDto.cs" />

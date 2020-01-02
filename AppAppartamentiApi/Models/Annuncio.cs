@@ -17,8 +17,8 @@ namespace AppAppartamentiApi.Models
             Appuntamenti = new HashSet<Appuntamento>();
             FasceOrarie = new HashSet<FasceOrarie>();
             ImmaginiPlanimetria = new HashSet<ImmaginePlanimetria>();
+            Chat = new HashSet<Chat>();
             Video = new HashSet<Video>();
-            AnnuncioMessaggi = new HashSet<AnnuncioMessaggi>();
 
         }
 
@@ -114,9 +114,6 @@ namespace AppAppartamentiApi.Models
         public virtual ICollection<ImmaginePlanimetria> ImmaginiPlanimetria { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnnuncioMessaggi> AnnuncioMessaggi { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Video> Video { get; set; }
 
         public virtual string CoordinateGeografiche { get; set;  }
@@ -126,6 +123,9 @@ namespace AppAppartamentiApi.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appuntamento> Appuntamenti { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Chat> Chat { get; set; }
 
     }
 }

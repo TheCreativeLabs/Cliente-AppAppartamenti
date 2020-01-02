@@ -5,22 +5,20 @@ namespace AppAppartamentiApi
 
     public partial class MessaggioDto
     {
-
-        [Required]
-        public Guid IdAnnuncio { get; set; }
-
-
         /// <summary>
         /// In input possiamo anche non passarlo perchè è il proprietario dell'annuncio e lo possiamo ricavare tramite idAnnuncio
         /// </summary>
-        public Guid IdUserDestinatario { get; set; }
+        public Guid IdDestinatario { get; set; }
+
+        public Guid IdMittente { get; set; }
 
         [StringLength(8000)]
         public string Messaggio { get; set; }
 
-        /// <summary>
-        /// Se IdChat è null, il messaggio è il primo di una nuova chat e verrà creata la chat
-        /// </summary>
-        public Guid? IdChat { get; set; }
+        public DateTime DataInserimento { get; set; }
+
+        public DateTime? DataLettura { get; set; }
+
+        public bool FromMe { get; set; }
     }
 }
