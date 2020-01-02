@@ -66,21 +66,39 @@
 
                     <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
 
-                    <appappartamenti:ShadowFrame Padding="0" HasShadow="False" BorderColor="LightGray">
                         <StackLayout Orientation="Horizontal">
-                            <Image HeightRequest="100" WidthRequest="100" Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                            <appappartamenti:ShadowFrame HasShadow="False" Padding="0" HeightRequest="80" CornerRadius="10" WidthRequest="80">
+                                <Image  Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                            </appappartamenti:ShadowFrame>
+
+
                             <StackLayout VerticalOptions="CenterAndExpand">
-                                    <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding InfoAnnuncio.TipologiaProprieta}" Style="{x:StaticResource AdTitle}"></Label>
-                                    <Label Text="{Binding InfoAnnuncio.TipologiaAnnuncio, StringFormat='in {0}'}" Style="{x:StaticResource AdTitle}"></Label>
-                                    <Label Text="{Binding InfoAnnuncio.Prezzo, StringFormat='a {0} €'}"  Style="{x:StaticResource AdTitle}"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding InfoAnnuncio.Superficie, StringFormat='Superficie: {0} m²'}" Style="{x:StaticResource AdSubtitle}"></Label>
-                                </StackLayout>
+                                     <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding InfoAnnuncio.TipologiaProprieta}" />
+                                        <Span Text=" in "/>
+                                        <Span  Text="{Binding InfoAnnuncio.TipologiaAnnuncio}" />
+                                        <Span Text=" a "/>
+                                        <Span Text="{Binding InfoAnnuncio.Prezzo, StringFormat='{}{0:N0}€'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding InfoAnnuncio.Indirizzo}"  />
+                                        <Span Text=", "/>
+                                        <Span Text="{Binding InfoAnnuncio.NomeComune}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
                             </StackLayout>
                         </StackLayout>
-                    </appappartamenti:ShadowFrame>
+                            
             </StackLayout>
                 </StackLayout>
             </ScrollView>

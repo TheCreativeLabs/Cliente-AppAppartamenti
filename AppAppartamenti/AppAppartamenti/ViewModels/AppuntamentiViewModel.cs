@@ -18,7 +18,6 @@ namespace AppAppartamenti.ViewModels
         public ObservableCollection<AppuntamentoDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-
         public AppuntamentiViewModel()
         {
             Items = new ObservableCollection<AppuntamentoDtoOutput>();

@@ -28,6 +28,9 @@ $(document).ready(function () {
         $("#searchbarInput").keyup(function () {
             EnableSearch(this);
         })
+
+        //Carica gli appuntamenti di oggi
+        LoadTodayAppointment();
     }
 
     //Login con Facebook
@@ -64,7 +67,21 @@ $(document).ready(function () {
             $(passwordInput).attr("type", "text");
         }
     });
+
+
+
+   
 });
+
+//Carica la lista degli appuntamenti di oggi
+function LoadTodayAppointment() {
+    let url = UrlTodayAppointment;
+
+    $('#TodayAppointment').load(url, function () {
+        isLoading = false;
+        HideLoader()
+    });
+}
 
 //Gestisce l'autenticazione con facebook
 function FacebookLogin(button) {

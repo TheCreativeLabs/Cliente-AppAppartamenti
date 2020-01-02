@@ -1,0 +1,91 @@
+﻿@model AppuntamentoDettaglioDtoOutput
+
+ <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Riepilogo appuntamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h6 class="section-title">Appuntamento con</h6>
+
+            @{
+                if (Model.ImagePersonToMeet != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.ImagePersonToMeet);
+                    var imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
+                    <div class="mb-2 mx-auto image-profile-edit" >
+                        <img id="profileImage" src="@imgSrc"  alt="image" class="rounded-circle d-block w-100" />
+                    </div>
+                }
+            }
+
+            <p>@Model.NameAndSurnamePersonToMeet</p>
+        </div>
+
+        <div class="col-12">
+            <h6 class="section-title">Quando</h6>
+
+            <p>@Model.Data.ToString("dd/MM/yyyy HH:mm")</p>
+        </div>
+
+        <div class="col-12">
+            <h6 class="section-title">Dove</h6>
+
+            <p>@string.Format("{0}, {1}",Model.InfoAnnuncio.Indirizzo,Model.InfoAnnuncio.NomeComune)</p>
+
+            <div id="googleMap" data-latlng="@Model.CoordinateGeograficheAnnuncio" class="map w-100" style="height:200px;"></div>
+        </div>
+
+        <div class="col-12">
+             <h6 class="section-title">Annuncio</h6>
+
+            <div class="row">
+                    <div class="col-md-6">
+                        @{
+                            if (Model.InfoAnnuncio.ImmaginePrincipale != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.InfoAnnuncio.ImmaginePrincipale);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+                                <img src="@imgSrc" class="card-img-annuncio" alt="image" style="height:150px !important;" />
+                            }
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="p-1 mt-2">
+                                <h6 class="section-title">
+                                    @Model.InfoAnnuncio.TipologiaProprieta in  @Model.InfoAnnuncio.TipologiaAnnuncio
+                                    <br />
+                                    <small class="text-muted">@Model.InfoAnnuncio.Indirizzo, @Model.InfoAnnuncio.NomeComune</small>
+                                    <br />
+                                    <strong>@string.Format("{0:N0}€", Model.InfoAnnuncio.Prezzo)</strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        @if(Model.Confermato.HasValue && Model.Confermato.Value)
+        {
+            <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger" data-dismiss="modal">Annulla appuntamento</button>
+        }
+        else
+        {
+            <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger">Rifiuta</button>
+            <button onclick="AcceptAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-success">Accetta</button>
+        }
+
+      </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUDWKfs6tGF891vL-VwXYubP_IKuG8exg&callback=setMap"></script>

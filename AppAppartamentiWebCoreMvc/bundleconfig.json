@@ -3,7 +3,6 @@
     "outputFileName": "wwwroot/bundle/bundle.min.css",
     "inputFiles": [
       "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
-      "wwwroot/css/bootstrap.min.css",
       "wwwroot/lib/nouislider/nouislider.min.css",
       "wwwroot/css/fontawesome.min.css",
       "wwwroot/css/brands.min.css",

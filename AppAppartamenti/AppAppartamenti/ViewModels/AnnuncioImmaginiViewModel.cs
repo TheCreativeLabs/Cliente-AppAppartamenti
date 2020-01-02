@@ -33,7 +33,6 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-
                 AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
                 ICollection<byte[]> immagini = await annunciClient.GetImmaginiByIdAnnuncioAsync(IdAnnuncio);

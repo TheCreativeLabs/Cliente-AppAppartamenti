@@ -23,11 +23,11 @@ using System.Drawing;
 namespace AppAppartamentiWebCoreMvc.Controllers
 {
     [Authorize]
-    public class AgendaController : Controller
+    public class MessaggiController : Controller
     {
         IConfiguration _configuration;
 
-        public AgendaController(IConfiguration configuration)
+        public MessaggiController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -37,29 +37,26 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View();
         }
 
-        public async Task<ActionResult> GetAppointmentList(DateTime SelectedDate)
+        public async Task<IActionResult> ListAsync()
         {
             HttpClient httpClient = new HttpClient();
-            AgendaClient agendaClient = new AgendaClient(httpClient);
+            MessaggiClient messaggiClient = new MessaggiClient(httpClient);
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            var list = await messaggiClient.GetChatListAsync();
+            return View(list.ToList());
+        }
+
+        public async Task<ActionResult> GetChatDetail(Guid IdChat)
+        {
+            HttpClient httpClient = new HttpClient();
+            MessaggiClient messaggiClient = new MessaggiClient(httpClient);
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-            var listaAppuntamenti =  await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
+            var chat = await messaggiClient.GetChatAsync(IdChat,null,null);
 
-            return PartialView("_AppuntamentiPartial", listaAppuntamenti.ToList());
+            return PartialView("_ChatDetailPartial", chat);
         }
-
-        public async Task<ActionResult> GetAppointmentDetail(Guid SelectedAppointment)
-        {
-            HttpClient httpClient = new HttpClient();
-            AgendaClient agendaClient = new AgendaClient(httpClient);
-            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-
-            var appuntamento = await agendaClient.GetAppuntamentoByIdAsync(SelectedAppointment);
-
-            return PartialView("_AppuntamentiDetailPartial", appuntamento);
-        }
-
     }
 }
