@@ -8,14 +8,14 @@
 
 <div class="container container-custom">
     <div class="col-sm-8 offset-sm-2">
-        <h2>
+        <label class="title">
             Messaggi
-        </h2>
+        </label>
 
         @{
             foreach (var msg in Model)
             {
-                <div class="col-12 border-bottom row-message" onclick="OpenModal('@msg.IdChat')">
+                <div class="col-12 border-bottom row-message" onclick="OpenModal('@msg.IdChat', '@string.Format("{0} {1}",msg.Nome,msg.Cognome)')">
                     <div class="row p-3">
                         <div class="col-2">
                             @{ if (msg.FotoUtente != null)
@@ -29,10 +29,12 @@
                             }
                         </div>
                         <div class="col-10">
-                            <h6>@msg.Nome @msg.Cognome
-                                <br />
-                                <small class="text-muted">@msg.DataCreazione.Value.ToString("dd/MM/yyyy")</small>
-                            </h6>
+                            <label class="adTitle">@msg.Nome @msg.Cognome
+                            </label>
+
+                            <br />
+
+                            <span class="info">@msg.DataCreazione.Value.ToString("dd/MM/yyyy")</span>
                         </div>
                     </div>
                 </div>

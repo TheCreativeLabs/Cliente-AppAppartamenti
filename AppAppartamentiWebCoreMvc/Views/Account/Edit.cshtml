@@ -12,7 +12,7 @@
         <div class="col-sm-8 offset-sm-2 col-xs-12 ">
             <a asp-action="Detail" asp-controller="Account" class="text-info float-right mt-4">@_localizer["Cancel"]</a>
 
-            <h2 class="mt-2">@_localizer["Title"]</h2>
+             <label class="title">@_localizer["Title"]</label>
         </div>
 
         @{
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group text-center">
                 <input type="file" class="file-input" id="inputAddImage">
-                <label class="file-label p-2 text-primary" for="inputAddImage">@_localizer["EditImage"]</label>
+                <label class="file-label p-2 text-dark" for="inputAddImage">@_localizer["EditImage"]</label>
             </div>
         </div>
         <div class="col-sm-5 col-xs-12">
@@ -48,11 +48,6 @@
                     <label asp-for="Surname" class="control-label">@_localizer["Surname"]</label>
                     <input asp-for="Surname" class="form-control" value="@userInfo.Cognome" placeholder="@_localizer["Surname"]"/>
                     <span asp-validation-for="Surname" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" value="@userInfo.Email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="DataNascita" class="control-label">@_localizer["BirthDate"]</label>

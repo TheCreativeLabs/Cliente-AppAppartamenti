@@ -165,8 +165,20 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View("../Home/Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            AnnunciClient annunciClient = new AnnunciClient(httpClient);
+
+            await annunciClient.DeleteAnnuncioAsync(Id);
+
+            return RedirectToAction("List");
+        }
+
         [HttpGet]
-        [Authorize]
         public async Task<string> AppuntamentiDisponibili(string IdAnnuncio, string Giorno)
         {
             ICollection<string> orariDisponibili = new List<string>();

@@ -4,7 +4,7 @@
     if(Model == null || !(Model.Any()))
     {
         <div class="col-12 alert bg-light">
-            <label class="h6">Non sono presenti annunci.</label>
+            <label>Non sono presenti annunci.</label>
         </div>
     }
 }
@@ -13,22 +13,10 @@
 {
         string detailUrl = @Url.Action("Detail", "Annunci", new { Id = item.Id });
 
-        <div class="card card-annuncio mb-3 shadow-sm" onclick="NavigateToDetail('@detailUrl')">
+        <div class="card card-annuncio mb-5" onclick="NavigateToDetail('@detailUrl')">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    @{
-                        if (item.ImmaginePrincipale != null)
-                        {
-                            var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
-                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-
-                            <img src="@imgSrc" class="card-img card-img-annuncio" alt="image" />
-                        }
-                    }
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body p-0">
-                        <div class="card-header p-1 bg-light border-0" style="text-align: end;">
+                     <div class="position-absolute bg-transparent p-2 border-0" style="text-align: end;">
                             @{
                                 string cssClass = "";
 
@@ -37,32 +25,40 @@
                                     cssClass = "text-preferred";
                                 }
 
-                                <button type="button" class="btn bg-light @cssClass" data-preferred="@item.FlagPreferito" onclick="AddOrRemovePreferred(this,'@item.Id')"><i class="fas fa-heart"></i></button>
+                                <button type="button" class="btn ad-action-button @cssClass" data-preferred="@item.FlagPreferito" onclick="AddOrRemovePreferred(this,'@item.Id')"><i class="fas fa-heart"></i></button>
                             }
 
-                            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn">
+                            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn ad-action-button">
                                 <i class="fas fa-share-alt"></i>
                             </button>
                         </div>
+                    @{
+                        if (item.ImmaginePrincipale != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
-                        <div class="p-3 mt-2">
-                            <h6>
-                                @item.TipologiaProprieta in  @item.TipologiaAnnuncio
-                                <br />
-                                <small class="text-muted">@item.Indirizzo, @item.NomeComune</small>
-                                <br />
-                                <strong>@string.Format("{0:N0}€", item.Prezzo)</strong>
-                            </h6>
+                            <img src="@imgSrc" class="card-img rounded" alt="image" height="260" />
+                        }
+                    }
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body p-0">
+                        <div class="pl-3 mt-0">
+                             <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
+                            <br />
+                            <label  >@item.Indirizzo, @item.NomeComune</label>
+                            <br />
+                            <label class="mb-3">Superficie: @item.Superficie m² </label>
 
-                                <hr />
-
+                            <br />
                             @{
                                 if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200) {
-                                    <small class="font-weight-ligh">@item.Descrizione.Substring(0, 200)...</small>
+                                    <span class="info">@item.Descrizione.Substring(0, 200)...</span>
 
                                 } else
                                 {
-                                    <small class="font-weight-ligh">@item.Descrizione...</small>
+                                    <span class="info">@item.Descrizione...</span>
                                 }
                             }
                         </div>

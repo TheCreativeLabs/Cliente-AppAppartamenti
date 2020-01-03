@@ -1,9 +1,31 @@
 ﻿<div class="modal" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div id="MessagesList" class="modal-content">
-
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chat-modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0" style="max-height:500px">
+                <div id="MessagesList"  class="container-fluid">
+                
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-10">
+                            <textarea class="form-control" placeholder="Manda un messaggio"></textarea>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary rounded-circle" style="height:40px;width:40px"> <i class="fas fa-arrow-up"></i> </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+     </div>
 </div>
 
 

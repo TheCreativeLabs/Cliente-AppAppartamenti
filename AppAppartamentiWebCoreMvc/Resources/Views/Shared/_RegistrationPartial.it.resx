@@ -74,7 +74,7 @@
     <value>Conferma password</value>
   </data>
      <data name="ConfirmCondition" xml:space="preserve">
-    <value>Accetto le condizioni</value>
+    <value>Ho più di 18 anni e accetto le Condizioni di utilizzo e la Politica sulla Privacy</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Registrati</value>
