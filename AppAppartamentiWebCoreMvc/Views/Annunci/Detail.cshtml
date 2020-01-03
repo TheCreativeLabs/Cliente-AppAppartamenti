@@ -368,7 +368,7 @@
 
                         </div>
                         <div class="col-6 mx-auto">
-                            <button class="btn btn-primary btn-sm btn-block btn-prenota-appuntamento">
+                            <button class="btn btn-primary btn-sm btn-block btn-prenota-appuntamento" style="display:none">
                                 Prenota
                             </button>
                         </div>
@@ -385,43 +385,43 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            var calendarEl2 = document.getElementById('appointment-caledar');
+            //var calendarEl2 = document.getElementById('appointment-caledar');
             var idAnnuncio = document.getElementById('id-annuncio').value;
 
             var immagini = GetImmaginiAnnuncioAjax(idAnnuncio);
 
-            var calendar2 = new FullCalendar.Calendar(calendarEl2, {
-                plugins: ['dayGrid', 'timeGrid', 'interaction'],
-                locale: selectedLanguage,
-                themeSystem: 'bootstrap',
-                header: {
-                    left: 'title',
-                    center: '',
-                    right: 'prev,next'
-                },
-                footer: {
-                    left: '',
-                    center: '',
-                    right: ''
-                },
-                dateClick: function (info) {
-                    var now = new Date();
-                    if ((now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()) == info.dateStr || info.date > (now)) {
-                        // This allows today and future date
-                        $('#giorno-selected').val(info.dateStr);
-                        //alert('Clicked on: ' + info.dateStr);
-                        //$(info.dayEl).addClass('fc-state-highlight');
-                        $('.fc-today').css('blackground', 'transparent !important'); //not working
-                        GetAndShowAppuntamentiDisponibili(idAnnuncio, info.dateStr); //+'T00:00:00'
-                    } else {
-                        // Else part is for past dates: do nothing
-                    }
-                },
-                selectable: true
+            //var calendar2 = new FullCalendar.Calendar(calendarEl2, {
+            //    plugins: ['dayGrid', 'timeGrid', 'interaction'],
+            //    locale: selectedLanguage,
+            //    themeSystem: 'bootstrap',
+            //    header: {
+            //        left: 'title',
+            //        center: '',
+            //        right: 'prev,next'
+            //    },
+            //    footer: {
+            //        left: '',
+            //        center: '',
+            //        right: ''
+            //    },
+            //    dateClick: function (info) {
+            //        var now = new Date();
+            //        if ((now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()) == info.dateStr || info.date > (now)) {
+            //            // This allows today and future date
+            //            $('#giorno-selected').val(info.dateStr);
+            //            //alert('Clicked on: ' + info.dateStr);
+            //            //$(info.dayEl).addClass('fc-state-highlight');
+            //            $('.fc-today').css('blackground', 'transparent !important'); //not working
+            //            GetAndShowAppuntamentiDisponibili(idAnnuncio, info.dateStr); //+'T00:00:00'
+            //        } else {
+            //            // Else part is for past dates: do nothing
+            //        }
+            //    },
+            //    selectable: true
 
-            });
+            //});
 
-            calendar2.render();
+            //calendar2.render();
         });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUDWKfs6tGF891vL-VwXYubP_IKuG8exg&callback=setMap"></script>
