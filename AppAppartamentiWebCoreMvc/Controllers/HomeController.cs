@@ -46,6 +46,16 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View();
         }
 
+        public IActionResult CookiePolicy()
+        {
+            return View();
+        }
+
+        public IActionResult GeneralCondition()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

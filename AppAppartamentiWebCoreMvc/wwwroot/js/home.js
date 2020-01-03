@@ -5,10 +5,12 @@
     window.onscroll = function () { changeScroll() };
 
     $('#btnSignIn').click(function () {
+        $('.input-validation-error').removeClass('input-validation-error');
         ShowModalSignIn();
     });
 
     $('#btnSignUp').click(function () {
+        $('.input-validation-error').removeClass('input-validation-error');
         ShowModalSignUp();
     });
 
@@ -24,10 +26,15 @@
     if (loggedUser != null && loggedUser.length > 0) {
         $("#txtSearchHome").keyup(function () {
             EnableSearch(this);
-        })
+        });
 
         //$("#recent-ad").load("/Annunci/RecentAds", function () {
         //});
+    }
+    else {
+        $("#txtSearchHome").keyup(function () {
+            ShowModalSignIn();
+        });
     }
 
     $("#btn-restore").click(function (e) {

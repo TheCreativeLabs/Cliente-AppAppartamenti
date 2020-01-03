@@ -324,7 +324,7 @@ p{
 }
 
 .noUi-connect{
-    background-color:var(--cyan) !important;
+    background-color:var(--color-primary) !important;
 }
 
 .plus-minus-input {

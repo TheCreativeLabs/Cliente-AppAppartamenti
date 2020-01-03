@@ -110,7 +110,7 @@ namespace AppAppartamentiWebCoreMvc
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("en-US"),
+                DefaultRequestCulture = new RequestCulture("it"),
                 // Formatting numbers, dates, etc.
                 SupportedCultures = supportedCultures,
                 // UI strings that we have localized.
