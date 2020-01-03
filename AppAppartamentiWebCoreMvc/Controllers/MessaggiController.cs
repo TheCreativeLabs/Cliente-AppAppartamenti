@@ -58,5 +58,16 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             return PartialView("_ChatDetailPartial", chat);
         }
+
+        [HttpPost]
+        public async void Send(Guid IdChat, Guid IdPersonToChat, string Message)
+        {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            MessaggiClient messaggiClient = new MessaggiClient(httpClient);
+
+            await messaggiClient.InsertMessaggioAsync(IdChat, IdPersonToChat, Message);
+        }
     }
 }
