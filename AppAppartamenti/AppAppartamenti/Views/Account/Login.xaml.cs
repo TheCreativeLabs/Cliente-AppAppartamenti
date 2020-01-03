@@ -48,9 +48,10 @@ namespace AppAppartamenti.Views.Login
 
         private async void btnAccedi_ClickedAsync(object sender, EventArgs e)
         {
+            var btn = (Button)sender;
             try
             {
-                var btn =  (Button)sender;
+                
                 btn.IsEnabled = false;
 
                 bool formIsValid = true;
@@ -85,8 +86,13 @@ namespace AppAppartamenti.Views.Login
             }
             catch (ApplicationException Ex)
             {
+                //ex.message
                 //Se sono qui significa che non ho i diritti per accedere.
-                await DisplayAlert("Attenzione", "L'indirizzo email o la password non sono validi.", "OK");
+                await DisplayAlert("Attenzione",
+                    "L'indirizzo email o la password non sono validi.",
+                    "OK");
+                // Se pensi che i tuoi dati siano corretti, verifica di aver confermato l'account al link che ti abbiamo inviato per email
+                btn.IsEnabled = true;
             }
             catch (Exception Ex)
             {

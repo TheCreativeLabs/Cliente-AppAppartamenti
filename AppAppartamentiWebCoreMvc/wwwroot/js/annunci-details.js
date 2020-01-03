@@ -3,10 +3,53 @@
 
     window.onscroll = function () { changeScroll() };
 
+
+    var calendarEl2 = document.getElementById('appointment-caledar');
+    var idAnnuncio = document.getElementById('id-annuncio').value;
+
+    var calendar2 = new FullCalendar.Calendar(calendarEl2, {
+        plugins: ['dayGrid', 'timeGrid', 'interaction'],
+        locale: selectedLanguage,
+        themeSystem: 'bootstrap',
+        header: {
+            left: 'title',
+            center: '',
+            right: 'prev,next'
+        },
+        footer: {
+            left: '',
+            center: '',
+            right: ''
+        },
+        dateClick: function (info) {
+            var now = new Date();
+            if ((now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()) == info.dateStr || info.date > (now)) {
+                // This allows today and future date
+                $('#giorno-selected').val(info.dateStr);
+                //alert('Clicked on: ' + info.dateStr);
+                //$(info.dayEl).addClass('fc-state-highlight');
+                $('.fc-today').css('blackground', 'transparent !important'); //not working
+                GetAndShowAppuntamentiDisponibili(idAnnuncio, info.dateStr); //+'T00:00:00'
+            } else {
+                // Else part is for past dates: do nothing
+            }
+        },
+        selectable: true
+
+    });
+
+    calendar2.render();
+
+
+
     $(".btn-modal-prenota").click(function(){
         var now = new Date();
         var idAnnuncio = document.getElementById('id-annuncio').value;
-        GetAndShowAppuntamentiDisponibili(idAnnuncio, (now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()));
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        GetAndShowAppuntamentiDisponibili(idAnnuncio, (yyyy) + '-' + (mm) + '-' + (dd));
     });
 
     $(".btn-prenota-appuntamento").click(function () {
@@ -70,11 +113,12 @@ function setMap() {
 
 function GetAndShowAppuntamentiDisponibili(idAnnuncio, giorno) {
     var containerOrari = document.getElementById('appointment-available');
+    $('.btn-prenota-appuntamento').hide();
     containerOrari.innerHTML = '';
     $.when(GetAppuntamentiDisponibiliAjax(idAnnuncio, giorno)).done(function (orari) {
         //var containerOrari = $('#appointment-available');
         
-        if (orari != null) {
+        if (orari != null && orari.length > 0) {
 
             orari.forEach(function (orario, index) {
                 containerOrari.innerHTML += '<label class="btn btn-light btn-orario-appuntamento" "aria-pressed=\"true\""  style="margin:0.5rem">' +
@@ -82,6 +126,10 @@ function GetAndShowAppuntamentiDisponibili(idAnnuncio, giorno) {
                     '</label>';
             });
 
+            $('.btn-prenota-appuntamento').show();
+
+        } else {
+            containerOrari.innerHTML += '<div class="col-12 alert bg-light"><label class="h6">Non ci sono appuntamenti disponibili per il giorno selezionato.</label></div>';
         }
 
         $('.btn-orario-appuntamento').click(function () {
@@ -130,9 +178,15 @@ function PrenotaAppuntamentoAjax(idAnnuncio, giorno, ora) {
         success: function (result, status, xhr) {
             //FIXME GESTIRE SUCCESS
             //alert('Appuntamento success');
+            var i = status;
+            var b = error;
+            var c = xhr;
         },
         error: function (xhr, status, error) {
-            //alert('Appuntamento fail');  
+            //alert('Appuntamento fail');
+            var i = status;
+            var b = error;
+            var c = xhr;
             $('#appointmentModal').modal('toggle');
         }
     });

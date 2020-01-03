@@ -302,4 +302,7 @@
   <data name="Minutes" xml:space="preserve">
     <value>Minuti</value>
   </data>
+  <data name="SaveAd" xml:space="preserve">
+    <value>Salva</value>
+  </data>
 </root>

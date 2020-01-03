@@ -302,4 +302,7 @@ select the days and time slots in which you are available to receive a visit
   <data name="Minutes" xml:space="preserve">
     <value>Minutes</value>
   </data>
+  <data name="SaveAd" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

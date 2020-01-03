@@ -208,7 +208,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         [Authorize]
         public async Task<string> PrenotaAppuntamento(string IdAnnuncio, string Giorno, string Ora)
         {
-            ICollection<string> orariDisponibili = new List<string>();
+            Appuntamento appuntamento = null;
 
             if (!string.IsNullOrEmpty(IdAnnuncio) && !string.IsNullOrEmpty(Giorno))
             {
@@ -239,12 +239,12 @@ namespace AppAppartamentiWebCoreMvc.Controllers
                     IdAnnuncio = new Guid(IdAnnuncio)
                 };
 
-                await agendaClient.InsertAppuntamentoAsync(dto);
+                appuntamento = await agendaClient.InsertAppuntamentoAsync(dto);
             }
 
-            return "";
+            //return "";
 
-            //return JsonConvert.SerializeObject("");
+            return appuntamento != null ? JsonConvert.SerializeObject(appuntamento) : "";
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
