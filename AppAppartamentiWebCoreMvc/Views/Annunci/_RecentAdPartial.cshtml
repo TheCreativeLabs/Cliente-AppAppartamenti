@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AnnunciDtoOutput>
+
+<div class="col-sm-8 offset-sm-2 col-xs-12 p-1 bg-white shadow rounded">
+
+<label class="title">Aggiunti di recente</label>
+
+
+        <div class="row flex-row flex-sm-nowrap pt-3" style="overflow-y:scroll">
+
+
+@foreach (var item in Model)
+{
+        <div class="col-sm-6 col-md-4">
+@{ 
+        string detailUrl = @Url.Action("Detail", "Annunci", new { Id = item.Id });
+    }
+        <div class="card mb-5 border-0" onclick="NavigateToDetail('@detailUrl')">
+            <div class="row ">
+                <div class="col-12">
+                    @{
+                        if (item.ImmaginePrincipale != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
+
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+                            <img src="@imgSrc" class="card-img rounded" alt="image" height="200" />
+                        }
+                    }
+                </div>
+                <div class="col-12">
+                             <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
+                            <br />
+                            <label  >@item.Indirizzo, @item.NomeComune</label>
+                            <br />
+                            <label class="mb-3">Superficie: @item.Superficie m² </label>
+            </div>
+            </div>
+
+        </div>
+
+            </div>
+        @await Html.PartialAsync("_ShareModal", item.Id)
+ }
+
+</div>
+
+</div>

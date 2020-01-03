@@ -126,5 +126,14 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return imagesSrc;
         }
 
+        public async Task<ActionResult> RecentAds()
+        {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+            var recentAds= await annunciClient.GetRicercheRecentiCurrentAsync();
+            return PartialView("~/Views/Annunci/_RecentAdPartial.cshtml", recentAds);
+        }
     }
 }

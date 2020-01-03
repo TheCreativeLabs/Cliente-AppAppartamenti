@@ -25,6 +25,9 @@
         $("#txtSearchHome").keyup(function () {
             EnableSearch(this);
         })
+
+        //$("#recent-ad").load("/Annunci/RecentAds", function () {
+        //});
     }
 
     $("#btn-restore").click(function (e) {

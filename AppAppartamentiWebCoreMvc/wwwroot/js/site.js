@@ -213,7 +213,7 @@ function GetUserInfo() {
 }
 
 function NavigateToDetail(Url) {
-    window.location.href = Url;
+    window.open(Url, '_blank');
 }
 
 function Login(url) {

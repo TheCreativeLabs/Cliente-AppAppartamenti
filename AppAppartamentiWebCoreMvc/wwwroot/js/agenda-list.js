@@ -18,10 +18,7 @@
         },
         dateClick: function (info) {
             let currentUrl = ListAppointmentUrl + "?SelectedDate=" + info.dateStr;
-            $('#ListAppointment').load(currentUrl, function () {
-                isLoading = false;
-                HideLoader()
-            });
+            LoadAppointmentList(currentUrl);
         }
     });
 
@@ -29,28 +26,63 @@
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    let urlToday = ListAppointmentUrl + "?SelectedDate=" + (yyyy+"-"+mm+"-"+dd);
-    $('#ListAppointment').load(urlToday, function () {
-        isLoading = false;
-        HideLoader()
-    });
-
+    let urlToday = ListAppointmentUrl + "?SelectedDate=" + (yyyy + "-" + mm + "-" + dd);
+    LoadAppointmentList(urlToday);
+    
     calendar2.render();
 });
+
+//Caricamento lista appuntamenti
+function LoadAppointmentList(Url) {
+    $("#ListAppointment").empty();
+    $("#agenda-spinner-loading").show();
+    $('#ListAppointment').load(Url, function () {
+        $("#agenda-spinner-loading").hide();
+    });
+}
 
 function LoadAppointmentDetail(IdAppuntamento) {
     let url = DetailAppointmentUrl + "?SelectedAppointment=" + IdAppuntamento;
 
-    $("#AppointmentDetail").load(url, function () {
-    });
-
+    $("#agenda-detail-spinner-loading").show();
+    $("#AppointmentDetail").empty();
     $("#appointmentDetailModal").modal("show");
+
+    $("#AppointmentDetail").load(url, function () {
+        $("#agenda-detail-spinner-loading").hide();
+    });
 }
 
 function AcceptAppointment(IdAppuntamento) {
+    $.ajax({
+        type: "POST",
+        url: "/Agenda/Accept",
+        data: { Id: IdAppuntamento},
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            LoadAppointmentDetail(IdAppuntamento);
+        },
+        error: function (xhr, status, error) {
+            TrapError("Error during SendMessage");
+        }
+    });
 }
 
 function DeleteAppointment(IdAppuntamento) {
+    $.ajax({
+        type: "POST",
+        url: "/Agenda/Accept",
+        data: { Id: IdAppuntamento },
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            $("#appointmentDetailModal").modal("hide");
+        },
+        error: function (xhr, status, error) {
+            TrapError("Error during SendMessage");
+        }
+    });
 }
 
 function setMap() {

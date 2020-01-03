@@ -61,6 +61,8 @@
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />
     <None Remove="wwwroot\js\annunci-create.js" />
+    <None Remove="scripts\app.ts" />
+    <None Remove="scripts\test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="wwwroot\js\facebook-login %28copy%29.js">

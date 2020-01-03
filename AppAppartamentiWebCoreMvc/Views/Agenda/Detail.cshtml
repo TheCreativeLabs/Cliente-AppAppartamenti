@@ -8,20 +8,36 @@
         <div class="col-sm-7">
             <div id="calendar2"></div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-5 text-center">
+            <div id="agenda-spinner-loading" class="spinner-border mt-5" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
             <div id="ListAppointment">
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="appointmentDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal" id="appointmentDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div id="AppointmentDetail">
-
-        </div>
-
-     
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Riepilogo appuntamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="col-12 text-center">
+               <div id="agenda-detail-spinner-loading" class="spinner-border mt-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+          </div>
+       
+          <div id="AppointmentDetail">
+          </div>
+    </div>
+</div>
   </div>
 </div>
 

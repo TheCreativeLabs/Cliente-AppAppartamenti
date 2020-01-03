@@ -178,31 +178,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return RedirectToAction("List");
         }
 
-        [HttpGet]
-        public async Task<string> AppuntamentiDisponibili(string IdAnnuncio, string Giorno)
-        {
-            ICollection<string> orariDisponibili = new List<string>();
-
-            if (!string.IsNullOrEmpty(IdAnnuncio) && !string.IsNullOrEmpty(Giorno))
-            {
-                //Creo il client e setto il Baerer Token
-                HttpClient httpClient = new HttpClient();
-                var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-
-                //Ottengo la lista degli orari disponibili
-                AgendaClient agendaClient = new AgendaClient(httpClient);
-                int day = Int32.Parse(Giorno.Split("-")[2]);
-                int month = Int32.Parse(Giorno.Split("-")[1]);
-                int year = Int32.Parse(Giorno.Split("-")[0]);
-                DateTime gg = new DateTime(year, month, day, 0, 0, 0);
-                int i = 1;
-                i++;
-                orariDisponibili = await agendaClient.GetFasceDisponibiliAnnuncioByGiornoAsync(new Guid(IdAnnuncio), new DateTimeOffset(gg));
-            }
-
-            return JsonConvert.SerializeObject(orariDisponibili);
-        }
+       
 
         [HttpGet]
         [Authorize]

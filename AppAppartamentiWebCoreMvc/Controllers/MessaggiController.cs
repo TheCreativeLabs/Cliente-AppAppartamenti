@@ -47,14 +47,14 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View(list.ToList());
         }
 
-        public async Task<ActionResult> GetChatDetail(Guid IdChat)
+        public async Task<ActionResult> GetChatDetail(Guid? IdChat,Guid? IdAnnuncio,Guid? IdPersonToChat)
         {
             HttpClient httpClient = new HttpClient();
             MessaggiClient messaggiClient = new MessaggiClient(httpClient);
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-            var chat = await messaggiClient.GetChatAsync(IdChat,null,null);
+            var chat = await messaggiClient.GetChatAsync(IdChat,IdAnnuncio,IdPersonToChat);
 
             return PartialView("_ChatDetailPartial", chat);
         }

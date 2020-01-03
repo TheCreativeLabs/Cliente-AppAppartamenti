@@ -8,10 +8,14 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        Use this space to summarize your privacy and cookie use policy. <a asp-area="" asp-controller="Home" asp-action="Privacy">Learn More</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Accept</span>
+    <div id="cookieConsent" class="alert bg-white position-fixed alert-dismissible fade show rounded-0 p-4"  role="alert">
+        <span>Questo sito utilizza cookie tecnici e di terze parti, continuando la navigazione ne accetti l'utilizzo.
+        </span>
+            <br />
+       <span>Per saperne di più leggi la nostra <a asp-area="" asp-controller="Home" asp-action="Privacy">politica sulla privacy</a>
+        </span> 
+        <button type="button" class="accept-policy close m-4" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <span aria-hidden="true">Accetta</span>
         </button>
     </div>
     <script>

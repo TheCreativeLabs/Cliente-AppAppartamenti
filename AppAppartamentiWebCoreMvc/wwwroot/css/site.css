@@ -548,6 +548,9 @@ img{
     color:white !important;
 }
 
+.fc-left h2{
+    font-size: 1.2rem !important;
+}
 
 .fc-widget-header {
     min-height: 2rem !important;
@@ -734,5 +737,12 @@ label{
 
 
 
-
+#cookieConsent{
+    z-index:1200;
+    bottom:0!important;
+    margin:0!important;
+    height:100px;
+    width:100%;
+    box-shadow: rgba(0,0,0,.14) 5px 5px 5px 9px !important;
+}
 

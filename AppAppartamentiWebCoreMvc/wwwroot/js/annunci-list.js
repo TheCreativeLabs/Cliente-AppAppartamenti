@@ -33,9 +33,8 @@ $(document).ready(function () {
         //se sono oltre il punto di "raggiungimentoFondo" per la prima volta e stavo andando dall'alto al basso, allora chiamo API
         if (posizioneAttuale > raggiungimentoFondo && discesaAttraversamento) { 
             if (!isLoading) {  //se non sto già caricando, chiedo una nuova pagina alle API
-            //alert("near bottom! ricarico");
+                //alert("near bottom! ricarico");
                 isLoading = true;
-                $("#listLoader").show();
 
                 UrlRefresh = UrlRefresh.replace(CurrentListPage.toString(), (new Number(CurrentListPage) + 1).toString());
                 //listPage = listPage + 1;
@@ -57,13 +56,8 @@ function ReloadList() {
     }
 
     $('#annunci').load(url, function () {
-        isLoading = false;
-        HideLoader()
     });
 }
 
-function HideLoader() {
-    $("#listLoader").hide();
-}
 
 

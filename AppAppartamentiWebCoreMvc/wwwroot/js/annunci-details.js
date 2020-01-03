@@ -3,7 +3,6 @@
 
     window.onscroll = function () { changeScroll() };
 
-
     var calendarEl2 = document.getElementById('appointment-caledar');
     var idAnnuncio = document.getElementById('id-annuncio').value;
 
@@ -52,12 +51,9 @@
         GetAndShowAppuntamentiDisponibili(idAnnuncio, (yyyy) + '-' + (mm) + '-' + (dd));
     });
 
-    $(".btn-prenota-appuntamento").click(function () {
-        //todo prenotare appuntamento
-        PrenotaAppuntamento();
+    $('#appointmentModal').on('shown.bs.modal', function () {
+        calendar2.render();
     });
-
-    
 }); 
 
 function changeScroll() {
@@ -88,73 +84,29 @@ function setMap() {
         position: LatLng,
         map: map
     });
-   
-    //if (address != null && address.length > 0) {
-    //        var geocoder = new google.maps.Geocoder();
-    //        geocoder.geocode({ 'address': address }, function (results, status) {
-    //        if (status == 'OK') {
-    //            var mapProp = {
-    //                zoom: 10,
-    //                mapTypeControl: false,
-    //                streetViewControl: false,
-    //            };
-    //            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-    //            var marker = new google.maps.Marker({
-    //                map: map,
-    //                position: results[0].geometry.location
-    //            });
-    //            map.setCenter(results[0].geometry.location);
-    //        } else {
-    //            alert('Geocode was not successful for the following reason: ' + status);
-    //        }
-    //    });
-    //}
 }
+
+function ToggleTimeSlot(btn) {
+    var cliccato = $(btn);
+
+    //deseleziono gli altri
+    $('.btn-orario-appuntamento').each(function () {
+        //se current != this, tolgo active
+        if ($(this) != cliccato) {
+            $(this).removeClass('active');
+        }
+    });
+};
 
 function GetAndShowAppuntamentiDisponibili(idAnnuncio, giorno) {
-    var containerOrari = document.getElementById('appointment-available');
-    $('.btn-prenota-appuntamento').hide();
-    containerOrari.innerHTML = '';
-    $.when(GetAppuntamentiDisponibiliAjax(idAnnuncio, giorno)).done(function (orari) {
-        //var containerOrari = $('#appointment-available');
-        
-        if (orari != null && orari.length > 0) {
+    $("#detail-agenda-spinner-loading").show();
+    $("#appointment-available").empty();
+    let url = '/Agenda/AppuntamentiDisponibili?IdAnnuncio=' + idAnnuncio + '&Giorno=' + giorno;
 
-            orari.forEach(function (orario, index) {
-                containerOrari.innerHTML += '<label class="btn btn-light btn-orario-appuntamento" "aria-pressed=\"true\""  style="margin:0.5rem">' +
-                    '<input type="checkbox">' + orario +
-                    '</label>';
-            });
-
-            $('.btn-prenota-appuntamento').show();
-
-        } else {
-            containerOrari.innerHTML += '<div class="col-12 alert bg-light"><label class="h6">Non ci sono appuntamenti disponibili per il giorno selezionato.</label></div>';
-        }
-
-        $('.btn-orario-appuntamento').click(function () {
-            var cliccato = $(this);
-            //deseleziono gli altri
-            $('.btn-orario-appuntamento').each(function () {
-                //se current != this, tolgo active
-                if ($(this) != cliccato) {
-                    $(this).removeClass('active');
-                }
-            });
-        });
+    $("#appointment-available").load(url, function () {
+        $("#detail-agenda-spinner-loading").hide();
+        $('.btn-prenota-appuntamento').show()
     });
-
-}
-
-function GetAppuntamentiDisponibiliAjax(idAnnuncio, giorno) {
-    return $.ajax({
-        type: "GET",
-        url: '/AnnunciPersonali/AppuntamentiDisponibili',
-        data: { IdAnnuncio: idAnnuncio, Giorno: giorno },
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    });
-
 }
 
 function PrenotaAppuntamento() {
@@ -162,38 +114,22 @@ function PrenotaAppuntamento() {
     var idAnnuncio = document.getElementById('id-annuncio').value;
     var giorno = $('#giorno-selected').val();
     var ora = ora.split('-')[0];
-    $.when(PrenotaAppuntamentoAjax(idAnnuncio, giorno, ora)).done(function (result) {
-        //popup success, chiudere modale
-        alert('appuntamento done');
-    });
-}
 
-function PrenotaAppuntamentoAjax(idAnnuncio, giorno, ora) {
-    return $.ajax({
+    $.ajax({
         type: "GET",
         url: '/AnnunciPersonali/PrenotaAppuntamento',
         data: { IdAnnuncio: idAnnuncio, Giorno: giorno, Ora: ora },
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (result, status, xhr) {
-            //FIXME GESTIRE SUCCESS
-            //alert('Appuntamento success');
-            var i = status;
-            var b = error;
-            var c = xhr;
+            alert('appuntamento done');
         },
         error: function (xhr, status, error) {
-            //alert('Appuntamento fail');
-            var i = status;
-            var b = error;
-            var c = xhr;
-            $('#appointmentModal').modal('toggle');
+            $('#appointmentModal').modal("hide");
         }
     });
 
 }
-
-
 
 function GetImmaginiAnnuncioAjax(idAnnuncio) {
     return $.ajax({
@@ -231,3 +167,62 @@ function GetImmaginiAnnuncioAjax(idAnnuncio) {
 
 }
 
+function OpenModal(IdAnnuncio, IdPersonToChat, PersonToChat) {
+    let url = '/Messaggi/GetChatDetail?IdChat=&IdAnnuncio='+IdAnnuncio+'&IdPersonToChat='+IdPersonToChat;
+
+    //mostro il loader e rimuovo il content
+    $("#chat-spinner-loading").show();
+    $("#messages-list").empty();
+
+    $("#chat-modal-title").text(PersonToChat);
+    $("#chat-modal").modal("show");
+
+    ReloadChatContentModal(url, true);
+
+    //refresh della lista ogni 30 sec
+    reloadInterval = setInterval(function () {
+        ReloadChatContentModal(url, false)
+    }, 40000)
+}
+
+
+//Reload del contenuto modal
+function ReloadChatContentModal(UrlToLoad, FirstTime) {
+    $("#messages-list").load(UrlToLoad, function () {
+        $("#chat-spinner-loading").hide();
+
+        if (FirstTime == true || $("#chat-modal-body").scrollTop() == $("#chat-modal-body").height()) {
+            $("#chat-modal-body").scrollTop($("#chat-modal-body")[0].scrollHeight);
+        }
+    });
+}
+
+
+//Invio del messaggio
+function SendMessage() {
+    let idChat = $("#chat-modal .row").data("idchat");
+    let idPerson = $("#chat-modal .row").data("idperson");
+    let message = $("#chat-textarea").val();
+
+    let content = '<div class="offset-2 mt-2 mb-2 col-10 bg-primary rounded p-2">';
+    content += '<span style="color:white">' + message + '</span>';
+    content += '</div>';
+
+    $("#messages-list .row").append(content);
+    $("#chat-modal-body").scrollTop($("#chat-modal-body")[0].scrollHeight);
+    $("#chat-textarea").val("");
+
+    $.ajax({
+        type: "POST",
+        url: "/Messaggi/Send",
+        data: { IdChat: idChat, IdPersonToChat: idPerson, Message: message },
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+
+        },
+        error: function (xhr, status, error) {
+            TrapError("Error during SendMessage");
+        }
+    });
+}

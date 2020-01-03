@@ -1,7 +1,7 @@
 ﻿@model ChatDtoOutput
 
 
-<div class="row p-3" data-idperson="@Model.IdUser">
+<div class="row p-3" data-idperson="@Model.IdUser" data-idchat="@Model.IdChat">
     @{
         foreach (var msg in Model.Messaggi)
         {

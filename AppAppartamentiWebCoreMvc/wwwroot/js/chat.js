@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 function OpenModal(IdChat, PersonToChat) {
-    let url = DetailChatUrl + "?IdChat=" + IdChat;
+    let url = DetailChatUrl + "?IdChat=" + IdChat+ "&IdAnnuncio=&IdPersonToChat=";
 
     //mostro il loader e rimuovo il content
     $("#chat-spinner-loading").show();
