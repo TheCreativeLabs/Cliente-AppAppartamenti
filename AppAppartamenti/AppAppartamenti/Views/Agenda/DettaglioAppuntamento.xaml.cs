@@ -48,6 +48,14 @@ namespace AppAppartamenti.Views
             }
 
 
+
+            BtnDeny.IsVisible = (!(bool)viewModel.Confermato && !(bool)viewModel.FromMe);
+            BtnAccept.IsVisible = (!(bool)viewModel.Confermato && !(bool)viewModel.FromMe);
+            BtnDelete.IsVisible = (bool)viewModel.Confermato || (!(bool)viewModel.Confermato && (bool)viewModel.FromMe);
+
+
+
+
             StackLoader.IsVisible = false;
             StackPage.IsVisible = true;
             StackFooter.IsVisible = true;
@@ -69,6 +77,7 @@ namespace AppAppartamenti.Views
             {
                 AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 await agendaClient.DeleteAppuntamentoAsync(IdAppuntamento);
+                MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "");
                 await Navigation.PopAsync();
             }
 
@@ -86,6 +95,7 @@ namespace AppAppartamenti.Views
             BtnDelete.IsVisible = true;
             BtnAccept.IsVisible = false;
             BtnDeny.IsVisible = false;
+            MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "");
 
             await DisplayAlert("Confermato", "L'appuntamento è stato confermato correttamente.", "OK");
 

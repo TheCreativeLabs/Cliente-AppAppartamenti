@@ -27,9 +27,14 @@
                 <StackLayout>
                     <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
 
-                <Label Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
+                        <Label Style="{x:StaticResource DangerTitle}" IsEnabled="False" Text="Questo appuntamento è in attesa di conferma" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"></Label>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                        <Label x:Name="lbl_appuntamentoCon"  IsVisible="{Binding Confermato}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
+
+
+                        <Label x:Name="lbl_appuntamentoAttesa"  IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento in attesa di approvazione con"></Label>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <Frame CornerRadius="30"
                             HeightRequest="60"
                             WidthRequest="60"
@@ -102,17 +107,18 @@
             </ScrollView>
 
             <StackLayout x:Name="StackFooter" IsVisible="false" Orientation="Horizontal" VerticalOptions="EndAndExpand" Padding="5">
-                <Button x:Name="BtnDelete" IsVisible="{Binding Confermato}"
+                
+                <Button x:Name="BtnDelete"
                     Text="Elimina appuntamento" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White">
                 </Button>
 
-                <Button x:Name="BtnDeny" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"
+                <Button x:Name="BtnDeny"
                     Text="Rifiuta" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White">
                 </Button>
 
-                <Button x:Name="BtnAccept" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"
+                <Button x:Name="BtnAccept"
                     Text="Conferma" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource SuccessColor}" Clicked="BtnAccept_Clicked" TextColor="White">
                 </Button>

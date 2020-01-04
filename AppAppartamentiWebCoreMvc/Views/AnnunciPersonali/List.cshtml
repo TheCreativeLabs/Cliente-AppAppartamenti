@@ -9,8 +9,28 @@
             I miei annunci
         </label>
 
+        <div class="modal fade" id="deleteAnnuncioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminazione annuncio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Eliminare definitivamente l'appuntamento?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnAnnulla" type="button" class="btn btn-primary">Annulla</button>
+                        <button id="btnDelete" type="button" class="btn btn-primary">Elimina</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @{
-            if(Model == null || !(Model.Any()))
+            if (Model == null || !(Model.Any()))
             {
                 <div class="col-12 alert bg-light">
                     <label class="h6">Non sono presenti annunci.</label>
@@ -22,53 +42,56 @@
         {
             string detailUrl = @Url.Action("Create", "AnnunciPersonali", new { Id = item.Id });
 
-           
-        <div class="card card-annuncio mb-5" onclick="NavigateToDetail('@detailUrl')">
-            <div class="row no-gutters">
-                <div class="col-md-6">
-                    <div class="position-absolute bg-transparent p-2 border-0" style="text-align: end;">
-                        <a title="Delete" class="btn ad-action-button" asp-action="Delete" asp-controller="AnnunciPersonali" asp-route-Id="@item.Id" onclick="return confirm('Continuare con l\'eliminazione dell\'annuncio');">
-                            <i class="fas fa-trash"></i>
-                        </a>
 
-                        <button type="button" title="Modifica" data-id="@item.Id" onclick="NavigateToDetail('@detailUrl')" class="btn ad-action-button">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </div>
+            <div class="card card-annuncio mb-5" onclick="NavigateToDetail('@detailUrl')">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <div class="position-absolute bg-transparent p-2 border-0" style="text-align: end;">
+                            @*asp-action="Delete" asp-controller="AnnunciPersonali" onclick="return confirm('Continuare con l\'eliminazione dell\'annuncio');"*@
+                            <button title="Delete" class="btn ad-action-button" data-toggle="modal" data-target="#deleteAnnuncioModal" asp-route-Id="@item.Id">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <button type="button" title="Modifica" data-id="@item.Id" onclick="NavigateToDetail('@detailUrl')" class="btn ad-action-button">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
                         @{
                             if (item.ImmaginePrincipale != null)
                             {
                                 var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
                                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
-                               <img src="@imgSrc" class="card-img rounded" alt="image" height="260" />
+                                <img src="@imgSrc" class="card-img rounded" alt="image" height="260" />
                             }
                         }
                     </div>
-                   <div class="col-md-6">
-                    <div class="card-body p-0">
-                        <div class="pl-3 mt-0">
-                             <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
-                            <br />
-                            <label  >@item.Indirizzo, @item.NomeComune</label>
-                            <br />
-                            <label class="mb-3">Superficie: @item.Superficie m² </label>
+                    <div class="col-md-6">
+                        <div class="card-body p-0">
+                            <div class="pl-3 mt-0">
+                                <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
+                                <br />
+                                <label>@item.Indirizzo, @item.NomeComune</label>
+                                <br />
+                                <label class="mb-3">Superficie: @item.Superficie m² </label>
 
-                            <br />
-                            @{
-                                if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200) {
-                                    <span class="info">@item.Descrizione.Substring(0, 200)...</span>
+                                <br />
+                                @{
+                                    if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200)
+                                    {
+                                        <span class="info">@item.Descrizione.Substring(0, 200)...</span>
 
-                                } else
-                                {
-                                    <span class="info">@item.Descrizione...</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="info">@item.Descrizione...</span>
+                                    }
                                 }
-                            }
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         }
     </div>
-</div>
+                </div>

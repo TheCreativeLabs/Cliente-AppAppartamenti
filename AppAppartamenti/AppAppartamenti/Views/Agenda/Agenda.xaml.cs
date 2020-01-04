@@ -11,6 +11,7 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
+using System.Collections.ObjectModel;
 
 namespace AppAppartamenti.Views
 {
@@ -34,7 +35,16 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
 
             if (calendar.SelectedDate.HasValue) {
-                if(viewModel.Items.Count == 0) { 
+
+                MessagingCenter.Subscribe<DettaglioAppuntamento, string>(this, "RefreshAppuntamentiAgenda", async (sender, arg) =>
+                {
+                    if (!string.IsNullOrEmpty(arg))
+                    {
+                        viewModel.Items = new ObservableCollection<AppuntamentoDtoOutput>(); ;
+                    }
+                });
+
+                if (viewModel.Items.Count == 0) { 
                     viewModel.SelectedDate = calendar.SelectedDate.Value;
                     viewModel.LoadItemsCommand.Execute(null);
                 }

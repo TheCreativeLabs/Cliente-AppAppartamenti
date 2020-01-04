@@ -180,6 +180,13 @@
                 <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
             </Style>
 
+            <Style TargetType="Label" x:Key="DangerTitle">
+                <Setter Property="FontSize" Value="26"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource DangerColor}"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+            </Style>
+
             <Style TargetType="Frame" x:Key="MessageToMe">
                 <Setter Property="BackgroundColor" Value="LightGray"></Setter>
                 <Setter Property="Margin" Value="10, 10, 40, 10"></Setter> 
