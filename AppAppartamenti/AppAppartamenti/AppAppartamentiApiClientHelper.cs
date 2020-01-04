@@ -29,9 +29,7 @@ namespace AppAppartamenti.Api
         public const string NotificationStatusKey = "NotificationStatus_Key";
         public const string ListaComuniKey = "ListaComuni_Key";
         public const string ListaAnnunciRecentiProprietaKey = "ListaAnnunciRecentiProprieta_Key";
-
-
-        
+        public const string ListaChatKey = "ListaChat_Key";
 
         public class BearerToken
         {
@@ -383,6 +381,26 @@ namespace AppAppartamenti.Api
 
             return listaAnnunci;
         }
+
+        public static async Task<List<ChatListDtoOutput>> GetListaMessaggi(bool RefreshData)
+        {
+            List<ChatListDtoOutput> listaChat = new List<ChatListDtoOutput>();
+
+            if (!RefreshData && Preferences.Get(ListaChatKey, null) != null)
+            {
+                listaChat = JsonConvert.DeserializeObject<List<ChatListDtoOutput>>(Preferences.Get(ListaChatKey, null));
+            }
+
+            if (listaChat.Any() == false)
+            {
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                listaChat = (await messaggiClient.GetChatListAsync()).ToList();
+                Preferences.Set(ListaChatKey, JsonConvert.SerializeObject(listaChat));
+            }
+
+            return listaChat;
+        }
+
 
         public static async Task<ICollection<ComuneDto>> GetListaComuni(string ComuneDesc)
         {

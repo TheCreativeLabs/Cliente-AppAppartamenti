@@ -9,65 +9,52 @@ using System.Collections;
 
 namespace AppAppartamenti.Behaviors
 {
-    public class InverseScroll : Behavior<ListView>
+    public class InverseScroll : Behavior<CollectionView>
     {
      public bool loadComplete;
 
-        public static readonly BindableProperty LoadItemsCommandProperty = BindableProperty.Create("LoadItemsCommand", typeof(ICommand), typeof(InverseScroll), null);
-
-        public ICommand LoadItemsCommand
+        public static readonly BindableProperty ScrollCommandProperty = BindableProperty.Create("ScrollItemCommand", typeof(ICommand), typeof(InverseScroll), null);
+        public ICommand ScrollItemCommand
         {
             get
             {
-                return (ICommand)GetValue(LoadItemsCommandProperty);
+                return (ICommand)GetValue(ScrollCommandProperty);
             }
             set
             {
-                SetValue(LoadItemsCommandProperty, value);
+                SetValue(ScrollCommandProperty, value);
             }
         }
-    
-        public ListView AssociatedObject
+
+        public CollectionView AssociatedObject
         {
             get;
             private set;
         }
 
-        protected override void OnAttachedTo(ListView bindable)
+        protected override void OnAttachedTo(CollectionView bindable)
         {
             base.OnAttachedTo(bindable);
             AssociatedObject = bindable;
             bindable.BindingContextChanged += Bindable_BindingContextChanged;
-            bindable.ItemAppearing += InfiniteListView_ItemAppearing;
+            //bindable.ItemAppearing += InfiniteListView_ItemAppearing;
         }
 
         private void Bindable_BindingContextChanged(object sender, EventArgs e)
         {
             OnBindingContextChanged();
         }
+
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             BindingContext = AssociatedObject.BindingContext;
-            loadComplete = false;
         }
-        protected override void OnDetachingFrom(ListView bindable)
+
+        protected override void OnDetachingFrom(CollectionView bindable)
         {
             base.OnDetachingFrom(bindable);
             bindable.BindingContextChanged -= Bindable_BindingContextChanged;
-            bindable.ItemAppearing -= InfiniteListView_ItemAppearing;
-        }
-
-        void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            if (!loadComplete) { 
-            var items = AssociatedObject.ItemsSource as IList;
-            AssociatedObject.ScrollTo(items[items.Count - 1], ScrollToPosition.End, false);
-
-            if (e.ItemIndex == items.Count - 1) { 
-                loadComplete = true;
-            }
-            }
         }
     }
 

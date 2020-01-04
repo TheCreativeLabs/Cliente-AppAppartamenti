@@ -12,6 +12,8 @@
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
             <conv:PrezzoConverter x:Key="PrezzoConverter" />
+            <conv:AppuntamentoApprovazioneConverter x:Key="ApprovazioneConverter" />
+
             <conv:BooleanConverter x:Key="BoolConverter" />
             <conv:ColorConverter x:Key="ColConverter" />
         </ResourceDictionary>
@@ -103,16 +105,16 @@
 
             <StackLayout x:Name="StackFooter" IsVisible="false" Orientation="Horizontal" VerticalOptions="EndAndExpand" Padding="5">
                 <Button x:Name="BtnDelete" IsVisible="{Binding Confermato}"
-                    Text="Elimina appuntamento" HeightRequest="40" HorizontalOptions="FillAndExpand"
+                    Text="Annulla appuntamento" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White">
                 </Button>
 
-                <Button x:Name="BtnDeny" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"
+                <Button x:Name="BtnDeny" IsVisible="{Binding ., Converter={StaticResource ApprovazioneConverter}}"
                     Text="Rifiuta" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White">
                 </Button>
 
-                <Button x:Name="BtnAccept" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"
+                <Button x:Name="BtnAccept" IsVisible="{Binding ., Converter={StaticResource ApprovazioneConverter}}"
                     Text="Conferma" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource SuccessColor}" Clicked="BtnAccept_Clicked" TextColor="White">
                 </Button>

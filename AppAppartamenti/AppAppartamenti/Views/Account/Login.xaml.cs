@@ -29,16 +29,16 @@ namespace AppAppartamenti.Views.Login
 
             try
             {
-                //Se ho il token allora vado direttamente alla home
-                if (await ApiHelper.GetToken() != null)
-                {
+                ////Se ho il token allora vado direttamente alla home
+                //if (await ApiHelper.GetToken() != null)
+                //{
                     
-                    Application.Current.MainPage = new MainPage();
-                }
-                else
-                {
+                //    Application.Current.MainPage = new MainPage();
+                //}
+                //else
+                //{
                     stkLogin.IsVisible = true;
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace AppAppartamenti.Views.Login
                 if (formIsValid)
                 {
                     await ApiHelper.SetTokenAsync(entUsername.Text, entPassword.Text);
-                    ApiHelper.GetUserInfo();
+                	ApiHelper.GetUserInfo();
                     ApiHelper.GetListaTipologiaProprieta();
                     ApiHelper.GetListaTipologiaAnnuncio();
                     Application.Current.MainPage = new EnableNotification();
