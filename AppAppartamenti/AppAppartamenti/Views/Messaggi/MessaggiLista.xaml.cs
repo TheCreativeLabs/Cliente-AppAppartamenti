@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
 using Xamarin.Forms;
@@ -9,6 +10,7 @@ namespace AppAppartamenti.Views.Messaggi
     public partial class MessaggiLista : ContentPage
     {
         ChatListViewModel viewModel;
+        Timer tmrExecutor = new Timer();
 
         public MessaggiLista()
         {
@@ -21,8 +23,20 @@ namespace AppAppartamenti.Views.Messaggi
         {
             base.OnAppearing();
 
-            //if (viewModel.Items.Count == 0)
+            viewModel.LoadItemsCommand.Execute(null);
+
+            tmrExecutor.Elapsed += new ElapsedEventHandler(tmrExecutor_Elapsed);
+            tmrExecutor.Interval = 30000;
+            tmrExecutor.Enabled = true;
+            tmrExecutor.Start();
+        }
+
+        private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 viewModel.LoadItemsCommand.Execute(null);
+            });
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -31,7 +45,9 @@ namespace AppAppartamenti.Views.Messaggi
 
             if (item == null)
                 return;
-          
+
+            await viewModel.UpdateItems(item.IdChat.Value);
+
             await Navigation.PushAsync(new NuovoMessaggio(item));
 
             // Manually deselect item.

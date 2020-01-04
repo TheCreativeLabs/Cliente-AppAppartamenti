@@ -28,6 +28,7 @@
 
             <Label Grid.Row="0" Style="{x:StaticResource Title}" Text="Messaggi"></Label>
 
+<!--IsRefreshing="{Binding IsBusy}"-->
             <ListView Grid.Row="1" x:Name="LvChat"
                         ItemsSource="{Binding Items}"
                         HasUnevenRows="true"
@@ -35,7 +36,6 @@
                         IsPullToRefreshEnabled="False"
                         CachingStrategy="RecycleElement"
                         VerticalScrollBarVisibility="Never"
-                        IsRefreshing="{Binding IsBusy}"
                         SeparatorVisibility="Default"
                         SeparatorColor="LightGray"
                         ItemSelected="OnItemSelected"
@@ -58,7 +58,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label FontSize="13" TextColor="{x:StaticResource SecondaryColor}" Text="{Binding DataCreazione, StringFormat='{0:dd/mm/yyyy}'}" ></Label>
+                                    <Label FontSize="13" TextColor="{x:StaticResource SecondaryColor}" Text="{Binding DataCreazione, StringFormat='{0:dd/MM/yyyy}'}" ></Label>
                                 </StackLayout>
 
                                 <BoxView IsVisible="{Binding NumberMsgToRead, Converter={StaticResource MsgListBadge}}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HeightRequest="10" WidthRequest="10" CornerRadius="5" Color="Red"></BoxView>

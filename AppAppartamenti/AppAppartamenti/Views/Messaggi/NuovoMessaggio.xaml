@@ -26,17 +26,17 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <ListView x:Name="lvMessages"
-                    ItemsSource="{Binding Items}"
-                          HasUnevenRows="true"
-                          RefreshCommand="{Binding LoadItemsCommand}"
+                 <!--RefreshCommand="{Binding LoadItemsCommand}"
                           IsPullToRefreshEnabled="False"
+                 -->
+                      
+                <ListView x:Name="lvMessages"
+                         ItemsSource="{Binding Items}"
                           VerticalScrollBarVisibility="Never"
+                          IsRefreshing="{Binding IsBusy}"
                           SeparatorVisibility="None"
+                          HasUnevenRows="True"
                           SelectionMode="None">
-                    <ListView.Behaviors>
-                       <b:InverseScroll LoadItemsCommand="{Binding LoadItemsCommand}" />
-                    </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -44,13 +44,10 @@
                                     <Frame HasShadow="False" Padding="10" CornerRadius="10" Style="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand">
                                             <Label Text="{Binding Messaggio}" TextColor="{Binding FromMe, Converter={StaticResource MsgTextColorConverter}}"></Label>
                                     </Frame>
-                                 </StackLayout>
+                                    </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.Footer>
-                        <Label></Label>
-                    </ListView.Footer>
                 </ListView>
 
                  <BoxView Grid.Row="1" Color="LightGray"></BoxView>

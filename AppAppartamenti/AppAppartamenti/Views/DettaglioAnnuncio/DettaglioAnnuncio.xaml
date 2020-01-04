@@ -8,14 +8,12 @@
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="True"
+             NavigationPage.HasBackButton="False"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
              ios:Page.UseSafeArea="true"
-             BackgroundColor="{x:StaticResource SfondoColor}"
-             
-             >
+             BackgroundColor="{x:StaticResource SfondoColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -29,13 +27,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-
     <NavigationPage.TitleView >
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
-
-            <Button Style="{x:StaticResource NavCancelButton}" x:Name="btnShareNavBar" Clicked="BtnShare_Clicked" Text="&#xf1e0;"
-                   FontFamily="{x:StaticResource FA-Solid}"  HorizontalOptions="End" WidthRequest="50">
-            </Button>
+             <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
             <Button x:Name="btnMessageNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
                     Text="&#xf27a;" HorizontalOptions="End"

@@ -70,11 +70,11 @@
                                         @*<input data-val-required="@_localizer["Required"]" class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />*@
                                         if (annuncio != null && annuncio.TipologiaProprieta.ToUpper() == proprieta.Descrizione.ToUpper())
                                         {
-                                            <input class="mr-2" type="radio" checked asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
+                                            <input class="mr-2" data-val-required="@_localizer["Required"]" type="radio" checked asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
                                         }
                                         else
                                         {
-                                            <input class="mr-2" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
+                                            <input class="mr-2" data-val-required="@_localizer["Required"]" type="radio" asp-for="IdTipologiaProprieta" value="@proprieta.Id" id="@proprieta.Id" />@proprieta.Descrizione<br />
                                         }
                                     }
                                     <span asp-validation-for="IdTipologiaProprieta" class="text-danger"></span>
@@ -114,16 +114,18 @@
                                 @_localizer["Position"]
                             </h5>
                             <div class="form-group form-group-sm">
-                                <label asp-for="CodiceComune" class="control-label"></label>
+                                <label asp-for="CodiceComune" class="control-label">Comune</label>
                                 <div class="input-group  mb-3">
                                     @{
                                         if (annuncio != null)
                                         {
-                                            <input id="input-comune" value="@annuncio.NomeComune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                            <input id="input-comune" data-val-required="Campo obbligatorio" data-val="true" required
+                                                   value="@annuncio.NomeComune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
                                         }
                                         else
                                         {
-                                            <input id="input-comune" type="text" class="form-control rounded" aria-describedby="basic-addon1" />
+                                            <input id="input-comune" data-val-required="Campo obbligatorio" data-val="true" required
+                                                   type="text" class="form-control rounded" aria-describedby="basic-addon1" />
                                         }
                                     }
                                     <div class="input-group-append">
@@ -137,11 +139,11 @@
                                 @{
                                     if (annuncio != null)
                                     {
-                                        <input data-val-required="@_localizer["Required"]" value="@annuncio.CodiceComune" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                        <input data-val-required="@_localizer["Required"]"  data-val="true" required value="@annuncio.CodiceComune" asp-for="CodiceComune" type="text" class="form-control d-none" />
                                     }
                                     else
                                     {
-                                        <input data-val-required="@_localizer["Required"]" asp-for="CodiceComune" type="text" class="form-control d-none" />
+                                        <input data-val-required="@_localizer["Required"]"  data-val="true" required asp-for="CodiceComune" type="text" class="form-control d-none" />
                                     }
                                 }
                                 <span asp-validation-for="CodiceComune" class="text-danger"></span>
@@ -151,11 +153,11 @@
                                 @{
                                     if (annuncio != null)
                                     {
-                                        <input asp-for="Indirizzo" class="form-control" value="@annuncio.Indirizzo" />
+                                        <input data-val-required="@_localizer["Required"]"  data-val="true" required asp-for="Indirizzo" class="form-control" value="@annuncio.Indirizzo" />
                                     }
                                     else
                                     {
-                                        <input asp-for="Indirizzo" class="form-control" disabled />
+                                        <input data-val-required="@_localizer["Required"]"  data-val="true" required asp-for="Indirizzo" class="form-control" disabled />
                                     }
 
                                 }
@@ -668,12 +670,12 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                 @{
                                     if (annuncio != null)
                                     {
-                                        @Html.TextArea("Descrizione", @annuncio.Descrizione, new { @rows = "10", @class = "form-control" })
+                                        @Html.TextArea("Descrizione", @annuncio.Descrizione, new { @rows = "10", @class = "form-control"  })
 
                                     }
                                     else
                                     {
-                                        <textarea rows="10" asp-for="Descrizione" class="form-control"></textarea>
+                                        <textarea rows="10" data-val-required="@_localizer["Required"]"  data-val="true" required asp-for="Descrizione" class="form-control"></textarea>
                                     }
 
                                 }

@@ -55,7 +55,7 @@
                             <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
                         <BoxView Grid.Column="0" Margin="10,0,0,0" HeightRequest="10" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="10" BackgroundColor="{x:StaticResource DangerColor}" CornerRadius="5"></BoxView>
-                        <Label Text="Da approvare " HorizontalOptions="Start" VerticalTextAlignment="Center" Grid.Column="1"></Label>
+                        <Label Text="In attesa di approvazione" HorizontalOptions="Start" VerticalTextAlignment="Center" Grid.Column="1"></Label>
                     </Grid>
 
                     <ListView x:Name="lvAppuntamenti" SelectionMode="Single" SeparatorVisibility="None"

@@ -24,10 +24,11 @@ namespace AppAppartamenti.ViewModels
         public Command ReloadItemsCommand { get; set; }
         public Command AddNewMessage { get; set; }
 
-
         public Guid? IdChatParam { get; set; }
         public Guid? IdAnnuncioParam { get; set; }
         public Guid? IdUserToChat { get; set; }
+
+        public CollectionView collection;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -75,6 +76,7 @@ namespace AppAppartamenti.ViewModels
                         {
                             Items.Add(msg);
                         }
+
                         OnpropertyChanged("Items");
                     }
                 }
@@ -86,6 +88,80 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        public async  Task LoadItems()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            OnpropertyChanged("IsBusy");
+
+            try
+            {
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                var chatInfo = await messaggiClient.GetChatAsync(IdChatParam, IdAnnuncioParam, IdUserToChat);
+
+                if (chatInfo != null)
+                {
+                    IdUser = chatInfo.IdUser.Value;
+                    IdChat = chatInfo.IdChat.Value;
+
+                    if (Items.Count != chatInfo.Messaggi.Count)
+                    {
+                        Items.Clear();
+
+                        foreach (var msg in chatInfo.Messaggi)
+                        {
+                            Items.Add(msg);
+                        }
+
+                        OnpropertyChanged("Items");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+                OnpropertyChanged("IsBusy");
+
+            }
+        }
+
+        public async Task ReloadItems()
+        {
+            try
+            {
+                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                var chatInfo = await messaggiClient.GetChatAsync(IdChatParam, IdAnnuncioParam, IdUserToChat);
+
+                if (chatInfo != null)
+                {
+                    IdUser = chatInfo.IdUser.Value;
+                    IdChat = chatInfo.IdChat.Value;
+
+                    if (Items.Count != chatInfo.Messaggi.Count)
+                    {
+                        Items.Clear();
+
+                        foreach (var msg in chatInfo.Messaggi)
+                        {
+                            Items.Add(msg);
+                        }
+
+                        OnpropertyChanged("Items");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -150,7 +226,6 @@ namespace AppAppartamenti.ViewModels
                 Debug.WriteLine(ex);
             }
         }
-
 
         private Task<string> DisplayActionSheet(string v1, string v2, object p, string v3, string v4)
         {

@@ -16,7 +16,7 @@ namespace AppAppartamenti.ContentViews
         {
             try
             {
-                bool answer = await App.Current.MainPage.DisplayAlert("Liberacasa.it vuole utilizzare Google.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
+                bool answer = await App.Current.MainPage.DisplayAlert("Promuovocasa.it vuole utilizzare Google.com per accedere", "Questo permette all'app e al sito web di accedere alle tue informazioni.", "Si", "No");
                 if (answer)
                 {
                     await Navigation.PushAsync(new NavigationPage(new Views.Account.GoogleLogin()));

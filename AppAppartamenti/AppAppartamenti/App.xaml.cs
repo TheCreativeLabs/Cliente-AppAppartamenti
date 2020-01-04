@@ -32,10 +32,11 @@ namespace AppAppartamenti
         {
             if (await ApiHelper.GetToken() != null)
             {
-                Task.Run(async () => { ApiHelper.GetListaAnnunciRecenti(true); });
-                Task.Run(async () => { await ApiHelper.GetUserInfo(); });
-                Task.Run(async () => { await ApiHelper.GetListaTipologiaProprieta(); });
-                Task.Run(async () => { await ApiHelper.GetListaTipologiaAnnuncio(); });
+                ApiHelper.GetListaAnnunciRecenti(true);
+                ApiHelper.GetUserInfo();
+                ApiHelper.GetListaTipologiaProprieta();
+                ApiHelper.GetListaTipologiaAnnuncio();
+
                 
                 MainPage = new MainPage();
             }
