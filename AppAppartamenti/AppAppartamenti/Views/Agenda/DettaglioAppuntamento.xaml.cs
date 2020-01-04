@@ -77,7 +77,7 @@ namespace AppAppartamenti.Views
             {
                 AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 await agendaClient.DeleteAppuntamentoAsync(IdAppuntamento);
-                MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "");
+                MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "Refresh");
                 await Navigation.PopAsync();
             }
 
@@ -95,7 +95,7 @@ namespace AppAppartamenti.Views
             BtnDelete.IsVisible = true;
             BtnAccept.IsVisible = false;
             BtnDeny.IsVisible = false;
-            MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "");
+            MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "Refresh");
 
             await DisplayAlert("Confermato", "L'appuntamento è stato confermato correttamente.", "OK");
 

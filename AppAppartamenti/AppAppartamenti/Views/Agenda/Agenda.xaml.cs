@@ -40,7 +40,7 @@ namespace AppAppartamenti.Views
                 {
                     if (!string.IsNullOrEmpty(arg))
                     {
-                        viewModel.Items = new ObservableCollection<AppuntamentoDtoOutput>(); ;
+                        viewModel.Items.Clear();
                     }
                 });
 
