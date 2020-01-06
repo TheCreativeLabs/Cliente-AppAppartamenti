@@ -17,12 +17,10 @@ namespace AppAppartamenti.ViewModels
         public Guid IdAnnuncio { get; set; }
         public ObservableCollection<Byte[]> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        public bool imagesMoreThanOne { get; set; }
 
         public AnnuncioimmaginiViewModel()
         {
             Items = new ObservableCollection<Byte[]>();
-            imagesMoreThanOne = false;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
@@ -45,8 +43,7 @@ namespace AppAppartamenti.ViewModels
                 {
                     Items.Add(img);
                 }
-
-                imagesMoreThanOne = Items.Count > 1;
+                MessagingCenter.Send(this, "ImmaginiCaricate", Items.Count);
             }
             catch (Exception ex)
             {

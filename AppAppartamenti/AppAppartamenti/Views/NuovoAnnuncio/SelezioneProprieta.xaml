@@ -20,20 +20,22 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Style="{x:StaticResource StackContainer}">
-            <Button Style="{x:StaticResource NavCancelButton}" 
-                    Clicked="BtnCancel_Clicked">
-            </Button>
+        
+            <StackLayout Style="{x:StaticResource StackContainer}">
+                <Button Style="{x:StaticResource NavCancelButton}" 
+                        Clicked="BtnCancel_Clicked">
+                </Button>
 
-            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneProprieta.PropertyType}"></Label>
-            <controls:StepMenu CurrentId="1"/>
-
-            <input:SelectionView ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton"
-                                 ColumnNumber="1" Color="{x:StaticResource DarkColor}">
-            </input:SelectionView>
-
+                <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
+                <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneProprieta.PropertyType}"></Label>
+                <controls:StepMenu CurrentId="1"/>
+            <ScrollView>
+                <input:SelectionView ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton"
+                                     ColumnNumber="1" Color="{x:StaticResource DarkColor}">
+                </input:SelectionView>
+            </ScrollView>
             <Button Text="{translator:Translate SelezioneProprieta.Continue}" Style="{x:StaticResource primaryButton}" Clicked="BtnAvanti_Clicked" ></Button>
-        </StackLayout>
+            </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

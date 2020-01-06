@@ -114,6 +114,11 @@ namespace AppAppartamenti.Views
                 map.IsVisible = false;
             }
 
+            MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>
+            {
+                    CarouselImagesProgress.Text = "1/" + arg;
+            });
+
             StackLoader.IsVisible = false;
             StackPage.IsVisible = true;
         }
