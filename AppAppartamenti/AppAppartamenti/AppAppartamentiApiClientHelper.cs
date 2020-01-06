@@ -30,6 +30,7 @@ namespace AppAppartamenti.Api
         public const string ListaComuniKey = "ListaComuni_Key";
         public const string ListaAnnunciRecentiProprietaKey = "ListaAnnunciRecentiProprieta_Key";
         public const string ListaChatKey = "ListaChat_Key";
+        public const string AndroidRegistrationToken = "AndroidRegistrationToken_Key";
 
         public class BearerToken
         {
@@ -445,6 +446,33 @@ namespace AppAppartamenti.Api
             
             return Task.FromResult<List<ComuneDto>>(list);
         }
+
+        public static void SetFirebaseToken(string Token)
+        {
+            Preferences.Set(AndroidRegistrationToken, Token);
+        }
+
+        // Ottiene il Token
+        public async static Task<string> GetFirebaseToken()
+        {
+            string Token = Preferences.Get(AndroidRegistrationToken, null);
+
+            return Token;
+        }
+
+        /// <summary>
+        /// Rimuove il token.
+        /// </summary>
+        /// <returns></returns>
+        public static async void DeleteFirebaseToken()
+        {
+            Preferences.Remove(AndroidRegistrationToken);
+        }
+
     }
+
+
+
+
 
 }

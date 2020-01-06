@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppAppartamenti.Api;
+using AppAppartamenti.NotificationSample;
 using AppAppartamentiApiClient;
 using Microsoft.AppCenter;
 using Xamarin.Forms;
@@ -48,7 +49,6 @@ namespace AppAppartamenti.Views
         async Task SetDeviceInfo()
         {
             NotificheClient notificheClient = new NotificheClient(await Api.ApiHelper.GetApiClient());
-            var installationId = await AppCenter.GetInstallIdAsync();
 
             var os = "ANDROID";
             if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
@@ -56,9 +56,21 @@ namespace AppAppartamenti.Views
                 os = "IOS";
             }
 
+            var installationId = "";
+
+            if (os == "ANDROID")
+            {
+                installationId = await ApiHelper.GetFirebaseToken();
+            }
+            else
+            {
+                var guid = await AppCenter.GetInstallIdAsync();
+                installationId = guid.Value.ToString();
+            }
+
             NotificationInfoDto notificationInfoDto = new NotificationInfoDto()
             {
-                InstallationId = installationId.Value,
+                InstallationId = installationId,
                 OsVersion = os
             };
 

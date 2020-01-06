@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "211045302909",
-    "firebase_url": "https://promuovocasaandroid.firebaseio.com",
-    "project_id": "promuovocasaandroid",
-    "storage_bucket": "promuovocasaandroid.appspot.com"
+    "project_number": "199520633255",
+    "firebase_url": "https://promuovocasa-pushnotification.firebaseio.com",
+    "project_id": "promuovocasa-pushnotification",
+    "storage_bucket": "promuovocasa-pushnotification.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:211045302909:android:1b1b524aee75ac4d006714",
+        "mobilesdk_app_id": "1:199520633255:android:2b4498d2ae780f0e1b3682",
         "android_client_info": {
           "package_name": "promuovocasa.it"
         }
       },
       "oauth_client": [
         {
-          "client_id": "211045302909-aqma0vjog7gbe2u91p1tsdrjau0oisoe.apps.googleusercontent.com",
+          "client_id": "199520633255-bl4vtafmriicdj1t79jb369tcqtgeqrr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD1WEpYK9L7vOnVNewhwYsQ7quPkKQ0-Hw"
+          "current_key": "AIzaSyAtccvKLgwJlRZqvhlok4Knxp__nVmYNRI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "211045302909-aqma0vjog7gbe2u91p1tsdrjau0oisoe.apps.googleusercontent.com",
+              "client_id": "199520633255-bl4vtafmriicdj1t79jb369tcqtgeqrr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
