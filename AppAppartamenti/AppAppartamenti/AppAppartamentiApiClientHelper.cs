@@ -267,11 +267,11 @@ namespace AppAppartamenti.Api
             }
         }
 
-        public static async Task<UserInfoDto> GetUserInfo()
+        public static async Task<UserInfoDto> GetUserInfo(bool RefreshData)
         {
             UserInfoDto userInfo = null;
 
-            if(Preferences.Get(UserInfoKey, null) != null)
+            if(!RefreshData && Preferences.Get(UserInfoKey, null) != null)
             {
                 userInfo = JsonConvert.DeserializeObject<UserInfoDto>(Preferences.Get(UserInfoKey, null));
             }
@@ -402,6 +402,23 @@ namespace AppAppartamenti.Api
             return listaChat;
         }
 
+        public static void UpdateChatList(Guid IdChat)
+        {
+            List<ChatListDtoOutput> listaChat = new List<ChatListDtoOutput>();
+
+            if (Preferences.Get(ListaChatKey, null) != null)
+            {
+                listaChat = JsonConvert.DeserializeObject<List<ChatListDtoOutput>>(Preferences.Get(ListaChatKey, null));
+            }
+
+            if (listaChat.Any())
+            {
+                var item = listaChat.Where(x => x.IdChat.Value == IdChat).FirstOrDefault();
+                item.NumberMsgToRead = 0;
+            }
+
+            Preferences.Set(ListaChatKey, JsonConvert.SerializeObject(listaChat));
+        }
 
         public static async Task<ICollection<ComuneDto>> GetListaComuni(string ComuneDesc)
         {

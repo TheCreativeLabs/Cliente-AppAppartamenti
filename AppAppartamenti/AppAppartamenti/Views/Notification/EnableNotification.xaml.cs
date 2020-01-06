@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppAppartamenti.Api;
 using AppAppartamenti.NotificationSample;
+using AppAppartamenti.Notify;
 using AppAppartamentiApiClient;
 using Microsoft.AppCenter;
 using Xamarin.Forms;
@@ -60,7 +61,11 @@ namespace AppAppartamenti.Views
 
             if (os == "ANDROID")
             {
-                installationId = await ApiHelper.GetFirebaseToken();
+                //installationId = await ApiHelper.GetFirebaseToken();
+
+                var notificationManager = DependencyService.Get<INotification>();
+
+              installationId =   notificationManager.GetToken();
             }
             else
             {

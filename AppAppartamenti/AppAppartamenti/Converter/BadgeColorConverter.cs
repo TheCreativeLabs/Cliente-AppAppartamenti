@@ -16,11 +16,11 @@ namespace AppAppartamenti.Converter
 
             if ((int)value == 0)
             {
-                return null;
+                return Color.Transparent;
             }
             else
             {
-                return (int)value;
+                return Color.Red;
             }
         }
         public object ConvertBack (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

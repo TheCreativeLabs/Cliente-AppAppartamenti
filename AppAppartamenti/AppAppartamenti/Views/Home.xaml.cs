@@ -52,7 +52,7 @@ namespace AppAppartamenti.Views
             if(!viewModel.Items.Any())
                 viewModel.LoadItemsCommand.Execute(null);
 
-            ((MainPage)this.Parent.Parent).viewModel.ReloadItemsCommand.Execute(null);
+            //((MainPage)this.Parent.Parent).viewModel.ReloadItemsCommand.Execute(null);
         }
 
         private async void entRicerca_Focused(object sender, EventArgs e)

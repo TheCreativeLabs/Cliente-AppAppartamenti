@@ -21,17 +21,20 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto">
                 </RowDefinition>
-
                 <RowDefinition Height="*">
                 </RowDefinition>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Style="{x:StaticResource Title}" Text="Messaggi"></Label>
 
-<!--IsRefreshing="{Binding IsBusy}"-->
+            <StackLayout Grid.Row="0" Margin="0,40,0,0" IsVisible="{Binding IsEmpty}" Padding="20">
+                <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non sono presenti messaggi"></Label>
+            </StackLayout>
+
             <ListView Grid.Row="1" x:Name="LvChat"
                         ItemsSource="{Binding Items}"
                         HasUnevenRows="true"
+                        IsRefreshing="{Binding IsBusy}"
                         RefreshCommand="{Binding LoadItemsCommand}"
                         IsPullToRefreshEnabled="False"
                         CachingStrategy="RecycleElement"
@@ -45,7 +48,7 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="20" >
                                 <Frame IsClippedToBounds="True" Padding="0" HeightRequest="60" WidthRequest="60" CornerRadius="30">
-                                   <Image Aspect="AspectFill" Source="{Binding FotoProfilo, Converter={StaticResource ByteArrayToImage}}"></Image> 
+                                   <Image Aspect="AspectFill" Source="{Binding FotoUtente, Converter={StaticResource ByteArrayToImage}}"></Image> 
                                 </Frame>
 
                                 <StackLayout VerticalOptions="CenterAndExpand">

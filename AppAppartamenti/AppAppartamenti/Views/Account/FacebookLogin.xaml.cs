@@ -42,8 +42,6 @@ namespace AppAppartamenti.Views.Account
             Content = webView;
         }
 
-
-
         private async void WebViewOnNavigated(object sender, WebNavigatedEventArgs e)
         {
             var accessToken = ExtractAccessTokenFromUrl(e.Url);
@@ -74,23 +72,25 @@ namespace AppAppartamenti.Views.Account
                     }
                     else if (userInfoViewModel.HasRegistered.Value == false) //Se l'utente non è registrato allora lo registro
                     {
-                        RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
-                        {
-                            Email = userInfoViewModel.Email
-                        };
+                        await Navigation.PushAsync(new ProviderGeneralCondition(userInfoViewModel, ApiRequest,accessToken));
 
-                        //registro l'utente
-                        await accountClient.RegisterExternalAsync(registerExternalBindingModel);
+                        //RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
+                        //{
+                        //    Email = userInfoViewModel.Email
+                        //};
 
-                        var webView = new WebView
-                        {
-                            Source = ApiRequest,
-                            HeightRequest = 1
-                        };
+                        ////registro l'utente
+                        //await accountClient.RegisterExternalAsync(registerExternalBindingModel);
 
-                        webView.Navigated += WebViewOnNavigated;
+                        //var webView = new WebView
+                        //{
+                        //    Source = ApiRequest,
+                        //    HeightRequest = 1
+                        //};
 
-                        Content = webView;
+                        //webView.Navigated += WebViewOnNavigated;
+
+                        //Content = webView;
                     }
                     else if(userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "FACEBOOK") //utente già registrato con FB: accede
                     {

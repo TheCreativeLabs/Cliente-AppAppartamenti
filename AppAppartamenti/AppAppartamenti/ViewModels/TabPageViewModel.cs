@@ -27,7 +27,7 @@ namespace AppAppartamenti.ViewModels
         public TabPageViewModel()
         {
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ReloadItemsCommand = new Command(async () => await ExecuteReloadItemsCommand());
+            ReloadItemsCommand = new Command(async (Object Msg) => await ExecuteReloadItemsCommand((int?)Msg));
             OnpropertyChanged("NewMessages");
         }
 
@@ -52,7 +52,6 @@ namespace AppAppartamenti.ViewModels
                 MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
                 NewMessages =  await messaggiClient.GetChatMessagesToReadAsync();
                 OnpropertyChanged("NewMessages");
-
             }
             catch (Exception ex)
             {
@@ -64,7 +63,7 @@ namespace AppAppartamenti.ViewModels
             }
         }
 
-        async Task ExecuteReloadItemsCommand()
+        async Task ExecuteReloadItemsCommand(int? msg)
         {
             if (IsBusy)
                 return;
@@ -73,9 +72,11 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
-                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
-                NewMessages = await messaggiClient.GetChatMessagesToReadAsync();
-                OnpropertyChanged("NewMessages");
+                if (msg.HasValue)
+                {
+                    NewMessages = msg.Value;
+                    OnpropertyChanged("NewMessages");
+                }
             }
             catch (Exception ex)
             {

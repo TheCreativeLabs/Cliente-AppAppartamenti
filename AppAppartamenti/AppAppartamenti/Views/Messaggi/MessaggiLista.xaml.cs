@@ -31,6 +31,13 @@ namespace AppAppartamenti.Views.Messaggi
             tmrExecutor.Start();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnAppearing();
+
+            tmrExecutor.Stop();
+        }
+
         private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(async () =>

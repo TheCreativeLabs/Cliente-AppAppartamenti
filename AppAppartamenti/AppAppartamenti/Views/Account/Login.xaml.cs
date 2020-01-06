@@ -71,9 +71,9 @@ namespace AppAppartamenti.Views.Login
                 if (formIsValid)
                 {
                     await ApiHelper.SetTokenAsync(entUsername.Text, entPassword.Text);
-                	ApiHelper.GetUserInfo();
-                    ApiHelper.GetListaTipologiaProprieta();
-                    ApiHelper.GetListaTipologiaAnnuncio();
+                    await Task.Run(() => ApiHelper.GetListaMessaggi(true));
+                    await Task.Run(() => ApiHelper.GetListaAnnunciRecenti(true));
+                    await Task.Run(() => ApiHelper.GetUserInfo(true));
                     Application.Current.MainPage = new EnableNotification();
                 }
                 else
@@ -82,7 +82,6 @@ namespace AppAppartamenti.Views.Login
                 }
 
                 btn.IsEnabled = true;
-
             }
             catch (ApplicationException Ex)
             {
