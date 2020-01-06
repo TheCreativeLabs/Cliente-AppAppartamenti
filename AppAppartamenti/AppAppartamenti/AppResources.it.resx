@@ -301,7 +301,7 @@
     <value>Posizione</value>
   </data>
   <data name="DettaglioAnnuncio.NewInspection" xml:space="preserve">
-    <value>Nuovo appuntamento</value>
+    <value>Appuntamento</value>
   </data>
   <data name="DettaglioAnnuncio.Other" xml:space="preserve">
     <value>Altre informazioni</value>

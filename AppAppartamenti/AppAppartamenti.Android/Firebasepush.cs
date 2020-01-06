@@ -36,7 +36,7 @@ namespace FCMClient
         {
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             Log.Debug(TAG, "Refreshed token: " + refreshedToken);
-            SendRegistrationToServer(refreshedToken);
+            //SendRegistrationToServer(refreshedToken);
         }
         async void SendRegistrationToServer(string token)
         {
@@ -78,6 +78,11 @@ namespace FCMClient
         public NotificationHelper()
         {
             mContext = global::Android.App.Application.Context;
+        }
+
+        public string GetToken()
+        {
+            return FirebaseInstanceId.Instance.Token;
         }
 
         public void CreateNotification(String title, String message)

@@ -7,6 +7,7 @@
             mc:Ignorable="d"
             x:Class="AppAppartamenti.Views.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.IsSwipePagingEnabled="false"
             xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
             xmlns:plugin= "clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
@@ -56,7 +57,7 @@
 
         <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="{Binding NewMessages,Converter={StaticResource BadgeColorConverter}}" >
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf27a;" Size="25" />
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;" Size="25" />
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views1:MessaggiLista>

@@ -26,6 +26,10 @@ namespace AppAppartamenti.NotificationSample
 {
     public interface INotification
     {
+        //void DeleteToken();
+
+        string GetToken();
+
         void CreateNotification(String title, String message);
     }
 }

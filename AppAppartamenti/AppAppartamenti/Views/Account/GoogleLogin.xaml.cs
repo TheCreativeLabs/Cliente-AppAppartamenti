@@ -75,23 +75,25 @@ namespace AppAppartamenti.Views.Account
                 }
                 else if (userInfoViewModel.HasRegistered.Value == false)
                 {
-                    RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
-                    {
-                        Email = userInfoViewModel.Email
-                    };
+                    await Navigation.PushAsync(new ProviderGeneralCondition(userInfoViewModel, ApiRequest, accessToken));
 
-                    //registro l'utente
-                    await accountClient.RegisterExternalAsync(registerExternalBindingModel);
+                    //RegisterExternalBindingModel registerExternalBindingModel = new RegisterExternalBindingModel()
+                    //{
+                    //    Email = userInfoViewModel.Email
+                    //};
 
-                    var webView = new WebView
-                    {
-                        Source = ApiRequest,
-                        HeightRequest = 1
-                    };
+                    ////registro l'utente
+                    //await accountClient.RegisterExternalAsync(registerExternalBindingModel);
 
-                    webView.Navigated += WebViewOnNavigated;
+                    //var webView = new WebView
+                    //{
+                    //    Source = ApiRequest,
+                    //    HeightRequest = 1
+                    //};
 
-                    Content = webView;
+                    //webView.Navigated += WebViewOnNavigated;
+
+                    //Content = webView;
                 }
                 else if (userInfoViewModel.HasRegistered.Value == true && userInfoViewModel.LoginProvider.ToUpper() == "GOOGLE") //utente già registrato con GOOGLE: accede
                 {
