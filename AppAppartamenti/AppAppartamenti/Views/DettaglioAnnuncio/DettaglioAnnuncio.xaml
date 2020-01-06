@@ -81,7 +81,10 @@
                             <Grid.RowDefinitions>
                                <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <CarouselView Grid.Row="0" x:Name="Carousel" ItemsSource="{Binding viewModelImmagini.Items}">
+                            <CarouselView Grid.Row="0" 
+                                          x:Name="Carousel" 
+                                          ItemsSource="{Binding viewModelImmagini.Items}"
+                                          PositionChanged="OnPositionChanged">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -93,9 +96,12 @@
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
-                         <Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
-                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                        </Grid>
+                                <!--<Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
+                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}" IsVisible="{Binding viewModelImmagini.imagesMoreThanOne}"></Label>-->
+
+                                <Label Grid.Row="0" x:Name="CarouselImagesProgress" HeightRequest="20" VerticalOptions="End" FontSize="Medium" HorizontalTextAlignment="End"
+                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}" Text="1/1"></Label>
+                            </Grid>
                     </StackLayout>
 
               

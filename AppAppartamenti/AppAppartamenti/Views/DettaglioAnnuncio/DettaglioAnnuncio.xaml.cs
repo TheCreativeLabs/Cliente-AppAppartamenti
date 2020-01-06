@@ -244,5 +244,12 @@ namespace AppAppartamenti.Views
                 Title = "Condividi il link"
             });
         }
+
+        void OnPositionChanged(object sender, PositionChangedEventArgs e)
+        {
+            int previousPosition = e.PreviousPosition;
+            int currentPosition = e.CurrentPosition;
+            CarouselImagesProgress.Text = (currentPosition+1) + "/" + bindingModel.viewModelImmagini.Items.Count;
+        }
     }
 }
