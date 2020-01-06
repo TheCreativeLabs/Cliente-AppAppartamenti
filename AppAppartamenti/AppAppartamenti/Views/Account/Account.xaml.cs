@@ -139,7 +139,7 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
-                ((MainPage)this.Parent).StopTimer();
+                ((MainPage)this.Parent.Parent).StopTimer();
 
                 DependencyService.Get<IClearCookies>().ClearAllCookies();
 
