@@ -85,7 +85,7 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            UserInfoDto userInfo = await ApiHelper.GetUserInfo();
+            UserInfoDto userInfo = await ApiHelper.GetUserInfo(true);
             viewModel = userInfo;
 
             BindingContext = viewModel;
@@ -139,6 +139,8 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
+                ((MainPage)this.Parent).StopTimer();
+
                 DependencyService.Get<IClearCookies>().ClearAllCookies();
 
                 //if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Facebook)

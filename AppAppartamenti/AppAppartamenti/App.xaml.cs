@@ -24,19 +24,15 @@ namespace AppAppartamenti
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTg2MTU3QDMxMzcyZTM0MmUzMEhjUEJsQW5VeG56QUlSUTBEcU8rcG5Ld2hTQ3lPcTk4MUpubnNWRnNIbDg9");
 
             SetMainPage();
-
-
         }
 
         public async void SetMainPage()
         {
             if (await ApiHelper.GetToken() != null)
             {
-                ApiHelper.GetListaAnnunciRecenti(true);
-                ApiHelper.GetUserInfo();
-                ApiHelper.GetListaTipologiaProprieta();
-                ApiHelper.GetListaTipologiaAnnuncio();
-
+                await Task.Run(() => ApiHelper.GetListaMessaggi(true));
+                await Task.Run(() => ApiHelper.GetListaAnnunciRecenti(true));
+                await Task.Run(() => ApiHelper.GetUserInfo(true));
 
                 MainPage = new MainPage();
             }
@@ -89,10 +85,6 @@ namespace AppAppartamenti
             //    //Start AppCenter Push notification with Android app secret
             //    AppCenter.Start("89d4b161-2305-4c49-9b68-8c386a835f4a", typeof(Push));
             //}
-
-            
-
-
 
             // Handle when your app starts
         }

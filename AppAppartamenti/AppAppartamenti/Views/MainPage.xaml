@@ -55,7 +55,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="{Binding NewMessages,Converter={StaticResource BadgeColorConverter}}" >
+        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="{Binding NewMessages}" plugin:TabBadge.BadgeColor="{Binding NewMessages, Converter={StaticResource BadgeColorConverter}}" plugin:TabBadge.BadgeTextColor="Transparent" >
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;" Size="25" />
             </NavigationPage.IconImageSource>

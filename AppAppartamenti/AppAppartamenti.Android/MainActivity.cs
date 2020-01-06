@@ -13,10 +13,12 @@ using Android.Content;
 using Plugin.CurrentActivity;
 using Android.Gms.Common;
 using Android.Util;
+using Android.Support.V7.App;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.Droid
 {
-    [Activity(Label = "Promuovocasa.it", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Promuovocasa.it", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         static readonly string TAG = "MainActivity";
@@ -144,5 +146,35 @@ namespace AppAppartamenti.Droid
         //    var notificationManager = (NotificationManager)GetSystemService(Android.Content.Context.NotificationService);
         //    notificationManager.CreateNotificationChannel(channel);
         //}
+    }
+
+
+    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+    public class SplashActivity : AppCompatActivity
+    {
+        static readonly string TAG = "X:" + typeof(SplashActivity).Name;
+
+        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+        {
+            base.OnCreate(savedInstanceState, persistentState);
+            Log.Debug(TAG, "SplashActivity.OnCreate");
+        }
+
+        // Launches the startup task
+        protected override void OnResume()
+        {
+            base.OnResume();
+            StartActivity(new Intent(ApplicationContext, typeof(MainActivity)));
+            //Task startupWork = new Task(() => { Startup(); });
+            //startupWork.Start();
+        }
+
+        // Simulates background work that happens behind the splash screen
+        async void Startup()
+        {
+            //ApiHelper.GetListaMessaggi(true);
+            //ApiHelper.GetListaAnnunciRecenti(true);
+            //ApiHelper.GetUserInfo(true);
+        }
     }
 }

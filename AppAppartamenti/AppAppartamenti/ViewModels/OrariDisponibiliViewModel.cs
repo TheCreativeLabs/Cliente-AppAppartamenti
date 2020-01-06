@@ -9,10 +9,13 @@ using AppAppartamenti.Models;
 using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class OrariDisponibiliViewModel : BaseViewModel
+    public class OrariDisponibiliViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
         public class OrarioAppuntamento
@@ -24,6 +27,17 @@ namespace AppAppartamenti.ViewModels
         public DateTimeOffset Giorno { get; set; }
         public Guid IdAnnuncio { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public bool IsEmpty { get; set; }
+
+        void OnpropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public OrariDisponibiliViewModel(Guid IdAnnuncio)
         {
@@ -38,18 +52,31 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
+            OnpropertyChanged("IsBusy");
+
+
+            IsEmpty = false;
+            OnpropertyChanged("IsEmpty");
 
             try
             {
                 Orari.Clear();
 
                 AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
-                ICollection<string> listaOrari = await agendaClient.GetFasceDisponibiliAnnuncioByGiornoAsync(IdAnnuncio, Giorno); //fixme creare offset con gg
+                var listaOrari = await agendaClient.GetFasceDisponibiliAnnuncioByGiornoAsync(IdAnnuncio, Giorno); //fixme creare offset con gg
+
+                if (!listaOrari.Any())
+                {
+                    IsEmpty = true;
+                    OnpropertyChanged("IsEmpty");
+                }
 
                 foreach (var orario in listaOrari)
                 {
                     Orari.Add(new OrarioAppuntamento() { Orario = orario});
                 }
+                OnpropertyChanged("Orari");
+
             }
             catch (Exception ex)
             {

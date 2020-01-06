@@ -9,6 +9,7 @@ using AppAppartamentiApiClient;
 using Xamarin.Forms;
 using AppAppartamenti.Behaviors;
 using System.Linq;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.Views.Messaggi
 {
@@ -25,8 +26,6 @@ namespace AppAppartamenti.Views.Messaggi
             BindingContext = viewModel = new MessaggiViewModel();
             viewModel.IdChatParam = ChatInfo.IdChat.Value;
             this.Title = $"{ChatInfo.Nome} {ChatInfo.Cognome}";
-
-            MessagingCenter.Send(this, "MessaggiLista", "OK");
         }
 
         public NuovoMessaggio(Guid IdAnnuncio, Guid IdPersonToMeet)
@@ -43,6 +42,15 @@ namespace AppAppartamenti.Views.Messaggi
         {
             base.OnAppearing();
 
+            if(viewModel.IdChatParam.HasValue) { 
+                ApiHelper.UpdateChatList(viewModel.IdChatParam.Value);
+                ((MainPage)this.Parent.Parent).RefreshBadge(0);
+            }
+            else
+            {
+                ApiHelper.GetListaAnnunciRecenti(true);
+            }
+
             if (viewModel.Items.Count == 0)
                 await viewModel.LoadItems();
 
@@ -53,6 +61,13 @@ namespace AppAppartamenti.Views.Messaggi
             tmrExecutor.Interval = 30000;
             tmrExecutor.Enabled = true;
             tmrExecutor.Start();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnAppearing();
+
+            tmrExecutor.Stop();
         }
 
         private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

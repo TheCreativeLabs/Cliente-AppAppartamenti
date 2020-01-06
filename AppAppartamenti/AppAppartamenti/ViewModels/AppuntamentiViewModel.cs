@@ -9,19 +9,31 @@ using AppAppartamentiApiClient;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AppuntamentiViewModel : BaseViewModel
+    public class AppuntamentiViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public DateTime SelectedDate { get; set; }
         public ObservableCollection<AppuntamentoDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public bool IsEmpty { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public AppuntamentiViewModel()
         {
             Items = new ObservableCollection<AppuntamentoDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+        }
+
+        void OnpropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -30,7 +42,11 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
+            OnpropertyChanged("IsBusy");
 
+
+            IsEmpty = false;
+            OnpropertyChanged("IsEmpty");
             try
             {
                 Items.Clear();
@@ -38,10 +54,18 @@ namespace AppAppartamenti.ViewModels
                 AgendaClient agendaClient = new AgendaClient(await Api.ApiHelper.GetApiClient());
                 var lista =await agendaClient.GetAgendaCurrentByGiornoAsync(SelectedDate);
 
+                if (!lista.Any())
+                {
+                    IsEmpty = true;
+                    OnpropertyChanged("IsEmpty");
+                }
+
                 foreach (var item in lista)
                 {
                     Items.Add(item);
                 }
+                OnpropertyChanged("Items");
+
             }
             catch (Exception ex)
             {
@@ -50,6 +74,7 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+                OnpropertyChanged("IsBusy");
             }
         }
 

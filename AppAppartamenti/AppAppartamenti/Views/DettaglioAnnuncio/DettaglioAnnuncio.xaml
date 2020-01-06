@@ -32,7 +32,7 @@
              <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
             <Button x:Name="btnMessageNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
-                    Text="&#xf27a;" HorizontalOptions="End"
+                    Text="&#xf086;" HorizontalOptions="End"
                     FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
             </Button>
 
@@ -282,7 +282,7 @@
                     </Button>
 
                     <Button x:Name="btnMessage" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
-                        Text="&#xf27a;" HorizontalOptions="End"
+                        Text="&#xf086;" HorizontalOptions="End"
                         FontFamily="{x:StaticResource FA-Solid}" TextColor="White" WidthRequest="50" >
                     </Button>
 

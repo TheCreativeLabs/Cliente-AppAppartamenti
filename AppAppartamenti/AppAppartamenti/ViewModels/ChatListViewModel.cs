@@ -21,6 +21,7 @@ namespace AppAppartamenti.ViewModels
         public ObservableCollection<ChatListDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+        public bool IsEmpty { get; set; }
 
         void OnpropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -30,12 +31,12 @@ namespace AppAppartamenti.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         public ChatListViewModel()
         {
             Items = new ObservableCollection<ChatListDtoOutput>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             OnpropertyChanged("Items");
-
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -44,27 +45,33 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
+            OnpropertyChanged("IsBusy");
+
+            IsEmpty = false;
+            OnpropertyChanged("IsEmpty");
 
             try
             {
-                MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
+                var listaChat = await ApiHelper.GetListaMessaggi(false);// await messaggiClient.GetChatListAsync();
+                
 
-                ICollection<ChatListDtoOutput> listaChat;
-
-                listaChat = await messaggiClient.GetChatListAsync();
-
-                //if(listaChat.Where(x=>x.NumberMsgToRead > 0).Any())
-                //{
-                Items.Clear();
-
-                foreach (var msg in listaChat)
+                if (!listaChat.Any())
                 {
-                    Items.Add(msg);
+                    IsEmpty = true;
+                    OnpropertyChanged("IsEmpty");
+                }
+                else
+                {
+                    Items.Clear();
+
+                    foreach (var msg in listaChat)
+                    {
+                        Items.Add(msg);
+                    }
+
+                    OnpropertyChanged("Items");
                 }
 
-                OnpropertyChanged("Items");
-
-                //}
             }
             catch (Exception ex)
             {
@@ -73,6 +80,8 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+                OnpropertyChanged("IsBusy");
+
             }
         }
 
@@ -104,7 +113,6 @@ namespace AppAppartamenti.ViewModels
                 IsBusy = false;
             }
         }
-
 
         private Task<string> DisplayActionSheet(string v1, string v2, object p, string v3, string v4)
         {

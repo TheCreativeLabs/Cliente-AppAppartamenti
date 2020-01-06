@@ -29,7 +29,7 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            UserInfoDto userInfo = await ApiHelper.GetUserInfo();
+            UserInfoDto userInfo = await ApiHelper.GetUserInfo(false);
             viewModel = userInfo;
 
             BindingContext = viewModel;
