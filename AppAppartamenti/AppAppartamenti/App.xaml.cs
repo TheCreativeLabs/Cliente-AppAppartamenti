@@ -30,11 +30,11 @@ namespace AppAppartamenti
         {
             if (await ApiHelper.GetToken() != null)
             {
-                await Task.Run(() => ApiHelper.GetListaMessaggi(true));
-                await Task.Run(() => ApiHelper.GetListaAnnunciRecenti(true));
-                await Task.Run(() => ApiHelper.GetUserInfo(true));
-
                 MainPage = new MainPage();
+
+                await Task.Run(async () => await ApiHelper.GetListaMessaggi(true));
+                await Task.Run(async () => await ApiHelper.GetListaAnnunciRecenti(true));
+                await Task.Run(async () => await ApiHelper.GetUserInfo(true));
             }
             else
             {
