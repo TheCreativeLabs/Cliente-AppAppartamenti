@@ -37,7 +37,7 @@ namespace AppAppartamenti
                 ApiHelper.GetListaTipologiaProprieta();
                 ApiHelper.GetListaTipologiaAnnuncio();
 
-                
+
                 MainPage = new MainPage();
             }
             else

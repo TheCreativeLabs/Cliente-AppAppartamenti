@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 namespace AppAppartamenti.Notify
 {
     public interface INotificationManager
@@ -16,5 +18,14 @@ namespace AppAppartamenti.Notify
     {
         public string Title { get; set; }
         public string Message { get; set; }
+    }
+}
+
+
+namespace AppAppartamenti.NotificationSample
+{
+    public interface INotification
+    {
+        void CreateNotification(String title, String message);
     }
 }

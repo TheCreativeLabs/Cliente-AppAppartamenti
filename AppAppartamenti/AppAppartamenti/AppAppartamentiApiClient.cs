@@ -4901,7 +4901,7 @@ namespace AppAppartamentiApiClient
         public string PhotoUrl { get; set; }
 
         [Newtonsoft.Json.JsonProperty("InstallationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? InstallationId { get; set; }
+        public string InstallationId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("OsVersion", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(16)]
@@ -5643,7 +5643,7 @@ namespace AppAppartamentiApiClient
         public string PhotoUrl { get; set; }
 
         [Newtonsoft.Json.JsonProperty("InstallationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? InstallationId { get; set; }
+        public string InstallationId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("OsVersion", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(16)]
@@ -6147,7 +6147,7 @@ namespace AppAppartamentiApiClient
     {
         [Newtonsoft.Json.JsonProperty("InstallationId", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public System.Guid InstallationId { get; set; }
+        public string InstallationId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("OsVersion", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
