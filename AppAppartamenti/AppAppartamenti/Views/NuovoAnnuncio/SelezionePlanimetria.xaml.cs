@@ -48,8 +48,8 @@ namespace AppAppartamenti.Views
                     ImageWithId imm = new ImageWithId() { Id = id, Image = item };
                     bytesImages.Add(imm);
                 }
-                cvImmagini.ItemsSource = bytesImages.ToArray();
             }
+            cvImmagini.ItemsSource = bytesImages.ToArray();
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

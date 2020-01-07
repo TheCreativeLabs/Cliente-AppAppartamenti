@@ -137,28 +137,34 @@ namespace AppAppartamenti.Views
 
         async void TakePhoto()
         {
-            await CrossMedia.Current.Initialize();
+            try { 
+                await CrossMedia.Current.Initialize();
 
-            //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-            //{
-            //    DisplayAlert("No Camera", ":( No camera available.", "OK");
-            //    return;
-            //}
+                //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                //{
+                //    DisplayAlert("No Camera", ":( No camera available.", "OK");
+                //    return;
+                //}
 
-            //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-            //{
-            //    Directory = "Sample",
-            //    Name = "test.jpg"
-            //});
+                //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                //{
+                //    Directory = "Sample",
+                //    Name = "test.jpg"
+                //});
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
+                    SaveToAlbum = true,
+                    PhotoSize = PhotoSize.Small
+                });
+
+                if (file == null)
+                    return;
+            }
+            catch
             {
-                SaveToAlbum = true,
-                PhotoSize = PhotoSize.Small
-            });
 
-            if (file == null)
-                return;
+            }
 
             //cvImmagini.ItemsSource = mediaFileImages;
         }

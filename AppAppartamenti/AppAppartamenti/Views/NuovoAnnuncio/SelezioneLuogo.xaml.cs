@@ -101,10 +101,16 @@ namespace AppAppartamenti.Views
             {
                 annuncio.Indirizzo = entIndirizzo.Text;
 
-                Position position = (await (new Geocoder()).GetPositionsForAddressAsync($"{entIndirizzo.Text} , {entCercaComune.Text}")).FirstOrDefault();
+                try { 
+                    Position position = (await (new Geocoder()).GetPositionsForAddressAsync($"{entIndirizzo.Text} , {entCercaComune.Text}")).FirstOrDefault();
 
-                annuncio.CoordinateGeografiche = $"{position.Latitude.ToString()};{position.Longitude.ToString()}";
-                await Navigation.PushModalAsync(new ValidazioneMappa(position,entCercaComune.Text, entIndirizzo.Text), true);
+                    annuncio.CoordinateGeografiche = $"{position.Latitude.ToString()};{position.Longitude.ToString()}";
+                    await Navigation.PushModalAsync(new ValidazioneMappa(position,entCercaComune.Text, entIndirizzo.Text), true);
+                }
+                catch
+                {
+                    await DisplayAlert("Attenzione", "Si è verificato un errore durante la localizzazione della mappa. Si prega di riprovare", "OK");
+                }
             }
         }
 

@@ -63,7 +63,7 @@
                     <StackLayout x:Name="stkLunedi" IsVisible="False" Margin="0,10,0,0">
                           <StackLayout Orientation="Horizontal">
                                 <Label Text="Lunedì" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="+ Aggiungi" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="1"></Button>
+                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="1"></Button>
                           </StackLayout>
 
                           <ListView x:Name="listViewMonday" SelectionMode="None" VerticalOptions="Start"  SeparatorVisibility="None"  HasUnevenRows="True">
@@ -91,8 +91,8 @@
 
                                                 <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" 
                                                        Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                            </StackLayout>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -109,7 +109,7 @@
                     <StackLayout x:Name="stkMartedi"  IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Martedì" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                            <Button Text="Aggiungi" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="2"></Button>
+                            <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="2"></Button>
                         </StackLayout>
 
                           <ListView x:Name="listViewMartedi" SeparatorVisibility="None" SelectionMode="None">
@@ -136,9 +136,9 @@
                                         </Frame>
 
                                         <Button Clicked="DeleteMartediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                       Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                    </StackLayout>
+                                                    Style="{x:StaticResource TimeSlotDeleteButton}"  HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                 </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -151,7 +151,7 @@
                     <StackLayout x:Name="stkMercoledi" IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
                                 <Label Text="Mercoledi" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="Aggiungi" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="3"></Button>
+                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="3"></Button>
                             </StackLayout>
 
                           <ListView x:Name="listViewMercoledi" SeparatorVisibility="None" SelectionMode="None">
@@ -178,9 +178,9 @@
                                                 </Frame>
 
                                                 <Button Clicked="DeleteMercolediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                                       Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                            </StackLayout>
+                                                          Style="{x:StaticResource TimeSlotDeleteButton}"  HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -193,7 +193,7 @@
                     <StackLayout x:Name="stkGiovedi" IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Giovedi" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                            <Button Text="Aggiungi" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="4"></Button>
+                            <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="4"></Button>
                         </StackLayout>
                           <ListView x:Name="listViewGiovedi" SeparatorVisibility="None" SelectionMode="None">
                                 <ListView.ItemTemplate>
@@ -219,9 +219,9 @@
                                                 </Frame>
 
                                                 <Button Clicked="DeleteGiovediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                                   Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                            </StackLayout>
+                                                    Style="{x:StaticResource TimeSlotDeleteButton}"  HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -234,7 +234,7 @@
                     <StackLayout x:Name="stkVenerdi" IsVisible="False" Margin="0,10,0,0" >
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Venerdì" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="Aggiungi" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="5"></Button>
+                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="5"></Button>
                             </StackLayout>
 
                           <ListView x:Name="listViewVenerdi" SeparatorVisibility="None" SelectionMode="None">
@@ -261,9 +261,9 @@
                                                 </Frame>
 
                                                 <Button Clicked="DeleteVenerdiElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                                   Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                            </StackLayout>
+                                                  Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -276,7 +276,7 @@
                     <StackLayout x:Name="stkSabato" IsVisible="False" Margin="0,10,0,0">
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Sabato" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="Aggiungi" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="6"></Button>
+                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="6"></Button>
                             </StackLayout>
 
                           <ListView x:Name="listViewSabato" SeparatorVisibility="None" SelectionMode="None">
@@ -303,9 +303,9 @@
                                                 </Frame>
 
                                                 <Button Clicked="DeleteSabatoElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                               Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                            </StackLayout>
+                                                   Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                 </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -320,7 +320,7 @@
                     <StackLayout x:Name="stkDomenica" IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Domenica" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                            <Button Text="Aggiungi" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="7"></Button>
+                            <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="7"></Button>
                         </StackLayout>
 
                           <ListView x:Name="listViewDomenica" SeparatorVisibility="None" SelectionMode="None">
@@ -347,9 +347,9 @@
                                                 </Frame>
 
                                                 <Button Clicked="DeleteDomenicaElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}"
-                                                               Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-
-                                            </StackLayout>
+                                                  Style="{x:StaticResource TimeSlotDeleteButton}"  HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
+                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
+                                        </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -367,11 +367,11 @@
 
         </ScrollView>
 
-        <StackLayout x:Name="stkPicker" IsVisible="False" Grid.Row="0" Padding="20" VerticalOptions="CenterAndExpand">
+            <StackLayout x:Name="stkPicker_Dalle" IsVisible="false" Grid.Row="0" Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="White" >
 
                 <appappartamenti:ShadowFrame HasShadow="True" Padding="0" >
                     <StackLayout>
-                         <syncfusion1:SfPicker
+                        <syncfusion1:SfPicker
                                         x:Name="pickerDalle"
                                         PickerMode="Default"
                                         IsVisible="false"
@@ -384,18 +384,27 @@
                                         ColumnHeaderTextColor="White"
                                         SelectionChanged="pickerDalle_SelectionChanged"
                                         ColumnHeaderHeight="40"
+                                       OkButtonClicked="Picker_Closed"
                                         ShowFooter="true"
                                         Margin="0"
                         BorderColor="Transparent"
 
                                         Closed="Picker_Closed"
-                                        />
-                                        </StackLayout>
-                    </appappartamenti:ShadowFrame>
+                                        >
+                            <syncfusion1:SfPicker.FooterView>
+                                <Button Text="Ok" Clicked="Picker_Closed"></Button>
+                            </syncfusion1:SfPicker.FooterView>
+                            
+                        </syncfusion1:SfPicker>
+                    </StackLayout>
+                </appappartamenti:ShadowFrame>
+            </StackLayout>
 
-                 <appappartamenti:ShadowFrame HasShadow="True" Padding="0">
+            <StackLayout x:Name="stkPicker_Alle" IsVisible="False" Grid.Row="0" Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="White" >
+
+                <appappartamenti:ShadowFrame HasShadow="True" Padding="0">
                     <StackLayout>
-         <syncfusion1:SfPicker
+                        <syncfusion1:SfPicker
                         x:Name="pickerAlle"
                         PickerMode="Default"
                         IsVisible="false"
@@ -408,12 +417,18 @@
                         ColumnHeaderTextColor="White"
                         SelectionChanged="pickerAlle_SelectionChanged"
                         ColumnHeaderHeight="40"
+                        OkButtonClicked="Picker_Closed"
+                        CancelButtonClicked="Picker_Closed"
                         BorderColor="Transparent"
                         ShowFooter="true"
                         Margin="0"
-                        Closed="Picker_Closed"
-             />
-                          </StackLayout>
+                        Closed="Picker_Closed" >
+
+                            <syncfusion1:SfPicker.FooterView>
+                                <Button Text="Ok" Clicked="Picker_Closed"></Button>
+                            </syncfusion1:SfPicker.FooterView>
+                        </syncfusion1:SfPicker>
+                    </StackLayout>
                     </appappartamenti:ShadowFrame>
             </StackLayout>
         </Grid>

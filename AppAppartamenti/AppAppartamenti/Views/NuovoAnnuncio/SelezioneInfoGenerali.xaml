@@ -11,7 +11,8 @@
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneInfoGenerali"
              NavigationPage.HasNavigationBar="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}">
 
 
     <ContentPage.Content>

@@ -673,7 +673,7 @@
     <value>Carica una foto</value>
   </data>
   <data name="SelezionePlanimetria.AddImage" xml:space="preserve">
-    <value>Seleziona immagine</value>
+    <value>Seleziona planimetria</value>
   </data>
   <data name="SelezionePlanimetria.Continue" xml:space="preserve">
     <value>Avanti</value>
@@ -776,5 +776,23 @@
   </data>
   <data name="TERMOAUTONOMO" xml:space="preserve">
     <value>Termoautonomo</value>
+  </data>
+  <data name="CANTINA" xml:space="preserve">
+    <value>Cantina</value>
+  </data>
+  <data name="CASALE" xml:space="preserve">
+    <value>Casale</value>
+  </data>
+  <data name="GARAGE_POSTO_AUTO" xml:space="preserve">
+    <value>Garage/Posto auto</value>
+  </data>
+  <data name="POSTO_LETTO" xml:space="preserve">
+    <value>Posto letto</value>
+  </data>
+  <data name="TERRENO" xml:space="preserve">
+    <value>Terreno</value>
+  </data>
+  <data name="VILLA_SCHIERA" xml:space="preserve">
+    <value>Villetta a schiera</value>
   </data>
 </root>

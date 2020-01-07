@@ -27,6 +27,12 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
+            MessagingCenter.Subscribe<SelezioneFasceOrarie, string>(this, "AnnuncioCreato", async (obj, arg) =>
+            {
+                viewModel.Items.Clear();
+                viewModel.LoadItemsCommand.Execute(null);
+            });
+
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }

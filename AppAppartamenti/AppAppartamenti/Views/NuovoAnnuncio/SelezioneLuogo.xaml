@@ -13,6 +13,7 @@
              ios:Page.UseSafeArea="true"
              NavigationPage.HasNavigationBar="False"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
     <ContentPage.Resources>
