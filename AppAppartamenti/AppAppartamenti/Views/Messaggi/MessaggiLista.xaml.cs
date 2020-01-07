@@ -23,13 +23,13 @@ namespace AppAppartamenti.Views.Messaggi
         {
             base.OnAppearing();
 
-            ((MainPage)this.Parent.Parent).StopTimer();
+            //((MainPage)this.Parent.Parent).StopTimer();
             viewModel.LoadItemsCommand.Execute(null);
 
-            tmrExecutor.Elapsed += new ElapsedEventHandler(tmrExecutor_Elapsed);
-            tmrExecutor.Interval = 30000;
-            tmrExecutor.Enabled = true;
-            tmrExecutor.Start();
+            //tmrExecutor.Elapsed += new ElapsedEventHandler(tmrExecutor_Elapsed);
+            //tmrExecutor.Interval = 30000;
+            //tmrExecutor.Enabled = true;
+            //tmrExecutor.Start();
         }
 
         protected override void OnDisappearing()
