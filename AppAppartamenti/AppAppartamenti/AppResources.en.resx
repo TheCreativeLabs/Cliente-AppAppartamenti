@@ -771,4 +771,22 @@
   <data name="TERMOAUTONOMO" xml:space="preserve">
     <value>Termoautonomo</value>
   </data>
+  <data name="CANTINA" xml:space="preserve">
+    <value>Cell</value>
+  </data>
+  <data name="CASALE" xml:space="preserve">
+    <value>Farmhouse</value>
+  </data>
+  <data name="GARAGE_POSTO_AUTO" xml:space="preserve">
+    <value>Garage/Parking space</value>
+  </data>
+  <data name="POSTO_LETTO" xml:space="preserve">
+    <value>Sleeping accomodation</value>
+  </data>
+  <data name="TERRENO" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="VILLA_SCHIERA" xml:space="preserve">
+    <value>Townhouse</value>
+  </data>
 </root>

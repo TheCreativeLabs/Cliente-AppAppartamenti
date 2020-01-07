@@ -11,7 +11,8 @@
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezionePrezzo"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              ios:Page.UseSafeArea="true"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{x:StaticResource SfondoColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>

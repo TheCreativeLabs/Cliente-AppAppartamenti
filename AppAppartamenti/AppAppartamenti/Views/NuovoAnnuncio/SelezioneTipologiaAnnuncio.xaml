@@ -8,7 +8,8 @@
              x:Class="AppAppartamenti.Views.SelezioneTipologiaAnnuncio"
                xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              ios:Page.UseSafeArea="true"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{x:StaticResource SfondoColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>

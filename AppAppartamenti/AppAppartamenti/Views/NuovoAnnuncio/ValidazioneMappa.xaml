@@ -13,7 +13,8 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:KeyToTranslateConverter x:Key="TranslateConverter" />

@@ -109,7 +109,7 @@
             <StackLayout x:Name="StackFooter" IsVisible="false" Orientation="Horizontal" VerticalOptions="EndAndExpand" Padding="5">
                 
                 <Button x:Name="BtnDelete"
-                    Text="Elimina appuntamento" HeightRequest="40" HorizontalOptions="FillAndExpand"
+                    Text="Annulla appuntamento" HeightRequest="40" HorizontalOptions="FillAndExpand"
                     BackgroundColor="{x:StaticResource DangerColor}" Clicked="BtnDelete_Clicked" TextColor="White">
                 </Button>
 

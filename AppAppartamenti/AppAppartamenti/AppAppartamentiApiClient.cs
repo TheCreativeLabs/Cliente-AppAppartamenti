@@ -3108,6 +3108,7 @@ namespace AppAppartamentiApiClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+                    var stringContent = Newtonsoft.Json.JsonConvert.SerializeObject(annuncio, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(annuncio, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;

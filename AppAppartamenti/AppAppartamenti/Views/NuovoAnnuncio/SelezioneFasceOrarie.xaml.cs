@@ -452,7 +452,7 @@ namespace AppAppartamenti.Views
                 pickerDalle.ColumnHeaderText = timeSlotViewModel.Header;
                 pickerDalle.IsOpen = true;
                 pickerDalle.IsVisible = true;
-                stkPicker.IsVisible = true;
+                stkPicker_Dalle.IsVisible = true;
             }
             catch (Exception ex)
             {
@@ -563,7 +563,7 @@ namespace AppAppartamenti.Views
                 pickerAlle.ColumnHeaderText = timeSlotViewModel.Header;
                 pickerAlle.IsOpen = true;
                 pickerAlle.IsVisible = true;
-                stkPicker.IsVisible = true;
+                stkPicker_Alle.IsVisible = true;
             }
             catch (Exception ex)
             {
@@ -594,7 +594,8 @@ namespace AppAppartamenti.Views
 
         private void Picker_Closed(object sender,EventArgs e)
         {
-            stkPicker.IsVisible = false;
+            stkPicker_Alle.IsVisible = false;
+            stkPicker_Dalle.IsVisible = false;
             pickerAlle.IsVisible = false;
             pickerDalle.IsVisible = false;
         }
@@ -688,6 +689,7 @@ namespace AppAppartamenti.Views
                     await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
                 }
 
+                MessagingCenter.Send(this, "AnnuncioCreato", "Ok");
                 await Navigation.PopModalAsync();
             }
             catch

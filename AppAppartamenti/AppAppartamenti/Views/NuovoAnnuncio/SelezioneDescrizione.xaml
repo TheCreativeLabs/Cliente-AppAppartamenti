@@ -32,6 +32,7 @@
                   </Button>
             </StackLayout>
 
+            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
             <controls:StepMenu CurrentId="9"/>
 

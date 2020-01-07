@@ -36,11 +36,11 @@
                     </StackLayout>
 
                     <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-                    <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneImmagini.AggiungiImmagini}"></Label>
+                        <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePlanimetria.Planimetria}"></Label>
                     <controls:StepMenu CurrentId="7"/>
 
 
-                    <Button Clicked="ActionImmagini" Text="{translator:Translate SelezioneImmagini.AggiungiImmagini}" Style="{x:StaticResource LinkButton}"></Button>
+                        <Button Clicked="ActionImmagini" Text="{translator:Translate SelezionePlanimetria.AddImage}" Style="{x:StaticResource LinkButton}"></Button>
 
                         </StackLayout>
                 </CollectionView.Header>

@@ -9,6 +9,7 @@ using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 using Plugin.InputKit.Shared.Controls;
 using RestSharp.Extensions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
