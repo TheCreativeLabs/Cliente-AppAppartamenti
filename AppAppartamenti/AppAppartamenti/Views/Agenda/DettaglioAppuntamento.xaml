@@ -27,14 +27,14 @@
                 <StackLayout>
                     <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
 
-                        <Label Style="{x:StaticResource DangerTitle}" IsEnabled="False" Text="Questo appuntamento è in attesa di conferma" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"></Label>
+                    <Label Style="{x:StaticResource DangerTitle}" IsEnabled="False" Text="Questo appuntamento è in attesa di conferma" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"></Label>
 
-                        <Label x:Name="lbl_appuntamentoCon"  IsVisible="{Binding Confermato}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
+                    <Label x:Name="lbl_appuntamentoCon"  IsVisible="{Binding Confermato}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
 
+                    <Label x:Name="lbl_appuntamentoAttesa"  IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento in attesa di approvazione con"></Label>
 
-                        <Label x:Name="lbl_appuntamentoAttesa"  IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento in attesa di approvazione con"></Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <Frame CornerRadius="30"
                             HeightRequest="60"
                             WidthRequest="60"

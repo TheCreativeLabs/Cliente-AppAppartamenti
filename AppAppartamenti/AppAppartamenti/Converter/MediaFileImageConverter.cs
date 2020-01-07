@@ -13,7 +13,7 @@ namespace AppAppartamenti.Converter
             ImageSource retSource = null;
 
             if (value != null) {
-                retSource = ImageSource.FromStream(() => ((MediaFile)value).GetStream());
+               retSource = ImageSource.FromStream(() => ((MediaFile)value).GetStream());
             } 
             
             return retSource; 

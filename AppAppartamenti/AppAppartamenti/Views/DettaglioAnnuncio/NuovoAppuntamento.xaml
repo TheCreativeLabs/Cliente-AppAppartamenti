@@ -56,6 +56,10 @@
 
                 <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
 
+                <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
+                    <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non sono disponib ili appuntamenti per il giorno selezionato"></Label>
+                </StackLayout>
+
                 <StackLayout x:Name="containerOrariDisponibili" Orientation="Vertical" IsVisible="False" >
                 <!--<FlexLayout x:Name="containerOrariDisponibili" Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">-->
                     <CollectionView  x:Name="OrariCollectionView"

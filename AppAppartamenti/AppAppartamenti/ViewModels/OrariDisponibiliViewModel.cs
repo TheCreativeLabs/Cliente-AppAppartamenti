@@ -85,6 +85,7 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+                OnpropertyChanged("IsBusy");
             }
         }
     }

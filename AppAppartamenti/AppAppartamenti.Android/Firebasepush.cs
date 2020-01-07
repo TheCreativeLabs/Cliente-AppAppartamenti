@@ -64,6 +64,13 @@ namespace FCMClient
         public override void OnMessageReceived(RemoteMessage message)
         {
             base.OnMessageReceived(message);
+
+            Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Title");
+            alert.SetMessage("Complex Alert");
+            alert.Show();
+
             new NotificationHelper().CreateNotification(message.GetNotification().Title, message.GetNotification().Body);
         }
     }

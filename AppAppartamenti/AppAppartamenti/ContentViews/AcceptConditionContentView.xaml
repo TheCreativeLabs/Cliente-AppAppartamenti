@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppAppartamenti.ContentViews.AcceptConditionContentView">
+    <ContentView.Content>
+        <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Ho più di 18 anni e accetto le "/>
+                    <Span Text="Condizioni Generali" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_lblCondizioniGenerali"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text=" e la " />
+                    <Span Text="Politica sulla privacy" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}" >
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_lblPrivacyPolici"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </ContentView.Content>
+</ContentView>

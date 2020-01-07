@@ -8,6 +8,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Push;
 using AppAppartamenti.Api;
 using System.Threading.Tasks;
+using AppAppartamenti.Views.Messaggi;
 
 namespace AppAppartamenti
 {
@@ -44,49 +45,20 @@ namespace AppAppartamenti
 
         protected override void OnStart()
         {
-
             Push.PushNotificationReceived += (sender, e) =>
             {
-                // Add the notification message and title to the message
-                var summary = $"Push notification received:" +
-                                    $"\n\tNotification title: {e.Title}" +
-                                    $"\n\tMessage: {e.Message}";
-
-                // If there is custom data associated with the notification,
-                // print the entries
-                if (e.CustomData != null)
-                {
-                    summary += "\n\tCustom data:\n";
-                    foreach (var key in e.CustomData.Keys)
-                    {
-                        summary += $"\t\t{key} : {e.CustomData[key]}\n";
-                    }
-                }
-
-                // Send the notification summary to debug output
-                System.Diagnostics.Debug.WriteLine(summary);
+                CatchPush(e);
             };
 
-            AppCenter.Start("ios=e5d73c0e-f124-4149-b83a-33bdbb6b46bc;" +
+            AppCenter.Start("ios=ad8c0d22-4f1c-44e4-b960-8874faf1f7f1;" +
                              "android=89d4b161-2305-4c49-9b68-8c386a835f4a;",
                              typeof(Push));
+        }
 
-            //AppCenter.Start("e5d73c0e-f124-4149-b83a-33bdbb6b46bc;", typeof(Push));
-
-            //AppCenter.SetUserId("SIMONEB");
-
-            //if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
-            //{
-            //    //Start AppCenter Push notification with iOS app secret
-            //    AppCenter.Start("e5d73c0e-f124-4149-b83a-33bdbb6b46bc", typeof(Push));
-            //}
-            //else if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android)
-            //{
-            //    //Start AppCenter Push notification with Android app secret
-            //    AppCenter.Start("89d4b161-2305-4c49-9b68-8c386a835f4a", typeof(Push));
-            //}
-
-            // Handle when your app starts
+        public async void CatchPush(PushNotificationReceivedEventArgs message)
+        {
+                var response = await Current.MainPage.DisplayAlert(message.Title, message.Message, "Chiudi", "Visualizza");
+                Current.MainPage = new MessaggiLista();
         }
 
         private async void getId()
@@ -94,14 +66,6 @@ namespace AppAppartamenti
             var i = await AppCenter.GetInstallIdAsync();
             await Current.MainPage.DisplayAlert("ID", i.ToString(), "OK");
         }
-
-        //private void OnPushNotificationRecieved(object sender, PushNotificationReceivedEventArgs e)
-        //{
-        //    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-        //    {
-        //        Current.MainPage.DisplayAlert(e.Title, e.Message, "OK");
-        //    });
-        //}
 
         protected override void OnSleep()
         {

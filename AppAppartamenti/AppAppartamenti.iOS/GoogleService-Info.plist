@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>199520633255-2j0bpt0sp4np6v35ommri8n3b6u43av8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.199520633255-2j0bpt0sp4np6v35ommri8n3b6u43av8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB3hzXcV1tLQ8dgCVn5mdm3ngmIT9wpsVQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>199520633255</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.promuovocasa.promuovocasa.it</string>
+	<key>PROJECT_ID</key>
+	<string>promuovocasa-pushnotification</string>
+	<key>STORAGE_BUCKET</key>
+	<string>promuovocasa-pushnotification.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:199520633255:ios:edb5b92a15666ca81b3682</string>
+	<key>DATABASE_URL</key>
+	<string>https://promuovocasa-pushnotification.firebaseio.com</string>
+</dict>
+</plist>
