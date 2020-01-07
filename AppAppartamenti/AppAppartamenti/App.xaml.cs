@@ -57,8 +57,14 @@ namespace AppAppartamenti
 
         public async void CatchPush(PushNotificationReceivedEventArgs message)
         {
-                var response = await Current.MainPage.DisplayAlert(message.Title, message.Message, "Chiudi", "Visualizza");
-                Current.MainPage = new MessaggiLista();
+            if(await ApiHelper.GetToken() != null) { 
+                await ApiHelper.GetListaMessaggi(true);
+                var response = await Current.MainPage.DisplayAlert(message.Title, message.Message, "Visualizza", "Chiudi");
+                if (response) {
+                    MainPage = new MainPage();
+                    ((MainPage)MainPage).CurrentPage = ((MainPage)MainPage).Children[3];
+                }
+            }
         }
 
         private async void getId()
