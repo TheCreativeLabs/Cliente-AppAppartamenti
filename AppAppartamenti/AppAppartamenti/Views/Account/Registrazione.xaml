@@ -76,24 +76,7 @@
 
                 <StackLayout Orientation="Horizontal" Margin="0,20,0,20">
                     <CheckBox x:Name="chkCondition" IsChecked="False" VerticalOptions="Center"></CheckBox>
-                    <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center" >
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Ho più di 18 anni e accetto le "/>
-                                <Span Text="Condizioni Generali" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_lblCondizioniGenerali"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                                <Span Text=" e la " />
-                                <Span Text="Politica sulla privacy" TextDecorations="Underline" TextColor="{x:StaticResource PrimaryColor}" >
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_lblPrivacyPolici"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                    <controls:AcceptConditionContentView></controls:AcceptConditionContentView>
                 </StackLayout>
 
                 <Button Style="{x:StaticResource primaryButton}"

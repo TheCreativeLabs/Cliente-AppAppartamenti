@@ -23,6 +23,7 @@ namespace AppAppartamenti.Views.Messaggi
         {
             base.OnAppearing();
 
+            ((MainPage)this.Parent.Parent).StopTimer();
             viewModel.LoadItemsCommand.Execute(null);
 
             tmrExecutor.Elapsed += new ElapsedEventHandler(tmrExecutor_Elapsed);
@@ -36,6 +37,8 @@ namespace AppAppartamenti.Views.Messaggi
             base.OnAppearing();
 
             tmrExecutor.Stop();
+
+            ((MainPage)this.Parent.Parent).StartTimer();
         }
 
         private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

@@ -9,8 +9,17 @@ namespace AppAppartamenti.Converter
     public class ByteArrayToImageSourceConverter : IValueConverter { 
         
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) { 
-            ImageSource retSource = null; if (value != null) { 
-                byte[] imageAsBytes = (byte[])value; retSource = ImageSource.FromStream(() => new MemoryStream(imageAsBytes)); 
+            ImageSource retSource = null;
+            if (value != null) {
+                try
+                {
+                    byte[] imageAsBytes = (byte[])value;
+                    retSource = ImageSource.FromStream(() => new MemoryStream(imageAsBytes));
+                }
+                catch(Exception ex)
+                {
+                    
+                }
             } 
             
             return retSource; 

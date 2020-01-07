@@ -228,7 +228,7 @@ namespace AppAppartamenti.Api
             /// Restituisce il Client da usare per le chiamate all'api
             /// </summary>
             /// <returns></returns>
-            public  static async Task<HttpClient> GetApiClient()
+        public  static async Task<HttpClient> GetApiClient()
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await Api.ApiHelper.GetToken());

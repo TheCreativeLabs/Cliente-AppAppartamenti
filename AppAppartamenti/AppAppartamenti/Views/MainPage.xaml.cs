@@ -25,15 +25,14 @@ namespace AppAppartamenti.Views
             viewModel = new TabPageViewModel();
             BindingContext = viewModel;
 
-            getBindingContext();
+            GetBindingContext();
 
             tmrExecutor.Elapsed += new ElapsedEventHandler(tmrExecutor_Elapsed);
             tmrExecutor.Interval = 30000;
             tmrExecutor.Enabled = true;
-            tmrExecutor.Start();
         }
 
-        private async void getBindingContext()
+        private async void GetBindingContext()
         {
             MessaggiClient messaggiClient = new MessaggiClient(await Api.ApiHelper.GetApiClient());
             var newMsg = await messaggiClient.GetChatMessagesToReadAsync();
@@ -43,11 +42,13 @@ namespace AppAppartamenti.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            tmrExecutor.Start();
         }
 
         protected async override void OnDisappearing()
         {
             base.OnDisappearing();
+            tmrExecutor.Stop();
         }
 
         private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -65,7 +66,7 @@ namespace AppAppartamenti.Views
 
         public void RefreshBadge(int newMsg)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
                 viewModel = new TabPageViewModel();
                 viewModel.NewMessages = newMsg;
@@ -76,6 +77,11 @@ namespace AppAppartamenti.Views
         public void StopTimer()
         {
             tmrExecutor.Stop();
+        }
+
+        public void StartTimer()
+        {
+            tmrExecutor.Start();
         }
 
         private Task DisplayAlert(string v1, string v2)

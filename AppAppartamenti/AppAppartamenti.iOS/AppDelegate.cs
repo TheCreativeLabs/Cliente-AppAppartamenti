@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Firebase.CloudMessaging;
 using Foundation;
 using Microsoft.AppCenter.Push;
-//using Microsoft.AppCenter.Push;
 using Syncfusion.SfCalendar.XForms.iOS;
 using Syncfusion.SfPicker.XForms.iOS;
 using UIKit;
@@ -20,6 +19,7 @@ namespace AppAppartamenti.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
         // method you should instantiate the window, load the UI into it and then make the window
@@ -51,27 +51,8 @@ namespace AppAppartamenti.iOS
             SfPickerRenderer.Init();
 
 
-            ////after iOS 10
-            //if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            //{
-            //    UNUserNotificationCenter center = UNUserNotificationCenter.Current;
-
-            //    center.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge, (bool arg1, NSError arg2) =>
-            //    {
-            //    });
-            //}
-
-            //else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-            //{
-
-            //    var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, new NSSet());
-
-            //    UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-            //}
-
-            //NUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
-
             LoadApplication(new App());
+
 
             return base.FinishedLaunching(app, options);
         }

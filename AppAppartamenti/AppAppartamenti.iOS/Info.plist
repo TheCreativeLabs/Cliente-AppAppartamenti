@@ -61,6 +61,6 @@
 	<key>CFBundleName</key>
 	<string>Promuovocasa.it</string>
 	<key>CFBundleIdentifier</key>
-	<string>Promuovocasa.it</string>
+	<string>com.promuovocasa.promuovocasa.it</string>
 </dict>
 </plist>

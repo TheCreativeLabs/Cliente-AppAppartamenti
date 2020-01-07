@@ -283,30 +283,6 @@ namespace AppAppartamenti.Views.Login
             imgFotoUtente.IsVisible = true;
         }
 
-        private async void TapGestureRecognizer_lblCondizioniGenerali(object sender, EventArgs e)
-        {
-            try
-            {
-                await Navigation.PushModalAsync(new GeneralCondition.GeneralCondition());
-            }
-            catch (Exception ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
-
-        private async void TapGestureRecognizer_lblPrivacyPolici(object sender, EventArgs e)
-        {
-            try
-            {
-                await Navigation.PushModalAsync(new PrivacyPolicy());
-            }
-            catch (Exception ex)
-            {
-                //Navigo alla pagina d'errore.
-                await Navigation.PushAsync(new ErrorPage());
-            }
-        }
+       
     }
 }
