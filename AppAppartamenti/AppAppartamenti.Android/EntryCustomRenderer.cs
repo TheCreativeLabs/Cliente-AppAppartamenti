@@ -225,8 +225,9 @@ namespace CustomRenderer
                 shape.Paint.Color = Xamarin.Forms.Color.White.ToAndroid();
                 shape.Paint.SetStyle(Paint.Style.Stroke);
                 nativeEditText.Background = shape;
-                nativeEditText.SetPadding(25, 25, 25, 25);
+                nativeEditText.SetPadding(15, 15, 15, 15);
             }
         }
     }
+
 }

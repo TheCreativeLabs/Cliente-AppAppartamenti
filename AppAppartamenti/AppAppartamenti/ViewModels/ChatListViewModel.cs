@@ -98,7 +98,7 @@ namespace AppAppartamenti.ViewModels
                 var index = Items.IndexOf(item);
                 Items.RemoveAt(index);
                 Items.Insert(index, item);
-                item.NumberMsgToRead = 0;
+                item.NumberMsgToRead = false;
 
                 OnpropertyChanged("Items");
 

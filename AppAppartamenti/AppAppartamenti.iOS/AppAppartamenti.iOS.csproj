@@ -66,6 +66,7 @@
     <CodesignKey>iPhone Developer: Simone Bitti (S4S5R973KD)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>PromuovocasaProfile</CodesignProvision>
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

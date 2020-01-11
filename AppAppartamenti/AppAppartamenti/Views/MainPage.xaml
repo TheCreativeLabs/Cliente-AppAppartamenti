@@ -16,7 +16,7 @@
             SelectedTabColor="{x:StaticResource DarkColor}"
             UnselectedTabColor="{x:StaticResource GrayColor}"
             NavigationPage.HasNavigationBar="False"
-            BackgroundColor="{OnPlatform Android=White, iOS=White}">
+            BackgroundColor="White">
 
      <TabbedPage.Resources>
         <ResourceDictionary>
@@ -55,7 +55,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="{Binding NewMessages}" plugin:TabBadge.BadgeColor="{Binding NewMessages, Converter={StaticResource BadgeColorConverter}}" plugin:TabBadge.BadgeTextColor="Transparent" >
+        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="1" plugin:TabBadge.BadgeTextColor="Transparent" plugin:TabBadge.BadgeColor="{Binding NewMessages, Converter={StaticResource BadgeColorConverter}}"  >
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;" Size="25" />
             </NavigationPage.IconImageSource>

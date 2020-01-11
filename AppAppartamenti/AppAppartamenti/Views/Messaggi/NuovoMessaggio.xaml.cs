@@ -44,11 +44,7 @@ namespace AppAppartamenti.Views.Messaggi
 
             if(viewModel.IdChatParam.HasValue) { 
                 ApiHelper.UpdateChatList(viewModel.IdChatParam.Value);
-                ((MainPage)this.Parent.Parent).RefreshBadge(0);
-            }
-            else
-            {
-                ApiHelper.GetListaAnnunciRecenti(true);
+                ((MainPage)this.Parent.Parent).RefreshBadge();
             }
 
             if (viewModel.Items.Count == 0)

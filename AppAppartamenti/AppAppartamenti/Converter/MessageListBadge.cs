@@ -14,14 +14,7 @@ namespace AppAppartamenti.Converter
             if (value == null)
                 return false;
 
-            if ((int)value > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (bool)value;
         }
         public object ConvertBack (object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

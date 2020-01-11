@@ -139,32 +139,15 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
-                ((MainPage)this.Parent.Parent).StopTimer();
-
                 DependencyService.Get<IClearCookies>().ClearAllCookies();
 
-                //if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Facebook)
-                //{
-                //    //Vado alla pagina di logout di facebook
-                //    Application.Current.MainPage = new NavigationPage(new FacebookLogout());
-                //}
-                //else if (Api.ApiHelper.GetProvider() == ApiHelper.LoginProvider.Google)
-                //{
-                //    //Vado alla pagina di logout di facebook
-                //    Application.Current.MainPage = new NavigationPage(new GoogleLogout());
-                //}
-                //else
-                //{
                 //Eseguo il logout
                 AccountClient accountClient = new AccountClient(await ApiHelper.GetApiClient());
                 await accountClient.LogoutAsync();
 
                 //Rimuovo il token e navigo alla home
                 Api.ApiHelper.RemoveSettings();
-                //Api.ApiHelper.DeleteToken();
-                //Api.ApiHelper.RemoveProvider();
                 Application.Current.MainPage = new NavigationPage(new Login.Login());
-                //}
             }
             catch (Exception ex)
             {

@@ -32,7 +32,7 @@ namespace AppAppartamenti
             if (await ApiHelper.GetToken() != null)
             {
                 MainPage = new MainPage();
-
+                ((MainPage)MainPage).RefreshBadge();
                 await Task.Run(async () => await ApiHelper.GetListaMessaggi(true));
                 await Task.Run(async () => await ApiHelper.GetListaAnnunciRecenti(true));
                 await Task.Run(async () => await ApiHelper.GetUserInfo(true));
@@ -57,13 +57,10 @@ namespace AppAppartamenti
 
         public async void CatchPush(PushNotificationReceivedEventArgs message)
         {
+            //Refresh del badge e lista messaggi
             if(await ApiHelper.GetToken() != null) { 
                 await ApiHelper.GetListaMessaggi(true);
-                var response = await Current.MainPage.DisplayAlert(message.Title, message.Message, "Visualizza", "Chiudi");
-                if (response) {
-                    MainPage = new MainPage();
-                    ((MainPage)MainPage).CurrentPage = ((MainPage)MainPage).Children[3];
-                }
+                ((MainPage)MainPage).RefreshBadge();
             }
         }
 

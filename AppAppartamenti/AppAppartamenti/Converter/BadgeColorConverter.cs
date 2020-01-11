@@ -14,7 +14,7 @@ namespace AppAppartamenti.Converter
             if (value == null)
                 return null;
 
-            if ((int)value == 0)
+            if ((bool)value == false)
             {
                 return Color.Transparent;
             }

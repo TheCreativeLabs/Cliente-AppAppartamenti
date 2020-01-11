@@ -414,7 +414,7 @@ namespace AppAppartamenti.Api
             if (listaChat.Any())
             {
                 var item = listaChat.Where(x => x.IdChat.Value == IdChat).FirstOrDefault();
-                item.NumberMsgToRead = 0;
+                item.NumberMsgToRead  = false;
             }
 
             Preferences.Set(ListaChatKey, JsonConvert.SerializeObject(listaChat));

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             x:Class="AppAppartamenti.Views.DettaglioAnnuncioImages" BackgroundColor="Black" NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <conv:BooleanConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Button Text="&#xf00d;" BackgroundColor="White" HorizontalOptions="EndAndExpand"
+                    Style="{x:StaticResource NavCancelButton}" Margin="0,10,10,0" WidthRequest="45"
+                    HeightRequest="45" CornerRadius="25" Clicked="BtnBack_Clicked"></Button>
+
+            <CarouselView x:Name="Carousel" HeightRequest="300" VerticalOptions="CenterAndExpand"
+                        ItemsSource="{Binding Items}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}">
+                               
+                            </Image>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+
+            <IndicatorView ItemsSourceBy="Carousel" VerticalOptions="CenterAndExpand"
+                   IndicatorColor="DarkGray"
+                   SelectedIndicatorColor="white"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

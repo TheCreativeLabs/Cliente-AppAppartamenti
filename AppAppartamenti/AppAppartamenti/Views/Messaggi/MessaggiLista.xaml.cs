@@ -38,7 +38,7 @@ namespace AppAppartamenti.Views.Messaggi
 
             tmrExecutor.Stop();
 
-            ((MainPage)this.Parent.Parent).StartTimer();
+            //((MainPage)this.Parent.Parent).StartTimer();
         }
 
         private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

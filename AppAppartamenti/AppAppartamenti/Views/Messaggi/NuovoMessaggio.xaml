@@ -8,6 +8,7 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              android:Application.WindowSoftInputModeAdjust="Resize"
              xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
+             
              >
 
     <ContentPage.Resources>
@@ -49,30 +50,31 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                 <BoxView Grid.Row="1" HeightRequest="1" Color="White"></BoxView>
+                 <controls:ChatInputBarView Grid.Row="2" VerticalOptions="End" Padding="10">
+                     <Frame CornerRadius="20" Padding="0" BorderColor="LightGray">
+                          <Grid RowSpacing="0"
+                               ColumnSpacing="0">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                 <BoxView Grid.Row="1" Color="LightGray"></BoxView>
+                            <appappartamenti:ChatEntry x:Name="chatTextInput"
+                                TextColor="Black" Keyboard="Text"
+                                IsTextPredictionEnabled="true"
+                                HorizontalOptions="FillAndExpand" 
+                                PlaceholderColor="LightGray"
+                                Placeholder="Type your message here"
+                                Grid.Row="0" VerticalOptions="Center"
+                                Grid.Column="0" AutoSize="TextChanges"/>
 
-                 <controls:ChatInputBarView Grid.Row="2" VerticalOptions="End">
-                      <Grid RowSpacing="0"
-                           ColumnSpacing="0">
-                        <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <appappartamenti:ChatEntry x:Name="chatTextInput"
-                            TextColor="Black" Keyboard="Text"
-                            IsTextPredictionEnabled="true"
-                            HorizontalOptions="FillAndExpand" 
-                            PlaceholderColor="LightGray"
-                            Placeholder="Type your message here"
-                            Grid.Row="0" VerticalOptions="Center"
-                            Grid.Column="0" AutoSize="TextChanges"/>
-
-                           <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
-                    </Grid>
+                               <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
+                        </Grid>
+                     </Frame>
                 </controls:ChatInputBarView>
              </Grid>
     </ContentPage.Content>
