@@ -9,7 +9,7 @@
              x:Class="AppAppartamenti.Views.ListaAnnunci"
              NavigationPage.HasNavigationBar="False"
              xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
    
@@ -23,14 +23,21 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-            <StackLayout>
-                 <Label Margin="20,20,0,0" Style="{x:StaticResource Title}" Text="Annunci"></Label>
+           <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" Padding="15" Margin="20,0,20,0">
+                    <appappartamenti:ShadowFrame Grid.Row="0" HasShadow="True" Padding="10" Margin="20,10,20,0">
                         <StackLayout Orientation="Horizontal">
-                            <Label FontSize="Medium" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
+                            <Label FontSize="24" WidthRequest="40" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" FontAttributes="Bold"  Text="&#xf053;">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Back_Clicked"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
 
-                            <Label x:Name="entRicerca"></Label>
+                            <Label x:Name="entRicerca" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <Frame.GestureRecognizers>
@@ -38,11 +45,14 @@
                         </Frame.GestureRecognizers>
                     </appappartamenti:ShadowFrame>
 
-                    <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
+                    <StackLayout Grid.Row="1" IsVisible="{Binding IsEmpty}" Padding="20">
                         <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non abbiamo trovato appartamenti"></Label>
                     </StackLayout>
+             
 
-                    <ListView x:Name="AnnunciiListView"
+                     <ListView  Grid.Row="1"
+                                x:Name="lvAnnunci"
+                                IsVisible="true"
                                 ItemsSource="{Binding Items}"
                                 HasUnevenRows="true"
                                 RefreshCommand="{Binding LoadItemsCommand}"
@@ -50,6 +60,7 @@
                                 IsRefreshing="{Binding IsBusy}"
                                 ItemSelected="OnItemSelected"
                                 SeparatorVisibility="None">
+
                             <ListView.Behaviors>
                                 <b:InfiniteScroll LoadMoreCommand="{Binding LoadMore}" />
                             </ListView.Behaviors>
@@ -117,6 +128,15 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-            </StackLayout>
+
+                     <appappartamenti:ShadowFrame CornerRadius="30" Margin="15" VerticalOptions="End" HorizontalOptions="End" Padding="0" Grid.Row="1" HeightRequest="60" WidthRequest="60">
+                        <Label FontSize="26" Text="&#xf5a0;" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}">
+                        </Label>
+
+                        <appappartamenti:ShadowFrame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnMap_Clicked"></TapGestureRecognizer>
+                        </appappartamenti:ShadowFrame.GestureRecognizers>
+                    </appappartamenti:ShadowFrame>
+                </Grid>
     </ContentPage.Content>
 </ContentPage>

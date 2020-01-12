@@ -11,9 +11,16 @@ using AppAppartamentiApiClient;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.Essentials;
+using Xamarin.Forms.Maps;
 
 namespace AppAppartamenti.ViewModels
 {
+    public class MapViewModel
+    {
+       public Guid IdAnnuncio { get; set; }
+       public Pin AnnPin { get; set; }
+    }
 
     public class RicercaModel
     {
@@ -54,8 +61,11 @@ namespace AppAppartamenti.ViewModels
         private int PageSize = 5;
 
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
+        public ObservableCollection<MapViewModel> PositionItems { get; set; }
+
         public Command LoadItemsCommand { get; set; }
         public Command LoadMore { get; set; }
+        public Command LoadAll { get; set; }
         public Command AddPreferito { get; set; }
         public Command RimuoviPreferito { get; set; }
         public RicercaModel FiltriRicerca { get; set; }
@@ -64,10 +74,13 @@ namespace AppAppartamenti.ViewModels
         public AnnunciViewModel()
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
+            PositionItems = new ObservableCollection<MapViewModel>();
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             OnpropertyChanged("Items");
 
             this.LoadMore = new Command(async () => await LoadMoreCommand());
+            this.LoadAll = new Command(async () => await LoadAllCommand());
             this.AddPreferito = new Command<AnnunciDtoOutput>(async item => await AddPreferitoCommand(item));
             this.RimuoviPreferito = new Command<AnnunciDtoOutput>(async item => await RemovePreferitoCommand(item));
         }
@@ -92,14 +105,92 @@ namespace AppAppartamenti.ViewModels
             {
                 CurrentPage += 1;
 
-                news = await GetAnnunci();
+                news = await GetAnnunci(false);
 
                 if (news != null)
                 {
-                    foreach (var item in news)
+                    foreach (var annuncio in news)
                     {
-                        Items.Add(item);
+                        Items.Add(annuncio);
+
+                        if (!string.IsNullOrEmpty(annuncio.CoordinateGeografiche))
+                        {
+                            var pos = annuncio.CoordinateGeografiche.Split(';');
+                            double lat;
+                            double.TryParse(pos[0], out lat);
+                            double lon;
+                            double.TryParse(pos[1], out lon);
+
+                            PositionItems.Add(new MapViewModel()
+                            {
+                                IdAnnuncio = annuncio.Id.Value,
+                                AnnPin = new Pin()
+                                {
+                                    Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                                    Position = new Position(lat, lon),
+                                    Label = $"{annuncio.TipologiaProprieta} in {annuncio.TipologiaAnnuncio} a {annuncio.Prezzo:N0}€"
+                                }
+                            });
+                        }
+
                         OnpropertyChanged("Items");
+                        OnpropertyChanged("PositionItems");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        async Task LoadAllCommand()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            ICollection<AnnunciDtoOutput> news = null;
+            try
+            {
+                CurrentPage += 1;
+
+                news = await GetAnnunci(true);
+
+                if (news != null)
+                {
+                    foreach (var annuncio in news)
+                    {
+                        Items.Add(annuncio);
+
+                        if (!string.IsNullOrEmpty(annuncio.CoordinateGeografiche))
+                        {
+                            var pos = annuncio.CoordinateGeografiche.Split(';');
+                            double lat;
+                            double.TryParse(pos[0], out lat);
+                            double lon;
+                            double.TryParse(pos[1], out lon);
+
+                            PositionItems.Add(new MapViewModel()
+                            {
+                                IdAnnuncio = annuncio.Id.Value,
+                                AnnPin = new Pin()
+                                {
+                                    Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                                    Position = new Position(lat, lon),
+                                    Label = $"{annuncio.TipologiaProprieta} in {annuncio.TipologiaAnnuncio} a {annuncio.Prezzo:N0}€"
+                                }
+                            });
+                        }
+
+                        OnpropertyChanged("Items");
+                        OnpropertyChanged("PositionItems");
+
                     }
                 }
             }
@@ -128,12 +219,32 @@ namespace AppAppartamenti.ViewModels
             {
                 CurrentPage = 1;
                 Items.Clear();
+                PositionItems.Clear();
 
-                ICollection<AnnunciDtoOutput> listaAnnunci = await GetAnnunci();
+                ICollection<AnnunciDtoOutput> listaAnnunci = await GetAnnunci(false);
 
-                foreach (var evento in listaAnnunci)
+                foreach (var annuncio in listaAnnunci)
                 {
-                    Items.Add(evento);
+                    Items.Add(annuncio);
+
+                    if (!string.IsNullOrEmpty(annuncio.CoordinateGeografiche)) { 
+                        var pos = annuncio.CoordinateGeografiche.Split(';');
+                        double lat;
+                        double.TryParse(pos[0],out lat);
+                        double lon;
+                        double.TryParse(pos[1],out lon);
+
+                        PositionItems.Add(new MapViewModel()
+                        {
+                            IdAnnuncio = annuncio.Id.Value,
+                            AnnPin = new Pin()
+                            {
+                                Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                                Position = new Position(lat,lon),
+                                Label = $"{annuncio.TipologiaProprieta} in {annuncio.TipologiaAnnuncio} a {annuncio.Prezzo:N0}€"
+                            }
+                        });
+                    }
                 }
 
                 if (Items.Count == 0) { 
@@ -173,13 +284,19 @@ namespace AppAppartamenti.ViewModels
         }
 
 
-        private async Task<ICollection<AnnunciDtoOutput>> GetAnnunci()
+        private async Task<ICollection<AnnunciDtoOutput>> GetAnnunci(bool ViewAll)
         {
             AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
 
             ICollection<AnnunciDtoOutput> listaAnnunci = null;
-            
-            listaAnnunci = await annunciClient.GetAnnunciAsync(CurrentPage, PageSize, FiltriRicerca.TipologiaAnnuncio, FiltriRicerca.TipologiaProprieta, FiltriRicerca.Comune.CodiceComune, FiltriRicerca.MinPrice, FiltriRicerca.MaxPrice,FiltriRicerca.MinSurface, FiltriRicerca.MaxSurface, FiltriRicerca.NumCamereLetto, FiltriRicerca.NumBagni, FiltriRicerca.NumCucine, FiltriRicerca.NumPostiAuto, FiltriRicerca.NumGarage,0,FiltriRicerca.Giardino, FiltriRicerca.Terrazzo, FiltriRicerca.Cantina, FiltriRicerca.Piscina, FiltriRicerca.Ascensore,FiltriRicerca.Condizionatori,null);
+
+            var pageSize = PageSize;
+            if (ViewAll)
+            {
+                pageSize = 500;
+            }
+
+            listaAnnunci = await annunciClient.GetAnnunciAsync(CurrentPage, pageSize, FiltriRicerca.TipologiaAnnuncio, FiltriRicerca.TipologiaProprieta, FiltriRicerca.Comune.CodiceComune, FiltriRicerca.MinPrice, FiltriRicerca.MaxPrice,FiltriRicerca.MinSurface, FiltriRicerca.MaxSurface, FiltriRicerca.NumCamereLetto, FiltriRicerca.NumBagni, FiltriRicerca.NumCucine, FiltriRicerca.NumPostiAuto, FiltriRicerca.NumGarage,0,FiltriRicerca.Giardino, FiltriRicerca.Terrazzo, FiltriRicerca.Cantina, FiltriRicerca.Piscina, FiltriRicerca.Ascensore,FiltriRicerca.Condizionatori,null);
 
             return listaAnnunci;
         }

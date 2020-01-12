@@ -43,6 +43,7 @@ namespace AppAppartamenti.iOS
 
             global::Xamarin.Forms.Forms.SetFlags("IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            Forms.SetFlags("IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
             Plugin.InputKit.Platforms.iOS.Config.Init();

@@ -4935,6 +4935,9 @@ namespace AppAppartamentiApiClient
         [System.ComponentModel.DataAnnotations.StringLength(512)]
         public string Indirizzo { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("CoordinateGeografiche", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CoordinateGeografiche { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Prezzo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Prezzo { get; set; }
 

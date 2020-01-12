@@ -11,7 +11,9 @@
              NavigationPage.HasBackButton="False"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" xmlns:appappartamenti="clr-namespace:AppAppartamenti" 
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
@@ -76,32 +78,41 @@
 
                 <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
                 <StackLayout>
-
-                            <CarouselView HeightRequest="300"
+                     <StackLayout  HeightRequest="300">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                               <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <CarouselView Grid.Row="0" 
                                           x:Name="Carousel" 
                                           ItemsSource="{Binding viewModelImmagini.Items}"
                                           PositionChanged="OnPositionChanged">
-                                <CarouselView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}">
-                                                 <Image.GestureRecognizers>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}">
+                                             <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="BtnOpenImages_Clicked"></TapGestureRecognizer>
                                 </Image.GestureRecognizers>
-                                            </Image>
-                                        </Grid>
-                                    </DataTemplate>
-                                </CarouselView.ItemTemplate>
-                            </CarouselView>
+                                        </Image>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                                <!--<Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
+                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}" IsVisible="{Binding viewModelImmagini.imagesMoreThanOne}"></Label>-->
 
-
-                    <IndicatorView ItemsSourceBy="Carousel"
-                       IndicatorColor="DarkGray"
-                       SelectedIndicatorColor="Black"
-                       HorizontalOptions="Center" />
+                            <Frame Grid.Row="0"  BackgroundColor="{x:StaticResource DarkColor}" Margin="5" Opacity="0.9" Padding="5" HeightRequest="20" WidthRequest="30" CornerRadius="15" VerticalOptions="End" HorizontalOptions="EndAndExpand"
+                                   >
+                                     <Label x:Name="CarouselImagesProgress" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" Text="1/1" FontSize="14" 
+                           TextColor="White" ></Label>
+                            </Frame>
+                           
+                            </Grid>
+                    </StackLayout>
 
                     <StackLayout Padding="20">
                             <Label LineBreakMode="NoWrap" Style="{x:StaticResource AdTitle}">
@@ -316,10 +327,20 @@
                     </Button>
                 </StackLayout>
 
-                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="20" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                 <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="20" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
                     <Button Clicked="BtnAppuntamento_Clicked" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="FillAndExpand"></Button>
+
+                     <appappartamenti:ShadowFrame Padding="0" HeightRequest="50" CornerRadius="25" WidthRequest="50" HorizontalOptions="End"  >
+
+                         <appappartamenti:ShadowFrame.GestureRecognizers>
+                             <TapGestureRecognizer Tapped="BtnAssistente_Clicked"></TapGestureRecognizer>
+                         </appappartamenti:ShadowFrame.GestureRecognizers>
+                     </appappartamenti:ShadowFrame>
                 </StackLayout>
-            </Grid>
+
+             </Grid>
+
+             
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

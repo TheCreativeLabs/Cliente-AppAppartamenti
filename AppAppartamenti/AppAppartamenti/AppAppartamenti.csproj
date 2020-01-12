@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
@@ -13,6 +14,7 @@
     <Compile Remove="Views\DettaglioAnnuncio\DettaglioAnnuncio %28copy%29.xaml.cs" />
     <Compile Remove="Views\NuovoAnnuncio.xaml.cs" />
     <Compile Remove="ContentViews\BackButton %28copy%29.xaml.cs" />
+    <Compile Remove="ViewModels\TipologiaAnnuncioViewModel %28copy%29.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -80,6 +82,7 @@
     <Folder Include="Views\Agenda\" />
     <Folder Include="Views\Messaggi\" />
     <Folder Include="Views\Notification\" />
+    <Folder Include="Views\Ricerca\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">
@@ -88,5 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="**/*" />
+    <None Include="ViewModels\MotiviSegnalazioneViewModel.cs" />
   </ItemGroup>
 </Project>

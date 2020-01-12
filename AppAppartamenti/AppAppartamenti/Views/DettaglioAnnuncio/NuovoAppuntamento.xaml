@@ -57,7 +57,7 @@
                 <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
 
                 <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
-                    <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non sono disponib ili appuntamenti per il giorno selezionato"></Label>
+                    <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non sono disponibili appuntamenti per il giorno selezionato"></Label>
                 </StackLayout>
 
                 <StackLayout x:Name="containerOrariDisponibili" Orientation="Vertical" IsVisible="False" >
@@ -75,10 +75,6 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Padding="5">
-                                      <!--ios:VisualElement.IsShadowEnabled="true"
-                                            ios:VisualElement.ShadowColor="Gray"
-                                            ios:VisualElement.ShadowOpacity="0.5"
-                                            ios:VisualElement.ShadowRadius="3"-->
                                     <appappartamenti:ShadowFrame
                                             HasShadow="True"
                                             HeightRequest="50"

@@ -120,8 +120,8 @@ namespace AppAppartamenti.Views.Account
                     Subject = "",
                     Body = "",
                     To = to,
-                    //Cc = ccRecipients,
-                    //Bcc = bccRecipients
+                    Cc = null,
+                    Bcc = null
                 };
                 await Email.ComposeAsync(message);
             }

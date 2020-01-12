@@ -39,16 +39,15 @@ namespace AppAppartamenti.Views
                     FiltriRicerca = JsonConvert.DeserializeObject<RicercaModel>(arg);
                 }
 
+                viewModel.Items.Clear();
                 viewModel.FiltriRicerca = FiltriRicerca;
-                //viewModel.Items = new System.Collections.ObjectModel.ObservableCollection<AnnunciDtoOutput>();
             });
 
-
-            viewModel.LoadItemsCommand.Execute(null);
+            if(!viewModel.Items.Any())
+                viewModel.LoadItemsCommand.Execute(null);
 
             entRicerca.Text = FiltriRicerca.Comune.NomeComune;
         }
-
 
         async void OnTapGestureRecognizerTapped(object sender, EventArgs args)
         {
@@ -65,12 +64,22 @@ namespace AppAppartamenti.Views
             if (item.Id != null && item.Id != Guid.Empty)
             {
                 // Manually deselect item.
-                AnnunciiListView.SelectedItem = null;
+                lvAnnunci.SelectedItem = null;
 
                 await Navigation.PushAsync(new DettaglioAnnuncio(item,false));
             }
         }
 
+        async void Back_Clicked(object sender, EventArgs e)
+        {
+          await Navigation.PopAsync();
+        }
+
+        async void BtnMap_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new RicercaSuMappa(viewModel));
+        }
+        
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta(null)));

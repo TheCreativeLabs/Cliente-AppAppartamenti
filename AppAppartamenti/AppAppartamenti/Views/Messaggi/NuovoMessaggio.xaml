@@ -42,27 +42,27 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout>
-                                    <Frame HasShadow="False" Padding="10" CornerRadius="10" Style="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand">
-                                            <Label Text="{Binding Messaggio}" TextColor="{Binding FromMe, Converter={StaticResource MsgTextColorConverter}}"></Label>
+                                    <Frame HasShadow="False" Padding="20" CornerRadius="10" Style="{Binding FromMe, Converter={StaticResource MsgColorConverter}}" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Messaggio}" TextColor="{Binding FromMe, Converter={StaticResource MsgTextColorConverter}}"></Label>
                                     </Frame>
-                                    </StackLayout>
+                                </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                 <BoxView Grid.Row="1" HeightRequest="1" Color="White"></BoxView>
-                 <controls:ChatInputBarView Grid.Row="2" VerticalOptions="End" Padding="10">
-                     <Frame CornerRadius="20" Padding="0" BorderColor="LightGray">
-                          <Grid RowSpacing="0"
-                               ColumnSpacing="0">
-                            <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
 
+                <BoxView Grid.Row="1" Color="LightGray"></BoxView>
+
+                 <controls:ChatInputBarView Grid.Row="2" VerticalOptions="End">
+                      <Grid RowSpacing="0"
+                           ColumnSpacing="0">
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                             <appappartamenti:ChatEntry x:Name="chatTextInput"
                                 TextColor="Black" Keyboard="Text"
                                 IsTextPredictionEnabled="true"
@@ -72,9 +72,8 @@
                                 Grid.Row="0" VerticalOptions="Center"
                                 Grid.Column="0" AutoSize="TextChanges"/>
 
-                               <Button Style="{x:StaticResource MessageSendButton}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1" Margin="5" VerticalOptions="Center" HorizontalOptions="End"></Button>
+                               <Button Padding="0" Text="Invia" BackgroundColor="Transparent" TextColor="{x:StaticResource PrimaryColor}" Clicked="Send_Clicked" Grid.Row="0" Grid.Column="1"  VerticalOptions="Center" HorizontalOptions="End"></Button>
                         </Grid>
-                     </Frame>
                 </controls:ChatInputBarView>
              </Grid>
     </ContentPage.Content>

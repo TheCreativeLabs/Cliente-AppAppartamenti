@@ -20,10 +20,11 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <Button Text="&#xf00d;" BackgroundColor="White" HorizontalOptions="EndAndExpand"
-                    Style="{x:StaticResource NavCancelButton}" Margin="0,10,10,0" WidthRequest="45"
-                    HeightRequest="45" CornerRadius="25" Clicked="BtnBack_Clicked"></Button>
+                    Style="{x:StaticResource NavCancelButton}" Margin="0,10,10,0" WidthRequest="40"
+                    HeightRequest="40" CornerRadius="20" Clicked="BtnBack_Clicked"></Button>
 
             <CarouselView x:Name="Carousel" HeightRequest="300" VerticalOptions="CenterAndExpand"
+                          PositionChanged="OnPositionChanged"
                         ItemsSource="{Binding Items}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
@@ -39,11 +40,8 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-
-            <IndicatorView ItemsSourceBy="Carousel" VerticalOptions="CenterAndExpand"
-                   IndicatorColor="DarkGray"
-                   SelectedIndicatorColor="white"
-                   HorizontalOptions="Center" />
+            <Label x:Name="CarouselImagesProgress" HeightRequest="20" VerticalOptions="CenterAndExpand" FontSize="Medium" HorizontalTextAlignment="Center"
+                           TextColor="White" ></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -114,10 +114,10 @@ namespace AppAppartamenti.Views
                 map.IsVisible = false;
             }
 
-            //MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>
-            //{
-            //        CarouselImagesProgress.Text = "1/" + arg;
-            //});
+            MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>
+            {
+                CarouselImagesProgress.Text = "1/" + arg;
+            });
 
             StackLoader.IsVisible = false;
             StackPage.IsVisible = true;
@@ -185,12 +185,11 @@ namespace AppAppartamenti.Views
             }
         }
 
-        
-
         private async void BtnSegnala_Clicked(object sender, EventArgs e)
         {
             try
             {
+                await Navigation.PushAsync(new SegnalaAnnuncio(IdAnnuncio));
             }
             catch (Exception Ex)
             {
@@ -261,6 +260,19 @@ namespace AppAppartamenti.Views
             }
         }
 
+        private async void BtnAssistente_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new AssistenteVirtualeAcquisto());
+            }
+            catch (Exception Ex)
+            {
+                //Navigo alla pagina d'errore.
+                await Navigation.PushAsync(new ErrorPage());
+            }
+        }
+
         private async void BtnModifica_Clicked(object sender, EventArgs e)
         {
             try
@@ -288,7 +300,7 @@ namespace AppAppartamenti.Views
         {
             int previousPosition = e.PreviousPosition;
             int currentPosition = e.CurrentPosition;
-            //CarouselImagesProgress.Text = (currentPosition+1) + "/" + bindingModel.viewModelImmagini.Items.Count;
+            CarouselImagesProgress.Text = (currentPosition+1) + "/" + bindingModel.viewModelImmagini.Items.Count;
         }
     }
 }

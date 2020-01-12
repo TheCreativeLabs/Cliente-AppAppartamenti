@@ -48,7 +48,7 @@
                                 <CollectionView x:Name="cvRecenti"
                                                 SelectionChanged="OnCollectionViewSelectionChanged"
                                                 ItemsSource="{Binding Items}"
-                                                HorizontalScrollBarVisibility="Always"
+                                                HorizontalScrollBarVisibility="Never"
                                                 SelectionMode="Single"
                                                 >
                                 <CollectionView.ItemsLayout>
