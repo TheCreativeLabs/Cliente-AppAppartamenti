@@ -81,12 +81,13 @@ namespace AppAppartamenti.Views
 
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
-            //foreach (var item in mediaFileImages)
-            //{
-            //    MemoryStream memoryStream = new MemoryStream();
-            //    item.File.GetStream().CopyTo(memoryStream);
-            //    annuncio.Immagini.Add(memoryStream.ToArray());
-            //}
+
+            if(!bytesImages.Any())
+            {
+                await DisplayAlert("Campo obbligatori", "Inserire almeno un'immagine", "Ok");
+                return;
+            }
+
             foreach (var item in bytesImages)
             {
                 annuncio.Immagini.Add(item.Image);

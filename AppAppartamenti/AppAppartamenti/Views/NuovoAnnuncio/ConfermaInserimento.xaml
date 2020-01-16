@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppAppartamenti.Views.NuovoAnnuncio.ConfermaInserimento"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             NavigationPage.HasBackButton="True" NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Style="{x:StaticResource StackContainer}">
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                 <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnCancel_Clicked">
+                  </Button>
+            </StackLayout>
+
+                <forms:AnimationView 
+	                        x:Name="animationView" 
+	                        Animation="ad_success.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="300" />
+
+                <Label HorizontalTextAlignment="Center" Style="{x:StaticResource AdTitle}" Text="Annuncio pubblicato con successo!"></Label>
+                <Label HorizontalTextAlignment="Center" Text="Il tuo annuncio verrà reso disponibile online una volta approvato dai nostri operatori."></Label>
+
+                <Button Text="Torna alla home" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

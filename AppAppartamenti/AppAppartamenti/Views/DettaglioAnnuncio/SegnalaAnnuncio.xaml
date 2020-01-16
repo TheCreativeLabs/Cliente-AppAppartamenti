@@ -6,7 +6,10 @@
     <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
                 <Label Style="{x:StaticResource AdTitle}" Text="Motivo segnalazione"></Label>
-                 <input:SelectionView ItemsSource="{Binding Items}" Color="{x:StaticResource DarkColor}"
+
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
+                    
+                <input:SelectionView ItemsSource="{Binding Items}" Color="{x:StaticResource DarkColor}"
                      RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1">
                 </input:SelectionView>
 

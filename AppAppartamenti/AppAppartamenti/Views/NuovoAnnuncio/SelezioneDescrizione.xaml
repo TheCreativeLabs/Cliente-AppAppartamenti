@@ -33,12 +33,14 @@
             </StackLayout>
 
             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
+            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
             <controls:StepMenu CurrentId="9"/>
 
-            <appappartamenti:ChatEntry AutoSize="TextChanges" x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></appappartamenti:ChatEntry>
+            <Frame HeightRequest="200" HasShadow="False" Padding="5" BorderColor="LightGray">
+                <appappartamenti:ChatEntry AutoSize="TextChanges" x:Name="edtDescrizione" Placeholder="{translator:Translate SelezioneDescrizione.Descrizione}" ></appappartamenti:ChatEntry>
+            </Frame>
 
-            <Button Margin="0,50,0,0" Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
+            <Button Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}"  x:Name="btnDescrizioneProcedi" Clicked="BtnDescrizioneProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

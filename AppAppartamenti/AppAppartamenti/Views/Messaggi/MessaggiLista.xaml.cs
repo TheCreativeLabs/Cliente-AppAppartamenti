@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
@@ -10,7 +11,6 @@ namespace AppAppartamenti.Views.Messaggi
     public partial class MessaggiLista : ContentPage
     {
         ChatListViewModel viewModel;
-        Timer tmrExecutor = new Timer();
 
         public MessaggiLista()
         {
@@ -23,30 +23,12 @@ namespace AppAppartamenti.Views.Messaggi
         {
             base.OnAppearing();
 
-            //((MainPage)this.Parent.Parent).StopTimer();
             viewModel.LoadItemsCommand.Execute(null);
-
-            //tmrExecutor.Elapsed += new ElapsedEventHandler(tmrExecutor_Elapsed);
-            //tmrExecutor.Interval = 30000;
-            //tmrExecutor.Enabled = true;
-            //tmrExecutor.Start();
         }
 
         protected override void OnDisappearing()
         {
             base.OnAppearing();
-
-            tmrExecutor.Stop();
-
-            //((MainPage)this.Parent.Parent).StartTimer();
-        }
-
-        private async void tmrExecutor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                viewModel.LoadItemsCommand.Execute(null);
-            });
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

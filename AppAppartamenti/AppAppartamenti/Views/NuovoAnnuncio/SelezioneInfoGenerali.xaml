@@ -26,20 +26,22 @@
                   </Button>
             </StackLayout>
 
-            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneInfoGenerali.InformazioniGenerali}"></Label>
-                        <controls:StepMenu CurrentId="4"/>
+                    <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
+                    <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneInfoGenerali.InformazioniGenerali}"></Label>
+                    <controls:StepMenu CurrentId="4"/>
 
+                    <Label Text="{translator:Translate SelezioneInfoGenerali.EnterHouseSize}"></Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                            <Entry x:Name="entSuperficie" Grid.Row="0" Keyboard="Numeric" Placeholder="{translator:Translate SelezioneInfoGenerali.HouseSizeExample}"></Entry>
+                        <Label Grid.Row="0"  Grid.Column="0" Text="mq" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                    </Grid>
 
-           
-
-                    <StackLayout Orientation="Horizontal">
-                            <Label Text="{translator:Translate SelezioneInfoGenerali.SquareMeters}" FontAttributes="Bold" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
-                            <Label Text="{translator:Translate SelezioneInfoGenerali.EnterHouseSize}"></Label>
-                    </StackLayout>
-                        <Entry x:Name="entSuperficie" Keyboard="Numeric" Placeholder="{translator:Translate SelezioneInfoGenerali.HouseSizeExample}"></Entry>
-
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                    <Label Style="{x:StaticResource AdTitle}" Text="Locali" Margin="0,30,0,10"></Label>
+                    
+                    <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
                     <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
@@ -49,7 +51,7 @@
                         <Stepper x:Name="stpCamereLetto" HorizontalOptions="EndAndExpand" ValueChanged="StpCamereLetto_ValueChanged" WidthRequest="100" Minimum="0" Visual="Material"></Stepper>
                     </StackLayout>
 
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                    <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
 
                     <StackLayout Orientation="Horizontal">
@@ -59,7 +61,7 @@
                         <Stepper x:Name="stpStanze" Minimum="0" Visual="Material" ValueChanged="StpStanze_ValueChanged" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                    <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
 
                     <StackLayout Orientation="Horizontal">
@@ -69,7 +71,7 @@
                         <Stepper x:Name="stpBagni" ValueChanged="StpBagni_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                    <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
 
                     <StackLayout Orientation="Horizontal">
@@ -80,7 +82,7 @@
 
                     </StackLayout>
 
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                    <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
 
 
@@ -91,7 +93,7 @@
                         <Stepper x:Name="stpParkingSpaces" ValueChanged="StpParkingSpaces_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                    <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
 
                     <StackLayout Orientation="Horizontal">
@@ -101,9 +103,9 @@
                         <Stepper x:Name="stpGarage" ValueChanged="StpGarage_ValueChanged" Minimum="0" Visual="Material" WidthRequest="100" HorizontalOptions="EndAndExpand"></Stepper>
                     </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>
+                        <!--<BoxView HeightRequest="1" Color="LightGray" Margin="0,15,0,15"></BoxView>-->
 
-                        <Label Text="{translator:Translate SelezioneInfoGenerali.Other}" FontSize="Medium"></Label>
+                        <Label Style="{x:StaticResource AdTitle}" Margin="0,30,0,10"  Text="{translator:Translate SelezioneInfoGenerali.Other}"></Label>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>

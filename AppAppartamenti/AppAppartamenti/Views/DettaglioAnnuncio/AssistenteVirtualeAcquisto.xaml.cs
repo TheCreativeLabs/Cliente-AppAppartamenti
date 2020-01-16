@@ -11,5 +11,10 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
         }
+
+        private async void BtnCancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

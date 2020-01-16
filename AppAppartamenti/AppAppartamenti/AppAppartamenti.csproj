@@ -15,6 +15,7 @@
     <Compile Remove="Views\NuovoAnnuncio.xaml.cs" />
     <Compile Remove="ContentViews\BackButton %28copy%29.xaml.cs" />
     <Compile Remove="ViewModels\TipologiaAnnuncioViewModel %28copy%29.cs" />
+    <Compile Remove="Converter\MessageTextColorConverter %28copy%29.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +41,7 @@
     <PackageReference Include="Microsoft.AppCenter" Version="2.6.4" />
     <PackageReference Include="Microsoft.AppCenter.Push" Version="2.6.4" />
     <PackageReference Include="Plugin.Badge" Version="2.2.1" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="3.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,6 +90,9 @@
     <Reference Include="Xamarin.iOS">
       <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\13.2.0.42\lib\mono\Xamarin.iOS\Xamarin.iOS.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\NuovoAnnuncio\MyView.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="**/*" />

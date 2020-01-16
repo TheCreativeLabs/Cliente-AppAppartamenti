@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Plugin.InputKit.Shared.Controls;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace AppAppartamenti
 {
@@ -67,5 +68,27 @@ namespace AppAppartamenti
 
     public class ChatEntry : Editor
     {
+    }
+
+    public class CustomMap : Map
+    {
+        public List<CustomPin> CustomPins { get; set; }
+    }
+
+    public class CustomPin : Pin
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public bool IsSelected { get; set; }
+    }
+
+    public class TimeSlotLabel : Label
+    {
+        public static readonly BindableProperty EnterTextProperty = BindableProperty.Create(propertyName: "Placeholder", returnType: typeof(string), declaringType: typeof(TimeSlotLabel), defaultValue: default(string));
+        public string Placeholder
+        {
+            get;
+            set;
+        }
     }
 }

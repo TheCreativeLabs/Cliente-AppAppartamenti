@@ -17,20 +17,34 @@ namespace AppAppartamenti.Views
     {
         AnnunciViewModel viewModel;
         RicercaModel FiltriRicerca;
+        AnnunciDtoOutput SelectedMapItem;
 
         public ListaAnnunci(RicercaModel FiltriRicercaParam)
         {
             InitializeComponent();
-
             FiltriRicerca = FiltriRicercaParam;
-
             BindingContext = viewModel = new AnnunciViewModel();
             viewModel.FiltriRicerca = FiltriRicerca;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            if(SelectedMapItem != null && SelectedMapItem.Id.HasValue && SelectedMapItem.Id.Value != Guid.Empty)
+            {
+                var item = SelectedMapItem;
+                SelectedMapItem = null;
+                await Navigation.PushAsync(new DettaglioAnnuncio(item, false));
+            }
+
+            MessagingCenter.Subscribe<RicercaSuMappa, string>(this, "RicercaSuMappa", async (sender, arg) =>
+            {
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    SelectedMapItem = JsonConvert.DeserializeObject<AnnunciDtoOutput>(arg);
+                }
+            });
 
             MessagingCenter.Subscribe<Ricerca, string>(this, "Ricarica", async (sender, arg) =>
             {

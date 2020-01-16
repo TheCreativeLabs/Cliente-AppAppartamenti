@@ -22,6 +22,9 @@ namespace AppAppartamenti.Views
         public MainPage()
         {
             InitializeComponent();
+            viewModel = new TabPageViewModel();
+            viewModel.NewMessages = false;
+            BindingContext = viewModel;
         }
 
         public async void RefreshBadge()

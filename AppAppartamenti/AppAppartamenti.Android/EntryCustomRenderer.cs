@@ -22,7 +22,7 @@ using Plugin.Badge.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
+
 // this line directly ubleow usings, before namespace declaration
 [assembly: ExportRenderer(typeof(WebViewUserAgent), typeof(DesktopWebViewRenderer))]
 [assembly: ExportRenderer(typeof(Entry), typeof(MyEntryRenderer))]
@@ -31,7 +31,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(Picker), typeof(CustomPickerRenderer))]
 [assembly: ExportRenderer(typeof(DatePickerCtrl), typeof(DatePickerCtrlRenderer))]
 [assembly: ExportRenderer(typeof(ChatEntry), typeof(ChatEditorRenderer))]
-
+[assembly: ExportRenderer(typeof(TimeSlotLabel), typeof(TimeSlotLabelRenderer))]
 namespace CustomRenderer
 {
     class MyEntryRenderer : EntryRenderer
@@ -226,6 +226,33 @@ namespace CustomRenderer
                 shape.Paint.SetStyle(Paint.Style.Stroke);
                 nativeEditText.Background = shape;
                 nativeEditText.SetPadding(15, 15, 15, 15);
+            }
+        }
+    }
+
+
+    class TimeSlotLabelRenderer : LabelRenderer
+    {
+        public TimeSlotLabelRenderer(Context context) : base(context)
+        {
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
+        {
+            base.OnElementChanged(e);
+
+            if (Control != null)
+            {
+                TimeSlotLabel element = Element as TimeSlotLabel;
+
+                if (string.IsNullOrEmpty(element.Text))
+                {
+                    Control.Text = element.Placeholder;
+                }
+                else
+                {
+                    Control.Text = element.Text;
+                }
             }
         }
     }

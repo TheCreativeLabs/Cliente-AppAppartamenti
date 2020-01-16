@@ -12,13 +12,26 @@ using System.Collections.Generic;
 using Xamarin.Forms.Maps;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AppAppartamenti.ViewModels
 {
-    public class AnnunciPreferitiViewModel : BaseViewModel
+    public class AnnunciPreferitiViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public bool IsEmpty { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        void OnpropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public AnnunciPreferitiViewModel()
         {
@@ -32,6 +45,10 @@ namespace AppAppartamenti.ViewModels
                 return;
 
             IsBusy = true;
+            OnpropertyChanged("IsBusy");
+
+            IsEmpty = false;
+            OnpropertyChanged("IsEmpty");
 
             try
             {
@@ -47,6 +64,12 @@ namespace AppAppartamenti.ViewModels
                 {
                     Items.Add(evento);
                 }
+
+                if (!Items.Any())
+                {
+                    IsEmpty = true;
+                    OnpropertyChanged("IsEmpty");
+                }
             }
             catch (Exception ex)
             {
@@ -55,6 +78,7 @@ namespace AppAppartamenti.ViewModels
             finally
             {
                 IsBusy = false;
+                OnpropertyChanged("IsBusy");
             }
         }
 

@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
              NavigationPage.HasNavigationBar="True"
-             NavigationPage.HasBackButton="False"
+             NavigationPage.HasBackButton="True"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
@@ -29,37 +29,40 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <NavigationPage.TitleView >
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
-             <controls:BackButton HorizontalOptions="StartAndExpand"/>
+    <NavigationPage.TitleView>
+        <Grid HorizontalOptions="End">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-            <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked"
+            <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked" Grid.Column="2"
                     VerticalOptions="Center"
-                        Text="&#xf1e0;" HorizontalOptions="End"
-                FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50">
+                        Text="&#xf1e0;"
+                FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End"  WidthRequest="50">
             </Button>
 
-            <Button x:Name="btnMessageNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
-                    Text="&#xf086;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
+            <Button x:Name="btnRemovePreferitoNav" Grid.Column="0" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
+                    Text="&#xf004;" 
+                    FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral" HorizontalOptions="End"  WidthRequest="50">
             </Button>
 
-            <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
-                    Text="&#xf004;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
+            <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Grid.Column="0"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
+                    Text="&#xf004;" 
+                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End"  WidthRequest="50" >
             </Button>
 
-            <Button x:Name="btnRemovePreferitoNav" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
-                    Text="&#xf004;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
+            <Button x:Name="btnMessageNav"  Grid.Column="1" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
+                    Text="&#xf086;"
+                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End"  WidthRequest="50" >
             </Button>
 
-            <Button  x:Name="btnModificaNavBar" IsVisible="False" Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
-                   FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" WidthRequest="50">
+            <Button  x:Name="btnModificaNavBar" Grid.Column="1" IsVisible="False" HorizontalOptions="End"  Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
+                   FontFamily="{x:StaticResource FA-Solid}"
+                     WidthRequest="50">
             </Button>
-
-            
-        </StackLayout>
+        </Grid>
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
@@ -105,7 +108,7 @@
                                 <!--<Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
                            TextColor="White" FontFamily="{x:StaticResource FA-Solid}" IsVisible="{Binding viewModelImmagini.imagesMoreThanOne}"></Label>-->
 
-                            <Frame Grid.Row="0"  BackgroundColor="{x:StaticResource DarkColor}" Margin="5" Opacity="0.9" Padding="5" HeightRequest="20" WidthRequest="30" CornerRadius="15" VerticalOptions="End" HorizontalOptions="EndAndExpand"
+                            <Frame HasShadow="False" Grid.Row="0"  BackgroundColor="{x:StaticResource DarkColor}" Margin="5" Opacity="0.9" Padding="5" HeightRequest="20" WidthRequest="30" CornerRadius="15" VerticalOptions="End" HorizontalOptions="EndAndExpand"
                                    >
                                      <Label x:Name="CarouselImagesProgress" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" Text="1/1" FontSize="14" 
                            TextColor="White" ></Label>

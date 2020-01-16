@@ -72,6 +72,13 @@ namespace AppAppartamenti.Views
 
         private async void BtnImmaginiProcedi_Clicked(object sender, EventArgs e)
         {
+            if (!bytesImages.Any())
+            {
+                await DisplayAlert("Campo obbligatori", "Inserire almeno un'immagine", "Ok");
+                return;
+            }
+
+
             if (annuncio.ImmaginePlanimetria == null)
             {
                 annuncio.ImmaginePlanimetria = new Collection<byte[]>();

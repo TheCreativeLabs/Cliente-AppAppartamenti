@@ -4969,6 +4969,12 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("StatoApprovazione", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StatoApprovazione { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("NumeroBagni", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroBagni { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("NumeroLocali", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? NumeroLocali { get; set; }
+
 
     }
 

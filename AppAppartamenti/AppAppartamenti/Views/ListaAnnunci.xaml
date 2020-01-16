@@ -9,8 +9,11 @@
              x:Class="AppAppartamenti.Views.ListaAnnunci"
              NavigationPage.HasNavigationBar="False"
              xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              ios:Page.UseSafeArea="true"
+             Title="Annunci"
              BackgroundColor="{x:StaticResource SfondoColor}">
    
      <ContentPage.Resources>
@@ -45,11 +48,6 @@
                         </Frame.GestureRecognizers>
                     </appappartamenti:ShadowFrame>
 
-                    <StackLayout Grid.Row="1" IsVisible="{Binding IsEmpty}" Padding="20">
-                        <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non abbiamo trovato appartamenti"></Label>
-                    </StackLayout>
-             
-
                      <ListView  Grid.Row="1"
                                 x:Name="lvAnnunci"
                                 IsVisible="true"
@@ -67,69 +65,108 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                           <StackLayout Padding="20">
-                                               <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="200"/>
-                                                    </Grid.RowDefinitions>
+                                        <StackLayout Padding="20">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="200"/>
+                                                </Grid.RowDefinitions>
                                 
-                                                    <Frame HasShadow="False" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
-                                                        <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
-                                                    </Frame>
-                                                    <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
-                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                                            <Button Style="{x:StaticResource AdButton}"
-                                                                    Clicked="BtnShare_Clicked"
-                                                                    CommandParameter="{Binding .}"
-                                                                    VerticalOptions="Center"
-                                                                    Text="&#xf1e0;"
-                                                                    HorizontalOptions="End"
-                                                                    FontFamily="{x:StaticResource FA-Solid}"
-                                                                    TextColor="White">
-                                                            </Button>
+                                                <Frame HasShadow="False" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
+                                                    <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                                </Frame>
+                                                <AbsoluteLayout Grid.Row="0" Padding="5" HorizontalOptions="EndAndExpand">
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                        <Button Style="{x:StaticResource AdButton}"
+                                                                Clicked="BtnShare_Clicked"
+                                                                CommandParameter="{Binding .}"
+                                                                VerticalOptions="Center"
+                                                                Text="&#xf1e0;"
+                                                                HorizontalOptions="End"
+                                                                FontFamily="{x:StaticResource FA-Solid}"
+                                                                TextColor="White">
+                                                        </Button>
 
-                                                            <Button Style="{x:StaticResource AdButton}"
-                                                                    Clicked="BtnAddRemovePreferito_Clicked"
-                                                                    CommandParameter="{Binding .}"
-                                                                    VerticalOptions="Center"
-                                                                    Text="&#xf004;" HorizontalOptions="End"
-                                                                    FontFamily="{x:StaticResource FA-Solid}"
-                                                                    TextColor="{Binding FlagPreferito, Converter={StaticResource ColConverter}}">
-                                                            </Button>
-                                                          </StackLayout>
-                                                    </AbsoluteLayout>
-                                                </Grid>
-                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding TipologiaProprieta}" />
-                                        <Span Text=" in "/>
-                                        <Span  Text="{Binding TipologiaAnnuncio}" />
-                                        <Span Text=" a "/>
-                                        <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                                        <Button Style="{x:StaticResource AdButton}"
+                                                                Clicked="BtnAddRemovePreferito_Clicked"
+                                                                CommandParameter="{Binding .}"
+                                                                VerticalOptions="Center"
+                                                                Text="&#xf004;" HorizontalOptions="End"
+                                                                FontFamily="{x:StaticResource FA-Solid}"
+                                                                TextColor="{Binding FlagPreferito, Converter={StaticResource ColConverter}}">
+                                                        </Button>
+                                                        </StackLayout>
+                                                </AbsoluteLayout>
+                                            </Grid>
+                                            <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding TipologiaProprieta}" />
+                                                        <Span Text=" in "/>
+                                                        <Span  Text="{Binding TipologiaAnnuncio}" />
+                                                        <Span Text=" a "/>
+                                                        <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
 
-                            <Label LineBreakMode="WordWrap">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding NomeComune}" />
-                                        <Span Text=", "/>
-                                        <Span Text="{Binding Indirizzo}"  />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                            <Label LineBreakMode="WordWrap">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding NomeComune}" />
+                                                        <Span Text=", "/>
+                                                        <Span Text="{Binding Indirizzo}"  />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
 
-                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
-                       
-                                            </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
 
-                     <appappartamenti:ShadowFrame CornerRadius="30" Margin="15" VerticalOptions="End" HorizontalOptions="End" Padding="0" Grid.Row="1" HeightRequest="60" WidthRequest="60">
+                                             <StackLayout  Orientation="Horizontal">
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf546;" />
+                                                <Span  Text="{Binding  Superficie, StringFormat=' {0} mq'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Margin="15,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf52b;" />
+                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} locali'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Margin="15,0,0,0">
+                                        <Label.FormattedText >
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf2cc;" />
+                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} bagni'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                                            </StackLayout>
+                                                    </ViewCell>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+
+                    <StackLayout Grid.Row="1" IsVisible="{Binding IsEmpty}" Padding="20">
+                            <forms:AnimationView 
+	                        x:Name="animationView" 
+	                        Animation="not_found.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="300" />
+
+                            <Label HorizontalTextAlignment="Center" Text="Non abbiamo trovato risultati"></Label>
+                    </StackLayout>
+
+
+                    <appappartamenti:ShadowFrame CornerRadius="30" Margin="15" VerticalOptions="End" HorizontalOptions="End" Padding="0" Grid.Row="1" HeightRequest="60" WidthRequest="60">
                         <Label FontSize="26" Text="&#xf5a0;" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}">
                         </Label>
 

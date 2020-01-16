@@ -118,6 +118,14 @@ namespace AppAppartamenti.Views
 
         private async void BtnPrezzoProcedi_Clicked(object sender, EventArgs e)
         {
+
+            if(string.IsNullOrEmpty(entPrezzo.Text) || string.IsNullOrEmpty(entSpeseCondominiali.Text) || ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Id == null
+                || ((TipologiaRiscaldamento)pckRiscaldamento.SelectedItem).Id == null)
+            {
+                await DisplayAlert("Campo obbligatori", "Valorizzare tutti i campi.", "Ok");
+                return;
+            }
+
             annuncio.Prezzo = double.Parse(entPrezzo.Text);
             annuncio.SpesaMensileCondominio = double.Parse(entSpeseCondominiali.Text);
             annuncio.IdClasseEnergetica = (Guid) ((ClasseEnergetica)pckClasseEnergetica.SelectedItem).Id;

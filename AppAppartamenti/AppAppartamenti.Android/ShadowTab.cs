@@ -4,27 +4,27 @@ using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using AppAppartamenti.Droid;
+using Plugin.Badge.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 
+[assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(MyTabsRenderer))]
-
 namespace AppAppartamenti.Droid
 {
 
-    public class MyTabsRenderer : TabbedPageRenderer
+    public class MyTabsRenderer : BadgedTabbedPageRenderer
+	{
+        //         public MyTabsRenderer()
+        //{
+
+        //}
+        public MyTabsRenderer(Context context): base(context)
 		{
-			public MyTabsRenderer()
-			{
+		}
 
-			}
-			public MyTabsRenderer(Context context)
-			{
-
-			}
-
-			protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TabbedPage> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TabbedPage> e)
 			{
 				base.OnElementChanged(e);
 

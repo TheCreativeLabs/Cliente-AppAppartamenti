@@ -27,9 +27,9 @@ namespace AppAppartamenti.Views
 
         public SelezioneLuogo(AnnuncioDtoInput Annuncio, AnnuncioDetailViewModel dtoToModify)
         {
-            this.dtoToModify = dtoToModify;
             InitializeComponent();
 
+            this.dtoToModify = dtoToModify;
             annuncio = Annuncio;
 
             if (dtoToModify != null)
@@ -69,8 +69,6 @@ namespace AppAppartamenti.Views
             }
 
             BindingContext = viewModel = new ListaComuniViewModel();
-
-           
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -116,7 +114,7 @@ namespace AppAppartamenti.Views
 
         private void EntCercaComune_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(entCercaComune.Text.Length >= 3) { 
+            if(entCercaComune.Text.Length >= 3 && viewModel != null) { 
                 viewModel.NomeComune = entCercaComune.Text;
                 viewModel.LoadItemsCommand.Execute(null);
                 lvComuni.IsVisible = true;

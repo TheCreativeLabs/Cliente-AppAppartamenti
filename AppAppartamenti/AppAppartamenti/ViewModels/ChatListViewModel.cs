@@ -53,7 +53,8 @@ namespace AppAppartamenti.ViewModels
             try
             {
                 var listaChat = await ApiHelper.GetListaMessaggi(false);// await messaggiClient.GetChatListAsync();
-                
+
+                Items.Clear();
 
                 if (!listaChat.Any())
                 {
@@ -62,8 +63,6 @@ namespace AppAppartamenti.ViewModels
                 }
                 else
                 {
-                    Items.Clear();
-
                     foreach (var msg in listaChat)
                     {
                         Items.Add(msg);

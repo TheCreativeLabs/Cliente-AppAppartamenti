@@ -39,13 +39,13 @@ namespace AppAppartamenti.Views.Account
             ObservableCollection<MenuItem> items = new ObservableCollection<MenuItem>();
             items.Add(new MenuItem() { Id=0, DisplayName = "Informazioni personali", Icona = "\uf007", RedirectPage =new InformazioniPersonali() });
             items.Add(new MenuItem() { Id=1, DisplayName = "Cambia password", Icona = "\uf084", RedirectPage = new Login.CambiaPassword() });
-            items.Add(new MenuItem() { Id = 2, DisplayName = "I miei annunci", Icona = "\uf08d", RedirectPage = new MieiAnnunci() });
+            items.Add(new MenuItem() { Id=2, DisplayName = "I miei annunci", Icona = "\uf08d", RedirectPage = new MieiAnnunci() });
             items.Add(new MenuItem() { Id=3, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
             items.Add(new MenuItem() { Id=4, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
             items.Add(new MenuItem() { Id=5, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });
-            items.Add(new MenuItem() { Id=6, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = new GeneralCondition.PrivacyPolicy() });
-            items.Add(new MenuItem() { Id=7, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
-
+            items.Add(new MenuItem() { Id=6, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = null});
+            items.Add(new MenuItem() { Id = 7, DisplayName = "Condizioni generali", Icona = "\uf56c", RedirectPage = null });
+            items.Add(new MenuItem() { Id=8, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});
 
             listView.ItemsSource = items;
         }
@@ -59,7 +59,7 @@ namespace AppAppartamenti.Views.Account
 
             listView.SelectedItem = null;
 
-            if(item.Id == 7)
+            if(item.Id == 8)
             {
                 string action = await DisplayActionSheet("Continuare?","Cancel", "Log out");
 
@@ -75,6 +75,22 @@ namespace AppAppartamenti.Views.Account
             {
                 await ContactUs();
             }
+            else if (item.Id == 6)
+            {
+                await Browser.OpenAsync(AppSetting.PrivacyUrl, new BrowserLaunchOptions
+                {
+                    LaunchMode = BrowserLaunchMode.SystemPreferred,
+                    TitleMode = BrowserTitleMode.Show
+                });
+            }
+            else if (item.Id == 7)
+            {
+                await Browser.OpenAsync(AppSetting.GeneralConditionUrl, new BrowserLaunchOptions
+                {
+                    LaunchMode = BrowserLaunchMode.SystemPreferred,
+                    TitleMode = BrowserTitleMode.Show
+                });
+            }
             else
             {
                 await Navigation.PushAsync(item.RedirectPage);
@@ -85,7 +101,7 @@ namespace AppAppartamenti.Views.Account
         {
             base.OnAppearing();
 
-            UserInfoDto userInfo = await ApiHelper.GetUserInfo(true);
+            UserInfoDto userInfo = await ApiHelper.GetUserInfo(false);
             viewModel = userInfo;
 
             BindingContext = viewModel;
@@ -117,9 +133,9 @@ namespace AppAppartamenti.Views.Account
                 to.Add(AppSetting.EmailApp);
                 var message = new EmailMessage
                 {
-                    Subject = "",
+                    Subject = $"Messaggio da {viewModel.Nome} {viewModel.Cognome}",
                     Body = "",
-                    To = to,
+                    To = new List<string> { "helper@promuovocasa.it" },
                     Cc = null,
                     Bcc = null
                 };

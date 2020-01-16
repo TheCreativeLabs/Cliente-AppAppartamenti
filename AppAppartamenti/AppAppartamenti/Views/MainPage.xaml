@@ -15,7 +15,7 @@
             xmlns:views1="clr-namespace:AppAppartamenti.Views.Messaggi"
             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            SelectedTabColor="{x:StaticResource DarkColor}"
+            SelectedTabColor="{x:StaticResource PrimaryColor}"
             UnselectedTabColor="{x:StaticResource GrayColor}"
             NavigationPage.HasNavigationBar="False"
             BackgroundColor="White">

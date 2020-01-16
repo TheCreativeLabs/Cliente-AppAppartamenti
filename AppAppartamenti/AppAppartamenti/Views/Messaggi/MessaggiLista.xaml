@@ -28,7 +28,7 @@
             <Label Grid.Row="0" Style="{x:StaticResource Title}" Text="Messaggi"></Label>
 
             <StackLayout Grid.Row="0" Margin="0,40,0,0" IsVisible="{Binding IsEmpty}" Padding="20">
-                <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non sono presenti messaggi"></Label>
+                <Label HorizontalTextAlignment="Center" Text="Non sono presenti messaggi da leggere"></Label>
             </StackLayout>
 
             <ListView Grid.Row="1" x:Name="LvChat"
@@ -36,6 +36,7 @@
                         HasUnevenRows="true"
                         IsRefreshing="{Binding IsBusy}"
                         RefreshCommand="{Binding LoadItemsCommand}"
+                        ios:ListView.RowAnimationsEnabled="false"
                         IsPullToRefreshEnabled="False"
                         CachingStrategy="RecycleElement"
                         VerticalScrollBarVisibility="Never"

@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
+using System.Linq;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -61,7 +62,7 @@ namespace AppAppartamenti.ViewModels
         private int PageSize = 5;
 
         public ObservableCollection<AnnunciDtoOutput> Items { get; set; }
-        public ObservableCollection<MapViewModel> PositionItems { get; set; }
+        public ObservableCollection<CustomPin> PositionItems { get; set; }
 
         public Command LoadItemsCommand { get; set; }
         public Command LoadMore { get; set; }
@@ -74,7 +75,7 @@ namespace AppAppartamenti.ViewModels
         public AnnunciViewModel()
         {
             Items = new ObservableCollection<AnnunciDtoOutput>();
-            PositionItems = new ObservableCollection<MapViewModel>();
+            PositionItems = new ObservableCollection<CustomPin>();
 
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             OnpropertyChanged("Items");
@@ -121,21 +122,21 @@ namespace AppAppartamenti.ViewModels
                             double lon;
                             double.TryParse(pos[1], out lon);
 
-                            PositionItems.Add(new MapViewModel()
-                            {
-                                IdAnnuncio = annuncio.Id.Value,
-                                AnnPin = new Pin()
+                            PositionItems.Add(
+                                new CustomPin
                                 {
-                                    Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                                    Type = PinType.Place,
                                     Position = new Position(lat, lon),
-                                    Label = $"{annuncio.TipologiaProprieta} in {annuncio.TipologiaAnnuncio} a {annuncio.Prezzo:N0}€"
+                                    Label = $"{ annuncio.TipologiaProprieta } in { annuncio.TipologiaAnnuncio}a { annuncio.Prezzo:N0}€",
+                                    Name = annuncio.Id.Value.ToString(),
+                                    Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                                    AutomationId = annuncio.Id.Value.ToString()
                                 }
-                            });
+                            ) ;
                         }
 
                         OnpropertyChanged("Items");
                         OnpropertyChanged("PositionItems");
-
                     }
                 }
             }
@@ -176,15 +177,14 @@ namespace AppAppartamenti.ViewModels
                             double lon;
                             double.TryParse(pos[1], out lon);
 
-                            PositionItems.Add(new MapViewModel()
+                            PositionItems.Add(new CustomPin
                             {
-                                IdAnnuncio = annuncio.Id.Value,
-                                AnnPin = new Pin()
-                                {
-                                    Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
-                                    Position = new Position(lat, lon),
-                                    Label = $"{annuncio.TipologiaProprieta} in {annuncio.TipologiaAnnuncio} a {annuncio.Prezzo:N0}€"
-                                }
+                                Type = PinType.Place,
+                                Position = new Position(lat, lon),
+                                Label = $"{ annuncio.TipologiaProprieta } in { annuncio.TipologiaAnnuncio}a { annuncio.Prezzo:N0}€",
+                                Name = annuncio.Id.Value.ToString(),
+                                Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                                AutomationId = annuncio.Id.Value.ToString()
                             });
                         }
 
@@ -234,20 +234,19 @@ namespace AppAppartamenti.ViewModels
                         double lon;
                         double.TryParse(pos[1],out lon);
 
-                        PositionItems.Add(new MapViewModel()
+                        PositionItems.Add(new CustomPin
                         {
-                            IdAnnuncio = annuncio.Id.Value,
-                            AnnPin = new Pin()
-                            {
-                                Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
-                                Position = new Position(lat,lon),
-                                Label = $"{annuncio.TipologiaProprieta} in {annuncio.TipologiaAnnuncio} a {annuncio.Prezzo:N0}€"
-                            }
+                            Type = PinType.Place,
+                            Position = new Position(lat, lon),
+                            Label = $"{ annuncio.TipologiaProprieta } in { annuncio.TipologiaAnnuncio}a { annuncio.Prezzo:N0}€",
+                            Name = annuncio.Id.Value.ToString(),
+                            Address = $"{annuncio.Indirizzo} {annuncio.NomeComune}",
+                            AutomationId = annuncio.Id.Value.ToString()
                         });
                     }
                 }
 
-                if (Items.Count == 0) { 
+                if (!Items.Any()) { 
                     IsEmpty = true;
                     OnpropertyChanged("IsEmpty");
                 }

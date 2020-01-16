@@ -51,39 +51,40 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="1" Text="L" x:Name="btn_ToggleLun"></Button>
-                        <Button Grid.Column="1"  Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="2" Text="M" x:Name="btn_ToggleMar"></Button>
-                        <Button Grid.Column="2"  Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="3" Text="M" x:Name="btn_ToggleMer"></Button>
-                        <Button Grid.Column="3"  Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="4" Text="G" x:Name="btn_ToggleGio"></Button>
-                        <Button Grid.Column="4"  Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="5" Text="V" x:Name="btn_ToggleVen"></Button>
-                        <Button Grid.Column="5"  Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="6" Text="S" x:Name="btn_ToggleSab"></Button>
-                        <Button Grid.Column="6"   Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="7" Text="D" x:Name="btn_ToggleDom"></Button>
+                        <Button Grid.Column="1" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="2" Text="M" x:Name="btn_ToggleMar"></Button>
+                        <Button Grid.Column="2" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="3" Text="M" x:Name="btn_ToggleMer"></Button>
+                        <Button Grid.Column="3" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="4" Text="G" x:Name="btn_ToggleGio"></Button>
+                        <Button Grid.Column="4" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="5" Text="V" x:Name="btn_ToggleVen"></Button>
+                        <Button Grid.Column="5" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="6" Text="S" x:Name="btn_ToggleSab"></Button>
+                        <Button Grid.Column="6" Clicked="ShowStackDay" Style="{x:StaticResource DayButton}" CommandParameter="7" Text="D" x:Name="btn_ToggleDom"></Button>
                     </Grid>
 
-
-                    <StackLayout x:Name="stkLunedi" IsVisible="False" Margin="0,10,0,0">
+                    <!--Style="{x:StaticResource TimeSlotTitle}"-->
+                    <StackLayout x:Name="stkLunedi"  IsVisible="False" Margin="0,10,0,0">
                           <StackLayout Orientation="Horizontal">
-                                <Label Text="Lunedì" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="1"></Button>
+                                <Label Text="Lunedì" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                                <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="1"></Button>
                           </StackLayout>
 
-                          <ListView x:Name="listViewMonday" SelectionMode="None" VerticalOptions="Start"  SeparatorVisibility="None"  HasUnevenRows="True">
+                          <ListView x:Name="listViewMonday"
+                                    SelectionMode="None"
+                                    SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <StackLayout Orientation="Horizontal">
-                                                    <Frame Padding="1" CornerRadius="5" HasShadow="False" WidthRequest="100">
-                                                        <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                                        </Entry>
-                                                        <Frame.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
-                                                        </Frame.GestureRecognizers>
-                                                    </Frame>
+                                            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False" WidthRequest="100" BorderColor="Gray">
+                                                    <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
 
                                                 <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False" WidthRequest="100">
-                                                    <Entry Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                                    </Entry>
+                                                <Frame Padding="1" CornerRadius="5" HasShadow="False" WidthRequest="100" BorderColor="Gray">
+                                                    <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -91,7 +92,6 @@
 
                                                 <Button Clicked="DeleteLunediElement" IsVisible="{Binding DeleteEnabled}" CommandParameter="{Binding}" 
                                                        Style="{x:StaticResource TimeSlotDeleteButton}" HorizontalOptions="Center" VerticalOptions="Center" Padding="2"></Button>
-                                            <!--Style="{x:StaticResource TimeSlotDeleteButton}"-->
                                         </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
@@ -102,24 +102,23 @@
                           </ListView>
                     </StackLayout>
 
-                   
-
-                    
-
                     <StackLayout x:Name="stkMartedi"  IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Martedì" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                            <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="2"></Button>
+                            <Label Text="Martedì" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                            <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="2"></Button>
                         </StackLayout>
 
-                          <ListView x:Name="listViewMartedi" SeparatorVisibility="None" SelectionMode="None">
+                          <ListView x:Name="listViewMartedi"
+                                    SeparatorVisibility="None"
+                                    SelectionMode="None"
+                                    VerticalScrollBarVisibility="Never">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                            <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                            </Entry>
+                                    <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                        <Frame Padding="1" CornerRadius="5" HasShadow="False" HeightRequest="60" WidthRequest="100" BorderColor="Gray">
+                                            <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                   
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                             </Frame.GestureRecognizers>
@@ -127,9 +126,9 @@
 
                                         <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                        <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                            <Entry  WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                            </Entry>
+                                        <Frame Padding="1" CornerRadius="5" HasShadow="False" HeightRequest="60"  WidthRequest="100" BorderColor="Gray">
+                                            <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                             </Frame.GestureRecognizers>
@@ -150,18 +149,21 @@
 
                     <StackLayout x:Name="stkMercoledi" IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
-                                <Label Text="Mercoledi" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="3"></Button>
+                                <Label Text="Mercoledi" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                                <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="3"></Button>
                             </StackLayout>
 
-                          <ListView x:Name="listViewMercoledi" SeparatorVisibility="None" SelectionMode="None">
+                          <ListView x:Name="listViewMercoledi"
+                                    SeparatorVisibility="None"
+                                    VerticalScrollBarVisibility="Never"
+                                    SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                                    </Entry>
+                                            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                                <Frame Padding="1" CornerRadius="5"  WidthRequest="100" HasShadow="False" BorderColor="Gray">
+                                                     <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                   
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -169,9 +171,9 @@
 
                                                 <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                                    </Entry>
+                                                <Frame Padding="1" CornerRadius="5"  WidthRequest="100" HasShadow="False" BorderColor="Gray">
+                                                     <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -192,17 +194,20 @@
 
                     <StackLayout x:Name="stkGiovedi" IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Giovedi" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                            <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="4"></Button>
+                            <Label Text="Giovedi" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                            <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="4"></Button>
                         </StackLayout>
-                          <ListView x:Name="listViewGiovedi" SeparatorVisibility="None" SelectionMode="None">
+                          <ListView x:Name="listViewGiovedi"
+                                    SeparatorVisibility="None"
+                                    VerticalScrollBarVisibility="Never"
+                                    SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                                    </Entry>
+                                            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                                <Frame Padding="1" CornerRadius="5"  WidthRequest="100" HasShadow="False" BorderColor="Gray">
+                                                    <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                   
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -210,9 +215,9 @@
 
                                                 <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                                    </Entry>
+                                                <Frame Padding="1" CornerRadius="5"  WidthRequest="100" HasShadow="False" BorderColor="Gray">
+                                                    <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -233,18 +238,21 @@
 
                     <StackLayout x:Name="stkVenerdi" IsVisible="False" Margin="0,10,0,0" >
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Venerdì" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="5"></Button>
+                                <Label Text="Venerdì" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                                <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="5"></Button>
                             </StackLayout>
 
-                          <ListView x:Name="listViewVenerdi" SeparatorVisibility="None" SelectionMode="None">
+                          <ListView x:Name="listViewVenerdi"
+                                    VerticalScrollBarVisibility="Never"
+                                    SeparatorVisibility="None"
+                                    SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                                    </Entry>
+                                            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                                <Frame Padding="1" CornerRadius="5"  WidthRequest="100" HasShadow="False" BorderColor="Gray">
+                                                     <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                   
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -252,9 +260,9 @@
 
                                                 <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                                    </Entry>
+                                                <Frame Padding="1"  WidthRequest="100" CornerRadius="5" HasShadow="False" BorderColor="Gray">
+                                                    <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -275,18 +283,21 @@
 
                     <StackLayout x:Name="stkSabato" IsVisible="False" Margin="0,10,0,0">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Sabato" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="6"></Button>
+                                <Label Text="Sabato" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                                <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}"  Clicked="BtnAddTimeSlot_Clicked" CommandParameter="6"></Button>
                             </StackLayout>
 
-                          <ListView x:Name="listViewSabato" SeparatorVisibility="None" SelectionMode="None">
+                          <ListView x:Name="listViewSabato"
+                                    SeparatorVisibility="None"
+                                    VerticalScrollBarVisibility="Never"
+                                    SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                                    </Entry>
+                                            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                                <Frame  WidthRequest="100" Padding="1" CornerRadius="5" HasShadow="False" BorderColor="Gray">
+                                                   <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                   
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -294,9 +305,9 @@
 
                                                 <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                                    </Entry>
+                                                <Frame  WidthRequest="100" Padding="1" CornerRadius="5" HasShadow="False" BorderColor="Gray">
+                                                   <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -319,18 +330,21 @@
 
                     <StackLayout x:Name="stkDomenica" IsVisible="False" Margin="0,10,0,0">
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Domenica" Style="{x:StaticResource TimeSlotTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                            <Button Text="+" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="7"></Button>
+                            <Label Text="Domenica" Style="{x:StaticResource AdTitle}"  VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
+                            <Button Text="Aggiungi fascia oraria" Style="{x:StaticResource AddTimeSlotButton}" Clicked="BtnAddTimeSlot_Clicked" CommandParameter="7"></Button>
                         </StackLayout>
 
-                          <ListView x:Name="listViewDomenica" SeparatorVisibility="None" SelectionMode="None">
+                          <ListView x:Name="listViewDomenica"
+                                    VerticalScrollBarVisibility="Never"
+                                    SeparatorVisibility="None"
+                                    SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" IsEnabled="False">
-                                                    </Entry>
+                                            <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                                                <Frame   WidthRequest="100" Padding="1" CornerRadius="5" HasShadow="False" BorderColor="Gray">
+                                                   <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.From}" Text="{Binding Dalle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+                                                   
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerDalle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -338,9 +352,9 @@
 
                                                 <Label Text=" - " VerticalTextAlignment="Center"></Label>
 
-                                                <Frame Padding="1" CornerRadius="5" HasShadow="False">
-                                                    <Entry WidthRequest="100" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" IsEnabled="False">
-                                                    </Entry>
+                                                <Frame  WidthRequest="100" Padding="1" CornerRadius="5" HasShadow="False" BorderColor="Gray">
+                                                    <appappartamenti:TimeSlotLabel VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Placeholder="{translator:Translate SelezioneFasceOrarie.To}" Text="{Binding Alle}" TextColor="{x:StaticResource DarkColor}"></appappartamenti:TimeSlotLabel>
+
                                                     <Frame.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="PickerAlle_LblClicked" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                     </Frame.GestureRecognizers>
@@ -361,10 +375,6 @@
 
                 <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
                 </StackLayout>
-
-
-
-
         </ScrollView>
 
             <StackLayout x:Name="stkPicker_Dalle" IsVisible="false" Grid.Row="0" Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="White" >
@@ -392,7 +402,7 @@
                                         Closed="Picker_Closed"
                                         >
                             <syncfusion1:SfPicker.FooterView>
-                                <Button Text="Ok" Clicked="Picker_Closed"></Button>
+                                <Button Text="Conferma orario" Clicked="Picker_Closed"></Button>
                             </syncfusion1:SfPicker.FooterView>
                             
                         </syncfusion1:SfPicker>
@@ -425,7 +435,7 @@
                         Closed="Picker_Closed" >
 
                             <syncfusion1:SfPicker.FooterView>
-                                <Button Text="Ok" Clicked="Picker_Closed"></Button>
+                                <Button Text="Conferma orario" Clicked="Picker_Closed"></Button>
                             </syncfusion1:SfPicker.FooterView>
                         </syncfusion1:SfPicker>
                     </StackLayout>
