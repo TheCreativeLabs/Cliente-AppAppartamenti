@@ -44,18 +44,26 @@
             </StackLayout>
 
                     
-                    <ListView x:Name="lvComuni" IsVisible="false"
+                    <ListView x:Name="lvComuni" IsVisible="false" Margin="0,-30,0,0" VerticalScrollBarVisibility="Never"
                               ItemSelected="LvComuni_Selected"
                               SelectionMode="Single"
                               ios:ListView.SeparatorStyle="FullWidth"
-                              SeparatorColor="LightGray"
+                              SeparatorColor="LightGray" RowHeight="60"
                               ItemsSource="{Binding Items}"
                               IsRefreshing="{Binding IsBusy}"
                               HasUnevenRows="False" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Label Text="{Binding NomeComune}"  VerticalTextAlignment="Center" />
+                                    <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding NomeComune}"  />
+                                                <Span Text=", Bologna">
+                                                </Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -66,68 +74,125 @@
 
                 <ScrollView VerticalScrollBarVisibility="Always" x:Name="stkRicercaAggiuntiva" Margin="-20,-10,-20,20">
                         <StackLayout Padding="19">
-                            <Label Style="{x:StaticResource AdTitle}" Text="Altri filtri" Margin="0,0,0,10"></Label>
-                            <Label  Text="{translator:Translate Ricerca.SaleRent}"></Label>
+                            <Label Style="{x:StaticResource AdTitle}" Text="Tipologia annuncio" Margin="0,0,0,10"></Label>
 
-                            <Picker x:Name="pckTipologiaVendita" SelectedIndexChanged="TipologiaVenditaSelectedIndexChanged" ItemDisplayBinding="{Binding Descrizione}">
+                            <Picker Title="Tpologia annuncio" x:Name="pckTipologiaVendita" SelectedIndexChanged="TipologiaVenditaSelectedIndexChanged" ItemDisplayBinding="{Binding Descrizione}">
                             </Picker>
 
-                            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
+                            <Label Style="{x:StaticResource AdTitle}" Margin="0,40,0,10" Text="{translator:Translate Ricerca.PropertyType}" ></Label>
 
-                            <Label Text="{translator:Translate Ricerca.PropertyType}"></Label>
-
-                            <Picker x:Name="pckTipologiaProprieta" ItemDisplayBinding="{Binding Descrizione}">
+                            <Picker Title="Tpologia proprietà" x:Name="pckTipologiaProprieta" ItemDisplayBinding="{Binding Descrizione}">
                             </Picker>
-
-                            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
 
                             <StackLayout x:Name="stkPrezzoVendita">
-                                <Label Text="{translator:Translate Ricerca.Price}"></Label>
+                                <Label Style="{x:StaticResource AdTitle}" Margin="0,40,0,10" Text="{translator:Translate Ricerca.Price}"></Label>
 
                                 <!--FIXME internazionalizzazione/mostrare nel format corretto i numeri-->
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="30.000 €" TextColor="Gray" ></Label>
+                                
 
-                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500.000+ €" TextColor="Gray"></Label>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Grid  WidthRequest="100">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Entry x:Name="entVenditaMin" TextChanged="Ven_TextChanged" Grid.Column="0" Keyboard="Numeric" Text="50000" ></Entry>
+                                        <Label Grid.Row="0"  Grid.Column="0" Text="€" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                                    </Grid>
+
+                                    <Grid  WidthRequest="100">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Entry x:Name="entVenditaMax" TextChanged="Ven_TextChanged" Grid.Column="0"  Keyboard="Numeric" Text="300000"></Entry>
+                                        <Label Grid.Row="0"  Grid.Column="0" Text="€" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                                    </Grid>
                                 </StackLayout>
 
-                                <forms:RangeSlider x:Name="RangeSliderVendita"
+                                <forms:RangeSlider x:Name="RangeSliderVendita" LowerValueChanged="RangeSliderVendita_LowerValueChanged"
+                                                   UpperValueChanged="RangeSliderVendita_UpperValueChanged"
                                                    MinimumValue="30000" MaximumValue="500000"
                                                    LowerValue="50000" UpperValue="300000"
                                                    StepValue="10000" ShowTextAboveThumbs="True"
                                                    StepValueContinuously="True" VerticalOptions="Center"
-                                                   TextSize="15" TextFormat="0€"/>
+                                                   TextSize="15" TextFormat="0€"
+                                                   BarHeight="8" ActiveColor="{x:StaticResource DarkColor}"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="Min: 30.000 €"  ></Label>
+
+                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="Max: 500.000+ €"></Label>
+                                </StackLayout>
                             </StackLayout>
 
 
                             <StackLayout x:Name="stkPrezzoAffitto">
-                                <Label Text="{translator:Translate Ricerca.Price}"></Label>
+                                <Label Style="{x:StaticResource AdTitle}" Margin="0,40,0,10" Text="{translator:Translate Ricerca.Price}"></Label>
 
-                                    <!--FIXME internazionalizzazione/mostrare nel format corretto i numeri-->
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="100 €/mese" TextColor="Gray" ></Label>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Grid  WidthRequest="150">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Entry x:Name="entAffittoMin" TextChanged="Aff_TextChanged" Grid.Column="0" Keyboard="Numeric" Text="400" ></Entry>
+                                        <Label Grid.Row="0"  Grid.Column="0" Text="€/mese" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                                    </Grid>
 
-                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="5000+ €/mese" TextColor="Gray"></Label>
+                                    <Grid  WidthRequest="150">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Entry x:Name="entAffittoMax" TextChanged="Aff_TextChanged" Grid.Column="0"  Keyboard="Numeric" Text="1500"></Entry>
+                                        <Label Grid.Row="0"  Grid.Column="0" Text="€/mese" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                                    </Grid>
                                 </StackLayout>
 
-                                <forms:RangeSlider x:Name="RangeSliderAffitto" MinimumValue="100" MaximumValue="5000" LowerValue="400" UpperValue="1000" StepValue="100" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
+                                <forms:RangeSlider BarHeight="8"
+                                                   TextFormat="0€"
+                                                   ActiveColor="{x:StaticResource DarkColor}" LowerValueChanged="RangeSliderAffitto_LowerValueChanged" UpperValueChanged="RangeSliderAffitto_UpperValueChanged" x:Name="RangeSliderAffitto" MinimumValue="100" MaximumValue="5000" LowerValue="400" UpperValue="1500" StepValue="100" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="Min: 100 €/mese"></Label>
+
+                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="Max: 5000+ €/mese"></Label>
+                                </StackLayout>
+
+                            </StackLayout>
+                           
+                            <Label Style="{x:StaticResource AdTitle}" Margin="0,40,0,10" Text="{translator:Translate Ricerca.HouseSize}"></Label>
+
+                            
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Grid  WidthRequest="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Entry x:Name="entSupMin" TextChanged="Sup_TextChanged" Grid.Column="0" Keyboard="Numeric" Text="80" ></Entry>
+                                    <Label Grid.Row="0"  Grid.Column="0" Text="mq" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                                </Grid>
+
+                                <Grid  WidthRequest="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Entry x:Name="entSupMax" TextChanged="Sup_TextChanged" Grid.Column="0"  Keyboard="Numeric" Text="250"></Entry>
+                                    <Label Grid.Row="0"  Grid.Column="0" Text="mq" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                                </Grid>
                             </StackLayout>
 
-                            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
-                           
-                            <Label Text="{translator:Translate Ricerca.HouseSize}"></Label>
+                            <forms:RangeSlider BarHeight="8"
+                                               TextFormat="0mq"
+                                               ActiveColor="{x:StaticResource DarkColor}"
+                                               LowerValueChanged="RangeSlider2_LowerValueChanged"
+                                               UpperValueChanged="RangeSlider2_UpperValueChanged" x:Name="RangeSlider2" MinimumValue="50" MaximumValue="500" LowerValue="80" UpperValue="250" StepValue="10" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
 
                             <StackLayout Orientation="Horizontal">
-                                <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="50 mq" TextColor="Gray" ></Label>
+                                <Label Grid.Column="0" HorizontalTextAlignment="Start" Text="Min: 50 mq" ></Label>
 
-                                <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="500+ mq" TextColor="Gray"></Label>
+                                <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="Max: 500+ mq"></Label>
                             </StackLayout>
 
-                            <forms:RangeSlider x:Name="RangeSlider2" MinimumValue="50" MaximumValue="500" LowerValue="80" UpperValue="250" StepValue="10" ShowTextAboveThumbs="True" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" />
-                             
-                            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
-
-                            <Label Text="{translator:Translate Ricerca.RoomsSection}"></Label>
+                            <Label Style="{x:StaticResource AdTitle}" Margin="0,40,0,10" Text="{translator:Translate Ricerca.RoomsSection}"></Label>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -136,70 +201,69 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
-                                      <Label x:Name="lblBadroomsCounter" Text="0" VerticalTextAlignment="Center"></Label>
-                                      <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Badrooms}" TextColor="Gray"></Label>
+                                      <Label Style="{x:StaticResource AdTitle}" FontSize="18" x:Name="lblBadroomsCounter" Text="0" VerticalTextAlignment="Center"></Label>
+                                      <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Badrooms}" ></Label>
                                 </StackLayout>
                                 <Stepper x:Name="stpBadrooms" ValueChanged="StpCamereLetto_ValueChanged" Visual="Material" Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="5"  HorizontalOptions="EndAndExpand"></Stepper>
 
                                 <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1" >
-                                       <Label x:Name="lblkitchensCounter" Text="0" VerticalTextAlignment="Center"></Label>
-                                       <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.kitchens}" TextColor="Gray"></Label>
+                                       <Label Style="{x:StaticResource AdTitle}" FontSize="18" x:Name="lblkitchensCounter" Text="0" VerticalTextAlignment="Center"></Label>
+                                       <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.kitchens}"></Label>
                                 </StackLayout>
                                 <Stepper x:Name="stpkitchens" ValueChanged="StpCucine_ValueChanged"   Visual="Material" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
 
                                  <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="2" >
-                                    <Label x:Name="lblBathroomCounter" Text="0" VerticalTextAlignment="Center"></Label>
-                                    <Label VerticalTextAlignment="Center"  Text="{translator:Translate Ricerca.Bathrooms}" TextColor="Gray"></Label>
+                                    <Label Style="{x:StaticResource AdTitle}" FontSize="18"  x:Name="lblBathroomCounter" Text="0" VerticalTextAlignment="Center"></Label>
+                                    <Label VerticalTextAlignment="Center"  Text="{translator:Translate Ricerca.Bathrooms}"></Label>
                                 </StackLayout>
                                <Stepper x:Name="stpBathroom" ValueChanged="StpBagni_ValueChanged"  Visual="Material" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
 
                                 <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="3" >
-                                      <Label x:Name="lblOtherRoomsCounter" Text="0" VerticalTextAlignment="Center"></Label>
-                                      <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Rooms}" TextColor="Gray"></Label>
+                                      <Label Style="{x:StaticResource AdTitle}" FontSize="18" x:Name="lblOtherRoomsCounter" Text="0" VerticalTextAlignment="Center"></Label>
+                                      <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Rooms}"></Label>
                                 </StackLayout>
                                 <Stepper x:Name="stpOtherRooms" ValueChanged="StpStanze_ValueChanged"  Visual="Material" Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="5"  HorizontalOptions="EndAndExpand"></Stepper>
                                
                                 <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="4" >
-                                       <Label x:Name="lblParkingSpaceCounter" Text="0" VerticalTextAlignment="Center"></Label>
-                                       <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.ParkingSpaces}" TextColor="Gray"></Label>
+                                       <Label Style="{x:StaticResource AdTitle}" FontSize="18" x:Name="lblParkingSpaceCounter"  Text="0" VerticalTextAlignment="Center"></Label>
+                                       <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.ParkingSpaces}"></Label>
                                 </StackLayout>
-                               <Stepper x:Name="stpParkingSpace" ValueChanged="StpParkingSpaces_ValueChanged"   Visual="Material" Grid.Column="1" Grid.Row="4" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
+                               <Stepper x:Name="stpParkingSpace" ValueChanged="StpParkingSpaces_ValueChanged"  Visual="Material" Grid.Column="1" Grid.Row="4" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
 
                                 <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="5" >
-                                       <Label x:Name="lblGaragesCounter" Text="0" VerticalTextAlignment="Center"></Label>
-                                       <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Garages}" TextColor="Gray"></Label>
+                                       <Label Style="{x:StaticResource AdTitle}" FontSize="18" x:Name="lblGaragesCounter" Text="0" VerticalTextAlignment="Center"></Label>
+                                       <Label VerticalTextAlignment="Center" Text="{translator:Translate Ricerca.Garages}"></Label>
                                 </StackLayout>
                                 <Stepper x:Name="stpGarages" ValueChanged="StpGarage_ValueChanged"  Visual="Material" Grid.Column="1" Grid.Row="5" Minimum="0" Maximum="5" HorizontalOptions="EndAndExpand"></Stepper>
 
                                   </Grid>
 
-                            <BoxView Style="{x:StaticResource BoxViewSeparator}"></BoxView>
 
-                            <Label Text="{translator:Translate Ricerca.Other}"></Label>
+                            <Label Style="{x:StaticResource AdTitle}" Margin="0,40,0,10" Text="{translator:Translate Ricerca.Other}"></Label>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="9*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox x:Name="chkGiardino" Grid.Column="0" Grid.Row="0" IsChecked="False"></CheckBox>
-                                    <Label  Grid.Column="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Backyard}"></Label>
+                                <CheckBox x:Name="chkGiardino" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="0" IsChecked="False"></CheckBox>
+                                    <Label  Grid.Column="0" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Backyard}"></Label>
 
-                                <CheckBox x:Name="chkTerrazzo" Grid.Column="0" Grid.Row="1" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Terrace}"></Label>
+                                <CheckBox x:Name="chkTerrazzo" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="1" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Terrace}"></Label>
 
-                                <CheckBox x:Name="chkCantina" Grid.Column="0" Grid.Row="2" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Cellar}"></Label>
+                                <CheckBox x:Name="chkCantina" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="2" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Cellar}"></Label>
 
-                                <CheckBox x:Name="chkPiscina" Grid.Column="0" Grid.Row="3" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Pool}"></Label>
+                                <CheckBox x:Name="chkPiscina" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="3" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Pool}"></Label>
 
-                                <CheckBox x:Name="chkAscensore" Grid.Column="0" Grid.Row="4" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
+                                <CheckBox x:Name="chkAscensore" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="4" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
 
-                                <CheckBox x:Name="chkCondizionatori" Grid.Column="0" Grid.Row="5" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
+                                <CheckBox x:Name="chkCondizionatori" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="5" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
                             </Grid>
                         </StackLayout>
                  </ScrollView>

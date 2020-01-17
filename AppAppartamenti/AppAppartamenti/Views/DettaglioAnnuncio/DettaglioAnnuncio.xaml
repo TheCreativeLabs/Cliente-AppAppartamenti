@@ -40,27 +40,27 @@
             <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked" Grid.Column="2"
                     VerticalOptions="Center"
                         Text="&#xf1e0;"
-                FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End"  WidthRequest="50">
+                FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" FontSize="17"  WidthRequest="60">
             </Button>
 
             <Button x:Name="btnRemovePreferitoNav" Grid.Column="0" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
                     Text="&#xf004;" 
-                    FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral" HorizontalOptions="End"  WidthRequest="50">
+                    FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral" FontSize="17" HorizontalOptions="End"  WidthRequest="60">
             </Button>
 
             <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Grid.Column="0"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
                     Text="&#xf004;" 
-                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End"  WidthRequest="50" >
+                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" FontSize="17" WidthRequest="60" >
             </Button>
 
             <Button x:Name="btnMessageNav"  Grid.Column="1" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
                     Text="&#xf086;"
-                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End"  WidthRequest="50" >
+                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" FontSize="17" WidthRequest="60" >
             </Button>
 
-            <Button  x:Name="btnModificaNavBar" Grid.Column="1" IsVisible="False" HorizontalOptions="End"  Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
+            <Button  x:Name="btnModificaNavBar" Grid.Column="1" IsVisible="False" FontSize="17" HorizontalOptions="End"  Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
                    FontFamily="{x:StaticResource FA-Solid}"
-                     WidthRequest="50">
+                     WidthRequest="60">
             </Button>
         </Grid>
     </NavigationPage.TitleView>

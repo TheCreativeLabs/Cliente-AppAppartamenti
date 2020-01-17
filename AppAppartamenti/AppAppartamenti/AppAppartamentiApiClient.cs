@@ -6074,8 +6074,6 @@ namespace AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("CodiceComune", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? CodiceComune { get; set; }
-
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.24.0 (Newtonsoft.Json v11.0.0.0)")]

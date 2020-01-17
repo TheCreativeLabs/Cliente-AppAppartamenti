@@ -20,6 +20,7 @@ using AppAppartamenti;
 using CustomRenderer;
 using Plugin.Badge.Droid;
 using Xamarin.Forms;
+using Xamarin.Forms.Material.Android;
 using Xamarin.Forms.Platform.Android;
 
 
@@ -102,20 +103,6 @@ namespace CustomRenderer
             base.OnElementChanged(e);
             if (Control != null)
             {
-
-                //var nativeEditText = (global::Android.Widget.EditText)Control;
-
-                //RoundRectShape i = new RoundRectShape(
-                //        new float[] { 15, 15, 15, 15, 15, 15, 15, 15 },
-                //        null,
-                //        new float[] { 15, 15, 15, 15, 15, 15, 15, 15 });
-
-                //var shape = new ShapeDrawable(i);
-                //shape.Paint.Color = Xamarin.Forms.Color.FromRgb(184, 184, 184).ToAndroid();
-                //shape.Paint.SetStyle(Paint.Style.Stroke);
-                //Control.Background = shape;
-                //Control.SetPadding(25, 25, 25, 25);
-
                 //this.Control.SetTextColor(Android.Graphics.Color.LightGray);
                 this.Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
                 this.Control.SetPadding(20, 0, 0, 0);

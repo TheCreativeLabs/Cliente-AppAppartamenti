@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.RangeSlider.Forms;
 
 namespace AppAppartamenti.Views
 {
@@ -41,6 +42,11 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
+            RangeSlider2.Effects.Add(Effect.Resolve("EffectsSlider.RangeSliderEffect"));
+            RangeSliderAffitto.Effects.Add(Effect.Resolve("EffectsSlider.RangeSliderEffect"));
+            RangeSliderVendita.Effects.Add(Effect.Resolve("EffectsSlider.RangeSliderEffect"));
+
+
             BindingContext = viewModel = new ListaComuniViewModel();
 
             entRicerca.Focus();
@@ -51,7 +57,6 @@ namespace AppAppartamenti.Views
             }
 
             pckTipologiaVendita.ItemsSource = listTipologiaAnnuncio;
-
 
             if (listTipologiaProprieta.Any() == false)
             {
@@ -248,6 +253,75 @@ namespace AppAppartamenti.Views
         void StpParkingSpaces_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             lblParkingSpaceCounter.Text = stpParkingSpace.Value.ToString();
+        }
+
+        void Sup_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(entSupMin.Text))
+                RangeSlider2.LowerValue = float.Parse(entSupMin.Text);
+
+            if (!string.IsNullOrEmpty(entSupMax.Text))
+                RangeSlider2.UpperValue = float.Parse(entSupMax.Text);
+        }
+
+        void RangeSlider2_LowerValueChanged(System.Object sender, System.EventArgs e)
+        {
+            entSupMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+        }
+
+        void RangeSlider2_UpperValueChanged(System.Object sender, System.EventArgs e)
+        {
+            entSupMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+        }
+
+
+        void Aff_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(entAffittoMin.Text)) { 
+                entAffittoMin.Text = string.Format("{0:N0}", Decimal.Parse(entAffittoMin.Text));
+
+            RangeSliderAffitto.LowerValue = float.Parse(entAffittoMin.Text);
+            }
+            if (!string.IsNullOrEmpty(entAffittoMax.Text))
+            {
+                entAffittoMax.Text = string.Format("{0:N0}", Decimal.Parse(entAffittoMax.Text));
+                RangeSliderAffitto.UpperValue = float.Parse(entAffittoMax.Text);
+            }
+        }
+
+        void RangeSliderAffitto_LowerValueChanged(System.Object sender, System.EventArgs e)
+        {
+            entAffittoMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+        }
+
+        void RangeSliderAffitto_UpperValueChanged(System.Object sender, System.EventArgs e)
+        {
+            entAffittoMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+        }
+
+        void Ven_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(entVenditaMin.Text))
+            {
+                entVenditaMin.Text = string.Format("{0:N0}", Decimal.Parse(entVenditaMin.Text));
+                RangeSliderVendita.LowerValue = float.Parse(entVenditaMin.Text);
+            }
+
+            if (!string.IsNullOrEmpty(entVenditaMax.Text))
+            {
+                entVenditaMax.Text = string.Format("{0:N0}", Decimal.Parse(entVenditaMax.Text));
+                RangeSliderVendita.UpperValue = float.Parse(entVenditaMax.Text);
+            }
+        }
+
+        void RangeSliderVendita_LowerValueChanged(System.Object sender, System.EventArgs e)
+        {
+            entVenditaMin.Text = string.Format("{0:N0}", Decimal.Parse(((RangeSlider)sender).LowerValue.ToString()));
+        }
+
+        void RangeSliderVendita_UpperValueChanged(System.Object sender, System.EventArgs e)
+        {
+            entVenditaMax.Text = string.Format("{0:N0}", Decimal.Parse(((RangeSlider)sender).UpperValue.ToString()));
         }
     }
 }
