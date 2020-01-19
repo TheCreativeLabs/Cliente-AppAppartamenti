@@ -735,8 +735,6 @@ label{
     background-color:white !important;
 }
 
-
-
 #cookieConsent{
     z-index:1200;
     bottom:0!important;
@@ -746,3 +744,6 @@ label{
     box-shadow: rgba(0,0,0,.14) 5px 5px 5px 9px !important;
 }
 
+.scroll-y{
+    overflow-y:scroll;
+}

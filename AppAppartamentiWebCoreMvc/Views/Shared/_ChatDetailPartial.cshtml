@@ -7,15 +7,23 @@
         {
             if (msg.FromMe.HasValue && msg.FromMe.Value)
             {
-                <div class="offset-2 mt-2 mb-2 col-10 bg-primary rounded p-2">
-                    <span style="color:white">@msg.Messaggio</span>
+                <div class="mt-2 mb-2 col-12">
+                    <div class="p-2 bg-primary rounded pl-5 pt-2 pb-2 float-right pr-2 text-right">
+                        <span class="text-white">@msg.Messaggio</span>
+                        <br />
+                        <span class="text-light mt-3 small">@msg.DataInserimento.Value.ToString("dddd, dd MMMM yyyy")</span>
+                    </div>
                 </div>
             }
             else
             {
-                <div class="col-10 mt-2 mb-2 bg-light rounded p-2">
+            <div class="col-12 mt-2 mb-2">
+                <div class="p-2 bg-light rounded pt-2 pl-2 pb-2 pr-5 float-left text-left">
                     <span>@msg.Messaggio</span>
+                    <br />
+                    <span class="text-dark mt-3 info small">@msg.DataInserimento.Value.ToString("dddd, dd MMMM yyyy")</span>
                 </div>
+            </div>
             }
         }
     }
