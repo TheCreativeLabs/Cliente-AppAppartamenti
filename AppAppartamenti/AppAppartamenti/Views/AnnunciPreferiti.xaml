@@ -9,7 +9,7 @@
              Title="Preferiti"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
-             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
@@ -33,7 +33,7 @@
 
                 <Label Grid.Row="0" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
            
-        <ListView Grid.Row="1" x:Name="AnnunciiListView"
+                <ListView Grid.Row="1" x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
                     HasUnevenRows="true"
                     RefreshCommand="{Binding LoadItemsCommand}"
@@ -66,7 +66,7 @@
                                 </AbsoluteLayout>
                             </Grid>
 
-                            <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
+                            <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding TipologiaProprieta}" />
@@ -78,6 +78,8 @@
                                 </Label.FormattedText>
                             </Label>
 
+                           
+
                             <Label LineBreakMode="WordWrap">
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -88,13 +90,51 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf546;" />
+                                                <Span  Text="{Binding  Superficie, StringFormat=' {0} mq'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Margin="15,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf52b;" />
+                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} locali'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Margin="15,0,0,0">
+                                        <Label.FormattedText >
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf2cc;" />
+                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} bagni'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
             </ListView>
+
+                <StackLayout Grid.Row="1" IsVisible="{Binding IsEmpty}">
+                        <forms:AnimationView Margin="0,50,0,0"
+	                    x:Name="animationView" 
+	                    Animation="start_searching.json" 
+	                    Loop="true" 
+	                    AutoPlay="true"
+                        HeightRequest="200" VerticalOptions="Center"/>
+
+                        <Label HorizontalTextAlignment="Center" Text="Nessun annuncio salvato."></Label>
+                </StackLayout>
             </Grid>
     </ContentPage.Content>
 </ContentPage>

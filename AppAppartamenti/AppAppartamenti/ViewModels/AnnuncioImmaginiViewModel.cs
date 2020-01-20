@@ -43,7 +43,7 @@ namespace AppAppartamenti.ViewModels
                 {
                     Items.Add(img);
                 }
-                MessagingCenter.Send(this, "ImmaginiCaricate", Items.Count);
+                    MessagingCenter.Send(this, "ImmaginiCaricate", Items.Count);
             }
             catch (Exception ex)
             {

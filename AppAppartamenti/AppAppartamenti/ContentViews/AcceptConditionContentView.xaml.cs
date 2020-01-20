@@ -20,9 +20,7 @@ namespace AppAppartamenti.ContentViews
                 await Browser.OpenAsync(AppSetting.GeneralConditionUrl, new BrowserLaunchOptions
                 {
                     LaunchMode = BrowserLaunchMode.SystemPreferred,
-                    TitleMode = BrowserTitleMode.Show,
-                    PreferredToolbarColor = Color.AliceBlue,
-                    PreferredControlColor = Color.Violet
+                    TitleMode = BrowserTitleMode.Show
                 });
             }
             catch (Exception ex)
@@ -39,9 +37,7 @@ namespace AppAppartamenti.ContentViews
                 await Browser.OpenAsync(AppSetting.PrivacyUrl, new BrowserLaunchOptions
                 {
                     LaunchMode = BrowserLaunchMode.SystemPreferred,
-                    TitleMode = BrowserTitleMode.Show,
-                    PreferredToolbarColor = Color.AliceBlue,
-                    PreferredControlColor = Color.Violet
+                    TitleMode = BrowserTitleMode.Show
                 });
             }
             catch (Exception ex)

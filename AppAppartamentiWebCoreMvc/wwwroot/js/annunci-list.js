@@ -2,7 +2,12 @@
 var isLoading = false;
 
 $(document).ready(function () {
+   
     ReloadList();
+
+    $("#btn-show-map").click(function () {
+        setHeight();
+    });
 
     //$('#loadFromMainFrame').click(function (e) {
     //    e.preventdefault;
@@ -43,7 +48,64 @@ $(document).ready(function () {
         }
         previousScrollPoint = posizioneAttuale;
     });
+
+    
 });
+
+
+function setHeight() {
+    $("#map-container").show();
+    $("#main-container").removeClass("container");
+    $("#main-container").addClass("container-fluid");
+    $("#container-annunci").removeClass();
+    $("#container-annunci").addClass("col-xs-12 col-sm-6 scroll-y");
+    $("#container-annunci").height($(window).height() - 100);
+}
+
+function setMap() {
+    var mapProp = {
+        zoom: 10,
+        mapTypeControl: false,
+        streetViewControl: false,
+    };
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+    $(".card-annuncio").each(function () {
+        let coordinates = $(this).data("coordinate");
+        let idAd = $(this).data("id");
+        var splittedCoordinates = coordinates.split(";");
+        var lat = splittedCoordinates[0];
+        var lng = splittedCoordinates[1];
+        var LatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
+        map.setCenter(LatLng);
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            scrollToDiv(idAd);
+        });
+    });
+
+    $("#map-container").height($(window).height() - 100);
+}
+
+function scrollToDiv(Id) {
+
+    $(".card-annuncio").each(function (index) {
+        if (Id == $(this).data("id")) {
+            let height = $(this).parent().height();
+            //let top = $(".card-annuncio[data-id='" + IdAnnuncio + "']").parent().offset().top;
+
+            $("#container-annunci").animate({
+                scrollTop: height * index
+            }, 500);
+        }
+    })
+
+    
+}
 
 function ReloadList() {
     let url = UrlRefresh;
@@ -56,6 +118,7 @@ function ReloadList() {
     }
 
     $('#annunci').load(url, function () {
+        setMap();
     });
 }
 

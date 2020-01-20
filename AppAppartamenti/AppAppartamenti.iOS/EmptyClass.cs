@@ -15,6 +15,8 @@ using Plugin.Badge.iOS;
 [assembly: ExportRenderer(typeof(ChatInputBarView), typeof(ChatEntryRenderer))]
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
 [assembly: ExportRenderer(typeof(ChatEntry), typeof(CustomEditorRenderer))]
+[assembly: ExportRenderer(typeof(TimeSlotLabel), typeof(TimeSlotLabelRenderer))]
+
 
 namespace AppAppartamenti.iOS
 {
@@ -154,5 +156,28 @@ namespace AppAppartamenti.iOS
                 this.Control.InputAccessoryView = null;
         }
         
+    }
+
+    public class TimeSlotLabelRenderer : LabelRenderer
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.NewElement != null)
+            {
+                var timeSlotLabel = e.NewElement as TimeSlotLabel;
+
+                if (string.IsNullOrEmpty(timeSlotLabel.Text))
+                {
+                    Control.Text = timeSlotLabel.Placeholder;
+                }
+                else
+                {
+                    Control.Text = timeSlotLabel.Text;
+                }
+            }
+        }
+
     }
 }

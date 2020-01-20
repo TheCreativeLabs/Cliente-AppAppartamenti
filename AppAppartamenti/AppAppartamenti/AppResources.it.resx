@@ -382,7 +382,7 @@
     <value>Altre stanze</value>
   </data>
   <data name="Ricerca.RoomsSection" xml:space="preserve">
-    <value>Camere</value>
+    <value>Locali</value>
   </data>
   <data name="Ricerca.Sale" xml:space="preserve">
     <value>Vendita</value>
@@ -400,7 +400,7 @@
     <value>Ricerca per città o provincia</value>
   </data>
   <data name="SelezioneDescrizione.CreaAnnuncio" xml:space="preserve">
-    <value>Procedi</value>
+    <value>Pubblica annuncio</value>
   </data>
   <data name="SelezioneDescrizione.Descrizione" xml:space="preserve">
     <value>Descrizione</value>
@@ -439,7 +439,7 @@
     <value>Ascensore</value>
   </data>
   <data name="SelezioneInfoGenerali.EnterHouseSize" xml:space="preserve">
-    <value>Inserisci la superficie</value>
+    <value>Superficie</value>
   </data>
   <data name="SelezioneInfoGenerali.HouseSizeExample" xml:space="preserve">
     <value>Esempio: 120</value>

@@ -12,7 +12,8 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -40,7 +41,7 @@
                     <controls:StepMenu CurrentId="7"/>
 
 
-                        <Button Clicked="ActionImmagini" Text="{translator:Translate SelezionePlanimetria.AddImage}" Style="{x:StaticResource LinkButton}"></Button>
+                        <Button Clicked="ActionImmagini" TextColor="{x:StaticResource PrimaryColor}" Text="{translator:Translate SelezionePlanimetria.AddImage}" Style="{x:StaticResource LinkButton}"></Button>
 
                         </StackLayout>
                 </CollectionView.Header>

@@ -17,18 +17,18 @@
             {
                 <div class="col-12 border-bottom row-message" onclick="OpenModal('@msg.IdChat', '@string.Format("{0} {1}",msg.Nome,msg.Cognome)')">
                     <div class="row p-3">
-                        <div class="col-2">
+                        <div class="col-2 p-2">
                             @{ if (msg.FotoUtente != null)
                                 {
                                     var base64 = Convert.ToBase64String(msg.FotoUtente);
                                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                    <div class="mb-2 mx-auto image-profile-edit" >
-                                        <img id="profileImage" src="@imgSrc"  alt="image" class="rounded-circle d-block w-100" />
+                                    <div class="mx-auto" >
+                                        <img id="profileImage" src="@imgSrc"   alt="image" class="rounded-circle d-block h-50 w-50 mx-auto " />
                                     </div>
                                 }
                             }
                         </div>
-                        <div class="col-9">
+                        <div class="col-9 p-2">
                             <label class="adTitle">@msg.Nome @msg.Cognome
                             </label>
 

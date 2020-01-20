@@ -17,20 +17,34 @@ namespace AppAppartamenti.Views
     {
         AnnunciViewModel viewModel;
         RicercaModel FiltriRicerca;
+        AnnunciDtoOutput SelectedMapItem;
 
         public ListaAnnunci(RicercaModel FiltriRicercaParam)
         {
             InitializeComponent();
-
             FiltriRicerca = FiltriRicercaParam;
-
             BindingContext = viewModel = new AnnunciViewModel();
             viewModel.FiltriRicerca = FiltriRicerca;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            if(SelectedMapItem != null && SelectedMapItem.Id.HasValue && SelectedMapItem.Id.Value != Guid.Empty)
+            {
+                var item = SelectedMapItem;
+                SelectedMapItem = null;
+                await Navigation.PushAsync(new DettaglioAnnuncio(item, false));
+            }
+
+            MessagingCenter.Subscribe<RicercaSuMappa, string>(this, "RicercaSuMappa", async (sender, arg) =>
+            {
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    SelectedMapItem = JsonConvert.DeserializeObject<AnnunciDtoOutput>(arg);
+                }
+            });
 
             MessagingCenter.Subscribe<Ricerca, string>(this, "Ricarica", async (sender, arg) =>
             {
@@ -39,16 +53,15 @@ namespace AppAppartamenti.Views
                     FiltriRicerca = JsonConvert.DeserializeObject<RicercaModel>(arg);
                 }
 
+                viewModel.Items.Clear();
                 viewModel.FiltriRicerca = FiltriRicerca;
-                //viewModel.Items = new System.Collections.ObjectModel.ObservableCollection<AnnunciDtoOutput>();
             });
 
-
-            viewModel.LoadItemsCommand.Execute(null);
+            if(!viewModel.Items.Any())
+                viewModel.LoadItemsCommand.Execute(null);
 
             entRicerca.Text = FiltriRicerca.Comune.NomeComune;
         }
-
 
         async void OnTapGestureRecognizerTapped(object sender, EventArgs args)
         {
@@ -65,12 +78,22 @@ namespace AppAppartamenti.Views
             if (item.Id != null && item.Id != Guid.Empty)
             {
                 // Manually deselect item.
-                AnnunciiListView.SelectedItem = null;
+                lvAnnunci.SelectedItem = null;
 
                 await Navigation.PushAsync(new DettaglioAnnuncio(item,false));
             }
         }
 
+        async void Back_Clicked(object sender, EventArgs e)
+        {
+          await Navigation.PopAsync();
+        }
+
+        async void BtnMap_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new RicercaSuMappa(viewModel));
+        }
+        
         async void BtnAdd_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage( new SelezioneProprieta(null)));

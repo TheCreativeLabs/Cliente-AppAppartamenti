@@ -11,7 +11,7 @@
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
     <ContentPage.Content>
-        <StackLayout Style="{x:StaticResource StackContainer}">
+         <StackLayout Style="{x:StaticResource StackContainer}">
                 <controls:BackButton IsVisible="false"/>
                 <Label IsVisible="false" Style="{x:StaticResource Title}" Margin="0,0,10,20" Text="{translator:Translate InformazionePersonali.Title}"></Label>
 

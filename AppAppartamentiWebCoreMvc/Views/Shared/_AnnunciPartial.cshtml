@@ -13,7 +13,7 @@
 {
         string detailUrl = @Url.Action("Detail", "Annunci", new { Id = item.Id });
 
-        <div class="card card-annuncio mb-5" onclick="NavigateToDetail('@detailUrl')">
+        <div class="card card-annuncio mb-5" data-id="@item.Id" data-coordinate="@item.CoordinateGeografiche" onclick="NavigateToDetail('@detailUrl')">
             <div class="row no-gutters">
                 <div class="col-md-6">
                      <div class="position-absolute bg-transparent p-2 border-0" style="text-align: end;">

@@ -101,6 +101,10 @@ namespace AppAppartamenti.Views
                 annuncio.IdTipologiaAnnuncio = (Guid) tipologiaAnnuncio.Id;
                 await Navigation.PushAsync(new SelezioneLuogo(annuncio, dtoToModify));
             }
+            else
+            {
+                await DisplayAlert("Campo obbligatorio", "Devi selezionare la tipologia di annuncio", "Ok");
+            }
         }
     }
 }

@@ -23,7 +23,7 @@
     <ContentPage.Content>
         
             <StackLayout Style="{x:StaticResource StackContainer}">
-            <ScrollView>
+            <ScrollView VerticalScrollBarVisibility="Never">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>

@@ -9,7 +9,7 @@
              x:Class="AppAppartamenti.Views.Home"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{x:StaticResource SfondoColor}"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              ios:Page.UseSafeArea="true">
 
     <ContentPage.Resources>
@@ -22,78 +22,105 @@
 
     <ContentPage.Content>
         <ScrollView>
-                <StackLayout Style="{x:StaticResource StackContainer}" CompressedLayout.IsHeadless="true">
-                    <Label FontSize="60" Margin="20" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}"
-                            TextColor="{x:StaticResource PrimaryColor}" Text="&#xf7ae;"></Label>
+                 <StackLayout  Style="{x:StaticResource StackContainer}" CompressedLayout.IsHeadless="true">
+                <Label FontSize="60" Margin="20" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}"
+                        TextColor="{x:StaticResource PrimaryColor}" Text="&#xf7ae;"></Label>
 
-                    <appappartamenti:ShadowFrame HasShadow="True" HeightRequest="40" CornerRadius="5" Padding="10,5,5,5" >
-                        <StackLayout Orientation="Horizontal">
-                            <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
+                <appappartamenti:ShadowFrame HasShadow="True" HeightRequest="40" CornerRadius="5" Padding="10,5,5,5" >
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontSize="17" VerticalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}" TextColor="Gray" FontAttributes="Bold"  Text="&#xf002;"></Label>
 
-                            <Label Text="{translator:Translate Home.StartSearch}" VerticalTextAlignment="Center" FontSize="17" TextColor="{x:StaticResource GrayColor}"></Label>
-                        </StackLayout>
-
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="entRicerca_Focused"></TapGestureRecognizer>
-                        </Frame.GestureRecognizers>
-                    </appappartamenti:ShadowFrame>
-
-                    <StackLayout Orientation="Vertical" Margin="0,20,0,0">
-                        <Label Style="{x:StaticResource Subtitle}" Text="Aggiunti di recente"></Label>
-
-                        <ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" IsRunning="True"></ActivityIndicator>
-
-                        <StackLayout HeightRequest="300"
-                                     Orientation="Horizontal">
-                                    <CollectionView x:Name="cvRecenti"
-                                                    SelectionChanged="OnCollectionViewSelectionChanged"
-                                                    ItemsSource="{Binding Items}"
-                                                    HorizontalScrollBarVisibility="Always"
-                                                    SelectionMode="Single"
-                                                    >
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal" />
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout WidthRequest="300" Padding="5">
-                                                <Frame HasShadow="False" Visual="Material" HorizontalOptions="FillAndExpand" HeightRequest="220" Padding="0" CornerRadius="5" IsClippedToBounds="True">
-                                                    <Image Aspect="AspectFill" Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
-                                                </Frame>
-
-                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
-                                                    <Label.FormattedText>
-                                                        <FormattedString>
-                                                            <Span Text="{Binding TipologiaProprieta}" />
-                                                            <Span Text=" in "/>
-                                                            <Span  Text="{Binding TipologiaAnnuncio}" />
-                                                            <Span Text=" a "/>
-                                                            <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
-                                                        </FormattedString>
-                                                    </Label.FormattedText>
-                                                </Label>
-
-                                                <Label LineBreakMode="WordWrap">
-                                                    <Label.FormattedText>
-                                                        <FormattedString>
-                                                            <Span Text="{Binding NomeComune}" />
-                                                            <Span Text=", "/>
-                                                            <Span Text="{Binding Indirizzo}"  />
-                                                        </FormattedString>
-                                                    </Label.FormattedText>
-                                                </Label>
-
-                                                <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
+                        <Label Text="{translator:Translate Home.StartSearch}" VerticalTextAlignment="Center" FontSize="17" TextColor="{x:StaticResource GrayColor}"></Label>
                     </StackLayout>
 
-                    <Label Style="{x:StaticResource Subtitle}" Margin="0,30,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
-                    <Button Text="Pubblica un annuncio" Clicked="btnNuovoAnnuncio_Clicked" Style="{x:StaticResource primaryButton}"></Button>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="entRicerca_Focused"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </appappartamenti:ShadowFrame>
+
+                <StackLayout Orientation="Vertical" Margin="0,20,0,0">
+                    <Label Style="{x:StaticResource Subtitle}" Text="Aggiunti di recente"></Label>
+
+                    <ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" IsRunning="True"></ActivityIndicator>
+
+                    <StackLayout HeightRequest="300"
+                                    Orientation="Horizontal">
+                                <CollectionView x:Name="cvRecenti"
+                                                SelectionChanged="OnCollectionViewSelectionChanged"
+                                                ItemsSource="{Binding Items}"
+                                                HorizontalScrollBarVisibility="Never"
+                                                SelectionMode="Single"
+                                                >
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout WidthRequest="300" Padding="5">
+                                            <Frame HasShadow="False" Visual="Material" HorizontalOptions="FillAndExpand" HeightRequest="200" Padding="0" CornerRadius="5" IsClippedToBounds="True">
+                                                <Image Aspect="AspectFill" HeightRequest="200"  Source="{Binding ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                            </Frame>
+
+                                            <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdTitle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding TipologiaProprieta}" />
+                                                        <Span Text=" in "/>
+                                                        <Span  Text="{Binding TipologiaAnnuncio}" />
+                                                        <Span Text=" a "/>
+                                                        <Span Text="{Binding Prezzo, StringFormat='{}{0:N0}€'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Label LineBreakMode="WordWrap">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding NomeComune}" />
+                                                        <Span Text=", "/>
+                                                        <Span Text="{Binding Indirizzo}"  />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                             <StackLayout  Orientation="Horizontal">
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf546;" />
+                                                <Span  Text="{Binding  Superficie, StringFormat=' {0} mq'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Margin="15,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf52b;" />
+                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} locali'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Margin="15,0,0,0">
+                                        <Label.FormattedText >
+                                            <FormattedString>
+                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf2cc;" />
+                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} bagni'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
                 </StackLayout>
-            </ScrollView>
+
+                <Label Style="{x:StaticResource Subtitle}" Margin="0,30,0,0" Text="{translator:Translate Home.Shortcut}"></Label>
+                <Button Text="Pubblica un annuncio" Clicked="btnNuovoAnnuncio_Clicked" Style="{x:StaticResource primaryButton}"></Button>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

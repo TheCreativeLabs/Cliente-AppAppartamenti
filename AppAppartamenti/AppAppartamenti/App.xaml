@@ -50,7 +50,7 @@
                 <On Platform="iOS" Value="Font Awesome 5 Free" />
             </OnPlatform>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="BodyFont">
+            <!--<OnPlatform x:TypeArguments="x:String" x:Key="BodyFont">
                 <On Platform="Android" Value="Roboto-Regular.ttf#Roboto" />
                 <On Platform="iOS" Value="Roboto-Regular" />
             </OnPlatform>
@@ -63,6 +63,21 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="TitleFont">
                 <On Platform="Android" Value="Roboto-Bold.ttf#Roboto Bold" />
                 <On Platform="iOS" Value="Roboto-Bold" />
+            </OnPlatform>-->
+
+             <OnPlatform x:TypeArguments="x:String" x:Key="BodyFont">
+                <On Platform="Android" Value="Raleway-Regular.ttf#Raleway" />
+                <On Platform="iOS" Value="Raleway-Regular" />
+            </OnPlatform>
+
+             <OnPlatform x:TypeArguments="x:String" x:Key="SubtitleFont">
+                <On Platform="Android" Value="Raleway-Medium.ttf#Raleway Medium" />
+                <On Platform="iOS" Value="Raleway-Medium" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="TitleFont">
+                <On Platform="Android" Value="Raleway-Bold.ttf#Raleway Bold" />
+                <On Platform="iOS" Value="Raleway-Bold" />
             </OnPlatform>
 
             <OnPlatform x:Key="PrimaryButtonCornerRadius" x:TypeArguments="x:Double" iOS="20" Android="50"></OnPlatform>
@@ -82,10 +97,14 @@
             </Style>
 
             <Style TargetType="Button" x:Key="DayButton">
-                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
                 <Setter Property="BorderColor" Value="{StaticResource LightColor}"/>
                 <Setter Property="WidthRequest" Value="45"/>
+                <Setter Property="HeightRequest" Value="45"/>
+                <Setter Property="CornerRadius" Value="22"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="FontSize" Value="17"/>
                 <Setter Property="BorderWidth" Value="1"/>
             </Style>
@@ -96,20 +115,21 @@
             </Style>
 
             <Style TargetType="Button" x:Key="AddTimeSlotButton">
-                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"/>
-                <Setter Property="Text" Value="&#xf067;"></Setter>
-                <Setter Property="HeightRequest" Value="40"></Setter>
-                <Setter Property="WidthRequest" Value="40"></Setter>
-                <Setter Property="CornerRadius" Value="20"></Setter>
+                 <Setter Property="TextColor" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="BackgroundColor" Value="Transparent">
+                </Setter>
+                  <Setter Property="Padding" Value="0">
+                </Setter>
             </Style>
 
             <Style TargetType="Button" x:Key="TimeSlotDeleteButton">
                 <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
                 <Setter Property="FontFamily" Value="{StaticResource FA-Solid}"/>
-                <Setter Property="Text" Value="&#xf2ed;"></Setter>
+                <Setter Property="WidthRequest" Value="40"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="CornerRadius" Value="20"></Setter>
+                <Setter Property="Text" Value="&#xf00d;"></Setter>
             </Style>
 
             <Style TargetType="Label" x:Key="PasswordShowButton">
@@ -195,13 +215,13 @@
             </Style>
 
             <Style TargetType="Frame" x:Key="MessageToMe">
-                <Setter Property="BackgroundColor" Value="LightGray"></Setter>
-                <Setter Property="Margin" Value="10, 10, 40, 10"></Setter> 
+                <Setter Property="BackgroundColor"  Value="{StaticResource LightColor}"></Setter>
+                <Setter Property="Margin" Value="10, 10, 40, 10"></Setter>
             </Style>
 
             <Style TargetType="Frame" x:Key="MessageFromMe">
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"></Setter>
-                <Setter Property="Margin" Value="40, 10, 10, 10"></Setter> 
+                <Setter Property="Margin" Value="40, 10, 10, 10"></Setter>
             </Style>
 
             <Style TargetType="StackLayout" x:Key="StackContainer">
@@ -234,7 +254,7 @@
             </Style>
 
             <Style TargetType="Label" x:Key="HelperLabel">
-                <Setter Property="FontFamily" Value="{StaticResource Subtitle}" />
+                <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
                 <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>

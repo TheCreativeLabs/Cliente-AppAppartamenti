@@ -4,16 +4,19 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="AppAppartamenti.Views.ErrorPage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
-            <Label  Text="&#xf071;" TextColor="Red" FontSize="Header" HorizontalTextAlignment="Center" FontFamily="{x:StaticResource FA-Solid}"></Label>
+             <forms:AnimationView 
+	            x:Name="animationView" 
+	            Animation="error.json" 
+	            Loop="true" 
+	            AutoPlay="true"
+                HeightRequest="300" />
 
-            <Label Text="{translator:Translate ErrorPage.ErrorMessage}" TextColor="Red" FontSize="Subtitle"  HorizontalTextAlignment="Center"></Label>
-
-            <Button x:Name="btnTornaAllaHome" Clicked="btnTornaAllaHome_Clicked" BorderColor="Red"  CornerRadius="30" BorderWidth="2" BackgroundColor="white" Visual="Material" TextColor="black" Text="{translator:Translate ErrorPage.BackHome}" HorizontalOptions="Center"></Button>
+            <Label Text="{translator:Translate ErrorPage.ErrorMessage}" HorizontalTextAlignment="Center"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

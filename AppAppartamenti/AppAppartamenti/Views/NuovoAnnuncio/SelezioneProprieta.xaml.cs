@@ -59,6 +59,9 @@ namespace AppAppartamenti.Views
                 await Navigation.PushAsync(new SelezioneTipologiaAnnuncio(annuncio, dtoToModify));
 
             }
+            else{
+                await DisplayAlert("Campo obbligatorio", "Devi selezionare la tipologia di immobile", "Ok");
+            }
         }
     }
 }

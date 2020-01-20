@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AppAppartamenti.Views.Messaggi;
 using Firebase.CloudMessaging;
 using Foundation;
 using Microsoft.AppCenter.Push;
@@ -40,8 +41,9 @@ namespace AppAppartamenti.iOS
             //NSUserDefaults.StandardUserDefaults.RegisterDefaults(new NSDictionary("UserAgent",
             //"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"));
 
+            global::Xamarin.Forms.Forms.SetFlags("IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
-
+            Forms.SetFlags("IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
             Plugin.InputKit.Platforms.iOS.Config.Init();
@@ -56,6 +58,7 @@ namespace AppAppartamenti.iOS
 
             return base.FinishedLaunching(app, options);
         }
+
 
     }
 }

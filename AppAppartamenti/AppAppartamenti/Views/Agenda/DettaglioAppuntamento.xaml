@@ -27,7 +27,16 @@
                 <StackLayout>
                     <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
 
-                    <Label Style="{x:StaticResource DangerTitle}" IsEnabled="False" Text="Questo appuntamento è in attesa di conferma" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}"></Label>
+                    <Frame HasShadow="False" BackgroundColor="{x:StaticResource DangerColor}" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}">
+                        <Label LineBreakMode="WordWrap" TextColor="White">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text=" Questo appuntamento è in attesa di conferma">
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Frame>
 
                     <Label x:Name="lbl_appuntamentoCon"  IsVisible="{Binding Confermato}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
 
@@ -42,7 +51,7 @@
                             HasShadow="False"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            Padding="0" BackgroundColor="Red" >
+                            Padding="0">
 
                         <Image x:Name="imgFotoUtente"
                             Aspect="AspectFill" Source="{Binding ImagePersonToMeet, Converter={StaticResource ByteArrayToImage}}"></Image>
@@ -58,49 +67,48 @@
                 </StackLayout>
 
                 <Label Style="{x:StaticResource SectionTitle}" Text="Data"></Label>
-                    <Label Text="{Binding Data, StringFormat='{0: dd/MM/yyyy HH:mm}'}"></Label>
+                    <Label Text="{Binding Data, StringFormat='{0:dddd, dd MMMM}'}"></Label>
 
 
                     <Label Style="{x:StaticResource SectionTitle}" Text="Dove"></Label>
                     <Label Text="via boccherini 10, Bologna"></Label>
                     <StackLayout>
-                        <maps:Map x:Name="map" IsVisible="True" HeightRequest="250"/>
+                        <maps:Map x:Name="map" HasScrollEnabled="False" HasZoomEnabled="False" IsVisible="True" HeightRequest="250"/>
                     </StackLayout>
 
                     <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
 
-                            <appappartamenti:ShadowFrame IsClippedToBounds="True" HasShadow="True" Padding="0" HeightRequest="80" CornerRadius="10" WidthRequest="80">
+                    <Frame  HasShadow="False" Padding="0" Margin="5" HeightRequest="80" CornerRadius="0" WidthRequest="80">
+                            <StackLayout Orientation="Horizontal">
+                                        <Image  Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
 
-                    <StackLayout Orientation="Horizontal">
-                                <Image  Aspect="AspectFill"  Source="{Binding InfoAnnuncio.ImmaginePrincipale, Converter={StaticResource ByteArrayToImage}}"></Image>
+                                    <StackLayout VerticalOptions="CenterAndExpand">
+                                                <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding InfoAnnuncio.TipologiaProprieta}" />
+                                                <Span Text=" in "/>
+                                                <Span  Text="{Binding InfoAnnuncio.TipologiaAnnuncio}" />
+                                                <Span Text=" a "/>
+                                                <Span Text="{Binding InfoAnnuncio.Prezzo, StringFormat='{}{0:N0}€'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
 
-                            <StackLayout VerticalOptions="CenterAndExpand">
-                                     <Label LineBreakMode="WordWrap" Style="{x:StaticResource AdSubtitle}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding InfoAnnuncio.TipologiaProprieta}" />
-                                        <Span Text=" in "/>
-                                        <Span  Text="{Binding InfoAnnuncio.TipologiaAnnuncio}" />
-                                        <Span Text=" a "/>
-                                        <Span Text="{Binding InfoAnnuncio.Prezzo, StringFormat='{}{0:N0}€'}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                    <Label LineBreakMode="WordWrap">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding InfoAnnuncio.Indirizzo}"  />
+                                                <Span Text=", "/>
+                                                <Span Text="{Binding InfoAnnuncio.NomeComune}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
 
-                            <Label LineBreakMode="WordWrap">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding InfoAnnuncio.Indirizzo}"  />
-                                        <Span Text=", "/>
-                                        <Span Text="{Binding InfoAnnuncio.NomeComune}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-
-                            <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
-                            </StackLayout>
-                        </StackLayout>
-                            </appappartamenti:ShadowFrame>
+                                    <Label Text="{Binding Superficie, StringFormat='Superficie: {0} m²'}"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                    </Frame>
                             
             </StackLayout>
                 </StackLayout>

@@ -44,11 +44,6 @@ namespace AppAppartamenti.Views.Messaggi
 
             if(viewModel.IdChatParam.HasValue) { 
                 ApiHelper.UpdateChatList(viewModel.IdChatParam.Value);
-                ((MainPage)this.Parent.Parent).RefreshBadge(0);
-            }
-            else
-            {
-                ApiHelper.GetListaAnnunciRecenti(true);
             }
 
             if (viewModel.Items.Count == 0)
@@ -67,6 +62,8 @@ namespace AppAppartamenti.Views.Messaggi
         {
             base.OnAppearing();
 
+            ((MainPage)this.Parent.Parent).RefreshBadge();
+
             tmrExecutor.Stop();
         }
 
@@ -83,6 +80,7 @@ namespace AppAppartamenti.Views.Messaggi
 
         private async void Send_Clicked(object sender, EventArgs e)
         {
+            ApiHelper.GetListaMessaggi(true);
 
             if (!string.IsNullOrEmpty(chatTextInput.Text))
             {

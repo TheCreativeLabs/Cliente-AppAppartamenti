@@ -8,15 +8,17 @@
             x:Class="AppAppartamenti.Views.MainPage"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.IsSwipePagingEnabled="false"
+            android:TabbedPage.IsSmoothScrollEnabled="false"
             xmlns:views11="clr-namespace:AppAppartamenti.Views.Account"
             xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
             xmlns:plugin= "clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
-            xmlns:views1="clr-namespace:AppAppartamenti.Views.Messaggi" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+            xmlns:views1="clr-namespace:AppAppartamenti.Views.Messaggi"
+            xmlns:conv="clr-namespace:AppAppartamenti.Converter"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            SelectedTabColor="{x:StaticResource DarkColor}"
+            SelectedTabColor="{x:StaticResource PrimaryColor}"
             UnselectedTabColor="{x:StaticResource GrayColor}"
             NavigationPage.HasNavigationBar="False"
-            BackgroundColor="{OnPlatform Android=White, iOS=White}">
+            BackgroundColor="White">
 
      <TabbedPage.Resources>
         <ResourceDictionary>
@@ -55,7 +57,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="{Binding NewMessages}" plugin:TabBadge.BadgeColor="{Binding NewMessages, Converter={StaticResource BadgeColorConverter}}" plugin:TabBadge.BadgeTextColor="Transparent" >
+        <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="1" plugin:TabBadge.BadgeTextColor="Transparent" plugin:TabBadge.BadgeColor="{Binding NewMessages, Converter={StaticResource BadgeColorConverter}}"  >
             <NavigationPage.IconImageSource>
                 <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;" Size="25" />
             </NavigationPage.IconImageSource>

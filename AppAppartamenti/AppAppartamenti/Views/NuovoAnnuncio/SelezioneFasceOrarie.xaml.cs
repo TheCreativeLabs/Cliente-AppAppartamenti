@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AppAppartamenti.Api;
 using AppAppartamenti.ViewModels;
+using AppAppartamenti.Views.NuovoAnnuncio;
 using AppAppartamentiApiClient;
 using DependencyServiceDemos;
 using RestSharp.Extensions;
@@ -135,36 +136,43 @@ namespace AppAppartamenti.Views
                         Lunedi = true;
                         stkLunedi.IsVisible = true;
                         btn_ToggleLun.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleLun.TextColor = Color.White;
                         break;
                     case 2:
                         Martedi = true;
                         stkMartedi.IsVisible = true;
                         btn_ToggleMar.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleMar.TextColor = Color.White;
                         break;
                     case 3:
                         Mercoledi = true;
                         stkMercoledi.IsVisible = true;
                         btn_ToggleMer.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleMer.TextColor = Color.White;
                         break;
                     case 4:
                         Giovedi = true;
                         stkGiovedi.IsVisible = true;
                         btn_ToggleGio.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleGio.TextColor = Color.White;
                         break;
                     case 5:
                         Venerdi = true;
                         stkVenerdi.IsVisible = true;
                         btn_ToggleVen.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleVen.TextColor = Color.White;
                         break;
                     case 6:
                         Sabato = true;
                         stkSabato.IsVisible = true;
                         btn_ToggleSab.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleSab.TextColor = Color.White;
                         break;
                     case 7:
                         Domenica = true;
                         stkDomenica.IsVisible = true;
                         btn_ToggleDom.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"];
+                        btn_ToggleDom.TextColor = Color.White;
                         break;
                 }
 
@@ -602,6 +610,8 @@ namespace AppAppartamenti.Views
 
         private async void BtnProcedi_Clicked(object sender, EventArgs e)
         {
+            ((Button)sender).IsEnabled = false;
+
             var fasceOrarieLunedi = string.Empty;
             foreach (var item in listTimeSlotLunedi)
             {
@@ -689,8 +699,7 @@ namespace AppAppartamenti.Views
                     await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
                 }
 
-                MessagingCenter.Send(this, "AnnuncioCreato", "Ok");
-                await Navigation.PopModalAsync();
+                await Navigation.PushAsync(new ConfermaInserimento());
             }
             catch
             {

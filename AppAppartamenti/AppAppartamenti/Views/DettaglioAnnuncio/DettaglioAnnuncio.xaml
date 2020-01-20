@@ -7,11 +7,13 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"
              x:Class="AppAppartamenti.Views.DettaglioAnnuncio"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" 
+             xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
@@ -27,36 +29,40 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <NavigationPage.TitleView >
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
-             <controls:BackButton HorizontalOptions="StartAndExpand"/>
+    <NavigationPage.TitleView>
+        <Grid HorizontalOptions="End">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnMessageNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
-                    Text="&#xf086;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
+            <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnShare_Clicked" Grid.Column="2"
+                    VerticalOptions="Center"
+                        Text="&#xf1e0;"
+                FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" FontSize="17"  WidthRequest="60">
             </Button>
 
-            <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
-                    Text="&#xf004;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" WidthRequest="50" >
+            <Button x:Name="btnRemovePreferitoNav" Grid.Column="0" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
+                    Text="&#xf004;" 
+                    FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral" FontSize="17" HorizontalOptions="End"  WidthRequest="60">
             </Button>
 
-            <Button x:Name="btnRemovePreferitoNav" IsVisible="False" Style="{x:StaticResource NavCancelButton}"  Clicked="BtnRemovePreferito_Clicked" 
-                    Text="&#xf004;" HorizontalOptions="End"
-                    FontFamily="{x:StaticResource FA-Solid}" TextColor="Coral"  WidthRequest="50">
+            <Button x:Name="btnAddPreferitoNav" IsVisible="False"  Grid.Column="0"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnAddPreferito_Clicked" VerticalOptions="Center"
+                    Text="&#xf004;" 
+                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" FontSize="17" WidthRequest="60" >
             </Button>
 
-            <Button  x:Name="btnModificaNavBar" IsVisible="False" Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
-                   FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" WidthRequest="50">
+            <Button x:Name="btnMessageNav"  Grid.Column="1" IsVisible="False"  Style="{x:StaticResource NavCancelButton}" Clicked="BtnNewMessage_Clicked" VerticalOptions="Center"
+                    Text="&#xf086;"
+                    FontFamily="{x:StaticResource FA-Solid}" HorizontalOptions="End" FontSize="17" WidthRequest="60" >
             </Button>
 
-             <Button x:Name="BtnSegnalaNav" IsVisible="False"  Style="{x:StaticResource NavCancelButton}"
-                                    Clicked="BtnSegnala_Clicked" VerticalOptions="Center"
-                                    Text="&#xf071;" HorizontalOptions="End"
-                                    FontFamily="{x:StaticResource FA-Solid}">
-                                    </Button>
-           
-        </StackLayout>
+            <Button  x:Name="btnModificaNavBar" Grid.Column="1" IsVisible="False" FontSize="17" HorizontalOptions="End"  Style="{x:StaticResource NavCancelButton}" Pressed="BtnModifica_Clicked" Text="&#xf044;"
+                   FontFamily="{x:StaticResource FA-Solid}"
+                     WidthRequest="60">
+            </Button>
+        </Grid>
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
@@ -73,10 +79,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Margin="0,-50,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
+                <ScrollView x:Name="scrollView" IsVisible="False" Scrolled="ScrollView_Scrolled" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" >
                 <StackLayout>
-
-                    <StackLayout  HeightRequest="300">
+                     <StackLayout  HeightRequest="300">
                         <Grid>
                             <Grid.RowDefinitions>
                                <RowDefinition Height="*"></RowDefinition>
@@ -91,7 +96,11 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}"/>
+                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}">
+                                             <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="BtnOpenImages_Clicked"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                                        </Image>
                                     </Grid>
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
@@ -99,17 +108,16 @@
                                 <!--<Label Grid.Row="0" HeightRequest="20" VerticalOptions="End" Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center"
                            TextColor="White" FontFamily="{x:StaticResource FA-Solid}" IsVisible="{Binding viewModelImmagini.imagesMoreThanOne}"></Label>-->
 
-                                <Label Grid.Row="0" x:Name="CarouselImagesProgress" HeightRequest="20" VerticalOptions="End" FontSize="Medium" HorizontalTextAlignment="Center"
-                           TextColor="White" FontFamily="{x:StaticResource FA-Solid}" ></Label>
+                            <Frame HasShadow="False" Grid.Row="0"  BackgroundColor="{x:StaticResource DarkColor}" Margin="5" Opacity="0.9" Padding="5" HeightRequest="20" WidthRequest="30" CornerRadius="15" VerticalOptions="End" HorizontalOptions="EndAndExpand"
+                                   >
+                                     <Label x:Name="CarouselImagesProgress" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" Text="1/1" FontSize="14" 
+                           TextColor="White" ></Label>
+                            </Frame>
+                           
                             </Grid>
                     </StackLayout>
 
-              
-                   
-
-
                     <StackLayout Padding="20">
-
                             <Label LineBreakMode="NoWrap" Style="{x:StaticResource AdTitle}">
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -180,26 +188,26 @@
 
                         <Label Text="{translator:Translate DettaglioAnnuncio.Other}" Style="{x:StaticResource SectionTitle}"></Label>
 
-                        <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">
-                            <Frame IsVisible="{Binding viewModel.Item.Giardino}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
-                                <Label Text="{translator:Translate DettaglioAnnuncio.Backyard}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
-                            </Frame>
-                            <Frame IsVisible="{Binding viewModel.Item.Balcone}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
-                                <Label Text="{translator:Translate DettaglioAnnuncio.Terrace}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
-                            </Frame>
-                            <Frame IsVisible="{Binding viewModel.Item.Cantina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
-                                <Label Text="{translator:Translate DettaglioAnnuncio.Cellar}" LineBreakMode="NoWrap"></Label>
-                            </Frame>
-                            <Frame IsVisible="{Binding viewModel.Item.Piscina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
-                                <Label Text="{translator:Translate DettaglioAnnuncio.Pool}" LineBreakMode="NoWrap"></Label>
-                            </Frame>
-                            <Frame IsVisible="{Binding viewModel.Item.Ascensore}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
-                                <Label Text="{translator:Translate DettaglioAnnuncio.Elevator}" LineBreakMode="NoWrap"></Label>
-                            </Frame>
-                            <Frame IsVisible="{Binding viewModel.Item.Condizionatori}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
-                                <Label Text="{translator:Translate DettaglioAnnuncio.AirConditioners}" LineBreakMode="NoWrap"></Label>
-                            </Frame>
-                        </FlexLayout>
+                            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">
+                                <Frame IsVisible="{Binding viewModel.Item.Giardino}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                                    <Label Text="{translator:Translate DettaglioAnnuncio.Backyard}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
+                                </Frame>
+                                <Frame IsVisible="{Binding viewModel.Item.Balcone}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                                    <Label Text="{translator:Translate DettaglioAnnuncio.Terrace}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
+                                </Frame>
+                                <Frame IsVisible="{Binding viewModel.Item.Cantina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                                    <Label Text="{translator:Translate DettaglioAnnuncio.Cellar}" LineBreakMode="NoWrap"></Label>
+                                </Frame>
+                                <Frame IsVisible="{Binding viewModel.Item.Piscina}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                                    <Label Text="{translator:Translate DettaglioAnnuncio.Pool}" LineBreakMode="NoWrap"></Label>
+                                </Frame>
+                                <Frame IsVisible="{Binding viewModel.Item.Ascensore}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                                    <Label Text="{translator:Translate DettaglioAnnuncio.Elevator}" LineBreakMode="NoWrap"></Label>
+                                </Frame>
+                                <Frame IsVisible="{Binding viewModel.Item.Condizionatori}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
+                                    <Label Text="{translator:Translate DettaglioAnnuncio.AirConditioners}" LineBreakMode="NoWrap"></Label>
+                                </Frame>
+                            </FlexLayout>
 
                             <Label Text="{translator:Translate DettaglioAnnuncio.Costs}" Style="{x:StaticResource SectionTitle}"></Label>
                 
@@ -225,8 +233,19 @@
                                 <Label Text="{Binding viewModel.Item.Indirizzo, StringFormat='{0},'}" ></Label>
                                 <Label Text="{Binding viewModel.Item.NomeComune}" ></Label>
                             </StackLayout>
-                        
-                            <maps:Map x:Name="map" IsVisible="True" HeightRequest="250"/>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <maps:Map Grid.Row="0" Grid.Column="0" x:Name="map" HasZoomEnabled="False" HasScrollEnabled="False" IsVisible="True" HeightRequest="250"/>
+                                <appappartamenti:ShadowFrame Padding="4" Margin="5" HasShadow="True" Grid.Row="0" Grid.Column="0" HorizontalOptions="End" VerticalOptions="End">
+                                    <Label Text="Apri in mappe"></Label>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="BtnOpenMaps_Clicked"></TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                </appappartamenti:ShadowFrame>
+                            </Grid>
 
                             <Label Text="{translator:Translate DettaglioAnnuncio.Planimetria}" Style="{x:StaticResource SectionTitle}"></Label>
 
@@ -264,7 +283,10 @@
                                 </Label>
                             </StackLayout>
 
-                            
+                             <Button x:Name="BtnSegnalaNav" Margin="0,10,0,0" IsVisible="False" BackgroundColor="{x:StaticResource DangerColor}" TextColor="White"
+                                Clicked="BtnSegnala_Clicked"
+                                Text="Segnala" HorizontalOptions="FillAndExpand">
+                             </Button>
 
                             <!--<Label Text="&#xf141;" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="Gray" FontFamily="{x:StaticResource FA-Solid}"></Label>-->
                             <StackLayout BackgroundColor="Transparent" HeightRequest="60"></StackLayout> <!-- Spazio: altrimenti il bottone "nuovo appuntamento" nasconde l'ultimo pezzo dello scroll view-->
@@ -275,7 +297,7 @@
                 https://theconfuzedsourcecode.wordpress.com/2017/02/06/is-it-possible-to-add-a-text-shadow-in-button-with-xamarin-forms/ -->
              </ScrollView>
 
-                <StackLayout Grid.Row="0" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="10,0,10,0" >
+                <StackLayout Grid.Row="0" IsVisible="false" Grid.Column="0" x:Name="stkHeader" VerticalOptions="StartAndExpand"  Orientation="Horizontal" Margin="10,0,10,0" >
                     <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnBack_Clicked" VerticalOptions="Center"
                             FontAttributes="Bold" Text="&#xf053;" HorizontalOptions="StartAndExpand"
                         FontFamily="{x:StaticResource FA-Solid}" TextColor="White"  WidthRequest="50">
@@ -308,10 +330,20 @@
                     </Button>
                 </StackLayout>
 
-                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="10" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                 <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="20" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
                     <Button Clicked="BtnAppuntamento_Clicked" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="FillAndExpand"></Button>
+
+                     <appappartamenti:ShadowFrame Padding="0" HeightRequest="50" CornerRadius="25" WidthRequest="50" HorizontalOptions="End"  >
+
+                         <appappartamenti:ShadowFrame.GestureRecognizers>
+                             <TapGestureRecognizer Tapped="BtnAssistente_Clicked"></TapGestureRecognizer>
+                         </appappartamenti:ShadowFrame.GestureRecognizers>
+                     </appappartamenti:ShadowFrame>
                 </StackLayout>
-            </Grid>
+
+             </Grid>
+
+             
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

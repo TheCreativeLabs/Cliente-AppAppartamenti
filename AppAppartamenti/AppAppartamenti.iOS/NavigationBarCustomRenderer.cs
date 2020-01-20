@@ -14,6 +14,7 @@ using Syncfusion.SfPicker.XForms;
 [assembly: ExportRenderer(typeof(CustomNavigationPage), typeof(CustomNavigationRenderer))]
 [assembly: ExportRenderer(typeof(DatePickerCtrl), typeof(DatePickerCtrlRenderer))]
 [assembly: ExportRenderer(typeof(SfPicker), typeof(SfPickerCustomRenderer))]
+[assembly: ExportRenderer(typeof(ViewCell), typeof(ViewCellTransparent))]
 
 
 namespace iOS.Renderers
@@ -118,5 +119,19 @@ namespace iOS.Renderers
         }
     }
 
+
+        public class ViewCellTransparent : ViewCellRenderer
+        {
+            public override UITableViewCell GetCell(Cell item, UITableViewCell reusableCell, UITableView tv)
+            {
+                var cell = base.GetCell(item, reusableCell, tv);
+                if (cell != null)
+                {
+                    // Disable native cell selection color style - set as *Transparent*
+                    cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                }
+                return cell;
+            }
+        }
 
 }

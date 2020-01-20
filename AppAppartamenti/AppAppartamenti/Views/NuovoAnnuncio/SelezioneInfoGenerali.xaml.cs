@@ -109,22 +109,27 @@ namespace AppAppartamenti.Views
             if (!(String.IsNullOrEmpty(entSuperficie.Text)))
             {
                 annuncio.Superficie = double.Parse(entSuperficie.Text);
+                annuncio.NumeroAltreStanze = int.Parse(stpStanze.Value.ToString());
+                annuncio.NumeroBagni = int.Parse(stpBagni.Value.ToString());
+                annuncio.NumeroCameraLetto = int.Parse(stpCamereLetto.Value.ToString());
+                annuncio.NumeroCucine = int.Parse(stpCucine.Value.ToString());
+                annuncio.NumeroGarage = int.Parse(stpGarage.Value.ToString());
+                annuncio.NumeroPostiAuto = int.Parse(stpParkingSpaces.Value.ToString());
+                annuncio.Cantina = chkCantina.IsChecked;
+                annuncio.Piscina = chkPiscina.IsChecked;
+                annuncio.Ascensore = chkAscensore.IsChecked;
+                annuncio.Balcone = chkTerrazzo.IsChecked;
+                annuncio.Giardino = chkGiardino.IsChecked;
+                annuncio.Condizionatori = chkCondizionatori.IsChecked;
+
+                await Navigation.PushAsync(new SelezionePrezzo(annuncio, dtoToModify));
+            }
+            else
+            {
+                await DisplayAlert("Campo obbligatorio", "Inserire la superficie dell'immobile", "Ok");
             }
 
-            annuncio.NumeroAltreStanze = int.Parse(stpStanze.Value.ToString());
-            annuncio.NumeroBagni = int.Parse(stpBagni.Value.ToString());
-            annuncio.NumeroCameraLetto = int.Parse(stpCamereLetto.Value.ToString());
-            annuncio.NumeroCucine = int.Parse(stpCucine.Value.ToString());
-            annuncio.NumeroGarage = int.Parse(stpGarage.Value.ToString());
-            annuncio.NumeroPostiAuto = int.Parse(stpParkingSpaces.Value.ToString());
-            annuncio.Cantina = chkCantina.IsChecked;
-            annuncio.Piscina = chkPiscina.IsChecked;
-            annuncio.Ascensore = chkAscensore.IsChecked;
-            annuncio.Balcone = chkTerrazzo.IsChecked;
-            annuncio.Giardino = chkGiardino.IsChecked;
-            annuncio.Condizionatori = chkCondizionatori.IsChecked;
-
-            await Navigation.PushAsync(new SelezionePrezzo(annuncio, dtoToModify));
+         
         }
 
         #region Stepper

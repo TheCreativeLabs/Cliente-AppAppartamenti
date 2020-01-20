@@ -61,6 +61,8 @@ namespace AppAppartamenti.Views.Account
 
             AccountClient accountClient = new AccountClient( await ApiHelper.GetApiClient());
             await accountClient.UpdateUserAsync(updateUserModel);
+
+            await ApiHelper.GetUserInfo(true);
         }
 
         async void OnPickPhotoButtonClicked(object sender, EventArgs e)

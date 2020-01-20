@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             x:Class="AppAppartamenti.Views.SegnalaAnnuncio"
+             NavigationPage.HasNavigationBar="True"
+             Title="Segnala annuncio">
+    <ContentPage.Content>
+        <StackLayout Style="{x:StaticResource StackContainer}">
+                <Label Style="{x:StaticResource AdTitle}" Text="Motivo segnalazione"></Label>
+
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
+                    
+                <input:SelectionView ItemsSource="{Binding Items}" Color="{x:StaticResource DarkColor}"
+                     RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1">
+                </input:SelectionView>
+
+                <Label Style="{x:StaticResource AdTitle}" Text="Messaggio aggiuntivo"></Label>
+                <Frame HasShadow="False" HeightRequest="250" Padding="0" BorderColor="LightGray">
+                    <appappartamenti:ChatEntry Placeholder="Messaggio aggiuntivo" x:Name="edtSegnalazione" AutoSize="TextChanges"></appappartamenti:ChatEntry>
+                </Frame>
+
+                <Button x:Name="BtnSegnalaNav" Margin="0,10,0,0" IsVisible="True" BackgroundColor="{x:StaticResource DangerColor}" TextColor="White"
+                    Clicked="BtnSegnala_Clicked"
+                    Text="Segnala" HorizontalOptions="FillAndExpand">
+                </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

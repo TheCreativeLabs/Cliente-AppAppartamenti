@@ -61,6 +61,12 @@ namespace AppAppartamenti.Views
 
         private async void BtnDescrizioneProcedi_Clicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(edtDescrizione.Text))
+            {
+                await DisplayAlert("Campo obbligatori", "Inserire la descrizione", "Ok");
+                return;
+            }
+
             annuncio.Descrizione = edtDescrizione.Text;
             if(dtoToModify != null && dtoToModify.Item != null)
             {

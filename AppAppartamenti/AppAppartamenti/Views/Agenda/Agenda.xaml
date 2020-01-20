@@ -60,7 +60,7 @@
                     </Grid>
 
                     <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
-                        <Label Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Center" Text="Non sono presenti appuntamenti per il giorno selezionato"></Label>
+                        <Label HorizontalTextAlignment="Center" Text="Non sono presenti appuntamenti per il giorno selezionato"></Label>
                     </StackLayout>
 
                     <ListView x:Name="lvAppuntamenti" SelectionMode="Single" SeparatorVisibility="None"

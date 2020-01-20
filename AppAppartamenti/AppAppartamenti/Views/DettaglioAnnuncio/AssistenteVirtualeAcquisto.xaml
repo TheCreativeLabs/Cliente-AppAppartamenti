@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppAppartamenti.Views.AssistenteVirtualeAcquisto"
+                xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout Style="{x:StaticResource StackContainer}">
+             <StackLayout Orientation="Horizontal">
+                  <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnCancel_Clicked">
+                  </Button>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Label Style="{x:StaticResource Title}" HorizontalTextAlignment="Center" Text="Ciao, sono qui per aiutarti nell'acquisto della tua nuova casa!"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
