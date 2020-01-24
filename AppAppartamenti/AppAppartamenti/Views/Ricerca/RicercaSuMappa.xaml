@@ -63,9 +63,10 @@
                                     ItemsSource="{Binding Items}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                        <Grid Padding="5">
+                                        <Grid Padding="5,5,5,20">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="8*"></RowDefinition>
+                                                    <RowDefinition Height="1*"></RowDefinition>
                                                     <RowDefinition Height="1*"></RowDefinition>
                                                 </Grid.RowDefinitions>
 
@@ -87,6 +88,45 @@
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>
+
+                                                <Label Grid.Row="2" LineBreakMode="WordWrap">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding NomeComune}" />
+                                                            <Span Text=", "/>
+                                                            <Span Text="{Binding Indirizzo}"  />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <StackLayout Grid.Row="3" Orientation="Horizontal">
+                                                    <Label>
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf546;" />
+                                                                <Span  Text="{Binding  Superficie, StringFormat=' {0} mq'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+
+                                                    <Label Margin="15,0,0,0">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf52b;" />
+                                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} locali'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+
+                                                    <Label Margin="15,0,0,0">
+                                                        <Label.FormattedText >
+                                                            <FormattedString>
+                                                                <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf2cc;" />
+                                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} bagni'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </StackLayout>
                                             </Grid>
                                         </DataTemplate>
                             </CarouselView.ItemTemplate>
