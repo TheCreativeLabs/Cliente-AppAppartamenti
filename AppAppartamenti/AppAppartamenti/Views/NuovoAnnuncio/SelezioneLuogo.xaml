@@ -62,7 +62,15 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding NomeComune}" VerticalTextAlignment="Center" />
+                           <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding NomeComune}"  />
+                                            <Span Text=", "/>
+                                            <Span Text="{Binding NomeProvincia}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
