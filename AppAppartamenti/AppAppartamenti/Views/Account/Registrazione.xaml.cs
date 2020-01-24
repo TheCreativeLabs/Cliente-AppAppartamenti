@@ -104,20 +104,25 @@ namespace AppAppartamenti.Views.Login
             }
             catch (Exception ex)
             {
-                if (ex.Message == "USER_ALREADY_EXIST")
-                {
-                    string alertTitle = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.Warning", translate.ci);
-                    string alertContent = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertMailAlreadySigned", translate.ci);
-                    string alertOk = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertOk", translate.ci);
+                if (ex.GetType() == typeof(AppAppartamentiApiClient.ApiException)) {
+                    AppAppartamentiApiClient.ApiException ecc = (AppAppartamentiApiClient.ApiException)ex;
+                    if (ecc.Response == "\"USER_ALREADY_EXIST\"")
+                    {
+                        string alertTitle = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.Warning", translate.ci);
+                        string alertContent = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertMailAlreadySigned", translate.ci);
+                        string alertOk = Helpers.TranslateExtension.ResMgr.Value.GetString("Login.AlertOk", translate.ci);
 
-                    await DisplayAlert(alertTitle,
-                        alertContent,
-                        alertOk);
-                    Api.ApiHelper.DeleteToken();
-                    Application.Current.MainPage = new Login();
-                } else
+                        await DisplayAlert(alertTitle,
+                            alertContent,
+                            alertOk);
+                        Api.ApiHelper.DeleteToken();
+                        Application.Current.MainPage = new Login();
+                    }
+                }
+                else
                 {
-                    //TODO Gestire l'errore navigando alla pagina specifica.
+                    //Navigo alla pagina d'errore.
+                    await Navigation.PushAsync(new ErrorPage());
                 }
             }
         }
