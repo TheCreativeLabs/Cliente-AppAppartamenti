@@ -3805,18 +3805,18 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ListaDocumentiDto> GetDocumentiAffittoAsync()
+        public System.Threading.Tasks.Task<ListaDocumentiDto> GetDocumentiAcquistoAsync()
         {
-            return GetDocumentiAffittoAsync(System.Threading.CancellationToken.None);
+            return GetDocumentiAcquistoAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ListaDocumentiDto> GetDocumentiAffittoAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ListaDocumentiDto> GetDocumentiAcquistoAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/DocumentiAffitto");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/DocumentiAcquisto");
 
             var client_ = _httpClient;
             try
@@ -6350,8 +6350,8 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("IdTipologiaDocumento", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? IdTipologiaDocumento { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("VenditaAffitto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? VenditaAffitto { get; set; }
+        [Newtonsoft.Json.JsonProperty("VenditaAcquisto", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? VenditaAcquisto { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Titolo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(1024)]

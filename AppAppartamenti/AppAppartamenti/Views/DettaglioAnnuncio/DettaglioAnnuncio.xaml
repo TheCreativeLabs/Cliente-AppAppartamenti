@@ -335,7 +335,10 @@
 
                      <appappartamenti:ShadowFrame Padding="0" HeightRequest="50" CornerRadius="25" WidthRequest="50" HorizontalOptions="End"  >
 
-                         <appappartamenti:ShadowFrame.GestureRecognizers>
+                        <Image x:Name="imgAssistente"   HeightRequest="50"
+                                Aspect="AspectFill"></Image> <!--, Converter={StaticResource ByteArrayToImage}-->
+                         
+                        <appappartamenti:ShadowFrame.GestureRecognizers>
                              <TapGestureRecognizer Tapped="BtnAssistente_Clicked"></TapGestureRecognizer>
                          </appappartamenti:ShadowFrame.GestureRecognizers>
                      </appappartamenti:ShadowFrame>

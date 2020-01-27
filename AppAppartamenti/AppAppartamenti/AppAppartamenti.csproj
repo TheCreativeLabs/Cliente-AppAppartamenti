@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utility\GenericFileProvider.cs" />
     <Compile Remove="Views\MenuPage.xaml.cs" />
     <Compile Remove="Views\NuovoAnnuncio\NuovoAnnuncio.xaml.cs" />
     <Compile Remove="Utility\CustomNavigationPage.cs" />
@@ -96,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="**/*" />
+    <None Remove="Utility\ICheckFilePermission.cs" />
+    <None Remove="Utility\ISaveFile.cs" />
+    <None Remove="ViewModels\DocumentiViewModel.cs" />
     <None Include="ViewModels\MotiviSegnalazioneViewModel.cs" />
   </ItemGroup>
 </Project>

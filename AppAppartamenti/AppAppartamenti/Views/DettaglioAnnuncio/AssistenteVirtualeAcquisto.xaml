@@ -1,18 +1,94 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppAppartamenti.Views.AssistenteVirtualeAcquisto"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
                 xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{x:StaticResource SfondoColor}"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Style="{x:StaticResource StackContainer}">
              <StackLayout Orientation="Horizontal">
                   <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnCancel_Clicked">
                   </Button>
             </StackLayout>
 
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <appappartamenti:ShadowFrame Padding="0" HeightRequest="50" CornerRadius="25" WidthRequest="50" HorizontalOptions="End"  >
+                    <Image x:Name="imgAssistenteVirtuale"   HeightRequest="50"
+                                Aspect="AspectFill"></Image>
+                </appappartamenti:ShadowFrame>
+            </StackLayout>
+
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Label Style="{x:StaticResource Title}" HorizontalTextAlignment="Center" Text="Ciao, sono qui per aiutarti nell'acquisto della tua nuova casa!"></Label>
             </StackLayout>
+            
+            <StackLayout VerticalOptions="FillAndExpand">
+                <!--<Label Style="{x:StaticResource Subtitle}" HorizontalTextAlignment="Start" Text="Documenti"></Label>-->
+                <!--Lista documenti-->
+
+                <CollectionView x:Name="cvDocumenti"
+                                IsGrouped="true"
+                                Margin="0,10,0,10"
+                                SelectionMode="Single"
+                                SelectionChanged="OnCollectionViewSelectionChanged"
+                                >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name, Converter={StaticResource TranslateConverter}}"  Style="{x:StaticResource AdTitle}" HorizontalTextAlignment="Start" Margin="0,0,0,5" />
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="0,5,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition ></RowDefinition>
+                                    <RowDefinition Height="2"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="8*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--<Frame Padding="5" Margin="0,5,0,5" HasShadow="False" >-->
+                                    <!--<StackLayout Orientation="Vertical">-->
+                                        <Label Text="{Binding Titolo}" VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand"></Label>
+                                    <Label Text="&#xf05a;" FontFamily="{x:StaticResource FA-Solid}" VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalTextAlignment="End" HorizontalOptions="EndAndExpand" TextColor="{x:StaticResource PrimaryColor}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnInfoTapped" CommandParameter="{Binding Descrizione}"></TapGestureRecognizer>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                        <!--<Label Text="{Binding Descrizione}" Style="{x:StaticResource AdSubtitle}" ></Label>-->
+                                        <BoxView BackgroundColor="{x:StaticResource LightColor}" VerticalOptions="Center" HeightRequest="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,-5,0,0"></BoxView>
+                                    <!--</StackLayout>-->
+
+
+                                    <!--</Frame>-->
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+
+
+
+
+                <!--<Label Style="{x:StaticResource Subtitle}" HorizontalTextAlignment="Start" Text="Link Utili"></Label>-->
+                <!--Lista link-->
+            </StackLayout>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

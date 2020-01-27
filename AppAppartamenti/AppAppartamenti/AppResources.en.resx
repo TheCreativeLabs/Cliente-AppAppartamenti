@@ -789,4 +789,10 @@
   <data name="VILLA_SCHIERA" xml:space="preserve">
     <value>Townhouse</value>
   </data>
+  <data name="DOCUMENT" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="LINK" xml:space="preserve">
+    <value>Useful links</value>
+  </data>
 </root>

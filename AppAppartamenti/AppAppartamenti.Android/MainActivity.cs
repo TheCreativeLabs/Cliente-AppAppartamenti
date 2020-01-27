@@ -15,6 +15,9 @@ using Android.Gms.Common;
 using Android.Util;
 using Android.Support.V7.App;
 using AppAppartamenti.Api;
+using Android.Support.V4.Content;
+using Android;
+using Android.Support.V4.App;
 
 namespace AppAppartamenti.Droid
 {
@@ -22,6 +25,7 @@ namespace AppAppartamenti.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         static readonly string TAG = "MainActivity";
+        int REQUEST_FOLDER_PERMISSION = 1;
 
         //internal static readonly string CHANNEL_ID = "my_notification_channel";
         //internal static readonly int NOTIFICATION_ID = 100;
@@ -64,7 +68,10 @@ namespace AppAppartamenti.Droid
             //Window.AddFlags(WindowManagerFlags.Fullscreen);
             //Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
 
+
+
             LoadApplication(new App());
+            App.ParentWindow = this;
 
             IsPlayServicesAvailable();
 
@@ -124,6 +131,23 @@ namespace AppAppartamenti.Droid
                 //msgText.Text = "Google Play Services is available.";
                 return true;
             }
+        }
+
+        public bool CheckAppPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                return true;
+            }
+
+            if (!(ContextCompat.CheckSelfPermission(this, Manifest.Permission.WriteExternalStorage) == (int)Permission.Granted) && !(ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) == (int)Permission.Granted))
+            {
+                var permissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
+                ActivityCompat.RequestPermissions(this, permissions, REQUEST_FOLDER_PERMISSION);
+                return false;
+            }
+            return true;
+
         }
 
         //void CreateNotificationChannel()

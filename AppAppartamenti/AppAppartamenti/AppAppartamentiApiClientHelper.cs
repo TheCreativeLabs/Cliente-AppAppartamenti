@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -31,6 +32,7 @@ namespace AppAppartamenti.Api
         public const string ListaAnnunciRecentiProprietaKey = "ListaAnnunciRecentiProprieta_Key";
         public const string ListaChatKey = "ListaChat_Key";
         public const string AndroidRegistrationToken = "AndroidRegistrationToken_Key";
+        public const string ImmagineAssistenteKey = "ImmagineAssistente_Key";
 
         public class BearerToken
         {

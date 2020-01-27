@@ -84,6 +84,10 @@ namespace AppAppartamenti.Views
 
             Task.Run(async () => { LoadUserInfo(); });
 
+            AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
+            byte[] ImmagineAssistente = await accountClient.GetAvatarCurrentUserAsync();
+            imgAssistente.Source = ImageSource.FromStream(() => new MemoryStream(ImmagineAssistente));
+
             if (!IsEditable)
             {
                 btnAddPreferito.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
@@ -264,7 +268,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
-                await Navigation.PushModalAsync(new AssistenteVirtualeAcquisto());
+                await Navigation.PushModalAsync(new AssistenteVirtualeAcquisto(true));
             }
             catch (Exception Ex)
             {
