@@ -23,30 +23,42 @@
     <ContentPage.Content>
         
             <StackLayout Style="{x:StaticResource StackContainer}">
-            <ScrollView VerticalScrollBarVisibility="Never">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0" >
-                    <Button Style="{x:StaticResource NavCancelButton}" 
-                            Clicked="BtnCancel_Clicked">
-                    </Button>
+                <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="0"  Margin="0,0,0,50">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="0" >
+                            <Button Style="{x:StaticResource NavCancelButton}" 
+                                    Clicked="BtnCancel_Clicked">
+                            </Button>
 
-                    <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"  ></Label>
-                    <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneProprieta.PropertyType}"></Label>
-                    <controls:StepMenu CurrentId="1"  />
+                            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"  ></Label>
+                            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneProprieta.PropertyType}"></Label>
+                            <controls:StepMenu CurrentId="1"  />
+                        </StackLayout>
+                        <!--<ScrollView  Grid.Row="1">-->
+                        <input:SelectionView  Grid.Row="1" ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton"
+                                                 ColumnNumber="1" Color="{x:StaticResource DarkColor}">
+                            </input:SelectionView>
+                        <!--</ScrollView>-->
+                        <!--<Button Grid.Row="2" Text="{translator:Translate SelezioneProprieta.Continue}" Style="{x:StaticResource primaryButton}" Clicked="BtnAvanti_Clicked" ></Button>-->
+                    </Grid>
+                </ScrollView>
+
+                <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                    <Button Text="{translator:Translate SelezioneProprieta.Continue}" Style="{x:StaticResource primaryButton}" Clicked="BtnAvanti_Clicked"  HorizontalOptions="FillAndExpand"></Button>
+
+                    <controls:AssistenteVenditaButton/>
                 </StackLayout>
-                <!--<ScrollView  Grid.Row="1">-->
-                <input:SelectionView  Grid.Row="1" ItemsSource="{Binding Items}" RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton"
-                                         ColumnNumber="1" Color="{x:StaticResource DarkColor}">
-                    </input:SelectionView>
-                <!--</ScrollView>-->
-                <Button Grid.Row="2" Text="{translator:Translate SelezioneProprieta.Continue}" Style="{x:StaticResource primaryButton}" Clicked="BtnAvanti_Clicked" ></Button>
             </Grid>
-            </ScrollView>
+
         </StackLayout>
         
     </ContentPage.Content>

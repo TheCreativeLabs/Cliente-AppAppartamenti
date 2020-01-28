@@ -7,15 +7,16 @@ using Xamarin.Forms;
 using System.Linq;
 using AppAppartamenti.Files;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace AppAppartamenti.Views
 {
-    public partial class AssistenteVirtualeAcquisto : ContentPage
+    public partial class AssistenteVirtuale : ContentPage
     {
 
         DocumentiViewModel viewModel;
 
-        public AssistenteVirtualeAcquisto(bool isVendita)
+        public AssistenteVirtuale(bool isVendita)
         {
             InitializeComponent();
 
@@ -73,18 +74,18 @@ namespace AppAppartamenti.Views
             }
             else if(documento.Documento != null) //caso documento pdf
             {
-                byte[] bytes = documento.Documento;
-                string fileName = documento.Titolo.Replace(" ", "") + ".pdf";
+                //byte[] bytes = documento.Documento;
+                //string fileName = documento.Titolo.Replace(" ", "") + ".pdf";
+                //string filepath = await DependencyService.Get<ISaveFile>().SaveFiles(fileName, bytes);
+                //return filepath;
+                string url = AppSetting.DocumentoUrl + "" + documento.Id;
+                //await Browser.OpenAsync(url, new BrowserLaunchOptions
+                //{
+                //    LaunchMode = BrowserLaunchMode.SystemPreferred,
+                //    TitleMode = BrowserTitleMode.Show
+                //});
+                bool x = await Xamarin.Essentials.Launcher.TryOpenAsync(url);
 
-                //var externalPath = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + fileName;
-                //File.WriteAllBytes(externalPath, bytes);
-                //Java.IO.File file = new Java.IO.File(externalPath);
-                //Android.Net.Uri uri = Android.Net.Uri.FromFile(file);
-                //Device.OpenUri(new Uri("https://www.canada.ca/content/dam/ircc/migration/ircc/english/pdf/kits/forms/imm5406e.pdf"));
-
-
-                string filepath = await DependencyService.Get<ISaveFile>().SaveFiles(fileName, bytes);
-                return filepath;
 
             }
             return "";

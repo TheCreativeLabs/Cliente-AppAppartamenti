@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             x:Class="AppAppartamenti.ContentViews.AssistenteVenditaButton"
+             xmlns:translator="clr-namespace:AppAppartamenti.Helpers">
+    <ContentView.Content>
+        <appappartamenti:ShadowFrame Padding="0" HeightRequest="50" CornerRadius="25" WidthRequest="50" HorizontalOptions="End"  >
+
+            <Image x:Name="imgAssistente"   HeightRequest="50"
+                                Aspect="AspectFill"></Image>
+            <!--, Converter={StaticResource ByteArrayToImage}-->
+
+            <appappartamenti:ShadowFrame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BtnAssistente_Clicked"></TapGestureRecognizer>
+            </appappartamenti:ShadowFrame.GestureRecognizers>
+        </appappartamenti:ShadowFrame>
+    </ContentView.Content>
+</ContentView>

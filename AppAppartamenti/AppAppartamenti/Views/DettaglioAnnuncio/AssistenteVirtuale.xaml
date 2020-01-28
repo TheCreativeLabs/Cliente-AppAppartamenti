@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppAppartamenti.Views.AssistenteVirtualeAcquisto"
+             x:Class="AppAppartamenti.Views.AssistenteVirtuale"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
                 xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
@@ -29,7 +29,7 @@
             </StackLayout>
 
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <Label Style="{x:StaticResource Title}" HorizontalTextAlignment="Center" Text="Ciao, sono qui per aiutarti nell'acquisto della tua nuova casa!"></Label>
+                <Label Style="{x:StaticResource Title}" HorizontalTextAlignment="Center" Text="Ciao, sono qui per aiutarti!"></Label>
             </StackLayout>
             
             <StackLayout VerticalOptions="FillAndExpand">

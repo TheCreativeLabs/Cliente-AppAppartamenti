@@ -12,5 +12,6 @@ namespace AppAppartamenti
         public const string SiteApp = "http://Appappartamentiweb.appregaliapitest.com";
         public const string PrivacyUrl = "https://appappartamentiweb.appregaliapitest.com/Home/Privacy";
         public const string GeneralConditionUrl = "https://appappartamentiweb.appregaliapitest.com/Home/CookiePolicy";
+        public const string DocumentoUrl = "https://appappartamentiweb.appregaliapitest.com/Documenti/Detail/";
     }
 }

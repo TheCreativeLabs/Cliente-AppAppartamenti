@@ -21,22 +21,38 @@
    <ContentPage.Content>
         <StackLayout Style="{x:StaticResource StackContainer}">
 
-         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                   <controls:BackButton/>
 
                  <Button Style="{x:StaticResource NavCancelButton}"  Clicked="BtnCancel_Clicked">
                   </Button>
             </StackLayout>
 
-            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneTipologiaAnnuncio.SaleRent}"></Label>
-            <controls:StepMenu CurrentId="2"/>
+            <StackLayout Grid.Row="1"  Margin="0,0,0,50">
+                <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
+                <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneTipologiaAnnuncio.SaleRent}"></Label>
+                <controls:StepMenu CurrentId="2"/>
 
-            <input:SelectionView ItemsSource="{Binding Items}" Color="{x:StaticResource DarkColor}"
-                 RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1">
-            </input:SelectionView>
+                <input:SelectionView ItemsSource="{Binding Items}" Color="{x:StaticResource DarkColor}"
+                     RowSpacing="20" Margin="20" x:Name="rbList" SelectionType="RadioButton" ColumnNumber="1">
+                </input:SelectionView>
+            </StackLayout>
 
-            <Button Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}" Clicked="BtnAvanti_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                <Button Text="{translator:Translate SelezioneTipologiaAnnuncio.Continue}" Clicked="BtnAvanti_Clicked"  Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"></Button>
+
+                <controls:AssistenteVenditaButton/>
+            </StackLayout>
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

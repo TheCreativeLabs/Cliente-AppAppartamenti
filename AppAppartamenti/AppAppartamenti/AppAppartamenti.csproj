@@ -46,6 +46,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ContentViews\AssistenteVenditaButton.xaml.cs">
+      <DependentUpon>AssistenteVenditaButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DettaglioAnnuncio\AssistenteVirtuale.xaml.cs">
+      <DependentUpon>AssistenteVirtuale.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ModificaAnnuncio.xaml.cs">
       <DependentUpon>ModificaAnnuncio.xaml</DependentUpon>
     </Compile>
@@ -78,8 +84,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ContentViews\" />
-    <Folder Include="Views\DettaglioAnnuncio\" />
     <Folder Include="Notify\" />
     <Folder Include="Views\GeneralCondition\" />
     <Folder Include="Views\Agenda\" />
@@ -97,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="**/*" />
+    <None Remove="ContentViews\FacebookButton - Copia.xaml.cs" />
     <None Remove="Utility\ICheckFilePermission.cs" />
     <None Remove="Utility\ISaveFile.cs" />
     <None Remove="ViewModels\DocumentiViewModel.cs" />

@@ -268,7 +268,7 @@ namespace AppAppartamenti.Views
         {
             try
             {
-                await Navigation.PushModalAsync(new AssistenteVirtualeAcquisto(true));
+                await Navigation.PushModalAsync(new AssistenteVirtuale(false));
             }
             catch (Exception Ex)
             {
