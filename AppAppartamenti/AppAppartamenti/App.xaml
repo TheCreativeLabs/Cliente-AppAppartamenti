@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              x:Class="AppAppartamenti.App"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit">
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -14,7 +15,7 @@
             <Color x:Key="SfondoColor">#fff</Color>
             <Color x:Key="SecondaryColor">#343a40</Color>
             <Color x:Key="PrimaryColor">#1188e6</Color>
-            <Color x:Key="DarkColor">#343a40</Color>
+            <Color x:Key="DarkColor">#484848</Color>
             <Color x:Key="GrayColor">#868e96</Color>
             <Color x:Key="SuccessColor">#20c997</Color>
             <Color x:Key="DangerColor">#dc3545</Color>
@@ -71,8 +72,8 @@
             </OnPlatform>
 
              <OnPlatform x:TypeArguments="x:String" x:Key="SubtitleFont">
-                <On Platform="Android" Value="Raleway-Medium.ttf#Raleway Medium" />
-                <On Platform="iOS" Value="Raleway-Medium" />
+                <On Platform="Android" Value="Raleway-SemiBold.ttf#Raleway SemiBold" />
+                <On Platform="iOS" Value="Raleway-SemiBold" />
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="TitleFont">
@@ -214,14 +215,17 @@
                 <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
             </Style>
 
-            <Style TargetType="Frame" x:Key="MessageToMe">
+            <Style TargetType="yummy:PancakeView" x:Key="MessageToMe">
                 <Setter Property="BackgroundColor"  Value="{StaticResource LightColor}"></Setter>
                 <Setter Property="Margin" Value="10, 10, 40, 10"></Setter>
+                <Setter Property="CornerRadius" Value="0,10,10,10"></Setter>
+
             </Style>
 
-            <Style TargetType="Frame" x:Key="MessageFromMe">
+            <Style TargetType="yummy:PancakeView" x:Key="MessageFromMe">
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"></Setter>
                 <Setter Property="Margin" Value="40, 10, 10, 10"></Setter>
+                <Setter Property="CornerRadius" Value="10,0,10,10"></Setter>
             </Style>
 
             <Style TargetType="StackLayout" x:Key="StackContainer">
@@ -242,7 +246,7 @@
             </Style>
 
             <Style TargetType="Label" x:Key="AdTitle">
-                <Setter Property="FontFamily" Value="{StaticResource TitleFont}" />
+                <Setter Property="FontFamily" Value="{StaticResource SubtitleFont}" />
                 <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource DarkColor}"></Setter>
             </Style>

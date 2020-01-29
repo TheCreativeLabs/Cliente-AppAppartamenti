@@ -10,6 +10,7 @@ using AppAppartamenti.Views;
 using AppAppartamentiApiClient;
 using System.Collections.Generic;
 using AppAppartamenti.Api;
+using System.Linq;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -40,19 +41,20 @@ namespace AppAppartamenti.ViewModels
                 Items.Clear();
 
                 if(NomeComune.Length > 3) { 
-                //AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
-                ICollection<ComuneDto> listaComuni; // = await ApiHelper.GetListaComuni(NomeComune);// annunciClient.GetListaComuniAsync(NomeComune);
-                AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
-                listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
-                    Items.Clear();
-                    foreach (var evento in listaComuni)
+                    //AnnunciClient annunciClient = new AnnunciClient(Api.ApiHelper.GetApiClient());
+                    ICollection<ComuneDto> listaComuni; // = await ApiHelper.GetListaComuni(NomeComune);// annunciClient.GetListaComuniAsync(NomeComune);
+                    AnnunciClient annunciClient = new AnnunciClient(await Api.ApiHelper.GetApiClient());
+                    listaComuni = await annunciClient.GetListaComuniAsync(NomeComune);
+
+                    var sonouguali  = Items.SequenceEqual(listaComuni);
+
+                    if (!sonouguali)
                     {
-                        Items.Add(evento);
+                        foreach (var evento in listaComuni)
+                        {
+                            Items.Add(evento);
+                        }
                     }
-                }
-                else
-                {
-                    Items.Clear();
                 }
             }
             catch (Exception ex)

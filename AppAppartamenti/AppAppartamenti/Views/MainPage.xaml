@@ -29,7 +29,7 @@
     <TabbedPage.Children>
         <NavigationPage x:Name="Test" Title="{translator:Translate MainPage.Search}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf689;" Size="25"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf689;" Size="23"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views:Home Title="{translator:Translate MainPage.Search}">
@@ -39,7 +39,7 @@
 
         <NavigationPage Title="{translator:Translate MainPage.Saved}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf004;" Size="25"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf004;" Size="23"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views:AnnunciPreferiti>
@@ -49,7 +49,7 @@
 
         <NavigationPage Title="{translator:Translate MainPage.Agenda}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf073;" Size="25"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf073;" Size="23"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views:Agenda>
@@ -59,7 +59,7 @@
 
         <NavigationPage Title="Messaggi" plugin:TabBadge.BadgeText="1" plugin:TabBadge.BadgeTextColor="Transparent" plugin:TabBadge.BadgeColor="{Binding NewMessages, Converter={StaticResource BadgeColorConverter}}"  >
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;" Size="25" />
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf086;" Size="23" />
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views1:MessaggiLista>
@@ -69,7 +69,7 @@
         
         <NavigationPage x:Name="tabAccount" Title="{translator:Translate MainPage.Account}">
             <NavigationPage.IconImageSource>
-                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;" Size="25"/>
+                <FontImageSource  FontFamily="{x:StaticResource FA-Solid}" Glyph="&#xf007;" Size="23"/>
             </NavigationPage.IconImageSource>
             <x:Arguments>
                 <views11:Account>

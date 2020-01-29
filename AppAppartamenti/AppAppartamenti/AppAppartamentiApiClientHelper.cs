@@ -404,6 +404,26 @@ namespace AppAppartamenti.Api
             return listaChat;
         }
 
+
+        public static async Task<byte[]> GetVirtualAssistentImage()
+        {
+            byte[] image  = null;
+
+            if (Preferences.Get(ImmagineAssistenteKey, null) != null)
+            {
+                image = JsonConvert.DeserializeObject<byte[]>(Preferences.Get(ImmagineAssistenteKey, null));
+            }
+
+            if (image == null )
+            {
+                AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
+                image = await accountClient.GetAvatarCurrentUserAsync();
+                Preferences.Set(ImmagineAssistenteKey, JsonConvert.SerializeObject(image));
+            }
+
+            return image;
+        }
+
         public static void UpdateChatList(Guid IdChat)
         {
             List<ChatListDtoOutput> listaChat = new List<ChatListDtoOutput>();

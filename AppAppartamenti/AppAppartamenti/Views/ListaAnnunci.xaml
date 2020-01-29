@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              xmlns:translator="clr-namespace:AppAppartamenti.Helpers"
-             xmlns:conv="clr-namespace:AppAppartamenti.Converter" mc:Ignorable="d"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.ListaAnnunci"
              NavigationPage.HasNavigationBar="False"
              xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
@@ -65,7 +66,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <StackLayout Padding="20">
+                                        <StackLayout Padding="20,20,20,30">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="200"/>

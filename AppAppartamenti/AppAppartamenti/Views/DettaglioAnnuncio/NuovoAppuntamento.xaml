@@ -13,7 +13,7 @@
              ios:Page.UseSafeArea="true"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" xmlns:local="clr-namespace:AppAppartamenti.Views"
              BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
@@ -33,9 +33,20 @@
         </syncTheme:SyncfusionThemeDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView x:Name="ScrollViewAppuntamento">
 
-            <StackLayout Style="{x:StaticResource StackContainer}">
+                <!--<FlexLayout x:Name="containerOrariDisponibili" Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">-->
+                    <CollectionView  x:Name="OrariCollectionView"
+                        ItemsSource="{Binding Orari}"
+                        SelectionMode="Single" Margin="20"
+                        >
+                        <!--SelectionChanged="OnPeopleSelectionChanged"-->
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.Header>
+                            <StackLayout>
                 <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
                 <Label Style="{x:StaticResource Title}" Text="{translator:Translate NuovoAppuntamento.Title}"></Label>
@@ -46,8 +57,8 @@
                                        EnableDatesInPast="False" 
                                        ShowLeadingAndTrailingDays="False"
                                        ShowNavigationButtons="True"
-                                       HeightRequest="300">
-
+                                       HeightRequest="300" BlackoutDatesViewMode="Strikethrough"
+                                       MonthChanged="calendar_MonthChanged">
                      <syncfusion:SfCalendar.MonthViewSettings>
                             <syncfusion:MonthViewSettings DayHeight="30" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
                             </syncfusion:MonthViewSettings>
@@ -59,18 +70,8 @@
                 <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
                     <Label HorizontalTextAlignment="Center" Text="Non sono disponibili appuntamenti per il giorno selezionato"></Label>
                 </StackLayout>
-
-                <StackLayout x:Name="containerOrariDisponibili" Orientation="Vertical" IsVisible="False" >
-                <!--<FlexLayout x:Name="containerOrariDisponibili" Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">-->
-                    <CollectionView  x:Name="OrariCollectionView"
-                        ItemsSource="{Binding Orari}"
-                        SelectionMode="Single"
-                        >
-                        <!--SelectionChanged="OnPeopleSelectionChanged"-->
-
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
+                                </StackLayout>
+                        </CollectionView.Header>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -119,8 +120,5 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                </StackLayout>
-            </StackLayout>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

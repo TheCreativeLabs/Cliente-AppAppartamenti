@@ -96,7 +96,7 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}">
+                                        <Image Grid.RowSpan="2" HeightRequest="300" Aspect="AspectFill" Source="{Binding ., Converter={StaticResource ByteArrayToImage}}">
                                              <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="BtnOpenImages_Clicked"></TapGestureRecognizer>
                                 </Image.GestureRecognizers>
@@ -351,11 +351,11 @@
                  <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Opacity="2" x:Name="stkPulsanti"  Padding="20" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
                     <Button Clicked="BtnAppuntamento_Clicked" Style="{x:StaticResource primaryButton}" Text="{translator:Translate DettaglioAnnuncio.NewInspection}" HorizontalOptions="FillAndExpand"></Button>
 
-                     <appappartamenti:ShadowFrame Padding="0" HeightRequest="50" CornerRadius="25" WidthRequest="50" HorizontalOptions="End"  >
+                     <appappartamenti:ShadowFrame IsClippedToBounds="True" Padding="0" HeightRequest="50" HasShadow="False" CornerRadius="25" WidthRequest="50">
 
                         <Image x:Name="imgAssistente"   HeightRequest="50"
-                                Aspect="AspectFill"></Image> <!--, Converter={StaticResource ByteArrayToImage}-->
-                         
+                                Aspect="AspectFill" ></Image> <!--, Converter={StaticResource ByteArrayToImage}-->
+
                         <appappartamenti:ShadowFrame.GestureRecognizers>
                              <TapGestureRecognizer Tapped="BtnAssistente_Clicked"></TapGestureRecognizer>
                          </appappartamenti:ShadowFrame.GestureRecognizers>

@@ -1,9 +1,12 @@
-﻿using Android.Content;
+﻿using System;
+using System.Linq;
+using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Support.V4.Content;
 using Android.Util;
+using AppAppartamenti.Behaviors;
 using AppAppartamenti.Droid.PlattformEffects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -11,6 +14,7 @@ using Xamarin.RangeSlider;
 
 [assembly: ResolutionGroupName("EffectsSlider")]
 [assembly: ExportEffect(typeof(RangeSliderEffect), "RangeSliderEffect")]
+[assembly: ExportEffect(typeof(LabelShadowEffect), "LabelShadowEffect")]
 namespace AppAppartamenti.Droid.PlattformEffects
 {
     public class RangeSliderEffect : PlatformEffect
@@ -44,6 +48,34 @@ namespace AppAppartamenti.Droid.PlattformEffects
             drawable.SetBounds(0, 0, widthPixels, heightPixels);
             drawable.Draw(canvas);
             return mutableBitmap;
+        }
+    }
+
+    public class LabelShadowEffect : PlatformEffect
+    {
+        protected override void OnAttached()
+        {
+            try
+            {
+                var control = Control as Android.Widget.TextView;
+                var effect = (ShadowEffect)Element.Effects.FirstOrDefault(e => e is ShadowEffect);
+                if (effect != null)
+                {
+                    float radius = effect.Radius;
+                    float distanceX = effect.DistanceX;
+                    float distanceY = effect.DistanceY;
+                    Android.Graphics.Color color = effect.Color.ToAndroid();
+                    control.SetShadowLayer(radius, distanceX, distanceY, color);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Cannot set property on attached control. Error: ", ex.Message);
+            }
+        }
+
+        protected override void OnDetached()
+        {
         }
     }
 }
