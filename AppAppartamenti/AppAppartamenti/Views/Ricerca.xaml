@@ -251,34 +251,34 @@
                                         </Grid.ColumnDefinitions>
 
                                         <CheckBox x:Name="chkGiardino" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="0" IsChecked="False"></CheckBox>
-                                            <Label  Grid.Column="0" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Backyard}"></Label>
+                                        <Label  Grid.Column="0" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Backyard}"></Label>
 
                                         <CheckBox x:Name="chkTerrazzo" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="1" IsChecked="False"></CheckBox>
-                                            <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Terrace}"></Label>
+                                        <Label Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Terrace}"></Label>
 
                                         <CheckBox x:Name="chkCantina" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="2" IsChecked="False"></CheckBox>
-                                            <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Cellar}"></Label>
+                                        <Label Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Cellar}"></Label>
 
                                         <CheckBox x:Name="chkPiscina" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="3" IsChecked="False"></CheckBox>
-                                            <Label Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Pool}"></Label>
+                                        <Label Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Pool}"></Label>
 
                                         <CheckBox x:Name="chkAscensore" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="4" IsChecked="False"></CheckBox>
-                                            <Label Grid.Column="0" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
+                                        <Label Grid.Column="0" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
 
-                                <CheckBox x:Name="chkCondizionatori" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="5" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="0" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
+                                        <CheckBox x:Name="chkCondizionatori" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="5" IsChecked="False"></CheckBox>
+                                        <Label Grid.Column="0" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
 
-                                <CheckBox x:Name="chkNoArchitecturalBarriers" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="6" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="0" Grid.Row="6" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoArchitecturalBarriers}"></Label>
+                                        <CheckBox x:Name="chkNoArchitecturalBarriers" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="6" IsChecked="False"></CheckBox>
+                                        <Label Grid.Column="0" Grid.Row="6" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoArchitecturalBarriers}"></Label>
 
-                                <CheckBox x:Name="chkStairlifts" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="7" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="0" Grid.Row="7" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Stairlifts}"></Label>
+                                        <CheckBox x:Name="chkStairlifts" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="7" IsChecked="False"></CheckBox>
+                                        <Label Grid.Column="0" Grid.Row="7" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Stairlifts}"></Label>
 
-                                <CheckBox x:Name="chkNoStepsInProperty" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="8" IsChecked="False"></CheckBox>
-                                    <Label Grid.Column="0" Grid.Row="8" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoStepsInProperty}"></Label>
-                    </Grid>
-                        </StackLayout>
-                 </ScrollView>
+                                        <CheckBox x:Name="chkNoStepsInProperty" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="8" IsChecked="False"></CheckBox>
+                                        <Label Grid.Column="0" Grid.Row="8" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoStepsInProperty}"></Label>
+                                    </Grid>
+                                </StackLayout>
+                        </ScrollView>
 
                                 <StackLayout VerticalOptions="EndAndExpand" >
                                     <Button Style="{x:StaticResource primaryButton}" Text="{translator:Translate Ricerca.Search}" Pressed="btnRicerca_Clicked"></Button>
