@@ -31,6 +31,13 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    DependencyService.Get<IStatusBarStyleManager>().SetColoredStatusBar("#2196F3");
+            //}
+
             try
             {
                 MessagingCenter.Subscribe<Ricerca, string>(this, "Ricerca", async (sender, arg) =>

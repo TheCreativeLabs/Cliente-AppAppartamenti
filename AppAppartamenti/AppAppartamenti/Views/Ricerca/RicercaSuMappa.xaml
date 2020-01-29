@@ -33,8 +33,8 @@
     <ContentPage.Content>
          <Grid x:Name="stackMap">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="7*"></RowDefinition>
-                            <RowDefinition Height="3*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
 
@@ -57,13 +57,13 @@
                             HeightRequest="40" CornerRadius="20" Clicked="BtnBack_Clicked"></Button>
 
 
-                            <CarouselView x:Name="cvLista" Grid.Row="1" Margin="20" VerticalOptions="CenterAndExpand"
+                            <CarouselView x:Name="cvLista" Grid.Row="1" Margin="20,10,20,10" HeightRequest="230" VerticalOptions="CenterAndExpand"
                                         PositionChanged="OnPositionChanged"
                                     HorizontalScrollBarVisibility="Always"
                                     ItemsSource="{Binding Items}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
-                                        <Grid Padding="5,5,5,20">
+                                        <Grid Padding="5">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="8*"></RowDefinition>
                                                     <RowDefinition Height="1*"></RowDefinition>

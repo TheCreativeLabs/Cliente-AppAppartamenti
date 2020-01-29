@@ -8,6 +8,7 @@ using System.Linq;
 using AppAppartamenti.Files;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using AppAppartamenti.Api;
 
 namespace AppAppartamenti.Views
 {
@@ -20,6 +21,9 @@ namespace AppAppartamenti.Views
         {
             InitializeComponent();
 
+            frameAcquisto.IsVisible = !isVendita;
+            frameVendita.IsVisible = isVendita;
+
             BindingContext = viewModel = new DocumentiViewModel(isVendita);
         }
 
@@ -27,8 +31,7 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
-            AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
-            byte[] ImmagineAssistente = await accountClient.GetAvatarCurrentUserAsync();
+            byte[] ImmagineAssistente = await ApiHelper.GetVirtualAssistentImage(); //await accountClient.GetAvatarCurrentUserAsync();
             imgAssistenteVirtuale.Source = ImageSource.FromStream(() => new MemoryStream(ImmagineAssistente));
 
             //viewModel.LoadItemsCommand.Execute(null);
@@ -37,8 +40,6 @@ namespace AppAppartamenti.Views
             cvDocumenti.ItemsSource = viewModel.Documents;
 
             //cvLink.ItemsSource = viewModel.Links;
-
-
         }
 
         public async void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)

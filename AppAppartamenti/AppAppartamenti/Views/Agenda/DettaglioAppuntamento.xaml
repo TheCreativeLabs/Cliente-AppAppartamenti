@@ -38,9 +38,9 @@
                         </Label>
                     </Frame>
 
-                    <Label x:Name="lbl_appuntamentoCon"  IsVisible="{Binding Confermato}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento con"></Label>
+                    <Label Margin="0,30,0,10" x:Name="lbl_appuntamentoCon"  IsVisible="{Binding Confermato}" Style="{x:StaticResource AdTitle}" Text="Hai un appuntamento con"></Label>
 
-                    <Label x:Name="lbl_appuntamentoAttesa"  IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}" Style="{x:StaticResource SectionTitle}" Text="Hai un appuntamento in attesa di approvazione con"></Label>
+                    <Label Margin="0,30,0,10" x:Name="lbl_appuntamentoAttesa"  IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}" Style="{x:StaticResource AdTitle}" Text="Hai un appuntamento in attesa di approvazione con"></Label>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
 
@@ -66,17 +66,17 @@
                     </StackLayout>
                 </StackLayout>
 
-                <Label Style="{x:StaticResource SectionTitle}" Text="Data"></Label>
+                    <Label Margin="0,30,0,10"  Style="{x:StaticResource AdTitle}" Text="Data"></Label>
                     <Label Text="{Binding Data, StringFormat='{0:dddd, dd MMMM}'}"></Label>
 
 
-                    <Label Style="{x:StaticResource SectionTitle}" Text="Dove"></Label>
+                    <Label Margin="0,30,0,10"  Style="{x:StaticResource AdTitle}" Text="Dove"></Label>
                     <Label Text="via boccherini 10, Bologna"></Label>
                     <StackLayout>
                         <maps:Map x:Name="map" HasScrollEnabled="False" HasZoomEnabled="False" IsVisible="True" HeightRequest="250"/>
                     </StackLayout>
 
-                    <Label Style="{x:StaticResource SectionTitle}" Text="Appartamento"></Label>
+                    <Label Margin="0,30,0,10"  Style="{x:StaticResource AdTitle}" Text="Appartamento"></Label>
 
                     <Frame  HasShadow="False" Padding="0" Margin="5" HeightRequest="80" CornerRadius="0" WidthRequest="80">
                             <StackLayout Orientation="Horizontal">

@@ -45,21 +45,26 @@
                         </syncfusion:SfCalendar.MonthViewSettings>
                     </syncfusion:SfCalendar>
 
-                    <Grid Padding="5" Margin="0,-40,0,0">
+                    <Label Style="{x:StaticResource SectionTitle}" Margin="0,-30,0,0"  Text="I tuoi appuntamenti"></Label>
+
+                    <Grid Padding="0" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*">
+                            <ColumnDefinition Width="auto">
                             </ColumnDefinition>
-                             <ColumnDefinition Width="11*">
+                             <ColumnDefinition Width="*">
                             </ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <BoxView Grid.Column="0" Margin="10,0,0,0" HeightRequest="10" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="10" BackgroundColor="{x:StaticResource DangerColor}" CornerRadius="5"></BoxView>
+                        <BoxView Grid.Column="0" Margin="0,0,0,0" HeightRequest="10" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="10" BackgroundColor="{x:StaticResource DangerColor}" CornerRadius="5"></BoxView>
+
+
                         <Label Text="In attesa di approvazione" HorizontalOptions="Start" VerticalTextAlignment="Center" Grid.Column="1"></Label>
                     </Grid>
 
                     <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
+
                         <Label HorizontalTextAlignment="Center" Text="Non sono presenti appuntamenti per il giorno selezionato"></Label>
                     </StackLayout>
 
@@ -72,13 +77,14 @@
                         <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                        <StackLayout Padding="5">
+                                       
+                                        <StackLayout>
                                             <appappartamenti:ShadowFrame Padding="10" HasShadow="True" BorderColor="{Binding Confermato, Converter={StaticResource ColorConverter}}">
                                                 <StackLayout Orientation="Horizontal">
                                                     <Label WidthRequest="70" Style="{x:StaticResource AdSubtitle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Data, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>
 
                                                     <StackLayout HorizontalOptions="StartAndExpand">
-                                                            <Label Text="{Binding NameAndSurnamePersonToMeet, StringFormat='Appuntamento con {0}'}"/>
+                                                            <Label Style="{x:StaticResource AdSubtitle}" Text="{Binding NameAndSurnamePersonToMeet, StringFormat='Appuntamento con {0}'}"/>
                                                             <Label Text="{Binding Indirizzo, StringFormat='Posizione: {0}'}"/>
                                                     </StackLayout>
                                                 </StackLayout>

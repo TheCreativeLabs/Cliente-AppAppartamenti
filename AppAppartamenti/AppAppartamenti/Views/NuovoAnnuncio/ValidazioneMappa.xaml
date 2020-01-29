@@ -13,7 +13,7 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true"
+             ios:Page.UseSafeArea="False"
              BackgroundColor="{x:StaticResource SfondoColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -22,15 +22,24 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Style="{x:StaticResource StackContainer}">
-            <Label Style="{x:StaticResource Title}" Text="La posizione è corretta?"></Label>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <maps:Map x:Name="map" Margin="0"/>
+            <Label Style="{x:StaticResource Title}" Grid.Row="0" HeightRequest="50" Margin="20,50,20,0" Text="La posizione è corretta?"></Label>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                <Button Text="No"  x:Name="btnCancel" Clicked="BtnBack_Clicked" HorizontalOptions="FillAndExpand" ></Button>
+            <appappartamenti:ShadowFrame CornerRadius="50"  Grid.Row="1" IsClippedToBounds="True" Padding="0">
+                <maps:Map x:Name="map"/>
+
+            </appappartamenti:ShadowFrame>
+
+
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Margin="20,0,20,40" VerticalOptions="End">
+                <Button Text="No" Style="{x:StaticResource SecondaryButton}"  x:Name="btnCancel" Clicked="BtnBack_Clicked" HorizontalOptions="FillAndExpand" ></Button>
                 <Button Text="Si" Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"   x:Name="btnDescrizioneProcedi" Clicked="BtnProcedi_Clicked" ></Button>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

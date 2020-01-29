@@ -17,6 +17,7 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using AppAppartamenti;
+using AppAppartamenti.Behaviors;
 using CustomRenderer;
 using Plugin.Badge.Droid;
 using Xamarin.Forms;
@@ -33,6 +34,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(DatePickerCtrl), typeof(DatePickerCtrlRenderer))]
 [assembly: ExportRenderer(typeof(ChatEntry), typeof(ChatEditorRenderer))]
 [assembly: ExportRenderer(typeof(TimeSlotLabel), typeof(TimeSlotLabelRenderer))]
+
 namespace CustomRenderer
 {
     class MyEntryRenderer : EntryRenderer
@@ -217,7 +219,6 @@ namespace CustomRenderer
         }
     }
 
-
     class TimeSlotLabelRenderer : LabelRenderer
     {
         public TimeSlotLabelRenderer(Context context) : base(context)
@@ -243,5 +244,8 @@ namespace CustomRenderer
             }
         }
     }
+
+    
+
 
 }

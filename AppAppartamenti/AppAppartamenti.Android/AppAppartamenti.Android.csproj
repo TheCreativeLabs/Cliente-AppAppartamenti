@@ -62,14 +62,14 @@
     <PackageReference Include="Plugin.Multilingual">
       <Version>1.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991477" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.4.0.991477</Version>
+      <Version>4.4.0.991537</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>4.4.0.991477</Version>
+      <Version>4.4.0.991537</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.InputKit">
       <Version>3.0.15</Version>
@@ -107,6 +107,9 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
       <Version>3.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.PancakeView">
+      <Version>1.3.7</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryCustomRenderer.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="RangeSliderRenderer.cs" />
     <Compile Include="Utility\CheckFilePermission.cs" />
     <Compile Include="Utility\SaveFile.cs" />
+    <Compile Include="EmptyClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Font Awesome 5 Brands-Regular-400.otf" />
@@ -163,6 +167,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
     <AndroidAsset Include="Assets\start_searching.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\Raleway-SemiBold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
   </ItemGroup>
@@ -314,6 +321,21 @@
       </SubType>
       <Generator>
       </Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\house.jpg">
+      <SubType></SubType>
+      <Generator></Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\couch.png">
+      <SubType></SubType>
+      <Generator></Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\couch2.png">
+      <SubType></SubType>
+      <Generator></Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
   </ItemGroup>

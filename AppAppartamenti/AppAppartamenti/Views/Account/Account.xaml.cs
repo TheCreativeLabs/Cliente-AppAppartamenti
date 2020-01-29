@@ -42,7 +42,7 @@ namespace AppAppartamenti.Views.Account
             items.Add(new MenuItem() { Id=2, DisplayName = "I miei annunci", Icona = "\uf08d", RedirectPage = new MieiAnnunci() });
             items.Add(new MenuItem() { Id=3, DisplayName = "Contattaci", Icona = "\uf658", RedirectPage = null });
             items.Add(new MenuItem() { Id=4, DisplayName = "Condividi l'app", Icona = "\uf14d", RedirectPage = null });
-            items.Add(new MenuItem() { Id=5, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });
+            //items.Add(new MenuItem() { Id=5, DisplayName = "Notifiche", Icona = "\uf0f3", RedirectPage = new Notification.NotificationSetting() });
             items.Add(new MenuItem() { Id=6, DisplayName = "Privacy", Icona = "\uf505", RedirectPage = null});
             items.Add(new MenuItem() { Id = 7, DisplayName = "Condizioni generali", Icona = "\uf56c", RedirectPage = null });
             items.Add(new MenuItem() { Id=8, DisplayName = "Logout", Icona = "\uf2f5", RedirectPage = null});

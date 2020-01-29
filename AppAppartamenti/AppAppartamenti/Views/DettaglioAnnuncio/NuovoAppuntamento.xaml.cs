@@ -1,17 +1,16 @@
 ﻿using AppAppartamenti.Api;
 using AppAppartamenti.ViewModels;
 using AppAppartamentiApiClient;
+using Syncfusion.SfCalendar.XForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
-using NavigationPage = Xamarin.Forms.NavigationPage;
 
 namespace AppAppartamenti.Views
 {
@@ -24,12 +23,16 @@ namespace AppAppartamenti.Views
 
         static Helpers.TranslateExtension translate = new Helpers.TranslateExtension();
 
+        public CalendarEventCollection CalendarInlineEvents { get; set; } = new CalendarEventCollection();
 
         public NuovoAppuntamento(Guid Id)
         {
             InitializeComponent();
 
             IdAnnuncio = Id;
+
+
+          
         }
 
         protected async override void OnAppearing()
@@ -37,14 +40,42 @@ namespace AppAppartamenti.Views
             base.OnAppearing();
             BindingContext = orariDisponibiliViewModel = new OrariDisponibiliViewModel(IdAnnuncio);
             ShowTimeSlot(calendar.SelectedDate);
+
+           ShowAvailableDate();
         }
+
+        /// <summary>
+        /// Visualizza le date disponibili
+        /// </summary>
+        async private void ShowAvailableDate()
+        {
+            var firstVisibleDate = calendar.VisibleDates[0];
+           
+            AgendaClient agendaClient = new AgendaClient(await ApiHelper.GetApiClient());
+            var listaDate = await agendaClient.GetGiorniDisponibiliByMeseAsync(IdAnnuncio, new DateTimeOffset(firstVisibleDate));
+
+            List<DateTime> black_Dates = new List<DateTime>();
+            var numDayOfYear = DateTime.DaysInMonth(firstVisibleDate.Year, firstVisibleDate.Month);
+
+            for (int i = 1; i < numDayOfYear + 1; i++)
+            {
+                var e = listaDate.Where(x => x.Day == i).ToList();
+
+                if (!e.Any())
+                {
+                    black_Dates.Add(new DateTime(firstVisibleDate.Year, firstVisibleDate.Month, i));
+                }
+            }
+            calendar.BlackoutDates = black_Dates;
+        }
+
 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
         }
 
-        public void OnDataCalendarSelected(object sender, SelectionChangedEventArgs e)
+        public void OnDataCalendarSelected(object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {
             Syncfusion.SfCalendar.XForms.SfCalendar cal = (Syncfusion.SfCalendar.XForms.SfCalendar)sender;
 
@@ -59,7 +90,6 @@ namespace AppAppartamenti.Views
                 DateTimeOffset giorno = new DateTimeOffset(date.Year, date.Month, date.Day, 0, 0, 0, new TimeSpan(0, 0, 0));
                 orariDisponibiliViewModel.Giorno = giorno;
                 orariDisponibiliViewModel.LoadItemsCommand.Execute(null);
-                containerOrariDisponibili.IsVisible = true;
             }
         }
 
@@ -114,5 +144,11 @@ namespace AppAppartamenti.Views
                 await Navigation.PushAsync(new ErrorPage());
             }
         }
+
+        async void calendar_MonthChanged(System.Object sender, Syncfusion.SfCalendar.XForms.MonthChangedEventArgs e)
+        {
+            ShowAvailableDate();
+        }
     }
+
 }

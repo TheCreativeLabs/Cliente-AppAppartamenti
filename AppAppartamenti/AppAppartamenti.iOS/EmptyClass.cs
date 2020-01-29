@@ -8,6 +8,10 @@ using Foundation;
 using System.ComponentModel;
 using AppAppartamenti.ContentViews;
 using Plugin.Badge.iOS;
+using AppAppartamenti.Behaviors;
+using System;
+using System.Linq;
+
 
 [assembly: ExportRenderer(typeof(SearchEntry), typeof(EntryCustomBorderRenderer))]
 [assembly: ExportRenderer(typeof(ShadowFrame), typeof(ShadowFrameRenderer))]
@@ -16,7 +20,6 @@ using Plugin.Badge.iOS;
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
 [assembly: ExportRenderer(typeof(ChatEntry), typeof(CustomEditorRenderer))]
 [assembly: ExportRenderer(typeof(TimeSlotLabel), typeof(TimeSlotLabelRenderer))]
-
 
 namespace AppAppartamenti.iOS
 {
@@ -180,4 +183,6 @@ namespace AppAppartamenti.iOS
         }
 
     }
+
+    
 }

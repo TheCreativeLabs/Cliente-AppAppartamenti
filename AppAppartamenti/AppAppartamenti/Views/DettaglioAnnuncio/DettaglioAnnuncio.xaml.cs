@@ -1,4 +1,5 @@
-﻿using AppAppartamenti.ViewModels;
+﻿using AppAppartamenti.Api;
+using AppAppartamenti.ViewModels;
 using AppAppartamenti.Views.Messaggi;
 using AppAppartamentiApiClient;
 using System;
@@ -20,7 +21,6 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DettaglioAnnuncio : ContentPage
     {
-
         public  class BindingModel
         {
             public AnnuncioDetailViewModel viewModel { get; set; }
@@ -50,7 +50,6 @@ namespace AppAppartamenti.Views
             bindingModel.viewModelImmagini = new AnnuncioimmaginiViewModel();
             bindingModel.viewModel = new AnnuncioDetailViewModel();
             bindingModel.viewModelImmagini.Items.Add(annuncio.ImmaginePrincipale);
-
         }
 
         private async void LoadUserInfo()
@@ -66,8 +65,10 @@ namespace AppAppartamenti.Views
                 {
                     imgUserImage.Source = ImageSource.FromStream(() => new MemoryStream(User.FotoProfilo));
                 }
-
                 stkUserInfo.IsVisible = true;
+
+                byte[] ImmagineAssistente = await ApiHelper.GetVirtualAssistentImage();// accountClient.GetAvatarCurrentUserAsync();
+                imgAssistente.Source = ImageSource.FromStream(() => new MemoryStream(ImmagineAssistente));
             });
         }
 
@@ -84,9 +85,9 @@ namespace AppAppartamenti.Views
 
             Task.Run(async () => { LoadUserInfo(); });
 
-            AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
-            byte[] ImmagineAssistente = await accountClient.GetAvatarCurrentUserAsync();
-            imgAssistente.Source = ImageSource.FromStream(() => new MemoryStream(ImmagineAssistente));
+
+
+
 
             if (!IsEditable)
             {
