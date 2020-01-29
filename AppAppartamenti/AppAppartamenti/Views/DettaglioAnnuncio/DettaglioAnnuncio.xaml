@@ -264,6 +264,24 @@
                                 </CarouselView>
                             </StackLayout>
 
+                            <Label Text="{translator:Translate DettaglioAnnuncio.Accessibility}" Style="{x:StaticResource SectionTitle}"></Label>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="9*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox x:Name="chkNoArchitecturalBarriers" Grid.Column="0" Grid.Row="0" IsChecked="{Binding viewModel.Item.SenzaBarriereArchitettoniche}" IsVisible="{Binding viewModel.Item.SenzaBarriereArchitettoniche}"></CheckBox>
+                                <Label Grid.Column="1" Grid.Row="0" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoArchitecturalBarriers}" IsVisible="{Binding viewModel.Item.SenzaBarriereArchitettoniche}"></Label>
+
+                                <CheckBox x:Name="chkStairlifts" Grid.Column="0" Grid.Row="1" IsChecked="{Binding viewModel.Item.Montascale}" IsVisible="{Binding viewModel.Item.Montascale}"></CheckBox>
+                                <Label Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Stairlifts}" IsVisible="{Binding viewModel.Item.Montascale}"></Label>
+
+                                <CheckBox x:Name="chkNoStepsInProperty" Grid.Column="0" Grid.Row="2" IsChecked="{Binding viewModel.Item.SenzaGradiniInternoProprieta}" IsVisible="{Binding viewModel.Item.SenzaGradiniInternoProprieta}"></CheckBox>
+                                <Label Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoStepsInProperty}" IsVisible="{Binding viewModel.Item.SenzaGradiniInternoProprieta}"></Label>
+
+                            </Grid>
                             <Label Text="Annunciatario" Style="{x:StaticResource SectionTitle}"></Label>
 
                             <StackLayout x:Name="stkUserInfo" IsVisible="False" Orientation="Horizontal">

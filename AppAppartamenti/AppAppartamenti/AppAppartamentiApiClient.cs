@@ -2797,15 +2797,15 @@ namespace AppAppartamentiApiClient
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, int? otherRooms, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, bool? airConditioners, OrderBy? orderBy)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, int? otherRooms, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, bool? airConditioners, bool? senzaBarriereArchitettoniche, bool? montascale, bool? senzaGradiniInternoProprieta, OrderBy? orderBy)
         {
-            return GetAnnunciAsync(pageNumber, pageSize, idTipologiaAnnuncio, idTipologiaProprieta, comuneCodice, priceMin, priceMax, houseSizeMin, houseSizeMax, bedrooms, bathrooms, kitchens, parkingSpaces, garages, otherRooms, backyard, terrace, cellar, pool, elevator, airConditioners, orderBy, System.Threading.CancellationToken.None);
+            return GetAnnunciAsync(pageNumber, pageSize, idTipologiaAnnuncio, idTipologiaProprieta, comuneCodice, priceMin, priceMax, houseSizeMin, houseSizeMax, bedrooms, bathrooms, kitchens, parkingSpaces, garages, otherRooms, backyard, terrace, cellar, pool, elevator, airConditioners, senzaBarriereArchitettoniche, montascale, senzaGradiniInternoProprieta, orderBy, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, int? otherRooms, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, bool? airConditioners, OrderBy? orderBy, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<AnnunciDtoOutput>> GetAnnunciAsync(int pageNumber, int pageSize, System.Guid? idTipologiaAnnuncio, System.Guid? idTipologiaProprieta, int? comuneCodice, int? priceMin, int? priceMax, int? houseSizeMin, int? houseSizeMax, int? bedrooms, int? bathrooms, int? kitchens, int? parkingSpaces, int? garages, int? otherRooms, bool? backyard, bool? terrace, bool? cellar, bool? pool, bool? elevator, bool? airConditioners, bool? senzaBarriereArchitettoniche, bool? montascale, bool? senzaGradiniInternoProprieta, OrderBy? orderBy, System.Threading.CancellationToken cancellationToken)
         {
             if (pageNumber == null)
                 throw new System.ArgumentNullException("pageNumber");
@@ -2892,6 +2892,18 @@ namespace AppAppartamentiApiClient
             if (airConditioners != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("airConditioners") + "=").Append(System.Uri.EscapeDataString(ConvertToString(airConditioners, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (senzaBarriereArchitettoniche != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("senzaBarriereArchitettoniche") + "=").Append(System.Uri.EscapeDataString(ConvertToString(senzaBarriereArchitettoniche, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (montascale != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("montascale") + "=").Append(System.Uri.EscapeDataString(ConvertToString(montascale, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (senzaGradiniInternoProprieta != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("senzaGradiniInternoProprieta") + "=").Append(System.Uri.EscapeDataString(ConvertToString(senzaGradiniInternoProprieta, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderBy != null)
             {
@@ -3857,6 +3869,78 @@ namespace AppAppartamentiApiClient
                         }
 
                         return default(ListaDocumentiDto);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<DocumentoDto> GetDownloadDocumentoPdfAsync(System.Guid id)
+        {
+            return GetDownloadDocumentoPdfAsync(id, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>OK</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<DocumentoDto> GetDownloadDocumentoPdfAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
+        {
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Annunci/DownloadDocumentoPdf?");
+            urlBuilder_.Append(System.Uri.EscapeDataString("Id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<DocumentoDto>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+
+                        return default(DocumentoDto);
                     }
                     finally
                     {
@@ -5623,6 +5707,15 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Cantina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Cantina { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("SenzaBarriereArchitettoniche", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? SenzaBarriereArchitettoniche { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Montascale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Montascale { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("SenzaGradiniInternoProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? SenzaGradiniInternoProprieta { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Descrizione", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(8000)]
         public string Descrizione { get; set; }
@@ -6281,6 +6374,15 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Cantina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Cantina { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("SenzaBarriereArchitettoniche", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? SenzaBarriereArchitettoniche { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Montascale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Montascale { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("SenzaGradiniInternoProprieta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? SenzaGradiniInternoProprieta { get; set; }
+
         [Newtonsoft.Json.JsonProperty("SpesaMensileCondominio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SpesaMensileCondominio { get; set; }
 
@@ -6544,6 +6646,15 @@ namespace AppAppartamentiApiClient
         [Newtonsoft.Json.JsonProperty("Cantina", Required = Newtonsoft.Json.Required.Always)]
         public bool Cantina { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("SenzaBarriereArchitettoniche", Required = Newtonsoft.Json.Required.Always)]
+        public bool SenzaBarriereArchitettoniche { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("Montascale", Required = Newtonsoft.Json.Required.Always)]
+        public bool Montascale { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("SenzaGradiniInternoProprieta", Required = Newtonsoft.Json.Required.Always)]
+        public bool SenzaGradiniInternoProprieta { get; set; }
+
         [Newtonsoft.Json.JsonProperty("Descrizione", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(8000)]
         public string Descrizione { get; set; }
@@ -6665,6 +6776,9 @@ namespace AppAppartamentiApiClient
 
         [Newtonsoft.Json.JsonProperty("DataCreazione", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? DataCreazione { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("DataUltimoMessaggio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? DataUltimoMessaggio { get; set; }
 
         [Newtonsoft.Json.JsonProperty("NumberMsgToRead", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? NumberMsgToRead { get; set; }

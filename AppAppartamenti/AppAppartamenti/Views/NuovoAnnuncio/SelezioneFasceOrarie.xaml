@@ -373,9 +373,15 @@
                           </ListView>
                     </StackLayout>
 
-                <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
                 </StackLayout>
         </ScrollView>
+
+
+            <StackLayout Style="{x:StaticResource StackContainer}" Grid.Row="0" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                <Button Text="{translator:Translate SelezioneDescrizione.CreaAnnuncio}" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}"  HorizontalOptions="FillAndExpand"></Button>
+
+                <controls:AssistenteVenditaButton/>
+            </StackLayout>
 
             <StackLayout x:Name="stkPicker_Dalle" IsVisible="false" Grid.Row="0" Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="White" >
 

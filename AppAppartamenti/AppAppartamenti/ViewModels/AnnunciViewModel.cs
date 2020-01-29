@@ -43,6 +43,9 @@ namespace AppAppartamenti.ViewModels
         public bool? Piscina { get; set; }
         public bool? Ascensore { get; set; }
         public bool? Condizionatori { get; set; }
+        public bool? SenzaBarriereArchitettoniche { get; set; }
+        public bool? Montascale { get; set; }
+        public bool? SenzaGradiniInternoProprieta { get; set; }
 
         public RicercaModel()
         {
@@ -295,7 +298,7 @@ namespace AppAppartamenti.ViewModels
                 pageSize = 500;
             }
 
-            listaAnnunci = await annunciClient.GetAnnunciAsync(CurrentPage, pageSize, FiltriRicerca.TipologiaAnnuncio, FiltriRicerca.TipologiaProprieta, FiltriRicerca.Comune.CodiceComune, FiltriRicerca.MinPrice, FiltriRicerca.MaxPrice,FiltriRicerca.MinSurface, FiltriRicerca.MaxSurface, FiltriRicerca.NumCamereLetto, FiltriRicerca.NumBagni, FiltriRicerca.NumCucine, FiltriRicerca.NumPostiAuto, FiltriRicerca.NumGarage,0,FiltriRicerca.Giardino, FiltriRicerca.Terrazzo, FiltriRicerca.Cantina, FiltriRicerca.Piscina, FiltriRicerca.Ascensore,FiltriRicerca.Condizionatori,null);
+            listaAnnunci = await annunciClient.GetAnnunciAsync(CurrentPage, pageSize, FiltriRicerca.TipologiaAnnuncio, FiltriRicerca.TipologiaProprieta, FiltriRicerca.Comune.CodiceComune, FiltriRicerca.MinPrice, FiltriRicerca.MaxPrice,FiltriRicerca.MinSurface, FiltriRicerca.MaxSurface, FiltriRicerca.NumCamereLetto, FiltriRicerca.NumBagni, FiltriRicerca.NumCucine, FiltriRicerca.NumPostiAuto, FiltriRicerca.NumGarage,0,FiltriRicerca.Giardino, FiltriRicerca.Terrazzo, FiltriRicerca.Cantina, FiltriRicerca.Piscina, FiltriRicerca.Ascensore,FiltriRicerca.Condizionatori, FiltriRicerca.SenzaBarriereArchitettoniche, FiltriRicerca.Montascale, FiltriRicerca.SenzaGradiniInternoProprieta, null);
 
             return listaAnnunci;
         }

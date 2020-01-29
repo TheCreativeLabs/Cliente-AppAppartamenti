@@ -32,50 +32,63 @@ namespace AppAppartamenti.Views
                     entSuperficie.Text = dtoToModify.Item.Superficie.ToString();
                 }
 
-                    stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroCameraLetto);
-                    lblCamereLettoCount.Text = dtoToModify.Item.NumeroCameraLetto.ToString();
+                stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroCameraLetto);
+                lblCamereLettoCount.Text = dtoToModify.Item.NumeroCameraLetto.ToString();
 
-                
-                    stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroAltreStanze);
-                    lblStanzeCount.Text = dtoToModify.Item.NumeroAltreStanze.ToString();
 
-                
-                    stpBagni.Value = Convert.ToDouble(dtoToModify.Item.NumeroBagni);
-                    lblBagniCount.Text = dtoToModify.Item.NumeroBagni.ToString();
+                stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroAltreStanze);
+                lblStanzeCount.Text = dtoToModify.Item.NumeroAltreStanze.ToString();
 
-                    stpCucine.Value = Convert.ToDouble(dtoToModify.Item.NumeroCucine);
-                    lblCucineCount.Text = dtoToModify.Item.NumeroCucine.ToString();
 
-                    stpGarage.Value = Convert.ToDouble(dtoToModify.Item.NumeroGarage);
-                    lblGarageCount.Text = dtoToModify.Item.NumeroGarage.ToString();
+                stpBagni.Value = Convert.ToDouble(dtoToModify.Item.NumeroBagni);
+                lblBagniCount.Text = dtoToModify.Item.NumeroBagni.ToString();
 
-                    stpParkingSpaces.Value = Convert.ToDouble(dtoToModify.Item.NumeroPostiAuto);
-                    lblParkingSpacesCount.Text = dtoToModify.Item.NumeroPostiAuto.ToString();
+                stpCucine.Value = Convert.ToDouble(dtoToModify.Item.NumeroCucine);
+                lblCucineCount.Text = dtoToModify.Item.NumeroCucine.ToString();
+
+                stpGarage.Value = Convert.ToDouble(dtoToModify.Item.NumeroGarage);
+                lblGarageCount.Text = dtoToModify.Item.NumeroGarage.ToString();
+
+                stpParkingSpaces.Value = Convert.ToDouble(dtoToModify.Item.NumeroPostiAuto);
+                lblParkingSpacesCount.Text = dtoToModify.Item.NumeroPostiAuto.ToString();
 
                 //if(annuncio.Cantina == null)
                 //{
-                    chkCantina.IsChecked = dtoToModify.Item.Cantina != null ? (bool)dtoToModify.Item.Cantina : false;
+                chkCantina.IsChecked = dtoToModify.Item.Cantina != null ? (bool)dtoToModify.Item.Cantina : false;
                 //}
                 //if (chkPiscina.IsChecked == null)
                 //{
-                    chkPiscina.IsChecked = dtoToModify.Item.Piscina != null ? (bool)dtoToModify.Item.Piscina : false;
+                chkPiscina.IsChecked = dtoToModify.Item.Piscina != null ? (bool)dtoToModify.Item.Piscina : false;
                 //}
                 //if (chkAscensore.IsChecked== null)
                 //{
-                    chkAscensore.IsChecked = dtoToModify.Item.Ascensore != null ? (bool)dtoToModify.Item.Ascensore : false;
+                chkAscensore.IsChecked = dtoToModify.Item.Ascensore != null ? (bool)dtoToModify.Item.Ascensore : false;
                 //}
                 //if (chkTerrazzo.IsChecked==null)
                 //{
-                    chkTerrazzo.IsChecked = dtoToModify.Item.Balcone != null ? (bool)dtoToModify.Item.Balcone : false;
+                chkTerrazzo.IsChecked = dtoToModify.Item.Balcone != null ? (bool)dtoToModify.Item.Balcone : false;
                 //}
                 //if (chkGiardino.IsChecked==null)
                 //{
-                    chkGiardino.IsChecked = dtoToModify.Item.Giardino != null ? (bool)dtoToModify.Item.Giardino : false;
+                chkGiardino.IsChecked = dtoToModify.Item.Giardino != null ? (bool)dtoToModify.Item.Giardino : false;
                 //}
                 //if (chkCondizionatori.IsChecked==null)
                 //{
-                    chkCondizionatori.IsChecked = dtoToModify.Item.Condizionatori != null ? (bool)dtoToModify.Item.Condizionatori : false;
+                chkCondizionatori.IsChecked = dtoToModify.Item.Condizionatori != null ? (bool)dtoToModify.Item.Condizionatori : false;
                 //}
+                //if (chkNoArchitecturalBarriers.IsChecked==null)
+                //{
+                chkNoArchitecturalBarriers.IsChecked = dtoToModify.Item.SenzaBarriereArchitettoniche != null ? (bool)dtoToModify.Item.SenzaBarriereArchitettoniche : false;
+                //}
+                //if (chkStairlifts.IsChecked==null)
+                //{
+                chkStairlifts.IsChecked = dtoToModify.Item.Montascale != null ? (bool)dtoToModify.Item.Montascale : false;
+                //}
+                //if (chkNoStepsInProperty.IsChecked==null)
+                //{
+                chkNoStepsInProperty.IsChecked = dtoToModify.Item.SenzaGradiniInternoProprieta != null ? (bool)dtoToModify.Item.SenzaGradiniInternoProprieta : false;
+                //}
+
             }
 
             annuncio = Annuncio;
@@ -121,6 +134,9 @@ namespace AppAppartamenti.Views
                 annuncio.Balcone = chkTerrazzo.IsChecked;
                 annuncio.Giardino = chkGiardino.IsChecked;
                 annuncio.Condizionatori = chkCondizionatori.IsChecked;
+                annuncio.SenzaBarriereArchitettoniche = chkNoArchitecturalBarriers.IsChecked;
+                annuncio.Montascale = chkStairlifts.IsChecked;
+                annuncio.SenzaGradiniInternoProprieta = chkNoStepsInProperty.IsChecked;
 
                 await Navigation.PushAsync(new SelezionePrezzo(annuncio, dtoToModify));
             }

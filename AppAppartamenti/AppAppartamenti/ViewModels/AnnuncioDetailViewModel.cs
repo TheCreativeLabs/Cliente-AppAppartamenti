@@ -56,6 +56,7 @@ namespace AppAppartamenti.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                throw new ApplicationException(ex.Message);
             }
 
             return annuncioDetailViewModel;

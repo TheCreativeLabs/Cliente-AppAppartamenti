@@ -83,6 +83,9 @@ namespace AppAppartamenti.Views
                 chkCondizionatori.IsChecked = FiltriRicerca.Condizionatori.Value;
                 chkGiardino.IsChecked = FiltriRicerca.Giardino.Value;
                 chkPiscina.IsChecked = FiltriRicerca.Piscina.Value;
+                chkNoArchitecturalBarriers.IsChecked = FiltriRicerca.SenzaBarriereArchitettoniche.Value;
+                chkStairlifts.IsChecked = FiltriRicerca.Montascale.Value;
+                chkNoStepsInProperty.IsChecked = FiltriRicerca.SenzaGradiniInternoProprieta.Value;
 
                 if (pckTipologiaVendita.SelectedIndex == 0)
                 {
@@ -156,7 +159,10 @@ namespace AppAppartamenti.Views
                     Giardino = chkGiardino.IsChecked,
                     Piscina = chkPiscina.IsChecked,
                     Condizionatori = chkCondizionatori.IsChecked,
-                    Terrazzo = chkTerrazzo.IsChecked
+                    Terrazzo = chkTerrazzo.IsChecked,
+                    SenzaBarriereArchitettoniche = chkNoArchitecturalBarriers.IsChecked,
+                    Montascale = chkStairlifts.IsChecked,
+                    SenzaGradiniInternoProprieta = chkNoStepsInProperty.IsChecked
                 };
 
 

@@ -26,11 +26,11 @@
                   </Button>
             </StackLayout>
 
-            <ScrollView>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <ScrollView VerticalScrollBarVisibility="Never"  Margin="0,0,0,70">
                     <StackLayout Grid.Row="0">
                         <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
                         <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneInfoGenerali.InformazioniGenerali}"></Label>
@@ -134,20 +134,30 @@
                                 <Label Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Elevator}"></Label>
 
                             <CheckBox x:Name="chkCondizionatori" Grid.Column="0" Grid.Row="5" IsChecked="False"></CheckBox>
-                                <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
+                            <Label Grid.Column="1" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
+
+                            <CheckBox x:Name="chkNoArchitecturalBarriers" Grid.Column="0" Grid.Row="6" IsChecked="False"></CheckBox>
+                                <Label Grid.Column="1" Grid.Row="6" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoArchitecturalBarriers}"></Label>
+
+                            <CheckBox x:Name="chkStairlifts" Grid.Column="0" Grid.Row="7" IsChecked="False"></CheckBox>
+                            <Label Grid.Column="1" Grid.Row="7" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Stairlifts}"></Label>
+
+                            <CheckBox x:Name="chkNoStepsInProperty" Grid.Column="0" Grid.Row="8" IsChecked="False"></CheckBox>
+                            <Label Grid.Column="1" Grid.Row="8" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoStepsInProperty}"></Label>
                         </Grid>
 
                     </StackLayout>
 
-                    <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
-                        <Button Text="{translator:Translate SelezioneInfoGenerali.Continue}"  x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"></Button>
+                </ScrollView>
 
-                        <controls:AssistenteVenditaButton/>
-                    </StackLayout>
-                </Grid>
+                <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                    <Button Text="{translator:Translate SelezioneInfoGenerali.Continue}"  x:Name="btnInfoGeneraliProcedi" Clicked="BtnInfoGeneraliProcedi_Clicked" Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"></Button>
 
-            </ScrollView>    
-            </StackLayout>
+                    <controls:AssistenteVenditaButton/>
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
             <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

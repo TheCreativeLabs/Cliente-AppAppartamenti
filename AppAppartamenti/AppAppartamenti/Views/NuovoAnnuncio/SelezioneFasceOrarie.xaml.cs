@@ -68,6 +68,10 @@ namespace AppAppartamenti.Views
         {
             if (dtoToModify != null)
             {
+                if (dtoToModify.Item.DisponibilitaOraria == null)
+                {
+                    dtoToModify.Item.DisponibilitaOraria = new DisponibilitaOrariaDto();
+                }
                 CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieLunedi, ref listTimeSlotLunedi, 1);
                 CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMartedi, ref listTimeSlotMartedi, 2);
                 CreateTimeSlotInput(dtoToModify.Item.DisponibilitaOraria.FasceOrarieMercoledi, ref listTimeSlotMercoledi, 3);
@@ -688,6 +692,7 @@ namespace AppAppartamenti.Views
             annuncio.DisponibilitaOraria.FasceOrarieDomenica = fasceOrarieDomenica;
 
             //TODO TRY CATCH
+            bool success = true;
             try { 
                 AnnunciClient annunciClient = new AnnunciClient(await ApiHelper.GetApiClient());
                 if (dtoToModify == null) // caso inserimento
@@ -699,11 +704,16 @@ namespace AppAppartamenti.Views
                     await annunciClient.UpdateAnnuncioAsync((Guid)dtoToModify.Item.Id, annuncio);
                 }
 
-                await Navigation.PushAsync(new ConfermaInserimento());
             }
             catch
             {
+                success = false;
                 await Navigation.PushAsync(new ErrorPage());
+            }
+
+            if (success)
+            {
+                await Navigation.PushAsync(new ConfermaInserimento());
             }
         }
     }

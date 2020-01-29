@@ -264,7 +264,16 @@
 
                                 <CheckBox x:Name="chkCondizionatori" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="5" IsChecked="False"></CheckBox>
                                     <Label Grid.Column="0" Grid.Row="5" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.AirConditioners}"></Label>
-                            </Grid>
+
+                                <CheckBox x:Name="chkNoArchitecturalBarriers" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="6" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="6" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoArchitecturalBarriers}"></Label>
+
+                                <CheckBox x:Name="chkStairlifts" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="7" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="7" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.Stairlifts}"></Label>
+
+                                <CheckBox x:Name="chkNoStepsInProperty" Color="{x:StaticResource DarkColor}" Grid.Column="1" Grid.Row="8" IsChecked="False"></CheckBox>
+                                    <Label Grid.Column="0" Grid.Row="8" VerticalTextAlignment="Center" Text="{translator:Translate SelezioneInfoGenerali.NoStepsInProperty}"></Label>
+                    </Grid>
                         </StackLayout>
                  </ScrollView>
 

@@ -75,56 +75,64 @@ namespace AppAppartamenti.Views
         {
             base.OnAppearing();
 
-            bindingModel.viewModelImmagini.IdAnnuncio = IdAnnuncio;
-            bindingModel.viewModelImmagini.LoadItemsCommand.Execute(null);
-            bindingModel.viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
-
-            BindingContext = bindingModel;
-            scrollView.IsVisible = true;
-
-            Task.Run(async () => { LoadUserInfo(); });
-
-            AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
-            byte[] ImmagineAssistente = await accountClient.GetAvatarCurrentUserAsync();
-            imgAssistente.Source = ImageSource.FromStream(() => new MemoryStream(ImmagineAssistente));
-
-            if (!IsEditable)
+            try
             {
-                btnAddPreferito.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
-                btnRemovePreferito.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
-                btnAddPreferitoNav.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
-                btnRemovePreferitoNav.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
-            }
 
-            if (!string.IsNullOrEmpty(bindingModel.viewModel.Item.CoordinateGeografiche))
-            {
-                var pos = bindingModel.viewModel.Item.CoordinateGeografiche.Split(';');
-                var lat = pos[0];
-                var lon = pos[1];
+                bindingModel.viewModelImmagini.IdAnnuncio = IdAnnuncio;
+                bindingModel.viewModelImmagini.LoadItemsCommand.Execute(null);
+                bindingModel.viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
 
-                Pin pin = new Pin
+                BindingContext = bindingModel;
+                scrollView.IsVisible = true;
+
+                Task.Run(async () => { LoadUserInfo(); });
+
+                AccountClient accountClient = new AccountClient(await Api.ApiHelper.GetApiClient());
+                byte[] ImmagineAssistente = await accountClient.GetAvatarCurrentUserAsync();
+                imgAssistente.Source = ImageSource.FromStream(() => new MemoryStream(ImmagineAssistente));
+
+                if (!IsEditable)
                 {
-                    Label = bindingModel.viewModel.Item.Indirizzo,
-                    Address = $"{bindingModel.viewModel.Item.Indirizzo},{bindingModel.viewModel.Item.NomeComune}",
-                    Type = PinType.Generic,
-                    Position = new Position(Double.Parse(lat), Double.Parse(lon))
-                };
+                    btnAddPreferito.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
+                    btnRemovePreferito.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
+                    btnAddPreferitoNav.IsVisible = !bindingModel.viewModel.Item.FlagPreferito.Value;
+                    btnRemovePreferitoNav.IsVisible = bindingModel.viewModel.Item.FlagPreferito.Value;
+                }
 
-                map.Pins.Add(pin);
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.1)));
-            }
-            else
+                if (!string.IsNullOrEmpty(bindingModel.viewModel.Item.CoordinateGeografiche))
+                {
+                    var pos = bindingModel.viewModel.Item.CoordinateGeografiche.Split(';');
+                    var lat = pos[0];
+                    var lon = pos[1];
+
+                    Pin pin = new Pin
+                    {
+                        Label = bindingModel.viewModel.Item.Indirizzo,
+                        Address = $"{bindingModel.viewModel.Item.Indirizzo},{bindingModel.viewModel.Item.NomeComune}",
+                        Type = PinType.Generic,
+                        Position = new Position(Double.Parse(lat), Double.Parse(lon))
+                    };
+
+                    map.Pins.Add(pin);
+                    map.MoveToRegion(MapSpan.FromCenterAndRadius(pin.Position, Distance.FromMiles(0.1)));
+                }
+                else
+                {
+                    map.IsVisible = false;
+                }
+
+                MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>
+                {
+                    CarouselImagesProgress.Text = "1/" + arg;
+                });
+
+                StackLoader.IsVisible = false;
+                StackPage.IsVisible = true;
+            } catch(Exception ex)
             {
-                map.IsVisible = false;
+                await Navigation.PushAsync(new ErrorPage());
+
             }
-
-            MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>
-            {
-                CarouselImagesProgress.Text = "1/" + arg;
-            });
-
-            StackLoader.IsVisible = false;
-            StackPage.IsVisible = true;
         }
 
         async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)

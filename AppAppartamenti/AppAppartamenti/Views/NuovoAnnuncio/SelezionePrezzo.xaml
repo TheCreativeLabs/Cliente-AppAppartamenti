@@ -21,51 +21,67 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
+        
         <StackLayout Style="{x:StaticResource StackContainer}">
 
-         <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal">
                   <controls:BackButton/>
 
                  <Button Style="{x:StaticResource NavCancelButton}"  Clicked="BtnCancel_Clicked">
                   </Button>
             </StackLayout>
 
-            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-            <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePrezzo.Costs}"></Label>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <ScrollView VerticalScrollBarVisibility="Never"  Margin="0,0,0,70">
+                    <StackLayout Grid.Row="0">
+
+
+                        <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
+                        <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePrezzo.Costs}"></Label>
                         <controls:StepMenu CurrentId="5"/>
 
-            <Label Text="{translator:Translate SelezionePrezzo.EnterPrice}"></Label>
+                        <Label Text="{translator:Translate SelezionePrezzo.EnterPrice}"></Label>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-            <Entry TextChanged="Entprezzo_TextChanged" Grid.Row="0" Grid.Column="0"  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
-                <Label Grid.Row="0" x:Name="lblPrezzo" Grid.Column="0" Text="€" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Entry TextChanged="Entprezzo_TextChanged" Grid.Row="0" Grid.Column="0"  x:Name="entPrezzo" Placeholder="{translator:Translate SelezionePrezzo.PriceExample}"  Keyboard="Numeric"></Entry>
+                            <Label Grid.Row="0" x:Name="lblPrezzo" Grid.Column="0" Text="€" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        </Grid>
+
+
+                        <Label VerticalTextAlignment="Center"  Margin="0,20,0,0" Text="{translator:Translate SelezionePrezzo.CondominiumFees}"></Label>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Entry Grid.Row="0" Grid.Column="0"  x:Name="entSpeseCondominiali" Placeholder="{translator:Translate SelezionePrezzo.FeesExample}" Keyboard="Numeric"></Entry>
+                            <Label Grid.Row="0" Grid.Column="0" Text="€/Mese" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        </Grid>
+
+                        <Label Text="{translator:Translate SelezionePrezzo.Heat}" Margin="0,20,0,0"></Label>
+                        <Picker x:Name="pckRiscaldamento"  ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
+
+
+                        <Label Text="{translator:Translate SelezionePrezzo.EnergyClass}" Margin="0,20,0,0"></Label>
+                        <Picker x:Name="pckClasseEnergetica"  ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
+
+                    </StackLayout>
+                </ScrollView>
+
+
+                <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                    <Button Text="{translator:Translate SelezionePrezzo.Continue}"  x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"></Button>
+
+                    <controls:AssistenteVenditaButton/>
+                </StackLayout>
             </Grid>
-
-
-            <Label VerticalTextAlignment="Center"  Margin="0,20,0,0" Text="{translator:Translate SelezionePrezzo.CondominiumFees}"></Label>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Entry Grid.Row="0" Grid.Column="0"  x:Name="entSpeseCondominiali" Placeholder="{translator:Translate SelezionePrezzo.FeesExample}" Keyboard="Numeric"></Entry>
-                <Label Grid.Row="0" Grid.Column="0" Text="€/Mese" VerticalTextAlignment="Center" Margin="0,0,10,0" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
-            </Grid>
-
-            <Label Text="{translator:Translate SelezionePrezzo.Heat}" Margin="0,20,0,0"></Label>
-            <Picker x:Name="pckRiscaldamento"  ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
-
-
-            <Label Text="{translator:Translate SelezionePrezzo.EnergyClass}" Margin="0,20,0,0"></Label>
-            <Picker x:Name="pckClasseEnergetica"  ItemDisplayBinding="{Binding Codice, Converter={StaticResource TranslateConverter}}"></Picker>
-
-            <Button Margin="0,20,0,0" Text="{translator:Translate SelezionePrezzo.Continue}"  x:Name="btnPrezzoProcedi" Clicked="BtnPrezzoProcedi_Clicked" Style="{x:StaticResource primaryButton}"></Button>
 
         </StackLayout>
-            </ScrollView>
     </ContentPage.Content>
 </ContentPage>

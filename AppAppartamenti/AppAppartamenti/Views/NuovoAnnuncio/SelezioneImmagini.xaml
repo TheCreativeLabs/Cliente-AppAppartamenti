@@ -23,53 +23,64 @@
 
     <ContentPage.Content>
 
-    <StackLayout Style="{x:StaticResource StackContainer}">
-            <CollectionView x:Name="cvImmagini">
-                <CollectionView.Header>
-                        <StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                  <controls:BackButton/>
+        <StackLayout Style="{x:StaticResource StackContainer}">
+            <StackLayout Orientation="Horizontal">
+                <controls:BackButton/>
+                <Button Style="{x:StaticResource NavCancelButton}"     Clicked="BtnCancel_Clicked">
+                </Button>
+            </StackLayout>
 
-                            </StackLayout>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <CollectionView x:Name="cvImmagini" Grid.Row="0" Margin="0,0,0,70">
+                    <CollectionView.Header>
+                        <StackLayout>
 
                             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
                             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneImmagini.AggiungiImmagini}"></Label>
-                                        <controls:StepMenu CurrentId="6"/>
+                            <controls:StepMenu CurrentId="6"/>
 
 
                             <Button Clicked="ActionImmagini" TextColor="{x:StaticResource PrimaryColor}" Text="{translator:Translate SelezioneImmagini.AggiungiImmagini}" Style="{x:StaticResource LinkButton}"></Button>
 
                         </StackLayout>
-                </CollectionView.Header>
+                    </CollectionView.Header>
 
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
                                     />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Margin="0,20,0,0">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="250"/>
-                                </Grid.RowDefinitions>
-                                
-                                <Image Grid.RowSpan="2"  Aspect="AspectFill" Source="{Binding Image, Converter={StaticResource BytesToImage}}"/>
-                                <AbsoluteLayout Grid.Row="0">
-                                    <Button Margin="5" CornerRadius="25" BorderColor="LightGray" HeightRequest="50" WidthRequest="50"  Text="&#xf2ed;" FontFamily="{x:StaticResource FA-Solid}"
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,20,0,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="250"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Image Grid.RowSpan="2"  Aspect="AspectFill" Source="{Binding Image, Converter={StaticResource BytesToImage}}"/>
+                                    <AbsoluteLayout Grid.Row="0">
+                                        <Button Margin="5" CornerRadius="25" BorderColor="LightGray" HeightRequest="50" WidthRequest="50"  Text="&#xf2ed;" FontFamily="{x:StaticResource FA-Solid}"
                                              Clicked="BtnDelete_Clicked" CommandParameter="{Binding Id}" Style="{x:StaticResource LinkButton}"  >
-                                </Button>
-                                </AbsoluteLayout>
-                            </Grid>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                                        </Button>
+                                    </AbsoluteLayout>
+                                </Grid>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
-                <CollectionView.Footer>
-                        <Button x:Name="btnImmaginiProcedi" VerticalOptions="EndAndExpand" Text="{translator:Translate SelezioneImmagini.Avanti}" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" ></Button>
-                </CollectionView.Footer>
-            </CollectionView>
+                </CollectionView>
 
+                <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Transparent" x:Name="stkPulsanti"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
+                    <Button x:Name="btnImmaginiProcedi" VerticalOptions="EndAndExpand" Text="{translator:Translate SelezioneImmagini.Avanti}" Clicked="BtnImmaginiProcedi_Clicked" Style="{x:StaticResource primaryButton}" HorizontalOptions="FillAndExpand"></Button>
+
+                    <controls:AssistenteVenditaButton/>
+                </StackLayout>
+            </Grid>
         </StackLayout>
 
     </ContentPage.Content>

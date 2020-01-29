@@ -801,4 +801,16 @@
   <data name="LINK" xml:space="preserve">
     <value>Link utili</value>
   </data>
+  <data name="DettaglioAnnuncio.Accessibility" xml:space="preserve">
+    <value>Accessibilità</value>
+  </data>
+  <data name="SelezioneInfoGenerali.NoArchitecturalBarriers" xml:space="preserve">
+    <value>Accesso senza barriere architettoniche</value>
+  </data>
+  <data name="SelezioneInfoGenerali.NoStepsInProperty" xml:space="preserve">
+    <value>Nessun gradino all'interno della proprietà</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Stairlifts" xml:space="preserve">
+    <value>Montascale</value>
+  </data>
 </root>

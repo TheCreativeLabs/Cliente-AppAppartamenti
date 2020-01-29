@@ -77,7 +77,10 @@ namespace AppAppartamenti.Views
             }
             else
             {
-                pckClasseEnergetica.SelectedIndex = 0;
+                if(dtoToModify == null || dtoToModify.Item == null)
+                {
+                    pckClasseEnergetica.SelectedIndex = 0;
+                }
 
             }
             if (pckRiscaldamento.SelectedItem  == null && dtoToModify != null && dtoToModify.Item.TipologiaRiscaldamento!=null)
@@ -85,7 +88,10 @@ namespace AppAppartamenti.Views
                 pckRiscaldamento.SelectedItem = listTipologiaRiscaldamento.Where(x => x.Descrizione == dtoToModify.Item.TipologiaRiscaldamento).FirstOrDefault();
             }
             else {
-                pckRiscaldamento.SelectedIndex = 0;
+                if (dtoToModify == null || dtoToModify.Item == null)
+                {
+                    pckRiscaldamento.SelectedIndex = 0;
+                }
             }
         }
 

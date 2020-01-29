@@ -795,4 +795,16 @@
   <data name="LINK" xml:space="preserve">
     <value>Useful links</value>
   </data>
+  <data name="DettaglioAnnuncio.Accessibility" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="SelezioneInfoGenerali.NoArchitecturalBarriers" xml:space="preserve">
+    <value>Barrier-free access</value>
+  </data>
+  <data name="SelezioneInfoGenerali.NoStepsInProperty" xml:space="preserve">
+    <value>No steps in the property</value>
+  </data>
+  <data name="SelezioneInfoGenerali.Stairlifts" xml:space="preserve">
+    <value>Stairlifts</value>
+  </data>
 </root>
