@@ -6,7 +6,7 @@
              Title="Messaggi"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{x:StaticResource SfondoColor}"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
              ios:Page.UseSafeArea="true">
 
     <ContentPage.Resources>
@@ -31,10 +31,16 @@
                 <Label HorizontalTextAlignment="Center" Text="Non sono presenti messaggi da leggere"></Label>
             </StackLayout>
 
+            <forms:AnimationView HorizontalOptions="Center"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
+
             <ListView Grid.Row="1" x:Name="LvChat"
                         ItemsSource="{Binding Items}"
                         HasUnevenRows="true"
-                        IsRefreshing="{Binding IsBusy}"
                         RefreshCommand="{Binding LoadItemsCommand}"
                         ios:ListView.RowAnimationsEnabled="false"
                         IsPullToRefreshEnabled="False"

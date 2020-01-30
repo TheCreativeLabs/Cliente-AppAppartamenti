@@ -106,6 +106,13 @@
 
                       <Label Margin="20,30,20,30" Style="{x:StaticResource SectionTitle}" Text="Aggiunti di recente"></Label>
 
+
+                        <forms:AnimationView HorizontalOptions="Center"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
                  </StackLayout>
 
                   <CollectionView x:Name="cvRecenti" HeightRequest="320"
@@ -188,9 +195,23 @@
                 
                 <Label Style="{x:StaticResource SectionTitle}" Margin="20,20,20,30"  Text="Pubblica un annuncio"></Label>
 
-               
-                <Button Margin="20,0,20,20" Text="Pubblica un annuncio" Clicked="btnNuovoAnnuncio_Clicked" Style="{x:StaticResource primaryButton}"></Button>
-            
+                <Frame Margin="20,0,20,20" BorderColor="{x:StaticResource DarkColor}" HasShadow="False" HorizontalOptions="Center"  CornerRadius="5" Padding="10">
+                    <StackLayout Orientation="Horizontal">
+                        <forms:AnimationView HorizontalOptions="CenterAndExpand"
+	                        x:Name="animationLoader2" 
+	                        Animation="deal.json" 
+	                        Loop="True" HeightRequest="50" WidthRequest="50"
+	                        AutoPlay="true" VerticalOptions="CenterAndExpand" />
+
+                        <StackLayout VerticalOptions="Center">
+                            <Label  Style="{x:StaticResource AdTitle}" Text="Vendi la tua casa" VerticalTextAlignment="Center"></Label>
+                            <Label Text="Pubblica un nuovo annuncio e vendi la tua casa in un attimo" VerticalTextAlignment="Center"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                        <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnNuovoAnnuncio_Clicked"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </StackLayout>
         </ScrollView>
 

@@ -13,7 +13,7 @@
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
-             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms" 
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}">
 
@@ -68,7 +68,12 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout x:Name="StackLoader"  VerticalOptions="CenterAndExpand">
-                <ActivityIndicator IsVisible="true" IsRunning="True"></ActivityIndicator>
+                <forms:AnimationView HorizontalOptions="Center" VerticalOptions="Start"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170"  />
             </StackLayout>
             <Grid VerticalOptions="FillAndExpand" x:Name="StackPage" IsVisible="false" >
                 <Grid.RowDefinitions>

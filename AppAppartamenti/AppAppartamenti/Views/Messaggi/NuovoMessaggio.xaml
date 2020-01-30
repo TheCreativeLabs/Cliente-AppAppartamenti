@@ -8,7 +8,7 @@
              xmlns:conv="clr-namespace:AppAppartamenti.Converter"
              android:Application.WindowSoftInputModeAdjust="Resize"
              xmlns:b="clr-namespace:AppAppartamenti.Behaviors"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              
              >
 
@@ -36,7 +36,6 @@
                 <ListView x:Name="lvMessages"
                          ItemsSource="{Binding Items}"
                           VerticalScrollBarVisibility="Never"
-                          IsRefreshing="{Binding IsBusy}"
                           SeparatorVisibility="None"
                           HasUnevenRows="True"
                           SelectionMode="None">
@@ -65,6 +64,13 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                   <forms:AnimationView HorizontalOptions="Center" Grid.Row="0" VerticalOptions="Start"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
 
                 <BoxView Grid.Row="1" Color="LightGray"></BoxView>
 

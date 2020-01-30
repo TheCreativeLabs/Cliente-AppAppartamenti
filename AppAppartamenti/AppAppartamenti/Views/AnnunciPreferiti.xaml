@@ -32,7 +32,14 @@
             </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Padding="20,20,0,0" Style="{x:StaticResource Title}" Text="{translator:Translate MainPage.Saved}"></Label>
-           
+
+                <forms:AnimationView HorizontalOptions="Center"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
+                
                 <ListView Grid.Row="1" x:Name="AnnunciiListView"
                     ItemsSource="{Binding Items}"
                     HasUnevenRows="true"
@@ -41,7 +48,6 @@
                     CachingStrategy="RecycleElement"
                     ItemSelected="OnItemSelected"
                     VerticalScrollBarVisibility="Never"
-                    IsRefreshing="{Binding IsBusy}"
                     SeparatorVisibility="None">
 
             <ListView.ItemTemplate>

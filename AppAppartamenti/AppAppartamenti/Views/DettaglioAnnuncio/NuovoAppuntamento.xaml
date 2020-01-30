@@ -13,7 +13,7 @@
              ios:Page.UseSafeArea="true"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
-             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" xmlns:local="clr-namespace:AppAppartamenti.Views"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews" xmlns:local="clr-namespace:AppAppartamenti.Views" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              BackgroundColor="{x:StaticResource SfondoColor}"
              >
 
@@ -33,20 +33,8 @@
         </syncTheme:SyncfusionThemeDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-
-                <!--<FlexLayout x:Name="containerOrariDisponibili" Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">-->
-                    <CollectionView  x:Name="OrariCollectionView"
-                        ItemsSource="{Binding Orari}"
-                        SelectionMode="Single" Margin="20"
-                        >
-                        <!--SelectionChanged="OnPeopleSelectionChanged"-->
-
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.Header>
-                            <StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20" >
                 <controls:BackButton HorizontalOptions="StartAndExpand"/>
 
                 <Label Style="{x:StaticResource Title}" Text="{translator:Translate NuovoAppuntamento.Title}"></Label>
@@ -65,13 +53,26 @@
                         </syncfusion:SfCalendar.MonthViewSettings>
                 </syncfusion:SfCalendar>
 
-                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
+                                <forms:AnimationView HorizontalOptions="Center" VerticalOptions="Start"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" IsVisible="{Binding IsBusy}" WidthRequest="170"  />
 
-                <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
-                    <Label HorizontalTextAlignment="Center" Text="Non sono disponibili appuntamenti per il giorno selezionato"></Label>
-                </StackLayout>
+                                <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
+                                    <Label HorizontalTextAlignment="Center" Text="Non sono disponibili appuntamenti per il giorno selezionato"></Label>
                                 </StackLayout>
-                        </CollectionView.Header>
+
+                    <CollectionView  x:Name="OrariCollectionView" 
+                        ItemsSource="{Binding Orari}"
+                        SelectionMode="Single" 
+                        >
+                        <!--SelectionChanged="OnPeopleSelectionChanged"-->
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -90,35 +91,11 @@
                                         </Label>
                                     </appappartamenti:ShadowFrame>
                                 </StackLayout>
-                                <!--<Grid Padding="15">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="3*" />
-                                        <RowDefinition Height="2*" />
-                                    </Grid.RowDefinitions>
-                                    <Frame Grid.Row="0"
-                                CornerRadius="100"
-                               HeightRequest="80"
-                               WidthRequest="80"
-                               HorizontalOptions="Center"
-                               Padding="0"
-                               IsClippedToBounds="True"
-                               HasShadow="True" BorderColor="#0bbfb9"
-                               >
-                                        <Image x:Name="imgContatto"  HorizontalOptions="Center" Aspect="AspectFill" Source="{Binding FotoProfilo, Converter={StaticResource ByteArrayToImage}}"
-                               VerticalOptions="Center"></Image>
-                                    </Frame>
-                                    <Label Grid.Row="1" HorizontalOptions="Center">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="{Binding Nome}" FontAttributes="Bold"/>
-                                                <Span Text=" "/>
-                                                <Span Text="{Binding Cognome}" FontAttributes="Bold" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </Grid>-->
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+
+                                </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
