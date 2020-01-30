@@ -30,9 +30,8 @@
 
             <Label Style="{x:StaticResource Title}" Grid.Row="0" HeightRequest="50" Margin="20,50,20,0" Text="La posizione è corretta?"></Label>
 
-            <appappartamenti:ShadowFrame CornerRadius="50"  Grid.Row="1" IsClippedToBounds="True" Padding="0">
+            <appappartamenti:ShadowFrame Grid.Row="1" IsClippedToBounds="True" Padding="0">
                 <maps:Map x:Name="map"/>
-
             </appappartamenti:ShadowFrame>
 
 

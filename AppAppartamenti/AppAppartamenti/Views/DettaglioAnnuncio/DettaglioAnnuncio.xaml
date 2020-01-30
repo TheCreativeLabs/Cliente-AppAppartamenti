@@ -269,7 +269,15 @@
                                 </CarouselView>
                             </StackLayout>
 
-                            <Label Text="{translator:Translate DettaglioAnnuncio.Accessibility}" Style="{x:StaticResource SectionTitle}"></Label>
+                            <Label Style="{x:StaticResource SectionTitle}">
+                                <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="&#xf193;" FontSize="20" FontFamily="{x:StaticResource FA-Solid}"/>
+                                            <Span Text=" "></Span>
+                                            <Span Text="{translator:Translate DettaglioAnnuncio.Accessibility}"/>
+                                        </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -298,7 +306,7 @@
                                 <Label LineBreakMode="WordWrap" VerticalTextAlignment="Center">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span x:Name="lblUserName"/>
+                                            <Span x:Name="lblUserName" />
                                             <Span Text=" "></Span>
                                             <Span x:Name="lblUserSurname"/>
                                         </FormattedString>

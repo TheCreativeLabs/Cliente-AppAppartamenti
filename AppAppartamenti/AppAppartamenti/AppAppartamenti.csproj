@@ -17,6 +17,7 @@
     <Compile Remove="ContentViews\BackButton %28copy%29.xaml.cs" />
     <Compile Remove="ViewModels\TipologiaAnnuncioViewModel %28copy%29.cs" />
     <Compile Remove="Converter\MessageTextColorConverter %28copy%29.cs" />
+    <Compile Remove="ViewModels\AnnunciViewModel %28copy%29.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -91,6 +92,7 @@
     <Folder Include="Views\Messaggi\" />
     <Folder Include="Views\Notification\" />
     <Folder Include="Views\Ricerca\" />
+    <Folder Include="Views\AssistenteVirtualeView\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">
@@ -107,5 +109,6 @@
     <None Remove="Utility\ISaveFile.cs" />
     <None Remove="ViewModels\DocumentiViewModel.cs" />
     <None Include="ViewModels\MotiviSegnalazioneViewModel.cs" />
+    <None Include="ViewModels\AssistenteVirtualeListViewModel.cs" />
   </ItemGroup>
 </Project>
