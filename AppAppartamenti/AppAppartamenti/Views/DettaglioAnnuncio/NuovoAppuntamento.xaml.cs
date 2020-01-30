@@ -38,6 +38,7 @@ namespace AppAppartamenti.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
             BindingContext = orariDisponibiliViewModel = new OrariDisponibiliViewModel(IdAnnuncio);
             ShowTimeSlot(calendar.SelectedDate);
 
@@ -49,24 +50,32 @@ namespace AppAppartamenti.Views
         /// </summary>
         async private void ShowAvailableDate()
         {
-            var firstVisibleDate = calendar.VisibleDates[0];
-           
-            AgendaClient agendaClient = new AgendaClient(await ApiHelper.GetApiClient());
-            var listaDate = await agendaClient.GetGiorniDisponibiliByMeseAsync(IdAnnuncio, new DateTimeOffset(firstVisibleDate));
-
-            List<DateTime> black_Dates = new List<DateTime>();
-            var numDayOfYear = DateTime.DaysInMonth(firstVisibleDate.Year, firstVisibleDate.Month);
-
-            for (int i = 1; i < numDayOfYear + 1; i++)
+            try
             {
-                var e = listaDate.Where(x => x.Day == i).ToList();
+                var firstVisibleDate = calendar.VisibleDates[0];
+           
+                AgendaClient agendaClient = new AgendaClient(await ApiHelper.GetApiClient());
+                var listaDate = await agendaClient.GetGiorniDisponibiliByMeseAsync(IdAnnuncio, new DateTimeOffset(firstVisibleDate));
 
-                if (!e.Any())
+                List<DateTime> black_Dates = new List<DateTime>();
+                var numDayOfYear = DateTime.DaysInMonth(firstVisibleDate.Year, firstVisibleDate.Month);
+
+                for (int i = 1; i < numDayOfYear + 1; i++)
                 {
-                    black_Dates.Add(new DateTime(firstVisibleDate.Year, firstVisibleDate.Month, i));
+                    var e = listaDate.Where(x => x.Day == i).ToList();
+
+                    if (!e.Any())
+                    {
+                        black_Dates.Add(new DateTime(firstVisibleDate.Year, firstVisibleDate.Month, i));
+                    }
                 }
+                calendar.BlackoutDates = black_Dates;
+
+                }
+            catch (Exception ex)
+            {
+
             }
-            calendar.BlackoutDates = black_Dates;
         }
 
 

@@ -3,7 +3,7 @@
              xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              x:Class="AppAppartamenti.Views.DettaglioAppuntamento"
              NavigationPage.HasNavigationBar="True"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:appappartamenti="clr-namespace:AppAppartamenti" xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
              Title="Riepilogo appuntamento">
@@ -20,7 +20,12 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout x:Name="StackLoader" VerticalOptions="CenterAndExpand" IsVisible="True">
-                <ActivityIndicator IsRunning="True"></ActivityIndicator>
+                <forms:AnimationView HorizontalOptions="Center" Grid.Row="0" VerticalOptions="Start"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" />
             </StackLayout>
 
             <ScrollView>

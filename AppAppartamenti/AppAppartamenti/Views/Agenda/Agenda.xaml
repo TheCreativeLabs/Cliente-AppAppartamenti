@@ -16,7 +16,7 @@
              xmlns:syncfusion1="clr-namespace:Syncfusion.SfPicker.XForms;assembly=Syncfusion.SfPicker.XForms" 
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
-              xmlns:conv="clr-namespace:AppAppartamenti.Converter">
+              xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
 
             <ContentPage.Resources>
                 <syncTheme:SyncfusionThemeDictionary x:Key="Theme">
@@ -68,11 +68,17 @@
                         <Label HorizontalTextAlignment="Center" Text="Non sono presenti appuntamenti per il giorno selezionato"></Label>
                     </StackLayout>
 
+                    <forms:AnimationView HorizontalOptions="Center"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
+
                     <ListView x:Name="lvAppuntamenti" SelectionMode="Single" SeparatorVisibility="None"
                               ItemSelected="OnItemSelected"
                               ItemsSource="{Binding Items}"
                               RefreshCommand="{Binding LoadItemsCommand}"
-                               IsRefreshing="{Binding IsBusy}"
                               HasUnevenRows="True">
                         <ListView.ItemTemplate>
                                 <DataTemplate>

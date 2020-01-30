@@ -5,7 +5,7 @@
                 xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
              BackgroundColor="{x:StaticResource SfondoColor}"
-             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -14,18 +14,12 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
+        <ScrollView>
                 <!--<Label Style="{x:StaticResource Subtitle}" HorizontalTextAlignment="Start" Text="Documenti"></Label>-->
                 <!--Lista documenti-->
+        <StackLayout>
 
-                <CollectionView x:Name="cvDocumenti"
-                                IsGrouped="true"
-                                SelectionMode="Single"
-                                SelectionChanged="OnCollectionViewSelectionChanged"
-                                >
-
-                    <CollectionView.Header>
-        <StackLayout Style="{x:StaticResource StackContainer}">
-
+            <StackLayout Margin="20">
 
 
                           <StackLayout Orientation="Horizontal">
@@ -64,11 +58,19 @@
                 </yummy:PancakeView>
            </StackLayout>
 
-            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True"></ActivityIndicator>
+               <forms:AnimationView HorizontalOptions="Center" VerticalOptions="Start"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" IsVisible="{Binding IsBusy}" WidthRequest="170"  />
+          </StackLayout>
+                <CollectionView x:Name="cvDocumenti"
+                                IsGrouped="true"
+                                SelectionMode="Single"
+                                SelectionChanged="OnCollectionViewSelectionChanged"
+                                >
 
-           </StackLayout>
-
-                    </CollectionView.Header>
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
@@ -109,5 +111,9 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+             </StackLayout>
+
+            </ScrollView>
     </ContentPage.Content>
 </ContentPage>
