@@ -9,12 +9,17 @@
              NavigationPage.HasNavigationBar="False"
              xmlns:appappartamenti="clr-namespace:AppAppartamenti"
              Title="Account"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              BackgroundColor="{x:StaticResource SfondoColor}"
              >
     <ContentPage.Content>
-        <StackLayout>
-            <appappartamenti:ShadowFrame  CornerRadius="0" HeightRequest="100" HasShadow="True" Padding="15" VerticalOptions="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <appappartamenti:ShadowFrame Grid.Row="0" CornerRadius="0" HeightRequest="100" HasShadow="True" Padding="15" VerticalOptions="Center">
                 <StackLayout Orientation="Horizontal" Margin="0,20,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
                     <Frame CornerRadius="35"
                            Margin="0,5,0,0"
@@ -39,7 +44,7 @@
                 </StackLayout>
             </appappartamenti:ShadowFrame>
 
-            <ListView  x:Name="listView" Margin="0,-3,0,0" BackgroundColor="{x:StaticResource SfondoColor}" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
+            <ListView  x:Name="listView" Grid.Row="1" Margin="0,-3,0,0" BackgroundColor="{x:StaticResource SfondoColor}" SelectionMode="None" ItemTapped="OnItemTapped" RowHeight="60" ios:ListView.SeparatorStyle="FullWidth" SeparatorColor="LightGray">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -61,6 +66,16 @@
                     <Label />
                 </ListView.Footer>
         </ListView>
-        </StackLayout>
+
+            <StackLayout x:Name="stkLoader" IsVisible="false" Opacity="0.8" BackgroundColor="{x:StaticResource LightColor}" Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                
+                    <forms:AnimationView HorizontalOptions="Center"
+	                    x:Name="animationLoader" 
+	                    Animation="loadericon.json" 
+	                    Loop="true" 
+	                    AutoPlay="true"
+                        HeightRequest="170" WidthRequest="170"  />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

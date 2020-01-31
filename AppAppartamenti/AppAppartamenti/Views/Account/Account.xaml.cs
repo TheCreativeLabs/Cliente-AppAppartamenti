@@ -157,6 +157,8 @@ namespace AppAppartamenti.Views.Account
         {
             try
             {
+                stkLoader.IsVisible = true;
+
                 DependencyService.Get<IClearCookies>().ClearAllCookies();
 
                 //Eseguo il logout
@@ -166,6 +168,8 @@ namespace AppAppartamenti.Views.Account
                 //Rimuovo il token e navigo alla home
                 Api.ApiHelper.RemoveSettings();
                 Application.Current.MainPage = new NavigationPage(new Login.Login());
+
+                stkLoader.IsVisible = false;
             }
             catch (Exception ex)
             {

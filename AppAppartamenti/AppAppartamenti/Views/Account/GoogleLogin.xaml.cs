@@ -24,6 +24,13 @@ namespace AppAppartamenti.Views.Account
         {
             InitializeComponent();
 
+           
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
             ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/GoogleLoading", true).Result.First();
@@ -41,8 +48,6 @@ namespace AppAppartamenti.Views.Account
 
             Content = webView;
         }
-
-
 
         private async void WebViewOnNavigated(object sender, WebNavigatedEventArgs e)
         {

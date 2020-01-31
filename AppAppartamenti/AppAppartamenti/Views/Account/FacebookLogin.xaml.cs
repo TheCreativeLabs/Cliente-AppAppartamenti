@@ -23,11 +23,16 @@ namespace AppAppartamenti.Views.Account
         public FacebookLogin()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             //ottengo l'url da chiamare per l'autenticazione su Facebook
             AccountClient accountClient = new AccountClient(new System.Net.Http.HttpClient());
             ExternalLoginViewModel externalLoginViewModel = accountClient.GetExternalLoginsAsync("/FacebookLoading", true).Result.ToList()[1];
-            string apiRequest = $"{AppSetting.ApiEndpoint.Replace(".com/",".com")}{externalLoginViewModel.Url}";
+            string apiRequest = $"{AppSetting.ApiEndpoint.Replace(".com/", ".com")}{externalLoginViewModel.Url}";
             apiRequest = apiRequest.Replace("www.", "");
             ApiRequest = apiRequest;
             //mostro l'url nella pagina

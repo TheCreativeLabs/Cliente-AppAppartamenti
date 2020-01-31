@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
 using System.Linq;
+using System.Globalization;
 
 namespace AppAppartamenti.ViewModels
 {
@@ -121,9 +122,9 @@ namespace AppAppartamenti.ViewModels
                         {
                             var pos = annuncio.CoordinateGeografiche.Split(';');
                             double lat;
-                            double.TryParse(pos[0], out lat);
+                            double.TryParse(pos[0], NumberStyles.Any, CultureInfo.InvariantCulture, out lat);
                             double lon;
-                            double.TryParse(pos[1], out lon);
+                            double.TryParse(pos[1],NumberStyles.Any, CultureInfo.InvariantCulture, out lon);
 
                             PositionItems.Add(
                                 new CustomPin
@@ -175,10 +176,8 @@ namespace AppAppartamenti.ViewModels
                         if (!string.IsNullOrEmpty(annuncio.CoordinateGeografiche))
                         {
                             var pos = annuncio.CoordinateGeografiche.Split(';');
-                            double lat;
-                            double.TryParse(pos[0], out lat);
-                            double lon;
-                            double.TryParse(pos[1], out lon);
+                            double lat = double.Parse(pos[0],CultureInfo.InvariantCulture);
+                            double lon=double.Parse(pos[1],CultureInfo.InvariantCulture);
 
                             PositionItems.Add(new CustomPin
                             {
@@ -232,10 +231,8 @@ namespace AppAppartamenti.ViewModels
 
                     if (!string.IsNullOrEmpty(annuncio.CoordinateGeografiche)) { 
                         var pos = annuncio.CoordinateGeografiche.Split(';');
-                        double lat;
-                        double.TryParse(pos[0],out lat);
-                        double lon;
-                        double.TryParse(pos[1],out lon);
+                        double lat = double.Parse(pos[0], CultureInfo.InvariantCulture);
+                        double lon = double.Parse(pos[1], CultureInfo.InvariantCulture);
 
                         PositionItems.Add(new CustomPin
                         {
