@@ -122,6 +122,23 @@ namespace AppAppartamenti.Views
                     map.IsVisible = false;
                 }
 
+                if ((bool) bindingModel.viewModel.Item.SenzaBarriereArchitettoniche || (bool) bindingModel.viewModel.Item.SenzaGradiniInternoProprieta || (bool) bindingModel.viewModel.Item.Montascale)
+                {
+                    lbl_Accessibility.IsVisible = true;
+                    grid_Accessibility.IsVisible = true;
+                }
+
+                if ((bool)bindingModel.viewModel.Item.Giardino ||
+                    (bool)bindingModel.viewModel.Item.Balcone || 
+                    (bool)bindingModel.viewModel.Item.Cantina ||
+                    (bool)bindingModel.viewModel.Item.Piscina ||
+                    (bool)bindingModel.viewModel.Item.Ascensore ||
+                    (bool)bindingModel.viewModel.Item.Condizionatori)
+                {
+                    lbl_Other.IsVisible = true;
+                    flx_Other.IsVisible = true;
+                }
+
                 MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>
                 {
                     CarouselImagesProgress.Text = "1/" + arg;

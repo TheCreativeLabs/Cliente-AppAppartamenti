@@ -10,10 +10,10 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" Style="{x:StaticResource StackContainer}">
             
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                  <Button Style="{x:StaticResource NavCancelButton}" Clicked="BtnCancel_Clicked">
                   </Button>
-            </StackLayout>
+            </StackLayout>-->
 
                 <forms:AnimationView 
 	                        x:Name="animationView" 
@@ -25,7 +25,7 @@
                 <Label HorizontalTextAlignment="Center" Style="{x:StaticResource AdTitle}" Text="Annuncio pubblicato con successo!"></Label>
                 <Label HorizontalTextAlignment="Center" Text="Il tuo annuncio verrà reso disponibile online una volta approvato dai nostri operatori."></Label>
 
-                <Button Text="Torna alla home" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
+                <Button Text="Torna alla lista" Clicked="BtnProcedi_Clicked"  Style="{x:StaticResource primaryButton}" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -807,4 +807,7 @@
   <data name="SelezioneInfoGenerali.Stairlifts" xml:space="preserve">
     <value>Stairlifts</value>
   </data>
+  <data name="SelezioneProprieta.ModificaAnnuncio" xml:space="preserve">
+    <value>Edit listing</value>
+  </data>
 </root>

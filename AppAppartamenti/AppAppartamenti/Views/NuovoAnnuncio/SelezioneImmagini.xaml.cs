@@ -49,7 +49,16 @@ namespace AppAppartamenti.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if ((annuncio.Immagini == null || annuncio.Immagini.Count == 0) && this.dtoToModify != null && this.dtoToModify.Item.ImmaginiAnnuncio != null && this.dtoToModify.Item.ImmaginiAnnuncio.Count != 0)
+            if (bytesImages.Count == 0 && annuncio.Immagini != null && annuncio.Immagini.Count > 0 )
+            {
+                foreach (var item in annuncio.Immagini)
+                {
+                    int id = bytesImages.Count + 1;
+                    ImageWithId imm = new ImageWithId() { Id = id, Image = item };
+                    bytesImages.Add(imm);
+                }
+            }
+            else if (bytesImages.Count == 0 && this.dtoToModify != null && this.dtoToModify.Item.ImmaginiAnnuncio != null && this.dtoToModify.Item.ImmaginiAnnuncio.Count != 0)
             {
                 foreach (var item in dtoToModify.Item.ImmaginiAnnuncio)
                 {
@@ -84,10 +93,11 @@ namespace AppAppartamenti.Views
 
             if(!bytesImages.Any())
             {
-                await DisplayAlert("Campo obbligatori", "Inserire almeno un'immagine", "Ok");
+                await DisplayAlert("Campo obbligatorio", "Inserire almeno un'immagine", "Ok");
                 return;
             }
 
+            annuncio.Immagini.Clear();
             foreach (var item in bytesImages)
             {
                 annuncio.Immagini.Add(item.Image);

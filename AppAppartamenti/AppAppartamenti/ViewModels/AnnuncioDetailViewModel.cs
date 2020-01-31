@@ -20,6 +20,8 @@ namespace AppAppartamenti.ViewModels
         {
             Item = new AnnuncioDtoOutput();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            OnPropertyChanged("Item");
+
         }
 
         async Task ExecuteLoadItemsCommand()

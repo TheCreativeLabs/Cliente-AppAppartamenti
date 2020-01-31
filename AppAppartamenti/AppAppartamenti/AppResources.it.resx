@@ -813,4 +813,7 @@
   <data name="SelezioneInfoGenerali.Stairlifts" xml:space="preserve">
     <value>Montascale</value>
   </data>
+  <data name="SelezioneProprieta.ModificaAnnuncio" xml:space="preserve">
+    <value>Modifica annuncio</value>
+  </data>
 </root>

@@ -29,6 +29,8 @@ namespace AppAppartamenti.Views
 
             annuncio = Annuncio;
             BindingContext = viewModel = new TipologiaAnnunciViewModel();
+            lbl_nuovoAnnuncio.IsVisible = outputDtoToModify == null;
+            lbl_modificaAnnuncio.IsVisible = outputDtoToModify != null;
         }
 
         protected async override void OnAppearing()
