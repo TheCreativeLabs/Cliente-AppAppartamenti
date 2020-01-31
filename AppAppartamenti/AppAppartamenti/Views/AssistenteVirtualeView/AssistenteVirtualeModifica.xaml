@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:appappartamenti="clr-namespace:AppAppartamenti"
+             xmlns:conv="clr-namespace:AppAppartamenti.Converter"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="AppAppartamenti.Views.AssistenteVirtualeView.AssistenteVirtualeModifica"
+             Title="Assistente virtuale">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightGray" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Padding="20,20,0,0" Style="{x:StaticResource AdTitle}"
+                   Text="Seleziona l'icona che preferisci per il tuo assistente virtuale"></Label>
+
+
+            <CollectionView Grid.Row="1" Margin="20"  x:Name="OrariCollectionView" 
+                        ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
+                            SelectionChanged="OrariCollectionView_SelectionChanged"
+                        SelectionMode="Single" 
+                        >
+                        <!--SelectionChanged="OnPeopleSelectionChanged"-->
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10">
+                                    <Frame HasShadow="True"
+                                            HeightRequest="80"
+                                            WidthRequest="80"
+                                            CornerRadius="40"
+                                            Padding="0"
+                                            IsClippedToBounds="True"
+                                            HorizontalOptions="Center" VerticalOptions="Center">
+
+                                        <Image Aspect="AspectFill"
+                                               Source="{Binding ImmagineAvatar, Converter={StaticResource ByteArrayToImage}}">
+                                        </Image>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+            <forms:AnimationView Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

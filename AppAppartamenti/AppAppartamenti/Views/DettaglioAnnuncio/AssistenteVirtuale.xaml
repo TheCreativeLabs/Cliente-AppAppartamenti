@@ -17,7 +17,7 @@
         <ScrollView>
                 <!--<Label Style="{x:StaticResource Subtitle}" HorizontalTextAlignment="Start" Text="Documenti"></Label>-->
                 <!--Lista documenti-->
-        <StackLayout>
+            <StackLayout>
 
             <StackLayout Margin="20">
 
@@ -114,6 +114,6 @@
 
              </StackLayout>
 
-            </ScrollView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -38,6 +38,9 @@ namespace AppAppartamenti.ViewModels
 
             try
             {
+                if (IsBusy)
+                    return;
+
                 Items.Clear();
 
                 if (NomeComune.Length > 3) { 

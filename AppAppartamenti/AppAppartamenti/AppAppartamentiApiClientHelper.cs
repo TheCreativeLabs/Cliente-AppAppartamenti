@@ -503,9 +503,14 @@ namespace AppAppartamenti.Api
         /// Rimuove il token.
         /// </summary>
         /// <returns></returns>
-        public static async void DeleteFirebaseToken()
+        public static void DeleteFirebaseToken()
         {
             Preferences.Remove(AndroidRegistrationToken);
+        }
+
+        public static void DeleteAssistenteVirtualeImage()
+        {
+            Preferences.Remove(ImmagineAssistenteKey);
         }
 
     }

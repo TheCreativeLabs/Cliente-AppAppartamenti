@@ -4,6 +4,7 @@ using AppAppartamenti.Views.Messaggi;
 using AppAppartamentiApiClient;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -111,7 +112,7 @@ namespace AppAppartamenti.Views
                         Label = bindingModel.viewModel.Item.Indirizzo,
                         Address = $"{bindingModel.viewModel.Item.Indirizzo},{bindingModel.viewModel.Item.NomeComune}",
                         Type = PinType.Generic,
-                        Position = new Position(Double.Parse(lat), Double.Parse(lon))
+                        Position = new Position(Double.Parse(lat,CultureInfo.InvariantCulture), Double.Parse(lon,CultureInfo.InvariantCulture))
                     };
 
                     map.Pins.Add(pin);

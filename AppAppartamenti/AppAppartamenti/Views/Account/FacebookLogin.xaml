@@ -2,13 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              mc:Ignorable="d"
              x:Class="AppAppartamenti.Views.Account.FacebookLogin"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout x:Name="MainStackLayout"
                Padding="8,30">
+
+             <forms:AnimationView HorizontalOptions="Center"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" />
 
         </StackLayout>
     </ContentPage.Content>

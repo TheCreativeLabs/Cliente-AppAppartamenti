@@ -102,7 +102,7 @@
                         
                     </StackLayout>
                 </Grid>
-                        <ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" IsRunning="True"></ActivityIndicator>
+                        <!--<ActivityIndicator IsVisible="{Binding IsBusy}" HorizontalOptions="CenterAndExpand" IsRunning="True"></ActivityIndicator>-->
 
                       <Label Margin="20,30,20,30" Style="{x:StaticResource SectionTitle}" Text="Aggiunti di recente"></Label>
 
