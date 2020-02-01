@@ -43,6 +43,8 @@ namespace AppAppartamenti.Views
         {
             this.dtoToModify = dtoToModify;
             InitializeComponent();
+            lbl_nuovoAnnuncio.IsVisible = dtoToModify == null;
+            lbl_modificaAnnuncio.IsVisible = dtoToModify != null;
             annuncio = Annuncio;
         }
 
@@ -198,6 +200,16 @@ namespace AppAppartamenti.Views
             var idImmagine = ((Button)sender).CommandParameter;
             bytesImages.RemoveAll(x => x.Id == (int) idImmagine);
             cvImmagini.ItemsSource = bytesImages.ToArray();
+
+            if (annuncio.Immagini == null)
+            {
+                annuncio.Immagini = new Collection<byte[]>();
+            }
+            annuncio.Immagini.Clear();
+            foreach (var item in bytesImages)
+            {
+                annuncio.Immagini.Add(item.Image);
+            }
         }
 
     }

@@ -269,7 +269,7 @@
                                 </CarouselView>
                             </StackLayout>
 
-                            <Label Style="{x:StaticResource SectionTitle}">
+                            <Label Style="{x:StaticResource SectionTitle}" x:Name="lbl_Accessibility" IsVisible="False">
                                 <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="&#xf193;" FontSize="20" FontFamily="{x:StaticResource FA-Solid}"/>
@@ -279,7 +279,7 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Grid x:Name="grid_Accessibility" IsVisible="False">
+                            <Grid x:Name="grid_Accessibility" IsVisible="False" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="9*"></ColumnDefinition>

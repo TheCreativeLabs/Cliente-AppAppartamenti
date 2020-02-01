@@ -37,8 +37,9 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackLayout>
-                        <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"></Label>
-                        <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
+                    <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}" x:Name="lbl_nuovoAnnuncio"></Label>
+                    <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.ModificaAnnuncio}" x:Name="lbl_modificaAnnuncio"></Label>
+                    <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneDescrizione.Descrizione}"></Label>
                         <controls:StepMenu CurrentId="9"/>
 
                         <Frame HeightRequest="100" HasShadow="False" Padding="5" BorderColor="LightGray">

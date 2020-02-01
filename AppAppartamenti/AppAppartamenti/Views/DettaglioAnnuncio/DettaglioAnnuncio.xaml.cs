@@ -85,6 +85,7 @@ namespace AppAppartamenti.Views
                 bindingModel.viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
 
                 BindingContext = bindingModel;
+                CarouselPlanimetria.ItemsSource = bindingModel.viewModel.Item.ImmaginiPlanimetria;
                 scrollView.IsVisible = true;
 
                 Task.Run(async () => { LoadUserInfo(); });

@@ -39,7 +39,8 @@
                                     Clicked="BtnCancel_Clicked">
                             </Button>
 
-                            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}"  ></Label>
+                            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}" x:Name="lbl_nuovoAnnuncio"></Label>
+                            <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.ModificaAnnuncio}" x:Name="lbl_modificaAnnuncio"></Label>
                             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezioneProprieta.PropertyType}"></Label>
                             <controls:StepMenu CurrentId="1"  />
                         </StackLayout>

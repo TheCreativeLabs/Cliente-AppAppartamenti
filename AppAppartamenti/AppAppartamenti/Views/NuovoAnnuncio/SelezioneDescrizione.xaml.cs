@@ -25,6 +25,8 @@ namespace AppAppartamenti.Views
         {
             this.dtoToModify = dtoToModify;
             InitializeComponent();
+            lbl_nuovoAnnuncio.IsVisible = dtoToModify == null;
+            lbl_modificaAnnuncio.IsVisible = dtoToModify != null;
 
             annuncio = Annuncio;
 

@@ -34,6 +34,8 @@ namespace AppAppartamenti.Views
         {
             this.dtoToModify = dtoToModify;
             InitializeComponent();
+            lbl_nuovoAnnuncio.IsVisible = dtoToModify == null;
+            lbl_modificaAnnuncio.IsVisible = dtoToModify != null;
             annuncio = Annuncio;
         }
 
@@ -194,6 +196,16 @@ namespace AppAppartamenti.Views
             var idImmagine = ((Button)sender).CommandParameter;
             bytesImages.RemoveAll(x => x.Id == (int)idImmagine);
             cvImmagini.ItemsSource = bytesImages.ToArray();
+
+            if (annuncio.ImmaginePlanimetria == null)
+            {
+                annuncio.ImmaginePlanimetria = new Collection<byte[]>();
+            }
+            annuncio.ImmaginePlanimetria.Clear();
+            foreach (var item in bytesImages)
+            {
+                annuncio.ImmaginePlanimetria.Add(item.Image);
+            }
         }
 
     }

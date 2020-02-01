@@ -24,6 +24,8 @@ namespace AppAppartamenti.Views
         {
             this.dtoToModify = dtoToModify;
             InitializeComponent();
+            lbl_nuovoAnnuncio.IsVisible = dtoToModify == null;
+            lbl_modificaAnnuncio.IsVisible = dtoToModify != null;
 
             if (this.dtoToModify != null)
             {
@@ -36,7 +38,7 @@ namespace AppAppartamenti.Views
                 lblCamereLettoCount.Text = dtoToModify.Item.NumeroCameraLetto.ToString();
 
 
-                stpCamereLetto.Value = Convert.ToDouble(dtoToModify.Item.NumeroAltreStanze);
+                stpStanze.Value = Convert.ToDouble(dtoToModify.Item.NumeroAltreStanze);
                 lblStanzeCount.Text = dtoToModify.Item.NumeroAltreStanze.ToString();
 
 

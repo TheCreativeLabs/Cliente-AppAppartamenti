@@ -20,13 +20,13 @@ namespace AppAppartamenti.Views.NuovoAnnuncio
         private async void BtnProcedi_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "AnnuncioCreato", "Ok");
-            //await Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
 
-            var i = Navigation.NavigationStack[Navigation.NavigationStack.Count - 10];
-            Navigation.RemovePage(i);
-            
-            //torno indietro alla lista degli eventi personali
-            await Navigation.PopAsync();
+            //var i = Navigation.NavigationStack[Navigation.NavigationStack.Count - 1];
+            //Navigation.RemovePage(i);
+
+            ////torno indietro alla lista degli eventi personali
+            //await Navigation.PopAsync();
 
         }
     }

@@ -816,4 +816,10 @@
   <data name="SelezioneProprieta.ModificaAnnuncio" xml:space="preserve">
     <value>Modifica annuncio</value>
   </data>
+  <data name="APPROVATO" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DA_APPROVARE" xml:space="preserve">
+    <value>Annuncio in attesa di approvazione</value>
+  </data>
 </root>

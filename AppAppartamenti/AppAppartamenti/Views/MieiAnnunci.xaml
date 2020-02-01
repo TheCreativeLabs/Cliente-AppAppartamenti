@@ -20,6 +20,7 @@
         <ResourceDictionary>
             <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
             <conv:PrezzoConverter x:Key="PrezzoConverter" />
+            <conv:KeyToTranslateConverter x:Key="TranslateConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -103,6 +104,7 @@
                             </Label>
 
                             <Label Text="{Binding Superficie, StringFormat='Superficie: {0} mq'}"></Label>
+                            <Label Text="{Binding StatoApprovazione, Converter={StaticResource TranslateConverter}}" TextColor="{x:StaticResource DangerColor}" x:Name="lbl_AnnuncioDaApprovare"></Label>
                        
                                 </StackLayout>
                         </ViewCell>
