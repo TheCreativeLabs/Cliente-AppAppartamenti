@@ -31,7 +31,7 @@
 
             <ContentPage.Content>
                 <StackLayout Style="{x:StaticResource StackContainer}">
-                    <Label Style="{x:StaticResource Title}"
+                    <!--<Label Style="{x:StaticResource Title}"
                            Text="{translator:Translate Agenda.Title}"></Label>
 
                     <syncfusion:SfCalendar x:Name="calendar" HeightRequest="300" Margin="0,20,0,10"
@@ -73,19 +73,67 @@
 	                        Animation="loadericon.json" 
 	                        Loop="true" 
 	                        AutoPlay="true"
-                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />-->
 
                     <ListView x:Name="lvAppuntamenti" SelectionMode="Single" SeparatorVisibility="None"
                               ItemSelected="OnItemSelected"
                               ItemsSource="{Binding Items}"
                               RefreshCommand="{Binding LoadItemsCommand}"
-                              HasUnevenRows="True">
-                        <ListView.ItemTemplate>
+                              HasUnevenRows="True"
+                              VerticalScrollBarVisibility="Never">
+                    <ListView.Header>
+                    <StackLayout>
+                    <Label Style="{x:StaticResource Title}"
+                           Text="{translator:Translate Agenda.Title}"></Label>
+
+                    <syncfusion:SfCalendar x:Name="calendar" HeightRequest="300" Margin="0,20,0,10"
+                                           EnableDatesInPast="False" 
+                                           ShowLeadingAndTrailingDays="False"
+                                           ShowNavigationButtons="True"
+                                           SelectionChanged="OnDataCalendarSelected">
+                        <syncfusion:SfCalendar.MonthViewSettings>
+                            <syncfusion:MonthViewSettings DayHeight="30" TodaySelectionBackgroundColor="{x:StaticResource PrimaryColor}" DateSelectionColor="{x:StaticResource PrimaryColor}">
+                            </syncfusion:MonthViewSettings>
+                        </syncfusion:SfCalendar.MonthViewSettings>
+                    </syncfusion:SfCalendar>
+
+                    <Label Style="{x:StaticResource SectionTitle}" Margin="0,-30,0,0"  Text="I tuoi appuntamenti"></Label>
+
+                    <Grid Padding="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto">
+                            </ColumnDefinition>
+                            <ColumnDefinition Width="*">
+                            </ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <BoxView Grid.Column="0" Margin="0,0,0,0" HeightRequest="10" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="10" BackgroundColor="{x:StaticResource DangerColor}" CornerRadius="5"></BoxView>
+
+
+                        <Label Text="In attesa di approvazione" HorizontalOptions="Start" VerticalTextAlignment="Center" Grid.Column="1"></Label>
+                    </Grid>
+
+                    <StackLayout IsVisible="{Binding IsEmpty}" Padding="20">
+
+                        <Label HorizontalTextAlignment="Center" Text="Non sono presenti appuntamenti per il giorno selezionato"></Label>
+                    </StackLayout>
+
+                    <forms:AnimationView HorizontalOptions="Center"
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170" IsVisible="{Binding IsBusy}" />
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                        
                                         <StackLayout>
-                                            <appappartamenti:ShadowFrame Padding="10" HasShadow="True" BorderColor="{Binding Confermato, Converter={StaticResource ColorConverter}}">
+                                            <appappartamenti:ShadowFrame Padding="10" HasShadow="True" BorderColor="{Binding Confermato, Converter={StaticResource ColorConverter}}" Margin="0,0,0,10">
                                                 <StackLayout Orientation="Horizontal">
                                                     <Label WidthRequest="70" Style="{x:StaticResource AdSubtitle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Data, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>
 

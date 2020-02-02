@@ -83,7 +83,7 @@
                                             CornerRadius="25"
                                             VerticalOptions="Center"
                                             Padding="0" >
-                                        <Label Text="{Binding Orario}" LineBreakMode="NoWrap" Margin="0" Padding="5" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                    <Label Text="{Binding Orario}"  Margin="0" Padding="5" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"><!--LineBreakMode="NoWrap"-->
                                         <!--CommandParameter="{Binding .}"-->
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="OnOrarioSelected" CommandParameter="{Binding .}"></TapGestureRecognizer>

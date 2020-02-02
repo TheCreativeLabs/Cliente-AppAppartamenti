@@ -95,6 +95,9 @@ namespace AppAppartamenti.Views
             BtnDelete.IsVisible = true;
             BtnAccept.IsVisible = false;
             BtnDeny.IsVisible = false;
+            frm_AppuntamentoInAttesa.IsVisible = false;
+            lbl_appuntamentoCon.IsVisible = true;
+            lbl_appuntamentoAttesa.IsVisible = false;
             MessagingCenter.Send(this, "RefreshAppuntamentiAgenda", "Refresh");
 
             await DisplayAlert("Confermato", "L'appuntamento è stato confermato correttamente.", "OK");

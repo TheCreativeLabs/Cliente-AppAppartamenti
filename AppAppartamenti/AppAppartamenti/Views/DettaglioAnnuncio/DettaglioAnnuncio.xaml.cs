@@ -4,9 +4,11 @@ using AppAppartamenti.Views.Messaggi;
 using AppAppartamentiApiClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -22,10 +24,28 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DettaglioAnnuncio : ContentPage
     {
-        public  class BindingModel
+        public  class BindingModel : INotifyPropertyChanged
         {
             public AnnuncioDetailViewModel viewModel { get; set; }
             public AnnuncioimmaginiViewModel viewModelImmagini { get; set; }
+            public event PropertyChangedEventHandler PropertyChanged;
+
+
+            void OnpropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                var handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+
+            public BindingModel()
+            {
+                OnpropertyChanged("viewModel");
+                OnpropertyChanged("viewModel.Item");
+
+            }
         }
 
         BindingModel bindingModel;

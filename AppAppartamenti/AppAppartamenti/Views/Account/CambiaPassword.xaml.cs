@@ -71,6 +71,8 @@ namespace AppAppartamenti.Views.Login
                     };
 
                     await accountClient.ChangePasswordAsync(changePasswordBindingModel);
+                    await DisplayAlert("Password modificata", "La modifica della password è stata effettuata con successo", "OK");
+
                 }
             }
             catch (ApiException Ex)

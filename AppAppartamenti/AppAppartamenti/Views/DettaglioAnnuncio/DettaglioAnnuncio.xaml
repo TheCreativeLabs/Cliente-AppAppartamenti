@@ -164,7 +164,7 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf52b;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                             <Label  VerticalTextAlignment="Center" Text="Altre stanze:"></Label>
-                            <Label x:Name="lblStanzeCount" Text="{Binding Item.AltreStanze}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblStanzeCount" Text="{Binding viewModel.Item.NumeroAltreStanze}" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
