@@ -4,9 +4,11 @@ using AppAppartamenti.Views.Messaggi;
 using AppAppartamentiApiClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -22,10 +24,28 @@ namespace AppAppartamenti.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DettaglioAnnuncio : ContentPage
     {
-        public  class BindingModel
+        public  class BindingModel : INotifyPropertyChanged
         {
             public AnnuncioDetailViewModel viewModel { get; set; }
             public AnnuncioimmaginiViewModel viewModelImmagini { get; set; }
+            public event PropertyChangedEventHandler PropertyChanged;
+
+
+            void OnpropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                var handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+
+            public BindingModel()
+            {
+                OnpropertyChanged("viewModel");
+                OnpropertyChanged("viewModel.Item");
+
+            }
         }
 
         BindingModel bindingModel;
@@ -85,6 +105,7 @@ namespace AppAppartamenti.Views
                 bindingModel.viewModel = await AnnuncioDetailViewModel.ExecuteLoadItemsCommandAsync(IdAnnuncio);
 
                 BindingContext = bindingModel;
+                CarouselPlanimetria.ItemsSource = bindingModel.viewModel.Item.ImmaginiPlanimetria;
                 scrollView.IsVisible = true;
 
                 Task.Run(async () => { LoadUserInfo(); });
@@ -121,6 +142,23 @@ namespace AppAppartamenti.Views
                 else
                 {
                     map.IsVisible = false;
+                }
+
+                if ((bool) bindingModel.viewModel.Item.SenzaBarriereArchitettoniche || (bool) bindingModel.viewModel.Item.SenzaGradiniInternoProprieta || (bool) bindingModel.viewModel.Item.Montascale)
+                {
+                    lbl_Accessibility.IsVisible = true;
+                    grid_Accessibility.IsVisible = true;
+                }
+
+                if ((bool)bindingModel.viewModel.Item.Giardino ||
+                    (bool)bindingModel.viewModel.Item.Balcone || 
+                    (bool)bindingModel.viewModel.Item.Cantina ||
+                    (bool)bindingModel.viewModel.Item.Piscina ||
+                    (bool)bindingModel.viewModel.Item.Ascensore ||
+                    (bool)bindingModel.viewModel.Item.Condizionatori)
+                {
+                    lbl_Other.IsVisible = true;
+                    flx_Other.IsVisible = true;
                 }
 
                 MessagingCenter.Subscribe<AnnuncioimmaginiViewModel, int>(this, "ImmaginiCaricate", async (sender, arg) =>

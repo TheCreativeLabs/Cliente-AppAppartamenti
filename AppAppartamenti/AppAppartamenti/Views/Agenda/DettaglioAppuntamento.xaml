@@ -32,7 +32,7 @@
                 <StackLayout>
                     <StackLayout x:Name="StackPage" IsVisible="False" Style="{x:StaticResource StackContainer}">
 
-                    <Frame HasShadow="False" BackgroundColor="{x:StaticResource DangerColor}" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}">
+                    <Frame HasShadow="False" BackgroundColor="{x:StaticResource DangerColor}" IsVisible="{Binding Confermato, Converter={StaticResource BoolConverter}}" x:Name="frm_AppuntamentoInAttesa">
                         <Label LineBreakMode="WordWrap" TextColor="White">
                             <Label.FormattedText>
                                 <FormattedString>
@@ -72,7 +72,7 @@
                 </StackLayout>
 
                     <Label Margin="0,30,0,10"  Style="{x:StaticResource AdTitle}" Text="Data"></Label>
-                    <Label Text="{Binding Data, StringFormat='{0:dddd, dd MMMM}'}"></Label>
+                        <Label Text="{Binding Data, StringFormat='{0:dddd, dd MMMM HH:mm}'}"></Label>
 
 
                     <Label Margin="0,30,0,10"  Style="{x:StaticResource AdTitle}" Text="Dove"></Label>

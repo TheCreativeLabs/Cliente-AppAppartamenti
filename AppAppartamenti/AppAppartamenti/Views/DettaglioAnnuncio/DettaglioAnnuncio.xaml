@@ -158,13 +158,13 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf236;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                             <Label  VerticalTextAlignment="Center" Text="{translator:Translate DettaglioAnnuncio.Bedrooms}"></Label>
-                            <Label Text="{Binding viewModel.Item.NumeroCameraLetto}"  VerticalTextAlignment="Center"></Label>
+                                <Label Text="{Binding viewModel.Item.NumeroCameraLetto, Mode=TwoWay}"  VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf52b;" Style="{x:StaticResource LabelNuovoAnnuncioIcon}" FontFamily="{x:StaticResource FA-Solid}"></Label>
                             <Label  VerticalTextAlignment="Center" Text="Altre stanze:"></Label>
-                            <Label x:Name="lblStanzeCount" Text="{Binding Item.AltreStanze}" VerticalTextAlignment="Center"></Label>
+                                <Label x:Name="lblStanzeCount" Text="{Binding viewModel.Item.NumeroAltreStanze}" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
@@ -191,9 +191,9 @@
                             <Label x:Name="lblGarageCount" Text="{Binding viewModel.Item.NumeroGarage}" VerticalTextAlignment="Center"></Label>
                         </StackLayout>
 
-                        <Label Text="{translator:Translate DettaglioAnnuncio.Other}" Style="{x:StaticResource SectionTitle}"></Label>
+                        <Label Text="{translator:Translate DettaglioAnnuncio.Other}" Style="{x:StaticResource SectionTitle}" x:Name="lbl_Other" IsVisible="False"></Label>
 
-                            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start">
+                            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Start" VerticalOptions="Start"  x:Name="flx_Other" IsVisible="False">
                                 <Frame IsVisible="{Binding viewModel.Item.Giardino}" HasShadow="True" Visual="Material" CornerRadius="20" Padding="10" HeightRequest="20" Margin="5" VerticalOptions="Center">
                                     <Label Text="{translator:Translate DettaglioAnnuncio.Backyard}" LineBreakMode="NoWrap" Margin="0" Padding="0"></Label>
                                 </Frame>
@@ -269,7 +269,7 @@
                                 </CarouselView>
                             </StackLayout>
 
-                            <Label Style="{x:StaticResource SectionTitle}">
+                            <Label Style="{x:StaticResource SectionTitle}" x:Name="lbl_Accessibility" IsVisible="False">
                                 <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="&#xf193;" FontSize="20" FontFamily="{x:StaticResource FA-Solid}"/>
@@ -279,7 +279,7 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <Grid>
+                            <Grid x:Name="grid_Accessibility" IsVisible="False" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
                                     <ColumnDefinition Width="9*"></ColumnDefinition>

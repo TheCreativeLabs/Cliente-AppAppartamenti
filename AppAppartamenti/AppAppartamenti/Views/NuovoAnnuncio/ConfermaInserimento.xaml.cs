@@ -21,6 +21,13 @@ namespace AppAppartamenti.Views.NuovoAnnuncio
         {
             MessagingCenter.Send(this, "AnnuncioCreato", "Ok");
             await Navigation.PopModalAsync();
+
+            //var i = Navigation.NavigationStack[Navigation.NavigationStack.Count - 1];
+            //Navigation.RemovePage(i);
+
+            ////torno indietro alla lista degli eventi personali
+            //await Navigation.PopAsync();
+
         }
     }
 }

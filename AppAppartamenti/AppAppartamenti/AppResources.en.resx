@@ -807,4 +807,13 @@
   <data name="SelezioneInfoGenerali.Stairlifts" xml:space="preserve">
     <value>Stairlifts</value>
   </data>
+  <data name="SelezioneProprieta.ModificaAnnuncio" xml:space="preserve">
+    <value>Edit listing</value>
+  </data>
+  <data name="APPROVATO" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DA_APPROVARE" xml:space="preserve">
+    <value>Waiting listing approval</value>
+  </data>
 </root>

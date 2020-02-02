@@ -27,6 +27,8 @@ namespace AppAppartamenti.Views
         {
             dtoToModify = annuncioDetailViewModel;
             InitializeComponent();
+            lbl_nuovoAnnuncio.IsVisible = dtoToModify == null;
+            lbl_modificaAnnuncio.IsVisible = dtoToModify != null;
 
             BindingContext = viewModel = new TipologiaProprietaViewModel();
         }

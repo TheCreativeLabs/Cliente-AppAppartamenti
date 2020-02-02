@@ -153,6 +153,7 @@ namespace AppAppartamenti.Views
                     NumBagni = (int)stpBathroom.Value,
                     NumCucine = (int)stpkitchens.Value,
                     NumGarage = (int)stpGarages.Value,
+                    NumAltreStanze = (int)stpOtherRooms.Value,
                     NumPostiAuto = (int)stpParkingSpace.Value,
                     Ascensore = chkAscensore.IsChecked,
                     Cantina = chkCantina.IsChecked,
