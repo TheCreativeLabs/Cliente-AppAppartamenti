@@ -45,22 +45,28 @@
                 <div class="col-md-6">
                     <div class="card-body p-0">
                         <div class="pl-3 mt-0">
-                             <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
+                            <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
                             <br />
-                            <label  >@item.Indirizzo, @item.NomeComune</label>
+                            <label>@item.Indirizzo, @item.NomeComune</label>
                             <br />
-                            <label class="mb-3">Superficie: @item.Superficie m² </label>
-
+                            <div class="mb-3">
+                                <i class="fas fa-ruler-combined"></i> @item.Superficie mq&nbsp;&nbsp; <i class="fas fa-door-open"></i> @item.NumeroLocali locali&nbsp;&nbsp;<i class="fas fa-shower"></i> @item.NumeroBagni bagni
+                            </div>
+                         
                             <br />
                             @{
-                                if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200) {
+                                if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200)
+                                {
                                     <span class="info">@item.Descrizione.Substring(0, 200)...</span>
 
-                                } else
+                                }
+                                else
                                 {
                                     <span class="info">@item.Descrizione...</span>
                                 }
                             }
+
+
                         </div>
                     </div>
                 </div>

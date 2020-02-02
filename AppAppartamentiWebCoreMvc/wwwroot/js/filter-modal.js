@@ -16,8 +16,46 @@
         $('[data-quantity="minus"]').click(function (e) {
             ButtonPlusDecrement(e,this);
         });
+
+        $('#inp-prz-min').blur(function () {
+            UpdateSliderPrz();
+        });
+
+        $('#inp-prz-max').blur(function () {
+            UpdateSliderPrz();
+        });
+
+        $('#inp-prz-aff-min').blur(function () {
+            UpdateSliderPrzAff();
+        });
+
+        $('#inp-prz-aff-max').blur(function () {
+            UpdateSliderPrzAff();
+        });
+
+        $('#inp-sup-min').blur(function () {
+            UpdateSliderSup();
+        });
+        $('#inp-sup-max').blur(function () {
+            UpdateSliderSup();
+        });
     }
 });
+
+function UpdateSliderPrz() {
+    let slider = document.getElementById("sliderPrezzo");
+    slider.noUiSlider.set([$("#inp-prz-min").val(), $("#inp-prz-max").val()]);
+}
+
+function UpdateSliderPrzAff() {
+    let slider = document.getElementById("sliderPrezzoAff");
+    slider.noUiSlider.set([$("#inp-prz-aff-min").val(), $("#inp-prz-aff-max").val()]);
+}
+
+function UpdateSliderSup() {
+    let slider = document.getElementById("sliderDimensione");
+    slider.noUiSlider.set([$("#inp-sup-min").val(), $("#inp-sup-max").val()]);
+}
 
 //Ricarica i filtri presi dalla sessione
 function LoadFilter() {
@@ -37,7 +75,9 @@ function LoadFilter() {
         let prezzoMax = $(sliderPrezzo).data("max");
         prezzoMax = ((prezzoMax == undefined || prezzoMax == null || prezzoMax == 0) ? 250000 : prezzoMax);
 
-        noUiSlider.create(document.getElementById("sliderPrezzo"), {
+        let uisliderprz= document.getElementById('sliderPrezzo');
+
+        noUiSlider.create(uisliderprz, {
             start: [prezzoMin, prezzoMax],
             tooltips: [wNumb({
                 mark: '.',
@@ -71,16 +111,77 @@ function LoadFilter() {
             }
         });
 
+        // When the slider value changes, update the input and span
+        uisliderprz.noUiSlider.on('update', function (values, handle) {
+            $("#inp-prz-min").val(values[0]);
+            $("#inp-prz-max").val(values[1]);
+        });
+
+
+        let sliderPrezzoAff = $('#sliderPrezzoAff');
+
+        let prezzoMinAff = $(sliderPrezzoAff).data("min");
+        prezzoMinAff = ((prezzoMinAff == undefined || prezzoMinAff == null || prezzoMinAff == 0) ? 500 : prezzoMinAff);
+
+        let prezzoMaxAff = $(sliderPrezzoAff).data("max");
+        prezzoMaxAff = ((prezzoMaxAff == undefined || prezzoMaxAff == null || prezzoMaxAff == 0) ?4000 : prezzoMaxAff);
+
+        let uisliderprzAff = document.getElementById('sliderPrezzoAff');
+
+        noUiSlider.create(uisliderprzAff, {
+            start: [prezzoMinAff, prezzoMaxAff],
+            tooltips: [wNumb({
+                mark: '.',
+                thousand: ',',
+                prefix: '€ ',
+                suffix: '',
+                decimals: 0
+            }), wNumb({
+                mark: '.',
+                thousand: ',',
+                prefix: '€ ',
+                suffix: '',
+                decimals: 0
+            })],
+            connect: true,
+            step: 100,
+            range: {
+                'min': 500,
+                'max': 5000
+            },
+            format: {
+                // 'to' the formatted value. Receives a number.
+                to: function (value) {
+                    return value;
+                },
+                // 'from' the formatted value.
+                // Receives a string, should return a number.
+                from: function (value) {
+                    return Number(value);
+                }
+            }
+        });
+
+        // When the slider value changes, update the input and span
+        uisliderprzAff.noUiSlider.on('update', function (values, handle) {
+            $("#inp-prz-aff-min").val(values[0]);
+            $("#inp-prz-aff-max").val(values[1]);
+        });
+
+
+
+
         let sliderDimensione = $('#sliderDimensione');
 
         let dimensioneMin = $(sliderDimensione).data("min");
         dimensioneMin = ((dimensioneMin == undefined || dimensioneMin == null || dimensioneMin == 0) ? 60 : dimensioneMin);
 
-
         let dimensioneMax = $(sliderDimensione).data("max");
         dimensioneMax = ((dimensioneMax == undefined || dimensioneMax == null || dimensioneMax == 0) ? 250 : dimensioneMax);
 
-        noUiSlider.create(document.getElementById("sliderDimensione"), {
+        let uisliderspr = document.getElementById('sliderDimensione');
+
+        noUiSlider.create(uisliderspr, {
             start: [dimensioneMin, dimensioneMax],
             tooltips: [wNumb({ decimals: 0, suffix: ' m²' }), wNumb({ decimals: 0, suffix: ' m²', })
             ],
@@ -99,6 +200,17 @@ function LoadFilter() {
                 }
             }
         });
+
+        // When the slider value changes, update the input and span
+        uisliderspr.noUiSlider.on('update', function (values, handle) {
+            var format = wNumb({ decimals: 0 });
+            $("#inp-sup-min").val(format.to(values[0]));
+
+            $("#inp-sup-max").val(format.to(values[1]));
+        });
+
+
+        ShowColPrice(null);
     }
         catch (ex) {
         TrapError("Error during LoadFilter:" + ex);
@@ -111,7 +223,14 @@ function SaveFilter() {
         let codiceComune = (($("#codiceComune").val() != null && $("#codiceComune").val() != "") ? parseInt($("#codiceComune").val()) : 0);
 
         //Ottengo i valori delle slider
-        let rangePrice = document.getElementById("sliderPrezzo").noUiSlider.get();
+        let rangePrice =  document.getElementById("sliderPrezzo").noUiSlider.get();
+
+        let index = $("#selectTipologiaAnnuncio").prop("selectedIndex");
+
+        if (index == 1) {
+            rangePrice = document.getElementById("sliderPrezzoAff").noUiSlider.get();
+        } 
+
         let rangeDimensione = document.getElementById("sliderDimensione").noUiSlider.get();
 
         let ascensore = (($("#customSwitchAscensore").is(":checked")) ? true : null);
@@ -178,4 +297,16 @@ function SaveFilter() {
     }
 }
 
+function ShowColPrice(select) {
+    let index = $("#selectTipologiaAnnuncio").prop("selectedIndex");
+
+    if (index == 0) {
+        $("#col-ven").show();
+        $("#col-aff").hide();
+
+    } else {
+        $("#col-aff").show();
+        $("#col-ven").hide();
+    }
+}
 

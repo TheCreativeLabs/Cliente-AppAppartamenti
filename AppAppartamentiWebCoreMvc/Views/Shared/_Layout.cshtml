@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/core@4.3.1/main.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/daygrid@4.3.0/main.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@@fullcalendar/timegrid@4.3.0/main.min.css">
+    <script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script>
 </head>
 
 <body data-spy="scroll" data-target="#navbar-create" style="position:relative" data-offset="90">
@@ -37,7 +38,7 @@
                 <form id="navSearchBar" class="navbar-start">
                     <input id="codiceComune" type="number" value="" style="display: none;" />
                     <div class="input-group rounded shadow" style="text-align: center;">
-                        <div class="input-group-prepend d-none d-sm-block border-0" style="background-color: white;">
+                        <div class="input-group-prepend d-none d-sm-block border-0 rounded-left" style="background-color: white;">
                             <span class="input-group-text mt-1" id="basic-addon1" style="background-color: white;border: none;">
                                 <i class="fas fa-search col-1"></i>
                             </span>
@@ -68,30 +69,9 @@
                             </li>
                             
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark p-1 m-1 d-none d-sm-block" id="agenda-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link text-dark" asp-controller="Agenda" asp-action="Detail">
                                     Agenda
                                 </a>
-
-                                <a class="nav-link text-dark d-block d-sm-none" asp-controller="Agenda" asp-action="Detail">
-                                    Agenda
-                                </a>
-
-                                <div class="dropdown-menu dropdown-agenda dropdown-menu-right border-0 bg-white shadow" aria-labelledby="agenda-menu-link" style="width:700px;height:430px;">
-                                    <div class="p-3">
-                                        <div class="container-flui">
-                                            <div class="row">
-                                                <div class="col-7">
-                                                    <div id="nav-calendar"></div>
-                                                </div>
-                                                <div class="col-5">
-                                                    <a asp-controller="Agenda" asp-action="Detail" class="btn btn-sm bg-light rounded-pill text-dark float-right"><i class="fas fa-expand-arrows-alt"></i>&nbsp;Espandi</a>
-                                                    <div id="TodayAppointment">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
 
                             <li class="nav-item">

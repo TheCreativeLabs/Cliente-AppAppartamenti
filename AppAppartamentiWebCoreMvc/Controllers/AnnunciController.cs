@@ -54,7 +54,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             var annunci = await annunciClient.GetAnnunciAsync(ListPage, pageSize, FilterModel.IdTipologiaAnnuncio,FilterModel.IdTipologiaProprieta,FilterModel.CodiceComune,
                 FilterModel.PrezzoMin,FilterModel.PrezzoMax,FilterModel.DimensioneMin, FilterModel.DimensioneMax,FilterModel.NumeroCamereLetto,
                 FilterModel.NumeroBagni, FilterModel.NumeroCucine, FilterModel.NumeroPostiAuto, FilterModel.NumeroGarage, FilterModel.NumeroAltreStanze, FilterModel.Giardino,null,FilterModel.Cantina,
-                FilterModel.Piscina,FilterModel.Ascensore, FilterModel.Condizionatori, null); //todo penultimo parametro condizionatori
+                FilterModel.Piscina,FilterModel.Ascensore, FilterModel.Condizionatori,null,null,null, null); //todo penultimo parametro condizionatori
 
             ICollection<AnnunciDtoOutput> listaAnnunci;
             if (ListPage == 1)
@@ -134,6 +134,33 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
             var recentAds= await annunciClient.GetRicercheRecentiCurrentAsync();
             return PartialView("~/Views/Annunci/_RecentAdPartial.cshtml", recentAds);
+        }
+
+        public async Task<ActionResult> SignalAdReason()
+        {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+            var list = await annunciClient.GetListaMotiviSegnalazioneAsync();
+            return PartialView("~/Views/Annunci/_SegnalaPartial.cshtml", list);
+        }
+
+        public async void ReportAd(Guid Id,Guid ReportReasonId,string ReportMessage)
+        {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            AnnunciClient annunciClient = new AppAppartamentiApiClient.AnnunciClient(httpClient);
+
+            SegnalazioneDtoInput segnalazioneDtoInput = new SegnalazioneDtoInput()
+            {
+                IdAnnuncio = Id,
+                IdMotivoSegnalazione = ReportReasonId,
+                TestoSegnalazione = ReportMessage
+            };
+
+           await annunciClient.InsertSegnalazioneAsync(segnalazioneDtoInput);
         }
     }
 }

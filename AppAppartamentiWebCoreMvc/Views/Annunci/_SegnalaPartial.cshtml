@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MotivoSegnalazione>
+
+<!-- Modal -->
+<div class="modal fade" id="signal-modal" tabindex="-1" role="dialog" aria-labelledby="signalmodal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signalmodal">Segnala annuncio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="report-reason">
+                <label class="adTitle mb-3">Motivo segnalazione</label>
+                <br />
+
+                @foreach (var item in Model)
+                {
+                    <input class="mr-2 mb-3" type="radio" value="@item.Id" id="@item.Id" name="reportreason" />@item.Descrizione<br />
+                }
+
+                <label class="adTitle mb-3">Messaggio aggiuntivo</label>
+                <br />
+
+                <textarea id="report-test" rows="6" placeholder="Inserisci un testo" class="form-control"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="ReportAd()">Segnala annuncio</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,43 +6,53 @@
         <div class="row">
 
             <div id="map-container" class="col-xs-12 col-sm-6" style="display:none;">
-                <div id="googleMap" class="map w-100 h-100"></div>
+                <div id="googleMap" class="map w-100 h-100 rounded-lg"></div>
             </div>
 
             <div id="container-annunci" class="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
-                <h2 class="mb-3">
-                    Annunci
-
-                    <button id="btn-show-map" type="button" class="btn bg-white rounded-circle shadow-lg float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Visualizza su mappa&nbsp;<i class="fas fa-map-marked-alt"></i>
-                    </button>
-                    <div class="input-group input-group-sm float-right mt-2 mr-2" style="max-width:150px">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text border-0 bg-light" for="inputGroupSelect01"><i class="fas fa-sort-amount-down-alt"></i></label>
-                        </div>
-                        <select class="custom-select border-0 bg-light" id="select-order">
-                            <option value="" selected>Ordina per</option>
-                            <option value="0">Prezzo - Dal più alto</option>
-                            <option value="1">Prezzo - Dal pi basso</option>
-                            <option value="2">Superficie - Dal più grande</option>
-                            <option value="3">Superficie - Dal più piccolo</option>
-                        </select>
+                <div class="row">
+                    <div class="col">
+                        <label class="title">
+                            Annunci
+                        </label>
                     </div>
+                    <div class="col text-right">
+                        <button id="btn-show-map" type="button" class="btn btn-link text-dark bg-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-map-marked-alt"></i>&nbsp;Visualizza su mappa
+                        </button>
+                   </div>
+               </div>
 
-                    @{//await Html.RenderPartialAsync("_VirtualAgentBuy");
-                    }
-                </h2>
+
+                   <!--<button id="btn-show-map" type="button" class="btn bg-white rounded-circle shadow-lg float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Visualizza su mappa&nbsp;<i class="fas fa-map-marked-alt"></i>
+    </button>
+    <div class="input-group input-group-sm float-right mt-2 mr-2" style="max-width:150px">
+        <div class="input-group-prepend">
+            <label class="input-group-text border-0 bg-light" for="inputGroupSelect01"><i class="fas fa-sort-amount-down-alt"></i></label>
+        </div>
+        <select class="custom-select border-0 bg-light" id="select-order">
+            <option value="" selected>Ordina per</option>
+            <option value="0">Prezzo - Dal più alto</option>
+            <option value="1">Prezzo - Dal pi basso</option>
+            <option value="2">Superficie - Dal più grande</option>
+            <option value="3">Superficie - Dal più piccolo</option>
+        </select>
+    </div>-->
+
+                        @{//await Html.RenderPartialAsync("_VirtualAgentBuy");
+                        }
 
 
-                <div id="annunci">
-                    <div class="text-center">
-                        <div id="chat-spinner-loading" class="spinner-border mt-5" role="status">
-                            <span class="sr-only">Loading...</span>
+                        <div id="annunci">
+                            <div class="text-center">
+                                <div id="chat-spinner-loading" class="spinner-border mt-5" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-            </div>
+                    </div>
 
         </div>
     </div>

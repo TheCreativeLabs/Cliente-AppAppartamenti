@@ -1,45 +1,13 @@
 ﻿$(document).ready(function () {
-    $("#secondnav").hide();
+    //$("#secondnav").hide();
 
-    window.onscroll = function () { changeScroll() };
+    //window.onscroll = function () { changeScroll() };
 
-    var calendarEl2 = document.getElementById('appointment-caledar');
     var idAnnuncio = document.getElementById('id-annuncio').value;
 
-    var calendar2 = new FullCalendar.Calendar(calendarEl2, {
-        plugins: ['dayGrid', 'timeGrid', 'interaction'],
-        locale: selectedLanguage,
-        themeSystem: 'bootstrap',
-        header: {
-            left: 'title',
-            center: '',
-            right: 'prev,next'
-        },
-        footer: {
-            left: '',
-            center: '',
-            right: ''
-        },
-        dateClick: function (info) {
-            var now = new Date();
-            if ((now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()) == info.dateStr || info.date > (now)) {
-                // This allows today and future date
-                $('#giorno-selected').val(info.dateStr);
-                //alert('Clicked on: ' + info.dateStr);
-                //$(info.dayEl).addClass('fc-state-highlight');
-                $('.fc-today').css('blackground', 'transparent !important'); //not working
-                GetAndShowAppuntamentiDisponibili(idAnnuncio, info.dateStr); //+'T00:00:00'
-            } else {
-                // Else part is for past dates: do nothing
-            }
-        },
-        selectable: true
+    LoadCalendar(idAnnuncio);
 
-    });
-
-    calendar2.render();
-
-
+    LoadReportModal();
 
     $(".btn-modal-prenota").click(function(){
         var now = new Date();
@@ -50,11 +18,110 @@
         var yyyy = today.getFullYear();
         GetAndShowAppuntamentiDisponibili(idAnnuncio, (yyyy) + '-' + (mm) + '-' + (dd));
     });
+});
 
-    $('#appointmentModal').on('shown.bs.modal', function () {
-        calendar2.render();
+
+function LoadCalendar(IdAnnuncio) {
+
+    let calendar =  document.getElementById('appointment-caledar');
+    let today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+
+    $.ajax({
+        type: "POST",
+        url: '/Agenda/GetEnabledDate',
+        data: { IdAnnuncio: IdAnnuncio, CurrentDate: currentMonth },
+        dataType: "json",
+        cache: false,
+        success: function (result, status, xhr) {
+            let enabledDate = [];
+            var listDate = [];
+            for (var i = 0; i < result.length -1; i++) enabledDate.push(new Date(result[i]).valueOf());
+
+            let numberOfDay = new Date(currentYear, currentMonth, 0).getDate();
+
+            for (var numDay = 1; numDay < numberOfDay; numDay++) {
+                 var d = new Date(currentYear, currentMonth, numDay,0,1,0);
+
+                 let isIncluded = enabledDate.includes(d.valueOf());
+
+                 if (isIncluded) {
+                     let tets = {
+                         start: d.toISOString().substr(0, 10),
+                         rendering: 'background'
+                     };
+
+                     listDate.push(tets);
+                 }
+             }
+
+
+            //for (var i = 1; i < numberOfDay; i++) {
+            //    var d = new Date(currentYear, currentMonth, i);
+            //    for (var i2 = 0; i2 < result.length - 1; i++) {
+
+            //        if (new Date(result[i2]) == d) {
+            //            var test = {
+            //                start: result[i2],
+            //                rendering: 'background'
+            //            }
+            //            listaDate.push(test);
+            //        }
+            //    }
+            //}
+
+            var calendar2 = new FullCalendar.Calendar(calendar, {
+                plugins: ['dayGrid', 'timeGrid', 'interaction'],
+                locale: selectedLanguage,
+                themeSystem: 'bootstrap',
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next'
+                },
+                footer: {
+                    left: '',
+                    center: '',
+                    right: ''
+                },
+                dateClick: function (info) {
+                    var now = new Date();
+                    if ((now.getFullYear()) + '-' + (now.getMonth() + 1) + '-' + (now.getDate()) == info.dateStr || info.date > (now)) {
+                        // This allows today and future date
+                        $('#giorno-selected').val(info.dateStr);
+                        //alert('Clicked on: ' + info.dateStr);
+                        //$(info.dayEl).addClass('fc-state-highlight');
+                        $('.fc-today').css('blackground', 'transparent !important'); //not working
+                        GetAndShowAppuntamentiDisponibili(IdAnnuncio, info.dateStr); //+'T00:00:00'
+                    } else {
+                        // Else part is for past dates: do nothing
+                    }
+                },
+                selectable: true,
+                events: listDate,
+                showNonCurrentDates: false
+            });
+
+            calendar2.render();
+
+            $('#appointmentModal').on('shown.bs.modal', function () {
+                calendar2.render();
+            });
+        },
+        error: function (xhr, status, error) {
+            console.log("error");
+        }
     });
-}); 
+
+}
+
+function LoadReportModal() {
+    let url = '/Annunci/SignalAdReason';
+
+    $("#report-modal").load(url, function () {
+    });
+}
 
 function changeScroll() {
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -225,4 +292,29 @@ function SendMessage() {
             TrapError("Error during SendMessage");
         }
     });
+}
+
+function ReportAd() {
+    let idAnnuncio = document.getElementById('id-annuncio').value;
+    let idReason = $("#report-reason input[type=radio]:checked").val();
+    let message = $("#report-test").val();
+
+    if (idReason != undefined) {
+        $.ajax({
+            type: "POST",
+            url: "/Annunci/ReportAd",
+            data: { Id: idAnnuncio, ReportReasonId: idReason, ReportMessage: message },
+            dataType: "json",
+            cache: false,
+            success: function (result, status, xhr) {
+                alert("L'annuncio è stato segnalato.")
+            },
+            error: function (xhr, status, error) {
+                TrapError("error "  + error);
+            }
+        });
+    } else {
+        alert("Devi selezionare un motivo prima di continuare");
+    }
+    
 }
