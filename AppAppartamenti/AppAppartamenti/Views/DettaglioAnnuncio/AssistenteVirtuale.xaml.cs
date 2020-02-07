@@ -65,7 +65,7 @@ namespace AppAppartamenti.Views
             public async Task<string> OpenOrDownloadDocument(DocumentoDto documento)
         {
 
-            if (documento.Link != null) //caso link
+            if (documento.TipologiaDocumentoCodice == "LINK") //caso link
             {
                 string link = documento.Link;
                 Uri uri = new Uri(link);
@@ -73,7 +73,7 @@ namespace AppAppartamenti.Views
                 return "";
                 //Device.OpenUri(uri);
             }
-            else if(documento.Documento != null) //caso documento pdf
+            else if(documento.TipologiaDocumentoCodice == "DOCUMENT") //caso documento pdf
             {
                 //byte[] bytes = documento.Documento;
                 //string fileName = documento.Titolo.Replace(" ", "") + ".pdf";

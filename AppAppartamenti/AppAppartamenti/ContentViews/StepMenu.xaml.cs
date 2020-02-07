@@ -16,6 +16,7 @@ namespace AppAppartamenti.ContentViews
         public Color BorderColor { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsVisible { get; set; }
+        public Color TextColor { get; set; }
     }
 
     partial class StepMenu : ContentView
@@ -62,13 +63,15 @@ namespace AppAppartamenti.ContentViews
                 {
                     item.BackgroundColor = (Color)App.Current.Resources["LightColor"];
                     item.BorderColor = (Color)App.Current.Resources["LightColor"];
+                    item.TextColor = Color.Black;
                     item.IsCompleted = true;
                     item.IsVisible = false;
 
                 }
                 else if (item.Id == (int)newValue)
                 {
-                    item.BackgroundColor = Color.White;
+                    item.BackgroundColor = (Color)App.Current.Resources["PrimaryColor"]; //Color.White;
+                    item.TextColor = Color.White;
                     item.BorderColor = (Color)App.Current.Resources["PrimaryColor"];
                 }
             }

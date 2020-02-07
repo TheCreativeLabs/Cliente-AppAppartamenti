@@ -20,6 +20,9 @@ namespace AppAppartamenti.Views
     {
         List<TipologiaAnnuncio> listTipologiaAnnuncio = new List<TipologiaAnnuncio>();
         List<TipologiaProprieta> listTipologiaProprieta = new List<TipologiaProprieta>();
+        List<TipologiaProprieta> listTipologiaProprietaVendita = new List<TipologiaProprieta>();
+        TipologiaProprieta room;
+        TipologiaProprieta postoLetto;
         RicercaModel FiltriRicerca;
         bool IsRicaricamento;
         ListaComuniViewModel viewModel;
@@ -64,9 +67,16 @@ namespace AppAppartamenti.Views
                 listTipologiaProprieta.Insert(0, new TipologiaProprieta() { Id = null,Codice="", Descrizione="Seleziona..."});
             }
 
-            pckTipologiaProprieta.ItemsSource = listTipologiaProprieta;
+            //pckTipologiaProprieta.ItemsSource = listTipologiaProprieta
+
+            listTipologiaProprietaVendita = listTipologiaProprieta;
+            room = listTipologiaProprietaVendita.FirstOrDefault(x => x.Codice == "ROOM");
+            postoLetto = listTipologiaProprietaVendita.FirstOrDefault(x => x.Codice == "POSTO_LETTO");
+            listTipologiaProprietaVendita.Remove(room);
+            listTipologiaProprietaVendita.Remove(postoLetto);
 
 
+            pckTipologiaProprieta.ItemsSource = listTipologiaProprietaVendita;
 
             if (FiltriRicerca != null)
             {
@@ -195,11 +205,25 @@ namespace AppAppartamenti.Views
             if(picker.SelectedIndex == 0) {
                 stkPrezzoVendita.IsVisible = true;
                 stkPrezzoAffitto.IsVisible = false;
+
+                //pckTipologiaProprieta.ItemsSource.Remove(room);
+                //pckTipologiaProprieta.ItemsSource.Remove(postoLetto);
+                //pckTipologiaProprieta.ItemsSource.Clear();
+                //pckTipologiaProprieta.ItemsSource = listTipologiaProprietaVendita; 
+                //pckTipologiaProprieta.SelectedItem = listTipologiaProprieta.FirstOrDefault();
             }
             else
             {
                 stkPrezzoVendita.IsVisible = false;
                 stkPrezzoAffitto.IsVisible = true;
+
+                //pckTipologiaProprieta.ItemsSource.Add(room);
+                //fixme doesn't work
+                //pckTipologiaProprieta.ItemsSource.Clear();
+                //pckTipologiaProprieta.ItemsSource = listTipologiaProprieta;
+                //pckTipologiaProprieta.SelectedItem = listTipologiaProprieta.FirstOrDefault();
+                //pckTipologiaProprieta.ItemsSource.Add(postoLetto);
+
             }
         }
 

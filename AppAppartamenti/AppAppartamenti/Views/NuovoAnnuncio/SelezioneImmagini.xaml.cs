@@ -70,6 +70,11 @@ namespace AppAppartamenti.Views
                 }
             }
             cvImmagini.ItemsSource = bytesImages.ToArray();
+
+
+            StackLoader.IsVisible = false;
+            stkHeader.IsVisible = true;
+            gridContainer.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)
@@ -98,6 +103,11 @@ namespace AppAppartamenti.Views
                 await DisplayAlert("Campo obbligatorio", "Inserire almeno un'immagine", "Ok");
                 return;
             }
+
+
+            StackLoader.IsVisible = true;
+            stkHeader.IsVisible = false;
+            gridContainer.IsVisible = false;
 
             annuncio.Immagini.Clear();
             foreach (var item in bytesImages)

@@ -9,6 +9,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d" x:Class="AppAppartamenti.Views.SelezioneImmagini"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
             NavigationPage.HasNavigationBar="False"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:AppAppartamenti.ContentViews"
              ios:Page.UseSafeArea="true"
@@ -24,14 +25,23 @@
     <ContentPage.Content>
 
         <StackLayout Style="{x:StaticResource StackContainer}">
-            <StackLayout Orientation="Horizontal">
+            <StackLayout x:Name="StackLoader"  VerticalOptions="CenterAndExpand" IsVisible="True">
+                <forms:AnimationView HorizontalOptions="Center" VerticalOptions="Start" 
+	                        x:Name="animationLoader" 
+	                        Animation="loadericon.json" 
+	                        Loop="true" 
+	                        AutoPlay="true"
+                            HeightRequest="170" WidthRequest="170"  />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" x:Name="stkHeader" IsVisible="False">
                 <controls:BackButton/>
                 <Button Style="{x:StaticResource NavCancelButton}"     Clicked="BtnCancel_Clicked">
                 </Button>
             </StackLayout>
 
 
-            <Grid>
+            <Grid x:Name="gridContainer" IsVisible="False">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>

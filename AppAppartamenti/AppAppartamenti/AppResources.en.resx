@@ -816,4 +816,7 @@
   <data name="DA_APPROVARE" xml:space="preserve">
     <value>Waiting listing approval</value>
   </data>
+  <data name="RUSTICO" xml:space="preserve">
+    <value>Farm building</value>
+  </data>
 </root>

@@ -95,6 +95,10 @@ namespace AppAppartamenti.Views
                     pckRiscaldamento.SelectedIndex = 0;
                 }
             }
+
+            StackLoader.IsVisible = false;
+            stkHeader.IsVisible = true;
+            gridContainer.IsVisible = true;
         }
 
         private async void BtnBack_Clicked(object sender, EventArgs e)

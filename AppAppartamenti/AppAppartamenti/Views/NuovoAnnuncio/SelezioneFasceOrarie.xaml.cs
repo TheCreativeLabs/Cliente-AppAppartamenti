@@ -618,6 +618,9 @@ namespace AppAppartamenti.Views
         {
             ((Button)sender).IsEnabled = false;
 
+            gridContainer.IsVisible = false;
+            StackLoader.IsVisible = true;
+
             var fasceOrarieLunedi = string.Empty;
             foreach (var item in listTimeSlotLunedi)
             {
