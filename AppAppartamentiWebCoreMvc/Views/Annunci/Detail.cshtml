@@ -70,27 +70,8 @@
                 <div class="col-12">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            @{
-                                if (ImmaginiAnnuncio != null)
-                                {
-                                    bool isLiActiveInserted = false;
-                                    @for (int i = 0; i < ImmaginiAnnuncio.Count(); i++)
-                                    {
-                                        if (!isLiActiveInserted)
-                                        {
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
-
-                                            isLiActiveInserted = true;
-                                        }
-                                        else
-                                        {
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
-                                        }
-                                    }
-                                }
-                            }
                         </ol>
-                        <div class="carousel-inner">
+                        <div class="carousel-inner text-center">
                             <lottie-player src="https://assets9.lottiefiles.com/datafiles/de5fLwslkvYN9zP/data.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay>
                             </lottie-player>
                         </div>
@@ -102,6 +83,10 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
+                    </div>
+
+                    <div class="text-right">
+                        @Html.ActionLink("Visualizza le foto", "DetailImmagini", new { Id = Model.Id.Value })
                     </div>
 
                     <div class="mt-3">

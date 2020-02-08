@@ -26,7 +26,7 @@
         </div>
 
 
-        <div class="col-sm-8 offset-sm-2">
+        <div class="col-sm-8 offset-sm-2" style="overflow: scroll !important;">
             <div class="nav nav-pills" id="create-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link text-dark active mr-2 rounded-0" id="tipologia-proprieta-tab" data-toggle="pill" href="#tipologia-proprieta" role="tab" aria-controls="tipologia-proprieta" aria-selected="true">
                     @_localizer["PropertyType"]
@@ -122,7 +122,7 @@
                     <div id="posizione" class="tab-pane fade" role="tabpanel" aria-labelledby="posizione-tab">
                         <div class="p-3">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-12">
                                     <div class="form-group form-group-sm">
 
                                         <label asp-for="CodiceComune" class="control-label">Comune</label>
@@ -188,7 +188,7 @@
                                         }
                                     </div>
                                 </div>
-                                <div class="col-8">
+                                <div class="col-12">
                                     @{
                                         if (annuncio != null)
                                         {
@@ -815,8 +815,8 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                         </div>
                         <div id="agenda" class="tab-pane fade" role="tabpanel" aria-labelledby="agenda-tab">
 
-                            <div class="p-3">
-                                <h5>@_localizer["AgendaTitle"]&nbsp;<small class="text-muted">@_localizer["AgendaSubtitle"]</small></h5>
+                            <div class="p-0">
+                                <label class="adSubtitle text-secondary"><i class="fas fa-info-circle"></i>&nbsp;@_localizer["AgendaSubtitle"]</label>
 
                                 <div class="btn-group-toggle text-center mt-3" data-toggle="buttons">
                                     @{
@@ -918,7 +918,6 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                     </label>
                                 </div>
 
-                                <hr />
                                 @{
                                     IEnumerable<string> Ore = (IEnumerable<string>)ViewData["ListaOre"];
                                     IEnumerable<string> Minuti = (IEnumerable<string>)ViewData["ListaMinuti"];
@@ -965,29 +964,29 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend ">
-                                            <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                            <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                         </div>
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                      new SelectList(@Ore, @selectedLunHourFrom),
                                                                                      @_localizer["Hours"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select  rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedLunMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@fasceLunPrimoTo" name="fasciaOrariaTo">*@
                                         @*<div id="input-to" class="input-group-prepend">*@
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                               new SelectList(@Ore, @selectedLunHourTo),
                                                                                                               @_localizer["Hours"].Value,
-                                                                                                              new { @class = "select-orario custom-select" })
+                                                                                                              new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                                                   new SelectList(@Minuti, @selectedLunMinutesTo),
                                                                                                                   @_localizer["Minutes"].Value,
-                                                                                                                  new { @class = "select-orario custom-select" })
+                                                                                                                  new { @class = "select-orario custom-select rounded-right border" })
                                         @*</div>*@
                                     </div>
 
@@ -1012,32 +1011,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                      new SelectList(@Ore, @hourFrom),
                                                                                      @_localizer["Hours"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                      new SelectList(@Ore, @hourTo),
                                                                                      @_localizer["Hours"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
@@ -1090,32 +1089,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@_localizer["From"]</span>
+                                            <span class="input-group-text border-0">@_localizer["From"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceMarPrimoFrom">*@
 
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @selectedMarHourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedMarMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceMarPrimoTo">*@
 
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                  new SelectList(@Ore, @selectedMarHourTo),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select  rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @selectedMarMinutesTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                     </div>
 
@@ -1139,32 +1138,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @hourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                  new SelectList(@Ore, @hourTo),
                                                                                                  @_localizer["Hours"].Value,
-                                                                                                 new { @class = "select-orario custom-select" })
+                                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
@@ -1217,32 +1216,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@_localizer["From"]</span>
+                                            <span class="input-group-text border-0">@_localizer["From"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceMerPrimoFrom">*@
 
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @selectedMerHourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedMerMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceMerPrimoTo">*@
 
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                  new SelectList(@Ore, @selectedMerHourTo),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @selectedMerMinutesTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                     </div>
 
@@ -1266,32 +1265,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @hourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                  new SelectList(@Ore, @hourTo),
                                                                                                  @_localizer["Hours"].Value,
-                                                                                                 new { @class = "select-orario custom-select" })
+                                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
@@ -1344,32 +1343,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@_localizer["From"]</span>
+                                            <span class="input-group-text border-0">@_localizer["From"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceGioPrimoFrom">*@
 
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @selectedGioHourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedGioMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceGioPrimoTo">*@
 
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                  new SelectList(@Ore, @selectedGioHourTo),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @selectedGioMinutesTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                     </div>
 
@@ -1393,32 +1392,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @hourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border " })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                  new SelectList(@Ore, @hourTo),
                                                                                                  @_localizer["Hours"].Value,
-                                                                                                 new { @class = "select-orario custom-select" })
+                                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
@@ -1471,32 +1470,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@_localizer["From"]</span>
+                                            <span class="input-group-text border-0">@_localizer["From"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceVenPrimoFrom">*@
 
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @selectedVenHourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedVenMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceVenPrimoTo">*@
 
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                  new SelectList(@Ore, @selectedVenHourTo),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @selectedVenMinutesTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                     </div>
 
@@ -1520,32 +1519,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @hourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                  new SelectList(@Ore, @hourTo),
                                                                                                  @_localizer["Hours"].Value,
-                                                                                                 new { @class = "select-orario custom-select" })
+                                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
@@ -1597,32 +1596,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@_localizer["From"]</span>
+                                            <span class="input-group-text border-0">@_localizer["From"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceSabPrimoFrom">*@
 
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @selectedSabHourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedSabMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceSabPrimoTo">*@
 
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                  new SelectList(@Ore, @selectedSabHourTo),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @selectedSabMinutesTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                     </div>
 
@@ -1646,32 +1645,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @hourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                  new SelectList(@Ore, @hourTo),
                                                                                                  @_localizer["Hours"].Value,
-                                                                                                 new { @class = "select-orario custom-select" })
+                                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
@@ -1723,32 +1722,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                             <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                         </div>
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@_localizer["From"]</span>
+                                            <span class="input-group-text border-0">@_localizer["From"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaFrom" value="@fasceDomPrimoFrom">*@
 
                                         @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @selectedDomHourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @selectedDomMinutesFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                         <div class="input-group-append">
-                                            <span class="input-group-text">@_localizer["To"]</span>
+                                            <span class="input-group-text border-0">@_localizer["To"]</span>
                                         </div>
                                         @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" name="fasciaOrariaTo" value="@fasceDomPrimoTo">*@
 
                                         @Html.DropDownList("oreFasciaOrariaTo",
                                                                                  new SelectList(@Ore, @selectedDomHourTo),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                         @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @selectedDomMinutesTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                     </div>
 
@@ -1772,32 +1771,32 @@ new SelectList(classeEnergetica, "Id", "Descrizione"),
                                                         <a class="btn btn-light rounded-circle"><i class="fas fa-times"></i></a>
                                                     </div>
                                                     <div class="input-group-prepend ">
-                                                        <span class="input-group-text rounded-left">@_localizer["From"]</span>
+                                                        <span class="input-group-text rounded-left border-0">@_localizer["From"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@from" name="fasciaOrariaFrom">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaFrom",
                                                                                  new SelectList(@Ore, @hourFrom),
                                                                                  @_localizer["Hours"].Value,
-                                                                                 new { @class = "select-orario custom-select" })
+                                                                                 new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaFrom",
                                                                                      new SelectList(@Minuti, @minFrom),
                                                                                      @_localizer["Minutes"].Value,
-                                                                                     new { @class = "select-orario custom-select" })
+                                                                                     new { @class = "select-orario custom-select rounded-right border" })
 
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">@_localizer["To"]</span>
+                                                        <span class="input-group-text border-0">@_localizer["To"]</span>
                                                     </div>
                                                     @*<input type="time" class="form-control valid" aria-label="Amount (to the nearest dollar)" aria-invalid="false" value="@to" name="fasciaOrariaTo">*@
 
                                                     @Html.DropDownList("oreFasciaOrariaTo",
                                                                                                      new SelectList(@Ore, @hourTo),
                                                                                                      @_localizer["Hours"].Value,
-                                                                                                     new { @class = "select-orario custom-select" })
+                                                                                                     new { @class = "select-orario custom-select rounded-left" })
                                                     @Html.DropDownList("minutiFasciaOrariaTo",
                                                                                          new SelectList(@Minuti, @minTo),
                                                                                          @_localizer["Minutes"].Value,
-                                                                                         new { @class = "select-orario custom-select" })
+                                                                                         new { @class = "select-orario custom-select rounded-right border" })
 
                                                 </div>
 
