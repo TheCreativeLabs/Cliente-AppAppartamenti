@@ -6,9 +6,11 @@
     List<byte[]> ImmaginiAnnuncio = (List<byte[]>)ViewData["ImmaginiAnnuncio"];
 }
 
-@section SubHeader {
+<input value="@Model.Id" id="id-annuncio" style="display:none" />
+
+@*@section SubHeader {
     <div id="secondnav" class="d-none sub-nav p-2 navbar-expand-sm fixed-top navbar-light bg-white shadow border-top">
-        <input value="@Model.Id" id="id-annuncio" style="display:none" />
+        
         <div class="container-fluid">
             <div class="row">
                 <div class="col-9">
@@ -40,7 +42,7 @@
             </div>
         </div>
     </div>
-}
+}*@
 
 <div class="container container-custom">
     <div class="row">
@@ -52,15 +54,15 @@
 
                 if (Model.FlagPreferito.HasValue && Model.FlagPreferito.Value == true)
                 {
-                    cssClass = "text-primary";
+                    cssClass = "text-preferred";
                 }
 
-                <button type="button" class="btn btn-ad-detail-action @cssClass" data-preferred="@Model.FlagPreferito" onclick="AddOrRemovePreferred(this,'@Model.Id')"><i class="fas fa-heart"></i>&nbsp;Salva</button>
+                <button type="button" class="btn btn-ad-detail-action shadow-lg @cssClass" data-preferred="@Model.FlagPreferito" onclick="AddOrRemovePreferred(this,'@Model.Id')"><i class="fas fa-heart"></i>&nbsp;Salva</button>
             }
 
-            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-ad-detail-action"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
+            <button type="button" id="btnShareModal" onclick="event.stopPropagation();$('#shareModal').modal('show');" class="btn btn-ad-detail-action shadow-lg"><i class="fas fa-share-alt"></i>&nbsp;Condividi</button>
 
-            <button type="button" class="btn btn-ad-detail-action"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
+            <button type="button" class="btn btn-ad-detail-action shadow-lg" data-toggle="modal" data-target="#signal-modal"><i class="fas fa-exclamation-triangle"></i>&nbsp;Segnala</button>
         </div>
         <div class="col-sm-9">
             <div class="row">
@@ -89,6 +91,8 @@
                             }
                         </ol>
                         <div class="carousel-inner">
+                            <lottie-player src="https://assets9.lottiefiles.com/datafiles/de5fLwslkvYN9zP/data.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay>
+                            </lottie-player>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,13 +104,13 @@
                         </a>
                     </div>
 
-                  <div class="mt-3">
-                    <span class="title">
-                        @Model.TipologiaProprieta in @Model.TipologiaAnnuncio a @string.Format("{0:N0}€", Model.Prezzo)
-                  </span>
-                    <br />
-                  <span class="subtitle">@Model.Indirizzo,  @Model.NomeComune</span>
-                </div>
+                    <div class="mt-3">
+                        <span class="title">
+                            @Model.TipologiaProprieta in @Model.TipologiaAnnuncio a @string.Format("{0:N0}€", Model.Prezzo)
+                        </span>
+                        <br />
+                        <span class="subtitle">@Model.Indirizzo,  @Model.NomeComune</span>
+                    </div>
 
                     <div class="mt-5">
                         <h5>Descrizione</h5>
@@ -116,167 +120,213 @@
                     </div>
 
                     <div class="mt-5">
-                        
-                            <h5>Caratteristiche principali</h5>
 
-                            <span asp-for="Superficie" class="control-label">Superficie: </span
-                            <span>@Model.Superficie m²</span>
+                        <h5>Caratteristiche principali</h5>
 
-                            <br />
+                        <span asp-for="Superficie" class="control-label">Superficie: </span>
+                        <span>@Model.Superficie m²</span>
 
-                            <span asp-for="Piano" class="control-label">Piano: </span>
-                            <span>@Model.Piano</span>
+                        <br />
 
-                            <br />
+                        <span asp-for="Piano" class="control-label">Piano: </span>
+                        <span>@Model.Piano</span>
 
-                            <span>
-                                <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
-                            </span>
+                        <br />
 
-                            <br />
+                        <span>
+                            <i class="fas fa-bed fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCameraLetto camere da letto
+                        </span>
 
-                            <span>
+                        <br />
 
-                                <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
-                            </span>
-                            <br />
+                        <span>
 
-
-                            <span>
-
-                                <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
-                            </span>
-
-                            <br />
+                            <i class="fas fa-door-open fas-custom"></i>&nbsp;&nbsp;@Model.NumeroAltreStanze altre stanze
+                        </span>
+                        <br />
 
 
-                            <span>
+                        <span>
 
-                                <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
-                            </span>
+                            <i class="fas fa-shower fas-custom"></i>&nbsp;&nbsp;@Model.NumeroBagni bagni
+                        </span>
 
-                            <br />
+                        <br />
 
-                            <span>
 
-                                <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
-                            </span>
+                        <span>
 
-                            <br />
+                            <i class="fas fa-utensils fas-custom"></i>&nbsp;&nbsp;@Model.NumeroCucine cucine
+                        </span>
 
-                            @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
-                            }
+                        <br />
 
-                            @if (Model.Balcone.HasValue && Model.Balcone.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
-                            }
+                        <span>
 
-                            @if (Model.Cantina.HasValue && Model.Cantina.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
-                            }
+                            <i class="fas fa-car fas-custom"></i>&nbsp;&nbsp;@Model.NumeroPostiAuto posti auto
+                        </span>
 
-                            @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
-                            }
+                        <br />
 
-                            @if (Model.Giardino.HasValue && Model.Giardino.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
-                            }
+                        @if (Model.Ascensore.HasValue && Model.Ascensore.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">Ascensore</span>
+                        }
 
-                            @if (Model.Piscina.HasValue && Model.Piscina.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
-                            }
+                        @if (Model.Balcone.HasValue && Model.Balcone.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">Balcone</span>
+                        }
 
-                            @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
-                            {
-                                <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
-                            }
+                        @if (Model.Cantina.HasValue && Model.Cantina.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">Cantina</span>
+                        }
+
+                        @if (Model.Condizionatori.HasValue && Model.Condizionatori.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">Condizionatori</span>
+                        }
+
+                        @if (Model.Giardino.HasValue && Model.Giardino.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">Giardino</span>
+                        }
+
+                        @if (Model.Piscina.HasValue && Model.Piscina.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">Piscina</span>
+                        }
+
+                        @if (Model.UltimoPiano.HasValue && Model.UltimoPiano.Value)
+                        {
+                            <span class="badge badge-white p-2 shadow-sm border mt-3">UltimoPiano</span>
+                        }
                     </div>
 
                     <div class="mt-5">
-                            <h5>Costi</h5>
+                        <h5>Costi</h5>
+                        @{
+                            string prezzo = string.Format("{0}{1}", Model.Prezzo, "€");
+                            if (Model.TipologiaAnnuncio == "Affitto")
+                            {
+                                prezzo = string.Format("{0}{1}", Model.Prezzo, "€/Mese");
+
+                            }
+                        }
+                        <span asp-for="Prezzo" class="control-label">Prezzo: @prezzo</span>
+
+
+                        <br />
+                        <span asp-for="SpesaMensileCondominio" class="control-label">Spese mensili: @Model.SpesaMensileCondominio €\mese</span>
+
+
+                        <br />
+                        <span asp-for="TipologiaRiscaldamento" class="control-label">Tipologia riscaldamento: @Model.TipologiaRiscaldamento</span>
+
+
+                        <br />
+                        <span asp-for="ClasseEnergetica" class="control-label">Clase energetica: @Model.ClasseEnergetica</span>
+
+
+                        <br />
+                        <div id="btnGroupEnergy" class="btn-group btn-block" role="group" aria-label="Basic example">
                             @{
-                                string prezzo = string.Format("{0}{1}", Model.Prezzo, "€");
-                                if (Model.TipologiaAnnuncio == "Affitto")
-                                {
-                                    prezzo = string.Format("{0}{1}", Model.Prezzo, "€/Mese");
+                                IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
 
+                                foreach (var item in classeEnergetica)
+                                {
+                                    @if (item.Descrizione == Model.ClasseEnergetica)
+                                    {
+
+                                        <button type="button" class="btn disabled bg-light energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn disabled bg-light energy-@item.Descrizione.Replace("+","plus")">@item.Descrizione</button>
+                                    }
                                 }
                             }
-                            <span asp-for="Prezzo" class="control-label">Prezzo: @prezzo</span>
-                           
+                        </div>
+                    </div>
 
-                            <br />
-                            <span asp-for="SpesaMensileCondominio" class="control-label">Spese mensili: @Model.SpesaMensileCondominio €\mese</span>
-                            
 
-                            <br />
-                            <span  asp-for="TipologiaRiscaldamento" class="control-label">Tipologia riscaldamento: @Model.TipologiaRiscaldamento</span>
-                            
+                    @if ((Model.SenzaBarriereArchitettoniche.HasValue && Model.SenzaBarriereArchitettoniche.Value) ||
+                        (Model.Montascale.HasValue && Model.Montascale.Value) ||
+                        (Model.SenzaGradiniInternoProprieta.HasValue && Model.SenzaGradiniInternoProprieta.Value))
+                    {
+                <div class="mt-5">
+                    <h5><i class="fas fa-wheelchair"></i> Accessibilità</h5>
 
-                            <br />
-                            <span asp-for="ClasseEnergetica" class="control-label">Clase energetica: @Model.ClasseEnergetica</span>
-                            
+                    @if (Model.SenzaBarriereArchitettoniche.HasValue && Model.SenzaBarriereArchitettoniche.Value)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" checked="checked" type="checkbox" value="" id="defaultCheck">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Senza barriere archittetoniche
+                            </label>
+                        </div>
+                    }
 
-                            <br />
-                            <div id="btnGroupEnergy" class="btn-group btn-block" role="group" aria-label="Basic example">
-                                @{
-                                    IEnumerable<ClasseEnergetica> classeEnergetica = (IEnumerable<ClasseEnergetica>)ViewData["ListaClassiEnergetiche"];
 
-                                    foreach (var item in classeEnergetica)
-                                    {
-                                        @if (item.Descrizione == Model.ClasseEnergetica)
-                                        {
+                    @if (Model.Montascale.HasValue && Model.Montascale.Value)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" checked="checked" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Montascale
+                            </label>
+                        </div>
 
-                                            <button type="button" class="btn disabled bg-light energy-@item.Descrizione.Replace("+","plus") active">@item.Descrizione</button>
-                                        }
-                                        else
-                                        {
-                                            <button type="button" class="btn disabled bg-light energy-@item.Descrizione.Replace("+","plus")">@item.Descrizione</button>
-                                        }
-                                    }
+                    }
+
+                    @if (Model.SenzaGradiniInternoProprieta.HasValue && Model.SenzaGradiniInternoProprieta.Value)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" checked="checked" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Proprietà senza gradini
+                            </label>
+                        </div>
+                    }
+
+                    </div>
+                    }
+
+
+
+
+                    <div class="mt-5">
+                        <h5>Planimetria</h5>
+                        <div style="height:400px">
+                            @{
+                                var srcPlanimetria = string.Empty;
+                                if (Model.ImmaginiPlanimetria != null && Model.ImmaginiPlanimetria.Any())
+                                {
+                                    var base64Planimetria = Convert.ToBase64String(Model.ImmaginiPlanimetria.First());
+                                    srcPlanimetria = String.Format("data:image/gif;base64,{0}", base64Planimetria);
                                 }
-                            </div>
+                            }
+
+                            <img src="@srcPlanimetria" class="w-100 h-100 rounded-lg" alt="image" />
+                        </div>
                     </div>
 
                     <div class="mt-5">
-                            <h5>Planimetria</h5>
-                            <div style="height:400px">
-                                @{
-                                    var srcPlanimetria = string.Empty;
-                                    if (Model.ImmaginiPlanimetria != null && Model.ImmaginiPlanimetria.Any())
-                                    {
-                                        var base64Planimetria = Convert.ToBase64String(Model.ImmaginiPlanimetria.First());
-                                        srcPlanimetria = String.Format("data:image/gif;base64,{0}", base64Planimetria);
-                                    }
-                                }
-
-                                <img src="@srcPlanimetria" class="w-100 h-100" alt="image" />
-                            </div>
-                    </div>
-
-                    <div class="mt-5">
-                            <h5 >Posizione</h5>
-                            <span>@Model.Indirizzo, @Model.NomeComune</span>
-                            @*data-address="@Model.Indirizzo,@Model.NomeComune"*@
-                            <div id="googleMap" data-latlng="@Model.CoordinateGeografiche" class="map w-100" style="height:400px;"></div>
+                        <h5>Posizione</h5>
+                        <span>@Model.Indirizzo, @Model.NomeComune</span>
+                        @*data-address="@Model.Indirizzo,@Model.NomeComune"*@
+                        <div id="googleMap" data-latlng="@Model.CoordinateGeografiche" class="map w-100 rounded-lg" style="height:400px;"></div>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
         <div class="col-sm-3">
             @{
                 UserInfoDto userInfo = (UserInfoDto)ViewData["UserInfo"];
             }
 
-            <div class="p-3 mt-1 text-center shadow">
+            <div class="p-3 mt-1 text-center">
                 @{
                     var imgUserProfile = userInfo.PhotoUrl;
 
@@ -287,15 +337,58 @@
                     }
                 }
 
-                <div class="mx-auto" style="width:100px;height:100px">
+                <div class="mx-auto profile-picture">
                     <img src="@imgUserProfile" class="w-100 h-100 rounded-circle" alt="image" />
                 </div>
 
+
+
                 <label class="text-center mx-auto mb-3 mt-2">@userInfo.Nome @userInfo.Cognome</label>
 
-                <button class="btn btn-primary btn-sm btn-block btn-modal-prenota" href="#" data-toggle="modal" data-target="#appointmentModal">Prendi un appuntamento</button>
+                <hr />
 
-                <button onclick="OpenModal('@Model.Id','@userInfo.IdAspNetUser','@string.Format("{0} {1}",userInfo.Nome,userInfo.Cognome)')" class="btn btn-success btn-sm btn-block" >Manda un messaggio</button>
+                <div class="btn-modal-prenota  rounded-lg" style="cursor:pointer" data-toggle="modal"
+                     data-target="#appointmentModal">
+                    <div class="row">
+                        <div class="col-2 p-1  pl-2">
+                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_w22Uo9.json" background="transparent" speed="1" style="width: 60px; height: 60px;" autoplay>
+                            </lottie-player>
+                        </div>
+                        <div class="col p-4">
+                            Prendi un appuntamento
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class=" rounded-lg  mt-3" style="cursor:pointer"
+                     onclick="OpenModal('@Model.Id','@userInfo.IdAspNetUser','@string.Format("{0} {1}",userInfo.Nome,userInfo.Cognome)')">
+                    <div class="row">
+                        <div class="col-2 text-center  pt-3 pl-4">
+                            <lottie-player src="https://assets2.lottiefiles.com/temp/lf20_6Xbo3i.json" background="transparent" speed="1" style="width: 40px; height: 40px;" autoplay>
+                            </lottie-player>
+                        </div>
+                        <div class="col p-4">
+                            Manda un messaggio
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="mt-3">
+                    <div class="row">
+                        <div class="col-2 text-center  pt-3 pl-4">
+                            <div id="virtual-assistent">
+                            </div>
+                        </div>
+                        <div class="col p-4">
+                            Assistente virtuale
+                        </div>
+                    </div>
+                </div>
+               
             </div>
         </div>
     </div>
@@ -305,32 +398,38 @@
 
 @await Html.PartialAsync("_ChatModalPartial")
 
+<div id="report-modal">
+</div>
+
+
 <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
         <div class="modal-content ">
             <div class="modal-header">
-                <h5 class="modal-title" id="shareModalLabel">Prendi un nuovo appuntamentoo</h5>
+                <h5 class="modal-title" id="shareModalLabel">Prendi un nuovo appuntamento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body pt-5" style="height:500px;">
+            <div class="modal-body pt-5">
                 <input id="giorno-selected" style="display:none" /> @*contenitore del giorno selezionato per l'appuntamento*@
                 <div class="row">
-                    <div class="cl-sm-6 col-7">
+                    <div class="col-xs-12 col-sm-7">
                         <div id="appointment-caledar"></div>
                     </div>
-                    <div class="col-5">
-                        <label class="title">Orari disponibili</label>
-                         <div class="text-center">
-                             <div id="detail-agenda-spinner-loading" class="spinner-border mt-5" role="status">
+                    <div class="col-xs-12 col-sm-5">
+                        <label class="adTitle">Orari disponibili</label>
+                        <div class="text-center">
+                            <div id="detail-agenda-spinner-loading" class="mt-5" role="status">
                                 <span class="sr-only">Loading...</span>
-                                 </div>
+                                <lottie-player src="https://assets9.lottiefiles.com/datafiles/de5fLwslkvYN9zP/data.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay>
+                                </lottie-player>
                             </div>
-                        <div id="appointment-available" class="btn-group-toggle text-center mt-3" data-toggle="buttons">
-
+                         
                         </div>
-                       
+                            <div id="appointment-available" class="btn-group-toggle text-center mt-3" data-toggle="buttons">
+
+                            </div>
                     </div>
                 </div>
             </div>

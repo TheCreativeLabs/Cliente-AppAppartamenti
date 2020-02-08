@@ -3,69 +3,61 @@
 
 <div class="container-fluid">
     <div class="row">
-         <div class="col-12 text-right">
-            @if(Model.Confermato.HasValue && Model.Confermato.Value)
-            {
-                <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger">Annulla appuntamento</button>
-            }
-            else
-            {
-                <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger">Rifiuta</button>
-                <button onclick="AcceptAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-success">Accetta</button>
-            }
-        </div>
-    </div>
-
-        <div class="col-12 p-0">
-    <label class="section-title">Appuntamento con</label>
-
-            <br />
-    @{
-        if (Model.ImagePersonToMeet != null)
-        {
-            var base64 = Convert.ToBase64String(Model.ImagePersonToMeet);
-            var imgSrc =  String.Format("data:image/gif;base64,{0}", base64);
-            <div class="mb-2 mx-auto image-profile-edit" >
-                <img id="profileImage" src="@imgSrc"  alt="image" class="rounded-circle d-block w-100" />
+        <div class="col-12">
+            <div class="alert alert-danger">
+                Questo appuntamento non è ancora stato confermato da @Model.NameAndSurnamePersonToMeet
             </div>
-        }
-    }
+        </div>
 
-    <span>@Model.NameAndSurnamePersonToMeet</span>
-<br />
-    <label class="section-title mt-3">Quando</label>
-            <br />
-
-    <span>@Model.Data.ToString("dd/MM/yyyy HH:mm")</span>
+        <div class="col-12">
+            <label class="section-title">Appuntamento con</label>
 
             <br />
-    <label class="section-title mt-3">Dove</label>
+            @{
+                if (Model.ImagePersonToMeet != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.ImagePersonToMeet);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                  
+                    <img id="profileImage" src="@imgSrc" alt="image" class="rounded-circle profile-picture" />
+                }
+            }
+
+            <span>@Model.NameAndSurnamePersonToMeet</span>
+            <br />
+            <label class="section-title">Quando</label>
             <br />
 
-    <span>@string.Format("{0}, {1}",Model.InfoAnnuncio.Indirizzo,Model.InfoAnnuncio.NomeComune)</span>
-<br />
+            <span>@Model.Data.ToString("dd/MM/yyyy HH:mm")</span>
 
-    <div id="googleMap" data-latlng="@Model.CoordinateGeograficheAnnuncio" class="map w-100" style="height:200px;"></div>
-  
+            <br />
+            <label class="section-title mt-3">Dove</label>
+            <br />
 
-   <label class="section-title mt-3">Annuncio</label>
+            <span>@string.Format("{0}, {1}", Model.InfoAnnuncio.Indirizzo, Model.InfoAnnuncio.NomeComune)</span>
+            <br />
 
-    
+            <div id="googleMap" data-latlng="@Model.CoordinateGeograficheAnnuncio" class="map w-100 rounded-lg mt-2" style="height:200px;"></div>
 
-</div>
 
-        <div class="col-md-6">
+            <label class="section-title mt-3">Annuncio</label>
+
+
+
+        </div>
+
+        <div class="col-4">
             @{
                 if (Model.InfoAnnuncio.ImmaginePrincipale != null)
                 {
                     var base64 = Convert.ToBase64String(Model.InfoAnnuncio.ImmaginePrincipale);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    <img src="@imgSrc" class="card-img-annuncio" alt="image" style="height:100px !important;width:100px !important;" />
+                    <img src="@imgSrc" class="w-100 rounded-lg" alt="image" />
                 }
             }
         </div>
 
-        <div class="col-md-6">
+        <div class="col-8">
             <div class="p-1 mt-2">
                 <span> @Model.InfoAnnuncio.TipologiaProprieta in  @Model.InfoAnnuncio.TipologiaAnnuncio a @string.Format("{0:N0}€", Model.InfoAnnuncio.Prezzo)</span>
                 <br />
@@ -74,6 +66,24 @@
                 <span class="mb-3">Superficie: @Model.InfoAnnuncio.Superficie m² </span>
             </div>
         </div>
+
+        <div class="col-12">
+            <hr />
+            @if (Model.FromMe.HasValue && Model.FromMe.Value == true)
+            {
+                <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger">Annulla appuntamento</button>
+            }
+            else if (Model.Confermato.HasValue && Model.Confermato.Value == false)
+            {
+                <button onclick="DeleteAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-danger">Rifiuta</button>
+                <button onclick="AcceptAppointment('@Model.IdAppuntamento')" type="button" class="btn btn-success">Accetta</button>
+            }
+        </div>
+    </div>
+
+       
+
+       
 
    
 </div>

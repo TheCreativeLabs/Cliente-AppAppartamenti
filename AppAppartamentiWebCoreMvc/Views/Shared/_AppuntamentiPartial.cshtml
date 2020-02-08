@@ -1,32 +1,36 @@
 ﻿@model List<AppuntamentoDtoOutput>
 
-<div class="row mt-5">
+<div class="row mt-2 pl-5">
     @{
 
         if (Model == null || !Model.Any())
         {
-            <div class="col-12 alert bg-light">
-                <label class="h6">Non sono presenti appuntamenti.</label>
+            <div class="col-12 alert">
+                <label class="h6">Non sono presenti appuntamenti per il giorno selezionato.</label>
             </div>
         }
         else
         {
             foreach (var appuntamento in Model)
             {
-                string cssClass = "border-0";
-                if (appuntamento.Confermato.HasValue && !appuntamento.Confermato.Value)
-                {
-                    cssClass = "border border-danger";
-                }
+                //string cssClass = "border-0";
+                //if (appuntamento.Confermato.HasValue && !appuntamento.Confermato.Value)
+                //{
+                //    cssClass = "border border-danger";
+                //}
 
-                <div class="col-12 shadow-sm @cssClass" onclick="LoadAppointmentDetail('@appuntamento.IdAppuntamento')">
+                <div class="col-12 shadow rounded-lg border">
                     <div class="row">
-                        <div class="col-3 text-center p-3">
-                            <label>@appuntamento.Data.ToString("HH:mm")</label>
-                        </div>
-                        <div class="col-9 p-3">
-                            <span> Appuntamento con @appuntamento.NameAndSurnamePersonToMeet </span>
+                        <div class="col-9 p-2 pl-3">
+                            @if (appuntamento.Confermato.HasValue && !appuntamento.Confermato.Value)
+                            {
+                                <label class="text-danger">Appuntamento non ancora confermato.</label>
+                            }
+                            <label class="adTitle small"> Appuntamento con @appuntamento.NameAndSurnamePersonToMeet alle @appuntamento.Data.ToString("HH:mm")</label>
+                            <br />
                             <span class="info">@string.Format("{0},{1}", appuntamento.Indirizzo, appuntamento.NomeComune)</span>
+                            <br />
+                            <a class="text-primary" href="#" onclick="LoadAppointmentDetail('@appuntamento.IdAppuntamento')">Viusalizza dettaglio</a>
                         </div>
                     </div>
                 </div>

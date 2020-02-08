@@ -8,7 +8,7 @@
             if (msg.FromMe.HasValue && msg.FromMe.Value)
             {
                 <div class="mt-2 mb-2 col-12">
-                    <div class="p-2 bg-primary rounded pl-5 pt-2 pb-2 float-right pr-2 text-right">
+                    <div class="p-2 bg-primary pl-5 pt-2 pb-2 float-right pr-2 text-right" style="border-radius: 1rem 0 1rem 1rem;">
                         <span class="text-white">@msg.Messaggio</span>
                         <br />
                         <span class="text-light mt-3 small">@msg.DataInserimento.Value.ToString("dddd, dd MMMM yyyy")</span>
@@ -18,7 +18,7 @@
             else
             {
             <div class="col-12 mt-2 mb-2">
-                <div class="p-2 bg-light rounded pt-2 pl-2 pb-2 pr-5 float-left text-left">
+                <div class="p-2 bg-light pt-2 pl-2 pb-2 pr-5 float-left text-left" style="border-radius: 0 1rem 1rem 1rem;">
                     <span>@msg.Messaggio</span>
                     <br />
                     <span class="text-dark mt-3 info small">@msg.DataInserimento.Value.ToString("dddd, dd MMMM yyyy")</span>

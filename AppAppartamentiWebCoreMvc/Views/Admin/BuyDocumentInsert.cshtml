@@ -1,0 +1,100 @@
+﻿@model DocumentoDto
+
+@{
+    ViewBag.Title = "Inserisci un documento";
+}
+
+<div class="container container-custom">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <div>
+                @Html.ActionLink("Torna alla lista", "ListBuyDocument")
+            </div>
+
+            <label class="title">@ViewBag.Title</label>
+
+            @using (Html.BeginForm("BuyDocumentInsert"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group" style="display:none">
+                        @Html.LabelFor(model => model.IdTipologiaDocumento, htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IdTipologiaDocumento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IdTipologiaDocumento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none">
+                        @Html.LabelFor(model => model.VenditaAcquisto, htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            <select asp-for="@Model.VenditaAcquisto">
+                                <option value="false">true</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.VenditaAcquisto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Titolo, htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Titolo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Titolo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descrizione, htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Descrizione, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descrizione, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TipologiaDocumentoCodice,"Tipologia documento", htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            <select asp-for="@Model.Descrizione" class="form-control">
+                                <option value="DOCUMENT">Documento pdf</option>
+                                <option value="LINK">Link</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.TipologiaDocumentoCodice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label col-12" })
+                        <div class="col-md-10">
+                            <div class="form-group text-left">
+                                <input type="file" data-input-name="Documento" class="file-input" style="display:none">
+                                <label class="file-label border-0 btn btn-light rounded-pill" for="input-planimetria"><i class="fas fa-plus"></i>&nbsp;Aggiungi un file</label>
+                            </div>
+                            @* @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group text-right">
+                        <hr />
+                        <input type="submit" value="Inserisci documento" class="btn btn-primary" />
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+</div>
+
+

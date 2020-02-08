@@ -6,7 +6,20 @@ $(document).ready(function () {
     ReloadList();
 
     $("#btn-show-map").click(function () {
+        $(this).hide();
+        $("#btn-hide-map").show();
         setHeight();
+    });
+
+    $("#btn-hide-map").click(function () {
+        $(this).hide();
+        $("#map-container").hide();
+        $("#main-container").addClass("container");
+        $("#main-container").removeClass("container-fluid");
+        $("#container-annunci").removeClass();
+        $("#container-annunci").addClass("col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2");
+        $("#container-annunci").height('auto');
+        $("#btn-show-map").show();
     });
 
     //$('#loadFromMainFrame').click(function (e) {
@@ -92,10 +105,11 @@ function setMap() {
 }
 
 function scrollToDiv(Id) {
-
     $(".card-annuncio").each(function (index) {
+        $(this).removeClass("card-ad-active");
         if (Id == $(this).data("id")) {
-            let height = $(this).parent().height();
+            $(this).addClass("card-ad-active");
+            let height = $(this).height();
             //let top = $(".card-annuncio[data-id='" + IdAnnuncio + "']").parent().offset().top;
 
             $("#container-annunci").animate({
@@ -103,8 +117,6 @@ function scrollToDiv(Id) {
             }, 500);
         }
     })
-
-    
 }
 
 function ReloadList() {

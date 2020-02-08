@@ -2,19 +2,19 @@
 
 @if (!Model.Any())
 {
-    <div class="col-12 alert bg-light"><span>Non ci sono appuntamenti disponibili per il giorno selezionato.</span></div>
+    <div class="col-12 alert"><span>Non ci sono appuntamenti disponibili per il giorno selezionato.</span></div>
 }
 else { 
 
 @foreach (var item in Model)
 {
-    <label onclick="ToggleTimeSlot(this);" class="btn btn-orario-appuntamento rounded-pill shadow" aria-pressed="true"  style="margin:0.5rem;cursor:pointer">
+    <label onclick="ToggleTimeSlot(this);" class="btn btn-orario-appuntamento border rounded-pill shadow" aria-pressed="true"  style="margin:0.5rem;cursor:pointer">
       <input type="checkbox"><span>@item</span>
     </label>
 }
 
  <div class="col-12 mx-auto">
-    <button onclick="PrenotaAppuntamento();" class="btn btn-primary btn-sm btn-block mt-5">
+    <button onclick="PrenotaAppuntamento();" class="btn btn-primary btn-sm btn-block mt-5 p-2">
         Prenota
     </button>
 </div>

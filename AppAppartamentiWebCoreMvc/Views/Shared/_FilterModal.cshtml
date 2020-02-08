@@ -16,60 +16,130 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12 mb-4">
-                            <label class="h6">@_localizer["AdType"]</label>
+                        <div class="col-12 mb-5">
+                            <label class="modal-section-title  mb-4">@_localizer["AdType"]</label>
 
                             @{
                                 IEnumerable<TipologiaAnnuncio> listaTipologiaAnnuncio = (IEnumerable<TipologiaAnnuncio>)ViewData["ListaTipologiaAnnuncio"];
 
 
-                                @Html.DropDownListFor(m => m.IdTipologiaProprieta,
-                                            new SelectList(listaTipologiaAnnuncio, "Id", "Descrizione", Model?.IdTipologiaAnnuncio),
-                                            null, new { @id = "selectTipologiaAnnuncio", @class = "custom-select" })
+                            @Html.DropDownListFor(m => m.IdTipologiaProprieta,new SelectList(listaTipologiaAnnuncio, "Id", "Descrizione", Model?.IdTipologiaAnnuncio),
+                                              null, new { @id = "selectTipologiaAnnuncio", @class = "custom-select", onchange = "ShowColPrice(this);" })
 
                             }
                         </div>
 
-                        <div class="col-12 mb-4">
-                            <label class="h6">@_localizer["PropertyType"]</label>
+                        <div class="col-12 mb-5">
+                            <label class="modal-section-title  mb-4">@_localizer["PropertyType"]</label>
 
                             @{
 
                                 IEnumerable<TipologiaProprieta> tipologiaProprieta = (IEnumerable<TipologiaProprieta>)ViewData["ListaTipologiaProprieta"];
 
                                 @Html.DropDownListFor(m => m.IdTipologiaProprieta,
-                                  new SelectList(tipologiaProprieta, "Id", "Descrizione", Model?.IdTipologiaProprieta),
-                                   "Tutti", new { @id = "selectTipologiaProprieta", @class = "custom-select" })
+                                                                                                        new SelectList(tipologiaProprieta, "Id", "Descrizione", Model?.IdTipologiaProprieta),
+                                                                                                         "Tutti", new { @id = "selectTipologiaProprieta", @class = "custom-select" })
 
                             }
 
                         </div>
 
-                        <div class="col-12 mb-4">
-                            <label class="h6 mb-5">@_localizer["Price"]</label>
+                        <div class="col-12 mb-5" id="col-ven">
+                            <label class="modal-section-title  mb-5">@_localizer["Price"]</label>
 
-                            <div id="sliderPrezzo" data-min="@Model?.PrezzoMin" data-max="@Model?.PrezzoMax"></div>
+                            <div class="row justify-content-center mb-5">
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="inp-prz-min" placeholder="Da">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="inp-prz-max" placeholder="A">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-prezzo-sm">€</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="sliderPrezzo" class="mt-4" data-min="@Model?.PrezzoMin" data-max="@Model?.PrezzoMax"></div>
                             <p class="float-left text-muted small">50.000€</p>
                             <p class="float-right text-muted small">500.000€</p>
                         </div>
 
-                        <div class="col-12 mb-4">
-                            <label class="h6 mb-5">@_localizer["Surface"]</label>
+                        <div class="col-12 mb-5" id="col-aff" style="display:none;">
+                            <label class="modal-section-title mb-5">@_localizer["Price"]</label>
 
-                            <div id="sliderDimensione" data-min="@Model?.DimensioneMin" data-max="@Model?.DimensioneMax"></div>
+                            <div class="row justify-content-center mb-5">
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input class="form-control inp-slider" data-slider="sliderPrezzoAff" type="text" id="inp-prz-aff-min" placeholder="Da">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-prezzo-aff-sm">€\mese</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input class="form-control inp-slider" data-slider="sliderPrezzoAff" type="text" id="inp-prz-aff-max" placeholder="A">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-prezzo-aff--sm">€\mese</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="sliderPrezzoAff" class="mt-4" data-min="@Model?.PrezzoMin" data-max="@Model?.PrezzoMax"></div>
+                            <p class="float-left text-muted small">400€\mese</p>
+                            <p class="float-right text-muted small">5000€\mese</p>
+                        </div>
+
+                        <div class="col-12 mb-5">
+                            <label class="modal-section-title mb-5">@_localizer["Surface"]</label>
+
+                            <div class="row justify-content-center mb-5">
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input class="form-control inp-slider" data-slider="sliderDimensione" type="text" id="inp-sup-min" placeholder="Da">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-prezzo-sm">mq</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input class="form-control inp-slider" data-slider="sliderDimensione" type="text" id="inp-sup-max" placeholder="A">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-prezzo-sm">mq</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="sliderDimensione" class="mt-4" data-min="@Model?.DimensioneMin" data-max="@Model?.DimensioneMax"></div>
                             <p class="float-left text-muted small">50m²</p>
                             <p class="float-right text-muted small">500m²</p>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 mb-4 text-center">
-                            <label class="h6">@_localizer["BathroomNumber"]</label>
+                        <div class="col-12 mb-3">
+                            <label class="modal-section-title">Locali</label>
+                        </div>
+
+                        <div class="col-8 mb-4">
+                            <label class="h6 text-left">@_localizer["BathroomNumber"]</label>
+                        </div>
+                        <div class="col-4">
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroBagni">
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroBagni" name="NumeroBagni" value="@Model?.NumeroBagni">
+                                <input class="input-group-field form-control form-control-sm bg-white ml-1 mr-1 border-0 rounded" disabled id="NumeroBagni" name="NumeroBagni" value="@Model?.NumeroBagni">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroBagni">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -78,16 +148,17 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 mb-4 text-center">
+                        <div class="col-8 mb-4">
                             <label class="h6">@_localizer["BedroomNumber"]</label>
-
+                        </div>
+                        <div class="col-4">
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCamereLetto">
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroCamereLetto" name="NumeroCamereLetto" value="@Model?.NumeroCamereLetto">
+                                <input class="input-group-field form-control form-control-sm bg-white ml-1 mr-1 border-0 rounded " disabled id="NumeroCamereLetto" name="NumeroCamereLetto" value="@Model?.NumeroCamereLetto">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCamereLetto">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -96,16 +167,19 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 mb-4 text-center">
-                            <label class="h6">@_localizer["OtherRoomNumber"]</label>
 
+                        <div class="col-8 mb-4">
+
+                            <label class="h6">@_localizer["OtherRoomNumber"]</label>
+                        </div>
+                        <div class="col-4">
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroAltreStanze">
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroAltreStanze" name="NumeroAltreStanze" value="@Model?.NumeroAltreStanze">
+                                <input class="input-group-field form-control form-control-sm bg-white ml-1 mr-1 border-0 rounded " disabled id="NumeroAltreStanze" name="NumeroAltreStanze" value="@Model?.NumeroAltreStanze">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroAltreStanze">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -114,16 +188,17 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 mb-4 text-center">
+                        <div class="col-8 mb-4">
                             <label class="h6">@_localizer["KitchensNumber"]</label>
-
+                        </div>
+                        <div class="col-4">
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroCucine">
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroCucine" name="NumeroCucine" value="@Model?.NumeroCucine">
+                                <input class="input-group-field form-control form-control-sm bg-white ml-1 mr-1 border-0 rounded " disabled id="NumeroCucine" name="NumeroCucine" value="@Model?.NumeroCucine">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroCucine">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -132,16 +207,17 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 mb-4 text-center">
+                        <div class="col-8 mb-4">
                             <label class="h6">@_localizer["GarageNumber"]</label>
-
+                        </div>
+                        <div class="col-4">
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroGarage">
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroGarage" name="NumeroGarage" value="@Model?.NumeroGarage">
+                                <input class="input-group-field form-control form-control-sm bg-white ml-1 mr-1 border-0 rounded " disabled id="NumeroGarage" name="NumeroGarage" value="@Model?.NumeroGarage">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroGarage">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -150,16 +226,17 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 mb-4 text-center">
+                        <div class="col-8 mb-4">
                             <label class="h6">@_localizer["CarSeatsNumber"]</label>
-
+                        </div>
+                        <div class="col-4">
                             <div class="input-group plus-minus-input justify-content-center">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="minus" data-field="NumeroPostiAuto">
                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field form-control form-control-sm bg-light border-0 rounded " disabled id="NumeroPostiAuto" name="NumeroPostiAuto" value="@Model?.NumeroPostiAuto">
+                                <input class="input-group-field form-control form-control-sm bg-white ml-1 mr-1 border-0 rounded " disabled id="NumeroPostiAuto" name="NumeroPostiAuto" value="@Model?.NumeroPostiAuto">
                                 <div class="input-group-button">
                                     <button type="button" class="button hollow circle btn btn-dark rounded-circle btn-sm" data-quantity="plus" data-field="NumeroPostiAuto">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -167,6 +244,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-12 mb-4 mt-4">
+                            <label class="modal-section-title mb-5">Altre caratteristiche</label>
+                        </div>
+
 
                         <div class="col-12  mb-4">
                             <div class="custom-control custom-switch">
@@ -204,7 +286,7 @@
                         </div>
 
                     </div>
-                </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button id="btnSaveFilter" type="button" class="btn btn-primary">@_localizer["SaveFilter"]</button>

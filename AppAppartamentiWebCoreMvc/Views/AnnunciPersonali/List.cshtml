@@ -19,7 +19,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label>Eliminare definitivamente l'appuntamento?</label>
+                        <label>Eliminare definitivamente l'annuncio?</label>
                     </div>
                     <div class="modal-footer">
                         <button id="btnAnnulla" type="button" class="btn btn-primary">Annulla</button>
@@ -43,9 +43,9 @@
             string detailUrl = @Url.Action("Create", "AnnunciPersonali", new { Id = item.Id });
 
 
-            <div class="card card-annuncio mb-5" onclick="NavigateToDetail('@detailUrl')">
+            <div class="card card-annuncio mb-5" style="cursor:default !important;">
                 <div class="row no-gutters">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="position-absolute bg-transparent p-2 border-0" style="text-align: end;">
                             @*asp-action="Delete" asp-controller="AnnunciPersonali" onclick="return confirm('Continuare con l\'eliminazione dell\'annuncio');"*@
                             <button title="Delete" class="btn ad-action-button" data-toggle="modal" data-target="#deleteAnnuncioModal" asp-route-Id="@item.Id">
@@ -62,11 +62,11 @@
                                 var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
                                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
-                                <img src="@imgSrc" class="card-img rounded" alt="image" height="260" />
+                                <img src="@imgSrc" class="card-img rounded" alt="image" height="200" />
                             }
                         }
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="card-body p-0">
                             <div class="pl-3 mt-0">
                                 <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
@@ -74,19 +74,6 @@
                                 <label>@item.Indirizzo, @item.NomeComune</label>
                                 <br />
                                 <label class="mb-3">Superficie: @item.Superficie m² </label>
-
-                                <br />
-                                @{
-                                    if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200)
-                                    {
-                                        <span class="info">@item.Descrizione.Substring(0, 200)...</span>
-
-                                    }
-                                    else
-                                    {
-                                        <span class="info">@item.Descrizione...</span>
-                                    }
-                                }
                             </div>
                         </div>
                     </div>

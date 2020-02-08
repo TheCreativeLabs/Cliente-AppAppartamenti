@@ -69,8 +69,9 @@ $(document).ready(function () {
     });
 
 
-
-   
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 });
 
 //Carica la lista degli appuntamenti di oggi
@@ -319,7 +320,7 @@ function EnableSearch(searchTextbox) {
 
                     var nomiComuni = [];
                     for (var i = 0; i < result.length; i++) {
-                        nomiComuni.push(result[i].NomeComune);
+                        nomiComuni.push(result[i].NomeComune + " (" + result[i].NomeProvincia + ")");
                     }
 
                     $(searchTextbox).autocomplete({
@@ -327,6 +328,12 @@ function EnableSearch(searchTextbox) {
                         select: function (event, ui) {
                             searchButton.removeClass("disabled");
                             var value = ui.item.value;
+
+                            if (value != null) {
+                                value = value.split(" (")[0];
+                                console.log("selected-place: " + value);
+                            }
+                           
                             for (var i = 0; i < listaComuni.length; i++) {
                                 if (listaComuni[i].NomeComune == value) {
                                     $("#codiceComune").val(listaComuni[i].CodiceComune);

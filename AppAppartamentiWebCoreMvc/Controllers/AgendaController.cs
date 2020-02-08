@@ -103,5 +103,21 @@ namespace AppAppartamentiWebCoreMvc.Controllers
 
             return PartialView("~/Views/Annunci/_FasceOrariePartial.cshtml", orariDisponibili);
         }
+
+        [HttpPost]
+        public async Task<string> GetEnabledDate(string IdAnnuncio, int CurrentMonth, int CurrentYear)
+        {
+            HttpClient httpClient = new HttpClient();
+            var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            //Ottengo la lista degli orari disponibili
+            AgendaClient agendaClient = new AgendaClient(httpClient);
+
+            var currentDate = new DateTime(CurrentYear, CurrentMonth, 01);
+            currentDate = currentDate.AddMonths(1);
+            var orariDisponibili = await agendaClient.GetGiorniDisponibiliByMeseAsync(new Guid(IdAnnuncio), new DateTimeOffset(currentDate));
+            return JsonConvert.SerializeObject(orariDisponibili);
+        }
     }
 }
