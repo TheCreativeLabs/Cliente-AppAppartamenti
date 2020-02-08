@@ -107,6 +107,12 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             return View(annuncio);
         }
 
+        public async Task<IActionResult> DetailImmaginiAsync(Guid Id)
+        {
+            ViewData["Id"] = Id;
+            return View();
+        }
+
         public async Task<List<string>> ImmaginiAnnuncioAsync(Guid IdAnnuncio) {
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();

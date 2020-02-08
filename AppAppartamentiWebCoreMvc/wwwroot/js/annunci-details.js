@@ -238,20 +238,23 @@ function GetImmaginiAnnuncioAjax(idAnnuncio) {
             var isActiveInserted = false;
 
             var innerHTML = "";
+            var innerOlHTML = "";
 
-            for(var k in result)
-            {
+            for (var k in result) {
                 if (!isActiveInserted) {
-                    innerHTML += '<div class="carousel-item active" style="height: 500px"><img src="' + result[k]+ '" class="w-100 h-100" alt="image" /></div>';
+                    innerHTML += '<div class="carousel-item active" style="height: 500px"><img src="' + result[k] + '" class="w-100 h-100" alt="image" /></div>';
+                    innerOlHTML += '<li data-target="#carouselExampleIndicators" data-slide-to="' + k + '" class="active"></li>';
 
                     isActiveInserted = true;
                 }
                 else {
                     innerHTML += '<div class="carousel-item" style="max-height: 500px"><img src="' + result[k] + '" class="d-block w-100" alt="image" /></div>';
+                    innerOlHTML += '<li data-target="#carouselExampleIndicators" data-slide-to="' + k + '"></li>';
                 }
             }
 
             $('.carousel-inner').html(innerHTML);
+            $('.carousel-indicators').html(innerOlHTML);
 
         },
         error: function (xhr, status, error) {

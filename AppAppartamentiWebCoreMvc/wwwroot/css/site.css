@@ -764,7 +764,7 @@ label{
 
 #create-pills-tab {
     flex-wrap: nowrap !important;
-    overflow: scroll !important;
+   
 }
 #create-pills-tab .nav-link {
     background-color: white;
