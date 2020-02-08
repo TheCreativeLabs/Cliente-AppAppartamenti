@@ -18,15 +18,14 @@
                 {
                     var base64 = Convert.ToBase64String(Model.ImagePersonToMeet);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    <div class="mb-2 mx-auto image-profile-edit">
-                        <img id="profileImage" src="@imgSrc" alt="image" class="rounded-circle d-block w-100" />
-                    </div>
+                  
+                    <img id="profileImage" src="@imgSrc" alt="image" class="rounded-circle profile-picture" />
                 }
             }
 
             <span>@Model.NameAndSurnamePersonToMeet</span>
             <br />
-            <label class="section-title mt-3">Quando</label>
+            <label class="section-title">Quando</label>
             <br />
 
             <span>@Model.Data.ToString("dd/MM/yyyy HH:mm")</span>

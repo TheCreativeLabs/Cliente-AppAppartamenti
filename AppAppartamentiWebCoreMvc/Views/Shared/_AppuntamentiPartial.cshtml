@@ -13,15 +13,19 @@
         {
             foreach (var appuntamento in Model)
             {
-                string cssClass = "border-0";
-                if (appuntamento.Confermato.HasValue && !appuntamento.Confermato.Value)
-                {
-                    cssClass = "border border-danger";
-                }
+                //string cssClass = "border-0";
+                //if (appuntamento.Confermato.HasValue && !appuntamento.Confermato.Value)
+                //{
+                //    cssClass = "border border-danger";
+                //}
 
-                <div class="col-12 shadow rounded-lg @cssClass">
+                <div class="col-12 shadow rounded-lg border">
                     <div class="row">
-                        <div class="col-9 p-2">
+                        <div class="col-9 p-2 pl-3">
+                            @if (appuntamento.Confermato.HasValue && !appuntamento.Confermato.Value)
+                            {
+                                <label class="text-danger">Appuntamento non ancora confermato.</label>
+                            }
                             <label class="adTitle small"> Appuntamento con @appuntamento.NameAndSurnamePersonToMeet alle @appuntamento.Data.ToString("HH:mm")</label>
                             <br />
                             <span class="info">@string.Format("{0},{1}", appuntamento.Indirizzo, appuntamento.NomeComune)</span>

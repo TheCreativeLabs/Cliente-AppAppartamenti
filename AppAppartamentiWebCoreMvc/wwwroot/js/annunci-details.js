@@ -1,11 +1,13 @@
 ﻿$(document).ready(function () {
+    $('#virtual-assistent').load('/VirtualAssistent/GetAvatar?IsForBuy=true', function () {
+    });
     //$("#secondnav").hide();
 
     //window.onscroll = function () { changeScroll() };
 
     var idAnnuncio = document.getElementById('id-annuncio').value;
 
-    LoadCalendar(idAnnuncio);
+    LoadCalendar(idAnnuncio,false);
 
     LoadReportModal();
 
@@ -31,45 +33,12 @@ function LoadCalendar(IdAnnuncio) {
     $.ajax({
         type: "POST",
         url: '/Agenda/GetEnabledDate',
-        data: { IdAnnuncio: IdAnnuncio, CurrentDate: currentMonth },
+        data: { IdAnnuncio: IdAnnuncio, CurrentMonth: currentMonth, CurrentYear: currentYear },
         dataType: "json",
         cache: false,
         success: function (result, status, xhr) {
-            let enabledDate = [];
-            var listDate = [];
-            for (var i = 0; i < result.length -1; i++) enabledDate.push(new Date(result[i]).valueOf());
 
-            let numberOfDay = new Date(currentYear, currentMonth, 0).getDate();
-
-            for (var numDay = 1; numDay < numberOfDay; numDay++) {
-                 var d = new Date(currentYear, currentMonth, numDay,0,1,0);
-
-                 let isIncluded = enabledDate.includes(d.valueOf());
-
-                 if (isIncluded) {
-                     let tets = {
-                         start: d.toISOString().substr(0, 10),
-                         rendering: 'background'
-                     };
-
-                     listDate.push(tets);
-                 }
-             }
-
-
-            //for (var i = 1; i < numberOfDay; i++) {
-            //    var d = new Date(currentYear, currentMonth, i);
-            //    for (var i2 = 0; i2 < result.length - 1; i++) {
-
-            //        if (new Date(result[i2]) == d) {
-            //            var test = {
-            //                start: result[i2],
-            //                rendering: 'background'
-            //            }
-            //            listaDate.push(test);
-            //        }
-            //    }
-            //}
+            let listDate = GetEnabledDate(result,currentYear,currentMonth);
 
             var calendar2 = new FullCalendar.Calendar(calendar, {
                 plugins: ['dayGrid', 'timeGrid', 'interaction'],
@@ -101,18 +70,77 @@ function LoadCalendar(IdAnnuncio) {
                 selectable: true,
                 events: listDate,
                 showNonCurrentDates: false
+
             });
 
             calendar2.render();
 
             $('#appointmentModal').on('shown.bs.modal', function () {
                 calendar2.render();
+
+                $(".fc-next-button").click(function () {
+                    let date = calendar2.getDate();
+                    let month = date.getMonth();
+                    let year = date.getFullYear();
+                    $.ajax({
+                        type: "POST",
+                        url: '/Agenda/GetEnabledDate',
+                        data: { IdAnnuncio: IdAnnuncio, CurrentMonth: month, CurrentYear: year},
+                        dataType: "json",
+                        cache: false,
+                        success: function (result, status, xhr) {
+                            let listDate = GetEnabledDate(result,year,month);
+                            calendar2.addEventSource(listDate);
+                            //calendar2.render();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log("error");
+                        }
+                    });
+                });
+
             });
         },
         error: function (xhr, status, error) {
             console.log("error");
         }
     });
+
+}
+
+function GetEnabledDate(enabledDates,year,month) {
+    let enabledDate = [];
+    var listDate = [];
+    for (var i = 0; i < enabledDates.length; i++) enabledDate.push(new Date(enabledDates[i]).valueOf());
+
+    let numberOfDay = new Date(year, month + 1, 0).getDate();
+
+    for (var numDay = 1; numDay < numberOfDay + 1; numDay++) {
+        var d = new Date(year, month, numDay, 0, 1, 0);
+
+        let dyear = d.getFullYear();
+        let dmonth = d.getMonth() + 1;
+        if (dmonth < 10) {
+            dmonth = '0' + dmonth;
+        }
+        let dday = d.getDate();
+        if (dday < 10) {
+            dday = '0' + dday;
+        }
+        
+        let isIncluded = enabledDate.includes(d.valueOf());
+
+        if (isIncluded == false) {
+            let tets = {
+                start: d.getFullYear() + '-' + dmonth + '-' + dday,
+                rendering: 'background'
+            };
+
+            listDate.push(tets);
+        }
+    }
+
+    return listDate;
 
 }
 

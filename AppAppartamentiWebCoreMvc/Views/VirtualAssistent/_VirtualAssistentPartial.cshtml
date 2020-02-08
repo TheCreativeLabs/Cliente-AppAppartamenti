@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer _localizer
+@model ListaDocumentiDto
+
+<div class="btn-group dropup">
+    @{
+        var imgObj = ViewData["AvatarImage"];
+        if (imgObj != null)
+        {
+            var base64 = Convert.ToBase64String((byte[])imgObj);
+            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+            <img src="@imgSrc" id="btn-virtual-agent" type="button" class="va-picture rounded-circle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+        }
+    }
+    <div class="dropdown-menu-agent dropdown-menu dropdown-menu-right shadow border-0 p-2">
+        <div class="container-fluid p-0">
+            <div class="row bg-light" style="margin-top:-0.5rem !important;">
+                <div class="col-12 text-center p-3">
+                    <label class="subtitle">
+                        Ciao, sono qui per aiutarti!
+                    </label>
+                    <br>
+                    <label>
+                        posso darti suggerimenti e indicarti tutto ciò che ti serve per vendere al meglio la tua casa!
+                    </label>
+                </div>
+            </div>
+
+            @{
+                foreach (var item in Model.DocumentiByTipologia)
+                {
+                        <label class="mt-3 adTitle mb-3">@_localizer[item.Key]</label>
+
+                    foreach (var doc in item.Value)
+                    {
+                        if (doc.TipologiaDocumentoCodice == "LINK")
+                        {
+                            <div class="row p-2">
+                                <div class="col-12">
+                                <a href="@doc.Link" class="text-primary" target="_blank" title="@doc.Descrizione">@doc.Titolo</a>
+                                    <hr />
+                                </div>
+                            </div>
+                        }
+                        else if (doc.TipologiaDocumentoCodice == "DOCUMENT")
+                        {
+                            <div class="col-12">
+                                <a href="/Documenti/Detail/@doc.Id" class="text-primary" target="_blank" title="@doc.Descrizione">@doc.Titolo</a>
+                                <hr />
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+

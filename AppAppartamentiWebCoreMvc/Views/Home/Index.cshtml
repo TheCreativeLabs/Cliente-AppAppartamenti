@@ -24,7 +24,7 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                         <div class="input-group-append">
-                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark" href="#"><small>+ @_localizer["OtherFilterLabel"]</small></a>
+                            <a id="btnFiltri2" data-toggle="modal" data-target="#filterModal" class="btn btn-link text-dark" href="#"><small><i class="fas fa-filter"></i>&nbsp;@_localizer["OtherFilterLabel"]</small></a>
                         </div>
                         <div class="input-group-append">
                             <a id="btnSearchHome" class="btn btn-primary disabled search-button"
@@ -40,27 +40,33 @@
     </div>
 </div>
 
-<div class="container-fluid mb-5 mt-5">
+<div class="container-fluid mb-5 mt-3">
     <div class="row p-4">
         <div class="col p-2 m-3">
+            <lottie-player src="https://assets3.lottiefiles.com/datafiles/KfDYWPNIlXdW4Jy/data.json" background="rgba(154, 64, 64, 0)" speed="1" style="width: 100px; height: 100px;" autoplay>
+            </lottie-player>
             <p class="title">Cerca</p>
             <span class="subtitle">Inizia a cerca la casa dei tuoi sogni tra milioni di annunci.</span>
         </div>
         <div class="col m-3 p-2">
+            <lottie-player src="https://assets8.lottiefiles.com/datafiles/qNzyBoPeMvTSu71/data.json" background="transparent" speed="1" style="width: 100px; height: 100px;" autoplay>
+            </lottie-player>
             <p class="title">Vendi</p>
             <span class="subtitle">Pubblica un nuovo annuncio e vendi la tua casa in un attimo.</span>
         </div>
         <div class="col m-3 p-2">
+            <lottie-player src="https://assets5.lottiefiles.com/temp/lf20_6Xbo3i.json" background="transparent" speed="1" style="width: 100px; height: 100px;"  autoplay>
+            </lottie-player>
             <p class="title">Contatta</p>
             <span class="subtitle">Manda un messaggio al annunciatario, prendi un appartamento e inizia a cercare la tua prossima casa.</span>
         </div>
     </div>
 
     <div class="row  border-top m-4 border-gray p-5 ">
-        <div class="col text-right">
-            <img src="/images/app.png" style="height:50rem;"/>
+        <div id="col-app-home" class="col">
+            <img src="/images/app.png"/>
         </div>
-        <div class="col text-left" style="padding-top: 20rem;">
+        <div id="col-app-desc-home" class="col" >
             <h3>@_localizer["DownloadAppTitle"]</h3>
             <label>@_localizer["DownloadAppDescription"]</label>
             <br />

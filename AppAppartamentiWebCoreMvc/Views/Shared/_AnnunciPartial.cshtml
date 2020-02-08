@@ -15,7 +15,7 @@
 
         <div class="card card-annuncio mb-5" data-id="@item.Id" data-coordinate="@item.CoordinateGeografiche" onclick="NavigateToDetail('@detailUrl')">
             <div class="row no-gutters">
-                <div class="col-md-6">
+                <div class="col-md-5">
                      <div class="position-absolute bg-transparent p-2 border-0" style="text-align: end;">
                             @{
                                 string cssClass = "";
@@ -38,11 +38,11 @@
                             var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
                             var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
-                            <img src="@imgSrc" class="card-img rounded" alt="image" height="260" />
+                            <img src="@imgSrc" class="card-img rounded" alt="image" height="200" />
                         }
                     }
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card-body p-0">
                         <div class="pl-3 mt-0">
                             <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>

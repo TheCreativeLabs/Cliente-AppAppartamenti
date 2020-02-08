@@ -69,8 +69,9 @@ $(document).ready(function () {
     });
 
 
-
-   
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 });
 
 //Carica la lista degli appuntamenti di oggi

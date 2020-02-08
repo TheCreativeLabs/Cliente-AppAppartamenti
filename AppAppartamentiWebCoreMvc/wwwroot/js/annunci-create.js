@@ -3,6 +3,9 @@ var numPlanimetria = 0;
 var numFasceLun = 0;
 
 $(document).ready(function () {
+    $('#virtual-assistent').load('/VirtualAssistent/GetAvatar?IsForBuy=false', function () {
+    });
+
     $("#smallTitle").hide();
     $("#navbar-create").addClass("mt-5");
     window.onscroll = function () { changeScroll() };
@@ -166,7 +169,7 @@ async function GetImmagini(input,listname,inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image appartamento-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'appartamento-image\'' + ',\'' + inputname+'\')" class="btn-remove btn btn-light rounded-circle position-absolute border"><i class="fas fa-trash-alt"></i></button><input style="display:none"  value="'+imageBytes+'"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image appartamento-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'appartamento-image\'' + ',\'' + inputname +'\')" class="btn-remove btn bg-white rounded-circle position-absolute border-0 shadow-lg"><i class="fas fa-trash-alt"></i></button><input style="display:none"  value="'+imageBytes+'"/><div class="p-0 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 rounded-lg" /></div></div>';
     refreshNames(listname, 'appartamento-image', inputname);
 
     //name = "' +inputname+'['+numImage+']"
@@ -198,7 +201,7 @@ async function GetPlanimetrie(input, listname, inputname) {
 
     let imageBytes = base64.slice(base64.indexOf(",")).substring(1, base64.lenght);
 
-    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image planimetria-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'planimetria-image\'' + ',\'' + inputname +'\')" class="btn-remove btn btn-light rounded-circle position-absolute border"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="border p-2 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 " /></div></div>';
+    document.getElementById(listname).innerHTML += '<div class="col-xs-12 col-sm-4 p-0 ad-create-image planimetria-image"><button onclick="RemoveFile(this,\'' + listname + '\',' + '\'planimetria-image\'' + ',\'' + inputname +'\')" class="btn-remove btn bg-white rounded-circle position-absolute border-0 shadow-lg"><i class="fas fa-trash-alt"></i></button><input style="display:none" name="' + inputname + '[' + numPlanimetria + ']" value="' + imageBytes + '"/><div class="p-0 m-2"><img id="ad-image" src="' + base64 + '" alt="image" class="d-block w-100 rounded-lg" /></div></div>';
     refreshNames(listname, 'planimetria-image', inputname);
 
     //numPlanimetria += 1;

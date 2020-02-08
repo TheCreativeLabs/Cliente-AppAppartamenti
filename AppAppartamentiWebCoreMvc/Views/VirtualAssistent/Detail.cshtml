@@ -1,0 +1,53 @@
+﻿@model List<AvatarDtoOutput>
+
+@{
+    ViewData["Title"] = "Avatars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container container-custom">
+    <div class="col-sm-8 offset-sm-2">
+        <label class="title">
+            Assistente virtuale
+        </label>
+        <label class="subtitle">
+            Modifica l'icona del tuo assistente virtuale
+        </label>
+
+        <div class="row">
+
+            @{
+                foreach (var avatar in Model)
+                {
+                    <div class="col-2">
+
+                        @{ if (avatar.ImmagineAvatar != null)
+                            {
+                                var base64 = Convert.ToBase64String(avatar.ImmagineAvatar);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+                                @if (avatar.IsAvatarOfCurrentUser.HasValue && avatar.IsAvatarOfCurrentUser.Value)
+                                {
+                                    <div class="mx-auto p-1 border border-dark">
+                                        <img data-id="@avatar.Id" src="@imgSrc" alt="image" class="rounded-circle d-block mx-auto avatar-picture" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mx-auto p-1">
+                                        <img data-id="@avatar.Id" src="@imgSrc" alt="image" class="rounded-circle d-block mx-auto avatar-picture" />
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/avatar.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AnnunciDtoOutput>
+
+@{
+    ViewData["Title"] = "View";
+}
+<div class="container container-custom">
+    <div class="col-sm-8 offset-sm-2">
+        <label class="title">
+            Annunci da approvare
+        </label>
+
+        @{
+            if (Model == null || !(Model.Any()))
+            {
+                <div class="col-12 alert bg-light">
+                    <label class="h6">Non sono presenti annunci da approvare.</label>
+                </div>
+            }
+        }
+
+        @foreach (var item in Model)
+        {
+            string detailUrl = @Url.Action("Detail", "Admin", new { Id = item.Id, Reported = true });
+            <div class="card card-annuncio mb-5" onclick="NavigateToDetail('@detailUrl')">
+                <div class="row no-gutters">
+                   <div class="col-md-5">
+                        @{
+                            if (item.ImmaginePrincipale != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.ImmaginePrincipale);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+                                <img src="@imgSrc" class="card-img rounded" alt="image" height="200" />
+                            }
+                        }
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body p-0">
+                            <div class="pl-3 mt-0">
+                                <span class="adTitle"> @item.TipologiaProprieta in  @item.TipologiaAnnuncio a @string.Format("{0:N0}€", item.Prezzo)</span>
+                                <br />
+                                <label>@item.Indirizzo, @item.NomeComune</label>
+                                <br />
+                                <label class="mb-3">Superficie: @item.Superficie m² </label>
+
+                                <br />
+                                @{
+                                    if (!String.IsNullOrEmpty(item.Descrizione) && item.Descrizione.Length > 200)
+                                    {
+                                        <span class="info">@item.Descrizione.Substring(0, 200)...</span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="info">@item.Descrizione...</span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        }
+    </div>
+</div>

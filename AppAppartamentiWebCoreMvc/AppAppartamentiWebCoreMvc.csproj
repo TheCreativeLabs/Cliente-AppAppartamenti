@@ -57,6 +57,9 @@
     <Folder Include="Resources\Views\Account\" />
     <Folder Include="Views\Setting\" />
     <Folder Include="Views\Messaggi\" />
+    <Folder Include="Views\VirtualAssistent\" />
+    <Folder Include="Resources\Views\VirtualAssistent\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\js\annunci-details.js" />

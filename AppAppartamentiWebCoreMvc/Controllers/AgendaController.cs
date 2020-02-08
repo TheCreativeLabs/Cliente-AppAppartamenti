@@ -105,7 +105,7 @@ namespace AppAppartamentiWebCoreMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<string> GetEnabledDate(string IdAnnuncio, string CurrentDate)
+        public async Task<string> GetEnabledDate(string IdAnnuncio, int CurrentMonth, int CurrentYear)
         {
             HttpClient httpClient = new HttpClient();
             var accessToken = User.Claims.Where(x => x.Type == "token").Select(x => x.Value).FirstOrDefault();
@@ -114,7 +114,8 @@ namespace AppAppartamentiWebCoreMvc.Controllers
             //Ottengo la lista degli orari disponibili
             AgendaClient agendaClient = new AgendaClient(httpClient);
 
-            var currentDate = DateTime.Today;
+            var currentDate = new DateTime(CurrentYear, CurrentMonth, 01);
+            currentDate = currentDate.AddMonths(1);
             var orariDisponibili = await agendaClient.GetGiorniDisponibiliByMeseAsync(new Guid(IdAnnuncio), new DateTimeOffset(currentDate));
             return JsonConvert.SerializeObject(orariDisponibili);
         }
