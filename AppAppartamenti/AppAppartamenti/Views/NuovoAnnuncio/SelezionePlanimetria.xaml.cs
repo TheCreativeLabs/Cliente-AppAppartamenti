@@ -168,6 +168,18 @@ namespace AppAppartamenti.Views
             if (file == null)
                 return;
 
+            //---INIZIO FIX CHIARA! HO AGGIUNTO QUESTO PEZZO, VERIFICARE SE MIGLIORA---
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                file.GetStream().CopyTo(memoryStream);
+                int id = bytesImages.Count + 1;
+                ImageWithId imm = new ImageWithId() { Id = id, Image = memoryStream.ToArray() };
+                bytesImages.Add(imm);
+                cvImmagini.ItemsSource = bytesImages.ToArray();
+                //mediaFileImages.Add(new MediaFileImage { File = item });
+            }
+            //---FINE FIX CHIARA! HO AGGIUNTO QUESTO PEZZO, VERIFICARE SE MIGLIORA---
+
             //cvImmagini.ItemsSource = mediaFileImages;
         }
 
