@@ -39,17 +39,21 @@
                 <CollectionView x:Name="cvImmagini" Grid.Row="0" Margin="0,0,0,70">
                     <CollectionView.Header>
                         <StackLayout>
-
-
                             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.NuovoAnnuncio}" x:Name="lbl_nuovoAnnuncio"></Label>
                             <Label Style="{x:StaticResource Title}" Text="{translator:Translate SelezioneProprieta.ModificaAnnuncio}" x:Name="lbl_modificaAnnuncio"></Label>
                             <Label Style="{x:StaticResource Subtitle}" Text="{translator:Translate SelezionePlanimetria.Planimetria}"></Label>
                             <controls:StepMenu CurrentId="7"/>
 
-
                             <Button Clicked="ActionImmagini" TextColor="{x:StaticResource PrimaryColor}" Text="{translator:Translate SelezionePlanimetria.AddImage}" Style="{x:StaticResource LinkButton}"></Button>
-
-                        </StackLayout>
+                            <Label LineBreakMode="WordWrap" Margin="0,0,0,10">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="0" x:Name="counter" FontAttributes="Bold" />
+                                        <Span Text="/5 immagini">
+                                        </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label></StackLayout>
                     </CollectionView.Header>
 
                     <CollectionView.ItemsLayout>

@@ -7,12 +7,12 @@ using AppAppartamenti.Droid;
 [assembly: Dependency(typeof(ClearCookies))]  
 namespace AppAppartamenti.Droid
 {
-		public class ClearCookies : IClearCookies
+	public class ClearCookies : IClearCookies
+	{
+		public void ClearAllCookies()
 		{
-			public void ClearAllCookies()
-			{
-				var cookieManager = CookieManager.Instance;
-				cookieManager.RemoveAllCookie();
-			}
+			var cookieManager = CookieManager.Instance;
+			cookieManager.RemoveAllCookie();
 		}
 	}
+}

@@ -58,6 +58,15 @@
 
                             <Button Clicked="ActionImmagini" TextColor="{x:StaticResource PrimaryColor}" Text="{translator:Translate SelezioneImmagini.AggiungiImmagini}" Style="{x:StaticResource LinkButton}"></Button>
 
+                            <Label LineBreakMode="WordWrap"  Margin="0,0,0,10">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="0" x:Name="counter" FontAttributes="Bold" />
+                                        <Span Text="/15 immagini">
+                                        </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                         </StackLayout>
                     </CollectionView.Header>
 

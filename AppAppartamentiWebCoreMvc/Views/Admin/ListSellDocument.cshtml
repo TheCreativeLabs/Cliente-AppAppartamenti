@@ -1,0 +1,41 @@
+﻿@model ListaDocumentiDto
+
+@{
+    ViewData["Title"] = "View";
+}
+<div class="container container-custom">
+    <div class="col-sm-8 offset-sm-2">
+        <label class="title">
+            Documenti per la vendita
+        </label>
+
+        @{
+            if (Model == null)
+            {
+                <div class="col-12 alert bg-light">
+                    <label class="h6">Non sono presenti documenti.</label>
+                </div>
+            }
+        }
+
+        
+        @foreach (var item in Model.DocumentiByTipologia)
+        {
+            <div class="row">
+                <div class="col-12 p-2">
+                    <label class="adTitle">@item.Key</label>
+                </div>
+
+                @foreach (var doc in item.Value)
+                {
+                <div class="col-12 p-2">
+                    <label>@doc.Titolo</label>
+                    @Html.ActionLink("Delete", "DeleteSellDocument", new { Id = doc.Id.Value })
+
+                    <hr />
+                </div>
+                }
+            </div>
+        }
+    </div>
+</div>

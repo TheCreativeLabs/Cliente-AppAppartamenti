@@ -119,7 +119,7 @@
                                         <Label.FormattedText >
                                             <FormattedString>
                                                 <Span FontFamily="{x:StaticResource FA-Solid}" Text="&#xf2cc;" />
-                                                <Span  Text="{Binding  NumeroLocali, StringFormat=' {0} bagni'}" />
+                                                <Span  Text="{Binding  NumeroBagni, StringFormat=' {0} bagni'}" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
