@@ -215,24 +215,60 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
     <BundleResource Include="Resources\logo2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2 2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-3.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-4.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-5.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-6.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-7.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-8.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-9.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-10.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-11.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-12.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-13.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-14.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-15.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2 2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-4.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-5.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-6.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-7.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-8.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-9.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-10.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-11.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-12.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-13.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-14.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-15.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo2-16.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
