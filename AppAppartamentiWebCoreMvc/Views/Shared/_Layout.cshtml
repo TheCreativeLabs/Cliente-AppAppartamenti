@@ -33,7 +33,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="container-fluid pl-1 pr-1">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-igloo h2"></i></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/imgsenzascrittacasabianca.png" width="45" height="45" style="margin-top: -5px" />
+
+                </a>
 
                 <form id="navSearchBar" class="navbar-start">
                     <input id="codiceComune" type="number" value="" style="display: none;" />
@@ -221,19 +224,22 @@
                 <div class="col text-center  col-md">
                     <label class="adTitle">Scorciatoie</label>
                     <ul class="list-unstyled text-small">
-                        <li><a href="#">Pubblica un annuncio</a></li>
+                        <li>
+                            @*<a href="#">Pubblica un annuncio</a>*@
+                            <a asp-action="Create" asp-controller="AnnunciPersonali" >@_localizer["PostAdLabel"]</a>
+                        </li>
                         <li><a href="#">Ricerca un annuncio</a></li>
                     </ul>
                 </div>
                 <div class="col text-center col-md">
                     <label class="adTitle">
                         Informazioni</label>
-                        <ul class="list-unstyled text-small">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Condizioni generali</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
-                        </ul>
+                    <ul class="list-unstyled text-small">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="GeneralCondition">Condizioni generali</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Credits">Crediti</a></li>
+                        @*<li><a href="#">Terms</a></li>*@
+                    </ul>
                 </div>
             </div>
 
@@ -241,7 +247,8 @@
 
             <div class="row p-3">
                 <div class="col">
-                    <i class="fas fa-igloo"></i> &copy; 2019 - Promuovocasa.it - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    <img src="/images/imgsenzascrittacasabianca.png" width="15" height="15" style="margin-top:-2px"/>
+                    &copy; 2019 - Promuovocasa.it - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
                 <div class="col text-right">
                     <button type="button" class="btn btn-social text-dark"><i class="fab fa-facebook-f"></i></button>

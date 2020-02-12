@@ -219,11 +219,11 @@
                                     @{
                                         if (annuncio != null)
                                         {
-                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.Prezzo" asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.Prezzo" asp-for="Prezzo" class="form-control prezzo" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" /> @*data-type="currency" per mettere . e ,*@
                                         }
                                         else
                                         {
-                                            <input data-val-required="@_localizer["Required"]" asp-for="Prezzo" class="form-control" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" />
+                                            <input data-val-required="@_localizer["Required"]" asp-for="Prezzo" class="form-control prezzo" aria-label="prezzo" aria-describedby="inputGroup-prezzo-sm" /> @*data-type="currency" per mettere . e ,*@
                                         }
                                     }
                                     <div class="input-group-append">
@@ -241,11 +241,11 @@
                                     @{
                                         if (annuncio != null)
                                         {
-                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.SpesaMensileCondominio" asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                            <input data-val-required="@_localizer["Required"]" value="@annuncio.SpesaMensileCondominio" asp-for="SpesaMensileCondominio" class="form-control spesecondominio" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" /> @*data-type="currency" per mettere . e ,*@
                                         }
                                         else
                                         {
-                                            <input data-val-required="@_localizer["Required"]" asp-for="SpesaMensileCondominio" class="form-control" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" />
+                                            <input data-val-required="@_localizer["Required"]" asp-for="SpesaMensileCondominio" class="form-control spesecondominio" aria-label="Spesa Mensile Condominio" aria-describedby="inputGroup-SpesaMensileCondominio-sm" /> @*data-type="currency" per mettere . e ,*@
                                         }
                                     }
                                     <div class="input-group-append">

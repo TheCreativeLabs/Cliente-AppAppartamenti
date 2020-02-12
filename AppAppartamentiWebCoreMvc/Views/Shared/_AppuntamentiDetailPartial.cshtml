@@ -4,10 +4,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-danger">
-                Questo appuntamento non è ancora stato confermato da @Model.NameAndSurnamePersonToMeet
+
+            @if (@Model.Confermato.HasValue && !@Model.Confermato.Value)
+            {
+                <div class="alert alert-danger">
+                    Questo appuntamento non è ancora stato confermato da @Model.NameAndSurnamePersonToMeet
+                   
+                </div>
+            }
             </div>
-        </div>
 
         <div class="col-12">
             <label class="section-title">Appuntamento con</label>

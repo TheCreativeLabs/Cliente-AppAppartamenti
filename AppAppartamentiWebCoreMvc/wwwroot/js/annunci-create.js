@@ -52,6 +52,11 @@ $(document).ready(function () {
     $('.select-orario').change(function () {
         ComponiFasceOrarie(this);
     });
+
+    var spesecondominio = $('.spesecondominio');
+    formatCurrency(spesecondominio, "blur");
+    var prezzo = $('.prezzo');
+    formatCurrency(prezzo, "blur");
 });
 
 function ComponiFasceOrarie(input) {
@@ -271,12 +276,12 @@ function EnableCitySearch(searchTextbox) {
     try {
         let nomeComune = $(searchTextbox).val();
 
-        if (listaComuni.length > 0 && nomeComune.length < 3) {
+        if (listaComuni != null && listaComuni.length > 0 && nomeComune.length < 3) {
             listaComuni = [];
             $(searchTextbox).autocomplete({
                 source: []
             });
-        } else if (listaComuni.length == 0 && nomeComune.length >= 3) {
+        } else if (listaComuni == null || (listaComuni.length == 0 && nomeComune.length >= 3)) {
             $("#city-spinner").show();
 
             $.ajax({
