@@ -48,9 +48,12 @@ namespace AppAppartamenti.Views
             annuncio = Annuncio;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            await CrossMedia.Current.Initialize();
+
             if (bytesImages.Count == 0 && annuncio.Immagini != null && annuncio.Immagini.Count > 0 )
             {
                 foreach (var item in annuncio.Immagini)
@@ -71,6 +74,7 @@ namespace AppAppartamenti.Views
             }
             cvImmagini.ItemsSource = bytesImages.ToArray();
 
+            counter.Text = bytesImages.Count.ToString();
 
             StackLoader.IsVisible = false;
             stkHeader.IsVisible = true;
@@ -122,11 +126,11 @@ namespace AppAppartamenti.Views
         {
             await CrossMedia.Current.Initialize();
 
-            //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
-            //{
-            //    DisplayAlert("No Camera", ":( No camera available.", "OK");
-            //    return;
-            //}
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await DisplayAlert("Attenzione", "Nonb è possibile collegarsi alla fotocamera", "OK");
+                return;
+            }
 
             //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             //{
@@ -142,6 +146,13 @@ namespace AppAppartamenti.Views
             if (listaImmagini == null)
                 return;
 
+
+            if(listaImmagini.Count > 15 || bytesImages.Count > 15 || bytesImages.Count + listaImmagini.Count > 15)
+            {
+                await DisplayAlert("Attenzione","È possibile caricare al massimo 15 immagini.", "OK");
+                return;
+            }
+
             //bytesImages.Clear();
             foreach (var item in listaImmagini)
             {
@@ -151,6 +162,7 @@ namespace AppAppartamenti.Views
                     int id = bytesImages.Count + 1;
                     ImageWithId imm = new ImageWithId() { Id = id, Image = memoryStream.ToArray() };
                     bytesImages.Add(imm);
+                    counter.Text = bytesImages.Count.ToString();
                     //mediaFileImages.Add(new MediaFileImage { File = item });
                 }
             }
@@ -161,13 +173,17 @@ namespace AppAppartamenti.Views
         async void TakePhoto()
         {
             try { 
-                await CrossMedia.Current.Initialize();
+                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                {
+                    await DisplayAlert("Attenzione", "Nonb è possibile collegarsi alla fotocamera", "OK");
+                    return;
+                }
 
-                //if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                //{
-                //    DisplayAlert("No Camera", ":( No camera available.", "OK");
-                //    return;
-                //}
+                if (bytesImages.Count + 1 > 15)
+                {
+                    await DisplayAlert("Attenzione", "È possibile caricare al massimo 15 immagini.", "OK");
+                    return;
+                }
 
                 //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 //{
@@ -177,7 +193,7 @@ namespace AppAppartamenti.Views
 
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
-                    SaveToAlbum = true,
+                    SaveToAlbum = false,
                     PhotoSize = PhotoSize.Small
                 });
 
@@ -192,10 +208,10 @@ namespace AppAppartamenti.Views
                     ImageWithId imm = new ImageWithId() { Id = id, Image = memoryStream.ToArray() };
                     bytesImages.Add(imm);
                     cvImmagini.ItemsSource = bytesImages.ToArray();
+                    counter.Text = bytesImages.Count.ToString();
                     //mediaFileImages.Add(new MediaFileImage { File = item });
                 }
                 //---FINE FIX CHIARA! HO AGGIUNTO QUESTO PEZZO, VERIFICARE SE MIGLIORA---
-
             }
             catch
             {
@@ -233,7 +249,8 @@ namespace AppAppartamenti.Views
             {
                 annuncio.Immagini.Add(item.Image);
             }
-        }
 
+            counter.Text = bytesImages.Count.ToString();
+        }
     }
 }

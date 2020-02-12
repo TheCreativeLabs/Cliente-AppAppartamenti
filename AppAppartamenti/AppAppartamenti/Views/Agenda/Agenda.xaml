@@ -132,7 +132,7 @@
                                 <DataTemplate>
                                     <ViewCell>
                                        
-                                        <StackLayout>
+                                        <StackLayout Padding="1">
                                             <appappartamenti:ShadowFrame Padding="10" HasShadow="True" BorderColor="{Binding Confermato, Converter={StaticResource ColorConverter}}" Margin="0,0,0,10">
                                                 <StackLayout Orientation="Horizontal">
                                                     <Label WidthRequest="70" Style="{x:StaticResource AdSubtitle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Data, StringFormat='{0:hh:mm}'}" VerticalTextAlignment="Center"></Label>

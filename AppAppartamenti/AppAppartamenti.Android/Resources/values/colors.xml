@@ -7,5 +7,5 @@
   <color name="ListViewSelected">#0000</color>
   <color name="ListViewHighlighted">#c786d3</color>
   <color name="DarkColor">#343a40</color>
-  <color name="splash_background">#1188e6</color>
+  <color name="splash_background">#FFF</color>
 </resources>
